@@ -30,10 +30,10 @@
 	<script src="https://smarthr.dreamstechnologies.com/html/template/assets/plugins/summernote/summernote-lite.min.js" type="12789c3eb65f5dda020bae43-text/javascript"></script>
 
 	<!-- Daterangepikcer JS -->
-	<script src="{{ asset('assets/plugins/@simonwep/pickr/pickr.es5.min.js')}} " type="12789c3eb65f5dda020bae43-text/javascript"></script>
+	<script src="https://smarthr.dreamstechnologies.com/html/template/assets/plugins/daterangepicker/daterangepicker.js" type="12789c3eb65f5dda020bae43-text/javascript"></script>
 
 	<!-- Color Picker JS -->
-	<script src="{{ asset('assets/plugins/@simonwep/pickr/pickr.es5.min.js')}} " type="12789c3eb65f5dda020bae43-text/javascript"></script>
+	<script src="{{ asset('assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js')}}https://smarthr.dreamstechnologies.com/html/template/assets/" type="12789c3eb65f5dda020bae43-text/javascript"></script>
 
 	<!-- Custom JS -->
 	<script src="https://smarthr.dreamstechnologies.com/html/template/assets/js/circle-progress.js" type="12789c3eb65f5dda020bae43-text/javascript"></script>

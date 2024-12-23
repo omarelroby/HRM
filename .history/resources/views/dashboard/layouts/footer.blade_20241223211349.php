@@ -30,16 +30,16 @@
 	<script src="https://smarthr.dreamstechnologies.com/html/template/assets/plugins/summernote/summernote-lite.min.js" type="12789c3eb65f5dda020bae43-text/javascript"></script>
 
 	<!-- Daterangepikcer JS -->
-	<script src="{{ asset('assets/plugins/@simonwep/pickr/pickr.es5.min.js')}} " type="12789c3eb65f5dda020bae43-text/javascript"></script>
+	<script src="{{ asset('assets/plugins/daterangepicker/daterangepicker.js')}} " type="12789c3eb65f5dda020bae43-text/javascript"></script>
 
 	<!-- Color Picker JS -->
 	<script src="{{ asset('assets/plugins/@simonwep/pickr/pickr.es5.min.js')}} " type="12789c3eb65f5dda020bae43-text/javascript"></script>
 
 	<!-- Custom JS -->
-	<script src="https://smarthr.dreamstechnologies.com/html/template/assets/js/circle-progress.js" type="12789c3eb65f5dda020bae43-text/javascript"></script>
-	<script src="https://smarthr.dreamstechnologies.com/html/template/assets/js/todo.js" type="12789c3eb65f5dda020bae43-text/javascript"></script>
-	<script src="https://smarthr.dreamstechnologies.com/html/template/assets/js/theme-colorpicker.js" type="12789c3eb65f5dda020bae43-text/javascript"></script>
-	<script src="https://smarthr.dreamstechnologies.com/html/template/assets/js/script.js" type="12789c3eb65f5dda020bae43-text/javascript"></script>
+	<script src="{{ asset('assets/js/circle-progress.js')}} " type="12789c3eb65f5dda020bae43-text/javascript"></script>
+	<script src="{{ asset('assets/js/todo.js')}}https://smarthr.dreamstechnologies.com/html/template/" type="12789c3eb65f5dda020bae43-text/javascript"></script>
+	<script src="{{ asset('assets/plugins/@simonwep/pickr/pickr.es5.min.js')}}https://smarthr.dreamstechnologies.com/html/template/assets/js/theme-colorpicker.js" type="12789c3eb65f5dda020bae43-text/javascript"></script>
+	<script src="{{ asset('assets/plugins/@simonwep/pickr/pickr.es5.min.js')}}https://smarthr.dreamstechnologies.com/html/template/assets/js/script.js" type="12789c3eb65f5dda020bae43-text/javascript"></script>
 
 <script src="https://smarthr.dreamstechnologies.com/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="12789c3eb65f5dda020bae43-|49" defer></script></body>
 
