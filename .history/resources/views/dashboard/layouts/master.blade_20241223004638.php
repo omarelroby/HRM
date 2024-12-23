@@ -1,0 +1,5050 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from smarthr.dreamstechnologies.com/html/template/employee-dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 22 Dec 2024 18:38:21 GMT -->
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<meta name="description" content="Smarthr - Bootstrap Admin Template">
+	<meta name="keywords" content="admin, estimates, bootstrap, business, html5, responsive, Projects">
+	<meta name="author" content="Dreams technologies - Bootstrap Admin Template">
+	<meta name="robots" content="noindex, nofollow">
+	<title>Smarthr Admin Template</title>
+
+	<!-- Favicon -->
+	<link rel="shortcut icon" type="image/x-icon" href="https://smarthr.dreamstechnologies.com/html/template/assets/img/favicon.png">
+
+	<!-- Apple Touch Icon -->
+	<link rel="apple-touch-icon" sizes="180x180" href="https://smarthr.dreamstechnologies.com/html/template/assets/img/apple-touch-icon.png">
+
+	<!-- Theme Script js -->
+	<script src="https://smarthr.dreamstechnologies.com/html/template/assets/js/theme-script.js" type="12789c3eb65f5dda020bae43-text/javascript"></script>
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://smarthr.dreamstechnologies.com/html/template/assets/css/bootstrap.min.css">
+
+	<!-- Feather CSS -->
+	<link rel="stylesheet" href="https://smarthr.dreamstechnologies.com/html/template/assets/plugins/icons/feather/feather.css">
+
+	<!-- Tabler Icon CSS -->
+	<link rel="stylesheet" href="https://smarthr.dreamstechnologies.com/html/template/assets/plugins/tabler-icons/tabler-icons.css">
+
+	<!-- Summernote CSS -->
+	<link rel="stylesheet" href="https://smarthr.dreamstechnologies.com/html/template/assets/plugins/summernote/summernote-lite.min.css">
+
+	<!-- Select2 CSS -->
+	<link rel="stylesheet" href="https://smarthr.dreamstechnologies.com/html/template/assets/plugins/select2/css/select2.min.css">
+
+	<!-- Bootstrap Tagsinput CSS -->
+	<link rel="stylesheet" href="https://smarthr.dreamstechnologies.com/html/template/assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css">
+
+	<!-- Fontawesome CSS -->
+	<link rel="stylesheet" href="https://smarthr.dreamstechnologies.com/html/template/assets/plugins/fontawesome/css/fontawesome.min.css">
+	<link rel="stylesheet" href="https://smarthr.dreamstechnologies.com/html/template/assets/plugins/fontawesome/css/all.min.css">
+
+	<!-- Datetimepicker CSS -->
+	<link rel="stylesheet" href="https://smarthr.dreamstechnologies.com/html/template/assets/css/bootstrap-datetimepicker.min.css">
+
+	<!-- Daterangepikcer CSS -->
+	<link rel="stylesheet" href="https://smarthr.dreamstechnologies.com/html/template/assets/plugins/daterangepicker/daterangepicker.css">
+
+	<!-- Color Picker Css -->
+	<link rel="stylesheet" href="https://smarthr.dreamstechnologies.com/html/template/assets/plugins/flatpickr/flatpickr.min.css">
+	<link rel="stylesheet" href="https://smarthr.dreamstechnologies.com/html/template/assets/plugins/@simonwep/pickr/themes/nano.min.css">
+
+	<!-- Main CSS -->
+	<link rel="stylesheet" href="https://smarthr.dreamstechnologies.com/html/template/assets/css/style.css">
+
+</head>
+
+<body>
+
+	<div id="global-loader">
+		<div class="page-loader"></div>
+	</div>
+
+	<!-- Main Wrapper -->
+	<div class="main-wrapper">
+
+		<!-- Header -->
+		<div class="header">
+			<div class="main-header">
+
+				<div class="header-left">
+					<a href="https://smarthr.dreamstechnologies.com/html/template/index.html" class="logo">
+						<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/logo.svg" alt="Logo">
+					</a>
+					<a href="https://smarthr.dreamstechnologies.com/html/template/index.html" class="dark-logo">
+						<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/logo-white.svg" alt="Logo">
+					</a>
+				</div>
+
+				<a id="mobile_btn" class="mobile_btn" href="#sidebar">
+					<span class="bar-icon">
+						<span></span>
+						<span></span>
+						<span></span>
+					</span>
+				</a>
+
+				<div class="header-user">
+					<div class="nav user-menu nav-list">
+
+						<div class="me-auto d-flex align-items-center" id="header-search">
+							<a id="toggle_btn" href="javascript:void(0);" class="btn btn-menubar me-1">
+								<i class="ti ti-arrow-bar-to-left"></i>
+							</a>
+							<!-- Search -->
+							<div class="input-group input-group-flat d-inline-flex me-1">
+								<span class="input-icon-addon">
+									<i class="ti ti-search"></i>
+								</span>
+								<input type="text" class="form-control" placeholder="Search in HRMS">
+								<span class="input-group-text">
+									<kbd>CTRL + / </kbd>
+								</span>
+							</div>
+							<!-- /Search -->
+							<div class="dropdown crm-dropdown">
+								<a href="#" class="btn btn-menubar me-1" data-bs-toggle="dropdown">
+									<i class="ti ti-layout-grid"></i>
+								</a>
+								<div class="dropdown-menu dropdown-lg dropdown-menu-start">
+									<div class="card mb-0 border-0 shadow-none">
+										<div class="card-header">
+											<h4>CRM</h4>
+										</div>
+										<div class="card-body pb-1">		
+											<div class="row">
+												<div class="col-sm-6">							
+													<a href="https://smarthr.dreamstechnologies.com/html/template/contacts.html" class="d-flex align-items-center justify-content-between p-2 crm-link mb-3">
+														<span class="d-flex align-items-center me-3">
+															<i class="ti ti-user-shield text-default me-2"></i>Contacts
+														</span>
+														<i class="ti ti-arrow-right"></i>
+													</a>							
+													<a href="https://smarthr.dreamstechnologies.com/html/template/deals-grid.html" class="d-flex align-items-center justify-content-between p-2 crm-link mb-3">
+														<span class="d-flex align-items-center me-3">
+															<i class="ti ti-heart-handshake text-default me-2"></i>Deals
+														</span>
+														<i class="ti ti-arrow-right"></i>
+													</a>								
+													<a href="https://smarthr.dreamstechnologies.com/html/template/pipeline.html" class="d-flex align-items-center justify-content-between p-2 crm-link mb-3">
+														<span class="d-flex align-items-center me-3">
+															<i class="ti ti-timeline-event-text text-default me-2"></i>Pipeline
+														</span>
+														<i class="ti ti-arrow-right"></i>
+													</a>		
+												</div>
+												<div class="col-sm-6">							
+													<a href="https://smarthr.dreamstechnologies.com/html/template/companies-grid.html" class="d-flex align-items-center justify-content-between p-2 crm-link mb-3">
+														<span class="d-flex align-items-center me-3">
+															<i class="ti ti-building text-default me-2"></i>Companies
+														</span>
+														<i class="ti ti-arrow-right"></i>
+													</a>								
+													<a href="https://smarthr.dreamstechnologies.com/html/template/leads-grid.html" class="d-flex align-items-center justify-content-between p-2 crm-link mb-3">
+														<span class="d-flex align-items-center me-3">
+															<i class="ti ti-user-check text-default me-2"></i>Leads
+														</span>
+														<i class="ti ti-arrow-right"></i>
+													</a>								
+													<a href="https://smarthr.dreamstechnologies.com/html/template/activity.html" class="d-flex align-items-center justify-content-between p-2 crm-link mb-3">
+														<span class="d-flex align-items-center me-3">
+															<i class="ti ti-activity text-default me-2"></i>Activities
+														</span>
+														<i class="ti ti-arrow-right"></i>
+													</a>		
+												</div>
+											</div>		
+										</div>
+									</div>
+								</div>
+							</div>
+							<a href="https://smarthr.dreamstechnologies.com/html/template/profile-settings.html" class="btn btn-menubar">
+								<i class="ti ti-settings-cog"></i>
+							</a>	
+						</div>
+
+						<!-- Horizontal Single -->
+						<div class="sidebar sidebar-horizontal" id="horizontal-single">
+							<div class="sidebar-menu">
+								<div class="main-menu">
+									<ul class="nav-menu">
+										<li class="menu-title">
+											<span>Main</span>
+										</li>
+										<li class="submenu">
+											<a href="#" class="active">
+												<i class="ti ti-smart-home"></i><span>Dashboard</span>
+												<span class="menu-arrow"></span>
+											</a>
+											<ul>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/index.html">Admin Dashboard</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/employee-dashboard.html" class="active">Employee Dashboard</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/deals-dashboard.html">Deals Dashboard</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/leads-dashboard.html">Leads Dashboard</a></li>
+											</ul>
+										</li>
+										<li class="submenu">
+											<a href="#">
+												<i class="ti ti-user-star"></i><span>Super Admin</span>
+												<span class="menu-arrow"></span>
+											</a>
+											<ul>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/dashboard.html">Dashboard</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/companies.html">Companies</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/subscription.html">Subscriptions</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/packages.html">Packages</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/domain.html">Domain</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/purchase-transaction.html">Purchase Transaction</a></li>
+											</ul>
+										</li>
+										<li class="submenu">
+											<a href="#">
+												<i class="ti ti-layout-grid-add"></i><span>Applications</span>
+												<span class="menu-arrow"></span>
+											</a>
+											<ul>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/chat.html">Chat</a></li>
+												<li class="submenu submenu-two">
+													<a href="https://smarthr.dreamstechnologies.com/html/template/call.html">Calls<span
+															class="menu-arrow inside-submenu"></span></a>
+													<ul>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/voice-call.html">Voice Call</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/video-call.html">Video Call</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/outgoing-call.html">Outgoing Call</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/incoming-call.html">Incoming Call</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/call-history.html">Call History</a></li>
+													</ul>
+												</li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/calendar.html">Calendar</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/email.html">Email</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/todo.html">To Do</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/notes.html">Notes</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/file-manager.html">File Manager</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/kanban-view.html">Kanban</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/invoices.html">Invoices</a></li>
+											</ul>
+										</li>
+										<li class="submenu">
+											<a href="#">
+												<i class="ti ti-layout-board-split"></i><span>Layouts</span>
+												<span class="menu-arrow"></span>
+											</a>
+											<ul>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/layout-horizontal.html">
+														<span>Horizontal</span>
+													</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/layout-detached.html">
+														<span>Detached</span>
+													</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/layout-modern.html">
+														<span>Modern</span>
+													</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/layout-two-column.html">
+														<span>Two Column </span>
+													</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/layout-hovered.html">
+														<span>Hovered</span>
+													</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/layout-box.html">
+														<span>Boxed</span>
+													</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/layout-horizontal-single.html">
+														<span>Horizontal Single</span>
+													</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/layout-horizontal-overlay.html">
+														<span>Horizontal Overlay</span>
+													</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/layout-horizontal-box.html">
+														<span>Horizontal Box</span>
+													</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/layout-horizontal-sidemenu.html">
+														<span>Menu Aside</span>
+													</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/layout-vertical-transparent.html">
+														<span>Transparent</span>
+													</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/layout-without-header.html">
+														<span>Without Header</span>
+													</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/layout-rtl.html">
+														<span>RTL</span>
+													</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/layout-dark.html">
+														<span>Dark</span>
+													</a>
+												</li>
+											</ul>
+										</li>
+										<li class="submenu">
+											<a href="#">
+												<i class="ti ti-user-star"></i><span>Projects</span>
+												<span class="menu-arrow"></span>
+											</a>
+											<ul>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/clients-grid.html"><span>Clients</span>
+													</a>
+												</li>
+												<li class="submenu">
+													<a href="javascript:void(0);"><span>Projects</span>
+														<span class="menu-arrow"></span>
+													</a>
+													<ul>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/projects-grid.html">Projects</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/tasks.html">Tasks</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/task-board.html">Task Board</a></li>
+													</ul>
+												</li>		
+												<li class="submenu">
+													<a href="https://smarthr.dreamstechnologies.com/html/template/call.html">Crm<span
+															class="menu-arrow"></span></a>
+													<ul>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/contacts-grid.html"><span>Contacts</span></a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/companies-grid.html"><span>Companies</span></a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/deals-grid.html"><span>Deals</span></a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/leads-grid.html"><span>Leads</span></a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/pipeline.html"><span>Pipeline</span></a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/analytics.html"><span>Analytics</span></a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/activity.html"><span>Activities</span></a></li>
+													</ul>
+												</li>
+												<li class="submenu">
+													<a href="javascript:void(0);"><span>Employees</span>
+														<span class="menu-arrow"></span>
+													</a>
+													<ul>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/employees.html">Employee Lists</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/employees-grid.html">Employee Grid</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/employee-details.html">Employee Details</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/departments.html">Departments</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/designations.html">Designations</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/policy.html">Policies</a></li>
+													</ul>
+												</li>
+												<li class="submenu">
+													<a href="javascript:void(0);"><span>Tickets</span>
+														<span class="menu-arrow"></span>
+													</a>
+													<ul>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/tickets.html">Tickets</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/ticket-details.html">Ticket Details</a></li>
+													</ul>
+												</li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/holidays.html"><span>Holidays</span></a></li>
+												<li class="submenu">
+													<a href="javascript:void(0);"><span>Attendance</span>
+														<span class="menu-arrow"></span>
+													</a>
+													<ul>
+														<li class="submenu">
+															<a href="javascript:void(0);">Leaves<span
+																	class="menu-arrow"></span></a>
+															<ul>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/leaves.html">Leaves (Admin)</a></li>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/leaves-employee.html">Leave (Employee)</a></li>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/leave-settings.html">Leave Settings</a></li>												
+															</ul>												
+														</li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/attendance-admin.html">Attendance (Admin)</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/attendance-employee.html">Attendance (Employee)</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/timesheets.html">Timesheets</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/schedule-timing.html">Shift & Schedule</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/overtime.html">Overtime</a></li>
+													</ul>
+												</li>
+												<li class="submenu">
+													<a href="javascript:void(0);"><span>Performance</span>
+														<span class="menu-arrow"></span>
+													</a>
+													<ul>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/performance-indicator.html">Performance Indicator</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/performance-review.html">Performance Review</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/performance-appraisal.html">Performance Appraisal</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/goal-tracking.html">Goal List</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/goal-type.html">Goal Type</a></li>
+													</ul>
+												</li>
+												<li class="submenu">
+													<a href="javascript:void(0);"><span>Training</span>
+														<span class="menu-arrow"></span>
+													</a>
+													<ul>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/training.html">Training List</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/trainers.html">Trainers</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/training-type.html">Training Type</a></li>
+													</ul>
+												</li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/promotion.html"><span>Promotion</span></a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/resignation.html"><span>Resignation</span></a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/termination.html"><span>Termination</span></a></li>														
+											</ul>
+										</li>
+										<li class="submenu">
+											<a href="#">
+												<i class="ti ti-user-star"></i><span>Administration</span>
+												<span class="menu-arrow"></span>
+											</a>
+											<ul>
+												<li class="submenu">
+													<a href="javascript:void(0);"><span>Sales</span>
+														<span class="menu-arrow"></span>
+													</a>
+													<ul>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/estimates.html">Estimates</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/invoices.html">Invoices</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/payments.html">Payments</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/expenses.html">Expenses</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/provident-fund.html">Provident Fund</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/taxes.html">Taxes</a></li>
+													</ul>
+												</li>
+												<li class="submenu">
+													<a href="javascript:void(0);"><span>Accounting</span>
+														<span class="menu-arrow"></span>
+													</a>
+													<ul>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/categories.html">Categories</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/budgets.html">Budgets</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/budget-expenses.html">Budget Expenses</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/budget-revenues.html">Budget Revenues</a></li>
+													</ul>
+												</li>
+												<li class="submenu">
+													<a href="javascript:void(0);"><span>Payroll</span>
+														<span class="menu-arrow"></span>
+													</a>
+													<ul>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/employee-salary.html">Employee Salary</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/payslip.html">Payslip</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/payroll.html">Payroll Items</a></li>
+													</ul>
+												</li>
+												<li class="submenu">
+													<a href="javascript:void(0);"><span>Assets</span>
+														<span class="menu-arrow"></span>
+													</a>
+													<ul>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/assets.html">Assets</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/asset-categories.html">Asset Categories</a></li>
+													</ul>
+												</li>
+												<li class="submenu">
+													<a href="javascript:void(0);"><span>Help & Supports</span>
+														<span class="menu-arrow"></span>
+													</a>
+													<ul>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/knowledgebase.html">Knowledge Base</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/activity.html">Activities</a></li>
+													</ul>
+												</li>
+												<li class="submenu">
+													<a href="javascript:void(0);"><span>User Management</span>
+														<span class="menu-arrow"></span>
+													</a>
+													<ul>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/users.html">Users</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/roles-permissions.html">Roles & Permissions</a></li>
+													</ul>
+												</li>
+												<li class="submenu">
+													<a href="javascript:void(0);"><span>Reports</span>
+														<span class="menu-arrow"></span>
+													</a>
+													<ul>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/expenses-report.html">Expense Report</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/invoice-report.html">Invoice Report</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/payment-report.html">Payment Report</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/project-report.html">Project Report</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/task-report.html">Task Report</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/user-report.html">User Report</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/employee-report.html">Employee Report</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/payslip-report.html">Payslip Report</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/attendance-report.html">Attendance Report</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/leave-report.html">Leave Report</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/daily-report.html">Daily Report</a></li>
+													</ul>
+												</li>
+												<li class="submenu">
+													<a href="javascript:void(0);"><span>Settings</span>
+														<span class="menu-arrow"></span>
+													</a>
+													<ul>
+														<li class="submenu">
+															<a href="javascript:void(0);">General Settings<span
+																	class="menu-arrow"></span></a>
+															<ul>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/profile-settings.html">Profile</a></li>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/security-settings.html">Security</a></li>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/notification-settings.html">Notifications</a></li>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/connected-apps.html">Connected Apps</a></li>
+															</ul>
+														</li>
+														<li class="submenu">
+															<a href="javascript:void(0);">Website Settings<span
+																	class="menu-arrow"></span></a>
+															<ul>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/bussiness-settings.html">Business Settings</a></li>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/seo-settings.html">SEO Settings</a></li>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/localization-settings.html">Localization</a></li>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/prefixes.html">Prefixes</a></li>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/preferences.html">Preferences</a></li>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/performance-appraisal.html">Appearance</a></li>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/language.html">Language</a></li>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/authentication-settings.html">Authentication</a></li>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/ai-settings.html">AI Settings</a></li>
+															</ul>
+														</li>
+														<li class="submenu">
+															<a href="javascript:void(0);">App Settings<span
+																	class="menu-arrow"></span></a>
+															<ul>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/salary-settings.html">Salary Settings</a></li>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/approval-settings.html">Approval Settings</a></li>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/invoice-settings.html">Invoice Settings</a></li>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/leave-type.html">Leave Type</a></li>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/custom-fields.html">Custom Fields</a></li>
+															</ul>
+														</li>
+														<li class="submenu">
+															<a href="javascript:void(0);">System Settings<span
+																	class="menu-arrow"></span></a>
+															<ul>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/email-settings.html">Email Settings</a></li>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/email-template.html">Email Templates</a></li>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/sms-settings.html">SMS Settings</a></li>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/sms-template.html">SMS Templates</a></li>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/otp-settings.html">OTP</a></li>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/gdpr.html">GDPR Cookies</a></li>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/maintenance-mode.html">Maintenance Mode</a></li>
+															</ul>
+														</li>
+														<li class="submenu">
+															<a href="javascript:void(0);">Financial Settings<span
+																	class="menu-arrow"></span></a>
+															<ul>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/payment-gateways.html">Payment Gateways</a></li>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/tax-rates.html">Tax Rate</a></li>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/currencies.html">Currencies</a></li>
+															</ul>
+														</li>
+														<li class="submenu">
+															<a href="javascript:void(0);">Other Settings<span
+																	class="menu-arrow"></span></a>
+															<ul>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/custom-css.html">Custom CSS</a></li>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/custom-js.html">Custom JS</a></li>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/cronjob.html">Cronjob</a></li>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/storage-settings.html">Storage</a></li>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/ban-ip-address.html">Ban IP Address</a></li>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/backup.html">Backup</a></li>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/clear-cache.html">Clear Cache</a></li>
+															</ul>
+														</li>
+													</ul>
+												</li>
+											</ul>
+										</li>
+										<li class="submenu">
+											<a href="#">
+												<i class="ti ti-page-break"></i><span>Pages</span>
+												<span class="menu-arrow"></span>
+											</a>
+											<ul>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/starter.html"><span>Starter</span></a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/profile.html"><span>Profile</span></a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/gallery.html"><span>Gallery</span></a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/search-result.html"><span>Search Results</span></a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/timeline.html"><span>Timeline</span></a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/pricing.html"><span>Pricing</span></a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/coming-soon.html"><span>Coming Soon</span></a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/under-maintenance.html"><span>Under Maintenance</span></a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/under-construction.html"><span>Under Construction</span></a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/api-keys.html"><span>API Keys</span></a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/privacy-policy.html"><span>Privacy Policy</span></a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/terms-condition.html"><span>Terms & Conditions</span></a></li>
+												<li class="submenu">
+													<a href="#"><span>Content</span> <span class="menu-arrow"></span></a>
+													<ul>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/pages.html">Pages</a></li>
+														<li class="submenu">
+															<a href="javascript:void(0);">Blogs<span class="menu-arrow"></span></a>
+															<ul>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/blogs.html">All Blogs</a></li>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/blog-categories.html">Categories</a></li>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/blog-comments.html">Comments</a></li>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/blog-tags.html">Tags</a></li>
+															</ul>
+														</li>
+														<li class="submenu">
+															<a href="javascript:void(0);">Locations<span class="menu-arrow"></span></a>
+															<ul>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/countries.html">Countries</a></li>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/states.html">States</a></li>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/cities.html">Cities</a></li>
+															</ul>
+														</li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/testimonials.html">Testimonials</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/faq.html">FAQ’S</a></li>
+													</ul>
+												</li>
+												<li class="submenu">
+													<a href="#">
+														<span>Authentication</span>
+														<span class="menu-arrow"></span>
+													</a>
+													<ul>
+														<li class="submenu">
+															<a href="javascript:void(0);" class="">Login<span class="menu-arrow"></span></a>
+															<ul>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/login.html">Cover</a></li>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/login-2.html">Illustration</a></li>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/login-3.html">Basic</a></li>
+															</ul>
+														</li>
+														<li class="submenu">
+															<a href="javascript:void(0);" class="">Register<span class="menu-arrow"></span></a>
+															<ul>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/register.html">Cover</a></li>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/register-2.html">Illustration</a></li>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/register-3.html">Basic</a></li>
+															</ul>
+														</li>
+														<li class="submenu"><a href="javascript:void(0);">Forgot Password<span class="menu-arrow"></span></a>
+															<ul>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/forgot-password.html">Cover</a></li>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/forgot-password-2.html">Illustration</a></li>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/forgot-password-3.html">Basic</a></li>
+															</ul>
+														</li>
+														<li class="submenu">
+															<a href="javascript:void(0);">Reset Password<span class="menu-arrow"></span></a>
+															<ul>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/reset-password.html">Cover</a></li>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/reset-password-2.html">Illustration</a></li>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/reset-password-3.html">Basic</a></li>
+															</ul>
+														</li>
+														<li class="submenu">
+															<a href="javascript:void(0);">Email Verification<span class="menu-arrow"></span></a>
+															<ul>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/email-verification.html">Cover</a></li>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/email-verification-2.html">Illustration</a></li>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/email-verification-3.html">Basic</a></li>
+															</ul>
+														</li>
+														<li class="submenu">
+															<a href="javascript:void(0);">2 Step Verification<span class="menu-arrow"></span></a>
+															<ul>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/two-step-verification.html">Cover</a></li>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/two-step-verification-2.html">Illustration</a></li>
+																<li><a href="https://smarthr.dreamstechnologies.com/html/template/two-step-verification-3.html">Basic</a></li>
+															</ul>
+														</li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/lock-screen.html">Lock Screen</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/error-404.html">404 Error</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/error-500.html">500 Error</a></li>
+													</ul>
+												</li>
+												<li class="submenu">
+													<a href="#">
+														<span>UI Interface</span>
+														<span class="menu-arrow"></span>
+													</a>
+													<ul>
+														<li class="submenu">
+															<a href="javascript:void(0);">
+																<i class="ti ti-hierarchy-2"></i>
+																<span>Base UI</span>
+																<span class="menu-arrow"></span>
+															</a>
+															<ul>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/ui-alerts.html">Alerts</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/ui-accordion.html">Accordion</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/ui-avatar.html">Avatar</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/ui-badges.html">Badges</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/ui-borders.html">Border</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/ui-buttons.html">Buttons</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/ui-buttons-group.html">Button Group</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/ui-breadcrumb.html">Breadcrumb</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/ui-cards.html">Card</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/ui-carousel.html">Carousel</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/ui-colors.html">Colors</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/ui-dropdowns.html">Dropdowns</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/ui-grid.html">Grid</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/ui-images.html">Images</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/ui-lightbox.html">Lightbox</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/ui-media.html">Media</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/ui-modals.html">Modals</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/ui-offcanvas.html">Offcanvas</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/ui-pagination.html">Pagination</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/ui-popovers.html">Popovers</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/ui-progress.html">Progress</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/ui-placeholders.html">Placeholders</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/ui-spinner.html">Spinner</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/ui-sweetalerts.html">Sweet Alerts</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/ui-nav-tabs.html">Tabs</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/ui-toasts.html">Toasts</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/ui-tooltips.html">Tooltips</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/ui-typography.html">Typography</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/ui-video.html">Video</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/ui-sortable.html">Sortable</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/ui-swiperjs.html">Swiperjs</a>
+																</li>
+															</ul>
+														</li>
+														<li class="submenu">
+															<a href="javascript:void(0);">
+																<i class="ti ti-hierarchy-3"></i>
+																<span>Advanced UI</span>
+																<span class="menu-arrow"></span>
+															</a>
+															<ul>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/ui-ribbon.html">Ribbon</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/ui-clipboard.html">Clipboard</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/ui-drag-drop.html">Drag & Drop</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/ui-rangeslider.html">Range Slider</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/ui-rating.html">Rating</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/ui-text-editor.html">Text Editor</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/ui-counter.html">Counter</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/ui-scrollbar.html">Scrollbar</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/ui-stickynote.html">Sticky Note</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/ui-timeline.html">Timeline</a>
+																</li>
+															</ul>
+														</li>
+														<li class="submenu">
+															<a href="javascript:void(0);">
+																<i class="ti ti-input-search"></i>
+																<span>Forms</span>
+																<span class="menu-arrow"></span>
+															</a>
+															<ul>
+																<li class="submenu submenu-two">
+																	<a href="javascript:void(0);">Form Elements <span class="menu-arrow inside-submenu"></span>
+																	</a>
+																	<ul>
+																		<li>
+																			<a href="https://smarthr.dreamstechnologies.com/html/template/form-basic-inputs.html">Basic Inputs</a>
+																		</li>
+																		<li>
+																			<a href="https://smarthr.dreamstechnologies.com/html/template/form-checkbox-radios.html">Checkbox & Radios</a>
+																		</li>
+																		<li>
+																			<a href="https://smarthr.dreamstechnologies.com/html/template/form-input-groups.html">Input Groups</a>
+																		</li>
+																		<li>
+																			<a href="https://smarthr.dreamstechnologies.com/html/template/form-grid-gutters.html">Grid & Gutters</a>
+																		</li>
+																		<li>
+																			<a href="https://smarthr.dreamstechnologies.com/html/template/form-select.html">Form Select</a>
+																		</li>
+																		<li>
+																			<a href="https://smarthr.dreamstechnologies.com/html/template/form-mask.html">Input Masks</a>
+																		</li>
+																		<li>
+																			<a href="https://smarthr.dreamstechnologies.com/html/template/form-fileupload.html">File Uploads</a>
+																		</li>
+																	</ul>
+																</li>
+																<li class="submenu submenu-two">
+																	<a href="javascript:void(0);">Layouts <span class="menu-arrow inside-submenu"></span>
+																	</a>
+																	<ul>
+																		<li>
+																			<a href="https://smarthr.dreamstechnologies.com/html/template/form-horizontal.html">Horizontal Form</a>
+																		</li>
+																		<li>
+																			<a href="https://smarthr.dreamstechnologies.com/html/template/form-vertical.html">Vertical Form</a>
+																		</li>
+																		<li>
+																			<a href="https://smarthr.dreamstechnologies.com/html/template/form-floating-labels.html">Floating Labels</a>
+																		</li>
+																	</ul>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/form-validation.html">Form Validation</a>
+																</li>
+																
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/form-select2.html">Select2</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/form-wizard.html">Form Wizard</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/form-pickers.html">Form Pickers</a>
+																</li>
+																
+															</ul>
+														</li>
+														<li class="submenu">
+															<a href="javascript:void(0);">
+																<i class="ti ti-table-plus"></i>
+																<span>Tables</span>
+																<span class="menu-arrow"></span>
+															</a>
+															<ul>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/tables-basic.html">Basic Tables </a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/data-tables.html">Data Table </a>
+																</li>
+															</ul>
+														</li>
+														<li class="submenu">
+															<a href="javascript:void(0);">
+																<i class="ti ti-chart-line"></i>
+																<span>Charts</span>
+																<span class="menu-arrow"></span>
+															</a>
+															<ul>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/chart-apex.html">Apex Charts</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/chart-c3.html">Chart C3</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/chart-js.html">Chart Js</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/chart-morris.html">Morris Charts</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/chart-flot.html">Flot Charts</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/chart-peity.html">Peity Charts</a>
+																</li>
+															</ul>
+														</li>
+														<li class="submenu">
+															<a href="javascript:void(0);">
+																<i class="ti ti-icons"></i>
+																<span>Icons</span>
+																<span class="menu-arrow"></span>
+															</a>
+															<ul>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/icon-fontawesome.html">Fontawesome Icons</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/icon-tabler.html">Tabler Icons</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/icon-bootstrap.html">Bootstrap Icons</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/icon-remix.html">Remix Icons</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/icon-feather.html">Feather Icons</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/icon-ionic.html">Ionic Icons</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/icon-material.html">Material Icons</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/icon-pe7.html">Pe7 Icons</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/icon-simpleline.html">Simpleline Icons</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/icon-themify.html">Themify Icons</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/icon-weather.html">Weather Icons</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/icon-typicon.html">Typicon Icons</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/icon-flag.html">Flag Icons</a>
+																</li>
+															</ul>
+														</li>
+														<li class="submenu">
+															<a href="javascript:void(0);">
+																<i class="ti ti-table-plus"></i>
+																<span>Maps</span>
+																<span class="menu-arrow"></span>
+															</a>
+															<ul>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/maps-vector.html">Vector</a>
+																</li>
+																<li>
+																	<a href="https://smarthr.dreamstechnologies.com/html/template/maps-leaflet.html">Leaflet</a>
+																</li>
+															</ul>
+														</li>
+													</ul>
+												</li>
+												<li><a href="#">Documentation</a></li>
+												<li><a href="#">Change Log</a></li>
+												<li class="submenu">
+													<a href="javascript:void(0);"><span>Multi Level</span><span class="menu-arrow"></span></a>
+													<ul>
+														<li><a href="javascript:void(0);">Multilevel 1</a></li>
+														<li class="submenu submenu-two">
+															<a href="javascript:void(0);">Multilevel 2<span
+																	class="menu-arrow inside-submenu"></span></a>
+															<ul>
+																<li><a href="javascript:void(0);">Multilevel 2.1</a></li>
+																<li class="submenu submenu-two submenu-three">
+																	<a href="javascript:void(0);">Multilevel 2.2<span
+																			class="menu-arrow inside-submenu inside-submenu-two"></span></a>
+																	<ul>
+																		<li><a href="javascript:void(0);">Multilevel 2.2.1</a></li>
+																		<li><a href="javascript:void(0);">Multilevel 2.2.2</a></li>
+																	</ul>
+																</li>
+															</ul>
+														</li>
+														<li><a href="javascript:void(0);">Multilevel 3</a></li>
+													</ul>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<!-- /Horizontal Single -->
+
+						<div class="d-flex align-items-center">
+							<div class="me-1">
+								<a href="#" class="btn btn-menubar btnFullscreen">
+									<i class="ti ti-maximize"></i>
+								</a>
+							</div>
+							<div class="dropdown me-1">
+								<a href="#" class="btn btn-menubar" data-bs-toggle="dropdown">
+									<i class="ti ti-layout-grid-remove"></i>
+								</a>
+								<div class="dropdown-menu dropdown-menu-end">
+									<div class="card mb-0 border-0 shadow-none">
+										<div class="card-header">
+											<h4>Applications</h4>
+										</div>
+										<div class="card-body">											
+											<a href="https://smarthr.dreamstechnologies.com/html/template/calendar.html" class="d-block pb-2">
+												<span class="avatar avatar-md bg-transparent-dark me-2"><i class="ti ti-calendar text-gray-9"></i></span>Calendar
+											</a>										
+											<a href="https://smarthr.dreamstechnologies.com/html/template/todo.html" class="d-block py-2">
+												<span class="avatar avatar-md bg-transparent-dark me-2"><i class="ti ti-subtask text-gray-9"></i></span>To Do
+											</a>										
+											<a href="https://smarthr.dreamstechnologies.com/html/template/notes.html" class="d-block py-2">
+												<span class="avatar avatar-md bg-transparent-dark me-2"><i class="ti ti-notes text-gray-9"></i></span>Notes
+											</a>										
+											<a href="https://smarthr.dreamstechnologies.com/html/template/file-manager.html" class="d-block py-2">
+												<span class="avatar avatar-md bg-transparent-dark me-2"><i class="ti ti-folder text-gray-9"></i></span>File Manager
+											</a>								
+											<a href="https://smarthr.dreamstechnologies.com/html/template/kanban-view.html" class="d-block py-2">
+												<span class="avatar avatar-md bg-transparent-dark me-2"><i class="ti ti-layout-kanban text-gray-9"></i></span>Kanban
+											</a>								
+											<a href="https://smarthr.dreamstechnologies.com/html/template/invoices.html" class="d-block py-2 pb-0">
+												<span class="avatar avatar-md bg-transparent-dark me-2"><i class="ti ti-file-invoice text-gray-9"></i></span>Invoices
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="me-1">
+								<a href="https://smarthr.dreamstechnologies.com/html/template/chat.html" class="btn btn-menubar position-relative">
+									<i class="ti ti-brand-hipchat"></i>
+									<span class="badge bg-info rounded-pill d-flex align-items-center justify-content-center header-badge">5</span>
+								</a>
+							</div>
+							<div class="me-1">
+								<a href="https://smarthr.dreamstechnologies.com/html/template/email.html" class="btn btn-menubar">
+									<i class="ti ti-mail"></i>
+								</a>
+							</div>
+							<div class="me-1 notification_item">
+								<a href="#" class="btn btn-menubar position-relative me-1" id="notification_popup"
+									data-bs-toggle="dropdown">
+									<i class="ti ti-bell"></i>
+									<span class="notification-status-dot"></span>
+								</a>
+								<div class="dropdown-menu dropdown-menu-end notification-dropdown p-4">
+									<div class="d-flex align-items-center justify-content-between border-bottom p-0 pb-3 mb-3">
+										<h4 class="notification-title">Notifications (2)</h4>
+										<div class="d-flex align-items-center">
+											<a href="#" class="text-primary fs-15 me-3 lh-1">Mark all as read</a>
+											<div class="dropdown">
+												<a href="javascript:void(0);" class="bg-white dropdown-toggle"
+													data-bs-toggle="dropdown">
+													<i class="ti ti-calendar-due me-1"></i>Today
+												</a>
+												<ul class="dropdown-menu mt-2 p-3">
+													<li>
+														<a href="javascript:void(0);" class="dropdown-item rounded-1">
+															This Week
+														</a>
+													</li>
+													<li>
+														<a href="javascript:void(0);" class="dropdown-item rounded-1">
+															Last Week
+														</a>
+													</li>
+													<li>
+														<a href="javascript:void(0);" class="dropdown-item rounded-1">
+															Last Month
+														</a>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+									<div class="noti-content">
+										<div class="d-flex flex-column">
+											<div class="border-bottom mb-3 pb-3">
+												<a href="https://smarthr.dreamstechnologies.com/html/template/activity.html">
+													<div class="d-flex">
+														<span class="avatar avatar-lg me-2 flex-shrink-0">
+															<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-27.jpg" alt="Profile">
+														</span>
+														<div class="flex-grow-1">
+															<p class="mb-1"><span
+																	class="text-dark fw-semibold">Shawn</span>
+																performance in Math is below the threshold.</p>
+															<span>Just Now</span>
+														</div>
+													</div>
+												</a>
+											</div>
+											<div class="border-bottom mb-3 pb-3">
+												<a href="https://smarthr.dreamstechnologies.com/html/template/activity.html" class="pb-0">
+													<div class="d-flex">
+														<span class="avatar avatar-lg me-2 flex-shrink-0">
+															<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-23.jpg" alt="Profile">
+														</span>
+														<div class="flex-grow-1">
+															<p class="mb-1"><span
+																	class="text-dark fw-semibold">Sylvia</span> added
+																appointment on 02:00 PM</p>
+															<span>10 mins ago</span>
+															<div
+																class="d-flex justify-content-start align-items-center mt-1">
+																<span class="btn btn-light btn-sm me-2">Deny</span>
+																<span class="btn btn-primary btn-sm">Approve</span>
+															</div>
+														</div>
+													</div>
+												</a>
+											</div>
+											<div class="border-bottom mb-3 pb-3">
+												<a href="https://smarthr.dreamstechnologies.com/html/template/activity.html">
+													<div class="d-flex">
+														<span class="avatar avatar-lg me-2 flex-shrink-0">
+															<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-25.jpg" alt="Profile">
+														</span>
+														<div class="flex-grow-1">
+															<p class="mb-1">New student record <span class="text-dark fw-semibold"> George</span> 
+																is created by <span class="text-dark fw-semibold">Teressa</span>
+															</p>
+															<span>2 hrs ago</span>
+														</div>
+													</div>
+												</a>
+											</div>
+											<div class="border-0 mb-3 pb-0">
+												<a href="https://smarthr.dreamstechnologies.com/html/template/activity.html">
+													<div class="d-flex">
+														<span class="avatar avatar-lg me-2 flex-shrink-0">
+															<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-01.jpg" alt="Profile">
+														</span>
+														<div class="flex-grow-1">
+															<p class="mb-1">A new teacher record for <span class="text-dark fw-semibold">Elisa</span> </p>
+															<span>09:45 AM</span>
+														</div>
+													</div>
+												</a>
+											</div>
+										</div>
+									</div>
+									<div class="d-flex p-0">
+										<a href="#" class="btn btn-light w-100 me-2">Cancel</a>
+										<a href="https://smarthr.dreamstechnologies.com/html/template/activity.html" class="btn btn-primary w-100">View All</a>
+									</div>
+								</div>
+							</div>
+							<div class="dropdown profile-dropdown">
+								<a href="javascript:void(0);" class="dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
+									<span class="avatar avatar-sm online">
+										<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-12.jpg" alt="Img" class="img-fluid rounded-circle">
+									</span>
+								</a>
+								<div class="dropdown-menu shadow-none">
+									<div class="card mb-0">
+										<div class="card-header">
+											<div class="d-flex align-items-center">
+												<span class="avatar avatar-lg me-2 avatar-rounded">
+													<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-12.jpg" alt="img">
+												</span>
+												<div>
+													<h5 class="mb-0">Kevin Larry</h5>
+													<p class="fs-12 fw-medium mb-0"><a href="https://smarthr.dreamstechnologies.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3a4d5b48485f547a5f425b574a565f14595557">[email&#160;protected]</a></p>
+												</div>
+											</div>
+										</div>
+										<div class="card-body">
+											<a class="dropdown-item d-inline-flex align-items-center p-0 py-2"
+												href="https://smarthr.dreamstechnologies.com/html/template/profile.html">
+												<i class="ti ti-user-circle me-1"></i>My Profile
+											</a>
+											<a class="dropdown-item d-inline-flex align-items-center p-0 py-2" href="https://smarthr.dreamstechnologies.com/html/template/bussiness-settings.html">
+												<i class="ti ti-settings me-1"></i>Settings
+											</a>
+											
+											<a class="dropdown-item d-inline-flex align-items-center p-0 py-2"
+												href="https://smarthr.dreamstechnologies.com/html/template/profile-settings.html">
+												<i class="ti ti-circle-arrow-up me-1"></i>My Account
+											</a>
+											<a class="dropdown-item d-inline-flex align-items-center p-0 py-2" href="https://smarthr.dreamstechnologies.com/html/template/knowledgebase.html">
+												<i class="ti ti-question-mark me-1"></i>Knowledge Base
+											</a>
+										</div>
+										<div class="card-footer py-1">
+											<a class="dropdown-item d-inline-flex align-items-center p-0 py-2" href="https://smarthr.dreamstechnologies.com/html/template/login.html"><i class="ti ti-login me-2"></i>Logout</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Mobile Menu -->
+				<div class="dropdown mobile-user-menu">
+					<a href="javascript:void(0);" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+						<i class="fa fa-ellipsis-v"></i>
+					</a>
+					<div class="dropdown-menu dropdown-menu-end">
+						<a class="dropdown-item" href="https://smarthr.dreamstechnologies.com/html/template/profile.html">My Profile</a>
+						<a class="dropdown-item" href="https://smarthr.dreamstechnologies.com/html/template/profile-settings.html">Settings</a>
+						<a class="dropdown-item" href="https://smarthr.dreamstechnologies.com/html/template/login.html">Logout</a>
+					</div>
+				</div>
+				<!-- /Mobile Menu -->
+
+			</div>
+
+		</div>
+		<!-- /Header -->
+
+		@include('dashboard.layouts.sidebar')
+
+		<!-- Horizontal Menu -->
+		<div class="sidebar sidebar-horizontal" id="horizontal-menu">
+			<div class="sidebar-menu">
+				<div class="main-menu">
+					<ul class="nav-menu">
+						<li class="menu-title">
+							<span>Main</span>
+						</li>
+						<li class="submenu">
+							<a href="#"   class="active subdrop">
+								<i class="ti ti-smart-home"></i><span>Dashboard</span>
+								<span class="menu-arrow"></span>
+							</a>
+							<ul>
+								<li><a href="https://smarthr.dreamstechnologies.com/html/template/index.html">Admin Dashboard</a></li>
+								<li><a href="https://smarthr.dreamstechnologies.com/html/template/employee-dashboard.html" class="active">Employee Dashboard</a></li>
+								<li><a href="https://smarthr.dreamstechnologies.com/html/template/deals-dashboard.html">Deals Dashboard</a></li>
+								<li><a href="https://smarthr.dreamstechnologies.com/html/template/leads-dashboard.html">Leads Dashboard</a></li>
+							</ul>
+						</li>
+						<li class="submenu">
+							<a href="#">
+								<i class="ti ti-user-star"></i><span>Super Admin</span>
+								<span class="menu-arrow"></span>
+							</a>
+							<ul>
+								<li><a href="https://smarthr.dreamstechnologies.com/html/template/dashboard.html">Dashboard</a></li>
+								<li><a href="https://smarthr.dreamstechnologies.com/html/template/companies.html">Companies</a></li>
+								<li><a href="https://smarthr.dreamstechnologies.com/html/template/subscription.html">Subscriptions</a></li>
+								<li><a href="https://smarthr.dreamstechnologies.com/html/template/packages.html">Packages</a></li>
+								<li><a href="https://smarthr.dreamstechnologies.com/html/template/domain.html">Domain</a></li>
+								<li><a href="https://smarthr.dreamstechnologies.com/html/template/purchase-transaction.html">Purchase Transaction</a></li>
+							</ul>
+						</li>
+						<li class="submenu">
+							<a href="#">
+								<i class="ti ti-layout-grid-add"></i><span>Applications</span>
+								<span class="menu-arrow"></span>
+							</a>
+							<ul>
+								<li><a href="https://smarthr.dreamstechnologies.com/html/template/chat.html">Chat</a></li>
+								<li class="submenu submenu-two">
+									<a href="https://smarthr.dreamstechnologies.com/html/template/call.html">Calls<span
+											class="menu-arrow inside-submenu"></span></a>
+									<ul>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/voice-call.html">Voice Call</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/video-call.html">Video Call</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/outgoing-call.html">Outgoing Call</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/incoming-call.html">Incoming Call</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/call-history.html">Call History</a></li>
+									</ul>
+								</li>
+								<li><a href="https://smarthr.dreamstechnologies.com/html/template/calendar.html">Calendar</a></li>
+								<li><a href="https://smarthr.dreamstechnologies.com/html/template/email.html">Email</a></li>
+								<li><a href="https://smarthr.dreamstechnologies.com/html/template/todo.html">To Do</a></li>
+								<li><a href="https://smarthr.dreamstechnologies.com/html/template/notes.html">Notes</a></li>
+								<li><a href="https://smarthr.dreamstechnologies.com/html/template/file-manager.html">File Manager</a></li>
+								<li><a href="https://smarthr.dreamstechnologies.com/html/template/kanban-view.html">Kanban</a></li>
+								<li><a href="https://smarthr.dreamstechnologies.com/html/template/invoices.html">Invoices</a></li>
+							</ul>
+						</li>
+						<li class="submenu">
+							<a href="#">
+								<i class="ti ti-layout-board-split"></i><span>Layouts</span>
+								<span class="menu-arrow"></span>
+							</a>
+							<ul>
+								<li>
+									<a href="https://smarthr.dreamstechnologies.com/html/template/layout-horizontal.html">
+										<span>Horizontal</span>
+									</a>
+								</li>
+								<li>
+									<a href="https://smarthr.dreamstechnologies.com/html/template/layout-detached.html">
+										<span>Detached</span>
+									</a>
+								</li>
+								<li>
+									<a href="https://smarthr.dreamstechnologies.com/html/template/layout-modern.html">
+										<span>Modern</span>
+									</a>
+								</li>
+								<li>
+									<a href="https://smarthr.dreamstechnologies.com/html/template/layout-two-column.html">
+										<span>Two Column </span>
+									</a>
+								</li>
+								<li>
+									<a href="https://smarthr.dreamstechnologies.com/html/template/layout-hovered.html">
+										<span>Hovered</span>
+									</a>
+								</li>
+								<li>
+									<a href="https://smarthr.dreamstechnologies.com/html/template/layout-box.html">
+										<span>Boxed</span>
+									</a>
+								</li>
+								<li>
+									<a href="https://smarthr.dreamstechnologies.com/html/template/layout-horizontal-single.html">
+										<span>Horizontal Single</span>
+									</a>
+								</li>
+								<li>
+									<a href="https://smarthr.dreamstechnologies.com/html/template/layout-horizontal-overlay.html">
+										<span>Horizontal Overlay</span>
+									</a>
+								</li>
+								<li>
+									<a href="https://smarthr.dreamstechnologies.com/html/template/layout-horizontal-box.html">
+										<span>Horizontal Box</span>
+									</a>
+								</li>
+								<li>
+									<a href="https://smarthr.dreamstechnologies.com/html/template/layout-horizontal-sidemenu.html">
+										<span>Menu Aside</span>
+									</a>
+								</li>
+								<li>
+									<a href="https://smarthr.dreamstechnologies.com/html/template/layout-vertical-transparent.html">
+										<span>Transparent</span>
+									</a>
+								</li>
+								<li>
+									<a href="https://smarthr.dreamstechnologies.com/html/template/layout-without-header.html">
+										<span>Without Header</span>
+									</a>
+								</li>
+								<li>
+									<a href="https://smarthr.dreamstechnologies.com/html/template/layout-rtl.html">
+										<span>RTL</span>
+									</a>
+								</li>
+								<li>
+									<a href="https://smarthr.dreamstechnologies.com/html/template/layout-dark.html">
+										<span>Dark</span>
+									</a>
+								</li>
+							</ul>
+						</li>
+						<li class="submenu">
+							<a href="#">
+								<i class="ti ti-user-star"></i><span>Projects</span>
+								<span class="menu-arrow"></span>
+							</a>
+							<ul>
+								<li>
+									<a href="https://smarthr.dreamstechnologies.com/html/template/clients-grid.html"><span>Clients</span>
+									</a>
+								</li>
+								<li class="submenu">
+									<a href="javascript:void(0);"><span>Projects</span>
+										<span class="menu-arrow"></span>
+									</a>
+									<ul>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/projects-grid.html">Projects</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/tasks.html">Tasks</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/task-board.html">Task Board</a></li>
+									</ul>
+								</li>		
+								<li class="submenu">
+									<a href="https://smarthr.dreamstechnologies.com/html/template/call.html">Crm<span class="menu-arrow"></span></a>
+									<ul>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/contacts-grid.html"><span>Contacts</span></a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/companies-grid.html"><span>Companies</span></a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/deals-grid.html"><span>Deals</span></a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/leads-grid.html"><span>Leads</span></a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/pipeline.html"><span>Pipeline</span></a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/analytics.html"><span>Analytics</span></a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/activity.html"><span>Activities</span></a></li>
+									</ul>
+								</li>
+								<li class="submenu">
+									<a href="javascript:void(0);"><span>Employees</span>
+										<span class="menu-arrow"></span>
+									</a>
+									<ul>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/employees.html">Employee Lists</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/employees-grid.html">Employee Grid</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/employee-details.html">Employee Details</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/departments.html">Departments</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/designations.html">Designations</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/policy.html">Policies</a></li>
+									</ul>
+								</li>
+								<li class="submenu">
+									<a href="javascript:void(0);"><span>Tickets</span>
+										<span class="menu-arrow"></span>
+									</a>
+									<ul>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/tickets.html">Tickets</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/ticket-details.html">Ticket Details</a></li>
+									</ul>
+								</li>
+								<li><a href="https://smarthr.dreamstechnologies.com/html/template/holidays.html"><span>Holidays</span></a></li>
+								<li class="submenu">
+									<a href="javascript:void(0);"><span>Attendance</span>
+										<span class="menu-arrow"></span>
+									</a>
+									<ul>
+										<li class="submenu">
+											<a href="javascript:void(0);">Leaves<span
+													class="menu-arrow"></span></a>
+											<ul>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/leaves.html">Leaves (Admin)</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/leaves-employee.html">Leave (Employee)</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/leave-settings.html">Leave Settings</a></li>												
+											</ul>												
+										</li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/attendance-admin.html">Attendance (Admin)</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/attendance-employee.html">Attendance (Employee)</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/timesheets.html">Timesheets</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/schedule-timing.html">Shift & Schedule</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/overtime.html">Overtime</a></li>
+									</ul>
+								</li>
+								<li class="submenu">
+									<a href="javascript:void(0);"><span>Performance</span>
+										<span class="menu-arrow"></span>
+									</a>
+									<ul>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/performance-indicator.html">Performance Indicator</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/performance-review.html">Performance Review</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/performance-appraisal.html">Performance Appraisal</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/goal-tracking.html">Goal List</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/goal-type.html">Goal Type</a></li>
+									</ul>
+								</li>
+								<li class="submenu">
+									<a href="javascript:void(0);"><span>Training</span>
+										<span class="menu-arrow"></span>
+									</a>
+									<ul>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/training.html">Training List</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/trainers.html">Trainers</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/training-type.html">Training Type</a></li>
+									</ul>
+								</li>
+								<li><a href="https://smarthr.dreamstechnologies.com/html/template/promotion.html"><span>Promotion</span></a></li>
+								<li><a href="https://smarthr.dreamstechnologies.com/html/template/resignation.html"><span>Resignation</span></a></li>
+								<li><a href="https://smarthr.dreamstechnologies.com/html/template/termination.html"><span>Termination</span></a></li>														
+							</ul>
+						</li>
+						<li class="submenu">
+							<a href="#">
+								<i class="ti ti-user-star"></i><span>Administration</span>
+								<span class="menu-arrow"></span>
+							</a>
+							<ul>
+								<li class="submenu">
+									<a href="javascript:void(0);"><span>Sales</span>
+										<span class="menu-arrow"></span>
+									</a>
+									<ul>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/estimates.html">Estimates</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/invoices.html">Invoices</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/payments.html">Payments</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/expenses.html">Expenses</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/provident-fund.html">Provident Fund</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/taxes.html">Taxes</a></li>
+									</ul>
+								</li>
+								<li class="submenu">
+									<a href="javascript:void(0);"><span>Accounting</span>
+										<span class="menu-arrow"></span>
+									</a>
+									<ul>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/categories.html">Categories</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/budgets.html">Budgets</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/budget-expenses.html">Budget Expenses</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/budget-revenues.html">Budget Revenues</a></li>
+									</ul>
+								</li>
+								<li class="submenu">
+									<a href="javascript:void(0);"><span>Payroll</span>
+										<span class="menu-arrow"></span>
+									</a>
+									<ul>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/employee-salary.html">Employee Salary</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/payslip.html">Payslip</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/payroll.html">Payroll Items</a></li>
+									</ul>
+								</li>
+								<li class="submenu">
+									<a href="javascript:void(0);"><span>Assets</span>
+										<span class="menu-arrow"></span>
+									</a>
+									<ul>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/assets.html">Assets</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/asset-categories.html">Asset Categories</a></li>
+									</ul>
+								</li>
+								<li class="submenu">
+									<a href="javascript:void(0);"><span>Help & Supports</span>
+										<span class="menu-arrow"></span>
+									</a>
+									<ul>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/knowledgebase.html">Knowledge Base</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/activity.html">Activities</a></li>
+									</ul>
+								</li>
+								<li class="submenu">
+									<a href="javascript:void(0);"><span>User Management</span>
+										<span class="menu-arrow"></span>
+									</a>
+									<ul>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/users.html">Users</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/roles-permissions.html">Roles & Permissions</a></li>
+									</ul>
+								</li>
+								<li class="submenu">
+									<a href="javascript:void(0);"><span>Reports</span>
+										<span class="menu-arrow"></span>
+									</a>
+									<ul>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/expenses-report.html">Expense Report</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/invoice-report.html">Invoice Report</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/payment-report.html">Payment Report</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/project-report.html">Project Report</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/task-report.html">Task Report</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/user-report.html">User Report</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/employee-report.html">Employee Report</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/payslip-report.html">Payslip Report</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/attendance-report.html">Attendance Report</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/leave-report.html">Leave Report</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/daily-report.html">Daily Report</a></li>
+									</ul>
+								</li>
+								<li class="submenu">
+									<a href="javascript:void(0);"><span>Settings</span>
+										<span class="menu-arrow"></span>
+									</a>
+									<ul>
+										<li class="submenu">
+											<a href="javascript:void(0);">General Settings<span
+													class="menu-arrow"></span></a>
+											<ul>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/profile-settings.html">Profile</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/security-settings.html">Security</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/notification-settings.html">Notifications</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/connected-apps.html">Connected Apps</a></li>
+											</ul>
+										</li>
+										<li class="submenu">
+											<a href="javascript:void(0);">Website Settings<span
+													class="menu-arrow"></span></a>
+											<ul>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/bussiness-settings.html">Business Settings</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/seo-settings.html">SEO Settings</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/localization-settings.html">Localization</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/prefixes.html">Prefixes</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/preferences.html">Preferences</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/performance-appraisal.html">Appearance</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/language.html">Language</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/authentication-settings.html">Authentication</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/ai-settings.html">AI Settings</a></li>
+											</ul>
+										</li>
+										<li class="submenu">
+											<a href="javascript:void(0);">App Settings<span
+													class="menu-arrow"></span></a>
+											<ul>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/salary-settings.html">Salary Settings</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/approval-settings.html">Approval Settings</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/invoice-settings.html">Invoice Settings</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/leave-type.html">Leave Type</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/custom-fields.html">Custom Fields</a></li>
+											</ul>
+										</li>
+										<li class="submenu">
+											<a href="javascript:void(0);">System Settings<span
+													class="menu-arrow"></span></a>
+											<ul>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/email-settings.html">Email Settings</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/email-template.html">Email Templates</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/sms-settings.html">SMS Settings</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/sms-template.html">SMS Templates</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/otp-settings.html">OTP</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/gdpr.html">GDPR Cookies</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/maintenance-mode.html">Maintenance Mode</a></li>
+											</ul>
+										</li>
+										<li class="submenu">
+											<a href="javascript:void(0);">Financial Settings<span
+													class="menu-arrow"></span></a>
+											<ul>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/payment-gateways.html">Payment Gateways</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/tax-rates.html">Tax Rate</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/currencies.html">Currencies</a></li>
+											</ul>
+										</li>
+										<li class="submenu">
+											<a href="javascript:void(0);">Other Settings<span
+													class="menu-arrow"></span></a>
+											<ul>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/custom-css.html">Custom CSS</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/custom-js.html">Custom JS</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/cronjob.html">Cronjob</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/storage-settings.html">Storage</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/ban-ip-address.html">Ban IP Address</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/backup.html">Backup</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/clear-cache.html">Clear Cache</a></li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+						<li class="submenu">
+							<a href="#">
+								<i class="ti ti-page-break"></i><span>Pages</span>
+								<span class="menu-arrow"></span>
+							</a>
+							<ul>
+								<li><a href="https://smarthr.dreamstechnologies.com/html/template/starter.html"><span>Starter</span></a></li>
+								<li><a href="https://smarthr.dreamstechnologies.com/html/template/profile.html"><span>Profile</span></a></li>
+								<li><a href="https://smarthr.dreamstechnologies.com/html/template/gallery.html"><span>Gallery</span></a></li>
+								<li><a href="https://smarthr.dreamstechnologies.com/html/template/search-result.html"><span>Search Results</span></a></li>
+								<li><a href="https://smarthr.dreamstechnologies.com/html/template/timeline.html"><span>Timeline</span></a></li>
+								<li><a href="https://smarthr.dreamstechnologies.com/html/template/pricing.html"><span>Pricing</span></a></li>
+								<li><a href="https://smarthr.dreamstechnologies.com/html/template/coming-soon.html"><span>Coming Soon</span></a></li>
+								<li><a href="https://smarthr.dreamstechnologies.com/html/template/under-maintenance.html"><span>Under Maintenance</span></a></li>
+								<li><a href="https://smarthr.dreamstechnologies.com/html/template/under-construction.html"><span>Under Construction</span></a></li>
+								<li><a href="https://smarthr.dreamstechnologies.com/html/template/api-keys.html"><span>API Keys</span></a></li>
+								<li><a href="https://smarthr.dreamstechnologies.com/html/template/privacy-policy.html"><span>Privacy Policy</span></a></li>
+								<li><a href="https://smarthr.dreamstechnologies.com/html/template/terms-condition.html"><span>Terms & Conditions</span></a></li>
+								<li class="submenu">
+									<a href="#"><span>Content</span> <span class="menu-arrow"></span></a>
+									<ul>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/pages.html">Pages</a></li>
+										<li class="submenu">
+											<a href="javascript:void(0);">Blogs<span class="menu-arrow"></span></a>
+											<ul>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/blogs.html">All Blogs</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/blog-categories.html">Categories</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/blog-comments.html">Comments</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/blog-tags.html">Tags</a></li>
+											</ul>
+										</li>
+										<li class="submenu">
+											<a href="javascript:void(0);">Locations<span class="menu-arrow"></span></a>
+											<ul>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/countries.html">Countries</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/states.html">States</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/cities.html">Cities</a></li>
+											</ul>
+										</li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/testimonials.html">Testimonials</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/faq.html">FAQ’S</a></li>
+									</ul>
+								</li>
+								<li class="submenu">
+									<a href="#">
+										<span>Authentication</span>
+										<span class="menu-arrow"></span>
+									</a>
+									<ul>
+										<li class="submenu">
+											<a href="javascript:void(0);" class="">Login<span class="menu-arrow"></span></a>
+											<ul>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/login.html">Cover</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/login-2.html">Illustration</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/login-3.html">Basic</a></li>
+											</ul>
+										</li>
+										<li class="submenu">
+											<a href="javascript:void(0);" class="">Register<span class="menu-arrow"></span></a>
+											<ul>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/register.html">Cover</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/register-2.html">Illustration</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/register-3.html">Basic</a></li>
+											</ul>
+										</li>
+										<li class="submenu"><a href="javascript:void(0);">Forgot Password<span class="menu-arrow"></span></a>
+											<ul>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/forgot-password.html">Cover</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/forgot-password-2.html">Illustration</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/forgot-password-3.html">Basic</a></li>
+											</ul>
+										</li>
+										<li class="submenu">
+											<a href="javascript:void(0);">Reset Password<span class="menu-arrow"></span></a>
+											<ul>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/reset-password.html">Cover</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/reset-password-2.html">Illustration</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/reset-password-3.html">Basic</a></li>
+											</ul>
+										</li>
+										<li class="submenu">
+											<a href="javascript:void(0);">Email Verification<span class="menu-arrow"></span></a>
+											<ul>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/email-verification.html">Cover</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/email-verification-2.html">Illustration</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/email-verification-3.html">Basic</a></li>
+											</ul>
+										</li>
+										<li class="submenu">
+											<a href="javascript:void(0);">2 Step Verification<span class="menu-arrow"></span></a>
+											<ul>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/two-step-verification.html">Cover</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/two-step-verification-2.html">Illustration</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/two-step-verification-3.html">Basic</a></li>
+											</ul>
+										</li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/lock-screen.html">Lock Screen</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/error-404.html">404 Error</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/error-500.html">500 Error</a></li>
+									</ul>
+								</li>
+								<li class="submenu">
+									<a href="#">
+										<span>UI Interface</span>
+										<span class="menu-arrow"></span>
+									</a>
+									<ul>
+										<li class="submenu">
+											<a href="javascript:void(0);">
+												<i class="ti ti-hierarchy-2"></i>
+												<span>Base UI</span>
+												<span class="menu-arrow"></span>
+											</a>
+											<ul>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/ui-alerts.html">Alerts</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/ui-accordion.html">Accordion</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/ui-avatar.html">Avatar</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/ui-badges.html">Badges</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/ui-borders.html">Border</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/ui-buttons.html">Buttons</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/ui-buttons-group.html">Button Group</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/ui-breadcrumb.html">Breadcrumb</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/ui-cards.html">Card</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/ui-carousel.html">Carousel</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/ui-colors.html">Colors</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/ui-dropdowns.html">Dropdowns</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/ui-grid.html">Grid</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/ui-images.html">Images</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/ui-lightbox.html">Lightbox</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/ui-media.html">Media</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/ui-modals.html">Modals</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/ui-offcanvas.html">Offcanvas</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/ui-pagination.html">Pagination</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/ui-popovers.html">Popovers</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/ui-progress.html">Progress</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/ui-placeholders.html">Placeholders</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/ui-spinner.html">Spinner</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/ui-sweetalerts.html">Sweet Alerts</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/ui-nav-tabs.html">Tabs</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/ui-toasts.html">Toasts</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/ui-tooltips.html">Tooltips</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/ui-typography.html">Typography</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/ui-video.html">Video</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/ui-sortable.html">Sortable</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/ui-swiperjs.html">Swiperjs</a>
+												</li>
+											</ul>
+										</li>
+										<li class="submenu">
+											<a href="javascript:void(0);">
+												<i class="ti ti-hierarchy-3"></i>
+												<span>Advanced UI</span>
+												<span class="menu-arrow"></span>
+											</a>
+											<ul>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/ui-ribbon.html">Ribbon</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/ui-clipboard.html">Clipboard</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/ui-drag-drop.html">Drag & Drop</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/ui-rangeslider.html">Range Slider</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/ui-rating.html">Rating</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/ui-text-editor.html">Text Editor</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/ui-counter.html">Counter</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/ui-scrollbar.html">Scrollbar</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/ui-stickynote.html">Sticky Note</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/ui-timeline.html">Timeline</a>
+												</li>
+											</ul>
+										</li>
+										<li class="submenu">
+											<a href="javascript:void(0);">
+												<i class="ti ti-input-search"></i>
+												<span>Forms</span>
+												<span class="menu-arrow"></span>
+											</a>
+											<ul>
+												<li class="submenu submenu-two">
+													<a href="javascript:void(0);">Form Elements <span class="menu-arrow inside-submenu"></span>
+													</a>
+													<ul>
+														<li>
+															<a href="https://smarthr.dreamstechnologies.com/html/template/form-basic-inputs.html">Basic Inputs</a>
+														</li>
+														<li>
+															<a href="https://smarthr.dreamstechnologies.com/html/template/form-checkbox-radios.html">Checkbox & Radios</a>
+														</li>
+														<li>
+															<a href="https://smarthr.dreamstechnologies.com/html/template/form-input-groups.html">Input Groups</a>
+														</li>
+														<li>
+															<a href="https://smarthr.dreamstechnologies.com/html/template/form-grid-gutters.html">Grid & Gutters</a>
+														</li>
+														<li>
+															<a href="https://smarthr.dreamstechnologies.com/html/template/form-select.html">Form Select</a>
+														</li>
+														<li>
+															<a href="https://smarthr.dreamstechnologies.com/html/template/form-mask.html">Input Masks</a>
+														</li>
+														<li>
+															<a href="https://smarthr.dreamstechnologies.com/html/template/form-fileupload.html">File Uploads</a>
+														</li>
+													</ul>
+												</li>
+												<li class="submenu submenu-two">
+													<a href="javascript:void(0);">Layouts <span class="menu-arrow inside-submenu"></span>
+													</a>
+													<ul>
+														<li>
+															<a href="https://smarthr.dreamstechnologies.com/html/template/form-horizontal.html">Horizontal Form</a>
+														</li>
+														<li>
+															<a href="https://smarthr.dreamstechnologies.com/html/template/form-vertical.html">Vertical Form</a>
+														</li>
+														<li>
+															<a href="https://smarthr.dreamstechnologies.com/html/template/form-floating-labels.html">Floating Labels</a>
+														</li>
+													</ul>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/form-validation.html">Form Validation</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/form-select2.html">Select2</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/form-wizard.html">Form Wizard</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/form-pickers.html">Form Pickers</a>
+												</li>
+												
+											</ul>
+										</li>
+										<li class="submenu">
+											<a href="javascript:void(0);">
+												<i class="ti ti-table-plus"></i>
+												<span>Tables</span>
+												<span class="menu-arrow"></span>
+											</a>
+											<ul>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/tables-basic.html">Basic Tables </a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/data-tables.html">Data Table </a>
+												</li>
+											</ul>
+										</li>
+										<li class="submenu">
+											<a href="javascript:void(0);">
+												<i class="ti ti-chart-line"></i>
+												<span>Charts</span>
+												<span class="menu-arrow"></span>
+											</a>
+											<ul>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/chart-apex.html">Apex Charts</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/chart-c3.html">Chart C3</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/chart-js.html">Chart Js</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/chart-morris.html">Morris Charts</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/chart-flot.html">Flot Charts</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/chart-peity.html">Peity Charts</a>
+												</li>
+											</ul>
+										</li>
+										<li class="submenu">
+											<a href="javascript:void(0);">
+												<i class="ti ti-icons"></i>
+												<span>Icons</span>
+												<span class="menu-arrow"></span>
+											</a>
+											<ul>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/icon-fontawesome.html">Fontawesome Icons</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/icon-tabler.html">Tabler Icons</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/icon-bootstrap.html">Bootstrap Icons</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/icon-remix.html">Remix Icons</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/icon-feather.html">Feather Icons</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/icon-ionic.html">Ionic Icons</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/icon-material.html">Material Icons</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/icon-pe7.html">Pe7 Icons</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/icon-simpleline.html">Simpleline Icons</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/icon-themify.html">Themify Icons</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/icon-weather.html">Weather Icons</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/icon-typicon.html">Typicon Icons</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/icon-flag.html">Flag Icons</a>
+												</li>
+											</ul>
+										</li>
+										<li class="submenu">
+											<a href="javascript:void(0);">
+												<i class="ti ti-table-plus"></i>
+												<span>Maps</span>
+												<span class="menu-arrow"></span>
+											</a>
+											<ul>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/maps-vector.html">Vector</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/maps-leaflet.html">Leaflet</a>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+								<li><a href="#">Documentation</a></li>
+								<li><a href="#">Change Log</a></li>
+								<li class="submenu">
+									<a href="javascript:void(0);"><span>Multi Level</span><span class="menu-arrow"></span></a>
+									<ul>
+										<li><a href="javascript:void(0);">Multilevel 1</a></li>
+										<li class="submenu submenu-two">
+											<a href="javascript:void(0);">Multilevel 2<span
+													class="menu-arrow inside-submenu"></span></a>
+											<ul>
+												<li><a href="javascript:void(0);">Multilevel 2.1</a></li>
+												<li class="submenu submenu-two submenu-three">
+													<a href="javascript:void(0);">Multilevel 2.2<span
+															class="menu-arrow inside-submenu inside-submenu-two"></span></a>
+													<ul>
+														<li><a href="javascript:void(0);">Multilevel 2.2.1</a></li>
+														<li><a href="javascript:void(0);">Multilevel 2.2.2</a></li>
+													</ul>
+												</li>
+											</ul>
+										</li>
+										<li><a href="javascript:void(0);">Multilevel 3</a></li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+					</ul>
+					<div class="d-xl-flex align-items-center d-none">
+						<a href="#" class="me-3 avatar avatar-sm">
+							<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-07.jpg" alt="profile" class="rounded-circle">
+						</a>
+						<a href="#" class="btn btn-icon btn-sm rounded-circle mode-toggle">
+							<i class="ti ti-sun"></i>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /Horizontal Menu -->
+
+		<!-- Two Col Sidebar -->
+		<div class="two-col-sidebar" id="two-col-sidebar">
+			<div class="sidebar sidebar-twocol">
+				<div class="twocol-mini">
+					<a href="https://smarthr.dreamstechnologies.com/html/template/index.html" class="logo-small">
+						<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/logo-small.svg" alt="Logo">
+					</a>
+					<div class="sidebar-left slimscroll">
+						<div class="nav flex-column align-items-center nav-pills" id="sidebar-tabs" role="tablist"
+							aria-orientation="vertical">
+							<a href="#" class="nav-link active" title="Dashboard" data-bs-toggle="tab" data-bs-target="#dashboard">
+								<i class="ti ti-smart-home"></i>
+							</a>
+							<a href="#" class="nav-link" title="Apps" data-bs-toggle="tab" data-bs-target="#application">
+								<i class="ti ti-layout-grid-add"></i>
+							</a>
+							<a href="#" class="nav-link" title="Super Admin" data-bs-toggle="tab" data-bs-target="#super-admin">
+								<i class="ti ti-user-star"></i>
+							</a>
+							<a href="#" class="nav-link" title="Layout" data-bs-toggle="tab" data-bs-target="#layout">
+								<i class="ti ti-layout-board-split"></i>
+							</a>
+							<a href="#" class="nav-link" title="Projects" data-bs-toggle="tab" data-bs-target="#projects">
+								<i class="ti ti-users-group"></i>
+							</a>
+							<a href="#" class="nav-link" title="Crm" data-bs-toggle="tab" data-bs-target="#crm">
+								<i class="ti ti-user-shield"></i>
+							</a>
+							<a href="#" class="nav-link" title="Hrm" data-bs-toggle="tab" data-bs-target="#hrm">
+								<i class="ti ti-user"></i>
+							</a>
+							<a href="#" class="nav-link" title="Finance" data-bs-toggle="tab" data-bs-target="#finance">
+								<i class="ti ti-shopping-cart-dollar"></i>
+							</a>
+							<a href="#" class="nav-link" title="Administration" data-bs-toggle="tab" data-bs-target="#administration">
+								<i class="ti ti-cash"></i>
+							</a>
+							<a href="#" class="nav-link" title="Content" data-bs-toggle="tab" data-bs-target="#content">
+								<i class="ti ti-license"></i>
+							</a>
+							<a href="#" class="nav-link" title="Pages" data-bs-toggle="tab" data-bs-target="#pages">
+								<i class="ti ti-page-break"></i>
+							</a>
+							<a href="#" class="nav-link" title="Authentication" data-bs-toggle="tab"
+								data-bs-target="#authentication">
+								<i class="ti ti-lock-check"></i>
+							</a>
+							<a href="#" class="nav-link " title="UI Elements" data-bs-toggle="tab"
+								data-bs-target="#ui-elements">
+								<i class="ti ti-ux-circle"></i>
+							</a>
+							<a href="#" class="nav-link" title="Extras" data-bs-toggle="tab" data-bs-target="#extras">
+								<i class="ti ti-vector-triangle"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="sidebar-right">
+					<div class="sidebar-logo mb-4">
+						<a href="https://smarthr.dreamstechnologies.com/html/template/index.html" class="logo logo-normal">
+							<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/logo.svg" alt="Logo">
+						</a>
+						<a href="https://smarthr.dreamstechnologies.com/html/template/index.html" class="dark-logo">
+							<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/logo-white.svg" alt="Logo">
+						</a>
+					</div>
+					<div class="sidebar-scroll">
+						<h6 class="mb-3">Welcome to SmartHR</h6>
+						<div class="text-center rounded bg-light p-3 mb-4">
+							<div class="avatar avatar-lg online mb-3">
+								<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-02.jpg" alt="Img" class="img-fluid rounded-circle">
+							</div>
+							<h6 class="fs-12 fw-normal mb-1">Adrian Herman</h6>
+							<p class="fs-10">System Admin</p>
+						</div>
+						<div class="tab-content" id="v-pills-tabContent">
+							<div class="tab-pane fade show active" id="dashboard">
+								<ul>
+									<li class="menu-title"><span>MAIN MENU</span></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/index.html">Admin Dashboard</a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/employee-dashboard.html" class="active">Employee Dashboard</a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/deals-dashboard.html">Deals Dashboard</a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/leads-dashboard.html">Leads Dashboard</a></li>
+								</ul>
+							</div>
+							<div class="tab-pane fade" id="application">
+								<ul>
+									<li class="menu-title"><span>APPLICATION</span></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/voice-call.html">Voice Call</a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/video-call.html">Video Call</a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/outgoing-call.html">Outgoing Call</a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/incoming-call.html">Incoming Call</a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/call-history.html">Call History</a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/calendar.html">Calendar</a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/email.html">Email</a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/todo.html">To Do</a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/notes.html">Notes</a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/file-manager.html">File Manager</a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/kanban-view.html">Kanban</a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/invoices.html">Invoices</a></li>
+								</ul>
+							</div>
+							<div class="tab-pane fade" id="super-admin">
+								<ul>
+									<li class="menu-title"><span>SUPER ADMIN</span></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/dashboard.html">Dashboard</a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/companies.html">Companies</a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/subscription.html">Subscriptions</a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/packages.html">Packages</a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/domain.html">Domain</a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/purchase-transaction.html">Purchase Transaction</a></li>
+								</ul>
+							</div>
+							<div class="tab-pane fade" id="layout">
+								<ul>
+									<li class="menu-title"><span>LAYOUT</span></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/layout-horizontal.html"><span>Horizontal</span></a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/layout-detached.html"><span>Detached</span></a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/layout-modern.html"><span>Modern</span></a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/layout-two-column.html"><span>Two Column </span></a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/layout-hovered.html"><span>Hovered</span></a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/layout-box.html"><span>Boxed</span></a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/layout-horizontal-single.html"><span>Horizontal Single</span></a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/layout-horizontal-overlay.html"><span>Horizontal Overlay</span></a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/layout-horizontal-box.html"><span>Horizontal Box</span></a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/layout-horizontal-sidemenu.html"><span>Menu Aside</span></a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/layout-vertical-transparent.html"><span>Transparent</span></a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/layout-without-header.html"><span>Without Header</span></a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/layout-rtl.html"><span>RTL</span></a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/layout-dark.html"><span>Dark</span></a></li>
+								</ul>
+							</div>
+							<div class="tab-pane fade" id="projects">
+								<ul>
+									<li class="menu-title"><span>PROJECTS</span></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/clients-grid.html">Clients</a></li>
+									<li class="submenu">
+										<a href="javascript:void(0);"><span>Projects</span>
+											<span class="menu-arrow"></span>
+										</a>
+										<ul>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/projects-grid.html">Projects</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/tasks.html">Tasks</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/task-board.html">Task Board</a></li>
+										</ul>
+									</li>	
+								</ul>
+							</div>
+							<div class="tab-pane fade" id="crm">
+								<ul>
+									<li class="menu-title"><span>CRM</span></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/contacts-grid.html"><span>Contacts</span></a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/companies-grid.html"><span>Companies</span></a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/deals-grid.html"><span>Deals</span></a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/leads-grid.html"><span>Leads</span></a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/pipeline.html"><span>Pipeline</span></a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/analytics.html"><span>Analytics</span></a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/activity.html"><span>Activities</span></a></li>
+								</ul>
+							</div>
+							<div class="tab-pane fade" id="hrm">
+								<ul>
+									<li class="menu-title"><span>HRM</span></li>
+									<li class="submenu">
+										<a href="javascript:void(0);"><span>Employees</span>
+											<span class="menu-arrow"></span>
+										</a>
+										<ul>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/employees.html">Employee Lists</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/employees-grid.html">Employee Grid</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/employee-details.html">Employee Details</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/departments.html">Departments</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/designations.html">Designations</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/policy.html">Policies</a></li>
+										</ul>
+									</li>
+									<li class="submenu">
+										<a href="javascript:void(0);"><span>Tickets</span>
+											<span class="menu-arrow"></span>
+										</a>
+										<ul>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/tickets.html">Tickets</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/ticket-details.html">Ticket Details</a></li>
+										</ul>
+									</li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/holidays.html"><span>Holidays</span></a></li>
+									<li class="submenu">
+										<a href="javascript:void(0);"><span>Attendance</span>
+											<span class="menu-arrow"></span>
+										</a>
+										<ul>
+											<li class="submenu submenu-two">
+												<a href="javascript:void(0);">Leaves<span
+														class="menu-arrow inside-submenu"></span></a>
+												<ul>
+													<li><a href="https://smarthr.dreamstechnologies.com/html/template/leaves.html">Leaves (Admin)</a></li>
+													<li><a href="https://smarthr.dreamstechnologies.com/html/template/leaves-employee.html">Leave (Employee)</a></li>
+													<li><a href="https://smarthr.dreamstechnologies.com/html/template/leave-settings.html">Leave Settings</a></li>												
+												</ul>												
+											</li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/attendance-admin.html">Attendance (Admin)</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/attendance-employee.html">Attendance (Employee)</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/timesheets.html">Timesheets</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/schedule-timing.html">Shift & Schedule</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/overtime.html">Overtime</a></li>
+										</ul>
+									</li>
+									<li class="submenu">
+										<a href="javascript:void(0);"><span>Performance</span>
+											<span class="menu-arrow"></span>
+										</a>
+										<ul>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/performance-indicator.html">Performance Indicator</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/performance-review.html">Performance Review</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/performance-appraisal.html">Performance Appraisal</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/goal-tracking.html">Goal List</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/goal-type.html">Goal Type</a></li>
+										</ul>
+									</li>
+									<li class="submenu">
+										<a href="javascript:void(0);"><span>Training</span>
+											<span class="menu-arrow"></span>
+										</a>
+										<ul>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/training.html">Training List</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/trainers.html">Trainers</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/training-type.html">Training Type</a></li>
+										</ul>
+									</li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/promotion.html"><span>Promotion</span></a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/resignation.html"><span>Resignation</span></a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/termination.html"><span>Termination</span></a></li>
+								</ul>
+							</div>
+							<div class="tab-pane fade" id="finance">
+								<ul>
+									<li class="menu-title"><span>FINANCE & ACCOUNTS</span></li>
+									<li class="submenu">
+										<a href="javascript:void(0);"><span>Sales</span>
+											<span class="menu-arrow"></span>
+										</a>
+										<ul>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/estimates.html">Estimates</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/invoices.html">Invoices</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/payments.html">Payments</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/expenses.html">Expenses</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/provident-fund.html">Provident Fund</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/taxes.html">Taxes</a></li>
+										</ul>
+									</li>
+									<li class="submenu">
+										<a href="javascript:void(0);"><span>Accounting</span>
+											<span class="menu-arrow"></span>
+										</a>
+										<ul>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/categories.html">Categories</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/budgets.html">Budgets</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/budget-expenses.html">Budget Expenses</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/budget-revenues.html">Budget Revenues</a></li>
+										</ul>
+									</li>
+									<li class="submenu">
+										<a href="javascript:void(0);"><span>Payroll</span>
+											<span class="menu-arrow"></span>
+										</a>
+										<ul>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/employee-salary.html">Employee Salary</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/payslip.html">Payslip</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/payroll.html">Payroll Items</a></li>
+										</ul>
+									</li>									
+								</ul>
+							</div>
+							<div class="tab-pane fade" id="administration">
+								<ul>
+									<li class="menu-title"><span>ADMINISTRATION</span></li>
+									<li class="submenu">
+										<a href="javascript:void(0);"><span>Assets</span>
+											<span class="menu-arrow"></span>
+										</a>
+										<ul>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/assets.html">Assets</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/asset-categories.html">Asset Categories</a></li>
+										</ul>
+									</li>
+									<li class="submenu">
+										<a href="javascript:void(0);"><span>Help & Supports</span>
+											<span class="menu-arrow"></span>
+										</a>
+										<ul>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/knowledgebase.html">Knowledge Base</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/activity.html">Activities</a></li>
+										</ul>
+									</li>
+									<li class="submenu">
+										<a href="javascript:void(0);"><span>User Management</span>
+											<span class="menu-arrow"></span>
+										</a>
+										<ul>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/users.html">Users</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/roles-permissions.html">Roles & Permissions</a></li>
+										</ul>
+									</li>
+									<li class="submenu">
+										<a href="javascript:void(0);"><span>Reports</span>
+											<span class="menu-arrow"></span>
+										</a>
+										<ul>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/expenses-report.html">Expense Report</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/invoice-report.html">Invoice Report</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/payment-report.html">Payment Report</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/project-report.html">Project Report</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/task-report.html">Task Report</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/user-report.html">User Report</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/employee-report.html">Employee Report</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/payslip-report.html">Payslip Report</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/attendance-report.html">Attendance Report</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/leave-report.html">Leave Report</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/daily-report.html">Daily Report</a></li>
+										</ul>
+									</li>
+									<li class="submenu">
+										<a href="javascript:void(0);">
+											General Settings
+											<span class="menu-arrow"></span>
+										</a>
+										<ul>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/profile-settings.html">Profile</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/security-settings.html">Security</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/notification-settings.html">Notifications</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/connected-apps.html">Connected Apps</a></li>
+										</ul>
+									</li>
+									<li class="submenu">
+										<a href="javascript:void(0);">
+											Website Settings
+											<span class="menu-arrow"></span>
+										</a>
+										<ul>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/bussiness-settings.html">Business Settings</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/seo-settings.html">SEO Settings</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/localization-settings.html">Localization</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/prefixes.html">Prefixes</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/preferences.html">Preferences</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/performance-appraisal.html">Appearance</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/language.html">Language</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/authentication-settings.html">Authentication</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/ai-settings.html">AI Settings</a></li>
+										</ul>
+									</li>
+									<li class="submenu">
+										<a href="javascript:void(0);">App Settings<span
+												class="menu-arrow"></span></a>
+										<ul>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/salary-settings.html">Salary Settings</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/approval-settings.html">Approval Settings</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/invoice-settings.html">Invoice Settings</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/leave-type.html">Leave Type</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/custom-fields.html">Custom Fields</a></li>
+										</ul>
+									</li>
+									<li class="submenu">
+										<a href="javascript:void(0);">
+											System Settings
+											<span class="menu-arrow"></span>
+										</a>
+										<ul>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/email-settings.html">Email Settings</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/email-template.html">Email Templates</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/sms-settings.html">SMS Settings</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/sms-template.html">SMS Templates</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/otp-settings.html">OTP</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/gdpr.html">GDPR Cookies</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/maintenance-mode.html">Maintenance Mode</a></li>
+										</ul>
+									</li>
+									<li class="submenu">
+										<a href="javascript:void(0);">
+											Financial Settings
+											<span class="menu-arrow"></span>
+										</a>
+										<ul>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/payment-gateways.html">Payment Gateways</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/tax-rates.html">Tax Rate</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/currencies.html">Currencies</a></li>
+										</ul>
+									</li>
+									<li class="submenu">
+										<a href="javascript:void(0);">Other Settings<span
+												class="menu-arrow"></span></a>
+										<ul>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/custom-css.html">Custom CSS</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/custom-js.html">Custom JS</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/cronjob.html">Cronjob</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/storage-settings.html">Storage</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/ban-ip-address.html">Ban IP Address</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/backup.html">Backup</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/clear-cache.html">Clear Cache</a></li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+							<div class="tab-pane fade" id="content">
+								<ul>
+									<li class="menu-title"><span>CONTENT</span></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/pages.html">Pages</a></li>
+									<li class="submenu">
+										<a href="javascript:void(0);">
+											Blogs
+											<span class="menu-arrow"></span>
+										</a>
+										<ul>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/blogs.html">All Blogs</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/blog-categories.html">Categories</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/blog-comments.html">Comments</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/blog-tags.html">Blog Tags</a></li>
+										</ul>
+									</li>
+									<li class="submenu">
+										<a href="javascript:void(0);">
+											Locations
+											<span class="menu-arrow"></span>
+										</a>
+										<ul>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/countries.html">Countries</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/states.html">States</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/cities.html">Cities</a></li>
+										</ul>
+									</li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/testimonials.html">Testimonials</a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/faq.html">FAQ’S</a></li>
+								</ul>
+							</div>
+							<div class="tab-pane fade" id="pages">
+								<ul>
+									<li class="menu-title"><span>PAGES</span></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/starter.html"><span>Starter</span></a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/profile.html"><span>Profile</span></a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/gallery.html"><span>Gallery</span></a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/search-result.html"><span>Search Results</span></a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/timeline.html"><span>Timeline</span></a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/pricing.html"><span>Pricing</span></a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/coming-soon.html"><span>Coming Soon</span></a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/under-maintenance.html"><span>Under Maintenance</span></a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/under-construction.html"><span>Under Construction</span></a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/api-keys.html"><span>API Keys</span></a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/privacy-policy.html"><span>Privacy Policy</span></a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/terms-condition.html"><span>Terms & Conditions</span></a></li>
+								</ul>
+							</div>
+							<div class="tab-pane fade" id="authentication">
+								<ul>
+									<li class="menu-title"><span>AUTHENTICATION</span></li>
+									<li class="submenu">
+										<a href="javascript:void(0);">
+											Login<span class="menu-arrow"></span>
+										</a>
+										<ul>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/login.html">Cover</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/login-2.html">Illustration</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/login-3.html">Basic</a></li>
+										</ul>
+									</li>
+									<li class="submenu">
+										<a href="javascript:void(0);">
+											Register<span class="menu-arrow"></span>
+										</a>
+										<ul>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/register.html">Cover</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/register-2.html">Illustration</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/register-3.html">Basic</a></li>
+										</ul>
+									</li>
+									<li class="submenu">
+										<a href="javascript:void(0);">
+											Forgot Password<span class="menu-arrow"></span>
+										</a>
+										<ul>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/forgot-password.html">Cover</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/forgot-password-2.html">Illustration</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/forgot-password-3.html">Basic</a></li>
+										</ul>
+									</li>
+									<li class="submenu">
+										<a href="javascript:void(0);">
+											Reset Password<span class="menu-arrow"></span>
+										</a>
+										<ul>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/reset-password.html">Cover</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/reset-password-2.html">Illustration</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/reset-password-3.html">Basic</a></li>
+										</ul>
+									</li>
+									<li class="submenu">
+										<a href="javascript:void(0);">
+											Email Verification<span class="menu-arrow"></span>
+										</a>
+										<ul>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/email-verification.html">Cover</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/email-verification-2.html">Illustration</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/email-verification-3.html">Basic</a></li>
+										</ul>
+									</li>
+									<li class="submenu">
+										<a href="javascript:void(0);">
+											2 Step Verification<span class="menu-arrow"></span>
+										</a>
+										<ul>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/two-step-verification.html">Cover</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/two-step-verification-2.html">Illustration</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/two-step-verification-3.html">Basic</a></li>
+										</ul>
+									</li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/lock-screen.html">Lock Screen</a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/error-404.html">404 Error</a></li>
+									<li><a href="https://smarthr.dreamstechnologies.com/html/template/error-500.html">500 Error</a></li>
+								</ul>
+							</div>
+							<div class="tab-pane fade" id="ui-elements">
+								<ul>
+									<li class="menu-title"><span>UI INTERFACE</span></li>
+									<li class="submenu">
+										<a href="javascript:void(0);">Base UI<span class="menu-arrow"></span>
+										</a>
+										<ul>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-alerts.html">Alerts</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-accordion.html">Accordion</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-avatar.html">Avatar</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-badges.html">Badges</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-borders.html">Border</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-buttons.html">Buttons</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-buttons-group.html">Button Group</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-breadcrumb.html">Breadcrumb</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-cards.html">Card</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-carousel.html">Carousel</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-colors.html">Colors</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-dropdowns.html">Dropdowns</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-grid.html">Grid</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-images.html">Images</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-lightbox.html">Lightbox</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-media.html">Media</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-modals.html">Modals</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-offcanvas.html">Offcanvas</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-pagination.html">Pagination</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-popovers.html">Popovers</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-progress.html">Progress</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-placeholders.html">Placeholders</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-spinner.html">Spinner</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-sweetalerts.html">Sweet Alerts</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-nav-tabs.html">Tabs</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-toasts.html">Toasts</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-tooltips.html">Tooltips</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-typography.html">Typography</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-video.html">Video</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-sortable.html">Sortable</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-swiperjs.html">Swiperjs</a></li>						
+										</ul>
+									</li>
+									<li class="submenu">
+										<a href="javascript:void(0);"> Advanced UI <span class="menu-arrow"></span> </a>
+										<ul>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-ribbon.html">Ribbon</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-clipboard.html">Clipboard</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-drag-drop.html">Drag & Drop</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-rangeslider.html">Range Slider</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-rating.html">Rating</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-text-editor.html">Text Editor</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-counter.html">Counter</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-scrollbar.html">Scrollbar</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-stickynote.html">Sticky Note</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-timeline.html">Timeline</a></li>
+										</ul>
+									</li>
+									<li class="submenu">
+										<a href="javascript:void(0);"> Forms <span class="menu-arrow"></span>
+										</a>
+										<ul>
+											<li class="submenu submenu-two">
+												<a href="javascript:void(0);">Form Elements<span class="menu-arrow inside-submenu"></span></a>
+												<ul>
+													<li><a href="https://smarthr.dreamstechnologies.com/html/template/form-basic-inputs.html">Basic Inputs</a></li>
+													<li><a href="https://smarthr.dreamstechnologies.com/html/template/form-checkbox-radios.html">Checkbox & Radios</a></li>
+													<li><a href="https://smarthr.dreamstechnologies.com/html/template/form-input-groups.html">Input Groups</a></li>
+													<li><a href="https://smarthr.dreamstechnologies.com/html/template/form-grid-gutters.html">Grid & Gutters</a></li>
+													<li><a href="https://smarthr.dreamstechnologies.com/html/template/form-select.html">Form Select</a></li>
+													<li><a href="https://smarthr.dreamstechnologies.com/html/template/form-mask.html">Input Masks</a></li>
+													<li><a href="https://smarthr.dreamstechnologies.com/html/template/form-fileupload.html">File Uploads</a></li>
+												</ul>
+											</li>
+											<li class="submenu submenu-two">
+												<a href="javascript:void(0);">Layouts<span class="menu-arrow inside-submenu"></span></a>
+												<ul>
+													<li><a href="https://smarthr.dreamstechnologies.com/html/template/form-horizontal.html">Horizontal Form</a></li>
+													<li><a href="https://smarthr.dreamstechnologies.com/html/template/form-vertical.html">Vertical Form</a></li>
+													<li><a href="https://smarthr.dreamstechnologies.com/html/template/form-floating-labels.html">Floating Labels</a></li>
+												</ul>
+											</li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/form-validation.html">Form Validation</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/form-select2.html">Select2</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/form-wizard.html">Form Wizard</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/form-pickers.html">Form Picker</a></li>
+										</ul>
+									</li>
+									<li class="submenu">
+										<a href="javascript:void(0);">Tables <span class="menu-arrow"></span></a>
+										<ul>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/tables-basic.html">Basic Tables </a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/data-tables.html">Data Table </a></li>
+										</ul>
+									</li>
+									<li class="submenu">
+										<a href="javascript:void(0);">Charts<span class="menu-arrow"></span> </a>
+										<ul>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/chart-apex.html">Apex Charts</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/chart-c3.html">Chart C3</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/chart-js.html">Chart Js</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/chart-morris.html">Morris Charts</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/chart-flot.html">Flot Charts</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/chart-peity.html">Peity Charts</a></li>
+										</ul>
+									</li>
+									<li class="submenu">
+										<a href="javascript:void(0);">Icons<span class="menu-arrow"></span> </a>
+										<ul>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/icon-fontawesome.html">Fontawesome Icons</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/icon-tabler.html">Tabler Icons</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/icon-bootstrap.html">Bootstrap Icons</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/icon-remix.html">Remix Icons</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/icon-feather.html">Feather Icons</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/icon-ionic.html">Ionic Icons</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/icon-material.html">Material Icons</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/icon-pe7.html">Pe7 Icons</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/icon-simpleline.html">Simpleline Icons</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/icon-themify.html">Themify Icons</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/icon-weather.html">Weather Icons</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/icon-typicon.html">Typicon Icons</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/icon-flag.html">Flag Icons</a></li>
+											
+										</ul>
+									</li>
+									<li class="submenu">
+										<a href="javascript:void(0);">
+											<i class="ti ti-table-plus"></i>
+											<span>Maps</span>
+											<span class="menu-arrow"></span>
+										</a>
+										<ul>
+											<li>
+												<a href="https://smarthr.dreamstechnologies.com/html/template/maps-vector.html">Vector</a>
+											</li>
+											<li>
+												<a href="https://smarthr.dreamstechnologies.com/html/template/maps-leaflet.html">Leaflet</a>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+							<div class="tab-pane fade" id="extras">
+								<ul>
+									<li class="menu-title"><span>EXTRAS</span></li>
+									<li><a href="#">Documentation</a></li>
+									<li><a href="#">Change Log</a></li>
+									<li class="submenu">
+										<a href="javascript:void(0);"><span>Multi Level</span><span class="menu-arrow"></span></a>
+										<ul>
+											<li><a href="javascript:void(0);">Multilevel 1</a></li>
+											<li class="submenu submenu-two">
+												<a href="javascript:void(0);">Multilevel 2<span class="menu-arrow inside-submenu"></span></a>
+												<ul>
+													<li><a href="javascript:void(0);">Multilevel 2.1</a></li>
+													<li class="submenu submenu-two submenu-three">
+														<a href="javascript:void(0);">Multilevel 2.2<span class="menu-arrow inside-submenu inside-submenu-two"></span></a>
+														<ul>
+															<li><a href="javascript:void(0);">Multilevel 2.2.1</a></li>
+															<li><a href="javascript:void(0);">Multilevel 2.2.2</a></li>
+														</ul>
+													</li>
+												</ul>
+											</li>
+											<li><a href="javascript:void(0);">Multilevel 3</a></li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /Two Col Sidebar -->
+
+		<!-- Stacked Sidebar -->
+		<div class="stacked-sidebar" id="stacked-sidebar">
+			<div class="sidebar sidebar-stacked" style="display: flex !important;">
+				<div class="stacked-mini">
+					<a href="https://smarthr.dreamstechnologies.com/html/template/index.html" class="logo-small">
+						<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/logo-small.svg" alt="Logo">
+					</a>
+					<div class="sidebar-left slimscroll">
+						<div class="d-flex align-items-center flex-column">
+							<div class="mb-1 notification-item">
+								<a href="#" class="btn btn-menubar position-relative">
+									<i class="ti ti-bell"></i>
+									<span class="notification-status-dot"></span>
+								</a>
+							</div>
+							<div class="mb-1">
+								<a href="#" class="btn btn-menubar btnFullscreen">
+									<i class="ti ti-maximize"></i>
+								</a>
+							</div>
+							<div class="mb-1">
+								<a href="https://smarthr.dreamstechnologies.com/html/template/calendar.html" class="btn btn-menubar">
+									<i class="ti ti-layout-grid-remove"></i>
+								</a>
+							</div>
+							<div class="mb-1">
+								<a href="https://smarthr.dreamstechnologies.com/html/template/chat.html" class="btn btn-menubar position-relative">
+									<i class="ti ti-brand-hipchat"></i>
+									<span class="badge bg-info rounded-pill d-flex align-items-center justify-content-center header-badge">5</span>
+								</a>
+							</div>
+							<div class="mb-1">
+								<a href="https://smarthr.dreamstechnologies.com/html/template/email.html" class="btn btn-menubar">
+									<i class="ti ti-mail"></i>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="sidebar-right d-flex justify-content-between flex-column">
+					<div class="sidebar-scroll">
+						<h6 class="mb-3">Welcome to SmartHR</h6>
+						<div class="sidebar-profile text-center rounded bg-light p-3 mb-4">
+							<div class="avatar avatar-lg online mb-3">
+								<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-02.jpg" alt="Img" class="img-fluid rounded-circle">
+							</div>
+							<h6 class="fs-12 fw-normal mb-1">Adrian Herman</h6>
+							<p class="fs-10">System Admin</p>
+						</div>
+						<div class="stack-menu">
+							<div class="nav flex-column align-items-center nav-pills" role="tablist" aria-orientation="vertical">
+								<div class="row g-2">
+									<div class="col-6">
+										<a href="#menu-dashboard" role="tab" class="nav-link active" title="Dashboard" data-bs-toggle="tab" data-bs-target="#menu-dashboard" aria-selected="true">
+											<span><i class="ti ti-smart-home"></i></span>
+											<p>Dashboard</p>
+										</a>
+									</div>
+									<div class="col-6">
+										<a href="#menu-application" role="tab" class="nav-link" title="Apps" data-bs-toggle="tab" data-bs-target="#menu-application" aria-selected="false">
+											<span><i class="ti ti-layout-grid-add"></i></span>
+											<p>Applications</p>
+										</a>
+									</div>
+									<div class="col-6">
+										<a href="#menu-superadmin" role="tab" class="nav-link" title="Apps" data-bs-toggle="tab" data-bs-target="#menu-superadmin" aria-selected="false">
+											<span><i class="ti ti-user-star"></i></span>
+											<p>Super Admin</p>
+										</a>
+									</div>
+									<div class="col-6">
+										<a href="#menu-layout" role="tab" class="nav-link" title="Layout" data-bs-toggle="tab" data-bs-target="#menu-layout" aria-selected="false">
+											<span><i class="ti ti-layout-board-split"></i></span>
+											<p>Layouts</p>
+										</a>
+									</div>
+									<div class="col-6">
+										<a href="#menu-project" role="tab" class="nav-link" title="Projects" data-bs-toggle="tab" data-bs-target="#menu-project" aria-selected="false">
+											<span><i class="ti ti-folder"></i></span>
+											<p>Projects</p>
+										</a>
+									</div>
+									<div class="col-6">
+										<a href="#menu-crm" role="tab" class="nav-link" title="CRM" data-bs-toggle="tab" data-bs-target="#menu-crm" aria-selected="false">
+											<span><i class="ti ti-user-shield"></i></span>
+											<p>Crm</p>
+										</a>
+									</div>
+									<div class="col-6">
+										<a href="#menu-hrm" role="tab" class="nav-link" title="HRM" data-bs-toggle="tab" data-bs-target="#menu-hrm" aria-selected="false">
+											<span><i class="ti ti-users"></i></span>
+											<p>Hrm</p>
+										</a>
+									</div>
+									<div class="col-6">
+										<a href="#menu-finance" role="tab" class="nav-link" title="Finance & Accounts" data-bs-toggle="tab" data-bs-target="#menu-finance" aria-selected="false">
+											<span><i class="ti ti-shopping-cart-dollar"></i></span>
+											<p>Finance & Accounts</p>
+										</a>
+									</div>
+									<div class="col-6">
+										<a href="#menu-administration" role="tab" class="nav-link" title="Administration" data-bs-toggle="tab" data-bs-target="#menu-administration" aria-selected="false">
+											<span><i class="ti ti-cash"></i></span>
+											<p>Administration</p>
+										</a>
+									</div>
+									<div class="col-6">
+										<a href="#menu-content" role="tab" class="nav-link" title="Content" data-bs-toggle="tab" data-bs-target="#menu-content" aria-selected="false">
+											<span><i class="ti ti-license"></i></span>
+											<p>Contents</p>
+										</a>
+									</div>
+									<div class="col-6">
+										<a href="#menu-pages" role="tab" class="nav-link" title="Pages"
+											data-bs-toggle="tab" data-bs-target="#menu-pages" aria-selected="false">
+											<span><i class="ti ti-page-break"></i></span>
+											<p>Pages</p>
+										</a>
+									</div>
+									<div class="col-6">
+										<a href="#menu-authentication" role="tab" class="nav-link" title="Authentication" data-bs-toggle="tab" data-bs-target="#menu-authentication" aria-selected="false">
+											<span><i class="ti ti-lock-check"></i></span>
+											<p>Authentication</p>
+										</a>
+									</div>
+									<div class="col-6">
+										<a href="#menu-ui-elements" role="tab" class="nav-link" title="UI Elements" data-bs-toggle="tab" data-bs-target="#menu-ui-elements" aria-selected="false">
+											<span><i class="ti ti-ux-circle"></i></span>
+											<p>Basic UI</p>
+										</a>
+									</div>
+								</div>
+							</div>
+							<div class="tab-content">
+								<div class="tab-pane fade show active" id="menu-dashboard">
+									<ul class="stack-submenu">
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/index.html">Admin Dashboard</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/employee-dashboard.html" class="active">Employee Dashboard</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/deals-dashboard.html">Deals Dashboard</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/leads-dashboard.html">Leads Dashboard</a></li>
+									</ul>
+								</div>
+								<div class="tab-pane fade" id="menu-superadmin">
+									<ul class="stack-submenu">
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/dashboard.html">Dashboard</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/companies.html">Companies</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/subscription.html">Subscriptions</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/packages.html">Packages</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/domain.html">Domain</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/purchase-transaction.html">Purchase Transaction</a></li>
+									</ul>
+								</div>
+								<div class="tab-pane fade" id="menu-application">
+									<ul class="stack-submenu">
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/chat.html">Chat</a></li>
+										<li class="submenu submenu-two">
+											<a href="https://smarthr.dreamstechnologies.com/html/template/call.html">Calls<span
+													class="menu-arrow inside-submenu"></span></a>
+											<ul>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/voice-call.html">Voice Call</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/video-call.html">Video Call</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/outgoing-call.html">Outgoing Call</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/incoming-call.html">Incoming Call</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/call-history.html">Call History</a></li>
+											</ul>
+										</li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/calendar.html">Calendar</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/email.html">Email</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/todo.html">To Do</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/notes.html">Notes</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/social-feed.html">Social Feed</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/file-manager.html">File Manager</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/kanban-view.html">Kanban</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/invoices.html">Invoices</a></li>
+									</ul>
+								</div>
+								<div class="tab-pane fade" id="menu-layout">
+									<ul class="stack-submenu">
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/layout-horizontal.html">Horizontal</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/layout-detached.html">Detached</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/layout-modern.html">Modern</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/layout-two-column.html">Two Column</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/layout-hovered.html">Hovered</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/layout-box.html">Boxed</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/layout-horizontal-single.html">Horizontal Single</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/layout-horizontal-overlay.html">Horizontal Overlay</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/layout-horizontal-box.html">Horizontal Box</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/layout-horizontal-sidemenu.html">Menu Aside</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/layout-vertical-transparent.html">Transparent</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/layout-without-header.html">Without Header</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/layout-rtl.html">RTL</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/layout-dark.html">Dark</a></li>
+									</ul>
+								</div>
+								<div class="tab-pane fade" id="menu-project">
+									<ul class="stack-submenu">
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/clients-grid.html"><span>Clients</span></a></li>
+										<li class="submenu">
+											<a href="javascript:void(0);"><span>Projects</span>
+												<span class="menu-arrow"></span>
+											</a>
+											<ul>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/projects-grid.html">Projects</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/tasks.html">Tasks</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/task-board.html">Task Board</a></li>
+											</ul>
+										</li>	
+									</ul>
+								</div>
+								<div class="tab-pane fade" id="menu-crm">
+									<ul class="stack-submenu">
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/contacts-grid.html"><span>Contacts</span></a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/companies-grid.html"><span>Companies</span></a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/deals-grid.html"><span>Deals</span></a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/leads-grid.html"><span>Leads</span></a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/pipeline.html"><span>Pipeline</span></a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/analytics.html"><span>Analytics</span></a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/activity.html"><span>Activities</span></a></li>
+									</ul>
+								</div>
+								<div class="tab-pane fade" id="menu-hrm">
+									<ul class="stack-submenu">
+										<li class="submenu">
+											<a href="javascript:void(0);"><span>Employees</span>
+												<span class="menu-arrow"></span>
+											</a>
+											<ul>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/employees.html">Employee Lists</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/employees-grid.html">Employee Grid</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/employee-details.html">Employee Details</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/departments.html">Departments</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/designations.html">Designations</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/policy.html">Policies</a></li>
+											</ul>
+										</li>
+										<li class="submenu">
+											<a href="javascript:void(0);"><span>Tickets</span>
+												<span class="menu-arrow"></span>
+											</a>
+											<ul>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/tickets.html">Tickets</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/ticket-details.html">Ticket Details</a></li>
+											</ul>
+										</li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/holidays.html"><span>Holidays</span></a></li>
+										<li class="submenu">
+											<a href="javascript:void(0);"><span>Attendance</span>
+												<span class="menu-arrow"></span>
+											</a>
+											<ul>
+												<li class="submenu submenu-two">
+													<a href="javascript:void(0);">Leaves<span
+															class="menu-arrow inside-submenu"></span></a>
+													<ul>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/leaves.html">Leaves (Admin)</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/leaves-employee.html">Leave (Employee)</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/leave-settings.html">Leave Settings</a></li>												
+													</ul>												
+												</li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/attendance-admin.html">Attendance (Admin)</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/attendance-employee.html">Attendance (Employee)</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/timesheets.html">Timesheets</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/schedule-timing.html">Shift & Schedule</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/overtime.html">Overtime</a></li>
+											</ul>
+										</li>
+										<li class="submenu">
+											<a href="javascript:void(0);"><span>Performance</span>
+												<span class="menu-arrow"></span>
+											</a>
+											<ul>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/performance-indicator.html">Performance Indicator</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/performance-review.html">Performance Review</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/performance-appraisal.html">Performance Appraisal</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/goal-tracking.html">Goal List</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/goal-type.html">Goal Type</a></li>
+											</ul>
+										</li>
+										<li class="submenu">
+											<a href="javascript:void(0);"><span>Training</span>
+												<span class="menu-arrow"></span>
+											</a>
+											<ul>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/training.html">Training List</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/trainers.html">Trainers</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/training-type.html">Training Type</a></li>
+											</ul>
+										</li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/promotion.html"><span>Promotion</span></a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/resignation.html"><span>Resignation</span></a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/termination.html"><span>Termination</span></a></li>
+									</ul>
+								</div>
+								<div class="tab-pane fade" id="menu-finance">
+									<ul class="stack-submenu">
+										<li class="submenu">
+											<a href="javascript:void(0);"><span>Sales</span>
+												<span class="menu-arrow"></span>
+											</a>
+											<ul>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/estimates.html">Estimates</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/invoices.html">Invoices</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/payments.html">Payments</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/expenses.html">Expenses</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/provident-fund.html">Provident Fund</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/taxes.html">Taxes</a></li>
+											</ul>
+										</li>
+										<li class="submenu">
+											<a href="javascript:void(0);"><span>Accounting</span>
+												<span class="menu-arrow"></span>
+											</a>
+											<ul>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/categories.html">Categories</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/budgets.html">Budgets</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/budget-expenses.html">Budget Expenses</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/budget-revenues.html">Budget Revenues</a></li>
+											</ul>
+										</li>
+										<li class="submenu">
+											<a href="javascript:void(0);"><span>Payroll</span>
+												<span class="menu-arrow"></span>
+											</a>
+											<ul>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/employee-salary.html">Employee Salary</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/payslip.html">Payslip</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/payroll.html">Payroll Items</a></li>
+											</ul>
+										</li>
+									</ul>
+								</div>
+								<div class="tab-pane fade" id="menu-administration">
+									<ul class="stack-submenu">
+										<li class="submenu">
+											<a href="javascript:void(0);"><span>Assets</span>
+												<span class="menu-arrow"></span>
+											</a>
+											<ul>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/assets.html">Assets</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/asset-categories.html">Asset Categories</a></li>
+											</ul>
+										</li>
+										<li class="submenu">
+											<a href="javascript:void(0);"><span>Help & Supports</span>
+												<span class="menu-arrow"></span>
+											</a>
+											<ul>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/knowledgebase.html">Knowledge Base</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/activity.html">Activities</a></li>
+											</ul>
+										</li>
+										<li class="submenu">
+											<a href="javascript:void(0);"><span>User Management</span>
+												<span class="menu-arrow"></span>
+											</a>
+											<ul>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/users.html">Users</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/roles-permissions.html">Roles & Permissions</a></li>
+											</ul>
+										</li>
+										<li class="submenu">
+											<a href="javascript:void(0);"><span>Reports</span>
+												<span class="menu-arrow"></span>
+											</a>
+											<ul>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/expenses-report.html">Expense Report</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/invoice-report.html">Invoice Report</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/payment-report.html">Payment Report</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/project-report.html">Project Report</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/task-report.html">Task Report</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/user-report.html">User Report</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/employee-report.html">Employee Report</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/payslip-report.html">Payslip Report</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/attendance-report.html">Attendance Report</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/leave-report.html">Leave Report</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/daily-report.html">Daily Report</a></li>
+											</ul>
+										</li>
+										<li class="submenu">
+											<a href="javascript:void(0);">
+												General Settings
+												<span class="menu-arrow"></span>
+											</a>
+											<ul>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/profile-settings.html">Profile</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/security-settings.html">Security</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/notification-settings.html">Notifications</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/connected-apps.html">Connected Apps</a></li>
+											</ul>
+										</li>
+										<li class="submenu">
+											<a href="javascript:void(0);">
+												Website Settings
+												<span class="menu-arrow"></span>
+											</a>
+											<ul>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/bussiness-settings.html">Business Settings</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/seo-settings.html">SEO Settings</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/localization-settings.html">Localization</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/prefixes.html">Prefixes</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/preferences.html">Preferences</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/performance-appraisal.html">Appearance</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/language.html">Language</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/authentication-settings.html">Authentication</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/ai-settings.html">AI Settings</a></li>
+											</ul>
+										</li>
+										<li class="submenu">
+											<a href="javascript:void(0);">App Settings<span
+													class="menu-arrow"></span></a>
+											<ul>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/salary-settings.html">Salary Settings</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/approval-settings.html">Approval Settings</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/invoice-settings.html">Invoice Settings</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/leave-type.html">Leave Type</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/custom-fields.html">Custom Fields</a></li>
+											</ul>
+										</li>
+										<li class="submenu">
+											<a href="javascript:void(0);">
+												System Settings
+												<span class="menu-arrow"></span>
+											</a>
+											<ul>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/email-settings.html">Email Settings</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/email-template.html">Email Templates</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/sms-settings.html">SMS Settings</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/sms-template.html">SMS Templates</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/otp-settings.html">OTP</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/gdpr.html">GDPR Cookies</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/maintenance-mode.html">Maintenance Mode</a></li>
+											</ul>
+										</li>
+										<li class="submenu">
+											<a href="javascript:void(0);">
+												Financial Settings
+												<span class="menu-arrow"></span>
+											</a>
+											<ul>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/payment-gateways.html">Payment Gateways</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/tax-rates.html">Tax Rate</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/currencies.html">Currencies</a></li>
+											</ul>
+										</li>
+										<li class="submenu">
+											<a href="javascript:void(0);">Other Settings<span
+													class="menu-arrow"></span></a>
+											<ul>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/custom-css.html">Custom CSS</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/custom-js.html">Custom JS</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/cronjob.html">Cronjob</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/storage-settings.html">Storage</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/ban-ip-address.html">Ban IP Address</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/backup.html">Backup</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/clear-cache.html">Clear Cache</a></li>
+											</ul>
+										</li>
+									</ul>
+								</div>
+								<div class="tab-pane fade" id="menu-content">
+									<ul class="stack-submenu">
+										<li class="submenu">
+											<a href="javascript:void(0);">Blogs<span class="menu-arrow"></span></a>
+											<ul>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/blogs.html">All Blogs</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/blog-categories.html">Categories</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/blog-comments.html">Comments</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/blog-tags.html">Tags</a></li>
+											</ul>
+										</li>
+										<li class="submenu">
+											<a href="javascript:void(0);">Locations<span class="menu-arrow"></span></a>
+											<ul>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/countries.html">Countries</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/states.html">States</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/cities.html">Cities</a></li>
+											</ul>
+										</li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/testimonials.html">Testimonials</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/faq.html">FAQ’S</a></li>
+									</ul>
+								</div>
+								<div class="tab-pane fade" id="menu-pages">
+									<ul class="stack-submenu">
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/starter.html">Starter</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/profile.html">Profile</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/profile-settings.html">Profile Settings</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/gallery.html">Gallery</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/search-result.html">Search Results</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/timeline.html">Timeline</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/pricing.html">Pricing</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/coming-soon.html">Coming Soon</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/under-maintenance.html">Under Maintenance</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/under-construction.html">Under Construction</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/api-keys.html">API Keys</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/privacy-policy.html">Privacy Policy</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/terms-condition.html">Terms & Conditions</a></li>
+									</ul>
+								</div>
+								<div class="tab-pane fade" id="menu-authentication">
+									<ul class="stack-submenu">
+										<li class="submenu">
+											<a href="javascript:void(0);" class="">Login<span class="menu-arrow"></span></a>
+											<ul>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/login.html">Cover</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/login-2.html">Illustration</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/login-3.html">Basic</a></li>
+											</ul>
+										</li>
+										<li class="submenu">
+											<a href="javascript:void(0);" class="">Register<span class="menu-arrow"></span></a>
+											<ul>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/register.html">Cover</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/register-2.html">Illustration</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/register-3.html">Basic</a></li>
+											</ul>
+										</li>
+										<li class="submenu">
+											<a href="javascript:void(0);">Reset Password<span class="menu-arrow"></span></a>
+											<ul>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/reset-password.html">Cover</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/reset-password-2.html">Illustration</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/reset-password-3.html">Basic</a></li>
+											</ul>
+										</li>
+										<li class="submenu">
+											<a href="javascript:void(0);">Email Verification<span class="menu-arrow"></span></a>
+											<ul>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/email-verification.html">Cover</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/email-verification-2.html">Illustration</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/email-verification-3.html">Basic</a></li>
+											</ul>
+										</li>
+										<li class="submenu">
+											<a href="javascript:void(0);">2 Step Verification<span class="menu-arrow"></span></a>
+											<ul>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/two-step-verification.html">Cover</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/two-step-verification-2.html">Illustration</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/two-step-verification-3.html">Basic</a></li>
+											</ul>
+										</li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/lock-screen.html">Lock Screen</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/error-404.html">404 Error</a></li>
+										<li><a href="https://smarthr.dreamstechnologies.com/html/template/error-500.html">500 Error</a></li>
+									</ul>
+								</div>
+								<div class="tab-pane fade" id="menu-ui-elements">
+									<ul class="stack-submenu">
+										<li class="submenu">
+											<a href="javascript:void(0);">Base UI<span class="menu-arrow"></span></a>
+											<ul>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-alerts.html">Alerts</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-accordion.html">Accordion</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-avatar.html">Avatar</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-badges.html">Badges</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-borders.html">Border</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-buttons.html">Buttons</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-buttons-group.html">Button Group</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-breadcrumb.html">Breadcrumb</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-cards.html">Card</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-carousel.html">Carousel</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-colors.html">Colors</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-dropdowns.html">Dropdowns</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-grid.html">Grid</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-images.html">Images</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-lightbox.html">Lightbox</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-media.html">Media</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-modals.html">Modals</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-offcanvas.html">Offcanvas</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-pagination.html">Pagination</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-popovers.html">Popovers</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-progress.html">Progress</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-placeholders.html">Placeholders</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-spinner.html">Spinner</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-sweetalerts.html">Sweet Alerts</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-nav-tabs.html">Tabs</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-toasts.html">Toasts</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-tooltips.html">Tooltips</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-typography.html">Typography</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-video.html">Video</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-sortable.html">Sortable</a></li>
+											<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-swiperjs.html">Swiperjs</a></li>
+											</ul>
+										</li>
+										<li class="submenu">
+											<a href="javascript:void(0);"> Advanced UI<span class="menu-arrow"></span></a>
+											<ul>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-ribbon.html">Ribbon</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-clipboard.html">Clipboard</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-drag-drop.html">Drag & Drop</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-rangeslider.html">Range Slider</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-rating.html">Rating</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-text-editor.html">Text Editor</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-counter.html">Counter</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-scrollbar.html">Scrollbar</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-stickynote.html">Sticky Note</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/ui-timeline.html">Timeline</a></li>
+											</ul>
+										</li>
+										<li class="submenu">
+											<a href="javascript:void(0);">Forms<span class="menu-arrow"></span> </a>
+											<ul>
+												<li class="submenu submenu-two">
+													<a href="javascript:void(0);">Form Elements<span class="menu-arrow inside-submenu"></span></a>
+													<ul>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/form-basic-inputs.html">Basic Inputs</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/form-checkbox-radios.html">Checkbox & Radios</a> </li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/form-input-groups.html">Input Groups</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/form-grid-gutters.html">Grid & Gutters</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/form-select.html">Form Select</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/form-mask.html">Input Masks</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/form-fileupload.html">File Uploads</a></li>
+														
+													</ul>
+												</li>
+												<li class="submenu submenu-two">
+													<a href="javascript:void(0);">Layouts<span class="menu-arrow inside-submenu"></span></a>
+													<ul>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/form-horizontal.html">Horizontal Form</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/form-vertical.html">Vertical Form</a></li>
+														<li><a href="https://smarthr.dreamstechnologies.com/html/template/form-floating-labels.html">Floating Labels</a></li>
+													</ul>
+												</li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/form-validation.html">Form Validation</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/form-select2.html">Select2</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/form-wizard.html">Form Wizard</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/form-pickers.html">Form Picker</a></li>
+											</ul>
+										</li>
+										<li class="submenu">
+											<a href="javascript:void(0);">Tables<span class="menu-arrow"></span></a>
+											<ul>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/tables-basic.html">Basic Tables </a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/data-tables.html">Data Table </a></li>
+											</ul>
+										</li>
+										<li class="submenu">
+											<a href="javascript:void(0);">Charts<span class="menu-arrow"></span> </a>
+											<ul>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/chart-apex.html">Apex Charts</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/chart-c3.html">Chart C3</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/chart-js.html">Chart Js</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/chart-morris.html">Morris Charts</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/chart-flot.html">Flot Charts</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/chart-peity.html">Peity Charts</a></li>
+											</ul>
+										</li>
+										<li class="submenu">
+											<a href="javascript:void(0);">Icons<span class="menu-arrow"></span> </a>
+											<ul>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/icon-fontawesome.html">Fontawesome Icons</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/icon-tabler.html">Tabler Icons</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/icon-bootstrap.html">Bootstrap Icons</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/icon-remix.html">Remix Icons</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/icon-feather.html">Feather Icons</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/icon-ionic.html">Ionic Icons</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/icon-material.html">Material Icons</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/icon-pe7.html">Pe7 Icons</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/icon-simpleline.html">Simpleline Icons</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/icon-themify.html">Themify Icons</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/icon-weather.html">Weather Icons</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/icon-typicon.html">Typicon Icons</a></li>
+												<li><a href="https://smarthr.dreamstechnologies.com/html/template/icon-flag.html">Flag Icons</a></li>
+											</ul>
+										</li>
+										<li class="submenu">
+											<a href="javascript:void(0);">
+												<i class="ti ti-table-plus"></i>
+												<span>Maps</span>
+												<span class="menu-arrow"></span>
+											</a>
+											<ul>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/maps-vector.html">Vector</a>
+												</li>
+												<li>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/maps-leaflet.html">Leaflet</a>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="p-3">
+						<a href="javascript:void(0);" class="d-flex align-items-center fs-12 mb-3">Documentation</a>
+						<a href="javascript:void(0);" class="d-flex align-items-center fs-12">Change Log<span class="badge bg-pink badge-xs text-white fs-10 ms-2">v4.0.2</span></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /Stacked Sidebar -->
+
+		<!-- Page Wrapper -->
+		<div class="page-wrapper">
+			<div class="content">
+
+				<!-- Breadcrumb -->
+				<div class="d-md-flex d-block align-items-center justify-content-between page-breadcrumb mb-3">
+					<div class="my-auto mb-2">
+						<h2 class="mb-1">Employee Dashboard</h2>
+						<nav>
+							<ol class="breadcrumb mb-0">
+								<li class="breadcrumb-item">
+									<a href="https://smarthr.dreamstechnologies.com/html/template/index.html"><i class="ti ti-smart-home"></i></a>
+								</li>
+								<li class="breadcrumb-item">
+									Dashboard
+								</li>
+								<li class="breadcrumb-item active" aria-current="page">Employee Dashboard</li>
+							</ol>
+						</nav>
+					</div>
+					<div class="d-flex my-xl-auto right-content align-items-center flex-wrap ">
+						<div class="me-2 mb-2">
+							<div class="dropdown">
+								<a href="javascript:void(0);" class="dropdown-toggle btn btn-white d-inline-flex align-items-center" data-bs-toggle="dropdown">
+									<i class="ti ti-file-export me-1"></i>Export
+								</a>
+								<ul class="dropdown-menu  dropdown-menu-end p-3">
+									<li>
+										<a href="javascript:void(0);" class="dropdown-item rounded-1"><i
+												class="ti ti-file-type-pdf me-1"></i>Export as PDF</a>
+									</li>
+									<li>
+										<a href="javascript:void(0);" class="dropdown-item rounded-1"><i
+												class="ti ti-file-type-xls me-1"></i>Export as Excel </a>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="input-icon w-120 position-relative mb-2">
+							<span class="input-icon-addon">
+								<i class="ti ti-calendar text-gray-9"></i>
+							</span>
+							<input type="text" class="form-control datetimepicker" value="15 Apr 2025">
+						</div>
+						<div class="ms-2 head-icons">
+							<a href="javascript:void(0);" class="" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Collapse" id="collapse-header">
+								<i class="ti ti-chevrons-up"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+				<!-- /Breadcrumb -->
+
+				<div class="alert bg-secondary-transparent alert-dismissible fade show mb-4">
+					Your Leave Request on“24th April 2024”has been Approved!!!
+					<button type="button" class="btn-close fs-14" data-bs-dismiss="alert" aria-label="Close"><i class="ti ti-x"></i></button>
+				</div>
+				<div class="row">
+					<div class="col-xl-4 d-flex">
+						<div class="card position-relative flex-fill">
+							<div class="card-header bg-dark">
+								<div class="d-flex align-items-center">
+									<span class="avatar avatar-lg avatar-rounded border border-white border-2 flex-shrink-0 me-2">
+										<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/users/user-01.jpg" alt="Img">
+									</span>
+									<div>
+										<h5 class="text-white mb-1">Stephan Peralt</h5>
+										<div class="d-flex align-items-center">
+										<p class="text-white fs-12 mb-0">Senior Product Designer</p>
+										<span class="mx-1"><i class="ti ti-point-filled text-primary"></i></span>
+										<p class="fs-12">UI/UX Design</p>
+									</div>
+									</div>
+								</div>
+								<a href="#" class="btn btn-icon btn-sm text-white rounded-circle edit-top"><i class="ti ti-edit"></i></a>
+							</div>
+							<div class="card-body">
+								<div class="mb-3">
+									<span class="d-block mb-1 fs-13">Phone Number</span>
+									<p class="text-gray-9">+1 324 3453 545</p>
+								</div>
+								<div class="mb-3">
+									<span class="d-block mb-1 fs-13">Email Address</span>
+									<p class="text-gray-9"><a href="https://smarthr.dreamstechnologies.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="edbe99889d889f8988dcdfd9ad88958c809d8188c38e8280">[email&#160;protected]</a></p>
+								</div>
+								<div class="mb-3">
+									<span class="d-block mb-1 fs-13">Report Office</span>
+									<p class="text-gray-9">Doglas Martini</p>
+								</div>
+								<div>
+									<span class="d-block mb-1 fs-13">Joined on</span>
+									<p class="text-gray-9">15  Jan 2024</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-5 d-flex">
+						<div class="card flex-fill">
+							<div class="card-header">
+								<div class="d-flex align-items-center justify-content-between flex-wrap row-gap-2">
+									<h5>Leave Details</h5>
+									<div class="dropdown">
+										<a href="javascript:void(0);" class="btn btn-white border btn-sm d-inline-flex align-items-center" data-bs-toggle="dropdown">
+											<i class="ti ti-calendar me-1"></i>2024
+										</a>
+										<ul class="dropdown-menu  dropdown-menu-end p-3">
+											<li>
+												<a href="javascript:void(0);" class="dropdown-item rounded-1">2024</a>
+											</li>
+											<li>
+												<a href="javascript:void(0);" class="dropdown-item rounded-1">2023</a>
+											</li>
+											<li>
+												<a href="javascript:void(0);" class="dropdown-item rounded-1">2022</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="card-body">
+								<div class="row align-items-center">
+									<div class="col-md-6">
+										<div class="mb-3">
+											<div class="mb-3">
+												<p class="d-flex align-items-center"><i class="ti ti-circle-filled fs-8 text-dark me-1"></i>
+													<span class="text-gray-9 fw-semibold me-1">1254</span>
+													on time
+												</p>
+											</div>
+											<div class="mb-3">
+												<p class="d-flex align-items-center"><i class="ti ti-circle-filled fs-8 text-success me-1"></i>
+													<span class="text-gray-9 fw-semibold me-1">32</span>
+													Late Attendance
+												</p>
+											</div>
+											<div class="mb-3">
+												<p class="d-flex align-items-center"><i class="ti ti-circle-filled fs-8 text-primary me-1"></i>
+													<span class="text-gray-9 fw-semibold me-1">658</span>
+													Work From Home
+												</p>
+											</div>
+											<div class="mb-3">
+												<p class="d-flex align-items-center"><i class="ti ti-circle-filled fs-8 text-danger me-1"></i>
+													<span class="text-gray-9 fw-semibold me-1">14</span>
+													Absent
+												</p>
+											</div>
+											<div>
+												<p class="d-flex align-items-center"><i class="ti ti-circle-filled fs-8 text-warning me-1"></i>
+													<span class="text-gray-9 fw-semibold me-1">68</span>
+													Sick Leave
+												</p>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="mb-3 d-flex justify-content-md-end">
+											<div id="leaves_chart"></div>
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-check mt-2">
+											<input class="form-check-input" type="checkbox" id="todo1">
+											<label class="form-check-label" for="todo1">Better than  <span class="text-gray-9">85%</span> of Employees</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-3 d-flex">
+						<div class="card flex-fill">
+							<div class="card-header">
+								<div class="d-flex align-items-center justify-content-between flex-wrap row-gap-2">
+									<h5>Leave Details</h5>
+									<div class="dropdown">
+										<a href="javascript:void(0);" class="btn btn-white border btn-sm d-inline-flex align-items-center" data-bs-toggle="dropdown">
+											<i class="ti ti-calendar me-1"></i>2024
+										</a>
+										<ul class="dropdown-menu  dropdown-menu-end p-3">
+											<li>
+												<a href="javascript:void(0);" class="dropdown-item rounded-1">2024</a>
+											</li>
+											<li>
+												<a href="javascript:void(0);" class="dropdown-item rounded-1">2023</a>
+											</li>
+											<li>
+												<a href="javascript:void(0);" class="dropdown-item rounded-1">2022</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="card-body">
+								<div class="row align-items-center">
+									<div class="col-sm-6">
+										<div class="mb-4">
+											<span class="d-block mb-1">Total Leaves</span>
+											<h4>16</h4>
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="mb-4">
+											<span class="d-block mb-1">Taken</span>
+											<h4>10</h4>
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="mb-4">
+											<span class="d-block mb-1">Absent</span>
+											<h4>2</h4>
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="mb-4">
+											<span class="d-block mb-1">Request</span>
+											<h4>0</h4>
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="mb-4">
+											<span class="d-block mb-1">Worked Days</span>
+											<h4>240</h4>
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="mb-4">
+											<span class="d-block mb-1">Loss of Pay</span>
+											<h4>2</h4>
+										</div>
+									</div>
+									<div class="col-sm-12">
+										<div>
+											<a href="#" class="btn btn-dark w-100" data-bs-toggle="modal" data-bs-target="#add_leaves">Apply New Leave</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xl-4 d-flex">
+						<div class="card flex-fill border-primary attendance-bg">
+							<div class="card-body">
+								<div class="mb-4 text-center">
+									<h6 class="fw-medium text-gray-5 mb-1">Attendance</h6>
+									<h4>08:35 AM, 11 Mar 2025</h4>
+								</div>
+								<div class="attendance-circle-progress attendance-progress mx-auto mb-3"  data-value='65'>
+									<span class="progress-left">
+										<span class="progress-bar border-success"></span>
+									</span>
+									<span class="progress-right">
+										<span class="progress-bar border-success"></span>
+									</span>
+									<div class="total-work-hours text-center w-100">
+										<span class="fs-13 d-block mb-1">Total Hours</span>
+										<h6>5:45:32</h6>
+									</div>
+								</div>
+								<div class="text-center">
+									<div class="badge badge-dark badge-md mb-3">Production :  3.45 hrs</div>
+									<h6 class="fw-medium d-flex align-items-center justify-content-center mb-4">
+										<i class="ti ti-fingerprint text-primary me-1"></i>
+										Punch In at  10.00 AM
+									</h6>
+									<a href="#" class="btn btn-primary w-100">Punch Out</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-8 d-flex">
+						<div class="row flex-fill">
+							<div class="col-xl-3 col-md-6">
+								<div class="card">
+									<div class="card-body">
+										<div class="border-bottom mb-3 pb-2">
+											<span class="avatar avatar-sm bg-primary mb-2"><i class="ti ti-clock-stop"></i></span>
+											<h2 class="mb-2">8.36 / <span class="fs-20 text-gray-5"> 9</span></h2>
+											<p class="fw-medium text-truncate">Total Hours Today</p>
+										</div>
+										<div>
+											<p class="d-flex align-items-center fs-13">
+												<span class="avatar avatar-xs rounded-circle bg-success flex-shrink-0 me-2">
+													<i class="ti ti-arrow-up fs-12"></i>
+												</span>
+												<span>5% This Week</span>
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-xl-3 col-md-6">
+								<div class="card">
+									<div class="card-body">
+										<div class="border-bottom mb-3 pb-2">
+											<span class="avatar avatar-sm bg-dark mb-2"><i class="ti ti-clock-up"></i></span>
+											<h2 class="mb-2">10 / <span class="fs-20 text-gray-5"> 40</span></h2>
+											<p class="fw-medium text-truncate">Total Hours Week</p>
+										</div>
+										<div>
+											<p class="d-flex align-items-center fs-13">
+												<span class="avatar avatar-xs rounded-circle bg-success flex-shrink-0 me-2">
+													<i class="ti ti-arrow-up fs-12"></i>
+												</span>
+												<span>7% Last Week</span>
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-xl-3 col-md-6">
+								<div class="card">
+									<div class="card-body">
+										<div class="border-bottom mb-3 pb-2">
+											<span class="avatar avatar-sm bg-info mb-2"><i class="ti ti-calendar-up"></i></span>
+											<h2 class="mb-2">75 / <span class="fs-20 text-gray-5"> 98</span></h2>
+											<p class="fw-medium text-truncate">Total Hours Month</p>
+										</div>
+										<div>
+											<p class="d-flex align-items-center fs-13 text-truncate">
+												<span class="avatar avatar-xs rounded-circle bg-danger flex-shrink-0 me-2">
+													<i class="ti ti-arrow-down fs-12"></i>
+												</span>
+												<span>8% Last Month</span>
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-xl-3 col-md-6">
+								<div class="card">
+									<div class="card-body">
+										<div class="border-bottom mb-3 pb-2">
+											<span class="avatar avatar-sm bg-pink mb-2"><i class="ti ti-calendar-star"></i></span>
+											<h2 class="mb-2">16 / <span class="fs-20 text-gray-5"> 28</span></h2>
+											<p class="fw-medium text-truncate">Overtime this Month</p>
+										</div>
+										<div>
+											<p class="d-flex align-items-center fs-13 text-truncate">
+												<span class="avatar avatar-xs rounded-circle bg-danger flex-shrink-0 me-2">
+													<i class="ti ti-arrow-down fs-12"></i>
+												</span>
+												<span>6% Last Month</span>
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="card">
+									<div class="card-body">
+										<div class="row">
+											<div class="col-xl-3">
+												<div class="mb-4">
+													<p class="d-flex align-items-center mb-1"><i class="ti ti-point-filled text-dark-transparent me-1"></i>Total Working hours</p>
+													<h3>12h 36m</h3>
+												</div>
+											</div>
+											<div class="col-xl-3">
+												<div class="mb-4">
+													<p class="d-flex align-items-center mb-1"><i class="ti ti-point-filled text-success me-1"></i>Productive Hours</p>
+													<h3>08h 36m</h3>
+												</div>
+											</div>
+											<div class="col-xl-3">
+												<div class="mb-4">
+													<p class="d-flex align-items-center mb-1"><i class="ti ti-point-filled text-warning me-1"></i>Break hours</p>
+													<h3>22m 15s</h3>
+												</div>
+											</div>
+											<div class="col-xl-3">
+												<div class="mb-4">
+													<p class="d-flex align-items-center mb-1"><i class="ti ti-point-filled text-info me-1"></i>Overtime</p>
+													<h3>02h 15m</h3>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12">
+												<div class="progress bg-transparent-dark mb-3" style="height: 24px;">
+													<div class="progress-bar bg-white rounded" role="progressbar" style="width: 18%;"></div>
+													<div class="progress-bar bg-success rounded me-2" role="progressbar" style="width: 18%;"></div>
+													<div class="progress-bar bg-warning rounded me-2" role="progressbar" style="width: 5%;"></div>
+													<div class="progress-bar bg-success rounded me-2" role="progressbar" style="width: 28%;"></div>
+													<div class="progress-bar bg-warning rounded me-2" role="progressbar" style="width: 17%;"></div>
+													<div class="progress-bar bg-success rounded me-2" role="progressbar" style="width: 22%;"></div>
+													<div class="progress-bar bg-warning rounded me-2" role="progressbar" style="width: 5%;"></div>
+													<div class="progress-bar bg-info rounded me-2" role="progressbar" style="width: 3%;"></div>
+													<div class="progress-bar bg-info rounded" role="progressbar" style="width: 2%;"></div>
+													<div class="progress-bar bg-white rounded" role="progressbar" style="width: 18%;"></div>
+												</div>
+												
+											</div>
+											<div class="co-md-12">
+												<div class="d-flex align-items-center justify-content-between flex-wrap row-gap-2">
+													<span class="fs-10">06:00</span>
+													<span class="fs-10">07:00</span>
+													<span class="fs-10">08:00</span>
+													<span class="fs-10">09:00</span>
+													<span class="fs-10">10:00</span>
+													<span class="fs-10">11:00</span>
+													<span class="fs-10">12:00</span>
+													<span class="fs-10">01:00</span>
+													<span class="fs-10">02:00</span>
+													<span class="fs-10">03:00</span>
+													<span class="fs-10">04:00</span>
+													<span class="fs-10">05:00</span>
+													<span class="fs-10">06:00</span>
+													<span class="fs-10">07:00</span>
+													<span class="fs-10">08:00</span>
+													<span class="fs-10">09:00</span>
+													<span class="fs-10">10:00</span>
+													<span class="fs-10">11:00</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xl-6 d-flex">
+						<div class="card flex-fill">
+							<div class="card-header">
+								<div class="d-flex align-items-center justify-content-between flex-wrap row-gap-2">
+									<h5>Projects</h5>
+									<div class="dropdown">
+										<a href="javascript:void(0);" class="btn btn-white border-0 dropdown-toggle border btn-sm d-inline-flex align-items-center" data-bs-toggle="dropdown">
+											Ongoing Projects
+										</a>
+										<ul class="dropdown-menu  dropdown-menu-end p-3">
+											<li>
+												<a href="javascript:void(0);" class="dropdown-item rounded-1">All Projects</a>
+											</li>
+											<li>
+												<a href="javascript:void(0);" class="dropdown-item rounded-1">Ongoing Projects</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="card-body">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="card mb-4 shadow-none mb-md-0">
+											<div class="card-body">
+												<div class="d-flex align-items-center justify-content-between mb-3">
+													<h6>Office Management</h6>
+													<div class="dropdown">
+														<a href="javascript:void(0);" class="d-inline-flex align-items-center" data-bs-toggle="dropdown">
+															<i class="ti ti-dots-vertical"></i>
+														</a>
+														<ul class="dropdown-menu dropdown-menu-end p-3">
+															<li>
+																<a href="javascript:void(0);" class="dropdown-item rounded-1" data-bs-toggle="modal" data-bs-target="#edit_task"><i class="ti ti-edit me-2"></i>Edit</a>
+															</li>
+															<li>
+																<a href="javascript:void(0);" class="dropdown-item rounded-1" data-bs-toggle="modal" data-bs-target="#delete_modal"><i class="ti ti-trash me-2"></i>Delete</a>
+															</li>
+														</ul>
+													</div>
+												</div>
+												<div>
+													<div class="d-flex align-items-center mb-3">
+														<a href="javascript:void(0);" class="avatar">
+															<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/users/user-32.jpg" class="img-fluid rounded-circle" alt="img">
+														</a>
+														<div class="ms-2">
+															<h6 class="fw-normal"><a href="javascript:void(0);">Anthony Lewis</a></h6>
+															<span class="fs-13 d-block">Project Leader</span>
+														</div>
+													</div>
+													<div class="d-flex align-items-center mb-3">
+														<a href="javascript:void(0);" class="avatar bg-soft-primary rounded-circle">
+															<i class="ti ti-calendar text-primary fs-16"></i>
+														</a>
+														<div class="ms-2">
+															<h6 class="fw-normal">14 Jan 2024</h6>
+															<span class="fs-13 d-block">Deadline</span>
+														</div>
+													</div>
+													<div class="d-flex align-items-center justify-content-between bg-transparent-light border border-dashed rounded p-2 mb-3">
+														<div class="d-flex align-items-center">
+															<span class="avatar avatar-sm bg-success-transparent rounded-circle me-1"><i class="ti ti-checklist fs-16"></i></span>
+															<p>Tasks : <span class="text-gray-9">6 </span> /10</p>
+														</div>
+														<div class="avatar-list-stacked avatar-group-sm">
+															<span class="avatar avatar-rounded">
+																<img class="border border-white" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-06.jpg" alt="img">
+															</span>
+															<span class="avatar avatar-rounded">
+																<img class="border border-white" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-07.jpg" alt="img">
+															</span>
+															<span class="avatar avatar-rounded">
+																<img class="border border-white" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-08.jpg" alt="img">
+															</span>
+															<a class="avatar bg-primary avatar-rounded text-fixed-white fs-12 fw-medium" href="javascript:void(0);">
+																+2
+															</a>
+														</div>
+													</div>
+													<div class="bg-soft-secondary p-2 rounded d-flex align-items-center justify-content-between">
+														<p class="text-secondary mb-0 text-truncate">Time Spent</p>
+														<h5 class="text-secondary text-truncate">65/120 <span class="fs-14 fw-normal">Hrs</span></h5>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="card shadow-none mb-0">
+											<div class="card-body">
+												<div class="d-flex align-items-center justify-content-between mb-3">
+													<h6>Office Management</h6>
+													<div class="dropdown">
+														<a href="javascript:void(0);" class="d-inline-flex align-items-center" data-bs-toggle="dropdown">
+															<i class="ti ti-dots-vertical"></i>
+														</a>
+														<ul class="dropdown-menu dropdown-menu-end p-3">
+															<li>
+																<a href="javascript:void(0);" class="dropdown-item rounded-1" data-bs-toggle="modal" data-bs-target="#edit_task"><i class="ti ti-edit me-2"></i>Edit</a>
+															</li>
+															<li>
+																<a href="javascript:void(0);" class="dropdown-item rounded-1" data-bs-toggle="modal" data-bs-target="#delete_modal"><i class="ti ti-trash me-2"></i>Delete</a>
+															</li>
+														</ul>
+													</div>
+												</div>
+												<div>
+													<div class="d-flex align-items-center mb-3">
+														<a href="javascript:void(0);" class="avatar">
+															<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/users/user-33.jpg" class="img-fluid rounded-circle" alt="img">
+														</a>
+														<div class="ms-2">
+															<h6 class="fw-normal"><a href="javascript:void(0);">Anthony Lewis</a></h6>
+															<span class="fs-13 d-block">Project Leader</span>
+														</div>
+													</div>
+													<div class="d-flex align-items-center mb-3">
+														<a href="javascript:void(0);" class="avatar bg-soft-primary rounded-circle">
+															<i class="ti ti-calendar text-primary fs-16"></i>
+														</a>
+														<div class="ms-2">
+															<h6 class="fw-normal">14 Jan 2024</h6>
+															<span class="fs-13 d-block">Deadline</span>
+														</div>
+													</div>
+													<div class="d-flex align-items-center justify-content-between bg-transparent-light border border-dashed rounded p-2 mb-3">
+														<div class="d-flex align-items-center">
+															<span class="avatar avatar-sm bg-success-transparent rounded-circle me-1"><i class="ti ti-checklist fs-16"></i></span>
+															<p>Tasks : <span class="text-gray-9">6 </span> /10</p>
+														</div>
+														<div class="avatar-list-stacked avatar-group-sm">
+															<span class="avatar avatar-rounded">
+																<img class="border border-white" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-06.jpg" alt="img">
+															</span>
+															<span class="avatar avatar-rounded">
+																<img class="border border-white" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-07.jpg" alt="img">
+															</span>
+															<span class="avatar avatar-rounded">
+																<img class="border border-white" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-08.jpg" alt="img">
+															</span>
+															<a class="avatar bg-primary avatar-rounded text-fixed-white fs-12 fw-medium" href="javascript:void(0);">
+																+2
+															</a>
+														</div>
+													</div>
+													<div class="bg-soft-secondary p-2 rounded d-flex align-items-center justify-content-between">
+														<p class="text-secondary mb-0 text-truncate">Time Spent</p>
+														<h5 class="text-secondary text-truncate">65/120 <span class="fs-14 fw-normal">Hrs</span></h5>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-6 d-flex">
+						<div class="card flex-fill">
+							<div class="card-header">
+								<div class="d-flex align-items-center justify-content-between flex-wrap row-gap-2">
+									<h5>Tasks</h5>
+									<div class="dropdown">
+										<a href="javascript:void(0);" class="btn btn-white border-0 dropdown-toggle border btn-sm d-inline-flex align-items-center" data-bs-toggle="dropdown">
+											All Projects
+										</a>
+										<ul class="dropdown-menu  dropdown-menu-end p-3">
+											<li>
+												<a href="javascript:void(0);" class="dropdown-item rounded-1">All Projects</a>
+											</li>
+											<li>
+												<a href="javascript:void(0);" class="dropdown-item rounded-1">Ongoing Projects</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="card-body">
+								<div class="list-group list-group-flush">
+									<div class="list-group-item border rounded mb-3 p-2">
+										<div class="row align-items-center row-gap-3">
+											<div class="col-md-8">
+												<div class="todo-inbox-check d-flex align-items-center">
+													<span><i class="ti ti-grid-dots me-2"></i></span>
+													<div class="form-check">
+														<input class="form-check-input" type="checkbox">
+													</div>
+													<span class="me-2 d-flex align-items-center rating-select"><i class="ti ti-star-filled filled"></i></span>
+													<div class="strike-info">
+														<h4 class="fs-14 text-truncate">Patient appointment booking</h4>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-4">
+												<div class="d-flex align-items-center justify-content-md-end flex-wrap row-gap-3">
+													<span class="badge bg-soft-pink d-inline-flex align-items-center me-2"><i class="fas fa-circle fs-6 me-1"></i>Onhold</span>
+													<div class="d-flex align-items-center">
+														<div class="avatar-list-stacked avatar-group-sm">
+															<span class="avatar avatar-rounded">
+																<img class="border border-white" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-13.jpg" alt="img">
+															</span>
+															<span class="avatar avatar-rounded">
+																<img class="border border-white" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-14.jpg" alt="img">
+															</span>
+															<span class="avatar avatar-rounded">
+																<img class="border border-white" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-15.jpg" alt="img">
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="list-group-item border rounded mb-3 p-2">
+										<div class="row align-items-center row-gap-3">
+											<div class="col-md-8">
+												<div class="todo-inbox-check d-flex align-items-center">
+													<span><i class="ti ti-grid-dots me-2"></i></span>
+													<div class="form-check">
+														<input class="form-check-input" type="checkbox">
+													</div>
+													<span class="me-2 rating-select d-flex align-items-center"><i class="ti ti-star"></i></span>
+													<div class="strike-info">
+														<h4 class="fs-14 text-truncate">Appointment booking with payment</h4>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-4">
+												<div class="d-flex align-items-center justify-content-md-end flex-wrap row-gap-3">
+													<span class="badge bg-transparent-purple d-flex align-items-center me-2"><i class="fas fa-circle fs-6 me-1"></i>Inprogress</span>
+													<div class="d-flex align-items-center">
+														<div class="avatar-list-stacked avatar-group-sm">
+															<span class="avatar avatar-rounded">
+																<img class="border border-white" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-20.jpg" alt="img">
+															</span>
+															<span class="avatar avatar-rounded">
+																<img class="border border-white" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-21.jpg" alt="img">
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="list-group-item border rounded mb-3 p-2">
+										<div class="row align-items-center row-gap-3">
+											<div class="col-md-8">
+												<div class="todo-inbox-check d-flex align-items-center">
+													<span><i class="ti ti-grid-dots me-2"></i></span>
+													<div class="form-check">
+														<input class="form-check-input" type="checkbox">
+													</div>
+													<span class="me-2 rating-select d-flex align-items-center"><i class="ti ti-star"></i></span>
+													<div class="strike-info">
+														<h4 class="fs-14 text-truncate">Patient and Doctor video conferencing</h4>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-4">
+												<div class="d-flex align-items-center justify-content-md-end flex-wrap row-gap-3">
+													<span class="badge badge-soft-success align-items-center me-2"><i class="fas fa-circle fs-6 me-1"></i>Completed</span>
+													<div class="d-flex align-items-center">
+														<div class="avatar-list-stacked avatar-group-sm">
+															<span class="avatar avatar-rounded">
+																<img class="border border-white" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-28.jpg" alt="img">
+															</span>
+															<span class="avatar avatar-rounded">
+																<img class="border border-white" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-29.jpg" alt="img">
+															</span>
+															<span class="avatar avatar-rounded">
+																<img class="border border-white" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-24.jpg" alt="img">
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="list-group-item border rounded mb-3 p-2">
+										<div class="row align-items-center row-gap-3">
+											<div class="col-md-8">
+												<div class="todo-inbox-check d-flex align-items-center todo-strike-content">
+													<span><i class="ti ti-grid-dots me-2"></i></span>
+													<div class="form-check">
+														<input class="form-check-input" type="checkbox" checked="">
+													</div>
+													<span class="me-2 rating-select d-flex align-items-center"><i class="ti ti-star"></i></span>
+													<div class="strike-info">
+														<h4 class="fs-14 text-truncate">Private chat module</h4>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-4">
+												<div class="d-flex align-items-center justify-content-md-end flex-wrap row-gap-3">
+													<span class="badge badge-secondary-transparent d-flex align-items-center me-2"><i class="fas fa-circle fs-6 me-1"></i>Pending</span>
+													<div class="d-flex align-items-center">
+														<div class="avatar-list-stacked avatar-group-sm">
+															<span class="avatar avatar-rounded">
+																<img class="border border-white" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-23.jpg" alt="img">
+															</span>
+															<span class="avatar avatar-rounded">
+																<img class="border border-white" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-24.jpg" alt="img">
+															</span>
+															<span class="avatar avatar-rounded">
+																<img class="border border-white" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-25.jpg" alt="img">
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="list-group-item border rounded p-2">
+										<div class="row align-items-center row-gap-3">
+											<div class="col-md-8">
+												<div class="todo-inbox-check d-flex align-items-center">
+													<span><i class="ti ti-grid-dots me-2"></i></span>
+													<div class="form-check">
+														<input class="form-check-input" type="checkbox">
+													</div>
+													<span class="me-2 rating-select d-flex align-items-center"><i class="ti ti-star"></i></span>
+													<div class="strike-info">
+														<h4 class="fs-14 text-truncate">Go-Live and Post-Implementation Support</h4>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-4">
+												<div class="d-flex align-items-center justify-content-md-end flex-wrap row-gap-3">
+													<span class="badge bg-transparent-purple d-flex align-items-center me-2"><i class="fas fa-circle fs-6 me-1"></i>Inprogress</span>
+													<div class="d-flex align-items-center">
+														<div class="avatar-list-stacked avatar-group-sm">
+															<span class="avatar avatar-rounded">
+																<img class="border border-white" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-28.jpg" alt="img">
+															</span>
+															<span class="avatar avatar-rounded">
+																<img class="border border-white" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-29.jpg" alt="img">
+															</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xl-5 d-flex">
+						<div class="card flex-fill">
+							<div class="card-header">
+								<div class="d-flex align-items-center justify-content-between flex-wrap row-gap-2">
+									<h5>Performance</h5>
+									<div class="dropdown">
+										<a href="javascript:void(0);" class="btn btn-white border btn-sm d-inline-flex align-items-center" data-bs-toggle="dropdown">
+											<i class="ti ti-calendar me-1"></i>2024
+										</a>
+										<ul class="dropdown-menu  dropdown-menu-end p-3">
+											<li>
+												<a href="javascript:void(0);" class="dropdown-item rounded-1">2024</a>
+											</li>
+											<li>
+												<a href="javascript:void(0);" class="dropdown-item rounded-1">2023</a>
+											</li>
+											<li>
+												<a href="javascript:void(0);" class="dropdown-item rounded-1">2022</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="card-body">
+								<div>
+									<div class="bg-light d-flex align-items-center rounded p-2">
+										<h3 class="me-2">98%</h3>
+										<span class="badge badge-outline-success bg-success-transparent rounded-pill me-1">12%</span>
+										<span>vs last years</span>
+									</div>
+									<div id="performance_chart2"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-4 d-flex">
+						<div class="card flex-fill">
+							<div class="card-header">
+								<div class="d-flex align-items-center justify-content-between flex-wrap row-gap-2">
+									<h5>My Skills</h5>
+									<div class="dropdown">
+										<a href="javascript:void(0);" class="btn btn-white border btn-sm d-inline-flex align-items-center" data-bs-toggle="dropdown">
+											<i class="ti ti-calendar me-1"></i>2024
+										</a>
+										<ul class="dropdown-menu  dropdown-menu-end p-3">
+											<li>
+												<a href="javascript:void(0);" class="dropdown-item rounded-1">2024</a>
+											</li>
+											<li>
+												<a href="javascript:void(0);" class="dropdown-item rounded-1">2023</a>
+											</li>
+											<li>
+												<a href="javascript:void(0);" class="dropdown-item rounded-1">2022</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="card-body">
+								<div>
+									<div class="border border-dashed bg-transparent-light rounded p-2 mb-2">
+										<div class="d-flex align-items-center justify-content-between">
+											<div class="d-flex align-items-center">
+												<span class="d-block border border-2 h-12 border-primary rounded-5 me-2"></span>
+												<div>
+													<h6 class="fw-medium mb-1">Figma</h6>
+													<p>Updated : 15 May 2025</p>
+												</div>
+											</div>
+											<div class="circle-progress circle-progress-md"  data-value='95'>
+												<span class="progress-left">
+													<span class="progress-bar border-primary"></span>
+												</span>
+												<span class="progress-right">
+													<span class="progress-bar border-primary"></span>
+												</span>
+												<div class="progress-value">95%</div>
+											</div>
+										</div>
+									</div>
+									<div class="border border-dashed bg-transparent-light rounded p-2 mb-2">
+										<div class="d-flex align-items-center justify-content-between">
+											<div class="d-flex align-items-center">
+												<span class="d-block border border-2 h-12 border-success rounded-5 me-2"></span>
+												<div>
+													<h6 class="fw-medium mb-1">HTML</h6>
+													<p>Updated : 12 May 2025</p>
+												</div>
+											</div>
+											<div class="circle-progress circle-progress-md"  data-value='85'>
+												<span class="progress-left">
+													<span class="progress-bar border-success"></span>
+												</span>
+												<span class="progress-right">
+													<span class="progress-bar border-success"></span>
+												</span>
+												<div class="progress-value">85%</div>
+											</div>
+										</div>
+									</div>
+									<div class="border border-dashed bg-transparent-light rounded p-2 mb-2">
+										<div class="d-flex align-items-center justify-content-between">
+											<div class="d-flex align-items-center">
+												<span class="d-block border border-2 h-12 border-purple rounded-5 me-2"></span>
+												<div>
+													<h6 class="fw-medium mb-1">CSS</h6>
+													<p>Updated : 12 May 2025</p>
+												</div>
+											</div>
+											<div class="circle-progress circle-progress-md"  data-value='70'>
+												<span class="progress-left">
+													<span class="progress-bar border-purple"></span>
+												</span>
+												<span class="progress-right">
+													<span class="progress-bar border-purple"></span>
+												</span>
+												<div class="progress-value">70%</div>
+											</div>
+										</div>
+									</div>
+									<div class="border border-dashed bg-transparent-light rounded p-2 mb-2">
+										<div class="d-flex align-items-center justify-content-between">
+											<div class="d-flex align-items-center">
+												<span class="d-block border border-2 h-12 border-info rounded-5 me-2"></span>
+												<div>
+													<h6 class="fw-medium mb-1">Wordpress</h6>
+													<p>Updated : 15 May 2025</p>
+												</div>
+											</div>
+											<div class="circle-progress circle-progress-md"  data-value='61'>
+												<span class="progress-left">
+													<span class="progress-bar border-info"></span>
+												</span>
+												<span class="progress-right">
+													<span class="progress-bar border-info"></span>
+												</span>
+												<div class="progress-value">61%</div>
+											</div>
+										</div>
+									</div>
+									<div class="border border-dashed bg-transparent-light rounded p-2">
+										<div class="d-flex align-items-center justify-content-between">
+											<div class="d-flex align-items-center">
+												<span class="d-block border border-2 h-12 border-dark rounded-5 me-2"></span>
+												<div>
+													<h6 class="fw-medium mb-1">Javascript</h6>
+													<p>Updated : 13 May 2025</p>
+												</div>
+											</div>
+											<div class="circle-progress circle-progress-md"  data-value='58'>
+												<span class="progress-left">
+													<span class="progress-bar border-dark"></span>
+												</span>
+												<span class="progress-right">
+													<span class="progress-bar border-dark"></span>
+												</span>
+												<div class="progress-value">58%</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-3 d-flex">
+						<div class="flex-fill">
+							<div class="card card-bg-5 bg-dark mb-3">
+								<div class="card-body">
+									<div class="text-center">
+										<h5 class="text-white mb-4">Team Birthday</h5>
+										<span class="avatar avatar-xl avatar-rounded mb-2">
+											<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/users/user-35.jpg" alt="Img">
+										</span>
+										<div class="mb-3">
+											<h6 class="text-white fw-medium mb-1">Andrew Jermia</h6>
+											<p>IOS Developer</p>
+										</div>
+										<a href="#" class="btn btn-sm btn-primary">Send Wishes</a>
+									</div>
+								</div>
+							</div>
+							<div class="card bg-secondary mb-3">
+								<div class="card-body d-flex align-items-center justify-content-between p-3">
+									<div>
+										<h5 class="text-white mb-1">Leave Policy</h5>
+										<p class="text-white">Last Updated : Today</p>
+									</div>
+									<a href="#" class="btn btn-white btn-sm px-3">View All</a>
+								</div>
+							</div>
+							<div class="card bg-warning">
+								<div class="card-body d-flex align-items-center justify-content-between p-3">
+									<div>
+										<h5 class="mb-1">Next Holiday</h5>
+										<p class="text-gray-9">Diwali, 15 Sep 2025</p>
+									</div>
+									<a href="https://smarthr.dreamstechnologies.com/html/template/holidays.html" class="btn btn-white btn-sm px-3">View All</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xl-4 d-flex">
+						<div class="card flex-fill">
+							<div class="card-header">
+								<div class="d-flex align-items-center justify-content-between flex-wrap">
+									<h5>Team Members</h5>
+									<div>
+										<a href="#" class="btn btn-light btn-sm">View All</a>
+									</div>
+								</div>
+							</div>
+							<div class="card-body">
+								<div class="d-flex align-items-center justify-content-between mb-4">
+									<div class="d-flex align-items-center">
+										<a href="javascript:void(0);" class="avatar flex-shrink-0">
+											<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/users/user-27.jpg" class="rounded-circle border border-2" alt="img">
+										</a>
+										<div class="ms-2">
+											<h6 class="fs-14 fw-medium text-truncate mb-1"><a href="#">Alexander Jermai</a></h6>
+											<p class="fs-13">UI/UX Designer</p>
+										</div>
+									</div>
+									<div class="d-flex align-items-center">
+										<a href="#" class="btn btn-light btn-icon btn-sm me-2"><i class="ti ti-phone fs-16"></i></a>
+										<a href="#" class="btn btn-light btn-icon btn-sm me-2"><i class="ti ti-mail-bolt fs-16"></i></a>
+										<a href="#" class="btn btn-light btn-icon btn-sm"><i class="ti ti-brand-hipchat fs-16"></i></a>
+									</div>
+								</div>
+								<div class="d-flex align-items-center justify-content-between mb-4">
+									<div class="d-flex align-items-center">
+										<a href="javascript:void(0);" class="avatar flex-shrink-0">
+											<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/users/user-42.jpg" class="rounded-circle border border-2" alt="img">
+										</a>
+										<div class="ms-2">
+											<h6 class="fs-14 fw-medium text-truncate mb-1"><a href="#">Doglas Martini</a></h6>
+											<p class="fs-13">Product Designer</p>
+										</div>
+									</div>
+									<div class="d-flex align-items-center">
+										<a href="#" class="btn btn-light btn-icon btn-sm me-2"><i class="ti ti-phone fs-16"></i></a>
+										<a href="#" class="btn btn-light btn-icon btn-sm me-2"><i class="ti ti-mail-bolt fs-16"></i></a>
+										<a href="#" class="btn btn-light btn-icon btn-sm"><i class="ti ti-brand-hipchat fs-16"></i></a>
+									</div>
+								</div>
+								<div class="d-flex align-items-center justify-content-between mb-4">
+									<div class="d-flex align-items-center">
+										<a href="javascript:void(0);" class="avatar flex-shrink-0">
+											<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/users/user-43.jpg" class="rounded-circle border border-2" alt="img">
+										</a>
+										<div class="ms-2">
+											<h6 class="fs-14 fw-medium text-truncate mb-1"><a href="#">Daniel Esbella</a></h6>
+											<p class="fs-13">Project Manager</p>
+										</div>
+									</div>
+									<div class="d-flex align-items-center">
+										<a href="#" class="btn btn-light btn-icon btn-sm me-2"><i class="ti ti-phone fs-16"></i></a>
+										<a href="#" class="btn btn-light btn-icon btn-sm me-2"><i class="ti ti-mail-bolt fs-16"></i></a>
+										<a href="#" class="btn btn-light btn-icon btn-sm"><i class="ti ti-brand-hipchat fs-16"></i></a>
+									</div>
+								</div>
+								<div class="d-flex align-items-center justify-content-between mb-4">
+									<div class="d-flex align-items-center">
+										<a href="javascript:void(0);" class="avatar flex-shrink-0">
+											<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/users/user-11.jpg" class="rounded-circle border border-2" alt="img">
+										</a>
+										<div class="ms-2">
+											<h6 class="fs-14 fw-medium text-truncate mb-1"><a href="#">Daniel Esbella</a></h6>
+											<p class="fs-13">Team Lead</p>
+										</div>
+									</div>
+									<div class="d-flex align-items-center">
+										<a href="#" class="btn btn-light btn-icon btn-sm me-2"><i class="ti ti-phone fs-16"></i></a>
+										<a href="#" class="btn btn-light btn-icon btn-sm me-2"><i class="ti ti-mail-bolt fs-16"></i></a>
+										<a href="#" class="btn btn-light btn-icon btn-sm"><i class="ti ti-brand-hipchat fs-16"></i></a>
+									</div>
+								</div>
+								<div class="d-flex align-items-center justify-content-between mb-4">
+									<div class="d-flex align-items-center">
+										<a href="javascript:void(0);" class="avatar flex-shrink-0">
+											<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/users/user-44.jpg" class="rounded-circle border border-2" alt="img">
+										</a>
+										<div class="ms-2">
+											<h6 class="fs-14 fw-medium text-truncate mb-1"><a href="#">Stephan Peralt</a></h6>
+											<p class="fs-13">Team Lead</p>
+										</div>
+									</div>
+									<div class="d-flex align-items-center">
+										<a href="#" class="btn btn-light btn-icon btn-sm me-2"><i class="ti ti-phone fs-16"></i></a>
+										<a href="#" class="btn btn-light btn-icon btn-sm me-2"><i class="ti ti-mail-bolt fs-16"></i></a>
+										<a href="#" class="btn btn-light btn-icon btn-sm"><i class="ti ti-brand-hipchat fs-16"></i></a>
+									</div>
+								</div>
+								<div class="d-flex align-items-center justify-content-between">
+									<div class="d-flex align-items-center">
+										<a href="javascript:void(0);" class="avatar flex-shrink-0">
+											<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/users/user-54.jpg" class="rounded-circle border border-2" alt="img">
+										</a>
+										<div class="ms-2">
+											<h6 class="fs-14 fw-medium text-truncate mb-1"><a href="#">Andrew Jermia</a></h6>
+											<p class="fs-13">Project  Lead</p>
+										</div>
+									</div>
+									<div class="d-flex align-items-center">
+										<a href="#" class="btn btn-light btn-icon btn-sm me-2"><i class="ti ti-phone fs-16"></i></a>
+										<a href="#" class="btn btn-light btn-icon btn-sm me-2"><i class="ti ti-mail-bolt fs-16"></i></a>
+										<a href="#" class="btn btn-light btn-icon btn-sm"><i class="ti ti-brand-hipchat fs-16"></i></a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-4 d-flex">
+						<div class="card flex-fill">
+							<div class="card-header">
+								<div class="d-flex align-items-center justify-content-between flex-wrap">
+									<h5>Notifications</h5>
+									<div>
+										<a href="#" class="btn btn-light btn-sm">View All</a>
+									</div>
+								</div>
+							</div>
+							<div class="card-body">
+								<div class="d-flex align-items-start mb-4">
+									<a href="javascript:void(0);" class="avatar flex-shrink-0">
+										<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/users/user-27.jpg" class="rounded-circle border border-2" alt="img">
+									</a>
+									<div class="ms-2">
+										<h6 class="fs-14 fw-medium text-truncate mb-1">Lex Murphy requested access to UNIX </h6>
+										<p class="fs-13 mb-2">Today at 9:42 AM</p>
+										<div class="d-flex align-items-center">
+											<a href="#" class="avatar avatar-sm border flex-shrink-0 me-2"><img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/social/pdf-icon.svg" class="w-auto h-auto" alt="Img"></a>
+											<h6 class="fw-normal"><a href="#">EY_review.pdf</a></h6>
+										</div>
+									</div>
+								</div>
+								<div class="d-flex align-items-start mb-4">
+									<a href="javascript:void(0);" class="avatar flex-shrink-0">
+										<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/users/user-28.jpg" class="rounded-circle border border-2" alt="img">
+									</a>
+									<div class="ms-2">
+										<h6 class="fs-14 fw-medium text-truncate mb-1">Lex Murphy requested access to UNIX </h6>
+										<p class="fs-13 mb-0">Today at 10:00 AM</p>
+									</div>
+								</div>
+								<div class="d-flex align-items-start mb-4">
+									<a href="javascript:void(0);" class="avatar flex-shrink-0">
+										<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/users/user-29.jpg" class="rounded-circle border border-2" alt="img">
+									</a>
+									<div class="ms-2">
+										<h6 class="fs-14 fw-medium text-truncate mb-1">Lex Murphy requested access to UNIX </h6>
+										<p class="fs-13 mb-2">Today at 10:50 AM</p>
+										<div class="d-flex align-items-center">
+											<a href="#" class="btn btn-primary btn-sm me-2">Approve</a>
+											<a href="#" class="btn btn-outline-primary btn-sm">Decline</a>
+										</div>
+									</div>
+								</div>
+								<div class="d-flex align-items-start mb-4">
+									<a href="javascript:void(0);" class="avatar flex-shrink-0">
+										<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/users/user-30.jpg" class="rounded-circle border border-2" alt="img">
+									</a>
+									<div class="ms-2">
+										<h6 class="fs-14 fw-medium text-truncate mb-1">Lex Murphy requested access to UNIX </h6>
+										<p class="fs-13 mb-0">Today at 12:00 PM</p>
+									</div>
+								</div>
+								<div class="d-flex align-items-start">
+									<a href="javascript:void(0);" class="avatar flex-shrink-0">
+										<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/users/user-33.jpg" class="rounded-circle border border-2" alt="img">
+									</a>
+									<div class="ms-2">
+										<h6 class="fs-14 fw-medium text-truncate mb-1">Lex Murphy requested access to UNIX </h6>
+										<p class="fs-13 mb-0">Today at 05:00 PM</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-4 d-flex">
+						<div class="card flex-fill">
+							<div class="card-header">
+								<div class="d-flex align-items-center justify-content-between flex-wrap row-gap-2">
+									<h5>Meetings Schedule</h5>
+									<div class="dropdown">
+										<a href="javascript:void(0);" class="btn btn-white border btn-sm d-inline-flex align-items-center" data-bs-toggle="dropdown">
+											<i class="ti ti-calendar me-1"></i>Today
+										</a>
+										<ul class="dropdown-menu  dropdown-menu-end p-3">
+											<li>
+												<a href="javascript:void(0);" class="dropdown-item rounded-1">Today</a>
+											</li>
+											<li>
+												<a href="javascript:void(0);" class="dropdown-item rounded-1">This Month</a>
+											</li>
+											<li>
+												<a href="javascript:void(0);" class="dropdown-item rounded-1">This Year</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="card-body schedule-timeline">
+								<div class="d-flex align-items-start">
+									<div class="d-flex align-items-center active-time">
+										<span>09:25 AM</span>
+										<span><i class="ti ti-point-filled text-primary fs-20"></i></span>
+									</div>
+									<div class="flex-fill ps-3 pb-4 timeline-flow">
+										<div class="bg-light p-2 rounded">
+											<p class="fw-medium text-gray-9 mb-1">Marketing Strategy Presentation</p>
+											<span>Marketing</span>
+										</div>
+									</div>
+								</div>
+								<div class="d-flex align-items-start">
+									<div class="d-flex align-items-center active-time">
+										<span>09:20 AM</span>
+										<span><i class="ti ti-point-filled text-secondary fs-20"></i></span>
+									</div>
+									<div class="flex-fill ps-3 pb-4 timeline-flow">
+										<div class="bg-light p-2 rounded">
+											<p class="fw-medium text-gray-9 mb-1">Design Review Hospital, doctors Management Project</p>
+											<span>Review</span>
+										</div>
+									</div>
+								</div>
+								<div class="d-flex align-items-start">
+									<div class="d-flex align-items-center active-time">
+										<span>09:18 AM</span>
+										<span><i class="ti ti-point-filled text-warning fs-20"></i></span>
+									</div>
+									<div class="flex-fill ps-3 pb-4 timeline-flow">
+										<div class="bg-light p-2 rounded">
+											<p class="fw-medium text-gray-9 mb-1">Birthday Celebration of Employee</p>
+											<span>Celebration</span>
+										</div>
+									</div>
+								</div>
+								<div class="d-flex align-items-start">
+									<div class="d-flex align-items-center active-time">
+										<span>09:10 AM</span>
+										<span><i class="ti ti-point-filled text-success fs-20"></i></span>
+									</div>
+									<div class="flex-fill ps-3 timeline-flow">
+										<div class="bg-light p-2 rounded">
+											<p class="fw-medium text-gray-9 mb-1">Update of Project Flow</p>
+											<span>Development</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="footer d-sm-flex align-items-center justify-content-between border-top bg-white p-3">
+				<p class="mb-0">2014 - 2025 &copy; SmartHR.</p>
+				<p>Designed &amp; Developed By <a href="javascript:void(0);" class="text-primary">Dreams</a></p>
+			</div>
+
+		</div>
+		<!-- /Page Wrapper -->
+
+		<!-- Add Leaves -->
+		<div class="modal fade" id="add_leaves">
+			<div class="modal-dialog modal-dialog-centered modal-md">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Add Leave</h4>
+						<button type="button" class="btn-close custom-btn-close" data-bs-dismiss="modal" aria-label="Close">
+							<i class="ti ti-x"></i>
+						</button>
+					</div>
+					<form action="https://smarthr.dreamstechnologies.com/html/template/employee-dashboard.html">
+						<div class="modal-body pb-0">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="mb-3">
+										<label class="form-label">Employee Name</label>
+										<select class="select">
+											<option>Select</option>
+											<option>Anthony Lewis</option>
+											<option>Brian Villalobos</option>
+											<option>Harvey Smith</option>
+										</select>
+									</div>	
+								</div>
+								<div class="col-md-12">
+									<div class="mb-3">
+										<label class="form-label">Leave Type</label>
+										<select class="select">
+											<option>Select</option>
+											<option>Medical Leave</option>
+											<option>Casual Leave</option>
+											<option>Annual Leave</option>
+										</select>
+									</div>	
+								</div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">From </label>
+                                        <div class="input-icon-end position-relative">
+                                            <input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy">
+                                            <span class="input-icon-addon">
+                                                <i class="ti ti-calendar text-gray-7"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">To </label>
+                                        <div class="input-icon-end position-relative">
+                                            <input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy">
+                                            <span class="input-icon-addon">
+                                                <i class="ti ti-calendar text-gray-7"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>   
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">No of Days</label>
+										<input type="text" class="form-control">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Remaining Days</label>
+										<input type="text" class="form-control">
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="mb-3">
+										<label class="form-label">Reason</label>
+										<textarea class="form-control" rows="3"></textarea>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-light me-2" data-bs-dismiss="modal">Cancel</button>
+							<button type="submit" class="btn btn-primary">Add Leaves</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- /Add Leaves -->
+
+		<!-- Edit Task -->
+		<div class="modal fade" id="edit_task">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Edit Task  </h4>
+						<button type="button" class="btn-close custom-btn-close" data-bs-dismiss="modal" aria-label="Close">
+							<i class="ti ti-x"></i>
+						</button>
+					</div>
+					<form action="https://smarthr.dreamstechnologies.com/html/template/employee-dashboard.html">
+						<div class="modal-body">
+							<div class="row">
+								<div class="col-12">
+									<div class="mb-3">
+										<label class="form-label">Todo Title</label>
+										<input type="text" class="form-control" value="Patient appointment booking">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Due Date</label>
+										<div class="input-icon-end position-relative">
+											<input type="text" class="form-control datetimepicker" placeholder="dd/mm/yyyy">
+											<span class="input-icon-addon">
+												<i class="ti ti-calendar text-gray-7"></i>
+											</span>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Project</label>
+										<select class="select">
+											<option>Select</option>
+											<option selected>Office Management</option>
+											<option>Clinic Management </option>
+											<option>Educational Platform</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="mb-3">
+										<label class="form-label me-2">Team Members</label>
+										<input class="input-tags form-control" placeholder="Add new" type="text" data-role="tagsinput"  name="Label" value="Jerald,Andrew,Philip,Davis">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Tag</label>
+										<select class="select">
+											<option>Select</option>
+											<option>Internal</option>
+											<option selected>Projects</option>
+											<option>Meetings</option>
+											<option>Reminder</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label">Status</label>
+										<select class="select">
+											<option>Select</option>
+											<option selected>Inprogress</option>
+											<option>Completed</option>
+											<option>Pending</option>
+											<option>Onhold</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="mb-3">
+										<label class="form-label">Priority</label>
+										<select class="select">
+											<option>Select</option>
+											<option selected>Medium</option>
+											<option>High</option>
+											<option>Low</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-12">
+									<label class="form-label">Who Can See this Task?</label>
+									<div class="d-flex align-items-center">
+										<div class="form-check me-3">
+											<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4">
+											<label class="form-check-label text-dark" for="flexRadioDefault4">
+												Public
+											</label>
+										</div>
+										<div class="form-check me-3">
+											<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault5" checked="">
+											<label class="form-check-label text-dark" for="flexRadioDefault5">
+												Private
+											</label>
+										</div>
+										<div class="form-check ">
+											<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault6">
+											<label class="form-check-label text-dark" for="flexRadioDefault6">
+												Admin Only
+											</label>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-12">
+									<div class="mb-3">
+										<label class="form-label">Descriptions</label>
+										<div class="summernote"></div>
+									</div>
+								</div>
+								<div class="col-md-12">
+									<label class="form-label">Upload Attachment</label>
+									<div class="bg-light rounded p-2">
+										<div class="profile-uploader border-bottom mb-2 pb-2">
+											<div class="drag-upload-btn btn btn-sm btn-white border px-3">
+												Select File
+												<input type="file" class="form-control image-sign" multiple="">
+											</div>
+										</div>
+										<div class="d-flex align-items-center justify-content-between border-bottom mb-2 pb-2">
+											<div class="d-flex align-items-center">
+												<h6 class="fs-12 fw-medium me-1">Logo.zip</h6>
+												<span class="badge badge-soft-info">21MB </span>
+											</div>
+											<a href="#" class="btn btn-sm btn-icon"><i class="ti ti-trash"></i></a>
+										</div>
+										<div class="d-flex align-items-center justify-content-between">
+											<div class="d-flex align-items-center">
+												<h6 class="fs-12 fw-medium me-1">Files.zip</h6>
+												<span class="badge badge-soft-info">25MB </span>
+											</div>
+											<a href="#" class="btn btn-sm btn-icon"><i class="ti ti-trash"></i></a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-light me-2" data-bs-dismiss="modal">Cancel</button>
+							<button type="submit" class="btn btn-primary">Save</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- /Edit Task -->
+
+		<!-- Delete Modal -->
+		<div class="modal fade" id="delete_modal">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-body text-center">
+						<span class="avatar avatar-xl bg-transparent-danger text-danger mb-3">
+							<i class="ti ti-trash-x fs-36"></i>
+						</span>
+						<h4 class="mb-1">Confirm Delete</h4>
+						<p class="mb-3">You want to delete all the marked items, this cant be undone once you delete.</p>
+						<div class="d-flex justify-content-center">
+							<a href="javascript:void(0);" class="btn btn-light me-3" data-bs-dismiss="modal">Cancel</a>
+							<a href="https://smarthr.dreamstechnologies.com/html/template/employee-dashboard.html" class="btn btn-danger">Yes, Delete</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /Delete Modal -->
+
+	</div>
+	<!-- /Main Wrapper -->
+
+	<!-- jQuery -->
+	<script data-cfasync="false" src="https://smarthr.dreamstechnologies.com/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://smarthr.dreamstechnologies.com/html/template/assets/js/jquery-3.7.1.min.js" type="12789c3eb65f5dda020bae43-text/javascript"></script>
+
+	<!-- Bootstrap Core JS -->
+	<script src="https://smarthr.dreamstechnologies.com/html/template/assets/js/bootstrap.bundle.min.js" type="12789c3eb65f5dda020bae43-text/javascript"></script>
+
+	<!-- Feather Icon JS -->
+	<script src="https://smarthr.dreamstechnologies.com/html/template/assets/js/feather.min.js" type="12789c3eb65f5dda020bae43-text/javascript"></script>
+
+	<!-- Slimscroll JS -->
+	<script src="https://smarthr.dreamstechnologies.com/html/template/assets/js/jquery.slimscroll.min.js" type="12789c3eb65f5dda020bae43-text/javascript"></script>
+	<script src="https://smarthr.dreamstechnologies.com/html/template/assets/plugins/daterangepicker/daterangepicker.js" type="12789c3eb65f5dda020bae43-text/javascript"></script>
+
+	<!-- Select2 JS -->
+	<script src="https://smarthr.dreamstechnologies.com/html/template/assets/plugins/select2/js/select2.min.js" type="12789c3eb65f5dda020bae43-text/javascript"></script>
+
+	<!-- Chart JS -->
+	<script src="https://smarthr.dreamstechnologies.com/html/template/assets/plugins/apexchart/apexcharts.min.js" type="12789c3eb65f5dda020bae43-text/javascript"></script>
+	<script src="https://smarthr.dreamstechnologies.com/html/template/assets/plugins/apexchart/chart-data.js" type="12789c3eb65f5dda020bae43-text/javascript"></script>
+
+	<!-- Datetimepicker JS -->
+	<script src="https://smarthr.dreamstechnologies.com/html/template/assets/js/moment.js" type="12789c3eb65f5dda020bae43-text/javascript"></script>
+	<script src="https://smarthr.dreamstechnologies.com/html/template/assets/js/bootstrap-datetimepicker.min.js" type="12789c3eb65f5dda020bae43-text/javascript"></script>
+
+	<!-- Bootstrap Tagsinput JS -->
+	<script src="https://smarthr.dreamstechnologies.com/html/template/assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js" type="12789c3eb65f5dda020bae43-text/javascript"></script>
+
+	<!-- Summernote JS -->
+	<script src="https://smarthr.dreamstechnologies.com/html/template/assets/plugins/summernote/summernote-lite.min.js" type="12789c3eb65f5dda020bae43-text/javascript"></script>
+
+	<!-- Daterangepikcer JS -->
+	<script src="https://smarthr.dreamstechnologies.com/html/template/assets/plugins/daterangepicker/daterangepicker.js" type="12789c3eb65f5dda020bae43-text/javascript"></script>
+
+	<!-- Color Picker JS -->
+	<script src="https://smarthr.dreamstechnologies.com/html/template/assets/plugins/@simonwep/pickr/pickr.es5.min.js" type="12789c3eb65f5dda020bae43-text/javascript"></script>
+
+	<!-- Custom JS -->
+	<script src="https://smarthr.dreamstechnologies.com/html/template/assets/js/circle-progress.js" type="12789c3eb65f5dda020bae43-text/javascript"></script>
+	<script src="https://smarthr.dreamstechnologies.com/html/template/assets/js/todo.js" type="12789c3eb65f5dda020bae43-text/javascript"></script>
+	<script src="https://smarthr.dreamstechnologies.com/html/template/assets/js/theme-colorpicker.js" type="12789c3eb65f5dda020bae43-text/javascript"></script>
+	<script src="https://smarthr.dreamstechnologies.com/html/template/assets/js/script.js" type="12789c3eb65f5dda020bae43-text/javascript"></script>
+
+<script src="https://smarthr.dreamstechnologies.com/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="12789c3eb65f5dda020bae43-|49" defer></script></body>
+
+
+<!-- Mirrored from smarthr.dreamstechnologies.com/html/template/employee-dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 22 Dec 2024 18:38:21 GMT -->
+</html>

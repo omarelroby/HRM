@@ -1,0 +1,21 @@
+html {
+    direction: rtl;
+    scroll-behavior: smooth;
+    scrollbar-color: #fff #0d8c60;
+    scrollbar-width: thin;
+}
+
+.navbar-nav {
+    margin-left: none !important;
+    margin-right: auto;
+}
+
+.timeline-row {
+
+    margin-bottom: 170px;
+}
+
+
+.links-footer h5 {
+    margin-right: 40px;
+}
