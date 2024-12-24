@@ -465,7 +465,7 @@
 
             {{-- Tab Content --}}
             <div class="tab-content">
-                {{-- Insurance End Date Tab --}}
+                {{-- Employee End Dates Table --}}
                 <div class="tab-pane fade active show" id="insurance-tab" role="tabpanel">
                     <table class="table table-striped">
                         <thead>
@@ -485,7 +485,6 @@
                     </table>
                 </div>
 
-                {{-- Worker End Date Tab --}}
                 <div class="tab-pane fade" id="worker-tab" role="tabpanel">
                     <table class="table table-striped">
                         <thead>
@@ -505,7 +504,6 @@
                     </table>
                 </div>
 
-                {{-- Contract End Date Tab --}}
                 <div class="tab-pane fade" id="contract-tab" role="tabpanel">
                     <table class="table table-striped">
                         <thead>
@@ -515,7 +513,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($records as $employee)
+                            @foreach ($data['records'] as $employee)
                                 <tr>
                                     <td>{{ $employee->id }}</td>
                                     <td>{{ $employee->contract_enddate ?? 'N/A' }}</td>
@@ -525,7 +523,6 @@
                     </table>
                 </div>
 
-                {{-- Residence Expiry Date Tab --}}
                 <div class="tab-pane fade" id="residence-tab" role="tabpanel">
                     <table class="table table-striped">
                         <thead>
@@ -535,7 +532,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($records as $employee)
+                            @foreach ($data['records'] as $employee)
                                 <tr>
                                     <td>{{ $employee->id }}</td>
                                     <td>{{ $employee->residence_expiredate ?? 'N/A' }}</td>

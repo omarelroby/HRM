@@ -116,20 +116,15 @@ class HomeController extends Controller
                     ->get()
                     ->take(6);
                 // Get the current date and calculate the date for 3 months ago
-                $threeMonthsAgo = Carbon::now()->subMonths(3);
+$threeMonthsAgo = Carbon::now()->subMonths(3);
 
-                // Filter EmployeeContracts where the end date is within the last 3 months (from now to 3 months ago)
-                $data['contract'] = EmployeeContracts::where(function ($query) use ($threeMonthsAgo) {
-                    $query->whereBetween('contract_enddate', [$threeMonthsAgo, Carbon::now()])
-                        ->orWhereBetween('insurance_enddate', [$threeMonthsAgo, Carbon::now()])
-                        ->orWhereBetween('worker_enddate', [$threeMonthsAgo, Carbon::now()])
-                        ->orWhereBetween('residence_expiredate', [$threeMonthsAgo, Carbon::now()]);
-                })->distinct()->get();
-
-                dd($data['contract']->count()); // Check the distinct records
-
-
-
+// Filter EmployeeContracts where the end date is within the last 3 months (from now to 3 months ago)
+$data['records'] = EmployeeContracts::where(function ($query) use ($threeMonthsAgo) {
+    $query->whereBetween('contract_enddate', [$threeMonthsAgo, Carbon::now()])
+          ->orWhereBetween('insurance_enddate', [$threeMonthsAgo, Carbon::now()])
+          ->orWhereBetween('worker_enddate', [$threeMonthsAgo, Carbon::now()])
+          ->orWhereBetween('residence_expiredate', [$threeMonthsAgo, Carbon::now()]);
+})->get()->take(6);
             return view('dashboard.dashboard', $data);
         }
     }

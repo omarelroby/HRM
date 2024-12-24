@@ -374,186 +374,130 @@
     </div>
 </div>
 {{-- End Employees Widgets --}}
-{{-- Job Applicants Widget --}}
+{{-- job applicants widget --}}
 <div class="col-xxl-4 d-flex">
     <div class="card flex-fill">
         <div class="card-header pb-2 d-flex align-items-center justify-content-between flex-wrap">
-            <h5 class="mb-2">Job Applicants</h5>
-            <a href="#" class="btn btn-light btn-md mb-2">View All</a>
+            <h5 class="mb-2">Jobs Applicants</h5>
+            <a href="job-list.html" class="btn btn-light btn-md mb-2">View All</a>
         </div>
         <div class="card-body">
-            {{-- Tabs Navigation --}}
             <ul class="nav nav-tabs tab-style-1 nav-justified d-sm-flex d-block p-0 mb-4" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link fw-medium" data-bs-toggle="tab" data-bs-target="#openings" href="#openings" role="tab">Opening Job Positions</a>
+                    <a class="nav-link fw-medium" data-bs-toggle="tab" data-bs-target="#openings" aria-current="page" href="#openings" aria-selected="false" role="tab" tabindex="-1">Openings</a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link fw-medium active" data-bs-toggle="tab" data-bs-target="#applicants" href="#applicants" role="tab">Job Applicants</a>
+                    <a class="nav-link fw-medium active" data-bs-toggle="tab" data-bs-target="#applicants" href="#applicants" aria-selected="true" role="tab">Applicants</a>
                 </li>
             </ul>
-
             <div class="tab-content">
-                {{-- Openings Tab --}}
                 <div class="tab-pane fade" id="openings" role="tabpanel">
-                    @foreach ($openings as $index => $job)
-                        <div class="d-flex align-items-center justify-content-between mb-4 p-3"
-                            style="background-color: {{ $index % 2 === 0 ? '#f1f8ff' : '#f9f9f9' }}; border-radius: 8px;">
-                            <div class="d-flex align-items-center">
-                                <div class="ms-2 overflow-hidden">
-                                    <p class="text-dark fw-medium text-truncate mb-0">
-                                        <a href="#" class="text-primary fw-bold">{{ $job->title ?? '' }}</a>
-                                    </p>
-                                    <span class="fs-12 text-secondary fw-bold">
-                                        No of Openings: {{ $job->position ?? 0 }}
-                                    </span>
-                                </div>
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <div class="d-flex align-items-center">
+                            <a href="#" class="avatar overflow-hidden flex-shrink-0 bg-gray-100">
+                                <img src="assets/img/icons/apple.svg" class="img-fluid rounded-circle w-auto h-auto" alt="img">
+                            </a>
+                            <div class="ms-2 overflow-hidden">
+                                <p class="text-dark fw-medium text-truncate mb-0"><a href="javascript:void(0);">Senior IOS Developer</a></p>
+                                <span class="fs-12">No of Openings : 25 </span>
                             </div>
                         </div>
-                    @endforeach
+                        <a href="javascript:void(0);" class="btn btn-light btn-sm p-0 btn-icon d-flex align-items-center justify-content-center"><i class="ti ti-edit"></i></a>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <div class="d-flex align-items-center">
+                            <a href="#" class="avatar overflow-hidden flex-shrink-0 bg-gray-100">
+                                <img src="assets/img/icons/php.svg" class="img-fluid w-auto h-auto" alt="img">
+                            </a>
+                            <div class="ms-2 overflow-hidden">
+                                <p class="text-dark fw-medium text-truncate mb-0"><a href="javascript:void(0);">Junior PHP Developer</a></p>
+                                <span class="fs-12">No of Openings : 20 </span>
+                            </div>
+                        </div>
+                        <a href="javascript:void(0);" class="btn btn-light btn-sm p-0 btn-icon d-flex align-items-center justify-content-center"><i class="ti ti-edit"></i></a>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <div class="d-flex align-items-center">
+                            <a href="#" class="avatar overflow-hidden flex-shrink-0 bg-gray-100">
+                                <img src="assets/img/icons/react.svg" class="img-fluid w-auto h-auto" alt="img">
+                            </a>
+                            <div class="ms-2 overflow-hidden">
+                                <p class="text-dark fw-medium text-truncate mb-0"><a href="javascript:void(0);">Junior React Developer </a></p>
+                                <span class="fs-12">No of Openings : 30 </span>
+                            </div>
+                        </div>
+                        <a href="javascript:void(0);" class="btn btn-light btn-sm p-0 btn-icon d-flex align-items-center justify-content-center"><i class="ti ti-edit"></i></a>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between mb-0">
+                        <div class="d-flex align-items-center">
+                            <a href="#" class="avatar overflow-hidden flex-shrink-0 bg-gray-100">
+                                <img src="assets/img/icons/laravel-icon.svg" class="img-fluid w-auto h-auto" alt="img">
+                            </a>
+                            <div class="ms-2 overflow-hidden">
+                                <p class="text-dark fw-medium text-truncate mb-0"><a href="javascript:void(0);">Senior Laravel Developer</a></p>
+                                <span class="fs-12">No of Openings : 40 </span>
+                            </div>
+                        </div>
+                        <a href="javascript:void(0);" class="btn btn-light btn-sm p-0 btn-icon d-flex align-items-center justify-content-center"><i class="ti ti-edit"></i></a>
+                    </div>
                 </div>
-
-                {{-- Applicants Tab --}}
                 <div class="tab-pane fade active show" id="applicants" role="tabpanel">
-                    @foreach ($applicants as $applicant)
-                        <div class="d-flex align-items-center justify-content-between mb-4">
-                            <div class="d-flex align-items-center">
-                                <div class="ms-2 overflow-hidden">
-                                    <p class="text-truncate mb-0">
-                                        <a href="#" class="text-dark fw-bold">{{ $applicant->name ?? '' }}</a>
-                                    </p>
-                                    <span class="fs-13 d-inline-flex align-items-center">
-                                        <span class="text-secondary fst-italic">
-                                            {{ $applicant->jobRelation->title ?? 'Unknown Job' }}
-                                        </span>
-                                    </span>
-                                </div>
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <div class="d-flex align-items-center">
+                            <a href="#" class="avatar overflow-hidden flex-shrink-0">
+                                <img src="assets/img/users/user-09.jpg" class="img-fluid rounded-circle" alt="img">
+                            </a>
+                            <div class="ms-2 overflow-hidden">
+                                <p class="text-dark fw-medium text-truncate mb-0"><a href="#">Brian Villalobos</a></p>
+                                <span class="fs-13 d-inline-flex align-items-center">Exp : 5+ Years<i class="ti ti-circle-filled fs-4 mx-2 text-primary"></i>USA</span>
                             </div>
-                            <span class="badge badge-xs text-white" style="background-color: #F26522;">
-                                {{ $applicant->jobRelation->title ?? 'Unknown' }}
-                            </span>
                         </div>
-                    @endforeach
+                        <span class="badge badge-secondary badge-xs">UI/UX Designer</span>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <div class="d-flex align-items-center">
+                            <a href="#" class="avatar overflow-hidden flex-shrink-0">
+                                <img src="assets/img/users/user-32.jpg" class="img-fluid rounded-circle" alt="img">
+                            </a>
+                            <div class="ms-2 overflow-hidden">
+                                <p class="text-dark fw-medium text-truncate mb-0"><a href="#">Anthony Lewis</a></p>
+                                <span class="fs-13 d-inline-flex align-items-center">Exp : 4+ Years<i class="ti ti-circle-filled fs-4 mx-2 text-primary"></i>USA</span>
+                            </div>
+                        </div>
+                        <span class="badge badge-info badge-xs">Python Developer</span>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <div class="d-flex align-items-center">
+                            <a href="#" class="avatar overflow-hidden flex-shrink-0">
+                                <img src="assets/img/users/user-32.jpg" class="img-fluid rounded-circle" alt="img">
+                            </a>
+                            <div class="ms-2 overflow-hidden">
+                                <p class="text-dark fw-medium text-truncate mb-0"><a href="#">Stephan Peralt</a></p>
+                                <span class="fs-13 d-inline-flex align-items-center">Exp : 6+ Years<i class="ti ti-circle-filled fs-4 mx-2 text-primary"></i>USA</span>
+                            </div>
+                        </div>
+                        <span class="badge badge-pink badge-xs">Android Developer</span>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between mb-0">
+                        <div class="d-flex align-items-center">
+                            <a href="javascript:void(0);" class="avatar overflow-hidden flex-shrink-0">
+                                <img src="assets/img/users/user-34.jpg" class="img-fluid rounded-circle" alt="img">
+                            </a>
+                            <div class="ms-2 overflow-hidden">
+                                <p class="text-dark fw-medium text-truncate mb-0"><a href="javascript:void(0);">Doglas Martini</a></p>
+                                <span class="fs-13 d-inline-flex align-items-center">Exp : 2+ Years<i class="ti ti-circle-filled fs-4 mx-2 text-primary"></i>USA</span>
+                            </div>
+                        </div>
+                        <span class="badge badge-purple badge-xs">React Developer</span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-{{-- End Job Applicants Widget --}}
- {{-- Card for End Dates --}}
- <div class="col-xxl-8 d-flex">
-    <div class="card flex-fill">
-        <div class="card-header pb-2 d-flex align-items-center justify-content-between flex-wrap">
-            <h5 class="mb-2">Employee End Dates</h5>
-            <a href="#" class="btn btn-light btn-md mb-2">View All</a>
+{{-- End job applicants widget --}}
+
         </div>
-        <div class="card-body">
-            {{-- Tabs Navigation --}}
-            <ul class="nav nav-tabs tab-style-1 nav-justified d-sm-flex d-block p-0 mb-4" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link fw-medium active" data-bs-toggle="tab" data-bs-target="#insurance-tab" href="#insurance-tab" role="tab">Insurance End Date</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link fw-medium" data-bs-toggle="tab" data-bs-target="#worker-tab" href="#worker-tab" role="tab">Worker End Date</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link fw-medium" data-bs-toggle="tab" data-bs-target="#contract-tab" href="#contract-tab" role="tab">Contract End Date</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link fw-medium" data-bs-toggle="tab" data-bs-target="#residence-tab" href="#residence-tab" role="tab">Residence Expiry Date</a>
-                </li>
-            </ul>
-
-            {{-- Tab Content --}}
-            <div class="tab-content">
-                {{-- Insurance End Date Tab --}}
-                <div class="tab-pane fade active show" id="insurance-tab" role="tabpanel">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Employee ID</th>
-                                <th>Insurance End Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($records as $employee)
-                                <tr>
-                                    <td>{{ $employee->id }}</td>
-                                    <td>{{ $employee->insurance_enddate ?? 'N/A' }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-
-                {{-- Worker End Date Tab --}}
-                <div class="tab-pane fade" id="worker-tab" role="tabpanel">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Employee ID</th>
-                                <th>Worker End Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($records as $employee)
-                                <tr>
-                                    <td>{{ $employee->id }}</td>
-                                    <td>{{ $employee->worker_enddate ?? 'N/A' }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-
-                {{-- Contract End Date Tab --}}
-                <div class="tab-pane fade" id="contract-tab" role="tabpanel">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Employee ID</th>
-                                <th>Contract End Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($records as $employee)
-                                <tr>
-                                    <td>{{ $employee->id }}</td>
-                                    <td>{{ $employee->contract_enddate ?? 'N/A' }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-
-                {{-- Residence Expiry Date Tab --}}
-                <div class="tab-pane fade" id="residence-tab" role="tabpanel">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Employee ID</th>
-                                <th>Residence Expiry Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($records as $employee)
-                                <tr>
-                                    <td>{{ $employee->id }}</td>
-                                    <td>{{ $employee->residence_expiredate ?? 'N/A' }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
- {{-- End Card for End Dates --}}
-
-
-
-
 @endsection
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>

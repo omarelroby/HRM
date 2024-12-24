@@ -51,8 +51,4 @@ class Job extends Model
     {
         return $this->hasOne('App\Models\User', 'id', 'created_by');
     }
-    public function applicants()
-    {
-        return $this->hasMany(JobApplication::class, 'job');
-    }
 }

@@ -440,116 +440,55 @@
 </div>
 {{-- End Job Applicants Widget --}}
  {{-- Card for End Dates --}}
- <div class="col-xxl-8 d-flex">
+<div class="col-xxl-4 d-flex">
     <div class="card flex-fill">
         <div class="card-header pb-2 d-flex align-items-center justify-content-between flex-wrap">
-            <h5 class="mb-2">Employee End Dates</h5>
-            <a href="#" class="btn btn-light btn-md mb-2">View All</a>
+            <h5 class="mb-2">End Dates Overview</h5>
+            <a href="#" class="btn btn-light btn-md mb-2">View Details</a>
         </div>
         <div class="card-body">
-            {{-- Tabs Navigation --}}
             <ul class="nav nav-tabs tab-style-1 nav-justified d-sm-flex d-block p-0 mb-4" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link fw-medium active" data-bs-toggle="tab" data-bs-target="#insurance-tab" href="#insurance-tab" role="tab">Insurance End Date</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link fw-medium" data-bs-toggle="tab" data-bs-target="#worker-tab" href="#worker-tab" role="tab">Worker End Date</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link fw-medium" data-bs-toggle="tab" data-bs-target="#contract-tab" href="#contract-tab" role="tab">Contract End Date</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link fw-medium" data-bs-toggle="tab" data-bs-target="#residence-tab" href="#residence-tab" role="tab">Residence Expiry Date</a>
+                    <a class="nav-link fw-medium active" data-bs-toggle="tab" data-bs-target="#endDates" href="#endDates" role="tab">
+                        End Dates
+                    </a>
                 </li>
             </ul>
-
-            {{-- Tab Content --}}
             <div class="tab-content">
-                {{-- Insurance End Date Tab --}}
-                <div class="tab-pane fade active show" id="insurance-tab" role="tabpanel">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Employee ID</th>
-                                <th>Insurance End Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($records as $employee)
-                                <tr>
-                                    <td>{{ $employee->id }}</td>
-                                    <td>{{ $employee->insurance_enddate ?? 'N/A' }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-
-                {{-- Worker End Date Tab --}}
-                <div class="tab-pane fade" id="worker-tab" role="tabpanel">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Employee ID</th>
-                                <th>Worker End Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($records as $employee)
-                                <tr>
-                                    <td>{{ $employee->id }}</td>
-                                    <td>{{ $employee->worker_enddate ?? 'N/A' }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-
-                {{-- Contract End Date Tab --}}
-                <div class="tab-pane fade" id="contract-tab" role="tabpanel">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Employee ID</th>
-                                <th>Contract End Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($records as $employee)
-                                <tr>
-                                    <td>{{ $employee->id }}</td>
-                                    <td>{{ $employee->contract_enddate ?? 'N/A' }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-
-                {{-- Residence Expiry Date Tab --}}
-                <div class="tab-pane fade" id="residence-tab" role="tabpanel">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Employee ID</th>
-                                <th>Residence Expiry Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($records as $employee)
-                                <tr>
-                                    <td>{{ $employee->id }}</td>
-                                    <td>{{ $employee->residence_expiredate ?? 'N/A' }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                {{-- End Dates Tab --}}
+                <div class="tab-pane fade active show" id="endDates" role="tabpanel">
+                    @foreach ($records as $index => $record)
+                        <div
+                            class="d-flex align-items-center justify-content-between mb-4 p-3"
+                            style="background-color: {{ $index % 2 === 0 ? '#f9f9f9' : '#f1f8ff' }}; border-radius: 8px;">
+                            <div>
+                                <p class="mb-0 text-dark fw-medium">
+                                    <span style="color: #007bff; font-weight: bold;">Employee ID:</span> {{ $record->employee_id }}
+                                </p>
+                                <p class="mb-0 text-secondary">
+                                    <span style="font-weight: bold;">Insurance End Date:</span> {{ $record->insurance_enddate ?? 'N/A' }}
+                                </p>
+                                <p class="mb-0 text-secondary">
+                                    <span style="font-weight: bold;">Worker End Date:</span> {{ $record->worker_enddate ?? 'N/A' }}
+                                </p>
+                                <p class="mb-0 text-secondary">
+                                    <span style="font-weight: bold;">Contract End Date:</span> {{ $record->contract_enddate ?? 'N/A' }}
+                                </p>
+                                <p class="mb-0 text-secondary">
+                                    <span style="font-weight: bold;">Residence Expiry Date:</span> {{ $record->residence_expiredate ?? 'N/A' }}
+                                </p>
+                            </div>
+                            <span class="badge badge-info" style="background-color: #28a745; color: #fff;">
+                                Active
+                            </span>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>
     </div>
 </div>
-
- {{-- End Card for End Dates --}}
+ {{-- Card for End Dates --}}
 
 
 

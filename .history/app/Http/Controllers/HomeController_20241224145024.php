@@ -126,7 +126,7 @@ class HomeController extends Controller
                         ->orWhereBetween('residence_expiredate', [$threeMonthsAgo, Carbon::now()]);
                 })->distinct()->get();
 
-                dd($data['contract']->count()); // Check the distinct records
+                dd($data['records']->count()); // Check the distinct records
 
 
 

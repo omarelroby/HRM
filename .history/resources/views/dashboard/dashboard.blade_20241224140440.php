@@ -378,182 +378,72 @@
 <div class="col-xxl-4 d-flex">
     <div class="card flex-fill">
         <div class="card-header pb-2 d-flex align-items-center justify-content-between flex-wrap">
-            <h5 class="mb-2">Job Applicants</h5>
-            <a href="#" class="btn btn-light btn-md mb-2">View All</a>
+            <h5 class="mb-2">Jobs Applicants</h5>
+            <a href=" " class="btn btn-light btn-md mb-2">View All</a>
         </div>
         <div class="card-body">
-            {{-- Tabs Navigation --}}
             <ul class="nav nav-tabs tab-style-1 nav-justified d-sm-flex d-block p-0 mb-4" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link fw-medium" data-bs-toggle="tab" data-bs-target="#openings" href="#openings" role="tab">Opening Job Positions</a>
+                    <a class="nav-link fw-medium" data-bs-toggle="tab" data-bs-target="#openings" href="#openings" role="tab">Openings</a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link fw-medium active" data-bs-toggle="tab" data-bs-target="#applicants" href="#applicants" role="tab">Job Applicants</a>
+                    <a class="nav-link fw-medium active" data-bs-toggle="tab" data-bs-target="#applicants" href="#applicants" role="tab">Applicants</a>
                 </li>
             </ul>
-
             <div class="tab-content">
                 {{-- Openings Tab --}}
                 <div class="tab-pane fade" id="openings" role="tabpanel">
-                    @foreach ($openings as $index => $job)
-                        <div class="d-flex align-items-center justify-content-between mb-4 p-3"
-                            style="background-color: {{ $index % 2 === 0 ? '#f1f8ff' : '#f9f9f9' }}; border-radius: 8px;">
-                            <div class="d-flex align-items-center">
-                                <div class="ms-2 overflow-hidden">
-                                    <p class="text-dark fw-medium text-truncate mb-0">
-                                        <a href="#" class="text-primary fw-bold">{{ $job->title ?? '' }}</a>
-                                    </p>
-                                    <span class="fs-12 text-secondary fw-bold">
-                                        No of Openings: {{ $job->position ?? 0 }}
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-
-                {{-- Applicants Tab --}}
-                <div class="tab-pane fade active show" id="applicants" role="tabpanel">
-                    @foreach ($applicants as $applicant)
+                    @foreach ($openings as $job)
                         <div class="d-flex align-items-center justify-content-between mb-4">
                             <div class="d-flex align-items-center">
+
                                 <div class="ms-2 overflow-hidden">
-                                    <p class="text-truncate mb-0">
-                                        <a href="#" class="text-dark fw-bold">{{ $applicant->name ?? '' }}</a>
-                                    </p>
-                                    <span class="fs-13 d-inline-flex align-items-center">
-                                        <span class="text-secondary fst-italic">
-                                            {{ $applicant->jobRelation->title ?? 'Unknown Job' }}
-                                        </span>
-                                    </span>
+                                    <p class="text-dark fw-medium text-truncate mb-0"><a href="#">{{ $job->title }}</a></p>
+                                    <span class="fs-12">No of Openings: {{ $job->position }}</span>
                                 </div>
                             </div>
-                            <span class="badge badge-xs text-white" style="background-color: #F26522;">
-                                {{ $applicant->jobRelation->title ?? 'Unknown' }}
-                            </span>
-                        </div>
+                         </div>
                     @endforeach
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-{{-- End Job Applicants Widget --}}
- {{-- Card for End Dates --}}
- <div class="col-xxl-8 d-flex">
-    <div class="card flex-fill">
-        <div class="card-header pb-2 d-flex align-items-center justify-content-between flex-wrap">
-            <h5 class="mb-2">Employee End Dates</h5>
-            <a href="#" class="btn btn-light btn-md mb-2">View All</a>
-        </div>
-        <div class="card-body">
-            {{-- Tabs Navigation --}}
-            <ul class="nav nav-tabs tab-style-1 nav-justified d-sm-flex d-block p-0 mb-4" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link fw-medium active" data-bs-toggle="tab" data-bs-target="#insurance-tab" href="#insurance-tab" role="tab">Insurance End Date</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link fw-medium" data-bs-toggle="tab" data-bs-target="#worker-tab" href="#worker-tab" role="tab">Worker End Date</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link fw-medium" data-bs-toggle="tab" data-bs-target="#contract-tab" href="#contract-tab" role="tab">Contract End Date</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link fw-medium" data-bs-toggle="tab" data-bs-target="#residence-tab" href="#residence-tab" role="tab">Residence Expiry Date</a>
-                </li>
-            </ul>
 
-            {{-- Tab Content --}}
-            <div class="tab-content">
-                {{-- Insurance End Date Tab --}}
-                <div class="tab-pane fade active show" id="insurance-tab" role="tabpanel">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Employee ID</th>
-                                <th>Insurance End Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($records as $employee)
-                                <tr>
-                                    <td>{{ $employee->id }}</td>
-                                    <td>{{ $employee->insurance_enddate ?? 'N/A' }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+{{-- Applicants Tab --}}
+<div class="tab-pane fade active show" id="applicants" role="tabpanel">
+    @foreach ($applicants as $applicant)
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <div class="d-flex align-items-center">
 
-                {{-- Worker End Date Tab --}}
-                <div class="tab-pane fade" id="worker-tab" role="tabpanel">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Employee ID</th>
-                                <th>Worker End Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($records as $employee)
-                                <tr>
-                                    <td>{{ $employee->id }}</td>
-                                    <td>{{ $employee->worker_enddate ?? 'N/A' }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                <div class="ms-2 overflow-hidden">
+                    <!-- Name Column -->
+                    <p class="text-truncate mb-0">
+                        <a href="#" style="color: #000000; font-weight: bold;">
+                            {{ $applicant->name ?? '' }}
+                        </a>
+                    </p>
 
-                {{-- Contract End Date Tab --}}
-                <div class="tab-pane fade" id="contract-tab" role="tabpanel">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Employee ID</th>
-                                <th>Contract End Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($records as $employee)
-                                <tr>
-                                    <td>{{ $employee->id }}</td>
-                                    <td>{{ $employee->contract_enddate ?? 'N/A' }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-
-                {{-- Residence Expiry Date Tab --}}
-                <div class="tab-pane fade" id="residence-tab" role="tabpanel">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Employee ID</th>
-                                <th>Residence Expiry Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($records as $employee)
-                                <tr>
-                                    <td>{{ $employee->id }}</td>
-                                    <td>{{ $employee->residence_expiredate ?? 'N/A' }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                    <!-- Job Title and Country -->
+                    <span class="fs-13 d-inline-flex align-items-center">
+                        <span style="color: #ff7f0e; font-style: italic;">
+                            {{ $applicant->jobRelation->title ?? 'Unknown Job' }}
+                        </span>
+                        <i class="ti ti-circle-filled fs-4 mx-2 text-primary"></i>
+                        <span style="color: #2ca02c;">
+                            {{ $applicant->country ?? 'Unknown Country' }}
+                        </span>
+                    </span>
                 </div>
             </div>
+
+            <!-- Job Badge -->
+            <span class="badge badge-xs" style="background-color: #9467bd; color: #fff;">
+                {{ $applicant->jobRelation->title ?? 'Unknown' }}
+            </span>
         </div>
-    </div>
+    @endforeach
 </div>
 
- {{-- End Card for End Dates --}}
 
 
-
-
+        </div>
 @endsection
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>

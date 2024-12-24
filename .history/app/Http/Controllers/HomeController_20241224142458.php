@@ -26,7 +26,6 @@ use App\Models\Ticket;
 use App\Models\Trainer;
 use App\Models\User;
 use App\Models\Utility;
-use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -115,20 +114,7 @@ class HomeController extends Controller
                     ->with('jobRelation')
                     ->get()
                     ->take(6);
-                // Get the current date and calculate the date for 3 months ago
-                $threeMonthsAgo = Carbon::now()->subMonths(3);
-
-                // Filter EmployeeContracts where the end date is within the last 3 months (from now to 3 months ago)
-                $data['contract'] = EmployeeContracts::where(function ($query) use ($threeMonthsAgo) {
-                    $query->whereBetween('contract_enddate', [$threeMonthsAgo, Carbon::now()])
-                        ->orWhereBetween('insurance_enddate', [$threeMonthsAgo, Carbon::now()])
-                        ->orWhereBetween('worker_enddate', [$threeMonthsAgo, Carbon::now()])
-                        ->orWhereBetween('residence_expiredate', [$threeMonthsAgo, Carbon::now()]);
-                })->distinct()->get();
-
-                dd($data['contract']->count()); // Check the distinct records
-
-
+                $data['records'] = EmployeeContracts::get()
 
             return view('dashboard.dashboard', $data);
         }

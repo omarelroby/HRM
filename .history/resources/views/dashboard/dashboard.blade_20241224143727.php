@@ -467,82 +467,34 @@
             <div class="tab-content">
                 {{-- Insurance End Date Tab --}}
                 <div class="tab-pane fade active show" id="insurance-tab" role="tabpanel">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Employee ID</th>
-                                <th>Insurance End Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($records as $employee)
-                                <tr>
-                                    <td>{{ $employee->id }}</td>
-                                    <td>{{ $employee->insurance_enddate ?? 'N/A' }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                    <div class="mb-3">
+                        <p>Employee ID: {{ $employee->id }}</p>
+                        <p>Insurance End Date: {{ $employee->insurance_enddate ?? 'N/A' }}</p>
+                    </div>
                 </div>
 
                 {{-- Worker End Date Tab --}}
                 <div class="tab-pane fade" id="worker-tab" role="tabpanel">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Employee ID</th>
-                                <th>Worker End Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($records as $employee)
-                                <tr>
-                                    <td>{{ $employee->id }}</td>
-                                    <td>{{ $employee->worker_enddate ?? 'N/A' }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                    <div class="mb-3">
+                        <p>Employee ID: {{ $employee->id }}</p>
+                        <p>Worker End Date: {{ $employee->worker_enddate ?? 'N/A' }}</p>
+                    </div>
                 </div>
 
                 {{-- Contract End Date Tab --}}
                 <div class="tab-pane fade" id="contract-tab" role="tabpanel">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Employee ID</th>
-                                <th>Contract End Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($records as $employee)
-                                <tr>
-                                    <td>{{ $employee->id }}</td>
-                                    <td>{{ $employee->contract_enddate ?? 'N/A' }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                    <div class="mb-3">
+                        <p>Employee ID: {{ $employee->id }}</p>
+                        <p>Contract End Date: {{ $employee->contract_enddate ?? 'N/A' }}</p>
+                    </div>
                 </div>
 
                 {{-- Residence Expiry Date Tab --}}
                 <div class="tab-pane fade" id="residence-tab" role="tabpanel">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Employee ID</th>
-                                <th>Residence Expiry Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($records as $employee)
-                                <tr>
-                                    <td>{{ $employee->id }}</td>
-                                    <td>{{ $employee->residence_expiredate ?? 'N/A' }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                    <div class="mb-3">
+                        <p>Employee ID: {{ $employee->id }}</p>
+                        <p>Residence Expiry Date: {{ $employee->residence_expiredate ?? 'N/A' }}</p>
+                    </div>
                 </div>
             </div>
         </div>

@@ -9,10 +9,8 @@ use App\Models\AttendanceEmployee;
 use App\Models\CompanyJobRequest;
 use App\Models\Department;
 use App\Models\Employee;
-use App\Models\EmployeeContracts;
 use App\Models\EmployeeRequest;
 use App\Models\Event;
-use App\Models\Job;
 use App\Models\JobApplication;
 use App\Models\Laborhirecompany;
 use App\Models\LandingPageSection;
@@ -26,7 +24,6 @@ use App\Models\Ticket;
 use App\Models\Trainer;
 use App\Models\User;
 use App\Models\Utility;
-use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -68,8 +65,8 @@ class HomeController extends Controller
 
             // Get total number of employees
             $data['employees'] = Employee::count();
-            $data['all_employees'] = Employee::get()->take(8);
-
+            $data['all_employees'] = Employee::take(6);
+            dd($data['all'])
 
             // Get employees with status 'Present' today
             $data['employeesWithAttendance'] = AttendanceEmployee::where('status', 'Present')
@@ -106,29 +103,8 @@ class HomeController extends Controller
 
                 $employees = Employee::count();
                 $data['absent_employees'] = $employees - ($data['early_arrivals']->count() + $data['late_arrivals']->count());
-                $data['openings'] = Job::select('id', 'title', 'position')
-                ->where('status', 'active')
-                ->get()
-                ->take(6);
 
-                $data['applicants'] = JobApplication::select('job', 'name', 'phone', 'profile', 'rating', 'skill', 'country', 'state', 'city', 'gender', 'dob')
-                    ->with('jobRelation')
-                    ->get()
-                    ->take(6);
-                // Get the current date and calculate the date for 3 months ago
-                $threeMonthsAgo = Carbon::now()->subMonths(3);
-
-                // Filter EmployeeContracts where the end date is within the last 3 months (from now to 3 months ago)
-                $data['contract'] = EmployeeContracts::where(function ($query) use ($threeMonthsAgo) {
-                    $query->whereBetween('contract_enddate', [$threeMonthsAgo, Carbon::now()])
-                        ->orWhereBetween('insurance_enddate', [$threeMonthsAgo, Carbon::now()])
-                        ->orWhereBetween('worker_enddate', [$threeMonthsAgo, Carbon::now()])
-                        ->orWhereBetween('residence_expiredate', [$threeMonthsAgo, Carbon::now()]);
-                })->distinct()->get();
-
-                dd($data['contract']->count()); // Check the distinct records
-
-
+            // dd($data['late_arrivals']);
 
             return view('dashboard.dashboard', $data);
         }

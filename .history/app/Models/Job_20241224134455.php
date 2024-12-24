@@ -53,6 +53,6 @@ class Job extends Model
     }
     public function applicants()
     {
-        return $this->hasMany(JobApplication::class, 'job');
+        return $this->hasMany(Job::class, 'job');
     }
 }

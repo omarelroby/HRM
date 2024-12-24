@@ -32,8 +32,4 @@ class JobApplication extends Model
     {
         return $this->hasOne('App\Models\Job', 'id', 'job');
     }
-    public function jobRelation()
-    {
-        return $this->belongsTo('App\Models\Job',  'job');
-    }
 }

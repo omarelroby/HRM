@@ -119,14 +119,14 @@ class HomeController extends Controller
                 $threeMonthsAgo = Carbon::now()->subMonths(3);
 
                 // Filter EmployeeContracts where the end date is within the last 3 months (from now to 3 months ago)
-                $data['contract'] = EmployeeContracts::where(function ($query) use ($threeMonthsAgo) {
+                $data['records'] = EmployeeContracts::where(function ($query) use ($threeMonthsAgo) {
                     $query->whereBetween('contract_enddate', [$threeMonthsAgo, Carbon::now()])
                         ->orWhereBetween('insurance_enddate', [$threeMonthsAgo, Carbon::now()])
                         ->orWhereBetween('worker_enddate', [$threeMonthsAgo, Carbon::now()])
                         ->orWhereBetween('residence_expiredate', [$threeMonthsAgo, Carbon::now()]);
-                })->distinct()->get();
+                })->distinct()->limit(8)->get();
 
-                dd($data['contract']->count()); // Check the distinct records
+                dd($data['records']->count()); // Check the distinct records
 
 
 
