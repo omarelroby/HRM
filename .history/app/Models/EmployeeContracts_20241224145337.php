@@ -21,7 +21,7 @@ class EmployeeContracts extends Model
     }
     public function employees()
     {
-        return $this->belongsTo('App\Models\Employee','employee_id');
+        return $this->belongsTo('App\Models\Employee', 'id', 'employee_id');
     }
 
 }

@@ -80,7 +80,6 @@ class HomeController extends Controller
             // Get other counts
             $data['complete_tasks'] = Task::where('status', 1)->count();
             $data['tasks'] = Task::count();
-            $data['all_tasks'] = Task::take(16)->get();
             $data['orders'] = Order::count();
             $data['job_app'] = JobApplication::count();
             $data['emp_req'] = EmployeeRequest::count();
@@ -139,7 +138,46 @@ class HomeController extends Controller
                     'canceled' => $statusCounts[3] ?? 0,
                 ];
                 $data['chartData'] = $chartData;
-            return view('dashboard.dashboard', $data);
+            return view('dashboard.dashboard', $data,compact('<script>
+    // Embed PHP data into JavaScript
+    const chartData = @json($chartData);
+
+    // Check the data in the console
+    console.log('Chart Data:', chartData);
+
+    // Initialize the chart
+    const ctx = document.getElementById('taskStatusChart').getContext('2d');
+    const taskStatusChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Completed', 'Pending', 'Canceled'],
+            datasets: [{
+                data: [chartData.completed, chartData.pending, chartData.canceled],
+                backgroundColor: ['#4CAF50', '#FFC107', '#F44336'],
+                borderWidth: 2,
+            }]
+        },
+        options: {
+            rotation: -90,
+            circumference: 180,
+            cutout: '70%',
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        font: {
+                            size: 14
+                        }
+                    }
+                },
+                tooltip: {
+                    enabled: true
+                }
+            }
+        }
+    });
+</script>
+'));
         }
     }
 

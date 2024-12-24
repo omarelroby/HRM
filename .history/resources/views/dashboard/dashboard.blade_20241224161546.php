@@ -592,7 +592,7 @@
                     $priorityLabels = ['Low', 'Medium', 'High', 'Critical']; // Customize priorities if needed
                     $badgeColors = ['badge-success', 'badge-warning', 'badge-danger', 'badge-dark']; // Customize colors
                     @endphp
-                    @foreach ($all_tasks as $task)
+                    @foreach ($tasks as $task)
                     <tr>
                         <td>
                             <h6 class="fw-medium"><a href="javascript:void(0);">{{ $task->name }}</a></h6>

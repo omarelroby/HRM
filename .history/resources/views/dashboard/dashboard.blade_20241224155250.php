@@ -557,74 +557,17 @@
 </div>
 
  {{-- End Card for End Dates --}}
-{{-- Card for Task Status --}}
-<div class="col-xxl-4 col-xl-6 d-flex">
+ <div class="col-xxl-4 col-xl-6 d-flex">
     <div class="card flex-fill">
-        <div class="card-header pb-2 d-flex align-items-center justify-content-between flex-wrap">
-            <h5 class="mb-2">Tasks Statistics</h5>
-            <a href="#" class="btn btn-light btn-md mb-2">View All</a>
-        </div>
-        <canvas id="taskStatusChart" width="400" height="400"></canvas>
-        <div id="taskStatusPercentages" class="mt-3 text-center"></div>
+ <canvas id="mySemiDonutChart" width="400" height="400"></canvas>
     </div>
-</div>
-{{-- End Card for Task Status --}}
-{{-- Tasks Widget --}}
-<div class="col-xxl-4 col-xl-6 d-flex">
-    <div class="card flex-fill">
-        <div class="card-header pb-2 d-flex align-items-center justify-content-between flex-wrap">
-            <h5 class="mb-2">Tasks</h5>
-            <a href="tasks.html" class="btn btn-light btn-md mb-2">View All</a>
-        </div>
-        <div class="card-body p-0">
-            <div class="table-responsive">
-                <table class="table table-nowrap mb-0">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Start Date</th>
-                            <th>End Date</th>
-                            <th>Priority</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    @php
-                    $priorityLabels = ['Low', 'Medium', 'High', 'Critical']; // Customize priorities if needed
-                    $badgeColors = ['badge-success', 'badge-warning', 'badge-danger', 'badge-dark']; // Customize colors
-                    @endphp
-                    @foreach ($all_tasks as $task)
-                    <tr>
-                        <td>
-                            <h6 class="fw-medium"><a href="javascript:void(0);">{{ $task->name }}</a></h6>
-                        </td>
-                        <td>{{ $task->start_date ? \Carbon\Carbon::parse($task->start_date)->format('Y-m-d') : '-' }}</td>
-                        <td>{{ $task->due_date ? \Carbon\Carbon::parse($task->due_date)->format('Y-m-d') : '-' }}</td>
-                        <td>
-                            @php
-                                $priorityIndex = $task->priority - 1; // Assuming priority is 1-based
-                                $priorityIndex = $priorityIndex >= 0 && $priorityIndex < count($priorityLabels) ? $priorityIndex : 0; // Fallback
-                                $badgeColor = $badgeColors[$priorityIndex];
-                            @endphp
-                            <span class="badge {{ $badgeColor }} badge-xs">
-                                {{ $priorityLabels[$priorityIndex] }}
-                            </span>
-                        </td>
-                    </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
-{{-- End Tasks Widget --}}
-
+ </div>
 
 
 @endsection
 @push('scripts')
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
 
@@ -705,72 +648,9 @@
         attendanceChart = new ApexCharts(document.querySelector("#attendanceChart"), options);
         attendanceChart.render();
     });
-    const ctx = document.getElementById('mySemiDonutChart').getContext('2d');
-
-
 </script>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const chartData = @json($chartData);
 
-    // Check the data in the console
-    console.log('Chart Data:', chartData);
-
-    // Calculate total tasks
-    const totalTasks = chartData.completed + chartData.pending + chartData.canceled;
-
-    // Initialize the chart
-    const ctx = document.getElementById('taskStatusChart').getContext('2d');
-    const taskStatusChart = new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-            labels: ['Completed', 'Pending', 'Canceled'],
-            datasets: [{
-                data: [chartData.completed, chartData.pending, chartData.canceled],
-                backgroundColor: ['#4CAF50', '#FFC107', '#F44336'],
-                borderWidth: 2,
-            }]
-        },
-        options: {
-            rotation: -90,
-            circumference: 180,
-            cutout: '70%',
-            plugins: {
-                legend: {
-                    position: 'bottom',
-                    labels: {
-                        font: {
-                            size: 14
-                        }
-                    }
-                },
-                tooltip: {
-                    enabled: true
-                }
-            }
-        }
-    });
-
-
-    // Display percentages below the chart
-    const percentagesContainer = document.getElementById('taskStatusPercentages');
-    const percentagesHTML = `
-        <div class="row">
-            <div class="col-4 text-success">
-                <strong>Completed:</strong> ${(chartData.completed / totalTasks * 100).toFixed(1)}%
-            </div>
-            <div class="col-4 text-warning">
-                <strong>Pending:</strong> ${(chartData.pending / totalTasks * 100).toFixed(1)}%
-            </div>
-            <div class="col-4 text-danger">
-                <strong>Canceled:</strong> ${(chartData.canceled / totalTasks * 100).toFixed(1)}%
-            </div>
-        </div>
-    `;
-    percentagesContainer.innerHTML = percentagesHTML;
-});
-</script>
 
 
 @endpush

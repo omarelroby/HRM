@@ -19,9 +19,9 @@ class EmployeeContracts extends Model
     {
         return $this->hasOne('App\Models\Employee', 'id', 'employee_id');
     }
-    public function employees()
+    public function employee()
     {
-        return $this->belongsTo('App\Models\Employee','employee_id');
+        return $this->hasOne('App\Models\Employee', 'id', 'employee_id');
     }
 
 }

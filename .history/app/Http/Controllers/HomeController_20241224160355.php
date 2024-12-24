@@ -80,7 +80,6 @@ class HomeController extends Controller
             // Get other counts
             $data['complete_tasks'] = Task::where('status', 1)->count();
             $data['tasks'] = Task::count();
-            $data['all_tasks'] = Task::take(16)->get();
             $data['orders'] = Order::count();
             $data['job_app'] = JobApplication::count();
             $data['emp_req'] = EmployeeRequest::count();
@@ -139,7 +138,7 @@ class HomeController extends Controller
                     'canceled' => $statusCounts[3] ?? 0,
                 ];
                 $data['chartData'] = $chartData;
-            return view('dashboard.dashboard', $data);
+            return view('dashboard.dashboard', $data,compact());
         }
     }
 

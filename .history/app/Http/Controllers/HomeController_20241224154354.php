@@ -30,7 +30,6 @@ use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 
 
@@ -80,7 +79,6 @@ class HomeController extends Controller
             // Get other counts
             $data['complete_tasks'] = Task::where('status', 1)->count();
             $data['tasks'] = Task::count();
-            $data['all_tasks'] = Task::take(16)->get();
             $data['orders'] = Order::count();
             $data['job_app'] = JobApplication::count();
             $data['emp_req'] = EmployeeRequest::count();
@@ -125,20 +123,9 @@ class HomeController extends Controller
                         ->orWhereBetween('worker_enddate', [$threeMonthsAgo, Carbon::now()])
                         ->orWhereBetween('residence_expiredate', [$threeMonthsAgo, Carbon::now()]);
                 })->distinct()
-                ->take(10)
                 ->get();
-                // Query to count tasks by status
-                $statusCounts = Task::select(DB::raw('status, COUNT(*) as count'))
-                ->groupBy('status')
-                ->pluck('count', 'status');
 
-            // Prepare data for the chart
-                $chartData = [
-                    'completed' => $statusCounts[1] ?? 0,
-                    'pending' => $statusCounts[2] ?? 0,
-                    'canceled' => $statusCounts[3] ?? 0,
-                ];
-                $data['chartData'] = $chartData;
+
             return view('dashboard.dashboard', $data);
         }
     }

@@ -80,7 +80,7 @@ class HomeController extends Controller
             // Get other counts
             $data['complete_tasks'] = Task::where('status', 1)->count();
             $data['tasks'] = Task::count();
-            $data['all_tasks'] = Task::take(16)->get();
+            $data['all_tasks'] = Task::take();
             $data['orders'] = Order::count();
             $data['job_app'] = JobApplication::count();
             $data['emp_req'] = EmployeeRequest::count();

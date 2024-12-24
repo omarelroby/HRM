@@ -326,71 +326,7 @@
     </div>
 </div>
 {{-- end attendance overview --}}
-{{-- Job Applicants Widget --}}
-<div class="col-xxl-4 d-flex">
-    <div class="card flex-fill">
-        <div class="card-header pb-2 d-flex align-items-center justify-content-between flex-wrap">
-            <h5 class="mb-2">Job Applicants</h5>
-            <a href="#" class="btn btn-light btn-md mb-2">View All</a>
-        </div>
-        <div class="card-body">
-            {{-- Tabs Navigation --}}
-            <ul class="nav nav-tabs tab-style-1 nav-justified d-sm-flex d-block p-0 mb-4" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link fw-medium" data-bs-toggle="tab" data-bs-target="#openings" href="#openings" role="tab">Opening Job Positions</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link fw-medium active" data-bs-toggle="tab" data-bs-target="#applicants" href="#applicants" role="tab">Job Applicants</a>
-                </li>
-            </ul>
 
-            <div class="tab-content">
-                {{-- Openings Tab --}}
-                <div class="tab-pane fade" id="openings" role="tabpanel">
-                    @foreach ($openings as $index => $job)
-                        <div class="d-flex align-items-center justify-content-between mb-4 p-3"
-                            style="background-color: {{ $index % 2 === 0 ? '#f1f8ff' : '#f9f9f9' }}; border-radius: 8px;">
-                            <div class="d-flex align-items-center">
-                                <div class="ms-2 overflow-hidden">
-                                    <p class="text-dark fw-medium text-truncate mb-0">
-                                        <a href="#" class="text-primary fw-bold">{{ $job->title ?? '' }}</a>
-                                    </p>
-                                    <span class="fs-12 text-secondary fw-bold">
-                                        No of Openings: {{ $job->position ?? 0 }}
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-
-                {{-- Applicants Tab --}}
-                <div class="tab-pane fade active show" id="applicants" role="tabpanel">
-                    @foreach ($applicants as $applicant)
-                        <div class="d-flex align-items-center justify-content-between mb-4">
-                            <div class="d-flex align-items-center">
-                                <div class="ms-2 overflow-hidden">
-                                    <p class="text-truncate mb-0">
-                                        <a href="#" class="text-dark fw-bold">{{ $applicant->name ?? '' }}</a>
-                                    </p>
-                                    <span class="fs-13 d-inline-flex align-items-center">
-                                        <span class="text-secondary fst-italic">
-                                            {{ $applicant->jobRelation->title ?? 'Unknown Job' }}
-                                        </span>
-                                    </span>
-                                </div>
-                            </div>
-                            <span class="badge badge-xs text-white" style="background-color: #F26522;">
-                                {{ $applicant->jobRelation->title ?? 'Unknown' }}
-                            </span>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-{{-- End Job Applicants Widget --}}
 {{-- Employees Widgets --}}
 <div class="col-xxl-4 col-xl-6 d-flex">
     <div class="card flex-fill">
@@ -440,7 +376,6 @@
 {{-- End Employees Widgets --}}
 
  {{-- Card for End Dates --}}
-
  <div class="col-xxl-8 d-flex">
     <div class="card flex-fill">
         <div class="card-header pb-2 d-flex align-items-center justify-content-between flex-wrap">
@@ -557,75 +492,13 @@
 </div>
 
  {{-- End Card for End Dates --}}
-{{-- Card for Task Status --}}
-<div class="col-xxl-4 col-xl-6 d-flex">
-    <div class="card flex-fill">
-        <div class="card-header pb-2 d-flex align-items-center justify-content-between flex-wrap">
-            <h5 class="mb-2">Tasks Statistics</h5>
-            <a href="#" class="btn btn-light btn-md mb-2">View All</a>
-        </div>
-        <canvas id="taskStatusChart" width="400" height="400"></canvas>
-        <div id="taskStatusPercentages" class="mt-3 text-center"></div>
-    </div>
-</div>
-{{-- End Card for Task Status --}}
-{{-- Tasks Widget --}}
-<div class="col-xxl-4 col-xl-6 d-flex">
-    <div class="card flex-fill">
-        <div class="card-header pb-2 d-flex align-items-center justify-content-between flex-wrap">
-            <h5 class="mb-2">Tasks</h5>
-            <a href="tasks.html" class="btn btn-light btn-md mb-2">View All</a>
-        </div>
-        <div class="card-body p-0">
-            <div class="table-responsive">
-                <table class="table table-nowrap mb-0">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Start Date</th>
-                            <th>End Date</th>
-                            <th>Priority</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    @php
-                    $priorityLabels = ['Low', 'Medium', 'High', 'Critical']; // Customize priorities if needed
-                    $badgeColors = ['badge-success', 'badge-warning', 'badge-danger', 'badge-dark']; // Customize colors
-                    @endphp
-                    @foreach ($all_tasks as $task)
-                    <tr>
-                        <td>
-                            <h6 class="fw-medium"><a href="javascript:void(0);">{{ $task->name }}</a></h6>
-                        </td>
-                        <td>{{ $task->start_date ? \Carbon\Carbon::parse($task->start_date)->format('Y-m-d') : '-' }}</td>
-                        <td>{{ $task->due_date ? \Carbon\Carbon::parse($task->due_date)->format('Y-m-d') : '-' }}</td>
-                        <td>
-                            @php
-                                $priorityIndex = $task->priority - 1; // Assuming priority is 1-based
-                                $priorityIndex = $priorityIndex >= 0 && $priorityIndex < count($priorityLabels) ? $priorityIndex : 0; // Fallback
-                                $badgeColor = $badgeColors[$priorityIndex];
-                            @endphp
-                            <span class="badge {{ $badgeColor }} badge-xs">
-                                {{ $priorityLabels[$priorityIndex] }}
-                            </span>
-                        </td>
-                    </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
-{{-- End Tasks Widget --}}
+
 
 
 
 @endsection
 @push('scripts')
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-
 <script>
 
     document.addEventListener("DOMContentLoaded", function() {
@@ -705,72 +578,9 @@
         attendanceChart = new ApexCharts(document.querySelector("#attendanceChart"), options);
         attendanceChart.render();
     });
-    const ctx = document.getElementById('mySemiDonutChart').getContext('2d');
-
-
 </script>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const chartData = @json($chartData);
 
-    // Check the data in the console
-    console.log('Chart Data:', chartData);
-
-    // Calculate total tasks
-    const totalTasks = chartData.completed + chartData.pending + chartData.canceled;
-
-    // Initialize the chart
-    const ctx = document.getElementById('taskStatusChart').getContext('2d');
-    const taskStatusChart = new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-            labels: ['Completed', 'Pending', 'Canceled'],
-            datasets: [{
-                data: [chartData.completed, chartData.pending, chartData.canceled],
-                backgroundColor: ['#4CAF50', '#FFC107', '#F44336'],
-                borderWidth: 2,
-            }]
-        },
-        options: {
-            rotation: -90,
-            circumference: 180,
-            cutout: '70%',
-            plugins: {
-                legend: {
-                    position: 'bottom',
-                    labels: {
-                        font: {
-                            size: 14
-                        }
-                    }
-                },
-                tooltip: {
-                    enabled: true
-                }
-            }
-        }
-    });
-
-
-    // Display percentages below the chart
-    const percentagesContainer = document.getElementById('taskStatusPercentages');
-    const percentagesHTML = `
-        <div class="row">
-            <div class="col-4 text-success">
-                <strong>Completed:</strong> ${(chartData.completed / totalTasks * 100).toFixed(1)}%
-            </div>
-            <div class="col-4 text-warning">
-                <strong>Pending:</strong> ${(chartData.pending / totalTasks * 100).toFixed(1)}%
-            </div>
-            <div class="col-4 text-danger">
-                <strong>Canceled:</strong> ${(chartData.canceled / totalTasks * 100).toFixed(1)}%
-            </div>
-        </div>
-    `;
-    percentagesContainer.innerHTML = percentagesHTML;
-});
-</script>
 
 
 @endpush
