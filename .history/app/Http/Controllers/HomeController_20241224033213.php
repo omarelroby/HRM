@@ -100,6 +100,8 @@ class HomeController extends Controller
                 ->get();
 
                 $employees = Employee::count();
+
+                // Assuming $data['early_arrivals'] and $data['late_arrivals'] are being set correctly before
                 $data['absent_employees'] = $employees - ($data['early_arrivals']->count() + $data['late_arrivals']->count());
 
             // dd($data['late_arrivals']);

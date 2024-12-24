@@ -270,63 +270,35 @@
             </div>
             {{-- end check in out widget --}}
 
-{{-- attendance overview --}}
-<div class="col-xxl-4 col-xl-6 d-flex">
-    <div class="card flex-fill">
-        <div class="card-header pb-2 d-flex align-items-center justify-content-between flex-wrap">
-            <h5 class="mb-2">Attendance Overview</h5>
-            <div class="dropdown mb-2">
-                <a href="javascript:void(0);" class="btn btn-white border btn-sm d-inline-flex align-items-center" data-bs-toggle="dropdown">
-                    <i class="ti ti-calendar me-1"></i>Today
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end p-3">
-                    <li>
-                        <a href="javascript:void(0);" class="dropdown-item rounded-1">This Month</a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);" class="dropdown-item rounded-1">This Week</a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);" class="dropdown-item rounded-1">Today</a>
-                    </li>
-                </ul>
+        {{-- attendance overview --}}
+        <div class="col-xxl-4 col-xl-6 d-flex">
+            <div class="card flex-fill">
+                <div class="card-header pb-2 d-flex align-items-center justify-content-between flex-wrap">
+                    <h5 class="mb-2">Attendance Overview</h5>
+                    <div class="dropdown mb-2">
+                        <a href="javascript:void(0);" class="btn btn-white border btn-sm d-inline-flex align-items-center" data-bs-toggle="dropdown">
+                            <i class="ti ti-calendar me-1"></i>Today
+                        </a>
+                        <ul class="dropdown-menu  dropdown-menu-end p-3">
+                            <li>
+                                <a href="javascript:void(0);" class="dropdown-item rounded-1">This Month</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="dropdown-item rounded-1">This Week</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="dropdown-item rounded-1">Today</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <canvas id="myChart"></canvas>
+                        <a href="leaves.html" class="fs-13 link-primary text-decoration-underline mb-2">View Details</a>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="card-body">
-            <div class="d-flex align-items-center">
-                <a href="javascript:void(0);" class="link-default me-2"><i class="ti ti-clock-share"></i></a>
-                <span class="fs-10 fw-medium d-inline-flex align-items-center badge badge-success">
-                    <i class="ti ti-circle-filled fs-5 me-1"></i>9:00 AM (Clock In)
-                </span>
-            </div>
-            <div class="d-flex align-items-center">
-                <a href="javascript:void(0);" class="link-default me-2"><i class="ti ti-clock-share"></i></a>
-                <span class="fs-10 fw-medium d-inline-flex align-items-center badge badge-danger">
-                    <i class="ti ti-circle-filled fs-5 me-1"></i>5:00 PM (Clock Out)
-                </span>
-            </div>
-
-            <div id="attendanceChart" style="height: 250px;"></div>
-
-            <h6 class="mb-3">Status</h6>
-
-            <div class="d-flex align-items-center justify-content-between">
-                <p class="f-13 mb-2"><i class="ti ti-circle-filled" style="color: #4a7fe0;" me-1></i>Coming Early</p>
-                <p class="f-13 fw-medium text-gray-9 mb-2">{{ $early_arrivals->count() }} Employee</p>
-            </div>
-            <div class="d-flex align-items-center justify-content-between">
-                <p class="f-13 mb-2"><i class="ti ti-circle-filled" style="color: #e7513e;" me-1></i>Coming Late</p>
-                <p class="f-13 fw-medium text-gray-9 mb-2">{{ $late_arrivals->count() }} Employee</p>
-            </div>
-            <div class="d-flex align-items-center justify-content-between mb-2">
-                <p class="f-13 mb-2"><i class="ti ti-circle-filled" style="color: #11c866;" me-1></i>Absent</p>
-                <p class="f-13 fw-medium text-gray-9 mb-2">{{ $absent_employees }} Employee</p>
-            </div>
-
-
-        </div>
-    </div>
-</div>
 {{-- end attendance overview --}}
 
         </div>
@@ -340,6 +312,8 @@
         var departmentNames = @json($departmentNames ?? []); // Use null coalescing for fallback
         var employeeCounts = @json($total_employees ?? []); // Use null coalescing for fallback
 
+        console.log("Department Names:", departmentNames);
+        console.log("Employee Counts:", employeeCounts);
 
         // Ensure there is data to render the chart
         if (departmentNames.length > 0 && employeeCounts.length > 0) {
@@ -379,41 +353,87 @@
 
 
 </script>
+
 <script>
-    // Global variable to store the chart instance
-    let attendanceChart;
+    document.addEventListener("DOMContentLoaded", function () {
+        const ctx = document.getElementById("attendance").getContext("2d");
 
-    document.addEventListener('DOMContentLoaded', function () {
-        // If chart already exists, destroy it before re-initializing
-        if (attendanceChart) {
-            attendanceChart.destroy();
-        }
-
-        // Fetch dynamic data from backend
-        var earlyArrivalsCount = @json($early_arrivals->count() ?? 0);  // Count of early arrivals
-        var lateArrivalsCount = @json($late_arrivals->count() ?? 0);    // Count of late arrivals
-        var absentEmployeesCount = @json($absent_employees  ?? 0);  // Count of absent employees
-
-        // Chart options
-        var options = {
-            chart: {
-                type: 'donut',
-                height: 250
-            },
-            series: [earlyArrivalsCount, lateArrivalsCount, absentEmployeesCount], // Dynamic attendance data
-            labels: ['Coming Early', 'Coming Late', 'Absent'],
-            colors: ['#4a7fe0', '#e7513e', '#11c866'], // New custom colors
-            legend: {
-                position: 'bottom'
-            },
+        const data = {
+            labels: ["Present", "Late", "Permission", "Absent"],
+            datasets: [
+                {
+                    label: "Attendance Overview",
+                    data: [59, 21, 2, 15], // Replace with dynamic values if needed
+                    backgroundColor: ["#28a745", "#6c757d", "#ffc107", "#dc3545"],
+                    borderWidth: 1,
+                },
+            ],
         };
 
-        // Initialize the chart
-        attendanceChart = new ApexCharts(document.querySelector("#attendanceChart"), options);
-        attendanceChart.render();
-    });
-</script>
+        const options = {
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function (tooltipItem) {
+                            return `${tooltipItem.label}: ${tooltipItem.raw}%`;
+                        },
+                    },
+                },
+                legend: {
+                    display: true,
+                    position: "bottom",
+                },
+            },
+            maintainAspectRatio: false,
+            responsive: true,
+        };
 
+        new Chart(ctx, {
+            type: "doughnut",
+            data: data,
+            options: options,
+        });
+    });
+    const ctx = document.getElementById('myChart').getContext('2d');
+const myChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+        labels: ['Present', 'Late', 'Permission', 'Absent'],
+        datasets: [{
+            data: [59, 21, 2, 15],
+            backgroundColor: ['#28a745', '#6c757d', '#ffc107', '#dc3545'],
+        }]
+    },
+    options: {
+        circumference: Math.PI,
+        rotation: Math.PI,
+        plugins: {
+            legend: { display: false },
+        },
+    }
+});
+
+    var options = {
+    series: [59, 21, 2, 15],
+    chart: {
+        type: 'donut',
+    },
+    labels: ['Present', 'Late', 'Permission', 'Absent'],
+    colors: ['#28a745', '#6c757d', '#ffc107', '#dc3545'],
+    plotOptions: {
+        pie: {
+            startAngle: -90,
+            endAngle: 90,
+            donut: {
+                size: '50%',
+            }
+        }
+    }
+};
+var chart = new ApexCharts(document.querySelector("#chart"), options);
+chart.render();
+
+</script>
 
 
 

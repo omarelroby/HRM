@@ -11,19 +11,19 @@
     <title>Login - Admin Panel</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('public/assets/img/favicon.png') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/favicon.png') }}">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{{ asset('public/assets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
 
     <!-- Feather CSS -->
-    <link rel="stylesheet" href="{{ asset('public/assets/plugins/icons/feather/feather.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/icons/feather/feather.css') }}">
 
     <!-- Fontawesome CSS -->
-    <link rel="stylesheet" href="{{ asset('public/assets/plugins/fontawesome/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome/css/all.min.css') }}">
 
     <!-- Main CSS -->
-    <link rel="stylesheet" href="{{ asset('public/assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 </head>
 
 <body class="bg-linear-gradient">
@@ -102,10 +102,10 @@
     <script src="{{ asset('public/assets/js/bootstrap.bundle.min.js') }}"></script>
 
     <!-- Feather Icon JS -->
-    <script src="{{ asset('public/assets/js/feather.min.js') }}"></script>
+    <script src="{{ asset('assets/js/feather.min.js') }}"></script>
 
     <!-- Custom JS -->
-    <script src="{{ asset('public/assets/js/script.js') }}"></script>
+    <script src="{{ asset('assets/js/script.js') }}"></script>
 </body>
 
 </html>

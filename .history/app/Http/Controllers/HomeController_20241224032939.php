@@ -99,8 +99,10 @@ class HomeController extends Controller
                 ->where('clock_in', '>', '09:00:00') // Customize based on late arrival time
                 ->get();
 
-                $employees = Employee::count();
-                $data['absent_employees'] = $employees - ($data['early_arrivals']->count() + $data['late_arrivals']->count());
+            // Get employees who were absent
+            $data['absent_employees'] = AttendanceEmployee::where('status','!=', 'Present')
+                ->where('date', today())
+                ->get();
 
             // dd($data['late_arrivals']);
 

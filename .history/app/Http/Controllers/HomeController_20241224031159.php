@@ -87,22 +87,20 @@ class HomeController extends Controller
                 ->get()
                 ->take(3);
 
-            // Get employees who came early (before 08:00:00)
+            // Get employees who came early, late, or absent
             $data['early_arrivals'] = AttendanceEmployee::where('status', 'Present')
                 ->where('date', today())
-                ->where('clock_in', '<=', '09:00:00') // Customize based on early arrival time
+                ->where('arrival_time', '<=', '08:00:00') // Customize based on early time
                 ->get();
 
-            // Get employees who came late (after 08:00:00)
             $data['late_arrivals'] = AttendanceEmployee::where('status', 'Present')
                 ->where('date', today())
-                ->where('clock_in', '>', '09:00:00') // Customize based on late arrival time
+                ->where('arrival_time', '>', '08:00:00') // Customize based on late time
                 ->get();
 
-                $employees = Employee::count();
-                $data['absent_employees'] = $employees - ($data['early_arrivals']->count() + $data['late_arrivals']->count());
-
-            // dd($data['late_arrivals']);
+            $data['absent_employees'] = AttendanceEmployee::where('status', 'Absent')
+                ->where('date', today())
+                ->get();
 
             return view('dashboard.dashboard', $data);
         }

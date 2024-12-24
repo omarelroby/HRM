@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="{{ asset('public/assets/css/bootstrap.min.css') }}">
 
     <!-- Feather CSS -->
-    <link rel="stylesheet" href="{{ asset('public/assets/plugins/icons/feather/feather.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/icons/feather/feather.css') }}">
 
     <!-- Fontawesome CSS -->
     <link rel="stylesheet" href="{{ asset('public/assets/plugins/fontawesome/css/all.min.css') }}">

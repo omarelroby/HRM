@@ -100,7 +100,7 @@ class HomeController extends Controller
                 ->get();
 
                 $employees = Employee::count();
-                $data['absent_employees'] = $employees - ($data['early_arrivals']->count() + $data['late_arrivals']->count());
+                 $data['absent_employees'] = $employees - ($data['early_arrivals']->count() + $data['late_arrivals']->count());
 
             // dd($data['late_arrivals']);
 

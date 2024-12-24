@@ -17,13 +17,13 @@
     <link rel="stylesheet" href="{{ asset('public/assets/css/bootstrap.min.css') }}">
 
     <!-- Feather CSS -->
-    <link rel="stylesheet" href="{{ asset('public/assets/plugins/icons/feather/feather.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/icons/feather/feather.css') }}">
 
     <!-- Fontawesome CSS -->
-    <link rel="stylesheet" href="{{ asset('public/assets/plugins/fontawesome/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome/css/all.min.css') }}">
 
     <!-- Main CSS -->
-    <link rel="stylesheet" href="{{ asset('public/assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 </head>
 
 <body class="bg-linear-gradient">

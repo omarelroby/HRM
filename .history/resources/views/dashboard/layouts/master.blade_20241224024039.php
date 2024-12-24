@@ -1166,14 +1166,8 @@
 											</a>
 										</div>
 										<div class="card-footer py-1">
-                                            <form action="{{ route('logout') }}" method="POST" class="d-inline">
-                                                @csrf
-                                                <button type="submit" class="dropdown-item d-inline-flex align-items-center p-0 py-2">
-                                                    <i class="ti ti-login me-2"></i>Logout
-                                                </button>
-                                            </form>
-                                        </div>
-
+											<a class="dropdown-item d-inline-flex align-items-center p-0 py-2" href="{{ route('lo') }}"><i class="ti ti-login me-2"></i>Logout</a>
+										</div>
 									</div>
 								</div>
 							</div>

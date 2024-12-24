@@ -312,15 +312,15 @@
 
             <div class="d-flex align-items-center justify-content-between">
                 <p class="f-13 mb-2"><i class="ti ti-circle-filled" style="color: #4a7fe0;" me-1></i>Coming Early</p>
-                <p class="f-13 fw-medium text-gray-9 mb-2">{{ $early_arrivals->count() }} Employee</p>
+                <p class="f-13 fw-medium text-gray-9 mb-2">{{ $early_arrivals->count() }}%</p>
             </div>
             <div class="d-flex align-items-center justify-content-between">
                 <p class="f-13 mb-2"><i class="ti ti-circle-filled" style="color: #e7513e;" me-1></i>Coming Late</p>
-                <p class="f-13 fw-medium text-gray-9 mb-2">{{ $late_arrivals->count() }} Employee</p>
+                <p class="f-13 fw-medium text-gray-9 mb-2">{{ $late_arrivals->count() }}%</p>
             </div>
             <div class="d-flex align-items-center justify-content-between mb-2">
                 <p class="f-13 mb-2"><i class="ti ti-circle-filled" style="color: #11c866;" me-1></i>Absent</p>
-                <p class="f-13 fw-medium text-gray-9 mb-2">{{ $absent_employees }} Employee</p>
+                <p class="f-13 fw-medium text-gray-9 mb-2">{{ $absent_employees) }}%</p>
             </div>
 
 
@@ -392,7 +392,7 @@
         // Fetch dynamic data from backend
         var earlyArrivalsCount = @json($early_arrivals->count() ?? 0);  // Count of early arrivals
         var lateArrivalsCount = @json($late_arrivals->count() ?? 0);    // Count of late arrivals
-        var absentEmployeesCount = @json($absent_employees  ?? 0);  // Count of absent employees
+        var absentEmployeesCount = @json($absent_employees->count() ?? 0);  // Count of absent employees
 
         // Chart options
         var options = {
