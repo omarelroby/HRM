@@ -6,7 +6,7 @@
 	<meta name="author" content="Dreams technologies - Bootstrap Admin Template">
 	<meta name="robots" content="noindex, nofollow">
 	<title>Smarthr Admin Template</title>
-
+  
 	<!-- Favicon -->
 	<link rel="shortcut icon" type="image/x-icon" href="https://smarthr.dreamstechnologies.com/html/template/assets/img/favicon.png">
 
