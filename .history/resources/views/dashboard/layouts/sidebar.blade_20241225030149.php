@@ -82,7 +82,7 @@
                         <ul>
                             <li class="submenu">
                                 <a href="{{ route('home') }}">
-                                    <i class="ti ti-smart-home"></i><span>{{ __('Dashboard') }}</span>
+                                    <i class="ti ti-smart-home"></i><span>__</span>
                                 </a>
 
                             </li>

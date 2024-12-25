@@ -987,7 +987,7 @@
                            <li class="dropdown">
                             <a class="dropdown-toggle count-info" href="#" id="languageDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <!-- Increase size of the globe icon -->
-                                <i class="fa fa-globe text-warning fa-1x"></i> <!-- Change fa-3x to fa-4x or fa-5x for even larger icons -->
+                                <i class="fa fa-globe text-warning fa-3x"></i> <!-- Change fa-3x to fa-4x or fa-5x for even larger icons -->
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="languageDropdown">
                                 <div class="dropdown-divider"></div> <!-- Divider after the first item -->
@@ -999,7 +999,7 @@
                                     </li>
                                 @endforeach
                             </ul>
-                            </li>
+                        </li>
 
 							<div class="dropdown me-1">
 								<a href="#" class="btn btn-menubar" data-bs-toggle="dropdown">

@@ -32,7 +32,12 @@ Route::get('/check', 'HomeController@check')->middleware(
         'XSS',
     ]
 );
-
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => ['localeSessionRedirect', 'localeViewPath'],
+    ],
+    function () {
 Route::get('/password/resets/{lang?}', 'Auth\LoginController@showLinkRequestForm')->name('change.langPass');
 
 Route::get('/', 'HomeController@index')->name('home')->middleware(['XSS']);
@@ -1520,3 +1525,4 @@ Route::post('setting/twilio', 'SettingsController@twilio')->name('twilio.setting
 
 // recaptcha
 Route::post('/recaptcha-settings',['as' => 'recaptcha.settings.store','uses' =>'SettingsController@recaptchaSettingStore'])->middleware(['auth','XSS']);
+    });

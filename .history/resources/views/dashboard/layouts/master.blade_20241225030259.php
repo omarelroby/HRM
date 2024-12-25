@@ -977,30 +977,6 @@
 									<i class="ti ti-maximize"></i>
 								</a>
 							</div>
-                            @php
-                            use App\Models\Utility;
-                            $users = \Auth::user();
-                            $currantLang = $users->currentLanguage();
-                            $languages = Utility::languages();
-                            $profile = asset(Storage::url('uploads/avatar/'));
-                            @endphp
-                           <li class="dropdown">
-                            <a class="dropdown-toggle count-info" href="#" id="languageDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <!-- Increase size of the globe icon -->
-                                <i class="fa fa-globe text-warning fa-1x"></i> <!-- Change fa-3x to fa-4x or fa-5x for even larger icons -->
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="languageDropdown">
-                                <div class="dropdown-divider"></div> <!-- Divider after the first item -->
-                                @foreach($languages as $key => $language)
-                                    <li>
-                                        <a class="dropdown-item @if($language == $currantLang) text-danger @endif" href="{{ route('change.language', $language) }}">
-                                            {{ Str::upper($language) }}
-                                        </a>
-                                    </li>
-                                @endforeach
-                            </ul>
-                            </li>
-
 							<div class="dropdown me-1">
 								<a href="#" class="btn btn-menubar" data-bs-toggle="dropdown">
 									<i class="ti ti-layout-grid-remove"></i>
@@ -1033,9 +1009,71 @@
 									</div>
 								</div>
 							</div>
-						</div>
-					</div>
-				</div>
+							<div class="me-1">
+								<a href="https://smarthr.dreamstechnologies.com/html/template/chat.html" class="btn btn-menubar position-relative">
+									<i class="ti ti-brand-hipchat"></i>
+									<span class="badge bg-info rounded-pill d-flex align-items-center justify-content-center header-badge">5</span>
+								</a>
+							</div>
+							<div class="me-1">
+								<a href="https://smarthr.dreamstechnologies.com/html/template/email.html" class="btn btn-menubar">
+									<i class="ti ti-mail"></i>
+								</a>
+							</div>
+                            @php
+                            use App\Models\Utility;
+                            $users = \Auth::user();
+                            $currantLang = $users->currentLanguage();
+                            $languages = Utility::languages();
+                            $profile = asset(Storage::url('uploads/avatar/'));
+                        @endphp
+ 
+
+                        <div class="dropdown profile-dropdown">
+                            <a href="javascript:void(0);" class="dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
+                                <span class="avatar avatar-sm online">
+                                    <img src="{{ $profile . '/' . $users->avatar }}" alt="Img" class="img-fluid rounded-circle">
+                                </span>
+                            </a>
+                            <div class="dropdown-menu shadow-none">
+                                <div class="card mb-0">
+                                    <div class="card-header">
+                                        <div class="d-flex align-items-center">
+                                            <span class="avatar avatar-lg me-2 avatar-rounded">
+                                                <img src="{{ $profile . '/' . $users->avatar }}" alt="img">
+                                            </span>
+                                            <div>
+                                                <h5 class="mb-0">{{ $users->name }}</h5>
+                                                <p class="fs-12 fw-medium mb-0">{{ $users->email }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <a class="dropdown-item d-inline-flex align-items-center p-0 py-2" href=" ">
+                                            <i class="ti ti-user-circle me-1"></i>My Profile
+                                        </a>
+                                        <a class="dropdown-item d-inline-flex align-items-center p-0 py-2" href=" ">
+                                            <i class="ti ti-settings me-1"></i>Settings
+                                        </a>
+                                        <a class="dropdown-item d-inline-flex align-items-center p-0 py-2" href=" ">
+                                            <i class="ti ti-circle-arrow-up me-1"></i>My Account
+                                        </a>
+                                        <a class="dropdown-item d-inline-flex align-items-center p-0 py-2" href=" ">
+                                            <i class="ti ti-question-mark me-1"></i>Knowledge Base
+                                        </a>
+                                    </div>
+                                    <div class="card-footer py-1">
+                                        <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                                            @csrf
+                                            <button type="submit" class="dropdown-item d-inline-flex align-items-center p-0 py-2">
+                                                <i class="ti ti-login me-2"></i>Logout
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
 
 				<!-- Mobile Menu -->
 				<div class="dropdown mobile-user-menu">
@@ -3572,6 +3610,9 @@
 	</div>
 	<!-- /Main Wrapper -->
 @include('dashboard.layouts.footer')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
 @yield('script')
 @stack('scripts')
 </html>

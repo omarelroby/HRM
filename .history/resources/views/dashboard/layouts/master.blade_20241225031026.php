@@ -977,30 +977,6 @@
 									<i class="ti ti-maximize"></i>
 								</a>
 							</div>
-                            @php
-                            use App\Models\Utility;
-                            $users = \Auth::user();
-                            $currantLang = $users->currentLanguage();
-                            $languages = Utility::languages();
-                            $profile = asset(Storage::url('uploads/avatar/'));
-                            @endphp
-                           <li class="dropdown">
-                            <a class="dropdown-toggle count-info" href="#" id="languageDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <!-- Increase size of the globe icon -->
-                                <i class="fa fa-globe text-warning fa-1x"></i> <!-- Change fa-3x to fa-4x or fa-5x for even larger icons -->
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="languageDropdown">
-                                <div class="dropdown-divider"></div> <!-- Divider after the first item -->
-                                @foreach($languages as $key => $language)
-                                    <li>
-                                        <a class="dropdown-item @if($language == $currantLang) text-danger @endif" href="{{ route('change.language', $language) }}">
-                                            {{ Str::upper($language) }}
-                                        </a>
-                                    </li>
-                                @endforeach
-                            </ul>
-                            </li>
-
 							<div class="dropdown me-1">
 								<a href="#" class="btn btn-menubar" data-bs-toggle="dropdown">
 									<i class="ti ti-layout-grid-remove"></i>
@@ -1030,6 +1006,201 @@
 												<span class="avatar avatar-md bg-transparent-dark me-2"><i class="ti ti-file-invoice text-gray-9"></i></span>Invoices
 											</a>
 										</div>
+									</div>
+								</div>
+							</div>
+							<div class="me-1">
+								<a href="https://smarthr.dreamstechnologies.com/html/template/chat.html" class="btn btn-menubar position-relative">
+									<i class="ti ti-brand-hipchat"></i>
+									<span class="badge bg-info rounded-pill d-flex align-items-center justify-content-center header-badge">5</span>
+								</a>
+							</div>
+							<div class="me-1">
+								<a href="https://smarthr.dreamstechnologies.com/html/template/email.html" class="btn btn-menubar">
+									<i class="ti ti-mail"></i>
+								</a>
+							</div>
+							<div class="me-1 notification_item">
+								<a href="#" class="btn btn-menubar position-relative me-1" id="notification_popup"
+									data-bs-toggle="dropdown">
+									<i class="ti ti-bell"></i>
+									<span class="notification-status-dot"></span>
+								</a>
+								<div class="dropdown-menu dropdown-menu-end notification-dropdown p-4">
+									<div class="d-flex align-items-center justify-content-between border-bottom p-0 pb-3 mb-3">
+										<h4 class="notification-title">Notifications (2)</h4>
+										<div class="d-flex align-items-center">
+											<a href="#" class="text-primary fs-15 me-3 lh-1">Mark all as read</a>
+											<div class="dropdown">
+												<a href="javascript:void(0);" class="bg-white dropdown-toggle"
+													data-bs-toggle="dropdown">
+													<i class="ti ti-calendar-due me-1"></i>Today
+												</a>
+												<ul class="dropdown-menu mt-2 p-3">
+													<li>
+														<a href="javascript:void(0);" class="dropdown-item rounded-1">
+															This Week
+														</a>
+													</li>
+													<li>
+														<a href="javascript:void(0);" class="dropdown-item rounded-1">
+															Last Week
+														</a>
+													</li>
+													<li>
+														<a href="javascript:void(0);" class="dropdown-item rounded-1">
+															Last Month
+														</a>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+									<div class="noti-content">
+										<div class="d-flex flex-column">
+											<div class="border-bottom mb-3 pb-3">
+												<a href="https://smarthr.dreamstechnologies.com/html/template/activity.html">
+													<div class="d-flex">
+														<span class="avatar avatar-lg me-2 flex-shrink-0">
+															<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-27.jpg" alt="Profile">
+														</span>
+														<div class="flex-grow-1">
+															<p class="mb-1"><span
+																	class="text-dark fw-semibold">Shawn</span>
+																performance in Math is below the threshold.</p>
+															<span>Just Now</span>
+														</div>
+													</div>
+												</a>
+											</div>
+											<div class="border-bottom mb-3 pb-3">
+												<a href="https://smarthr.dreamstechnologies.com/html/template/activity.html" class="pb-0">
+													<div class="d-flex">
+														<span class="avatar avatar-lg me-2 flex-shrink-0">
+															<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-23.jpg" alt="Profile">
+														</span>
+														<div class="flex-grow-1">
+															<p class="mb-1"><span
+																	class="text-dark fw-semibold">Sylvia</span> added
+																appointment on 02:00 PM</p>
+															<span>10 mins ago</span>
+															<div
+																class="d-flex justify-content-start align-items-center mt-1">
+																<span class="btn btn-light btn-sm me-2">Deny</span>
+																<span class="btn btn-primary btn-sm">Approve</span>
+															</div>
+														</div>
+													</div>
+												</a>
+											</div>
+											<div class="border-bottom mb-3 pb-3">
+												<a href="https://smarthr.dreamstechnologies.com/html/template/activity.html">
+													<div class="d-flex">
+														<span class="avatar avatar-lg me-2 flex-shrink-0">
+															<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-25.jpg" alt="Profile">
+														</span>
+														<div class="flex-grow-1">
+															<p class="mb-1">New student record <span class="text-dark fw-semibold"> George</span>
+																is created by <span class="text-dark fw-semibold">Teressa</span>
+															</p>
+															<span>2 hrs ago</span>
+														</div>
+													</div>
+												</a>
+											</div>
+											<div class="border-0 mb-3 pb-0">
+												<a href="https://smarthr.dreamstechnologies.com/html/template/activity.html">
+													<div class="d-flex">
+														<span class="avatar avatar-lg me-2 flex-shrink-0">
+															<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-01.jpg" alt="Profile">
+														</span>
+														<div class="flex-grow-1">
+															<p class="mb-1">A new teacher record for <span class="text-dark fw-semibold">Elisa</span> </p>
+															<span>09:45 AM</span>
+														</div>
+													</div>
+												</a>
+											</div>
+										</div>
+									</div>
+									<div class="d-flex p-0">
+										<a href="#" class="btn btn-light w-100 me-2">Cancel</a>
+										<a href="https://smarthr.dreamstechnologies.com/html/template/activity.html" class="btn btn-primary w-100">View All</a>
+									</div>
+								</div>
+							</div>
+							<div class="dropdown profile-dropdown">
+								<a href="javascript:void(0);" class="dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
+									<span class="avatar avatar-sm online">
+										<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-12.jpg" alt="Img" class="img-fluid rounded-circle">
+									</span>
+								</a>
+                                @php
+                                use App\Models\Utility;
+                                $users = \Auth::user();
+                                $currantLang = $users->currentLanguage();
+                                $languages = Utility::languages();
+                                $profile = asset(Storage::url('uploads/avatar/'));
+                                @endphp
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle count-info" href="#" id="languageDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-globe text-warning"></i>
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('manage.language', [$currantLang]) }}">
+                                                {{ __('Create & Customize') }}
+                                            </a>
+                                        </li>
+                                        <div class="dropdown-divider"></div> <!-- Divider after the first item -->
+                                        @foreach($languages as $key => $language)
+                                            <li>
+                                                <a class="dropdown-item @if($language == $currantLang) text-danger @endif" href="{{ route('change.language', $language) }}">
+                                                    {{ Str::upper($language) }}
+                                                </a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </li>
+								<div class="dropdown-menu shadow-none">
+									<div class="card mb-0">
+										<div class="card-header">
+											<div class="d-flex align-items-center">
+												<span class="avatar avatar-lg me-2 avatar-rounded">
+													<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-12.jpg" alt="img">
+												</span>
+												<div>
+													<h5 class="mb-0">Kevin Larry</h5>
+													<p class="fs-12 fw-medium mb-0"><a href="https://smarthr.dreamstechnologies.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3a4d5b48485f547a5f425b574a565f14595557">[email&#160;protected]</a></p>
+												</div>
+											</div>
+										</div>
+										<div class="card-body">
+											<a class="dropdown-item d-inline-flex align-items-center p-0 py-2"
+												href="https://smarthr.dreamstechnologies.com/html/template/profile.html">
+												<i class="ti ti-user-circle me-1"></i>My Profile
+											</a>
+											<a class="dropdown-item d-inline-flex align-items-center p-0 py-2" href="https://smarthr.dreamstechnologies.com/html/template/bussiness-settings.html">
+												<i class="ti ti-settings me-1"></i>Settings
+											</a>
+
+											<a class="dropdown-item d-inline-flex align-items-center p-0 py-2"
+												href="https://smarthr.dreamstechnologies.com/html/template/profile-settings.html">
+												<i class="ti ti-circle-arrow-up me-1"></i>My Account
+											</a>
+											<a class="dropdown-item d-inline-flex align-items-center p-0 py-2" href="https://smarthr.dreamstechnologies.com/html/template/knowledgebase.html">
+												<i class="ti ti-question-mark me-1"></i>Knowledge Base
+											</a>
+										</div>
+										<div class="card-footer py-1">
+                                            <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                                                @csrf
+                                                <button type="submit" class="dropdown-item d-inline-flex align-items-center p-0 py-2">
+                                                    <i class="ti ti-login me-2"></i>Logout
+                                                </button>
+                                            </form>
+                                        </div>
+
 									</div>
 								</div>
 							</div>

@@ -984,23 +984,26 @@
                             $languages = Utility::languages();
                             $profile = asset(Storage::url('uploads/avatar/'));
                             @endphp
-                           <li class="dropdown">
-                            <a class="dropdown-toggle count-info" href="#" id="languageDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <!-- Increase size of the globe icon -->
-                                <i class="fa fa-globe text-warning fa-1x"></i> <!-- Change fa-3x to fa-4x or fa-5x for even larger icons -->
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="languageDropdown">
-                                <div class="dropdown-divider"></div> <!-- Divider after the first item -->
-                                @foreach($languages as $key => $language)
+                            <li class="dropdown">
+                                <a class="dropdown-toggle count-info" href="#" id="languageDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-globe text-warning"></i>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="languageDropdown">
                                     <li>
-                                        <a class="dropdown-item @if($language == $currantLang) text-danger @endif" href="{{ route('change.language', $language) }}">
-                                            {{ Str::upper($language) }}
+                                        <a class="dropdown-item" href="{{ route('manage.language', [$currantLang]) }}">
+                                            {{ __('Create & Customize') }}
                                         </a>
                                     </li>
-                                @endforeach
-                            </ul>
+                                    <div class="dropdown-divider"></div> <!-- Divider after the first item -->
+                                    @foreach($languages as $key => $language)
+                                        <li>
+                                            <a class="dropdown-item @if($language == $currantLang) text-danger @endif" href="{{ route('change.language', $language) }}">
+                                                {{ Str::upper($language) }}
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul>
                             </li>
-
 							<div class="dropdown me-1">
 								<a href="#" class="btn btn-menubar" data-bs-toggle="dropdown">
 									<i class="ti ti-layout-grid-remove"></i>
@@ -1033,6 +1036,7 @@
 									</div>
 								</div>
 							</div>
+					
 						</div>
 					</div>
 				</div>

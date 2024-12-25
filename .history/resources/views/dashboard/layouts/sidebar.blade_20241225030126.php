@@ -77,12 +77,12 @@
         <div class="sidebar-inner slimscroll">
             <div id="sidebar-menu" class="sidebar-menu">
                 <ul>
-                    <li class="menu-title"><span>{{ app()->getLocale() }}</span></li>
+                    <li class="menu-title"><span>{{ app() }}</span></li>
                     <li>
                         <ul>
                             <li class="submenu">
                                 <a href="{{ route('home') }}">
-                                    <i class="ti ti-smart-home"></i><span>{{ __('Dashboard') }}</span>
+                                    <i class="ti ti-smart-home"></i><span>Dashboard</span>
                                 </a>
 
                             </li>

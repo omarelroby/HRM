@@ -157,11 +157,31 @@
             <div class="d-flex align-items-center">
             <div class="dropdown mb-2">
 
-          
+            <ul class="dropdown-menu dropdown-menu-end p-3" style="">
+                <li>
+                    <a href="javascript:void(0);" class="dropdown-item rounded-1">Finance</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" class="dropdown-item rounded-1">Development</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" class="dropdown-item rounded-1">Marketing</a>
+                </li>
+            </ul>
             </div>
             <div class="dropdown mb-2">
-
-
+            
+            <ul class="dropdown-menu dropdown-menu-end p-3" style="">
+                <li>
+                    <a href="javascript:void(0);" class="dropdown-item rounded-1">This Month</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" class="dropdown-item rounded-1">This Week</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" class="dropdown-item rounded-1">Today</a>
+                </li>
+            </ul>
             </div>
             </div>
             </div>
@@ -251,7 +271,22 @@
     <div class="card flex-fill">
         <div class="card-header pb-2 d-flex align-items-center justify-content-between flex-wrap">
             <h5 class="mb-2">Attendance Overview</h5>
-
+            <div class="dropdown mb-2">
+                <a href="javascript:void(0);" class="btn btn-white border btn-sm d-inline-flex align-items-center" data-bs-toggle="dropdown">
+                    <i class="ti ti-calendar me-1"></i>Today
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end p-3">
+                    <li>
+                        <a href="javascript:void(0);" class="dropdown-item rounded-1">This Month</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="dropdown-item rounded-1">This Week</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="dropdown-item rounded-1">Today</a>
+                    </li>
+                </ul>
+            </div>
         </div>
         <div class="card-body">
             <div class="d-flex align-items-center">

@@ -6,16 +6,8 @@
 	<meta name="author" content="Dreams technologies - Bootstrap Admin Template">
 	<meta name="robots" content="noindex, nofollow">
 	<title>Smarthr Admin Template</title>
-    <style>
-        .dropdown-menu {
-    display: block !important;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    z-index: 1000;
-    width: 200px;  /* You can adjust the width */
-}
-        </style>
+  
+    </style>
 	<!-- Favicon -->
 	<link rel="shortcut icon" type="image/x-icon" href="https://smarthr.dreamstechnologies.com/html/template/assets/img/favicon.png">
 
@@ -56,7 +48,5 @@
 
 	<!-- Main CSS -->
 	<link rel="stylesheet" href="{{ asset('public/assets/css/style.css')}}">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 
 </head>

@@ -32,7 +32,12 @@ Route::get('/check', 'HomeController@check')->middleware(
         'XSS',
     ]
 );
-
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => ['localeSessionRedirect', 'localeViewPath'],
+    ],
+    function () {
 Route::get('/password/resets/{lang?}', 'Auth\LoginController@showLinkRequestForm')->name('change.langPass');
 
 Route::get('/', 'HomeController@index')->name('home')->middleware(['XSS']);

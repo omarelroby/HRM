@@ -157,7 +157,17 @@
             <div class="d-flex align-items-center">
             <div class="dropdown mb-2">
 
-          
+            <ul class="dropdown-menu dropdown-menu-end p-3" style="">
+                <li>
+                    <a href="javascript:void(0);" class="dropdown-item rounded-1">Finance</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" class="dropdown-item rounded-1">Development</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" class="dropdown-item rounded-1">Marketing</a>
+                </li>
+            </ul>
             </div>
             <div class="dropdown mb-2">
 
@@ -251,7 +261,7 @@
     <div class="card flex-fill">
         <div class="card-header pb-2 d-flex align-items-center justify-content-between flex-wrap">
             <h5 class="mb-2">Attendance Overview</h5>
-
+           
         </div>
         <div class="card-body">
             <div class="d-flex align-items-center">
