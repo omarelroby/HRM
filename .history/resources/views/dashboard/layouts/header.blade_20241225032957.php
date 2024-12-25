@@ -15,8 +15,11 @@
     z-index: 1000;
     width: 200px;  /* You can adjust the width */
 }
-/* Adjust dropdown width */ 
-
+/* Adjust dropdown positioning for RTL */
+.dropdown-menu-left {
+    left: 50 !important;  /* Align the dropdown to the left side */
+    right: auto !important; /* Reset the 'right' property for RTL */
+}
 
         </style>
 	<!-- Favicon -->

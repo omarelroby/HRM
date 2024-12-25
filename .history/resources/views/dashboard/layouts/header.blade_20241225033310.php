@@ -15,7 +15,17 @@
     z-index: 1000;
     width: 200px;  /* You can adjust the width */
 }
-/* Adjust dropdown width */ 
+/* Adjust dropdown width */
+.dropdown-menu {
+    width: 50px; /* Adjust to desired width */
+    min-width: 0; /* Optional: removes the default minimum width */
+}
+
+/* Optional: You can add specific styling for RTL (Arabic) */
+.dropdown-menu-left {
+    left: 0 !important;  /* Align the dropdown to the left side */
+    right: auto !important; /* Reset the 'right' property for RTL */
+}
 
 
         </style>

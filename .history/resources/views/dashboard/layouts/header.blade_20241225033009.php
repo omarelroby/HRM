@@ -15,8 +15,6 @@
     z-index: 1000;
     width: 200px;  /* You can adjust the width */
 }
-/* Adjust dropdown width */ 
-
 
         </style>
 	<!-- Favicon -->

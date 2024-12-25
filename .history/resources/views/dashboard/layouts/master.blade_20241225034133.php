@@ -39,15 +39,7 @@
 				<div class="header-user">
 					<div class="nav user-menu nav-list">
 
-						<div class="me-auto d-flex align-items-center" id="header-search">
-							<a id="toggle_btn" href="javascript:void(0);" class="btn btn-menubar me-1">
-								<i class="ti ti-arrow-bar-to-left"></i>
-							</a>
-
-							<a href="https://smarthr.dreamstechnologies.com/html/template/profile-settings.html" class="btn btn-menubar">
-								<i class="ti ti-settings-cog"></i>
-							</a>
-						</div>
+						 
 
 
 						<!-- /Horizontal Single -->

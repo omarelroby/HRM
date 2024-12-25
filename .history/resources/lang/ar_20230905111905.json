@@ -300,7 +300,6 @@
     "Daily" : "يوميا ",
     "Dark Mode" : "نمط داكن ",
     "Dashboard" : "لوحة التحكم ",
-    "Main menu" : "القائمة الرئيسية ",
     "Date" : "التاريخ ",
     "Date Format" : "نسق التاريخ ",
     "Date Of Birth" : "تاريخ الميلاد ",
@@ -1409,13 +1408,13 @@
     "Job Titles" : "المسميات الوظيفية",
     "Categories" : "الأقسام",
     "Nationality" : "الجنسيات",
-
+  
     "Enter Name" : "أدخل الإسم ",
     "Enter Name arabic" : "أدخل الإسم بالعربى",
     "jobtitle" : "المسمى الوظيفى",
     "category" : "القسم",
     "nationality" : "الجنسية",
-
+  
     "nationality_type" : "نوع الجنسية",
     "saudi" : "سعودى",
     "non_saudi" : "غير سعودى",
@@ -1714,7 +1713,7 @@
     "Attendance Movement"                  : "حركة الحضور",
     "Create New Attendance movement"       : "إنشاء حركة حضور جديدة",
     "Movement start date"                  : "تاريخ بداية الحركة",
-    "The current attendance movement must be closed first in order to be able to create a new one" :
+    "The current attendance movement must be closed first in order to be able to create a new one" : 
     " لابد من إغلاق حركة الحضور الحالية أولا كى تتمكن من إنشاء حركة جديدة",
     "closed" : "مغلقة",
     "opened" : "حالية",
@@ -1779,3 +1778,4 @@
     "Location successfully deleted." : "تم حذف الموقع بنجاح. ",
     "Location successfully updated." : "تم تعديل الموقع بنجاح. "
   }
+   

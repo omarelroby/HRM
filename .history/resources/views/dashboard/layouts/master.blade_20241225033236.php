@@ -43,7 +43,73 @@
 							<a id="toggle_btn" href="javascript:void(0);" class="btn btn-menubar me-1">
 								<i class="ti ti-arrow-bar-to-left"></i>
 							</a>
-
+							<!-- Search -->
+							<div class="input-group input-group-flat d-inline-flex me-1">
+								<span class="input-icon-addon">
+									<i class="ti ti-search"></i>
+								</span>
+								<input type="text" class="form-control" placeholder="Search in HRMS">
+								<span class="input-group-text">
+									<kbd>CTRL + / </kbd>
+								</span>
+							</div>
+							<!-- /Search -->
+							<div class="dropdown crm-dropdown">
+								<a href="#" class="btn btn-menubar me-1" data-bs-toggle="dropdown">
+									<i class="ti ti-layout-grid"></i>
+								</a>
+								<div class="dropdown-menu dropdown-lg dropdown-menu-start">
+									<div class="card mb-0 border-0 shadow-none">
+										<div class="card-header">
+											<h4>CRM</h4>
+										</div>
+										<div class="card-body pb-1">
+											<div class="row">
+												<div class="col-sm-6">
+													<a href="https://smarthr.dreamstechnologies.com/html/template/contacts.html" class="d-flex align-items-center justify-content-between p-2 crm-link mb-3">
+														<span class="d-flex align-items-center me-3">
+															<i class="ti ti-user-shield text-default me-2"></i>Contacts
+														</span>
+														<i class="ti ti-arrow-right"></i>
+													</a>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/deals-grid.html" class="d-flex align-items-center justify-content-between p-2 crm-link mb-3">
+														<span class="d-flex align-items-center me-3">
+															<i class="ti ti-heart-handshake text-default me-2"></i>Deals
+														</span>
+														<i class="ti ti-arrow-right"></i>
+													</a>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/pipeline.html" class="d-flex align-items-center justify-content-between p-2 crm-link mb-3">
+														<span class="d-flex align-items-center me-3">
+															<i class="ti ti-timeline-event-text text-default me-2"></i>Pipeline
+														</span>
+														<i class="ti ti-arrow-right"></i>
+													</a>
+												</div>
+												<div class="col-sm-6">
+													<a href="https://smarthr.dreamstechnologies.com/html/template/companies-grid.html" class="d-flex align-items-center justify-content-between p-2 crm-link mb-3">
+														<span class="d-flex align-items-center me-3">
+															<i class="ti ti-building text-default me-2"></i>Companies
+														</span>
+														<i class="ti ti-arrow-right"></i>
+													</a>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/leads-grid.html" class="d-flex align-items-center justify-content-between p-2 crm-link mb-3">
+														<span class="d-flex align-items-center me-3">
+															<i class="ti ti-user-check text-default me-2"></i>Leads
+														</span>
+														<i class="ti ti-arrow-right"></i>
+													</a>
+													<a href="https://smarthr.dreamstechnologies.com/html/template/activity.html" class="d-flex align-items-center justify-content-between p-2 crm-link mb-3">
+														<span class="d-flex align-items-center me-3">
+															<i class="ti ti-activity text-default me-2"></i>Activities
+														</span>
+														<i class="ti ti-arrow-right"></i>
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
 							<a href="https://smarthr.dreamstechnologies.com/html/template/profile-settings.html" class="btn btn-menubar">
 								<i class="ti ti-settings-cog"></i>
 							</a>
@@ -64,23 +130,18 @@
                             $currantLang = $users->currentLanguage();
                             $languages = Utility::languages();
                             $profile = asset(Storage::url('uploads/avatar/'));
-                             @endphp
+                        @endphp
                         <li class="dropdown">
                             <a class="dropdown-toggle count-info" href="#" id="languageDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <!-- Increase size of the globe icon -->
-                                <i class="fa fa-globe text-warning fa-1x"></i> <!-- Increase icon size here -->
+                                <i class="fa fa-globe text-warning fa-2x"></i> <!-- Increase icon size here -->
                             </a>
-                            <ul class="dropdown-menu   {{ $currantLang == 'ar' ? 'dropdown-menu-left' : '' }}"
-                                aria-labelledby="languageDropdown"
-                                style="position: absolute; transform: translate3d(0px, 30px, 0px); top: 0px; right: 0px; width:  80px; min-width: 0; will-change: transform;">
-
+                            <ul class="dropdown-menu {{ $currantLang == 'ar' ? 'dropdown-menu-left' : '' }}" aria-labelledby="languageDropdown">
                                 <div class="dropdown-divider"></div> <!-- Divider after the first item -->
-
                                 @foreach($languages as $key => $language)
-                                    @if($language != 'urdu') <!-- Skip 'urdu' language -->
+                                    @if($language !='urdu')
                                         <li>
-                                            <a class="dropdown-item @if($language == $currantLang) text-danger @endif"
-                                               href="{{ route('change.language', $language) }}">
+                                            <a class="dropdown-item @if($language == $currantLang) text-danger @endif" href="{{ route('change.language', $language) }}">
                                                 @if($language == 'ar')
                                                     العربية
                                                 @else
@@ -92,6 +153,7 @@
                                 @endforeach
                             </ul>
                         </li>
+
 
                             </li>
 
