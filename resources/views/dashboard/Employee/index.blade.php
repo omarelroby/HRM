@@ -34,11 +34,7 @@
             <div class="mb-2">
                 <a href="#" data-bs-toggle="modal" data-bs-target="#addEmployeeModal" class="btn btn-primary d-flex align-items-center"><i class="ti ti-circle-plus me-2"></i>Add Employee</a>
             </div>
-            <div class="head-icons ms-2">
-                <a href="javascript:void(0);" class="" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Collapse" id="collapse-header">
-                    <i class="ti ti-chevrons-up"></i>
-                </a>
-            </div>
+
         </div>
     </div>
     <!-- /Breadcrumb -->
@@ -231,27 +227,7 @@
                 </table>
             </div>
             </div>
-            <div class="row">
-                <div class="col-sm-12 col-md-7">
-                    <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
-                        <ul class="pagination">
-                            <li class="paginate_button page-item previous disabled" id="DataTables_Table_0_previous">
-                                <a aria-controls="DataTables_Table_0" aria-disabled="true" role="link" data-dt-idx="previous" tabindex="-1" class="page-link">
-                                    <i class="ti ti-chevron-left"></i>
-                                </a>
-                            </li>
-                            <li class="paginate_button page-item active">
-                                <a href="#" aria-controls="DataTables_Table_0" role="link" aria-current="page" data-dt-idx="0" tabindex="0" class="page-link">1</a>
-                            </li>
-                            <li class="paginate_button page-item next disabled" id="DataTables_Table_0_next">
-                                <a aria-controls="DataTables_Table_0" aria-disabled="true" role="link" data-dt-idx="next" tabindex="-1" class="page-link">
-                                    <i class="ti ti-chevron-right"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+
         </div>
             </div>
         </div>
@@ -265,8 +241,7 @@
             <div class="modal-header">
                 <div class="d-flex align-items-center">
                     <h4 class="modal-title me-2">Add New Employee</h4>
-                    <span>Employee ID: EMP-0024</span>
-                </div>
+                 </div>
                 <button type="button" class="btn-close custom-btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form id="add_employee" method="post">
@@ -347,10 +322,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <div class="mb-3">
                                         <label for="dob" class="form-label">Date of Birth <span class="text-danger">*</span></label>
-                                        <div class="input-icon-end position-relative">
+                                        <div class="input-icon-start position-relative">
                                             <input type="text" name="dob" id="dob" class="form-control datetimepicker" placeholder="dd/mm/yyyy">
                                             <span class="input-icon-addon">
                                                 <i class="ti ti-calendar text-gray-7"></i>
@@ -359,29 +334,79 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+
+                                <div class="col-md-4">
                                     <div class="mb-3">
-                                        <label for="department" class="form-label">Departments</label>
-                                        <select name="department_id" required id="department" class="select select2-hidden-accessible">
+                                        <label for="designati" class="form-label">Deparments</label>
+                                        <select name="department_id" required id="designati" class="select select2-hidden-accessible">
                                             <option value="">Select</option>
-                                            <option value="all">All Departments</option>
                                             @foreach($departments as $department)
                                                 <option value="{{ $department->id }}">{{ $department->name }}</option>
                                             @endforeach
                                         </select>
-                                        <div id="department_error" class="invalid-feedback"></div>
+                                        <div id="" class="invalid-feedback"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    {{ Form::label('designation_id', __('Designation'), ['class' => 'form-label']) }}
+                                    <select name="designation_id" class="select select2-hidden-accessible">
+                                        <option value="">{{ __('Select Designation') }}</option>
+                                        @foreach($designations as $designation)
+                                            <option value="{{ $designation->id }}">{{ $designation->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+
+
+                                <div class="col-md-3">
+                                    <div class="mb-3">
+                                        {{ Form::label('nationality_type', __('nationality_type'), ['class' => 'form-label']) }}
+                                        {{ Form::select('nationality_type', ["0" => __('non_saudi'), "1" => __('saudi')], null, ['class' => 'form-select required', 'id' => 'nationality_type', 'aria-label' => __('Select Nationality Type')]) }}
+                                        <div class="wizard-form-error"></div>
                                     </div>
                                 </div>
 
+                                <div class="col-md-3">
+                                    <div class="mb-3" id="nationality">
+                                        {{ Form::label('nationality_id', __('nationality'), ['class' => 'form-label']) }}
+                                        <select name="nationality_id" class="form-select required" aria-label="{{ __('Select Nationality') }}">
+                                            <option value="">{{ __('Select Nationality') }}</option>
+                                            @foreach($nationalities as $nationality)
+                                                <option value="{{ $nationality->id }}">{{ $nationality->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        <div class="wizard-form-error"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="mb-3">
+                                        <label for="gender" class="form-label">{{ __('Gender') }}</label>
+                                        <select name="gender" required id="gender" class="select select2-hidden-accessible">
+                                            <option value="">Select</option>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="mb-3">
+                                        <label for="religion" class="form-label">Religion</label>
+                                        <select name="religion" required id="religion" class="select select2-hidden-accessible">
+                                            <option value="">Select</option>
+                                            <option value="1">muslim</option>
+                                            <option value="0">non-muslim</option>
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="col-md-6">
                                     <div class="mb-3 text-center">
                                         <label class="form-label">Do you want to register in the list of users?</label>
                                         <div class="form-check form-check-md form-switch d-flex justify-content-center">
-                                            <input class="form-check-input" name="user_register" type="checkbox" id="user_register">
+                                            <input class="form-check-input" name="user_register" type="checkbox" id="user_register" value="1">
                                         </div>
                                     </div>
                                 </div>
-
 
                             </div>
                         </div>
@@ -394,9 +419,63 @@
                         <div class="modal-body">
                             <div class="card bg-light-500 shadow-none">
                                 <div class="card-body">
-                                    <h6>Enable Options</h6>
+                                    <h6>العناوين</h6>
                                 </div>
                             </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-light border me-2" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="identity" role="tabpanel" aria-labelledby="identity-tab">
+                        <div class="modal-body">
+                            <div class="card bg-light-500 shadow-none">
+                                <div class="card-body">
+                                    <h6>معلومات الهوية</h6>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <h6 class="col-md-12">تفاصيل الهوية / الأقامة</h6>
+
+                                <div class="form-group col-md-3">
+                                    <label for="residence_number" class="form-control-label">رقم الإقامة / الهوية</label>
+                                    <input class="form-control" name="residence_number" type="text" id="residence_number">
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    <label for="place_of_issuance_of_ID_residence" class="form-control-label">مكان إصدار الهوية / الإقامة</label>
+                                    <input class="form-control" name="place_of_issuance_of_ID_residence" type="text" id="place_of_issuance_of_ID_residence">
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    <label for="iqama_issuance_date_Hijri" class="form-control-label">(هجرى) تاريخ إصدار الهوية / الإقامة</label>
+                                    <input id="hijri_4" class="form-control hijri-date-input" name="iqama_issuance_date_Hijri" type="text" value="2024-12-26">
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    <label for="iqama_issuance_date_gregorian" class="form-control-label">(ميلادى) تاريخ إصدار الهوية / الإقامة</label>
+                                    <input id="gregorian_4" class="form-control gregorian-date" name="iqama_issuance_date_gregorian" type="text" value="2024-12-26">
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    <label for="iqama_issuance_expirydate_Hijri" class="form-control-label">(هجرى) تاريخ إنتهاء الهوية / الإقامة</label>
+                                    <input id="hijri_5" class="form-control hijri-date-input" name="iqama_issuance_expirydate_Hijri" type="text" value="2024-12-26">
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    <label for="iqama_issuance_expirydate_gregorian" class="form-control-label">(ميلادى) تاريخ إنتهاء الهوية / الإقامة</label>
+                                    <input id="gregorian_5" class="form-control gregorian-date" name="iqama_issuance_expirydate_gregorian" type="text" value="2024-12-26">
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    <label for="iqama_attachment" class="form-control-label">إضافة مرفق</label>
+                                    <input name="iqama_attachment" type="file" id="iqama_attachment">
+                                </div>
+                            </div>
+
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-outline-light border me-2" data-bs-dismiss="modal">Cancel</button>
@@ -1131,6 +1210,50 @@
 {{-- end delete modal --}}
 @endsection
 @section('script')
+
+<!-- Moment.js (Hijri Support) -->
+<script src="https://cdn.jsdelivr.net/npm/moment-hijri@2.20.1/moment-hijri.min.js"></script>
+
+ 
+<script>
+
+    $(document).ready(function() {
+
+        // Check if jQuery is loaded
+        if (typeof jQuery === 'undefined') {
+            console.error("jQuery is not loaded.");
+            return;
+        }
+
+        // Check if moment-hijri is loaded
+        if (typeof moment === 'undefined' || !moment.isMoment) {
+            console.error("Moment.js (with Hijri support) is not loaded.");
+            return;
+        }
+
+        // Initialize the Hijri date picker
+        $('.hijri-date-input').datetimepicker({
+            timepicker: false,
+            format: 'YYYY-MM-DD', // Customize this format if needed
+            lang: 'en', // Set the language to Arabic
+            hijri: true, // Enable Hijri mode
+            onSelectDate: function(current_datetime){
+                console.log("Hijri Date Selected: ", current_datetime);
+            }
+        });
+
+        // Initialize the Gregorian date picker (if needed)
+        $('.gregorian-date').datetimepicker({
+            timepicker: false,
+            format: 'YYYY-MM-DD',
+            onSelectDate: function(current_datetime){
+                console.log("Gregorian Date Selected: ", current_datetime);
+            }
+        });
+    });
+</script>
+
+
 <script>
 
 // Select All Checkbox Functionality
@@ -1223,7 +1346,18 @@ document.addEventListener('DOMContentLoaded', function () {
     // Function to close the Add Employee Modal
     function closeAddEmployeeModal() {
         $('#addEmployeeModal').modal('hide');
+        location.reload();
 
     }
+</script>
+<script>
+    $(document).on('change', '#nationality_type', function () {
+        var nationality_type = $(this).val();
+        if (nationality_type == 1) {
+            $('#nationality').hide();
+        } else {
+            $('#nationality').show();
+        }
+    });
 </script>
 @endsection
