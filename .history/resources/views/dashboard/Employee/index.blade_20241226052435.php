@@ -12,7 +12,7 @@
                         <a href="{{ route('home') }}"><i class="ti ti-smart-home"></i>Home</a>
                     </li>
                 </ol>
-            </nav>
+            </nav>h
         </div>
         <div class="d-flex my-xl-auto right-content align-items-center flex-wrap ">
 
@@ -440,15 +440,41 @@
                                 <h6 class="col-md-12">تفاصيل الهوية / الأقامة</h6>
 
                                 <div class="form-group col-md-3">
-                                    <label for="hijri_date" class="form-label">تاريخ هجري</label>
-                                    <input type="text" class="form-control hijri-date-input" name="hijri_date" id="hijri_date">
+                                    <label for="residence_number" class="form-control-label">رقم الإقامة / الهوية</label>
+                                    <input class="form-control" name="residence_number" type="text" id="residence_number">
                                 </div>
 
                                 <div class="form-group col-md-3">
-                                    <label for="gregorian_date" class="form-label">تاريخ ميلادي</label>
-                                    <input type="text" class="form-control gregorian-date" name="gregorian_date" id="gregorian_date">
+                                    <label for="place_of_issuance_of_ID_residence" class="form-control-label">مكان إصدار الهوية / الإقامة</label>
+                                    <input class="form-control" name="place_of_issuance_of_ID_residence" type="text" id="place_of_issuance_of_ID_residence">
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    <label for="iqama_issuance_date_Hijri" class="form-control-label">(هجرى) تاريخ إصدار الهوية / الإقامة</label>
+                                    <input id="hijri_4" class="form-control hijri-date-input" name="iqama_issuance_date_Hijri" type="text" value="2024-12-26">
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    <label for="iqama_issuance_date_gregorian" class="form-control-label">(ميلادى) تاريخ إصدار الهوية / الإقامة</label>
+                                    <input id="gregorian_4" class="form-control gregorian-date" name="iqama_issuance_date_gregorian" type="text" value="2024-12-26">
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    <label for="iqama_issuance_expirydate_Hijri" class="form-control-label">(هجرى) تاريخ إنتهاء الهوية / الإقامة</label>
+                                    <input id="hijri_5" class="form-control hijri-date-input" name="iqama_issuance_expirydate_Hijri" type="text" value="2024-12-26">
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    <label for="iqama_issuance_expirydate_gregorian" class="form-control-label">(ميلادى) تاريخ إنتهاء الهوية / الإقامة</label>
+                                    <input id="gregorian_5" class="form-control gregorian-date" name="iqama_issuance_expirydate_gregorian" type="text" value="2024-12-26">
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    <label for="iqama_attachment" class="form-control-label">إضافة مرفق</label>
+                                    <input name="iqama_attachment" type="file" id="iqama_attachment">
                                 </div>
                             </div>
+
 
                         </div>
                         <div class="modal-footer">
@@ -1185,43 +1211,50 @@
 @endsection
 @section('script')
 
+<!-- Moment.js (Hijri Support) -->
+<script src="https://cdn.jsdelivr.net/npm/moment-hijri@2.20.1/moment-hijri.min.js"></script>
 
-<!-- Hijri DatePicker Styles -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/persian-datepicker@1.2.0/dist/css/persian-datepicker.min.css">
 
-<!-- Moment.js with Hijri support -->
-<script src="https://cdn.jsdelivr.net/npm/moment-hijri@2.17.0/moment-hijri.min.js"></script>
-
-<!-- Hijri DatePicker Script -->
-<script src="https://cdn.jsdelivr.net/npm/persian-datepicker@1.2.0/dist/js/persian-datepicker.min.js"></script>
-
-    <!-- Your HTML content -->
-
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <!-- Bootstrap JS (if not already included) -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Bootstrap Hijri Datepicker JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-hijri-datepicker/1.0.7/js/bootstrap-hijri-datepicker.min.js"></script>
-
-    <script>
-        $(document).ready(function() {
-            // Initialize the Hijri Datepicker
-            $('.hijri-date-input').hijriDatePicker({
-                format: 'YYYY/MM/DD',  // Set the format of the date
-                showSwitcher: true,     // Show the Hijri/Gregorian switcher
-                hijri: true,            // Enable Hijri calendar
-                locale: 'ar',           // Set the locale to Arabic
-                todayBtn: 'linked',     // Add a button for today
-                autoclose: true         // Close the datepicker after a date is selected
-            });
-        });
-    </script>
 <script>
 
+    $(document).ready(function() {
 
+        // Check if jQuery is loaded
+        if (typeof jQuery === 'undefined') {
+            console.error("jQuery is not loaded.");
+            return;
+        }
+
+        // Check if moment-hijri is loaded
+        if (typeof moment === 'undefined' || !moment.isMoment) {
+            console.error("Moment.js (with Hijri support) is not loaded.");
+            return;
+        }
+
+        // Initialize the Hijri date picker
+        $('.hijri-date-input').datetimepicker({
+            timepicker: false,
+            format: 'YYYY-MM-DD', // Customize this format if needed
+            lang: 'en', // Set the language to Arabic
+            hijri: true, // Enable Hijri mode
+            onSelectDate: function(current_datetime){
+                console.log("Hijri Date Selected: ", current_datetime);
+            }
+        });
+
+        // Initialize the Gregorian date picker (if needed)
+        $('.gregorian-date').datetimepicker({
+            timepicker: false,
+            format: 'YYYY-MM-DD',
+            onSelectDate: function(current_datetime){
+                console.log("Gregorian Date Selected: ", current_datetime);
+            }
+        });
+    });
+</script>
+
+
+<script>
 
 // Select All Checkbox Functionality
 document.addEventListener('DOMContentLoaded', function () {
@@ -1326,12 +1359,5 @@ document.addEventListener('DOMContentLoaded', function () {
             $('#nationality').show();
         }
     });
-    $(document).ready(function () {
-		var d_id = $('#department_id').val();
-		//getDesignation(d_id);
-	});
-
-
 </script>
-
 @endsection
