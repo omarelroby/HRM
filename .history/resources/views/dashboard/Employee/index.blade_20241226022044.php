@@ -374,14 +374,13 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <div class="mb-3 text-center">
+                                    <div class="mb-3">
                                         <label class="form-label">Do you want to register in the list of users?</label>
                                         <div class="form-check form-check-md form-switch d-flex justify-content-center">
                                             <input class="form-check-input" name="user_register" type="checkbox" id="user_register">
                                         </div>
                                     </div>
                                 </div>
-
 
                             </div>
                         </div>
