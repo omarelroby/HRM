@@ -147,7 +147,7 @@ class EmployeeController extends Controller
             } else {
                 return redirect()->back()->with('error', __('Your employee limit is over, Please upgrade plan.'));
             }
-            
+
             if(!empty($request->document) && !is_null($request->document)) {
                 $document_implode = implode(',', array_keys($request->document));
             } else {
@@ -453,11 +453,11 @@ class EmployeeController extends Controller
                 $path = $request->file('insurance_document')->storeAs('uploads/document/', $fileNameToStore);
                 $data['insurance_document'] = $fileNameToStore;
             }
-            
+
             if($request->user_register)
             {
                 $employee_user = User::where('id',$employee->user_id)->first();
-            
+
                 if(!$employee_user)
                 {
                     $user = User::create([
@@ -469,7 +469,7 @@ class EmployeeController extends Controller
                         'user_status'  => $request->user_register,
                         'created_by'   => \Auth::user()->creatorId(),
                     ]);
-    
+
                     $user->save();
                     $user->assignRole('Employee');
                 }else{
@@ -480,18 +480,18 @@ class EmployeeController extends Controller
                     }
                     $employee_user->save();
                 }
-    
+
                 $input['user_id']                = $employee_user ? $employee_user->id : $user->id;
                 if($request->password)
                 {
                     $input['password']    = Hash::make($request['password']);
                 }
             }
-            
+
             $input['nationality_id']         = $request['nationality_type'] == 0 ? $request['nationality_id'] : null;
             $input['driving_license_number'] = $request['driving_license'] == 1 ? $request['driving_license_number'] : null;
             $input['expiry_date']            = $request['driving_license'] == 1 ? $request['expiry_date'] : null;
-            
+
             $employee->fill($input)->save();
 
             // $employeeContract = EmployeeContracts::where('employee_id',$id)->first();
@@ -622,7 +622,7 @@ class EmployeeController extends Controller
             $emp_documents = EmployeeDocument::where('employee_id', $employee->employee_id)->get();
             $employee->delete();
             $user ? $user->delete() : '';
-            
+
             $dir = storage_path('uploads/document/');
             foreach ($emp_documents as $emp_document) {
                 $emp_document->delete();
@@ -639,7 +639,7 @@ class EmployeeController extends Controller
 
     public function show($id)
     {
-        if(\Auth::user()->can('Show Employee')) 
+        if(\Auth::user()->can('Show Employee'))
         {
             $lang                    = app()->getLocale() == 'ar' ? '_ar' : '';
             $empId                   = Crypt::decrypt($id);
@@ -698,14 +698,14 @@ class EmployeeController extends Controller
                 $carbonday            = \Carbon\Carbon::parse($attendancemovement->start_movement_date)->format('d');
                 $carbonmonth          = \Carbon\Carbon::parse($attendancemovement->start_movement_date)->format('m');
                 $carbonyear           = \Carbon\Carbon::parse($attendancemovement->start_movement_date)->format('Y');
-    
+
                 $begin_of_month = now()->setDay($carbonday)->setMonth($carbonmonth)->setYear($carbonyear);
                 $end_of_month   = $begin_of_month->clone()->addMonthNoOverflow()->subDay();
-    
+
                 for($i = $begin_of_month; $i <= ($end_of_month);  $i->addDay()){
                     $dates[] = $i->format('Y').'/'.$i->format('m').'/'.$i->format('d');
                 }
-                
+
             }
 
             $employeesAttendance = [];
@@ -716,12 +716,12 @@ class EmployeeController extends Controller
             {
                 $attendances['id']   = $id;
                 $attendances['name'] = $employeee;
-                
+
                 foreach($dates as $date)
                 {
                     $dt                 = Carbon::parse($date);
                     $employeeAttendance = AttendanceEmployee::where('employee_id', $id)->where('date', $date)->first();
-                    
+
                     if(!empty($employeeAttendance) && $employeeAttendance->status == 'Present')
                     {
                         $attendanceStatus[$date.'-'.$dt->format('l')] = 'P';
@@ -763,7 +763,7 @@ class EmployeeController extends Controller
                         {
                             $startDate           = Carbon::parse($absence->start_date);
                             array_push($datesArr,$startDate->addDays($i)->subDays(1)->format('Y/m/d'));
-                            
+
                             foreach($datesArr as $singleDate)
                             {
                                 $singledt     = Carbon::parse($singleDate);
@@ -783,13 +783,13 @@ class EmployeeController extends Controller
                                 }
                             }
                         }
-                    } 
+                    }
                 }
-                
+
                 $attendances['status'] = array_merge($attendanceStatus , $absenceStatus) ?? [];
                 $employeesAttendance[] = $attendances;
             }
-            
+
             $totalOverTime   = $ovetimeHours + ($overtimeMins / 60);
             $totalEarlyleave = $earlyleaveHours + ($earlyleaveMins / 60);
             $totalLate       = $lateHours + ($lateMins / 60);
@@ -809,7 +809,7 @@ class EmployeeController extends Controller
 
             return view('employee.show', compact('employee','lang','setting','holidays','employees','assets','documents','employeesAttendance','dates', 'data',
             'leaves','employee_shifts','banks','allowance_options','roles','jobclasses','job_types','work_units','laborCompanies','qualifications',
-            'jobtitles','nationalities','categories','attandance_employees','employeeContract','employeeFollowers','employeesId', 'branches', 'departments', 'designations', 
+            'jobtitles','nationalities','categories','attandance_employees','employeeContract','employeeFollowers','employeesId', 'branches', 'departments', 'designations',
             'documents','employee_tracking_dates','employee_shifts','employee_location'));
         } else {
             return redirect()->back()->with('error', __('Permission denied.'));
@@ -829,7 +829,7 @@ class EmployeeController extends Controller
     public function export()
     {
         $name = 'employee_' . date('Y-m-d i:h:s');
-        $data = Excel::download(new EmployeesExport(), $name . '.xlsx'); 
+        $data = Excel::download(new EmployeesExport(), $name . '.xlsx');
         if(ob_get_contents()) ob_end_clean();
 
         return $data;

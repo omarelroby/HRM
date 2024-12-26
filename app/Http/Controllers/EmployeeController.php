@@ -62,15 +62,20 @@ class EmployeeController extends Controller
 
         if(\Auth::user()->can('Manage Employee')) {
             if (Auth::user()->type == 'employee') {
-                $data['departments'] = Department::all();
+                $data['departments']  = Department::where('created_by', \Auth::user()->creatorId())->get();
+                $data['nationalities']     = Nationality::where('created_by', \Auth::user()->creatorId())->get();
+                $data['designations']     = Designation::where('created_by', \Auth::user()->creatorId())->get();
                 $data['employees'] = Employee::where('user_id', '=', Auth::user()->id)->get();
                 $lastMonthStart = Carbon::now()->subMonth()->startOfMonth();
                 $lastMonthEnd = Carbon::now()->subMonth()->endOfMonth();
                 $data['new_join'] = Employee::whereBetween('Join_date_gregorian', [$lastMonthStart, $lastMonthEnd])->count();
 
             } else {
+
                 $data['employees'] = Employee::where('created_by', \Auth::user()->creatorId())->get();
-                $data['departments'] = Department::all();
+                $data['nationalities']     = Nationality::where('created_by', \Auth::user()->creatorId())->get();
+                $data['designations']     = Designation::where('created_by', \Auth::user()->creatorId())->get();
+                $data['departments']  = Department::where('created_by', \Auth::user()->creatorId())->get();
                 $lastMonthStart = Carbon::now()->subMonth()->startOfMonth();
                 $lastMonthEnd = Carbon::now()->subMonth()->endOfMonth();
                 $data['new_join'] = Employee::whereBetween('Join_date_gregorian', [$lastMonthStart, $lastMonthEnd])->count();
@@ -161,7 +166,7 @@ class EmployeeController extends Controller
                 'password'     => Hash::make($request->password),
                 'type'         => 'employee',
                 'lang'         => 'en',
-                'user_status'  => $request->user_register,
+                'user_status'  => $request->user_register?1:0,
                 'created_by'   => \Auth::user()->creatorId(),
             ]);
 
@@ -243,13 +248,13 @@ class EmployeeController extends Controller
             $documents    = Document::where('created_by', \Auth::user()->creatorId())->get();
             $branches     = Branch::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
             $departments  = Department::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
+            $nationalities     = Nationality::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
             $designations = Designation::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
             $employee     = Employee::find($id);
             $employeesId  = \Auth::user()->employeeIdFormat($employee->employee_id);
 
             $jobtitles         = Jobtitle::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
             $categories        = Category::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
-            $nationalities     = Nationality::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
             $employeeContract  = EmployeeContracts::where('employee_id',$id)->first();
 
             $attandance_employees     = Http::get('https://attendance.our2030vision.com/employees');
