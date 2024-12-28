@@ -933,7 +933,7 @@
         // Handle Edit Button Click
         $('.edit-btn').on('click', function () {
             const id = $(this).data('id');
-
+            // Fetch employee details via AJAX
             $.ajax({
                 url: `/employee/${id}/edit`,
                 method: 'GET',

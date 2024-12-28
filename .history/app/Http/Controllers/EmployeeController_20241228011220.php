@@ -206,7 +206,7 @@ class EmployeeController extends Controller
                 'contract_enddate_Hijri'    => $request->contract_enddate_Hijri,
             ]);
 
-             
+            Allowance
             if ($request->allowance_option) {
                 foreach ($request->allowance_option as $key => $allowance) {
                     allowance::create([

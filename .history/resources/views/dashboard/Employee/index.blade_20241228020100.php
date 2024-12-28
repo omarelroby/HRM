@@ -695,13 +695,13 @@
         <div class="modal-content">
             <div class="modal-header">
                 <div class="d-flex align-items-center">
-                    <h4 class="modal-title me-2">Edit Employee</h4>
+                    <h4 class="modal-title me-2">Edit Employee</h4><span>Employee  ID : EMP -0024</span>
                 </div>
                 <button type="button" class="btn-close custom-btn-close" data-bs-dismiss="modal" aria-label="Close">
                     <i class="ti ti-x"></i>
                 </button>
             </div>
-
+           
         </div>
     </div>
 </div>
@@ -933,7 +933,7 @@
         // Handle Edit Button Click
         $('.edit-btn').on('click', function () {
             const id = $(this).data('id');
-
+            // Fetch employee details via AJAX
             $.ajax({
                 url: `/employee/${id}/edit`,
                 method: 'GET',
