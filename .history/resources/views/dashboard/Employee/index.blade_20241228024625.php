@@ -1,6 +1,16 @@
 @extends('dashboard.layouts.master')
- 
+
+@section('css')
+<style>
+.table-condensed thead tr th:nth-child(2),
+.table-condensed tbody tr td:nth-child(2) {
+    display: none !important;
+}
+</style>
+
+@endsection
 @section('content')
+
 <div class="content">
 
     <!-- Breadcrumb -->
@@ -212,8 +222,11 @@
                             </td>
                             <td>
                                 <div class="action-icon d-inline-flex">
-                                    <a href="{{ route('employee.edit',$employee->id) }}"
-                                       class="me-2" >
+                                    <a href="javascript:void(0);"
+                                       class="me-2 edit_employee_modal"
+                                       data-id="{{ $employee->id }}"
+                                       data-bs-toggle="modal"
+                                       data-bs-target="#edit_employee">
                                         <i class="ti ti-edit"></i>
                                     </a>
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#delete_modal">
@@ -664,6 +677,7 @@
         </div>
     </div>
 </div>
+
 {{-- Success Modal --}}
 <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -682,6 +696,45 @@
     </div>
 </div>
 {{-- end Success Modal --}}
+{{-- Edit Modal --}}
+<div class="modal fade" id="edit_employee" tabindex="-1" aria-labelledby="editEmployeeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="editEmployeeModalLabel">Edit Employee</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="edit_employee_form" method="POST">
+                @csrf
+                @method('PUT')
+                <div class="modal-body">
+                    <input type="hidden" id="edit_employee_id" name="id">
+                    <div class="mb-3">
+                        <label for="edit_name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="edit_name" name="name" required>
+                        <div class="invalid-feedback" id="edit_name_error"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_name_ar" class="form-label">Name (Arabic)</label>
+                        <input type="text" class="form-control" id="edit_name_ar" name="name_ar">
+                        <div class="invalid-feedback" id="edit_name_ar_error"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="edit_email" name="email" required>
+                        <div class="invalid-feedback" id="edit_email_error"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{{-- End Edit Modal --}}
+
 
 {{-- add Employee Success  --}}
 <div class="modal fade" id="success_modal" role="dialog">
@@ -900,5 +953,5 @@
 
 
 </script>
-
+ 
 @endsection

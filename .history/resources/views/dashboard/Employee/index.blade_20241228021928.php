@@ -1,6 +1,16 @@
 @extends('dashboard.layouts.master')
- 
+
+@section('css')
+<style>
+.table-condensed thead tr th:nth-child(2),
+.table-condensed tbody tr td:nth-child(2) {
+    display: none !important;
+}
+</style>
+
+@endsection
 @section('content')
+
 <div class="content">
 
     <!-- Breadcrumb -->
@@ -212,8 +222,8 @@
                             </td>
                             <td>
                                 <div class="action-icon d-inline-flex">
-                                    <a href="{{ route('employee.edit',$employee->id) }}"
-                                       class="me-2" >
+                                    <!-- Add the data-id attribute with the employee's ID -->
+                                    <a href="#" class="me-2 edit_employee_modal" data-id="{{ $employee->id }}" data-bs-toggle="modal" data-bs-target="#edit_employee">
                                         <i class="ti ti-edit"></i>
                                     </a>
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#delete_modal">
@@ -221,7 +231,6 @@
                                     </a>
                                 </div>
                             </td>
-
 
 
                         </tr>
@@ -664,6 +673,7 @@
         </div>
     </div>
 </div>
+
 {{-- Success Modal --}}
 <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -682,7 +692,73 @@
     </div>
 </div>
 {{-- end Success Modal --}}
+{{-- Edit modal --}}
+<div class="modal fade" id="edit_employee">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="d-flex align-items-center">
+                    <h4 class="modal-title me-2">Edit Employee</h4>
+                </div>
+                <button type="button" class="btn-close custom-btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="ti ti-x"></i>
+                </button>
+            </div>
+            <form id="add_employee" method="post">
+                @csrf
+                <div id="error-messages" class="alert alert-danger d-none">
+                    <ul></ul>
+                </div>
 
+                <div class="contact-grids-tab">
+                    <ul class="nav nav-underline" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="info-tab-edit" data-bs-toggle="tab" data-bs-target="#basic-info-edit" type="button" role="tab" aria-selected="true">{{ __('Basic Information') }}</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="identity-tab-edit" data-bs-toggle="tab" data-bs-target="#identity-edit" type="button" role="tab" aria-selected="false" tabindex="-1">{{ __('ID Details') }}</button>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="basic-info-edit" role="tabpanel" aria-labelledby="info-tab-edit">
+                        <div class="modal-body pb-0">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="name" class="form-label">{{ __('Name') }} <span class="text-danger">*</span></label>
+                                        <input type="text" name="name" id="name" class="form-control">
+                                        <div id="name_error" class="invalid-feedback"></div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="name_ar" class="form-label">{{ __('Name (Arabic)') }}</label>
+                                        <input type="text" name="name_ar" id="name_ar" class="form-control">
+                                        <div id="name_ar_error" class="invalid-feedback"></div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label">{{ __('Email') }} <span class="text-danger">*</span></label>
+                                        <input type="email" name="email" id="email" class="form-control">
+                                        <div id="email_error" class="invalid-feedback"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+    </div>
+</div>
+{{-- end edit Modal --}}
 {{-- add Employee Success  --}}
 <div class="modal fade" id="success_modal" role="dialog">
     <div class="modal-dialog modal-dialog-centered modal-sm">
@@ -900,5 +976,48 @@
 
 
 </script>
+<script>
+    $(document).ready(function () {
+        $('.edit_employee_modal').on('click', function () {
+            const id = $(this).data('id'); // Retrieve the employee ID
+            console.log(id);
 
+            // Use the ID to perform further actions, like populating the modal with employee details
+            // Example: fetch employee data via AJAX or update the modal content dynamically
+            $.ajax({
+                url: `/employee/${id}/edit`, // Adjust URL to your API/route
+                method: 'GET',
+                success: function(response) {
+                    // Populate modal fields with response data
+                    $('#editEmployeeModal #employeeName').val(response.name);
+                    $('#editEmployeeModal #employeeEmail').val(response.email);
+                    // Add other fields as needed
+                },
+                error: function(error) {
+                    console.error('Error fetching employee data:', error);
+                }
+            });
+          });
+
+
+
+        // Handle Edit Employee Form Submission
+        $('#edit_employee_form').on('submit', function (e) {
+            e.preventDefault();
+            const id = $('#edit_employee_id').val();
+            const formData = $(this).serialize();
+            $.ajax({
+                url: `/employee/${id}`,
+                method: 'PUT',
+                data: formData,
+                success: function (response) {
+                    location.reload();
+                },
+                error: function (xhr) {
+                    alert('An error occurred.');
+                }
+            });
+        });
+    });
+</script>
 @endsection

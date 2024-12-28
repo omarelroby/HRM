@@ -1,6 +1,16 @@
 @extends('dashboard.layouts.master')
- 
+
+@section('css')
+<style>
+.table-condensed thead tr th:nth-child(2),
+.table-condensed tbody tr td:nth-child(2) {
+    display: none !important;
+}
+</style>
+
+@endsection
 @section('content')
+
 <div class="content">
 
     <!-- Breadcrumb -->
@@ -212,8 +222,8 @@
                             </td>
                             <td>
                                 <div class="action-icon d-inline-flex">
-                                    <a href="{{ route('employee.edit',$employee->id) }}"
-                                       class="me-2" >
+                                    <!-- Add the data-id attribute with the employee's ID -->
+                                    <a href="#" class="me-2 edit_employee" data-id="{{ $employee->id }}" data-bs-toggle="modal" data-bs-target="#editEmployeeModal">
                                         <i class="ti ti-edit"></i>
                                     </a>
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#delete_modal">
@@ -221,7 +231,6 @@
                                     </a>
                                 </div>
                             </td>
-
 
 
                         </tr>
@@ -664,6 +673,7 @@
         </div>
     </div>
 </div>
+
 {{-- Success Modal --}}
 <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -682,7 +692,22 @@
     </div>
 </div>
 {{-- end Success Modal --}}
+<div class="modal fade" id="edit_employee">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="d-flex align-items-center">
+                    <h4 class="modal-title me-2">Edit Employee</h4>
+                </div>
+                <button type="button" class="btn-close custom-btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="ti ti-x"></i>
+                </button>
+            </div>
 
+        </div>
+    </div>
+</div>
+{{-- end edit Modal --}}
 {{-- add Employee Success  --}}
 <div class="modal fade" id="success_modal" role="dialog">
     <div class="modal-dialog modal-dialog-centered modal-sm">
@@ -901,4 +926,52 @@
 
 </script>
 
+@endsection
+
+
+@section('script')
+<script>
+    $(document).ready(function () {
+        $('.edit_employee').on('click', function () {
+    const id = $(this).data('id'); // Retrieve the employee ID
+    console.log(id);
+
+    // Use the ID to perform further actions, like populating the modal with employee details
+    // Example: fetch employee data via AJAX or update the modal content dynamically
+    $.ajax({
+        url: `/employee/${id}/edit`, // Adjust URL to your API/route
+        method: 'GET',
+        success: function(response) {
+            // Populate modal fields with response data
+            $('#editEmployeeModal #employeeName').val(response.name);
+            $('#editEmployeeModal #employeeEmail').val(response.email);
+            // Add other fields as needed
+        },
+        error: function(error) {
+            console.error('Error fetching employee data:', error);
+        }
+    });
+});
+
+
+
+        // Handle Edit Employee Form Submission
+        $('#edit_employee_form').on('submit', function (e) {
+            e.preventDefault();
+            const id = $('#edit_employee_id').val();
+            const formData = $(this).serialize();
+            $.ajax({
+                url: `/employee/${id}`,
+                method: 'PUT',
+                data: formData,
+                success: function (response) {
+                    location.reload();
+                },
+                error: function (xhr) {
+                    alert('An error occurred.');
+                }
+            });
+        });
+    });
+</script>
 @endsection

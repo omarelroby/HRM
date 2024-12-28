@@ -1,6 +1,16 @@
 @extends('dashboard.layouts.master')
- 
+
+@section('css')
+<style>
+.table-condensed thead tr th:nth-child(2),
+.table-condensed tbody tr td:nth-child(2) {
+    display: none !important;
+}
+</style>
+
+@endsection
 @section('content')
+
 <div class="content">
 
     <!-- Breadcrumb -->
@@ -212,8 +222,11 @@
                             </td>
                             <td>
                                 <div class="action-icon d-inline-flex">
-                                    <a href="{{ route('employee.edit',$employee->id) }}"
-                                       class="me-2" >
+                                    <a href="{{ route('employee.') }}"
+                                       class="me-2 edit_employee_modal"
+                                       data-id="{{ $employee->id }}"
+                                       data-bs-toggle="modal"
+                                       data-bs-target="#edit_employee">
                                         <i class="ti ti-edit"></i>
                                     </a>
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#delete_modal">

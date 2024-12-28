@@ -1,6 +1,16 @@
 @extends('dashboard.layouts.master')
- 
+
+@section('css')
+<style>
+.table-condensed thead tr th:nth-child(2),
+.table-condensed tbody tr td:nth-child(2) {
+    display: none !important;
+}
+</style>
+
+@endsection
 @section('content')
+
 <div class="content">
 
     <!-- Breadcrumb -->
@@ -212,8 +222,11 @@
                             </td>
                             <td>
                                 <div class="action-icon d-inline-flex">
-                                    <a href="{{ route('employee.edit',$employee->id) }}"
-                                       class="me-2" >
+                                    <a href="javascript:void(0);"
+                                       class="me-2 edit_employee_modal"
+                                       data-id="{{ $employee->id }}"
+                                       data-bs-toggle="modal"
+                                       data-bs-target="#edit_employee">
                                         <i class="ti ti-edit"></i>
                                     </a>
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#delete_modal">
@@ -664,6 +677,7 @@
         </div>
     </div>
 </div>
+
 {{-- Success Modal --}}
 <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -682,6 +696,45 @@
     </div>
 </div>
 {{-- end Success Modal --}}
+{{-- Edit Modal --}}
+<div class="modal fade" id="edit_employee" tabindex="-1" aria-labelledby="editEmployeeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="editEmployeeModalLabel">Edit Employee</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="edit_employee_form" method="POST">
+                @csrf
+                @method('PUT')
+                <div class="modal-body">
+                    <input type="hidden" id="edit_employee_id" name="id">
+                    <div class="mb-3">
+                        <label for="edit_name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="edit_name" name="name" required>
+                        <div class="invalid-feedback" id="edit_name_error"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_name_ar" class="form-label">Name (Arabic)</label>
+                        <input type="text" class="form-control" id="edit_name_ar" name="name_ar">
+                        <div class="invalid-feedback" id="edit_name_ar_error"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="edit_email" name="email" required>
+                        <div class="invalid-feedback" id="edit_email_error"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{{-- End Edit Modal --}}
+
 
 {{-- add Employee Success  --}}
 <div class="modal fade" id="success_modal" role="dialog">
@@ -900,5 +953,89 @@
 
 
 </script>
+<script>
+    $(document).on('click', '.edit_employee', function () {
+    // Get data from button attributes
+    const id = $(this).data('id');
+    const name = $(this).data('name');
+    const name_ar = $(this).data('name_ar');
+    const email = $(this).data('email');
 
+    // Populate modal fields
+    $('#edit_name').val(name);
+    $('#edit_name_ar').val(name_ar);
+    $('#edit_email').val(email);
+
+    // Set the form action dynamically
+    $('#edit_employee_form').attr('action', `/employee/${id}`);
+});
+
+// Handle form submission with AJAX
+$('#edit_employee_form').on('submit', function (e) {
+    // e.preventDefault();
+
+    // const formData = $(this).serialize();
+
+    // $.ajax({
+    //     url: $(this).attr('action'),
+    //     type: 'PUT',
+    //     data: formData,
+    //     success: function (response) {
+    //         $('#edit_employee').modal('hide');
+    //         alert('Employee updated successfully');
+    //         location.reload(); // Optionally refresh the page or update the UI dynamically
+    //     },
+    //     error: function (error) {
+    //         console.error('Error updating employee:', error);
+    //         alert('Failed to update employee. Please try again.');
+    //         }
+    //     });
+    // });
+
+    $(document).ready(function () {
+        $('.edit_employee_modal').on('click', function () {
+        const id = $(this).data('id'); // Retrieve the employee ID
+        console.log(id);
+    $.ajax({
+        url: `/employee/${id}/edit`, // Uses the resource route
+        method: 'GET',
+        beforeSend: function () {
+            // Optional: Add a loading indicator
+            $('#edit_employee').addClass('loading');
+        },
+        success: function (response) {
+            // Populate modal fields with data
+            $('#edit_employee #name').val(response.employee.name);
+            $('#edit_employee #email').val(response.employee.email);
+        },
+        error: function (xhr) {
+            alert(`Error: Unable to fetch employee data.`);
+            console.error(xhr);
+        },
+        complete: function () {
+            // Remove loading indicator
+            $('#edit_employee').removeClass('loading');
+        }
+    });
+});
+
+        $('#edit_employee_form').on('submit', function (e) {
+            e.preventDefault();
+            const id = $('#edit_employee_id').val();
+            const formData = $(this).serialize();
+            $.ajax({
+                url: `/employee/${id}`,
+                method: 'PUT',
+                data: formData,
+                success: function (response) {
+                    location.reload();
+                },
+                error: function (xhr) {
+                    alert('An error occurred.');
+                }
+                 });
+            });
+         });
+
+</script>
 @endsection

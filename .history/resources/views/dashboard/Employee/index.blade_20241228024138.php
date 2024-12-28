@@ -1,6 +1,16 @@
 @extends('dashboard.layouts.master')
- 
+
+@section('css')
+<style>
+.table-condensed thead tr th:nth-child(2),
+.table-condensed tbody tr td:nth-child(2) {
+    display: none !important;
+}
+</style>
+
+@endsection
 @section('content')
+
 <div class="content">
 
     <!-- Breadcrumb -->
@@ -212,8 +222,11 @@
                             </td>
                             <td>
                                 <div class="action-icon d-inline-flex">
-                                    <a href="{{ route('employee.edit',$employee->id) }}"
-                                       class="me-2" >
+                                    <a href="javascript:void(0);"
+                                       class="me-2 edit_employee_modal"
+                                       data-id="{{ $employee->id }}"
+                                       data-bs-toggle="modal"
+                                       data-bs-target="#edit_employee">
                                         <i class="ti ti-edit"></i>
                                     </a>
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#delete_modal">
@@ -664,6 +677,7 @@
         </div>
     </div>
 </div>
+
 {{-- Success Modal --}}
 <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -682,6 +696,84 @@
     </div>
 </div>
 {{-- end Success Modal --}}
+{{-- Edit Modal --}}
+<div class="modal fade" id="edit_employee" tabindex="-1" aria-labelledby="editEmployeeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="d-flex align-items-center">
+                    <h4 class="modal-title me-2">Edit Employee</h4>
+                </div>
+                <button type="button" class="btn-close custom-btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="edit_employee_form" method="POST">
+                @csrf
+                @method('PUT')
+                <div id="error-messages" class="alert alert-danger d-none">
+                    <ul></ul>
+                </div>
+
+                <div class="contact-grids-tab">
+                    <ul class="nav nav-underline" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="info-tab-edit" data-bs-toggle="tab" data-bs-target="#basic-info-edit" type="button" role="tab" aria-selected="true">{{ __('Basic Information') }}</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="identity-tab-edit" data-bs-toggle="tab" data-bs-target="#identity-edit" type="button" role="tab" aria-selected="false" tabindex="-1">{{ __('ID Details') }}</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="address-tab-edit" data-bs-toggle="tab" data-bs-target="#address-edit" type="button" role="tab" aria-selected="false" tabindex="-1">{{ __('Address Details') }}</button>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="basic-info-edit" role="tabpanel" aria-labelledby="info-tab-edit">
+                        <div class="modal-body pb-0">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="edit_name" class="form-label">{{ __('Name') }} <span class="text-danger">*</span></label>
+                                        <input type="text" name="name" id="edit_name" class="form-control">
+                                        <div id="name_error" class="invalid-feedback"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="edit_name_ar" class="form-label">{{ __('Name (Arabic)') }}</label>
+                                        <input type="text" name="name_ar" id="edit_name_ar" class="form-control">
+                                        <div id="name_ar_error" class="invalid-feedback"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="edit_email" class="form-label">{{ __('Email') }} <span class="text-danger">*</span></label>
+                                        <input type="email" name="email" id="edit_email" class="form-control">
+                                        <div id="email_error" class="invalid-feedback"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="address-edit" role="tabpanel" aria-labelledby="address-tab-edit">
+                        <div class="modal-body">
+                            <div class="card bg-light-500 shadow-none">
+                                <div class="card-body">
+                                    <h6>{{ __('Address Details') }}</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-light border me-2" data-bs-dismiss="modal">{{ __('Cancel') }}</button>
+                            <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{{-- End Edit Modal --}}
 
 {{-- add Employee Success  --}}
 <div class="modal fade" id="success_modal" role="dialog">
@@ -900,5 +992,89 @@
 
 
 </script>
+<script>
+    $(document).on('click', '.edit_employee', function () {
+    // Get data from button attributes
+    const id = $(this).data('id');
+    const name = $(this).data('name');
+    const name_ar = $(this).data('name_ar');
+    const email = $(this).data('email');
 
+    // Populate modal fields
+    $('#edit_name').val(name);
+    $('#edit_name_ar').val(name_ar);
+    $('#edit_email').val(email);
+
+    // Set the form action dynamically
+    $('#edit_employee_form').attr('action', `/employee/${id}`);
+});
+
+// Handle form submission with AJAX
+$('#edit_employee_form').on('submit', function (e) {
+    // e.preventDefault();
+
+    // const formData = $(this).serialize();
+
+    // $.ajax({
+    //     url: $(this).attr('action'),
+    //     type: 'PUT',
+    //     data: formData,
+    //     success: function (response) {
+    //         $('#edit_employee').modal('hide');
+    //         alert('Employee updated successfully');
+    //         location.reload(); // Optionally refresh the page or update the UI dynamically
+    //     },
+    //     error: function (error) {
+    //         console.error('Error updating employee:', error);
+    //         alert('Failed to update employee. Please try again.');
+    //         }
+    //     });
+    // });
+
+    $(document).ready(function () {
+        $('.edit_employee_modal').on('click', function () {
+        const id = $(this).data('id'); // Retrieve the employee ID
+        co
+    $.ajax({
+        url: `/employee/${id}/edit`, // Uses the resource route
+        method: 'GET',
+        beforeSend: function () {
+            // Optional: Add a loading indicator
+            $('#edit_employee').addClass('loading');
+        },
+        success: function (response) {
+            // Populate modal fields with data
+            $('#edit_employee #name').val(response.employee.name);
+            $('#edit_employee #email').val(response.employee.email);
+        },
+        error: function (xhr) {
+            alert(`Error: Unable to fetch employee data.`);
+            console.error(xhr);
+        },
+        complete: function () {
+            // Remove loading indicator
+            $('#edit_employee').removeClass('loading');
+        }
+    });
+});
+
+        $('#edit_employee_form').on('submit', function (e) {
+            e.preventDefault();
+            const id = $('#edit_employee_id').val();
+            const formData = $(this).serialize();
+            $.ajax({
+                url: `/employee/${id}`,
+                method: 'PUT',
+                data: formData,
+                success: function (response) {
+                    location.reload();
+                },
+                error: function (xhr) {
+                    alert('An error occurred.');
+                }
+                 });
+            });
+         });
+
+</script>
 @endsection

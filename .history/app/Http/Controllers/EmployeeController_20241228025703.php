@@ -260,7 +260,7 @@ class EmployeeController extends Controller
             'designations'     => Designation::where('created_by', $creatorId)->get(),
             'jobtitles'        => Jobtitle::where('created_by', $creatorId)->get(),
             'categories'       => Category::where('created_by', $creatorId)->get(),
-            'employee_shifts'  => Employee_shift::where('created_by', $creatorId)->get(),
+            'employee_shifts'  => Employee_shift::where('created_by', $creatorId)->get();
             'employee_location'=> Place::where('created_by', $creatorId)->get(),
             'employee'         => Employee::findOrFail($id),
             'employeeContract' => EmployeeContracts::where('employee_id', $id)->first(),

@@ -1,6 +1,16 @@
 @extends('dashboard.layouts.master')
- 
+
+@section('css')
+<style>
+.table-condensed thead tr th:nth-child(2),
+.table-condensed tbody tr td:nth-child(2) {
+    display: none !important;
+}
+</style>
+
+@endsection
 @section('content')
+
 <div class="content">
 
     <!-- Breadcrumb -->
@@ -212,8 +222,11 @@
                             </td>
                             <td>
                                 <div class="action-icon d-inline-flex">
-                                    <a href="{{ route('employee.edit',$employee->id) }}"
-                                       class="me-2" >
+                                    <a href="javascript:void(0);"
+                                       class="me-2 edit_employee_modal"
+                                       data-id="{{ $employee->id }}"
+                                       data-bs-toggle="modal"
+                                       data-bs-target="#edit_employee">
                                         <i class="ti ti-edit"></i>
                                     </a>
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#delete_modal">
@@ -664,6 +677,7 @@
         </div>
     </div>
 </div>
+
 {{-- Success Modal --}}
 <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -682,7 +696,7 @@
     </div>
 </div>
 {{-- end Success Modal --}}
-
+ 
 {{-- add Employee Success  --}}
 <div class="modal fade" id="success_modal" role="dialog">
     <div class="modal-dialog modal-dialog-centered modal-sm">

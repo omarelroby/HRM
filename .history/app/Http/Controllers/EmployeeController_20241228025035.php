@@ -245,7 +245,11 @@ class EmployeeController extends Controller
     public function edit($id)
     {
 
-
+        try {
+            $id = Crypt::decrypt($id);
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', __('Invalid ID.'));
+        }
 
         if (!\Auth::user()->can('Edit Employee')) {
             return redirect()->back()->with('error', __('Permission denied.'));
@@ -254,12 +258,12 @@ class EmployeeController extends Controller
         $creatorId = \Auth::user()->creatorId();
         $data = [
             'documents'        => Document::where('created_by', $creatorId)->get(),
-            'branches'         => Branch::where('created_by', $creatorId)->get(),
-            'departments'      => Department::where('created_by', $creatorId)->get(),
-            'nationalities'    => Nationality::where('created_by', $creatorId)->get(),
-            'designations'     => Designation::where('created_by', $creatorId)->get(),
-            'jobtitles'        => Jobtitle::where('created_by', $creatorId)->get(),
-            'categories'       => Category::where('created_by', $creatorId)->get(),
+            'branches'         => Branch::where('created_by', $creatorId)->pluck('name', 'id'),
+            'departments'      => Department::where('created_by', $creatorId)->pluck('name', 'id'),
+            'nationalities'    => Nationality::where('created_by', $creatorId)->pluck('name', 'id'),
+            'designations'     => Designation::where('created_by', $creatorId)->pluck('name', 'id'),
+            'jobtitles'        => Jobtitle::where('created_by', $creatorId)->pluck('name', 'id'),
+            'categories'       => Category::where('created_by', $creatorId)->pluck('name', 'id'),
             'employee_shifts'  => Employee_shift::where('created_by', $creatorId)->get(),
             'employee_location'=> Place::where('created_by', $creatorId)->get(),
             'employee'         => Employee::findOrFail($id),
@@ -267,10 +271,10 @@ class EmployeeController extends Controller
             'employeesId'      => \Auth::user()->employeeIdFormat(Employee::findOrFail($id)->employee_id),
         ];
 
-        // $attendanceResponse = Http::get('https://attendance.our2030vision.com/employees');
-        // $data['attendance_employees'] = $attendanceResponse->successful() ? $attendanceResponse['data'] : [];
+        $attendanceResponse = Http::get('https://attendance.our2030vision.com/employees');
+        $data['attendance_employees'] = $attendanceResponse->successful() ? $attendanceResponse['data'] : [];
 
-        return view('dashboard.Employee.edit', $data);
+        return view('Employee.', $data);
     }
 
 

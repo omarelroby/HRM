@@ -1,5 +1,7 @@
 @extends('dashboard.layouts.master')
-@include('dashboard.layouts.header')
+@section('css')
+ @
+@endsection
 @section('content')
 
     <div class="row">
