@@ -166,7 +166,7 @@
                     <div class="ms-2">
                         <h6 class="fs-14 fw-medium text-truncate">{{ $emp->employee->name ?? '' }}</h6>
                         <h6 class="fs-14 fw-medium text-truncate"></h6>
-                        <p class="fs-13">{{ $emp->employee->department->name ?? '' }}</p>
+                        <p class="fs-13">{{ $->employee->department->name ?? '' }}</p>
                     </div>
                 </div>
 
@@ -356,7 +356,7 @@
                             <div class="d-flex align-items-center">
                                 <div class="ms-2">
                                     <h6 class="fw-medium"><a href="javascript:void(0);">{{ $employee->name }}</a></h6>
-                                    <span class="fs-12">{{ $employee->department->name??'' }}</span>
+                                    <span class="fs-12">{{ $employee->department->name }}</span>
                                 </div>
                             </div>
                         </td>

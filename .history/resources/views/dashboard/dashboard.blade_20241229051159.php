@@ -356,7 +356,7 @@
                             <div class="d-flex align-items-center">
                                 <div class="ms-2">
                                     <h6 class="fw-medium"><a href="javascript:void(0);">{{ $employee->name }}</a></h6>
-                                    <span class="fs-12">{{ $employee->department->name??'' }}</span>
+                                    <span class="fs-12">{{ $employee->department->name }}</span>
                                 </div>
                             </div>
                         </td>
