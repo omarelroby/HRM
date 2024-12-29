@@ -74,7 +74,7 @@
                                     <div class="mb-3">
                                         <label for="dob" class="form-label">{{ __('Date of Birth') }} <span class="text-danger">*</span></label>
                                         <div class="input-icon-start position-relative">
-                                            <input type="text" name="dob" value="{{ $employee->dob }}" id="dob" class="form-control form-control-lg datetimepicker" placeholder="dd/mm/yyyy">
+                                            <input type="text" name="dob" value="{{  }}" id="dob" class="form-control form-control-lg datetimepicker" placeholder="dd/mm/yyyy">
                                             <span class="input-icon-addon">
                                                 <i class="ti ti-calendar text-gray-7"></i>
                                             </span>
@@ -89,7 +89,7 @@
                                         <select name="department_id" required id="designati" class="select select2-hidden-accessible">
                                             <option value="">{{ __('Select') }}</option>
                                             @foreach($departments as $department)
-                                                <option @if($department->id == $employee->department_id) selected @endif value="{{ $department->id }}">{{ $department->name }}</option>
+                                                <option value="{{ $department->id }}">{{ $department->name }}</option>
                                             @endforeach
                                         </select>
                                         <div id="" class="invalid-feedback"></div>

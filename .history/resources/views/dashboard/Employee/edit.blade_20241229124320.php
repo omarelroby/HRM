@@ -89,7 +89,7 @@
                                         <select name="department_id" required id="designati" class="select select2-hidden-accessible">
                                             <option value="">{{ __('Select') }}</option>
                                             @foreach($departments as $department)
-                                                <option @if($department->id == $employee->department_id) selected @endif value="{{ $department->id }}">{{ $department->name }}</option>
+                                                <option @e value="{{ $department->id }}">{{ $department->name }}</option>
                                             @endforeach
                                         </select>
                                         <div id="" class="invalid-feedback"></div>
