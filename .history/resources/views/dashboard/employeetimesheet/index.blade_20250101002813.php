@@ -32,7 +32,7 @@
                 </div>
             </div>
             <div class="mb-2">
-                <a href="#" data-bs-toggle="modal" data-bs-target="#addEmployeeModal" class="btn btn-primary d-flex align-items-center"><i class="ti ti-circle-plus me-2"></i>{{ __('Add Employee time sheet') }}</a>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#addEmployeeModal" class="btn btn-primary d-flex align-items-center"><i class="ti ti-circle-plus me-2"></i>Add Employee</a>
             </div>
 
         </div>
@@ -43,7 +43,7 @@
 
     <div class="card">
         <div class="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
-            <h5>{{ __('Timesheet') }}</h5>
+            <h5>Employees List</h5>
 
         </div>
         <div class="row">
@@ -74,7 +74,7 @@
                  </div>
             </div>
                 </div>
-                   <div class="table-responsive">
+                <  <div class="table-responsive">
                     <table class="table table-striped table-bordered table-hover dataTables">
                         <thead>
                             <tr>
@@ -103,25 +103,12 @@
                                             </a>
                                         @endcan
                                         @can('Delete TimeSheet')
-                                        <!-- Delete Button -->
-                                        <a href="#"
-                                        class="btn btn-danger btn-icon-only"
-                                        data-toggle="tooltip"
-                                        data-original-title="{{ __('Delete') }}"
-                                        onclick="if(confirm('{{ __('Are you sure? This action cannot be undone.') }}')) {
-                                                        document.getElementById('delete-form-{{ $timeSheet->id }}').submit();
-                                                    }">
-                                            <i class="fas fa-trash-alt"></i>
-                                        </a>
-
-                                        <!-- Form for Delete -->
-                                        {!! Form::open(['method' => 'DELETE', 'route' => ['timesheet.destroy', $timeSheet->id], 'id' => 'delete-form-' . $timeSheet->id, 'style' => 'display:none;']) !!}
-                                        {!! Form::close() !!}
+                                            <a href="#" class="btn btn-danger btn-icon-only" data-toggle="tooltip" data-original-title="{{ __('Delete') }}" data-confirm="{{ __('Are you sure?') }}|{{ __('This action cannot be undone. Do you want to continue?') }}" data-confirm-yes="document.getElementById('delete-form-{{ $timeSheet->id }}').submit();">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </a>
+                                            {!! Form::open(['method' => 'DELETE', 'route' => ['timesheet.destroy', $timeSheet->id], 'id' => 'delete-form-' . $timeSheet->id]) !!}
+                                            {!! Form::close() !!}
                                         @endcan
-
-
-
-
                                     </td>
                                 </tr>
                             @endforeach
@@ -142,8 +129,8 @@
     <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">{{ __('Add Employee time sheet') }}</h5>
-                {{-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> --}}
+                <h5 class="modal-title">{{ __('Add New Employee') }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
             {{ Form::open(array('route' => array('timesheet.store'))) }}
@@ -506,20 +493,6 @@ document.addEventListener('DOMContentLoaded', function () {
 		var d_id = $('#department_id').val();
 		//getDesignation(d_id);
 	});
-
-    $(document).ready(function() {
-    $('[data-confirm]').on('click', function (e) {
-        e.preventDefault();
-        var message = $(this).data('confirm').split('|');
-        var confirmMessage = message[0] + "\n\n" + message[1];
-
-        // Show the confirmation dialog
-        if (confirm(confirmMessage)) {
-            var formId = $(this).data('confirm-yes');
-            document.getElementById(formId).submit(); // Submit the form if confirmed
-        }
-    });
-});
 
 
 

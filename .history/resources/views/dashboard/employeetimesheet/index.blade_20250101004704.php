@@ -43,7 +43,7 @@
 
     <div class="card">
         <div class="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
-            <h5>{{ __('Timesheet') }}</h5>
+            <h5>Employees List</h5>
 
         </div>
         <div class="row">
@@ -79,7 +79,7 @@
                         <thead>
                             <tr>
                                 @if (\Auth::user()->type != 'employee')
-                                    <th>{{ __('Employee') }}</th>
+                                    <th>{{ __('Timesheet') }}</th>
                                 @endif
                                 <th>{{ __('Date') }}</th>
                                 <th>{{ __('Hours') }}</th>

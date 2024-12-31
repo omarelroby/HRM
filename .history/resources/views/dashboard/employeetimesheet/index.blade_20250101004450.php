@@ -43,7 +43,7 @@
 
     <div class="card">
         <div class="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
-            <h5>{{ __('Timesheet') }}</h5>
+            <h5>Employees List</h5>
 
         </div>
         <div class="row">
@@ -105,20 +105,17 @@
                                         @can('Delete TimeSheet')
                                         <!-- Delete Button -->
                                         <a href="#"
-                                        class="btn btn-danger btn-icon-only"
-                                        data-toggle="tooltip"
-                                        data-original-title="{{ __('Delete') }}"
-                                        onclick="if(confirm('{{ __('Are you sure? This action cannot be undone.') }}')) {
-                                                        document.getElementById('delete-form-{{ $timeSheet->id }}').submit();
-                                                    }">
+                                           class="btn btn-danger btn-icon-only"
+                                           data-toggle="tooltip"
+                                           data-original-title="{{ __('Delete') }}"
+                                           onclick="return confirm('{{ __('Are you sure? This action cannot be undone.') }}');">
                                             <i class="fas fa-trash-alt"></i>
                                         </a>
 
                                         <!-- Form for Delete -->
                                         {!! Form::open(['method' => 'DELETE', 'route' => ['timesheet.destroy', $timeSheet->id], 'id' => 'delete-form-' . $timeSheet->id, 'style' => 'display:none;']) !!}
                                         {!! Form::close() !!}
-                                        @endcan
-
+                                    @endcan
 
 
 

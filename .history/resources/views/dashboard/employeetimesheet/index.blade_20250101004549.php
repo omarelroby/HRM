@@ -43,7 +43,7 @@
 
     <div class="card">
         <div class="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
-            <h5>{{ __('Timesheet') }}</h5>
+            <h5>Employees List</h5>
 
         </div>
         <div class="row">
@@ -117,7 +117,7 @@
                                         <!-- Form for Delete -->
                                         {!! Form::open(['method' => 'DELETE', 'route' => ['timesheet.destroy', $timeSheet->id], 'id' => 'delete-form-' . $timeSheet->id, 'style' => 'display:none;']) !!}
                                         {!! Form::close() !!}
-                                        @endcan
+                                    @endcan
 
 
 

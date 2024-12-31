@@ -4,7 +4,7 @@
     {{ __('Manage Goal Tracking') }}
 @endsection
 
-@section('css')
+@section('css-page')
 <style>
     .progress-percentage {
         display: inline-block;

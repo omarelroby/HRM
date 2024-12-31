@@ -43,7 +43,7 @@
 
     <div class="card">
         <div class="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
-            <h5>{{ __('Timesheet') }}</h5>
+            <h5>Employees List</h5>
 
         </div>
         <div class="row">
@@ -97,29 +97,19 @@
                                     <td>{{ $timeSheet->hours }}</td>
                                     <td>{{ $timeSheet->remark }}</td>
                                     <td class="text-right">
-                                        @can('Edit TimeSheet')
-                                            <a href="{{ route('timesheet.edit', $timeSheet->id) }}" data-url="{{ route('timesheet.edit', $timeSheet->id) }}" data-size="lg" data-ajax-popup="true" data-title="{{ __('Edit Timesheet') }}" class="btn btn-success btn-icon-only" data-toggle="tooltip" data-original-title="{{ __('Edit') }}">
-                                                <i class="fa fa-edit"></i>
-                                            </a>
-                                        @endcan
                                         @can('Delete TimeSheet')
-                                        <!-- Delete Button -->
                                         <a href="#"
                                         class="btn btn-danger btn-icon-only"
                                         data-toggle="tooltip"
                                         data-original-title="{{ __('Delete') }}"
-                                        onclick="if(confirm('{{ __('Are you sure? This action cannot be undone.') }}')) {
-                                                        document.getElementById('delete-form-{{ $timeSheet->id }}').submit();
-                                                    }">
+                                        data-confirm="{{ __('Are you sure?') }}|{{ __('This action cannot be undone. Do you want to continue?') }}"
+                                        data-confirm-yes="document.getElementById('delete-form-{{ $timeSheet->id }}').submit();">
                                             <i class="fas fa-trash-alt"></i>
                                         </a>
 
-                                        <!-- Form for Delete -->
-                                        {!! Form::open(['method' => 'DELETE', 'route' => ['timesheet.destroy', $timeSheet->id], 'id' => 'delete-form-' . $timeSheet->id, 'style' => 'display:none;']) !!}
+                                        {!! Form::open(['method' => 'DELETE', 'route' => ['timesheet.destroy', $timeSheet->id], 'id' => 'delete-form-' . $timeSheet->id]) !!}
                                         {!! Form::close() !!}
-                                        @endcan
-
-
+                                    @endcan
 
 
                                     </td>
@@ -506,20 +496,6 @@ document.addEventListener('DOMContentLoaded', function () {
 		var d_id = $('#department_id').val();
 		//getDesignation(d_id);
 	});
-
-    $(document).ready(function() {
-    $('[data-confirm]').on('click', function (e) {
-        e.preventDefault();
-        var message = $(this).data('confirm').split('|');
-        var confirmMessage = message[0] + "\n\n" + message[1];
-
-        // Show the confirmation dialog
-        if (confirm(confirmMessage)) {
-            var formId = $(this).data('confirm-yes');
-            document.getElementById(formId).submit(); // Submit the form if confirmed
-        }
-    });
-});
 
 
 
