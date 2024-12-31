@@ -38,7 +38,7 @@ class TimeSheetController extends Controller
                 $timeSheets = $timesheets->get();
             }
 
-            return view('dashboard.timeSheet.index', compact('timeSheets', 'employeesList'));
+            return view('timeSheet.index', compact('timeSheets', 'employeesList'));
         }
         else
         {
@@ -182,7 +182,7 @@ class TimeSheetController extends Controller
     {
         return view('timeSheet.import');
     }
-
+    
     public function import(Request $request)
     {
         $rules = [
@@ -205,9 +205,9 @@ class TimeSheetController extends Controller
             $timesheets = $timesheet[$i];
             //dd($timesheet[$i]);
             $timesheetData=TimeSheet::where('employee_id',$timesheets[1])->where('date',$timesheets[0])->first();
-
+            
             if(!empty($timesheetData))
-            {
+            {   
                 $errorArray[]=$timesheetData;
             }
             else
@@ -221,21 +221,21 @@ class TimeSheetController extends Controller
                 $time_sheet->save();
             }
         }
-
-
+       
+        
         if (empty($errorArray)) {
             $data['status'] = 'success';
             $data['msg']    = __('Record successfully imported');
         } else {
-
+           
             $data['status'] = 'error';
             $data['msg']    = count($errorArray) . ' ' . __('Record imported fail out of' . ' ' . $totalTimesheet . ' ' . 'record');
 
-
+           
             foreach ($errorArray as $errorData) {
                 $errorRecord[] = implode(',', $errorData->toArray());
             }
-
+            
             \Session::put('errorArray', $errorRecord);
         }
 
