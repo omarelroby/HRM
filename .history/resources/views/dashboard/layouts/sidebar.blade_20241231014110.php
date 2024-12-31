@@ -85,16 +85,20 @@
                                     <i class="ti ti-smart-home"></i><span>{{ __('Dashboard') }}</span>
                                 </a>
                             </li>
+                            <li  >
+                                <a href="{{ url('/employee') }}">
+                                    <i class="ti ti-user-circle"></i><span>{{ __('Employee') }}</span>
+                                </a>
+                            </li>
                             <li class="submenu">
                                 <a href="javascript:void(0);" class="subdrop">
-                                    <i class="ti ti-user-circle"></i><span>{{ __('Employee') }}</span>
+                                    <i class="ti ti-file-description"></i><span>{{ __('Employee') }}</span>
                                     <span class="menu-arrow"></span>
                                 </a>
                                 <ul style="display: none;"> <!-- Initially hidden -->
                                     <li><a href="{{ url('/employee') }}">{{ __('Employee') }}</a></li>
-                                    <li><a href="{{ url('/timesheet') }}">{{ __('timesheet') }}</a></li>
-                                    <li><a href="{{ route('payslip.index') }}">{{ __('Payslip list') }}</a></li>
-                                 </ul>
+                                    <li><a href="{{ route('setsalary.index') }}">{{ __('Determine the salary') }}</a></li>
+                                </ul>
                             </li>
                             <li class="submenu">
                                 <a href="javascript:void(0);" class="subdrop">

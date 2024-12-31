@@ -14,9 +14,8 @@
 
 
     <!-- Datatable JS -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- jQuery -->
-    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script> <!-- DataTables -->
-    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script> <!-- DataTables with Bootstrap 5 -->
+    <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}https://smarthr.dreamstechnologies.com/html/template/assets/js/dataTables.bootstrap5.min.js" type="text/javascript"></script>
 
     <!-- Daterangepicker JS -->
     <script src="https://smarthr.dreamstechnologies.com/html/template/assets/js/moment.js" type="text/javascript"></script>

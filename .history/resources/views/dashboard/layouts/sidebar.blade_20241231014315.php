@@ -93,7 +93,6 @@
                                 <ul style="display: none;"> <!-- Initially hidden -->
                                     <li><a href="{{ url('/employee') }}">{{ __('Employee') }}</a></li>
                                     <li><a href="{{ url('/timesheet') }}">{{ __('timesheet') }}</a></li>
-                                    <li><a href="{{ route('payslip.index') }}">{{ __('Payslip list') }}</a></li>
                                  </ul>
                             </li>
                             <li class="submenu">

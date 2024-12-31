@@ -2,6 +2,8 @@
 @section('page-title')
     {{__('Payslip')}}
 @endsection
+
+
 @section('action-button')
     @can('Create Pay Slip')
         {{Form::open(array('route'=>array('payslip.store'),'method'=>'POST','class'=>'w-100','id'=>'payslip_form'))}}
@@ -79,13 +81,13 @@
                             </div>
 
                             @can('Create Pay Slip')
-                                <input type="button" value="{{__('Bulk Payment')}}" class="btn btn-primary col-2 float-right search mt-0" id="bulk_payment">
+                                <input type="button" value="{{__('Bulk Payment')}}" class="btn btn-primary col-2 float-right search mt-0" id="bulk_payment">                                
                             @endcan
-
+                            
                         </div>
                     </form>
                 </div>
-
+                
                 <div class="col-lg-12">
                     <div class="ibox ">
                         <div class="ibox-title">
@@ -133,7 +135,7 @@
                             var year  = $(".year_date").val();
                             var datePicker = year + '-' + month;
                             var id = data[0];
-                            console.log(data);
+
                             if (data[6] == 'Paid')
                                 return '<div class="badge badge-pill badge-success"><a href="#" class="text-white">' + data[6] + '</a></div>';
                             else
@@ -252,7 +254,7 @@
                 var month = $(".month_date").val();
                 var year = $(".year_date").val();
                 var datePicker = year + '-' + month;
-
+                
 
                 var title = 'Bulk Payment';
                 var size = 'md';

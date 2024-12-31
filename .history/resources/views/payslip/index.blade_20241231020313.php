@@ -133,7 +133,7 @@
                             var year  = $(".year_date").val();
                             var datePicker = year + '-' + month;
                             var id = data[0];
-                            console.log(data);
+
                             if (data[6] == 'Paid')
                                 return '<div class="badge badge-pill badge-success"><a href="#" class="text-white">' + data[6] + '</a></div>';
                             else

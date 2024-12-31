@@ -80,7 +80,7 @@ class PaySlipController extends Controller
             $year = [
                 date('Y') =>  date('Y'),
             ];
-             return view('dashboard.payslip.index', compact('employees', 'month', 'year', 'months', 'years'));
+            return view('payslip.index', compact('employees', 'month', 'year', 'months', 'years'));
         } else {
             return redirect()->back()->with('error', __('Permission denied.'));
         }
@@ -208,11 +208,10 @@ class PaySlipController extends Controller
 
     public function showemployee($paySlip)
     {
-
         $payslip       = PaySlip::find($paySlip);
         $employee      = Employee::find($payslip->employee_id);
         $insurance     = $employee->insurance($payslip->employee_id,'employee');
-        return view('dashboard.payslip.show', compact('payslip','employee','insurance'));
+        return view('payslip.show', compact('payslip','employee','insurance'));
     }
 
     public function search_json(Request $request)
@@ -341,7 +340,7 @@ class PaySlipController extends Controller
 
         $payslip = PaySlip::where('employee_id', '=', $employees->id)->get();
 
-        return view('dashboard.payslip.employeepayslip', compact('payslip'));
+        return view('payslip.employeepayslip', compact('payslip'));
     }
 
     public function pdf($id, $month)
@@ -352,7 +351,7 @@ class PaySlipController extends Controller
         $insurance     = $employee->insurance($payslip->employee_id,'employee');
         $payslipDetail = Utility::employeePayslipDetail($id);
 
-        return view('dashboard.payslip.pdf', compact('payslip', 'employee', 'payslipDetail','totalSalary','insurance'));
+        return view('payslip.pdf', compact('payslip', 'employee', 'payslipDetail','totalSalary','insurance'));
     }
 
     public function Payrollpdf($month,$year)
@@ -416,7 +415,7 @@ class PaySlipController extends Controller
         $totalBasicSalary = $totalallowance = $totalOtherAllowance = $totalOverTime = $totalCommission = $totalOtherPayment =
         $totalDue = $totalinsurance = $totalMedicalInsurance = $totalAbsence = $totalAbsence_S = $totalLoan =
         $totalsaturationDeduction = $totalDeduction = $totalNetSalary = 0;
-        return view('dashboard.payslip.payrollpdf', compact('payslip','months','year','month','allowoptions','totalBasicSalary','totalallowance',
+        return view('payslip.payrollpdf', compact('payslip','months','year','month','allowoptions','totalBasicSalary','totalallowance',
                                                   'totalOtherAllowance','totalOverTime','totalCommission','totalOtherPayment',
                                                    'totalDue','totalinsurance','totalMedicalInsurance','totalAbsence','totalNetSalary',
                                                    'totalAbsence_S','totalLoan','totalsaturationDeduction','totalDeduction'));
@@ -582,7 +581,7 @@ class PaySlipController extends Controller
     public function editEmployee($paySlip)
     {
         $payslip = PaySlip::find($paySlip);
-        return view('dashboard.payslip.salaryEdit', compact('payslip'));
+        return view('payslip.salaryEdit', compact('payslip'));
     }
 
     public function updateEmployee(Request $request, $id)
