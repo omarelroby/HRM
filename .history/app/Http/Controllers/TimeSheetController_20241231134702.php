@@ -152,7 +152,7 @@ class TimeSheetController extends Controller
             $timeSheet->remark_ar     = $request->remark_ar;
             $timeSheet->save();
 
-            return redirect()->route('timesheet.index')->with('success', __('TimeSheet successfully updated.'));
+            return redirect(''dashboard.employeetimesheet.index'')->with('success', __('TimeSheet successfully updated.'));
         }
         else
         {

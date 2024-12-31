@@ -125,7 +125,6 @@ class TimeSheetController extends Controller
 
     public function update(Request $request, $id)
     {
-
         if(\Auth::user()->can('Edit TimeSheet'))
         {
 

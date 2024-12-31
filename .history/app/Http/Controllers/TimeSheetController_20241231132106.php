@@ -26,23 +26,23 @@ class TimeSheetController extends Controller
                 $employeesList = Employee::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'user_id');
                 $employeesList->prepend('All', '');
                 $timesheets = TimeSheet::where('created_by', \Auth::user()->creatorId());
-                $employees = Employee::where('created_by', '=', \Auth::user()->creatorId())->get()->pluck('name', 'user_id');
-
                 if(!empty($request->start_date) && !empty($request->end_date))
                 {
                     $timesheets->where('date', '>=', $request->start_date);
                     $timesheets->where('date', '<=', $request->end_date);
+                    $employees = Employee::where('created_by', '=', \Auth::user()->creatorId())->get()->pluck('name', 'user_id');
 
                 }
                 if(!empty($request->employee))
                 {
                     $timesheets->where('employee_id', $request->employee);
+                    $employees = Employee::where('created_by', '=', \Auth::user()->creatorId())->get()->pluck('name', 'user_id');
 
                 }
                 $timeSheets = $timesheets->get();
             }
 
-            return view('dashboard.employeetimeSheet.index', compact('timeSheets', 'employeesList','employees'));
+            return view('dashboard.employeetimeSheet.index', compact('timeSheets', 'employeesList','employees','employees));
         }
         else
         {
@@ -112,10 +112,10 @@ class TimeSheetController extends Controller
 
         if(\Auth::user()->can('Edit TimeSheet'))
         {
-            $employees = Employee::where('created_by', '=', \Auth::user()->creatorId())->get();
+            $employees = Employee::where('created_by', '=', \Auth::user()->creatorId())->get()->pluck('name', 'user_id');
             $timeSheet = Timesheet::find($id);
 
-            return view('dashboard.employeetimeSheet.edit', compact('timeSheet', 'employees'));
+            return view('timeSheet.edit', compact('timeSheet', 'employees'));
         }
         else
         {
@@ -125,7 +125,6 @@ class TimeSheetController extends Controller
 
     public function update(Request $request, $id)
     {
-
         if(\Auth::user()->can('Edit TimeSheet'))
         {
 
