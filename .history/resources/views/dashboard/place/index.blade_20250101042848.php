@@ -22,52 +22,25 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-striped table-bordered table-hover dataTables">
+                        <table class="table table-striped table-bordered table-hover dataTables" >
                             <thead>
                                 <tr>
-                                    <th>{{__('Shift Name')}}</th>
-                                    <th>{{__('Shift Name (Arabic)')}}</th>
-                                    <th>{{ __('Shift Days') }}</th>
-                                    <th>{{ __('Shift Start Time') }}</th>
-                                    <th>{{ __('Shift End Time') }}</th>
+                                    <th>{{__('Location')}}</th>
                                     <th width="200px">{{ __('Action') }}</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @foreach ($employee_shifts as $employee_shift)
+                            <tbody class="font-style">
+                                @foreach ($places as $place)
                                     <tr>
-                                        <td>{{ $employee_shift->name }}</td>
-                                        <td>{{ $employee_shift->name_ar }}</td>
-                                        <td>{{ implode(', ', explode(',', $employee_shift->shift_days)) }}</td>
-                                        <td>{{ $employee_shift->shift_starttime }}</td>
-                                        <td>{{ $employee_shift->shift_endtime }}</td>
-                                        <td class="text-right">
+                                        <td>{{ $place->name }}</td>
+                                        <td class="Action text-right">
                                             <span>
-                                                @can('Edit Employee')
-                                                    <a href="{{ URL::to('employee_shifts/'.$employee_shift->id.'/edit') }}"
-                                                       class="btn btn-success btn-icon-only"
-                                                       data-url="{{ URL::to('employee_shifts/'.$employee_shift->id.'/edit') }}"
-                                                       data-size="lg"
-                                                       data-ajax-popup="true"
-                                                       data-title="{{__('Edit Employee Shift')}}"
-                                                       data-toggle="tooltip"
-                                                       data-original-title="{{__('Edit')}}">
-                                                        <i class="fa fa-edit"></i>
-                                                    </a>
+                                                @can('Edit Branch')
+                                                    <a href="#" class="edit-icon btn btn-success" data-url="{{ URL::to('place/'.$place->id.'/edit') }}" data-size="lg" data-ajax-popup="true" data-title="{{__('Edit Location')}}" data-toggle="tooltip" data-original-title="{{__('Edit')}}"><i class="fa fa-edit"></i></a>
                                                 @endcan
-                                                @can('Delete Employee')
-                                                    <a href="#"
-                                                       class="btn btn-danger btn-icon-only"
-                                                       data-toggle="tooltip"
-                                                       data-original-title="{{__('Delete')}}"
-                                                       onclick="if(confirm('{{ __('Are you sure? This action cannot be undone.') }}')) {
-                                                                    document.getElementById('delete-form-{{$employee_shift->id}}').submit();
-                                                                }">
-                                                        <i class="fa fa-trash"></i>
-                                                    </a>
-
-                                                    <!-- Form for Delete -->
-                                                    {!! Form::open(['method' => 'DELETE', 'route' => ['employee_shifts.destroy', $employee_shift->id], 'id' => 'delete-form-' . $employee_shift->id, 'style' => 'display:none;']) !!}
+                                                @can('Delete Branch')
+                                                    <a href="#" class="delete-icon btn btn-danger" data-toggle="tooltip" data-original-title="{{__('Delete')}}" data-confirm="{{__('Are You Sure?').'|'.__('This action can not be undone. Do you want to continue?')}}" data-confirm-yes="document.getElementById('delete-form-{{$place->id}}').submit();"><i class="fa fa-trash"></i></a>
+                                                    {!! Form::open(['method' => 'DELETE', 'route' => ['place.destroy', $place->id],'id'=>'delete-form-'.$place->id]) !!}
                                                     {!! Form::close() !!}
                                                 @endcan
                                             </span>

@@ -116,7 +116,7 @@
                                         <li><a href="{{ url('/labor_companies') }}">{{ __('labor_companies') }}</a></li>
                                         <li><a href="{{ url('/workunits') }}">{{ __('workunits') }}</a></li>
                                         <li><a href="{{ url('/employee_shifts') }}">{{ __('employee_shifts') }}</a></li>
-                                        <li><a href="{{ url('/place') }}">{{ __('location') }}</a></li>
+                                        <li><a href="{{ url('/place') }}">{{ __('place') }}</a></li>
                                     </ul>
                                 </li>
                             </ul>

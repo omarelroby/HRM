@@ -1,4 +1,5 @@
 @extends('dashboard.layouts.master')
+
 @section('content')
     <div class="row">
         <!-- Button to trigger Create Modal -->

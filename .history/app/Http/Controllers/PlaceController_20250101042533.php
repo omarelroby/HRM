@@ -13,7 +13,7 @@ class PlaceController extends Controller
         if(\Auth::user()->can('Manage Branch'))
         {
             $places = Place::where('created_by', '=', \Auth::user()->creatorId())->get();
-            return view('dashboard.place.index', compact('places'));
+            return view('dashboard.places.index', compact('places'));
         }
         else
         {
@@ -77,7 +77,7 @@ class PlaceController extends Controller
         {
             if($place->created_by == \Auth::user()->creatorId())
             {
-                return view('dashboard.place.edit', compact('place'));
+                return view('dashboard.places.edit', compact('place'));
             }
             else
             {
