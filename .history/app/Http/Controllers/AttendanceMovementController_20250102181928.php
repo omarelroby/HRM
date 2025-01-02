@@ -50,7 +50,6 @@ class AttendanceMovementController extends Controller
             $AttendanceMovements = AttendanceMovement::where('created_by', '=', \Auth::user()->creatorId())->orderBy('id','DESC')->first();
             if($AttendanceMovements && $AttendanceMovements->status != 1)
             {
-         
                 return redirect()->back()->with('error', __('The current attendance movement must be closed first in order to be able to create a new one'));
             }
 
@@ -59,6 +58,7 @@ class AttendanceMovementController extends Controller
             $AttendanceMovement->end_movement_date       = \Carbon\Carbon::parse($request->start_movement_date)->addMonthNoOverflow()->subDay();
             $AttendanceMovement->created_by              = \Auth::user()->creatorId();
             $AttendanceMovement->save();
+            dd($AttendanceMovement);
 
             return redirect()->route('attendancemovement.index')->with('success', __('AttendanceMovement  successfully created.'));
         }

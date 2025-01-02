@@ -44,13 +44,15 @@ class AttendanceMovementController extends Controller
             if($validator->fails())
             {
                 $messages = $validator->getMessageBag();
+
+
                 return redirect()->back()->with('error', $messages->first());
             }
 
             $AttendanceMovements = AttendanceMovement::where('created_by', '=', \Auth::user()->creatorId())->orderBy('id','DESC')->first();
             if($AttendanceMovements && $AttendanceMovements->status != 1)
             {
-         
+                dd($messages);
                 return redirect()->back()->with('error', __('The current attendance movement must be closed first in order to be able to create a new one'));
             }
 
