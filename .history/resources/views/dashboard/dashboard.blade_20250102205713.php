@@ -563,18 +563,15 @@
 @endsection
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/apexcharts.js"></script>
-{{-- <script>
-
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script>
     document.addEventListener("DOMContentLoaded", function() {
-
         var departmentNames = @json($departmentNames ?? []); // Use null coalescing for fallback
         var employeeCounts = @json($total_employees ?? []); // Use null coalescing for fallback
 
-
-        // Ensure there is data to render the chart
         if (departmentNames.length > 0 && employeeCounts.length > 0) {
-            var options = {
+            // Bar Chart Options
+            var barOptions = {
                 series: [{
                     data: employeeCounts
                 }],
@@ -600,16 +597,40 @@
                 }
             };
 
-            var chart = new ApexCharts(document.querySelector("#emp-department"), options);
-            chart.render();
+            // Line Chart Options
+            var lineOptions = {
+                series: [{
+                    name: 'Employee Count',
+                    data: employeeCounts
+                }],
+                chart: {
+                    type: 'line',
+                    height: 350
+                },
+                colors: ['#007bff'], // Set the line color to blue
+                dataLabels: {
+                    enabled: true // Enable data labels
+                },
+                stroke: {
+                    curve: 'smooth' // Smooth line
+                },
+                xaxis: {
+                    categories: departmentNames // X-axis categories
+                }
+            };
+
+            // Render Bar Chart
+            var barChart = new ApexCharts(document.querySelector("#emp-department-bar"), barOptions);
+            barChart.render();
+
+            // Render Line Chart
+            var lineChart = new ApexCharts(document.querySelector("#emp-department-line"), lineOptions);
+            lineChart.render();
         } else {
             console.error("Data for departments or employee counts is missing or invalid.");
         }
     });
-
-
-
-</script> --}}
+</script>
 <script>
 let attendanceChart;
 document.addEventListener('DOMContentLoaded', function () {
@@ -641,10 +662,7 @@ document.addEventListener('DOMContentLoaded', function () {
     attendanceChart.render();
 });
 const ctx = document.getElementById('mySemiDonutChart').getContext('2d');
-
-
 </script>
-
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const chartData = @json($chartData);
@@ -706,6 +724,4 @@ const ctx = document.getElementById('mySemiDonutChart').getContext('2d');
     percentagesContainer.innerHTML = percentagesHTML;
 });
 </script>
-
-
 @endpush

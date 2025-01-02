@@ -35,7 +35,7 @@ class UserController extends Controller
                 $users = User::where('created_by', '=', $user->creatorId())->where('user_status',1)->get();
             }
 
-            return view('dashboard.user.index', compact('users'));
+            return view('dauser.index', compact('users'));
         }
         else
         {
@@ -158,7 +158,7 @@ class UserController extends Controller
             $user  = User::find($id);
             $emp   = Employee::where('user_id', '=', $user->id)->first();
             $roles = $emp ? Role::where('created_by', '=', $user->creatorId())->get()->pluck('name', 'id') : Role::where('created_by', '=', $user->creatorId())->where('name', '!=', 'employee')->get()->pluck('name', 'id');
-            return view('dashboard.user.edit', compact('user', 'roles'));
+            return view('user.edit', compact('user', 'roles'));
         }
         else
         {

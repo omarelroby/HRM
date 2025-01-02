@@ -563,8 +563,8 @@
 @endsection
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/apexcharts.js"></script>
-{{-- <script>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script>
 
     document.addEventListener("DOMContentLoaded", function() {
 
@@ -609,40 +609,42 @@
 
 
 
-</script> --}}
+</script>
 <script>
-let attendanceChart;
-document.addEventListener('DOMContentLoaded', function () {
+    // Global variable to store the chart instance
+ 
+    <script>
+  let attendanceChart;
+
+  document.addEventListener('DOMContentLoaded', function() {
     if (attendanceChart) {
-        attendanceChart.destroy();
+      attendanceChart.destroy();
     }
 
-    // Fetch dynamic data from backend
-    var earlyArrivalsCount = @json($early_arrivals->count() ?? 0);  // Count of early arrivals
-    var lateArrivalsCount = @json($late_arrivals->count() ?? 0);    // Count of late arrivals
-    var absentEmployeesCount = @json($absent_employees  ?? 0);  // Count of absent employees
+    // Parse data as numbers
+    const earlyArrivalsCount = parseInt(@json($early_arrivals->count() ?? 0));
+    const lateArrivalsCount = parseInt(@json($late_arrivals->count() ?? 0));
+    const absentEmployeesCount = parseInt(@json($absent_employees ?? 0));
 
-    // Chart options
-    var options = {
-        chart: {
-            type: 'donut',
-            height: 250
-        },
-        series: [earlyArrivalsCount, lateArrivalsCount, absentEmployeesCount], // Dynamic attendance data
-        labels: ['Coming Early', 'Coming Late', 'Absent'],
-        colors: ['#4a7fe0', '#e7513e', '#11c866'], // New custom colors
-        legend: {
-            position: 'bottom'
-        },
+    const options = {
+      chart: {
+        type: 'donut',
+        height: 250
+      },
+      series: [earlyArrivalsCount, lateArrivalsCount, absentEmployeesCount],
+      labels: ['Coming Early', 'Coming Late', 'Absent'],
+      colors: ['#4a7fe0', '#e7513e', '#11c866'],
+      legend: {
+        position: 'bottom'
+      }
     };
 
-    // Initialize the chart
     attendanceChart = new ApexCharts(document.querySelector("#attendanceChart"), options);
     attendanceChart.render();
-});
-const ctx = document.getElementById('mySemiDonutChart').getContext('2d');
+  });
+</script>
 
-
+<div id="attendanceChart" style="height: 250px;"></div>
 </script>
 
 <script>

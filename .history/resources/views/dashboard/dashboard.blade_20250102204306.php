@@ -562,9 +562,9 @@
 
 @endsection
 @push('scripts')
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/apexcharts.js"></script>
-{{-- <script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
 
     document.addEventListener("DOMContentLoaded", function() {
 
@@ -606,10 +606,7 @@
             console.error("Data for departments or employee counts is missing or invalid.");
         }
     });
-
-
-
-</script> --}}
+</script>
 <script>
 let attendanceChart;
 document.addEventListener('DOMContentLoaded', function () {
@@ -641,10 +638,7 @@ document.addEventListener('DOMContentLoaded', function () {
     attendanceChart.render();
 });
 const ctx = document.getElementById('mySemiDonutChart').getContext('2d');
-
-
 </script>
-
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const chartData = @json($chartData);
@@ -706,6 +700,4 @@ const ctx = document.getElementById('mySemiDonutChart').getContext('2d');
     percentagesContainer.innerHTML = percentagesHTML;
 });
 </script>
-
-
 @endpush

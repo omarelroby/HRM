@@ -564,52 +564,61 @@
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/apexcharts.js"></script>
-{{-- <script>
 
-    document.addEventListener("DOMContentLoaded", function() {
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var departmentNames = @json($departmentNames ?? []); // Use null coalescing for fallback
+    var employeeCounts = @json($total_employees ?? []); // Use null coalescing for fallback
 
-        var departmentNames = @json($departmentNames ?? []); // Use null coalescing for fallback
-        var employeeCounts = @json($total_employees ?? []); // Use null coalescing for fallback
+    if (departmentNames.length > 0 && employeeCounts.length > 0) {
+      function createChart(ctx, type) {
+        return new Chart(ctx, {
+          type: type,
+          data: {
+            labels: departmentNames,
+            datasets: [{
+              label: 'Employee Count',
+              data: employeeCounts,
+            }]
+          },
+          options: {
+            scales: {
+              xAxes: [{
+                stacked: (type === 'bar'), // Enable stacking only for bar chart
+              }]
+            }
+          }
+        });
+      }
 
+      // Bar Chart
+      var barCtx = document.getElementById('emp-department-bar').getContext('2d');
+      var barChart = createChart(barCtx, 'horizontalBar');
+      barChart.options.data.datasets[0].backgroundColor = '#ea642b'; // Set bar color
+      barChart.options.data.datasets[0].borderRadius = 10;
 
-        // Ensure there is data to render the chart
-        if (departmentNames.length > 0 && employeeCounts.length > 0) {
-            var options = {
-                series: [{
-                    data: employeeCounts
-                }],
-                chart: {
-                    type: 'bar',
-                    height: 350
-                },
-                colors: ['#ea642b'], // Set the bar color to orange
-                plotOptions: {
-                    bar: {
-                        borderRadius: 10,
-                        horizontal: true // Horizontal bar chart
-                    }
-                },
-                dataLabels: {
-                    enabled: false // Disable data labels
-                },
-                grid: {
-                    show: false // Disable grid lines
-                },
-                xaxis: {
-                    categories: departmentNames // X-axis categories
-                }
-            };
+      // Line Chart
+      var lineCtx = document.getElementById('emp-department-line').getContext('2d');
+      var lineChart = createChart(lineCtx, 'line');
+      lineChart.options.data.datasets[0].backgroundColor = 'transparent'; // Set line color
+      lineChart.options.data.datasets[0].borderColor = '#007bff';
+      lineChart.options.data.datasets[0].borderWidth = 1;
+      lineChart.options.data.datasets[0].fill = false; // No fill for line chart
+      lineChart.options.elements.point.radius = 5; // Set point radius
+      lineChart.options.elements.point.hoverRadius = 7;
+      lineChart.options.elements.point.hitRadius = 3;
+      lineChart.options.elements.point.backgroundColor = '#007bff';
+      lineChart.options.elements.point.borderColor = '#fff';
+      lineChart.options.elements.point.hoverBorderColor = '#fff';
+      lineChart.options.elements.point.borderWidth = 1;
 
-            var chart = new ApexCharts(document.querySelector("#emp-department"), options);
-            chart.render();
-        } else {
-            console.error("Data for departments or employee counts is missing or invalid.");
-        }
-    });
-
-
-
-</script> --}}
+      barChart.render();
+      lineChart.render();
+    } else {
+      console.error("Data for departments or employee counts is missing or invalid.");
+    }
+  });
+</script>
 <script>
 let attendanceChart;
 document.addEventListener('DOMContentLoaded', function () {
@@ -641,10 +650,7 @@ document.addEventListener('DOMContentLoaded', function () {
     attendanceChart.render();
 });
 const ctx = document.getElementById('mySemiDonutChart').getContext('2d');
-
-
 </script>
-
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const chartData = @json($chartData);
@@ -706,6 +712,4 @@ const ctx = document.getElementById('mySemiDonutChart').getContext('2d');
     percentagesContainer.innerHTML = percentagesHTML;
 });
 </script>
-
-
 @endpush

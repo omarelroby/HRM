@@ -115,8 +115,11 @@
 
                     </div>
                     <div class="card-body">
-                        <div id="emp-department">
-                            <!-- Chart will render here -->
+                        <div style="max-width: 600px; margin: 20px auto;">
+                            <canvas id="emp-department-bar"></canvas>
+                        </div>
+                        <div style="max-width: 600px; margin: 20px auto;">
+                            <canvas id="emp-department-line"></canvas>
                         </div>
                     </div>
                 </div>
@@ -563,53 +566,72 @@
 @endsection
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/apexcharts.js"></script>
-{{-- <script>
-
+<script>
     document.addEventListener("DOMContentLoaded", function() {
-
         var departmentNames = @json($departmentNames ?? []); // Use null coalescing for fallback
         var employeeCounts = @json($total_employees ?? []); // Use null coalescing for fallback
 
+        console.log("Department Names:", departmentNames);
+        console.log("Employee Counts:", employeeCounts);
 
-        // Ensure there is data to render the chart
         if (departmentNames.length > 0 && employeeCounts.length > 0) {
-            var options = {
-                series: [{
-                    data: employeeCounts
-                }],
-                chart: {
-                    type: 'bar',
-                    height: 350
-                },
-                colors: ['#ea642b'], // Set the bar color to orange
-                plotOptions: {
-                    bar: {
+            // Bar Chart
+            var barCtx = document.getElementById('emp-department-bar').getContext('2d');
+            var barChart = new Chart(barCtx, {
+                type: 'horizontalBar',
+                data: {
+                    labels: departmentNames,
+                    datasets: [{
+                        label: 'Employee Count',
+                        data: employeeCounts,
+                        backgroundColor: '#ea642b', // Set the bar color to orange
                         borderRadius: 10,
-                        horizontal: true // Horizontal bar chart
+                    }]
+                },
+                options: {
+                    scales: {
+                        xAxes: [{
+                            stacked: false, // Disable for stacked bar chart
+                        }]
                     }
-                },
-                dataLabels: {
-                    enabled: false // Disable data labels
-                },
-                grid: {
-                    show: false // Disable grid lines
-                },
-                xaxis: {
-                    categories: departmentNames // X-axis categories
                 }
-            };
+            });
 
-            var chart = new ApexCharts(document.querySelector("#emp-department"), options);
-            chart.render();
+            // Line Chart
+            var lineCtx = document.getElementById('emp-department-line').getContext('2d');
+            var lineChart = new Chart(lineCtx, {
+                type: 'line',
+                data: {
+                    labels: departmentNames,
+                    datasets: [{
+                        label: 'Employee Count',
+                        data: employeeCounts,
+                        backgroundColor: 'transparent', // Set background color to transparent
+                        borderColor: '#007bff', // Set the line color to blue
+                        borderWidth: 1,
+                        fill: false, // No fill for line chart
+                        pointRadius: 5,
+                        pointHoverRadius: 7,
+                        pointHitRadius: 3,
+                        pointBackgroundColor: '#007bff',
+                        pointBorderColor: '#fff',
+                        pointHoverBorderColor: '#fff',
+                        pointBorderWidth: 1,
+                    }]
+                },
+                options: {
+                    scales: {
+                        xAxes: [{
+                            stacked: false, // Disable for line chart
+                        }]
+                    }
+                }
+            });
         } else {
             console.error("Data for departments or employee counts is missing or invalid.");
         }
     });
-
-
-
-</script> --}}
+</script>
 <script>
 let attendanceChart;
 document.addEventListener('DOMContentLoaded', function () {
@@ -641,10 +663,7 @@ document.addEventListener('DOMContentLoaded', function () {
     attendanceChart.render();
 });
 const ctx = document.getElementById('mySemiDonutChart').getContext('2d');
-
-
 </script>
-
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const chartData = @json($chartData);
@@ -706,6 +725,4 @@ const ctx = document.getElementById('mySemiDonutChart').getContext('2d');
     percentagesContainer.innerHTML = percentagesHTML;
 });
 </script>
-
-
 @endpush

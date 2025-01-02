@@ -564,52 +564,7 @@
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/apexcharts.js"></script>
-{{-- <script>
 
-    document.addEventListener("DOMContentLoaded", function() {
-
-        var departmentNames = @json($departmentNames ?? []); // Use null coalescing for fallback
-        var employeeCounts = @json($total_employees ?? []); // Use null coalescing for fallback
-
-
-        // Ensure there is data to render the chart
-        if (departmentNames.length > 0 && employeeCounts.length > 0) {
-            var options = {
-                series: [{
-                    data: employeeCounts
-                }],
-                chart: {
-                    type: 'bar',
-                    height: 350
-                },
-                colors: ['#ea642b'], // Set the bar color to orange
-                plotOptions: {
-                    bar: {
-                        borderRadius: 10,
-                        horizontal: true // Horizontal bar chart
-                    }
-                },
-                dataLabels: {
-                    enabled: false // Disable data labels
-                },
-                grid: {
-                    show: false // Disable grid lines
-                },
-                xaxis: {
-                    categories: departmentNames // X-axis categories
-                }
-            };
-
-            var chart = new ApexCharts(document.querySelector("#emp-department"), options);
-            chart.render();
-        } else {
-            console.error("Data for departments or employee counts is missing or invalid.");
-        }
-    });
-
-
-
-</script> --}}
 <script>
 let attendanceChart;
 document.addEventListener('DOMContentLoaded', function () {
@@ -641,10 +596,7 @@ document.addEventListener('DOMContentLoaded', function () {
     attendanceChart.render();
 });
 const ctx = document.getElementById('mySemiDonutChart').getContext('2d');
-
-
 </script>
-
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const chartData = @json($chartData);
@@ -706,6 +658,4 @@ const ctx = document.getElementById('mySemiDonutChart').getContext('2d');
     percentagesContainer.innerHTML = percentagesHTML;
 });
 </script>
-
-
 @endpush
