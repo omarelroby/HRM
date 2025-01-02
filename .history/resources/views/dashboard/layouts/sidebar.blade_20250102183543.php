@@ -81,8 +81,8 @@
                             <ul style="display: none;">
                                 <li><a href="{{ url('/user') }}"  class="{{ Request::is('user') ?'active' :'' }}">{{ __('User') }}</a></li>
                                 <li><a href="{{ url('/timesheet') }}" class="{{ Request::is('roles') ?'active' :'' }}">{{ __('roles') }}</a></li>
-                                <li><a href="{{ url('/employee-profile') }}" class="{{ Request::is('employee-profile') ?'active' :'' }}">{{ __('Employee Profile') }}</a></li>
-                                <li><a href="{{ url('/lastlogin') }}" class="{{ Request::is('lastlogin') ?'active' :'' }}">{{ __('Last Login') }}</a></li>
+                                <li><a href="{{ url('./employee-profile.index') }}" class="{{ Request::is('employee-profile') ?'active' :'' }}">{{ __('Employee Profile') }}</a></li>
+                                <li><a href="{{ route('lastlogin.index') }}" class="{{ Request::is('lastlogin') ?'active' :'' }}">{{ __('Last Login') }}</a></li>
 
                             </ul>
                         </li>

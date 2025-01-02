@@ -73,7 +73,7 @@
                             </a>
                         </li>
                         <li class="submenu">
-                            <a href="javascript:void(0);" class="subdrop {{ Request::is('user')|| Request::is('roles')|| Request::is('employee-profile')|| Request::is('lastlogin')    ? 'active' : '' }}">
+                            <a href="javascript:void(0);" class="subdrop {{ Request::is('user')|| Request::is('roles')|| Request::is('employee-profile')|| Request::is('lastlogin') || Request::is('timesheet')|| Request::is('request_types')  || Request::is('payslip') || Request::is('jobtitle')||Request::is('nationality') || Request::is('labor_companies') || Request::is('employee_shifts') || Request::is('place')|| Request::is('jobtypes') || Request::is('banks')  ? 'active' : '' }}">
                                 <i class="ti ti-user-circle"></i>
                                 <span class="submenu-title">{{ __('Users') }}</span>
                                 <span class="menu-arrow"></span>
@@ -81,8 +81,8 @@
                             <ul style="display: none;">
                                 <li><a href="{{ url('/user') }}"  class="{{ Request::is('user') ?'active' :'' }}">{{ __('User') }}</a></li>
                                 <li><a href="{{ url('/timesheet') }}" class="{{ Request::is('roles') ?'active' :'' }}">{{ __('roles') }}</a></li>
-                                <li><a href="{{ url('/employee-profile') }}" class="{{ Request::is('employee-profile') ?'active' :'' }}">{{ __('Employee Profile') }}</a></li>
-                                <li><a href="{{ url('/lastlogin') }}" class="{{ Request::is('lastlogin') ?'active' :'' }}">{{ __('Last Login') }}</a></li>
+                                <li><a href="{{ route('employee-profile.index') }}" class="{{ Request::is('employee-profile') ?'active' :'' }}">{{ __('Employee Profile') }}</a></li>
+                                <li><a href="{{ route('lastlogin.index') }}" class="{{ Request::is('lastlogin') ?'active' :'' }}">{{ __('Last login') }}</a></li>
 
                             </ul>
                         </li>

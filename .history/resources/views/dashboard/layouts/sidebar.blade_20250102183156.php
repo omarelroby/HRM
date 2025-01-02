@@ -73,17 +73,35 @@
                             </a>
                         </li>
                         <li class="submenu">
-                            <a href="javascript:void(0);" class="subdrop {{ Request::is('user')|| Request::is('roles')|| Request::is('employee-profile')|| Request::is('lastlogin')    ? 'active' : '' }}">
+                            <a href="javascript:void(0);" class="subdrop {{ Request::is('employee')|| Request::is('attendancemovement')|| Request::is('salary_component_type')|| Request::is('holiday') || Request::is('timesheet')|| Request::is('request_types')  || Request::is('payslip') || Request::is('jobtitle')||Request::is('nationality') || Request::is('labor_companies') || Request::is('employee_shifts') || Request::is('place')|| Request::is('jobtypes') || Request::is('banks')  ? 'active' : '' }}">
                                 <i class="ti ti-user-circle"></i>
-                                <span class="submenu-title">{{ __('Users') }}</span>
+                                <span class="submenu-title">{{ __('Employee') }}</span>
                                 <span class="menu-arrow"></span>
                             </a>
                             <ul style="display: none;">
-                                <li><a href="{{ url('/user') }}"  class="{{ Request::is('user') ?'active' :'' }}">{{ __('User') }}</a></li>
-                                <li><a href="{{ url('/timesheet') }}" class="{{ Request::is('roles') ?'active' :'' }}">{{ __('roles') }}</a></li>
-                                <li><a href="{{ url('/employee-profile') }}" class="{{ Request::is('employee-profile') ?'active' :'' }}">{{ __('Employee Profile') }}</a></li>
-                                <li><a href="{{ url('/lastlogin') }}" class="{{ Request::is('lastlogin') ?'active' :'' }}">{{ __('Last Login') }}</a></li>
-
+                                <li><a href="{{ url('/employee') }}"  class="{{ Request::is('employee') ?'active' :'' }}">{{ __('Employee') }}</a></li>
+                                <li><a href="{{ url('/timesheet') }}" class="{{ Request::is('timesheet') ?'active' :'' }}">{{ __('Timesheet') }}</a></li>
+                                <li><a href="{{ route('payslip.index') }}" class="{{ Request::is('payslip') ?'active' :'' }}">{{ __('Payslip List') }}</a></li>
+                                <li class="submenu">
+                                    <a href="javascript:void(0);" class="subdrop {{ Request::is('jobtitle')|| Request::is('attendancemovement')|| Request::is('salary_component_type')|| Request::is('holiday') || Request::is('nationality')|| Request::is('request_types') || Request::is('labor_companies') || Request::is('workunits') || Request::is('employee_shifts') || Request::is('place')|| Request::is('jobtypes') || Request::is('banks') ?'active' :'' }}">
+                                        <i class="ti ti-user-circle"></i><span class="submenu-title">{{ __('Employee Setting') }}</span>
+                                        <span class="menu-arrow"></span>
+                                    </a>
+                                    <ul style="display: none;">
+                                        <li><a href="{{ url('/jobtitle') }}" class="{{ Request::is('jobtitle') ?'active' :'' }}">{{ __('Job Titles') }}</a></li>
+                                        <li><a href="{{ url('/nationality') }}" class="{{ Request::is('nationality') ?'active' :'' }}">{{ __('Nationality') }}</a></li>
+                                        <li><a href="{{ url('/labor_companies') }}" class="{{ Request::is('labor_companies') ?'active' :'' }}">{{ __('labor_companies') }}</a></li>
+                                        <li><a href="{{ url('/workunits') }}" class="{{ Request::is('workunits') ?'active' :'' }}">{{ __('workunits') }}</a></li>
+                                        <li><a href="{{ url('/employee_shifts') }}" class="{{ Request::is('employee_shifts') ?'active' :'' }}">{{ __('employee_shifts') }}</a></li>
+                                        <li><a href="{{ url('/place') }}" class="{{ Request::is('place') ?'active' :'' }}">{{ __('location') }}</a></li>
+                                        <li><a href="{{ url('/jobtypes') }}" class="{{ Request::is('jobtypes') ?'active' :'' }}">{{ __('job_type') }}</a></li>
+                                        <li><a href="{{ url('/banks') }}" class="{{ Request::is('banks') ?'active' :'' }}">{{ __('banks') }}</a></li>
+                                        <li><a href="{{ url('/request_types') }}" class="{{ Request::is('request_types') ?'active' :'' }}">{{ __('request_types') }}</a></li>
+                                        <li><a href="{{ url('/holiday') }}" class="{{ Request::is('holiday') ?'active' :'' }}">{{ __('holiday') }}</a></li>
+                                        <li><a href="{{ url('/salary_component_type') }}" class="{{ Request::is('salary_component_type') ?'active' :'' }}">{{ __('salary_component_type') }}</a></li>
+                                        <li><a href="{{ url('/attendancemovement') }}" class="{{ Request::is('attendancemovement') ?'active' :'' }}">{{ __('attendancemovement') }}</a></li>
+                                    </ul>
+                                </li>
                             </ul>
                         </li>
                         <li class="submenu">
