@@ -83,7 +83,7 @@
                                 <li><a href="{{ url('/timesheet') }}" class="{{ Request::is('timesheet') ?'active' :'' }}">{{ __('Timesheet') }}</a></li>
                                 <li><a href="{{ route('payslip.index') }}" class="{{ Request::is('payslip') ?'active' :'' }}">{{ __('Payslip List') }}</a></li>
                                 <li class="submenu">
-                                    <a href="javascript:void(0);" class="subdrop {{ Request::is('jobtitle') || Request::is('nationality') || Request::is('labor_companies') || Request::is('workunits') || Request::is('employee_shifts') || Request::is('place')|| Request::is('jobtypes') || Request::is('banks') ?'active' :'' }}">
+                                    <a href="javascript:void(0);" class="subdrop">
                                         <i class="ti ti-user-circle"></i><span class="submenu-title">{{ __('Employee Setting') }}</span>
                                         <span class="menu-arrow"></span>
                                     </a>
@@ -125,20 +125,20 @@
                         </li>
 
                         <li class="submenu">
-                            <a href="javascript:void(0);" class="subdrop {{ Request::is('employee_requests') || Request::is('attendanceemployee') || Request::is('attendanceemployee/bulkattendance') ? 'active' : '' }}">
+                            <a href="javascript:void(0);" class="subdrop {{ Request::is('employee_requests') || Request::is('attendanceemployee') || Request::is('appraisal') ? 'active' : '' }}">
                                 <i class="ti ti-clock"></i><span class="submenu-title">{{ __('Time Statement') }}</span>
                                 <span class="menu-arrow"></span>
                             </a>
                             <ul style="display: none;">
-                                <li><a class="{{ Request::is('employee_requests') ?'active' :'' }}" href="{{ route('employee_requests.index') }}">{{ __('Employee Request Management') }}</a></li>
+                                <li><a href="{{ route('employee_requests.index') }}">{{ __('Employee Request Management') }}</a></li>
                                 <li class="submenu">
-                                    <a href="javascript:void(0);" class="subdrop {{ Request::is('attendanceemployee') || Request::is('attendanceemployee/bulkattendance')  ?'active' :'' }}">
+                                    <a href="javascript:void(0);" class="subdrop">
                                         <i class="ti ti-box"></i><span class="submenu-title">{{ __('Attendance') }}</span>
                                         <span class="menu-arrow"></span>
                                     </a>
                                     <ul style="display: none;">
-                                        <li><a class="{{ Request::is('attendanceemployee') ?'active' :'' }}" href="{{ route('attendanceemployee.index') }}">{{ __('Attendance History') }}</a></li>
-                                        <li><a class="{{ Request::is('attendanceemployee/bulkattendance') ?'active' :'' }}" href="{{ route('attendanceemployee.bulkattendance') }}">{{ __('Collective attendance') }}</a></li>
+                                        <li><a href="{{ route('attendanceemployee.index') }}">{{ __('Attendance History') }}</a></li>
+                                        <li><a href="{{ route('attendanceemployee.bulkattendance') }}">{{ __('Collective attendance') }}</a></li>
                                     </ul>
                                 </li>
                             </ul>
