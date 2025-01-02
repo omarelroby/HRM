@@ -26,7 +26,7 @@ class HolidayController extends Controller
             }
             $holidays = $holidays->get();
 
-            return view('dashboard.holiday.index', compact('holidays'));
+            return view('dashbaord.holiday.index', compact('holidays'));
         } else {
             return redirect()->back()->with('error', __('Permission denied.'));
         }
@@ -100,7 +100,7 @@ class HolidayController extends Controller
     public function edit(Holiday $holiday)
     {
         if (\Auth::user()->can('Edit Holiday')) {
-            return view('dashboard.holiday.edit', compact('holiday'));
+            return view('holiday.edit', compact('holiday'));
         } else {
             return redirect()->back()->with('error', __('Permission denied.'));
         }

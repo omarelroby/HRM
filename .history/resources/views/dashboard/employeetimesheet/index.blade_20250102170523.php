@@ -371,21 +371,20 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="{{ asset('assets/js/bootstrap-hijri-datetimepicker.js') }}"></script>
         <script src="{{ asset('assets/js/bootstrap-hijri-datepicker.js') }}"></script>
-        <script>
-            $(document).ready(function () {
-                // Initialize Hijri Date Picker
-                $('.hijri-date-input').hijriDatePicker({
-                    hijri: true, // Enable Hijri mode
-                    locale: 'ar-sa', // Arabic locale
-                    format: 'iYYYY-iMM-iDD', // Hijri format
-                    hijriFormat: 'iYYYY-iMM-iDD',
-                    showTodayButton: true,
-                    showClear: true,
-                    showClose: true,
-                    allowInputToggle: true
-                });
+        $(document).ready(function () {
+            // Initialize Hijri Date Picker
+            $('.hijri-date-input').hijriDatePicker({
+                hijri: true, // Enable Hijri mode
+                locale: 'ar-sa', // Arabic locale
+                format: 'iYYYY-iMM-iDD', // Hijri format
+                hijriFormat: 'iYYYY-iMM-iDD',
+                showTodayButton: true,
+                showClear: true,
+                showClose: true,
+                allowInputToggle: true
             });
-            </script>
+        });
+        </script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const paymentTypeInputs = document.querySelectorAll('input[name="payment_type"]');
@@ -408,7 +407,21 @@
             });
         });
     </script>
-
+        <script>
+        $(document).ready(function () {
+            // Initialize Hijri Date Picker
+            $('.hijri-date-input').hijriDatePicker({
+                hijri: true, // Enable Hijri mode
+                locale: 'ar-sa', // Arabic locale
+                format: 'iYYYY-iMM-iDD', // Hijri format
+                hijriFormat: 'iYYYY-iMM-iDD',
+                showTodayButton: true,
+                showClear: true,
+                showClose: true,
+                allowInputToggle: true
+            });
+        });
+        </script>
 
 
 

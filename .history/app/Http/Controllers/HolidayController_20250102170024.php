@@ -26,7 +26,7 @@ class HolidayController extends Controller
             }
             $holidays = $holidays->get();
 
-            return view('dashboard.holiday.index', compact('holidays'));
+            return view('dashbaord.holiday.index', compact('holidays'));
         } else {
             return redirect()->back()->with('error', __('Permission denied.'));
         }
