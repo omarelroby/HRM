@@ -31,10 +31,13 @@
                             </a>
                           </li>
                           <li>
-                            <a class="dropdown-item" href="javascript:void(0);" data-url="{{ route('user.destroy', $user->id) }}" data-bs-toggle="modal" data-bs-target="#delete_modal">
+                            <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#delete_modal">
                               <i class="ti ti-trash me-1"></i>Delete
                             </a>
-
+                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_modal"
+                            data-url="{{ route('employee.destroy', $employee->id) }}" title="Delete">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
                           </li>
                         </ul>
                       </div>
@@ -124,17 +127,3 @@
     </div>
 </div>
 {{-- End Delete Confirmation Modal --}}
-@section('script')
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-    const deleteModal = document.getElementById('delete_modal');
-    const deleteForm = document.getElementById('delete_form');
-
-    deleteModal.addEventListener('show.bs.modal', function (event) {
-        const button = event.relatedTarget; // Button that triggered the modal
-        const deleteUrl = button.getAttribute('data-url'); // Extract the URL from the data-url attribute
-        deleteForm.action = deleteUrl; // Update the form action dynamically
-    });
-});
-</script>
-@endsection

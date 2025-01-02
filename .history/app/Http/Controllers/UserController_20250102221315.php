@@ -28,16 +28,16 @@ class UserController extends Controller
             $user = \Auth::user();
             if(\Auth::user()->type == 'super admin')
             {
-                $roles = Role::where('created_by', '=', $user->creatorId())->where('name', '!=', 'employee')->get();
+                $roles = Role::where('created_by', '=', $user->creatorId())->where('name', '!=', 'employee')->get()->pluck('name', 'id');
                 $users = User::where('created_by', '=', $user->creatorId())->where('user_status',1)->where('type', '=', 'company')->get();
             }
             else
             {
-                $roles = Role::where('created_by', '=', $user->creatorId())->where('name', '!=', 'employee')->get();
+                $roles = Role::where('created_by', '=', $user->creatorId())->where('name', '!=', 'employee')->get()->pluck('name', 'id');
                 $users = User::where('created_by', '=', $user->creatorId())->where('user_status',1)->get();
             }
 
-            return view('dashboard.user.index', compact('users','roles'));
+            return view('dashboard.user.index', compact('users'));
         }
         else
         {
@@ -192,7 +192,7 @@ class UserController extends Controller
         else
         {
             $user = User::findOrFail($id);
-            
+
             $role          = Role::findById($request->role);
             $input         = $request->all();
             $input['type'] = $role->name;

@@ -122,103 +122,126 @@
     </div>
 
     <div class="card">
-    <div class="card-header d-flex align-items-center justify-content-between flex-wrap bg-light p-3">
-        <h5 class="mb-0">Employees List</h5>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul class="mb-0">
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+        <div class="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
+            <h5>Employees List</h5>
+
         </div>
-    </div>
-    <div class="card-body p-0">
-        <div class="custom-datatable-filter table-responsive">
-            <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
-                 
+        <div class="row">
+            <div class="col-12">
+                   @if ($errors->any())
+                     <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                   @endif
+            </div>
+        </div>
+        <div class="card-body p-0">
+            <div class="custom-datatable-filter table-responsive">
+                <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <div class="dataTables_length" id="DataTables_Table_0_length">
+
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <div id="DataTables_Table_0_filter" class="dataTables_filter">
+
+                 </div>
+            </div>
+                </div>
                 <div class="row dt-row">
                     <div class="col-sm-12 table-responsive">
-                        <table class="table datatable dataTable no-footer" id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th class="no-sort sorting" style="width: 21px;">
-                                        <div class="form-check form-check-md">
-                                            <input class="form-check-input" type="checkbox" id="select-all">
-                                        </div>
-                                    </th>
-                                    <th class="sorting">ID</th>
-                                    <th class="sorting">Name</th>
-                                    <th class="sorting">Email</th>
-                                    <th class="sorting">Job Title</th>
-                                    <th class="sorting">Department</th>
-                                    <th class="sorting">Joining Date</th>
-                                    <th class="sorting">Status</th>
-                                    <th class="sorting" style="width: 60px;"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($employees as $key => $employee)
-                                    <tr class="odd">
-                                        <td class="sorting_1">
-                                            <div class="form-check form-check-md">
-                                                <input class="form-check-input" type="checkbox">
-                                            </div>
-                                        </td>
-                                        <td><a href="employee-details.html">{{ ++$key }}</a></td>
-                                        <td>
-                                            <div class="d-flex align-items-center">
-                                                <div class="ms-2">
-                                                    <p class="text-dark mb-0">
-                                                        <a href="employee-details.html" data-bs-toggle="modal" data-bs-target="#view_details">{{ $employee->name }}</a>
-                                                    </p>
-                                                    <span class="fs-12">{{ $employee->departments->name ?? '' }}</span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>{{ $employee->email ?? '' }}</td>
-                                        <td>{{ $employee->jobtitle->name ?? '' }}</td>
-                                        <td>{{ $employee->departments->name ?? '' }}</td>
-                                        <td>{{ $employee->Join_date_gregorian ?? '' }}</td>
-                                        <td>
-                                            @if($employee->is_active)
-                                                <span class="badge badge-success d-inline-flex align-items-center badge-xs">
-                                                    <i class="ti ti-point-filled me-1"></i>Active
-                                                </span>
-                                            @else
-                                                <span class="badge badge-danger d-inline-flex align-items-center badge-xs">
-                                                    <i class="ti ti-point-filled me-1"></i>Inactive
-                                                </span>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            <div class="d-flex align-items-center">
-                                                <!-- Edit Button -->
-                                                <a href="{{ route('employee.edit', $employee->id) }}" class="btn btn-sm btn-primary me-2" title="Edit">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                                <!-- Delete Button -->
-                                                <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_modal"
-                                                        data-url="{{ route('employee.destroy', $employee->id) }}" title="Delete">
-                                                    <i class="fas fa-trash-alt"></i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                            <table class="table datatable dataTable no-footer" id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info">
+                    <thead class="thead-light">
+                        <tr>
+                            <th class="no-sort sorting sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="
+                            : activate to sort column descending" style="width: 21px;">
+                                <div class="form-check form-check-md">
+                                    <input class="form-check-input" type="checkbox" id="select-all">
+                                </div>
+                            </th>
+                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="ID" style="width: 55.5341px;">ID</th>
+                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Name: " style="width: 136.818px;">Name</th>
+                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Email: " style="width: 155.534px;">Email</th>
+                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Job Title: " style="width: 95.2045px;">Job Title</th>
+                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Designation:  " style="width: 126.648px;">Department</th>
+                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Joining Date:  " style="width: 79.2273px;">Joining Date</th>
+                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Status:  " style="width: 74.5568px;">Status</th>
+                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label=":  " style="width: 60px;"></th></tr>
+                    </thead>
+                    <tbody>
+                        @foreach($employees as $key=>$employee)
+                        <tr class="odd">
+                            <td class="sorting_1">
+                                <div class="form-check form-check-md">
+                                    <input class="form-check-input" type="checkbox">
+                                </div>
+                            </td>
+                            <td><a href="employee-details.html">{{ ++$key }}</a></td>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div class="ms-2">
+                                        <p class="text-dark mb-0"><a href="employee-details.html" data-bs-toggle="modal" data-bs-target="#view_details">{{ $employee->name }}
+                                            </a>
+                                        </p>
+                                        <span class="fs-12">{{ $employee->departments->name ??'' }}</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>{{ $employee->email ??''}}</td>
+                            <td>{{ $employee->jobtitle->name ??'' }}</td>
+
+                            <td>{{ $employee->departments->name ??''}}</td>
+                            <td>{{ $employee->Join_date_gregorian ??'' }}</td>
+
+                            <td>
+                                @if($employee->is_active)
+                                <span class="badge badge-success d-inline-flex align-items-center badge-xs">
+                                    <i class="ti ti-point-filled me-1"></i>Active
+                                </span>
+                                @else
+                                <span class="badge badge-danger d-inline-flex align-items-center badge-xs">
+                                    <i class="ti ti-point-filled me-1"></i>In-Acitve
+                                </span>
+                                @endif
+                            </td>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <!-- Edit Button -->
+                                    <a href="{{ route('employee.edit', $employee->id) }}" class="btn btn-sm btn-primary me-2" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+
+                                    <!-- Delete Button -->
+                                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_modal"
+                                            data-url="{{ route('employee.destroy', $employee->id) }}" title="Delete">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </div>
+                            </td>
+
+
+
+
+                        </tr>
+                        @endforeach
+
+
+                    </tbody>
+                    </table>
                 </div>
+            </div>
+
+        </div>
             </div>
         </div>
     </div>
-</div>
+
 
 </div>
 {{-- Add Employee Modal --}}

@@ -141,7 +141,18 @@
     <div class="card-body p-0">
         <div class="custom-datatable-filter table-responsive">
             <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
-                 
+                <div class="row">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="dataTables_length" id="DataTables_Table_0_length">
+                            <!-- Length Selector -->
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div id="DataTables_Table_0_filter" class="dataTables_filter">
+                            <!-- Filter Input -->
+                        </div>
+                    </div>
+                </div>
                 <div class="row dt-row">
                     <div class="col-sm-12 table-responsive">
                         <table class="table datatable dataTable no-footer" id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info">

@@ -121,104 +121,116 @@
 
     </div>
 
-    <div class="card">
-    <div class="card-header d-flex align-items-center justify-content-between flex-wrap bg-light p-3">
-        <h5 class="mb-0">Employees List</h5>
+  <div class="card">
+    <div class="card-header d-flex align-items-center justify-content-between">
+        <h5>Employees List</h5>
+        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addEmployeeModal">
+            Add Employee
+        </button>
     </div>
-    <div class="row">
-        <div class="col-12">
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul class="mb-0">
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" id="selectAll"></th>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Job Title</th>
+                        <th>Department</th>
+                        <th>Joining Date</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($employees as $employee)
+                        <tr>
+                            <td><input type="checkbox" class="employeeCheckbox"></td>
+                            <td>{{ $employee->id }}</td>
+                            <td>{{ $employee->name }}</td>
+                            <td>{{ $employee->email }}</td>
+                            <td>{{ $employee->jobtitle->name ?? '' }}</td>
+                            <td>{{ $employee->departments->name ?? '' }}</td>
+                            <td>{{ $employee->Join_date_gregorian ?? '' }}</td>
+                            <td>
+                                @if($employee->is_active)
+                                    <span class="badge bg-success">Active</span>
+                                @else
+                                    <span class="badge bg-danger">Inactive</span>
+                                @endif
+                            </td>
+                            <td>
+                                <a href="{{ route('employee.edit', $employee->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                                <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"
+                                    data-url="{{ route('employee.destroy', $employee->id) }}">
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
-    <div class="card-body p-0">
-        <div class="custom-datatable-filter table-responsive">
-            <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
-                 
-                <div class="row dt-row">
-                    <div class="col-sm-12 table-responsive">
-                        <table class="table datatable dataTable no-footer" id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th class="no-sort sorting" style="width: 21px;">
-                                        <div class="form-check form-check-md">
-                                            <input class="form-check-input" type="checkbox" id="select-all">
-                                        </div>
-                                    </th>
-                                    <th class="sorting">ID</th>
-                                    <th class="sorting">Name</th>
-                                    <th class="sorting">Email</th>
-                                    <th class="sorting">Job Title</th>
-                                    <th class="sorting">Department</th>
-                                    <th class="sorting">Joining Date</th>
-                                    <th class="sorting">Status</th>
-                                    <th class="sorting" style="width: 60px;"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($employees as $key => $employee)
-                                    <tr class="odd">
-                                        <td class="sorting_1">
-                                            <div class="form-check form-check-md">
-                                                <input class="form-check-input" type="checkbox">
-                                            </div>
-                                        </td>
-                                        <td><a href="employee-details.html">{{ ++$key }}</a></td>
-                                        <td>
-                                            <div class="d-flex align-items-center">
-                                                <div class="ms-2">
-                                                    <p class="text-dark mb-0">
-                                                        <a href="employee-details.html" data-bs-toggle="modal" data-bs-target="#view_details">{{ $employee->name }}</a>
-                                                    </p>
-                                                    <span class="fs-12">{{ $employee->departments->name ?? '' }}</span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>{{ $employee->email ?? '' }}</td>
-                                        <td>{{ $employee->jobtitle->name ?? '' }}</td>
-                                        <td>{{ $employee->departments->name ?? '' }}</td>
-                                        <td>{{ $employee->Join_date_gregorian ?? '' }}</td>
-                                        <td>
-                                            @if($employee->is_active)
-                                                <span class="badge badge-success d-inline-flex align-items-center badge-xs">
-                                                    <i class="ti ti-point-filled me-1"></i>Active
-                                                </span>
-                                            @else
-                                                <span class="badge badge-danger d-inline-flex align-items-center badge-xs">
-                                                    <i class="ti ti-point-filled me-1"></i>Inactive
-                                                </span>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            <div class="d-flex align-items-center">
-                                                <!-- Edit Button -->
-                                                <a href="{{ route('employee.edit', $employee->id) }}" class="btn btn-sm btn-primary me-2" title="Edit">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                                <!-- Delete Button -->
-                                                <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_modal"
-                                                        data-url="{{ route('employee.destroy', $employee->id) }}" title="Delete">
-                                                    <i class="fas fa-trash-alt"></i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+</div>
+
+<div class="modal fade" id="addEmployeeModal" tabindex="-1" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addEmployeeModalLabel">Add Employee</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
                 </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save</button>
             </div>
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this employee?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <form id="deleteForm" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Handle delete modal
+    $('#deleteModal').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget);
+        var url = button.data('url');
+        var modal = $(this);
+        modal.find('#deleteForm').attr('action', url);
+    });
+
+    // Handle select all checkboxes
+    $('#selectAll').on('click', function() {
+        $('.employeeCheckbox').prop('checked', $(this).is(':checked'));
+    });
+</script>
+
 
 </div>
 {{-- Add Employee Modal --}}

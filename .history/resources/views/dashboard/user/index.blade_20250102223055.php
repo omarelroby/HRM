@@ -124,17 +124,3 @@
     </div>
 </div>
 {{-- End Delete Confirmation Modal --}}
-@section('script')
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-    const deleteModal = document.getElementById('delete_modal');
-    const deleteForm = document.getElementById('delete_form');
-
-    deleteModal.addEventListener('show.bs.modal', function (event) {
-        const button = event.relatedTarget; // Button that triggered the modal
-        const deleteUrl = button.getAttribute('data-url'); // Extract the URL from the data-url attribute
-        deleteForm.action = deleteUrl; // Update the form action dynamically
-    });
-});
-</script>
-@endsection

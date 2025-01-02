@@ -192,7 +192,7 @@ class UserController extends Controller
         else
         {
             $user = User::findOrFail($id);
-            
+            dd()
             $role          = Role::findById($request->role);
             $input         = $request->all();
             $input['type'] = $role->name;

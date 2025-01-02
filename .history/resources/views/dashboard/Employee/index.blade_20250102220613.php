@@ -141,7 +141,25 @@
     <div class="card-body p-0">
         <div class="custom-datatable-filter table-responsive">
             <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
-                 
+              <div class="row mb-3">
+    <div class="col-sm-12 col-md-6">
+        <div class="dataTables_length" id="DataTables_Table_0_length">
+            <label class="form-label mb-0" for="rowsPerPage">Rows Per Page:</label>
+            <select name="DataTables_Table_0_length" aria-controls="DataTables_Table_0" class="form-select form-select-sm" id="rowsPerPage">
+                <option value="10">10</option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="-1">All</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-6 text-md-end">
+        <div id="DataTables_Table_0_filter" class="dataTables_filter">
+            <label class="form-label mb-0" for="searchInput">Search:</label>
+            <input type="search" class="form-control form-control-sm" id="searchInput" placeholder="Search..." aria-controls="DataTables_Table_0">
+        </div>
+    </div>
+</div>
                 <div class="row dt-row">
                     <div class="col-sm-12 table-responsive">
                         <table class="table datatable dataTable no-footer" id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info">

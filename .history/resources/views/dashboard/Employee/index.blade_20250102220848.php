@@ -141,7 +141,15 @@
     <div class="card-body p-0">
         <div class="custom-datatable-filter table-responsive">
             <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
-                 
+                <div class="row mb-3">
+                    
+                    <div class="col-sm-12 col-md-6 text-md-end">
+                        <div id="DataTables_Table_0_filter" class="dataTables_filter">
+                            <label class="form-label mb-0" for="searchInput">Search:</label>
+                            <input type="search" class="form-control form-control-sm" id="searchInput" placeholder="Search..." aria-controls="DataTables_Table_0">
+                        </div>
+                    </div>
+                </div>
                 <div class="row dt-row">
                     <div class="col-sm-12 table-responsive">
                         <table class="table datatable dataTable no-footer" id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info">

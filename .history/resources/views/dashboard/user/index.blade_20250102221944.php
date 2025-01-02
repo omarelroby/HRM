@@ -31,10 +31,9 @@
                             </a>
                           </li>
                           <li>
-                            <a class="dropdown-item" href="javascript:void(0);" data-url="{{ route('user.destroy', $user->id) }}" data-bs-toggle="modal" data-bs-target="#delete_modal">
+                            <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#delete_modal">
                               <i class="ti ti-trash me-1"></i>Delete
                             </a>
-
                           </li>
                         </ul>
                       </div>
@@ -74,7 +73,7 @@
                             <div class="mb-3">
                                 <label for="type" class="form-label">User  Type</label>
                                 <div class="input-group">
-                                    <select class="form-select" id="type" name="role" required>
+                                    <select class="form-select" id="type" name="type" required>
                                         @foreach ($roles as $role)
                                             <option @if($role->name == $user->type) selected @endif value="{{ $role->id }}">{{ $role->name }}</option>
                                         @endforeach
@@ -98,43 +97,4 @@
     </div>
   </div>
 </div>
-@endsection
-{{-- Delete Confirmation Modal --}}
-<div class="modal fade" id="delete_modal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-sm">
-        <div class="modal-content">
-            <div class="modal-body text-center">
-                <span class="avatar avatar-xl bg-transparent-danger text-danger mb-3">
-                    <i class="ti ti-trash-x fs-36"></i>
-                </span>
-                <h4 class="mb-1">Confirm Delete</h4>
-                <p class="mb-3">Are you sure you want to delete this item? This action cannot be undone.</p>
-
-                <form id="delete_form" action="" method="POST">
-                    @csrf
-                    @method('DELETE')
-
-                    <div class="d-flex justify-content-center">
-                        <button type="button" class="btn btn-light me-3" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-danger">Yes, Delete</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-{{-- End Delete Confirmation Modal --}}
-@section('script')
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-    const deleteModal = document.getElementById('delete_modal');
-    const deleteForm = document.getElementById('delete_form');
-
-    deleteModal.addEventListener('show.bs.modal', function (event) {
-        const button = event.relatedTarget; // Button that triggered the modal
-        const deleteUrl = button.getAttribute('data-url'); // Extract the URL from the data-url attribute
-        deleteForm.action = deleteUrl; // Update the form action dynamically
-    });
-});
-</script>
 @endsection
