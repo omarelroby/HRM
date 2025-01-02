@@ -73,9 +73,9 @@ class SalaryComponentTypeController extends Controller
         if(\Auth::user()->can('Edit Employee'))
         {
             $salary_component_type = Salary_components_type::where('id',$salary_components_type)->first();
-            if($salary_component_type->created_by == \Auth::user()->creatorId())
+            if($salary_components_type->created_by == \Auth::user()->creatorId())
             {
-                return view('dashboard.salary_component_type.edit', compact('salary_component_type'));
+                return view('dashboard.salary_component_type.index', compact('salary_components_type'));
             }
             else
             {

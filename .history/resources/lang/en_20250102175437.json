@@ -21,8 +21,7 @@
     "Action": "Action",
     "request_types" : "Employee Request Types",
     "holiday" : "Holidays ",
-    "salary_component_type" : "Salary Component Type",
-    "attendancemovement" : "Attendance Movement",
+    "salary_component_type" : "Salary component type",
 
     "Active Jobs": "Active Jobs",
     "Add Notes": "Add Notes",

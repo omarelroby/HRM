@@ -12,7 +12,7 @@ class SalaryComponentTypeController extends Controller
         if(\Auth::user()->can('Manage Employee'))
         {
             $salary_components_types = Salary_components_type::where('created_by', '=', \Auth::user()->creatorId())->get();
-            return view('dashboard.salary_component_type.index', compact('salary_components_types'));
+            return view('dashboard.salary_component_types.index', compact('salary_components_types'));
         }
         else
         {
@@ -72,10 +72,10 @@ class SalaryComponentTypeController extends Controller
     {
         if(\Auth::user()->can('Edit Employee'))
         {
-            $salary_component_type = Salary_components_type::where('id',$salary_components_type)->first();
-            if($salary_component_type->created_by == \Auth::user()->creatorId())
+            $salary_components_type = Salary_components_type::where('id',$salary_components_type)->first();
+            if($salary_components_type->created_by == \Auth::user()->creatorId())
             {
-                return view('dashboard.salary_component_type.edit', compact('salary_component_type'));
+                return view('dashboard.salary_component_types.edit', compact('salary_components_type'));
             }
             else
             {
