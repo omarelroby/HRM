@@ -10,7 +10,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h5>{{ __('Update Employee Attendance Movement') }}</h5>
+                    <h5>{{ __('Update Employee attendancemovement') }}</h5>
                 </div>
                 <div class="card-body">
 
