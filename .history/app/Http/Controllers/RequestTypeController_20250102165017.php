@@ -74,7 +74,7 @@ class RequestTypeController extends Controller
         {
             if($request_type->created_by == \Auth::user()->creatorId())
             {
-                return view('dashboard.request_types.edit', compact('request_type'));
+                return view('dashboard.request_types.edit', compact('RequestType'));
             }
             else
             {

@@ -96,6 +96,8 @@
                                         <li><a href="{{ url('/place') }}" class="{{ Request::is('place') ?'active' :'' }}">{{ __('location') }}</a></li>
                                         <li><a href="{{ url('/jobtypes') }}" class="{{ Request::is('jobtypes') ?'active' :'' }}">{{ __('job_type') }}</a></li>
                                         <li><a href="{{ url('/banks') }}" class="{{ Request::is('banks') ?'active' :'' }}">{{ __('banks') }}</a></li>
+                                        <li><a href="{{ url('/request_types') }}" class="{{ Request::is('request_types') ?'active' :'' }}">{{ __('request_types') }}</a></li>
+                                        <li><a href="{{ url('/holiday') }}" class="{{ Request::is('holiday') ?'active' :'' }}">{{ __('holiday') }}</a></li>
                                     </ul>
                                 </li>
                             </ul>

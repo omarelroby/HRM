@@ -128,11 +128,11 @@
 </script>
 <script src="https://smarthr.dreamstechnologies.com/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="12789c3eb65f5dda020bae43-|49" defer></script>
 </body>
-<script type="text/javascript">
-    function changeLanguage() {
-        var lang = document.getElementById("langSwitcher").value;
-        window.location.href = lang;
-    }
-</script>
+    <script type="text/javascript">
+        function changeLanguage() {
+            var lang = document.getElementById("langSwitcher").value;
+            window.location.href = lang;
+        }
+    </script>
 
 <!-- Mirrored from smarthr.dreamstechnologies.com/html/template/employee-dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 22 Dec 2024 18:38:21 GMT -->

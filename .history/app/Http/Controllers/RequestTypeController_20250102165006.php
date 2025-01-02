@@ -11,8 +11,8 @@ class RequestTypeController extends Controller
     {
         if(\Auth::user()->can('Manage Employee'))
         {
-            $request_types = RequestType::where('created_by', '=', \Auth::user()->creatorId())->get();
-            return view('dashboard.request_types.index', compact('request_types'));
+            $RequestTypes = RequestType::where('created_by', '=', \Auth::user()->creatorId())->get();
+            return view('dashboard.request_types.index', compact('RequestTypes'));
         }
         else
         {
@@ -74,7 +74,7 @@ class RequestTypeController extends Controller
         {
             if($request_type->created_by == \Auth::user()->creatorId())
             {
-                return view('dashboard.request_types.edit', compact('request_type'));
+                return view('dashboard.request_types.edit', compact('RequestType'));
             }
             else
             {
