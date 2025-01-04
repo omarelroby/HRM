@@ -1943,7 +1943,8 @@
     "Edit Location"          : "تعديل موقع",
     "Location successfully created." : "تم انشاء الموقع بنجاح. ",
     "Location successfully deleted." : "تم حذف الموقع بنجاح. ",
-    "Location successfully updated." : "تم تعديل الموقع بنجاح. ",
+    "Location successfully updated." : "تم تعديل الموقع بنجاح. "
+    {
         "Client ID": "معرف العميل",
         "Employee": "الموظف",
         "Date Of Join": "تاريخ الانضمام",
@@ -1964,8 +1965,6 @@
         "Emergency Contact Number": "رقم الاتصال في حالة الطوارئ",
         "Primary": "رئيسي",
         "Muslim": "مسلم",
-        "NON-MUSLIM": "غير مسلم",
-        "ID_qama_details": "تفاصيل هوية الإقامة"
-
+        "NON-MUSLIM": "غير مسلم"
       }
 

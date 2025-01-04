@@ -54,11 +54,11 @@
                                         </div>
                                     </div>
                                     <div class="row gx-2 mt-3">
-                                        <div class="col-12">
+                                        <div class="col-6">
                                             <div>
                                                 <a href="{{ route('employee.edit',$employee->id) }}" class="btn btn-dark w-100" target="_blank"><i class="ti ti-edit me-1"></i>Edit Info</a>
                                             </div>
-                                        </div>
+                                        </div
                                     </div>
                                 </div>
                             </div>

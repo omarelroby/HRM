@@ -54,9 +54,14 @@
                                         </div>
                                     </div>
                                     <div class="row gx-2 mt-3">
-                                        <div class="col-12">
+                                        <div class="col-6">
                                             <div>
                                                 <a href="{{ route('employee.edit',$employee->id) }}" class="btn btn-dark w-100" target="_blank"><i class="ti ti-edit me-1"></i>Edit Info</a>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div>
+                                                <a href=" " class="btn btn-primary w-100"><i class="ti ti-message-heart me-1"></i>Message</a>
                                             </div>
                                         </div>
                                     </div>
@@ -370,9 +375,9 @@
                                                                     <div class="d-flex align-items-center justify-content-between">
                                                                         <div>
                                                                             <h6 class="d-inline-flex align-items-center fw-medium">
-                                                                                {{ __('Address_in_mother_country') }}
+                                                                                Google
                                                                             </h6>
-                                                                            <span class="d-flex align-items-center badge bg-secondary-transparent mt-1"><i class="ti ti-point-filled me-1"></i>{{ $employee->address ??'N/A' }}</span>
+                                                                            <span class="d-flex align-items-center badge bg-secondary-transparent mt-1"><i class="ti ti-point-filled me-1"></i>UI/UX Developer</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -380,21 +385,23 @@
                                                                     <div class="d-flex align-items-center justify-content-between">
                                                                         <div>
                                                                             <h6 class="d-inline-flex align-items-center fw-medium">
-                                                                                {{ __('City') }}
+                                                                                Salesforce
                                                                             </h6>
-                                                                            <span class="d-flex align-items-center badge bg-secondary-transparent mt-1"><i class="ti ti-point-filled me-1"></i>{{ $employee->mother_city ??'N/A' }}</span>
+                                                                            <span class="d-flex align-items-center badge bg-secondary-transparent mt-1"><i class="ti ti-point-filled me-1"></i>Web Developer</span>
                                                                         </div>
-                                                                     </div>
+                                                                        <p class="text-dark">Dec 2012- Jan 2015</p>
+                                                                    </div>
                                                                 </div>
                                                                 <div>
                                                                     <div class="d-flex align-items-center justify-content-between">
                                                                         <div>
                                                                             <h6 class="d-inline-flex align-items-center fw-medium">
-                                                                                {{ __('Country') }}
+                                                                                HubSpot
                                                                             </h6>
-                                                                            <span class="d-flex align-items-center badge bg-secondary-transparent mt-1"><i class="ti ti-point-filled me-1"></i>{{ $employee->mother_country ??'N/A' }}</span>
+                                                                            <span class="d-flex align-items-center badge bg-secondary-transparent mt-1"><i class="ti ti-point-filled me-1"></i>Software Developer</span>
                                                                         </div>
-                                                                     </div>
+                                                                        <p class="text-dark">Dec 2011- Jan 2012</p>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -403,7 +410,190 @@
                                             </div>
                                         </div>
                                     </div>
-
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="contact-grids-tab p-0 mb-3">
+                                                <ul class="nav nav-underline" id="myTab" role="tablist">
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link active" id="info-tab2" data-bs-toggle="tab" data-bs-target="#basic-info2" type="button" role="tab" aria-selected="true">Projects</button>
+                                                    </li>
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link" id="address-tab2" data-bs-toggle="tab" data-bs-target="#address2" type="button" role="tab" aria-selected="false">Assets</button>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="tab-content" id="myTabContent3">
+                                                <div class="tab-pane fade show active" id="basic-info2" role="tabpanel" aria-labelledby="info-tab2" tabindex="0">
+                                                    <div class="row">
+                                                        <div class="col-md-6 d-flex">
+                                                            <div class="card flex-fill mb-4 mb-md-0">
+                                                                <div class="card-body">
+                                                                    <div class="d-flex align-items-center pb-3 mb-3 border-bottom">
+                                                                        <a href="  " class="flex-shrink-0 me-2">
+                                                                            <img src=" " alt="Img">
+                                                                        </a>
+                                                                        <div>
+                                                                            <h6 class="mb-1"><a href=" ">World Health</a></h6>
+                                                                            <div class="d-flex align-items-center">
+                                                                                <p class="mb-0 fs-13">8 tasks</p>
+                                                                                <p class="fs-13"><span class="mx-1"><i class="ti ti-point-filled text-primary"></i></span>15 Completed</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-md-6">
+                                                                            <div>
+                                                                                <span class="mb-1 d-block">Deadline</span>
+                                                                                <p class="text-dark">31 July 2025</p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <div>
+                                                                                <span class="mb-1 d-block">Project Lead</span>
+                                                                                <a href="#" class="fw-normal d-flex align-items-center">
+                                                                                    <img class="avatar avatar-sm rounded-circle me-2" src=" " alt="Img">
+                                                                                    Leona
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6 d-flex">
+                                                            <div class="card flex-fill mb-0">
+                                                                <div class="card-body">
+                                                                    <div class="d-flex align-items-center pb-3 mb-3 border-bottom">
+                                                                        <a href=" " class="flex-shrink-0 me-2">
+                                                                            <img src=" " alt="Img">
+                                                                        </a>
+                                                                        <div>
+                                                                            <h6 class="mb-1 text-truncate"><a href=" ">Hospital Administration</a></h6>
+                                                                            <div class="d-flex align-items-center">
+                                                                                <p class="mb-0 fs-13">8 tasks</p>
+                                                                                <p class="fs-13"><span class="mx-1"><i class="ti ti-point-filled text-primary"></i></span>15 Completed</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-md-6">
+                                                                            <div>
+                                                                                <span class="mb-1 d-block">Deadline</span>
+                                                                                <p class="text-dark">31 July 2025</p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <div>
+                                                                                <span class="mb-1 d-block">Project Lead</span>
+                                                                                <a href="#" class="fw-normal d-flex align-items-center">
+                                                                                    <img class="avatar avatar-sm rounded-circle me-2" src=" " alt="Img">
+                                                                                    Leona
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade" id="address2" role="tabpanel" aria-labelledby="address-tab2" tabindex="0">
+                                                    <div class="row">
+                                                        <div class="col-md-12 d-flex">
+                                                            <div class="card flex-fill">
+                                                                <div class="card-body">
+                                                                    <div class="row align-items-center">
+                                                                        <div class="col-md-8">
+                                                                            <div class="d-flex align-items-center">
+                                                                                <a href=" " class="flex-shrink-0 me-2">
+                                                                                    <img src=" " class="img-fluid rounded-circle" alt="img">
+                                                                                </a>
+                                                                                <div>
+                                                                                    <h6 class="mb-1"><a href=" ">Dell Laptop - #343556656</a></h6>
+                                                                                    <div class="d-flex align-items-center">
+                                                                                            <p><span class="text-primary">AST - 001<i class="ti ti-point-filled text-primary mx-1"></i></span>Assigned on 22 Nov, 2022 10:32AM </p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            <div>
+                                                                                <span class="mb-1 d-block">Assigned by</span>
+                                                                                <a href="#" class="fw-normal d-flex align-items-center">
+                                                                                    <img class="avatar avatar-sm rounded-circle me-2" src=" " alt="Img">
+                                                                                    Andrew Symon
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-1">
+                                                                            <div class="dropdown ms-2">
+                                                                                <a href="javascript:void(0);" class="d-inline-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                                    <i class="ti ti-dots-vertical"></i>
+                                                                                </a>
+                                                                                <ul class="dropdown-menu dropdown-menu-end p-3">
+                                                                                    <li>
+                                                                                        <a href="javascript:void(0);" class="dropdown-item rounded-1" data-bs-toggle="modal" data-bs-target="#asset_info">View Info</a>
+                                                                                    </li>
+                                                                                    <li>
+                                                                                        <a href="javascript:void(0);" class="dropdown-item rounded-1" data-bs-toggle="modal" data-bs-target="#refuse_msg">Raise Issue </a>
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12 d-flex">
+                                                            <div class="card flex-fill mb-0">
+                                                                <div class="card-body">
+                                                                    <div class="row align-items-center">
+                                                                        <div class="col-md-8">
+                                                                            <div class="d-flex align-items-center">
+                                                                                <a href=" " class="flex-shrink-0 me-2">
+                                                                                    <img src=" " class="img-fluid rounded-circle" alt="img">
+                                                                                </a>
+                                                                                <div>
+                                                                                    <h6 class="mb-1"><a href=" ">Bluetooth Mouse  - #478878</a></h6>
+                                                                                    <div class="d-flex align-items-center">
+                                                                                            <p><span class="text-primary">AST - 001<i class="ti ti-point-filled text-primary mx-1"></i></span>Assigned on 22 Nov, 2022 10:32AM </p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            <div>
+                                                                                <span class="mb-1 d-block">Assigned by</span>
+                                                                                <a href="#" class="fw-normal d-flex align-items-center">
+                                                                                    <img class="avatar avatar-sm rounded-circle me-2" src=" " alt="Img">
+                                                                                    Andrew Symon
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-1">
+                                                                            <div class="dropdown ms-2">
+                                                                                <a href="javascript:void(0);" class="d-inline-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                                    <i class="ti ti-dots-vertical"></i>
+                                                                                </a>
+                                                                                <ul class="dropdown-menu dropdown-menu-end p-3">
+                                                                                    <li>
+                                                                                        <a href="javascript:void(0);" class="dropdown-item rounded-1" data-bs-toggle="modal" data-bs-target="#asset_info">View Info</a>
+                                                                                    </li>
+                                                                                    <li>
+                                                                                        <a href="javascript:void(0);" class="dropdown-item rounded-1" data-bs-toggle="modal" data-bs-target="#refuse_msg">Raise Issue </a>
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

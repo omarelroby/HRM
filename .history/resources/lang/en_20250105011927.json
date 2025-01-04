@@ -1210,7 +1210,7 @@
   "Job type list": "Job type list",
   "create bank": "create bank",
   "update bank": "update bank",
-  "bank list": "bank list",
+  "bank list": "bank list"
     "Client ID": "Client ID",
     "Employee": "Employee",
     "Date Of Join": "Date Of Join",
@@ -1231,8 +1231,7 @@
     "Emergency Contact Number": "Emergency Contact Number",
     "Primary": "Primary",
     "Muslim": "Muslim",
-    "NON-MUSLIM": "NON-MUSLIM",
-     "ID_qama_details": "ID Qama Details"
+    "NON-MUSLIM": "NON-MUSLIM"
   }
 
 

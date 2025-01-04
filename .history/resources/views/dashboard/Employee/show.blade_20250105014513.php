@@ -54,9 +54,14 @@
                                         </div>
                                     </div>
                                     <div class="row gx-2 mt-3">
-                                        <div class="col-12">
+                                        <div class="col-6">
                                             <div>
                                                 <a href="{{ route('employee.edit',$employee->id) }}" class="btn btn-dark w-100" target="_blank"><i class="ti ti-edit me-1"></i>Edit Info</a>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div>
+                                                <a href=" " class="btn btn-primary w-100"><i class="ti ti-message-heart me-1"></i>Message</a>
                                             </div>
                                         </div>
                                     </div>
@@ -403,7 +408,7 @@
                                             </div>
                                         </div>
                                     </div>
-
+                                  
                                 </div>
                             </div>
                         </div>
