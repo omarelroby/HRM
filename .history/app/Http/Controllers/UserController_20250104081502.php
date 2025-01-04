@@ -151,7 +151,7 @@ class UserController extends Controller
     public function show(User $user)
     {
 
-        return view('dashboard.user.show',compact('user'));
+        return view('dashboard.employee.show',compact('user'));
     }
 
     public function edit($id)

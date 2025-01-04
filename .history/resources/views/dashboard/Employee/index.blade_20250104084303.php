@@ -152,8 +152,8 @@
                                             <input class="form-check-input" type="checkbox" id="select-all">
                                         </div>
                                     </th>
-                                    <th class="sorting">#</th>
                                     <th class="sorting">ID</th>
+                                    <th class="sorting">Employee-ID</th>
                                     <th class="sorting">Name</th>
                                     <th class="sorting">Email</th>
                                     <th class="sorting">Job Title</th>

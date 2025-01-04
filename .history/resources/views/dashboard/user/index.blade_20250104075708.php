@@ -17,7 +17,7 @@
                     <div class="d-flex justify-content-between align-items-center mb-2">
                       <div class="w-100 text-center">
                         <h5 class="card-title mb-0">
-                          <a href="{{ route('user.show',$user->id) }}">{{ $user->name }}</a>
+                          <a href="{{ route('user.show',) }}">{{ $user->name }}</a>
                         </h5>
                       </div>
                       <div class="dropdown">

@@ -17,7 +17,7 @@
                     <div class="d-flex justify-content-between align-items-center mb-2">
                       <div class="w-100 text-center">
                         <h5 class="card-title mb-0">
-                          <a href="{{ route('user.show',$user->id) }}">{{ $user->name }}</a>
+                          <a href="https://smarthr.dreamstechnologies.com/html/template/employee-details.html">{{ $user->name }}</a>
                         </h5>
                       </div>
                       <div class="dropdown">
@@ -99,42 +99,5 @@
   </div>
 </div>
 @endsection
-{{-- Delete Confirmation Modal --}}
-<div class="modal fade" id="delete_modal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-sm">
-        <div class="modal-content">
-            <div class="modal-body text-center">
-                <span class="avatar avatar-xl bg-transparent-danger text-danger mb-3">
-                    <i class="ti ti-trash-x fs-36"></i>
-                </span>
-                <h4 class="mb-1">Confirm Delete</h4>
-                <p class="mb-3">Are you sure you want to delete this item? This action cannot be undone.</p>
 
-                <form id="delete_form" action="" method="POST">
-                    @csrf
-                    @method('DELETE')
-
-                    <div class="d-flex justify-content-center">
-                        <button type="button" class="btn btn-light me-3" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-danger">Yes, Delete</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-{{-- End Delete Confirmation Modal --}}
-@section('script')
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-    const deleteModal = document.getElementById('delete_modal');
-    const deleteForm = document.getElementById('delete_form');
-
-    deleteModal.addEventListener('show.bs.modal', function (event) {
-        const button = event.relatedTarget; // Button that triggered the modal
-        const deleteUrl = button.getAttribute('data-url'); // Extract the URL from the data-url attribute
-        deleteForm.action = deleteUrl; // Update the form action dynamically
-    });
-});
-</script>
 @endsection

@@ -150,8 +150,7 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-
-        return view('dashboard.user.show',compact('user'));
+        return view('profile.index','');
     }
 
     public function edit($id)

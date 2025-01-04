@@ -152,8 +152,8 @@
                                             <input class="form-check-input" type="checkbox" id="select-all">
                                         </div>
                                     </th>
-                                    <th class="sorting">#</th>
                                     <th class="sorting">ID</th>
+                                    <th class="sorting">Employee-ID</th>
                                     <th class="sorting">Name</th>
                                     <th class="sorting">Email</th>
                                     <th class="sorting">Job Title</th>
@@ -178,7 +178,7 @@
                                                 <div class="ms-2">
                                                     <p class="text-dark mb-0">
                                                         <!-- Applying bold, orange, and underlined styles -->
-                                                        <a href="{{ route('employee.show', base64_encode($employee->id)) }}" target="_blank"  >
+                                                        <a href="{{ route('employee.show', base64_encode($employee->id)) }}" target="_blank" style="font-weight: bold; color: #f47b14; text-decoration: underline;">
                                                             {{ $employee->name }}
                                                         </a>
                                                     </p>

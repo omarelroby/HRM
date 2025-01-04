@@ -152,7 +152,6 @@
                                             <input class="form-check-input" type="checkbox" id="select-all">
                                         </div>
                                     </th>
-                                    <th class="sorting">#</th>
                                     <th class="sorting">ID</th>
                                     <th class="sorting">Name</th>
                                     <th class="sorting">Email</th>
@@ -171,23 +170,17 @@
                                                 <input class="form-check-input" type="checkbox">
                                             </div>
                                         </td>
-                                        <td><a href="{{ route('employee.show', base64_encode($employee->id)) }}">{{ ++$key }}</a></td>
-                                        <td><a href="{{ route('employee.show', base64_encode($employee->id)) }}">{{ \Auth::user()->employeeIdFormat($employee->employee_id) }}  </a></td>
+                                        <td><a href="employee-details.html">{{ ++$key }}</a></td>
                                         <td>
                                             <div class="d-flex align-items-center">
                                                 <div class="ms-2">
                                                     <p class="text-dark mb-0">
-                                                        <!-- Applying bold, orange, and underlined styles -->
-                                                        <a href="{{ route('employee.show', base64_encode($employee->id)) }}" target="_blank"  >
-                                                            {{ $employee->name }}
-                                                        </a>
+                                                        <a href="{{ $ }}" data-bs-toggle="modal" data-bs-target="#view_details">{{ $employee->name }}</a>
                                                     </p>
                                                     <span class="fs-12">{{ $employee->departments->name ?? '' }}</span>
                                                 </div>
                                             </div>
                                         </td>
-
-
                                         <td>{{ $employee->email ?? '' }}</td>
                                         <td>{{ $employee->jobtitle->name ?? '' }}</td>
                                         <td>{{ $employee->departments->name ?? '' }}</td>

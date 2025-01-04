@@ -643,9 +643,10 @@ class EmployeeController extends Controller
     {
         if(\Auth::user()->can('Show Employee'))
         {
-            $empId = base64_decode($id);
+            $decoded = base64_decode($id);
             // $empId = Crypt::decryptString($decoded);
             $lang                    = app()->getLocale() == 'ar' ? '_ar' : '';
+            $empId                   = Crypt::decrypt($id);
             $documents               = Document::where('created_by', \Auth::user()->creatorId())->get();
             $branches                = Branch::where('created_by', \Auth::user()->creatorId())->get()->pluck('name'.$lang, 'id');
             $departments             = Department::where('created_by', \Auth::user()->creatorId())->get()->pluck('name'.$lang, 'id');
@@ -811,7 +812,7 @@ class EmployeeController extends Controller
             $employee_shifts             = Employee_shift::where('created_by', \Auth::user()->creatorId())->get();
             $employee_location           = Place::where('created_by', \Auth::user()->creatorId())->get();
 
-            return view('dashboard.employee.show', compact('employee','lang','setting','holidays','employees','assets','documents','employeesAttendance','dates', 'data',
+            return view('employee.show', compact('employee','lang','setting','holidays','employees','assets','documents','employeesAttendance','dates', 'data',
             'leaves','employee_shifts','banks','allowance_options','roles','jobclasses','job_types','work_units','laborCompanies','qualifications',
             'jobtitles','nationalities','categories','attandance_employees','employeeContract','employeeFollowers','employeesId', 'branches', 'departments', 'designations',
             'documents','employee_tracking_dates','employee_shifts','employee_location'));
