@@ -163,7 +163,7 @@
                         </li>
                         <li class="submenu">
                             <a href="javascript:void(0);" class="subdrop {{ Request::is('training') || Request::is('trainer')  ? 'active' : '' }}">
-                                <i class="ti ti-activity"></i><span class="submenu-title">{{ __('Training') }}</span>
+                                <i class="ti ti-clock"></i><span class="submenu-title">{{ __('Training') }}</span>
                                 <span class="menu-arrow"></span>
                             </a>
                             <ul style="display: none;">

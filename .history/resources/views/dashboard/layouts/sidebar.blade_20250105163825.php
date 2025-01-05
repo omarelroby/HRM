@@ -161,17 +161,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="submenu">
-                            <a href="javascript:void(0);" class="subdrop {{ Request::is('training') || Request::is('trainer')  ? 'active' : '' }}">
-                                <i class="ti ti-activity"></i><span class="submenu-title">{{ __('Training') }}</span>
-                                <span class="menu-arrow"></span>
-                            </a>
-                            <ul style="display: none;">
-                                <li><a class="{{ Request::is('training') ?'active' :'' }}" href="{{ route('training.index') }}">{{ __('Training') }}</a></li>
-                                <li><a class="{{ Request::is('trainer') ?'active' :'' }}" href="{{ route('trainer.index') }}">{{ __('Trainer') }}</a></li>
-
-                            </ul>
-                        </li>
+                        
                     </ul>
                 </li>
             </ul>

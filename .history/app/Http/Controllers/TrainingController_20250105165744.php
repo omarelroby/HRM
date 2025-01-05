@@ -54,49 +54,46 @@ class TrainingController extends Controller
 
     public function store(Request $request)
     {
+
         if (\Auth::user()->can('Create Training')) {
-            // Validate the request
+
             $validator = \Validator::make(
                 $request->all(),
                 [
                     'branch' => 'required',
                     'training_type' => 'required',
-                    'training_cost' => 'required|numeric',
+                    'training_cost' => 'required',
                     'employee' => 'required',
-                    'start_date' => 'required|date',
-                    'end_date' => 'required|date|after_or_equal:start_date',
-                    'description' => 'nullable',
-                    'description_ar' => 'nullable',
+                    'start_date' => 'required',
+                    'end_date' => 'required',
                 ]
             );
-
-            // If validation fails, return errors with input
             if ($validator->fails()) {
-                return redirect()->back()
-                    ->withErrors($validator) // Pass validation errors to the view
-                    ->withInput(); // Retain old input values
+                $messages = $validator->getMessageBag();
+
+                return redirect()->back()->with('error', $messages->first());
             }
 
-            // Create a new training record
-            $training = new Training();
-            $training->branch = $request->branch;
+            $training                 = new Training();
+            $training->branch         = $request->branch;
             $training->trainer_option = $request->trainer_option;
-            $training->training_type = $request->training_type;
-            $training->trainer = $request->trainer;
-            $training->training_cost = $request->training_cost;
-            $training->employee = $request->employee;
-            $training->start_date = $request->start_date;
-            $training->end_date = $request->end_date;
-            $training->description = $request->description;
-            $training->description_ar = $request->description_ar;
-            $training->created_by = \Auth::user()->creatorId();
+            $training->training_type  = $request->training_type;
+            $training->trainer        = $request->trainer;
+            $training->training_cost  = $request->training_cost;
+            $training->employee       = $request->employee;
+            $training->start_date     = $request->start_date;
+            $training->end_date       = $request->end_date;
+            $training->description    = $request->description;
+            $training->description_ar    = $request->description_ar;
+            $training->created_by     = \Auth::user()->creatorId();
             $training->save();
-
+            dd($training);
             return redirect()->route('training.index')->with('success', __('Training successfully created.'));
         } else {
             return redirect()->back()->with('error', __('Permission denied.'));
         }
     }
+
 
     public function show($id)
     {

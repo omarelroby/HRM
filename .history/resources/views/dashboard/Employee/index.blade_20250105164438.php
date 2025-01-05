@@ -236,7 +236,7 @@
                 <div class="d-flex align-items-center">
                     <h4 class="modal-title me-2">{{ __('Add New Employee') }}</h4>
                 </div>
-                <button type="button" class="btn-close custom-btn-close" data-bs-dismiss="modal" aria-label="Close">x</button>
+                <button type="button" class="btn-close custom-btn-close" data-bs-dismiss="modal" aria-label="Close"><x/button>
             </div>
 
             <form id="add_employee" enctype="multipart/form-data" method="post">
