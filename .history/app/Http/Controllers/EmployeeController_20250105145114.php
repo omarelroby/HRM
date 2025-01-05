@@ -961,13 +961,18 @@ class EmployeeController extends Controller
                 $employees->where('designation_id', $request->designation);
             }
             $employees = $employees->get();
+
             $brances = Branch::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
             $brances->prepend('All', '');
+
             $departments = Department::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
             $departments->prepend('All', '');
+
             $designations = Designation::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
             $designations->prepend('All', '');
             $roles= Role::where('created_by', '=', \Auth::user()->creatorId())->get();
+
+
             return view('dashboard.employee.profile', compact('employees', 'departments', 'designations', 'brances','roles'));
         } else {
             return redirect()->back()->with('error', __('Permission denied.'));

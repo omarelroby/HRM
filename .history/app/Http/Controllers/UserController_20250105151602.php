@@ -144,10 +144,10 @@ class UserController extends Controller
         }
     }
 
-        public function show($id)
+        public function show(User $user)
         {
-            $employee= Employee::findOrFail($id);
-            return view('dashboard.user.show',compact('employee'));
+            dd('dd');
+            return view('dashboard.user.show',compact('user'));
         }
 
     public function edit($id)

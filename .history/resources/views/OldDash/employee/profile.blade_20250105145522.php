@@ -7,8 +7,7 @@
 
     <div class="wrapper wrapper-content animated fadeInRight ecommerce">
         <div class="ibox-content m-b-sm border-bottom">
-            {{ Form::open(array('route' => array('employee.profile'),'method'=>'get','id'=>'employee_profile_filter')) }}
-                <div class="row">
+                 <div class="row">
 
                         <div class="col-sm-3">
                             <div class="form-group">
@@ -40,7 +39,7 @@
                             </a>
                         </div>
                 </div>
-            {{ Form::close() }}
+
         </div>
     </div>
 @endsection

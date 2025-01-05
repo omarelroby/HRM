@@ -82,13 +82,6 @@
                                     <p class="text-dark">{{ $employee->email ?? 'N/A' }}</p>
 
                                  </div>
-                                 <div class="d-flex align-items-center justify-content-between mb-2">
-                                    <span class="d-inline-flex align-items-center">
-                                        <i class="ti ti-mail-check me-2"></i>
-                                        {{ __('Personal Email') }}
-                                    </span>
-                                    <p class="text-dark">{{ $employee->personal_email ?? 'N/A' }}</p>
-                                 </div>
                                 <div class="d-flex align-items-center justify-content-between mb-2">
                                     <span class="d-inline-flex align-items-center">
                                         <i class="ti ti-gender-male me-2"></i>
@@ -236,7 +229,7 @@
                                                 <div class="d-flex align-items-center justify-content-between flex-fill">
                                                     <h5>{{ __('Passport_details') }}</h5>
                                                     <div class="d-flex">
-                                                        <a href="#" class="btn btn-icon btn-sm" data-bs-toggle="modal" data-bs-target="#edit_familyinformation"> </a>
+                                                        <a href="#" class="btn btn-icon btn-sm" data-bs-toggle="modal" data-bs-target="#edit_familyinformation"><i class="ti ti-edit"></i></a>
                                                         <a href="#" class="d-flex align-items-center collapsed collapse-arrow" data-bs-toggle="collapse" data-bs-target="#primaryBorderThree" aria-expanded="false" aria-controls="primaryBorderThree">
                                                             <i class="ti ti-chevron-down fs-18"></i>
                                                         </a>
@@ -284,7 +277,7 @@
                                                             <div class="d-flex align-items-center justify-content-between flex-fill">
                                                                 <h5>{{ __('Address_in_Saudi_Arabia') }}</h5>
                                                                 <div class="d-flex">
-                                                                    <a href="#" class="btn btn-icon btn-sm"  data-bs-toggle="modal" data-bs-target="#edit_education"> </a>
+                                                                    <a href="#" class="btn btn-icon btn-sm"  data-bs-toggle="modal" data-bs-target="#edit_education"><i class="ti ti-edit"></i></a>
                                                                     <a href="#" class="d-flex align-items-center collapsed collapse-arrow" data-bs-toggle="collapse" data-bs-target="#primaryBorderFour" aria-expanded="false" aria-controls="primaryBorderFour">
                                                                         <i class="ti ti-chevron-down fs-18"></i>
                                                                     </a>
@@ -362,7 +355,7 @@
                                                             <div class="d-flex align-items-center justify-content-between flex-fill">
                                                                 <h5>{{ __('Address_in_mother_country') }}</h5>
                                                                 <div class="d-flex">
-                                                                    <a href="#" class="btn btn-icon btn-sm" data-bs-toggle="modal" data-bs-target="#edit_experience"> </a>
+                                                                    <a href="#" class="btn btn-icon btn-sm" data-bs-toggle="modal" data-bs-target="#edit_experience"><i class="ti ti-edit"></i></a>
                                                                     <a href="#" class="d-flex align-items-center collapsed collapse-arrow" data-bs-toggle="collapse" data-bs-target="#primaryBorderFive" aria-expanded="false" aria-controls="primaryBorderFive">
                                                                         <i class="ti ti-chevron-down fs-18"></i>
                                                                     </a>

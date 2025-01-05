@@ -93,6 +93,7 @@ class UserController extends Controller
                 $input               = $request->all();
                 $input['created_by'] = $user->id;
                 Salary_setting::create($input);
+
                 Utility::jobStage($user->id);
                 $role_r = Role::findById(2);
             }
@@ -144,11 +145,11 @@ class UserController extends Controller
         }
     }
 
-        public function show($id)
-        {
-            $employee= Employee::findOrFail($id);
-            return view('dashboard.user.show',compact('employee'));
-        }
+    public function show(User $user)
+    {
+
+        return view('dashboard.user.show',compact('user'));
+    }
 
     public function edit($id)
     {

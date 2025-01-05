@@ -7,8 +7,7 @@
 
     <div class="wrapper wrapper-content animated fadeInRight ecommerce">
         <div class="ibox-content m-b-sm border-bottom">
-            {{ Form::open(array('route' => array('employee.profile'),'method'=>'get','id'=>'employee_profile_filter')) }}
-                <div class="row">
+                 <div class="row">
 
                         <div class="col-sm-3">
                             <div class="form-group">
@@ -31,16 +30,9 @@
                             </select>
                         </div>
 
-                        <div class="col-md-3">
-                            <a href="#" class="apply-btn btn btn-primary mt-4" onclick="document.getElementById('employee_profile_filter').submit(); return false;" data-toggle="tooltip" data-title="{{__('Apply')}}">
-                                <span class="btn-inner--icon"><i class="fa fa-search"></i></span>
-                            </a>
-                            <a href="{{route('employee.profile')}}" class="reset-btn btn btn-danger mt-4" data-toggle="tooltip" data-title="{{__('Reset')}}">
-                                <span class="btn-inner--icon"><i class="fa fa-trash"></i></span>
-                            </a>
-                        </div>
+                      
                 </div>
-            {{ Form::close() }}
+
         </div>
     </div>
 @endsection

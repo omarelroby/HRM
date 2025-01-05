@@ -65,7 +65,7 @@
                             <div class="p-3 border-bottom">
                                 <div class="d-flex align-items-center justify-content-between mb-2">
                                     <h6>{{ __('Basic information') }}</h6>
-                                    <a href="javascript:void(0);" class="btn btn-icon btn-sm" data-bs-toggle="modal" data-bs-target="#edit_employee"></a>
+                                    <a href="javascript:void(0);" class="btn btn-icon btn-sm" data-bs-toggle="modal" data-bs-target="#edit_employee"> </a>
                                 </div>
                                 <div class="d-flex align-items-center justify-content-between mb-2">
                                     <span class="d-inline-flex align-items-center">
@@ -81,13 +81,6 @@
                                     </span>
                                     <p class="text-dark">{{ $employee->email ?? 'N/A' }}</p>
 
-                                 </div>
-                                 <div class="d-flex align-items-center justify-content-between mb-2">
-                                    <span class="d-inline-flex align-items-center">
-                                        <i class="ti ti-mail-check me-2"></i>
-                                        {{ __('Personal Email') }}
-                                    </span>
-                                    <p class="text-dark">{{ $employee->personal_email ?? 'N/A' }}</p>
                                  </div>
                                 <div class="d-flex align-items-center justify-content-between mb-2">
                                     <span class="d-inline-flex align-items-center">
@@ -114,7 +107,7 @@
                             <div class="p-3 border-bottom">
                                 <div class="d-flex align-items-center justify-content-between mb-2">
                                     <h6>{{ __('Personal Information') }}</h6>
-                                    <a href="javascript:void(0);" class="btn btn-icon btn-sm" data-bs-toggle="modal" data-bs-target="#edit_personal"></a>
+                                    <a href="javascript:void(0);" class="btn btn-icon btn-sm" data-bs-toggle="modal" data-bs-target="#edit_personal"> </a>
                                 </div>
                                 <div class="d-flex align-items-center justify-content-between mb-2">
                                     <span class="d-inline-flex align-items-center">
@@ -151,7 +144,7 @@
                     </div>
                     <div class="d-flex align-items-center justify-content-between mb-2">
                         <h6>{{ __('Emergency Contact Number') }}</h6>
-                        <a href="javascript:void(0);" class="btn btn-icon btn-sm" data-bs-toggle="modal" data-bs-target="#edit_emergency"></a>
+                        <a href="javascript:void(0);" class="btn btn-icon btn-sm" data-bs-toggle="modal" data-bs-target="#edit_emergency"> </a>
                     </div>
                     <div class="card">
                         <div class="card-body p-0">
@@ -362,8 +355,7 @@
                                                             <div class="d-flex align-items-center justify-content-between flex-fill">
                                                                 <h5>{{ __('Address_in_mother_country') }}</h5>
                                                                 <div class="d-flex">
-                                                                    <a href="#" class="btn btn-icon btn-sm" data-bs-toggle="modal" data-bs-target="#edit_experience"> </a>
-                                                                    <a href="#" class="d-flex align-items-center collapsed collapse-arrow" data-bs-toggle="collapse" data-bs-target="#primaryBorderFive" aria-expanded="false" aria-controls="primaryBorderFive">
+                                                                     <a href="#" class="d-flex align-items-center collapsed collapse-arrow" data-bs-toggle="collapse" data-bs-target="#primaryBorderFive" aria-expanded="false" aria-controls="primaryBorderFive">
                                                                         <i class="ti ti-chevron-down fs-18"></i>
                                                                     </a>
                                                                 </div>

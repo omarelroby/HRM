@@ -82,13 +82,6 @@
                                     <p class="text-dark">{{ $employee->email ?? 'N/A' }}</p>
 
                                  </div>
-                                 <div class="d-flex align-items-center justify-content-between mb-2">
-                                    <span class="d-inline-flex align-items-center">
-                                        <i class="ti ti-mail-check me-2"></i>
-                                        {{ __('Personal Email') }}
-                                    </span>
-                                    <p class="text-dark">{{ $employee->personal_email ?? 'N/A' }}</p>
-                                 </div>
                                 <div class="d-flex align-items-center justify-content-between mb-2">
                                     <span class="d-inline-flex align-items-center">
                                         <i class="ti ti-gender-male me-2"></i>

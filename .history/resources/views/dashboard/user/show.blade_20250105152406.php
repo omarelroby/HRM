@@ -85,9 +85,9 @@
                                  <div class="d-flex align-items-center justify-content-between mb-2">
                                     <span class="d-inline-flex align-items-center">
                                         <i class="ti ti-mail-check me-2"></i>
-                                        {{ __('Personal Email') }}
+                                        {{ __('Work Email') }}
                                     </span>
-                                    <p class="text-dark">{{ $employee->personal_email ?? 'N/A' }}</p>
+                                    <p class="text-dark">{{ $employee->work_email ?? 'N/A' }}</p>
                                  </div>
                                 <div class="d-flex align-items-center justify-content-between mb-2">
                                     <span class="d-inline-flex align-items-center">

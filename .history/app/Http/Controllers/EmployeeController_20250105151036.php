@@ -961,6 +961,7 @@ class EmployeeController extends Controller
                 $employees->where('designation_id', $request->designation);
             }
             $employees = $employees->get();
+
             $brances = Branch::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
             $brances->prepend('All', '');
             $departments = Department::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
