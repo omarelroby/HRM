@@ -1,4 +1,4 @@
-    {{Form::open(array('url'=>'trainer','method'=>'post'))}}
+    {{Form::open(array('url'=>'training','method'=>'post'))}}
     <div class="row">
         <div class="col-md-12">
             <div class="form-group">
@@ -8,47 +8,53 @@
         </div>
         <div class="col-md-6">
             <div class="form-group">
-                {{Form::label('firstname',__('First Name'),['class'=>'form-control-label'])}}
-                {{Form::text('firstname',null,array('class'=>'form-control','required'=>'required'))}}
+                {{Form::label('trainer_option',__('Trainer Option'),['class'=>'form-control-label'])}}
+                {{Form::select('trainer_option',$options,null,array('class'=>'form-control select2','required'=>'required'))}}
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
-                {{Form::label('firstname_ar',__('First Name ar'),['class'=>'form-control-label'])}}
-                {{Form::text('firstname_ar',null,array('class'=>'form-control','required'=>'required'))}}
+                {{Form::label('training_type',__('Training Type'),['class'=>'form-control-label'])}}
+                {{Form::select('training_type',$trainingTypes,null,array('class'=>'form-control select2','required'=>'required'))}}
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
-                {{Form::label('lastname',__('Last Name'),['class'=>'form-control-label'])}}
-                {{Form::text('lastname',null,array('class'=>'form-control','required'=>'required'))}}
+                {{Form::label('trainer',__('Trainer'),['class'=>'form-control-label'])}}
+                {{Form::select('trainer',$trainers,null,array('class'=>'form-control select2','required'=>'required'))}}
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
-                {{Form::label('lastname_ar',__('Last Name_ar'),['class'=>'form-control-label'])}}
-                {{Form::text('lastname_ar',null,array('class'=>'form-control','required'=>'required'))}}
+                {{Form::label('training_cost',__('Training Cost'),['class'=>'form-control-label'])}}
+                {{Form::number('training_cost',null,array('class'=>'form-control','step'=>'0.01','required'=>'required'))}}
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                {{Form::label('employee',__('Employee'),['class'=>'form-control-label'])}}
+                {{Form::select('employee',$employees,null,array('class'=>'form-control select2','required'=>'required'))}}
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
-                {{Form::label('contact',__('Contact'),['class'=>'form-control-label'])}}
-                {{Form::text('contact',null,array('class'=>'form-control','required'=>'required'))}}
+                {{Form::label('start_date',__('Start Date'),['class'=>'form-control-label'])}}
+                {{Form::text('start_date',null,array('class'=>'form-control datepicker'))}}
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
-                {{Form::label('email',__('Email'),['class'=>'form-control-label'])}}
-                {{Form::text('email',null,array('class'=>'form-control','required'=>'required'))}}
+                {{Form::label('end_date',__('End Date'),['class'=>'form-control-label'])}}
+                {{Form::text('end_date',null,array('class'=>'form-control datepicker'))}}
             </div>
         </div>
         <div class="form-group col-lg-12">
-            {{Form::label('expertise',__('Expertise'),['class'=>'form-control-label'])}}
-            {{Form::textarea('expertise',null,array('class'=>'form-control','placeholder'=>__('Expertise')))}}
+            {{Form::label('description',__('Description'),['class'=>'form-control-label'])}}
+            {{Form::textarea('description',null,array('class'=>'form-control','placeholder'=>__('Description')))}}
         </div>
         <div class="form-group col-lg-12">
-            {{Form::label('address',__('Address'),['class'=>'form-control-label'])}}
-            {{Form::textarea('address',null,array('class'=>'form-control','placeholder'=>__('Address')))}}
+             {{Form::label('description_ar',__('Description_ar'),['class'=>'form-control-label'])}}
+             {{Form::textarea('description_ar',null,array('class'=>'form-control','placeholder'=>__('Description_ar')))}}
         </div>
         <div class="col-12">
             <input type="submit" value="{{__('Create')}}" class="btn btn-primary">
@@ -56,3 +62,14 @@
         </div>
     </div>
     {{Form::close()}}
+
+    <script>
+        $(function () {
+            $(".gregorian-date , .datepicker").hijriDatePicker({
+            format:'YYYY-M-D',
+            showSwitcher: false,
+            hijri:false,
+            useCurrent: true,
+            });
+        });
+    </script>
