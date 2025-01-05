@@ -103,24 +103,20 @@
         </div>
     </div>
 
-<!-- Add Role Modal -->
+ <!-- Add Job Title Modal -->
 <div class="modal fade" id="addJobTitleModal" tabindex="-1" aria-labelledby="addJobTitleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
-            {{-- Modal Header --}}
-            <div class="modal-header bg-light  ">
+            <div class="modal-header">
                 <h5 class="modal-title" id="addJobTitleModalLabel">{{ __('Add New Role') }}</h5>
-                <button type="button" class="btn-close custom-btn-close" data-bs-dismiss="modal" aria-label="Close">x</button>
-
             </div>
-
-            {{-- Modal Body --}}
-            <div class="modal-body">
-                {{-- Form Start --}}
-                {{ Form::open(['url' => 'roles', 'method' => 'post', 'class' => 'needs-validation', 'novalidate' => true]) }}
-                    {{-- Role Name Input --}}
-                    <div class="form-group my-2">
-                        {{ Form::label('name', __('Name'), ['class' => 'form-control-label font-weight-bold']) }}
+           {{-- Form Start --}}
+            {{ Form::open(['url' => 'roles', 'method' => 'post', 'class' => 'needs-validation', 'novalidate' => true]) }}
+            <div class="row">
+                {{-- Role Name Input --}}
+                <div class="col-md-12">
+                    <div class="form-group">
+                        {{ Form::label('name', __('Name'), ['class' => 'form-control-label']) }}
                         {{ Form::text('name', null, ['class' => 'form-control ' . ($errors->has('name') ? 'is-invalid' : ''), 'placeholder' => __('Enter Role Name'), 'required' => true]) }}
                         @error('name')
                             <div class="invalid-feedback">
@@ -128,16 +124,20 @@
                             </div>
                         @enderror
                     </div>
+                </div>
+            </div>
 
-                    {{-- Permissions Section --}}
-                    <div class="card shadow-sm mb-4">
-                        <div class="card-header bg-light">
-                            <h5 class="card-title mb-0">{{ __('Assign Permissions to Role') }}</h5>
-                        </div>
-                        <div class="card-body">
-                            @if(!empty($permissions))
+            {{-- Permissions Section --}}
+            <div class="row">
+                <div class="col-lg-12">
+                    @if(!empty($permissions))
+                        <div class="card shadow-sm">
+                            <div class="card-header bg-light">
+                                <h5 class="card-title mb-0">{{ __('Assign Permission to Roles') }}</h5>
+                            </div>
+                            <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table table-striped table-bordered table-hover dataTables">
+                                    <table class="table table-hover table-bordered">
                                         <thead class="thead-light">
                                             <tr>
                                                 <th>{{ __('Module') }}</th>
@@ -186,33 +186,30 @@
                                         </tbody>
                                     </table>
                                 </div>
-                            @else
-                                <div class="alert alert-warning" role="alert">
-                                    {{ __('No permissions available.') }}
-                                </div>
-                            @endif
+                            </div>
                         </div>
-                    </div>
-
-                    {{-- Form Actions --}}
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-light border me-2" data-bs-dismiss="modal">{{ __('Cancel') }}</button>
-                        <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
-                    </div>
-                {{ Form::close() }}
+                    @endif
+                </div>
             </div>
+
+            {{-- Form Actions --}}
+            <div class="row mt-4">
+                <div class="col-12 text-right">
+                    <button type="submit" class="btn btn-primary">{{ __('Create') }}</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('Cancel') }}</button>
+                </div>
+            </div>
+            {{ Form::close() }}
+
         </div>
     </div>
 </div>
-
-{{-- End Role  --}}
 
 
 
 
 @endsection
 @section('script')
-
 <script>
     function confirmDelete(event, formId) {
         // Prevent the default link click behavior

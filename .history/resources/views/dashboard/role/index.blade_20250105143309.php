@@ -103,15 +103,16 @@
         </div>
     </div>
 
-<!-- Add Role Modal -->
+<!-- Add Job Title Modal -->
 <div class="modal fade" id="addJobTitleModal" tabindex="-1" aria-labelledby="addJobTitleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             {{-- Modal Header --}}
-            <div class="modal-header bg-light  ">
+            <div class="modal-header bg-light my">
                 <h5 class="modal-title" id="addJobTitleModalLabel">{{ __('Add New Role') }}</h5>
-                <button type="button" class="btn-close custom-btn-close" data-bs-dismiss="modal" aria-label="Close">x</button>
-
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
 
             {{-- Modal Body --}}
@@ -119,7 +120,7 @@
                 {{-- Form Start --}}
                 {{ Form::open(['url' => 'roles', 'method' => 'post', 'class' => 'needs-validation', 'novalidate' => true]) }}
                     {{-- Role Name Input --}}
-                    <div class="form-group my-2">
+                    <div class="form-group">
                         {{ Form::label('name', __('Name'), ['class' => 'form-control-label font-weight-bold']) }}
                         {{ Form::text('name', null, ['class' => 'form-control ' . ($errors->has('name') ? 'is-invalid' : ''), 'placeholder' => __('Enter Role Name'), 'required' => true]) }}
                         @error('name')
@@ -137,7 +138,7 @@
                         <div class="card-body">
                             @if(!empty($permissions))
                                 <div class="table-responsive">
-                                    <table class="table table-striped table-bordered table-hover dataTables">
+                                    <table class="table table-hover table-bordered">
                                         <thead class="thead-light">
                                             <tr>
                                                 <th>{{ __('Module') }}</th>
@@ -196,8 +197,8 @@
 
                     {{-- Form Actions --}}
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-light border me-2" data-bs-dismiss="modal">{{ __('Cancel') }}</button>
-                        <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('Cancel') }}</button>
+                        <button type="submit" class="btn btn-primary">{{ __('Create Role') }}</button>
                     </div>
                 {{ Form::close() }}
             </div>
@@ -205,14 +206,11 @@
     </div>
 </div>
 
-{{-- End Role  --}}
-
 
 
 
 @endsection
 @section('script')
-
 <script>
     function confirmDelete(event, formId) {
         // Prevent the default link click behavior

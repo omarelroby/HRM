@@ -97,7 +97,6 @@ class RoleController extends Controller
                 $role->save();
                  foreach($request->permissions as $permission)
                 {
-                    
                     $p    = Permission::where('id', '=', $permission)->firstOrFail();
                     $role->givePermissionTo($p);
 

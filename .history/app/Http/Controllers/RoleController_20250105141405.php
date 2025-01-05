@@ -70,7 +70,7 @@ class RoleController extends Controller
 
     public function store(Request $request)
     {
-
+        dd($request->all());
 
         if(\Auth::user()->can('Create Role'))
         {
@@ -89,21 +89,21 @@ class RoleController extends Controller
                             ]
                 );
 
-
                 $name             = $request['name'];
                 $role             = new Role();
                 $role->name       = $name;
                 $role->created_by = \Auth::user()->creatorId();
+                $permissions      = $request['permissions'];
                 $role->save();
-                 foreach($request->permissions as $permission)
-                {
-                    
-                    $p    = Permission::where('id', '=', $permission)->firstOrFail();
-                    $role->givePermissionTo($p);
 
+                foreach($permissions as $permission)
+                {
+                    $p    = Permission::where('id', '=', $permission)->firstOrFail();
+                    $role = Role::where('name', '=', $name)->first();
+                    $role->givePermissionTo($p);
                 }
 
-                return redirect('roles')->with('success', 'Role successfully created.');
+                return redirect()->route('roles.index')->with('success', 'Role successfully created.');
             }
         }
         else

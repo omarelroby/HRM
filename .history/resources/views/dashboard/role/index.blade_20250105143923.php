@@ -110,8 +110,9 @@
             {{-- Modal Header --}}
             <div class="modal-header bg-light  ">
                 <h5 class="modal-title" id="addJobTitleModalLabel">{{ __('Add New Role') }}</h5>
-                <button type="button" class="btn-close custom-btn-close" data-bs-dismiss="modal" aria-label="Close">x</button>
-
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
 
             {{-- Modal Body --}}
@@ -196,8 +197,8 @@
 
                     {{-- Form Actions --}}
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-light border me-2" data-bs-dismiss="modal">{{ __('Cancel') }}</button>
-                        <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('Cancel') }}</button>
+                        <button type="submit" class="btn btn-primary">{{ __('Create Role') }}</button>
                     </div>
                 {{ Form::close() }}
             </div>

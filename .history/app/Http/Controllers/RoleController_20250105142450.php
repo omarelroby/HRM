@@ -94,11 +94,11 @@ class RoleController extends Controller
                 $role             = new Role();
                 $role->name       = $name;
                 $role->created_by = \Auth::user()->creatorId();
+                // $permissions      = $request['permissions'];
                 $role->save();
                  foreach($request->permissions as $permission)
                 {
-                    
-                    $p    = Permission::where('id', '=', $permission)->firstOrFail();
+                     $p    = Permission::where('id', '=', $permission)->firstOrFail();
                     $role->givePermissionTo($p);
 
                 }

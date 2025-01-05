@@ -196,8 +196,8 @@
 
                     {{-- Form Actions --}}
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-light border me-2" data-bs-dismiss="modal">{{ __('Cancel') }}</button>
-                        <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('Cancel') }}</button>
+                        <button type="submit" class="btn btn-primary">{{ __('Create Role') }}</button>
                     </div>
                 {{ Form::close() }}
             </div>

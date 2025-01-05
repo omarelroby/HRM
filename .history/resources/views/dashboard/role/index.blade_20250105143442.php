@@ -103,15 +103,16 @@
         </div>
     </div>
 
-<!-- Add Role Modal -->
+<!-- Add Job Title Modal -->
 <div class="modal fade" id="addJobTitleModal" tabindex="-1" aria-labelledby="addJobTitleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             {{-- Modal Header --}}
             <div class="modal-header bg-light  ">
                 <h5 class="modal-title" id="addJobTitleModalLabel">{{ __('Add New Role') }}</h5>
-                <button type="button" class="btn-close custom-btn-close" data-bs-dismiss="modal" aria-label="Close">x</button>
-
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
 
             {{-- Modal Body --}}
@@ -137,7 +138,7 @@
                         <div class="card-body">
                             @if(!empty($permissions))
                                 <div class="table-responsive">
-                                    <table class="table table-striped table-bordered table-hover dataTables">
+                                    <table class="table table-hover table-bordered">
                                         <thead class="thead-light">
                                             <tr>
                                                 <th>{{ __('Module') }}</th>
@@ -172,7 +173,7 @@
                                                                 @if(in_array($action . ' ' . $module, (array) $permissions))
                                                                     @php $key = array_search($action . ' ' . $module, $permissions); @endphp
                                                                     <div class="col-md-3 mb-2">
-                                                                        <div class="custom-control custom-checkbox">
+                                                                        <div class="col-md-3 custom-control custom-checkbox">
                                                                             {{ Form::checkbox('permissions[]', $key, false, ['class' => 'custom-control-input', 'id' => 'permission' . $key]) }}
                                                                             {{ Form::label('permission' . $key, $action, ['class' => 'custom-control-label font-weight-500']) }}
                                                                         </div>
@@ -196,8 +197,8 @@
 
                     {{-- Form Actions --}}
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-light border me-2" data-bs-dismiss="modal">{{ __('Cancel') }}</button>
-                        <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('Cancel') }}</button>
+                        <button type="submit" class="btn btn-primary">{{ __('Create Role') }}</button>
                     </div>
                 {{ Form::close() }}
             </div>
@@ -205,14 +206,11 @@
     </div>
 </div>
 
-{{-- End Role  --}}
-
 
 
 
 @endsection
 @section('script')
-
 <script>
     function confirmDelete(event, formId) {
         // Prevent the default link click behavior
