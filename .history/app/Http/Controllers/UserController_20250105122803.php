@@ -105,7 +105,7 @@ class UserController extends Controller
                 $objUser    = \Auth::user();
                 $total_user = $objUser->countUsers();
                 $plan       = Plan::find($objUser->plan);
-               e
+                dd($role_r)
                 if($total_user < $plan->max_users || $plan->max_users == -1)
                 {
                     $role_r = Role::findById($request->role);
