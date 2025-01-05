@@ -30,7 +30,7 @@ class RoleController extends Controller
                 $permissions = $permissions->pluck('name', 'id')->toArray();
 
             }
-            return view('dashboard.role.index',compact('permissions'))->with('roles', $roles);
+            return view('dashboard.role.index')->with('roles', $roles);
         }
         else
         {

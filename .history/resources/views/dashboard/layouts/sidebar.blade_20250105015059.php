@@ -75,12 +75,12 @@
                         <li class="submenu">
                             <a href="javascript:void(0);" class="subdrop {{ Request::is('user')|| Request::is('roles')|| Request::is('employee-profile')|| Request::is('lastlogin')    ? 'active' : '' }}">
                                 <i class="ti ti-user-circle"></i>
-                                <span class="submenu-title">{{ __('Users') }}</span>
+                                <span class="submenu-title">{{ __('S') }}</span>
                                 <span class="menu-arrow"></span>
                             </a>
                             <ul style="display: none;">
                                 <li><a href="{{ url('/user') }}"  class="{{ Request::is('user') ?'active' :'' }}">{{ __('User') }}</a></li>
-                                <li><a href="{{ url('/roles') }}" class="{{ Request::is('roles') ?'active' :'' }}">{{ __('roles') }}</a></li>
+                                <li><a href="{{ url('/timesheet') }}" class="{{ Request::is('roles') ?'active' :'' }}">{{ __('roles') }}</a></li>
                                 <li><a href="{{ url('/employee-profile') }}" class="{{ Request::is('employee-profile') ?'active' :'' }}">{{ __('Employee Profile') }}</a></li>
                                 <li><a href="{{ url('/lastlogin') }}" class="{{ Request::is('lastlogin') ?'active' :'' }}">{{ __('Last Login') }}</a></li>
 
