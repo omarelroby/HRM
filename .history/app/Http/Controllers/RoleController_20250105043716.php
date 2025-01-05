@@ -132,7 +132,7 @@ class RoleController extends Controller
                 }
                 $permissions = $permissions->pluck('name', 'id')->toArray();
             }
-             
+            dd($permissions);
             return view('dashboard.role.edit', compact('role', 'permissions'));
         }
         else

@@ -68,7 +68,9 @@
                                         <td>
                                             <div class="d-flex gap-1">
                                                 @can('Edit Role')
-                                                    <a href="{{ URL::to('roles/'.$role->id.'/edit') }}"
+                                                    <a href="#"
+                                                       data-url="{{ URL::to('roles/'.$role->id.'/edit') }}"
+                                                       data-id="{{ $role->id }}"
                                                        data-title="{{__('Edit Role')}}"
                                                        class="btn btn-success btn-sm edit-role-btn"
                                                        title="{{__('Edit')}}">
@@ -76,21 +78,19 @@
                                                     </a>
                                                 @endcan
                                                 @if($role->name != 'employee')
-                                                @can('Delete Role')
-                                                <a href="#"
-                                                   class="btn btn-danger btn-sm"
-                                                   data-toggle="tooltip"
-                                                   title="{{ __('Delete') }}"
-                                                   data-confirm="{{ __('Are You Sure?') . '|' . __('This action cannot be undone. Do you want to continue?') }}"
-                                                   onclick="confirmDelete(event, 'delete-form-{{$role->id}}')">
-                                                    <i class="fa fa-trash"></i>
-                                                </a>
-
-                                                {!! Form::open(['method' => 'DELETE', 'route' => ['roles.destroy', $role->id], 'id' => 'delete-form-'.$role->id, 'style' => 'display:none;']) !!}
-                                                {!! Form::close() !!}
-                                                @endcan
+                                                    @can('Delete Role')
+                                                        <a href="#"
+                                                           class="btn btn-danger btn-sm"
+                                                           data-toggle="tooltip"
+                                                           title="{{__('Delete')}}"
+                                                           data-confirm="{{ __('Are You Sure?') . '|' . __('This action cannot be undone. Do you want to continue?') }}"
+                                                           data-confirm-yes="document.getElementById('delete-form-{{$role->id}}').submit();">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                        {!! Form::open(['method' => 'DELETE', 'route' => ['roles.destroy', $role->id], 'id' => 'delete-form-'.$role->id]) !!}
+                                                        {!! Form::close() !!}
+                                                    @endcan
                                                 @endif
-
                                             </div>
                                         </td>
                                     </tr>
@@ -198,23 +198,145 @@
 </div>
 
 
+ <!-- Edit Job Title Modal -->
+
+<div class="modal fade" id="editJobTitleModal" tabindex="-1" aria-labelledby="editJobTitleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editJobTitleModalLabel">{{ __('Edit Role') }}</h5>
+            </div>
+            {{ Form::open(['url' => 'roles', 'method' => 'put', 'id' => 'edit-role-form']) }}
+            <div class="modal-body">
+                <!-- Role Name Input (Editable) -->
+                <div class="mb-4">
+                    <label for="editRoleName" class="form-label">{{ __('Role Name') }}</label>
+                    {{ Form::text('name', null, ['class' => 'form-control', 'id' => 'editRoleName', 'placeholder' => __('Enter Role Name')]) }}
+                    @error('name')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+
+                @php
+                $modules = [
+                    'User', 'Role', 'Award', 'Transfer', 'Resignation', 'Travel', 'Promotion', 'Complaint', 'Warning',
+                    'Termination', 'Department', 'Designation', 'Document Type', 'Branch', 'Award Type', 'Termination Type',
+                    'Employee', 'Payslip Type', 'Allowance Option', 'Loan Option', 'Deduction Option', 'Set Salary', 'Allowance',
+                    'Commission', 'Loan', 'Saturation Deduction', 'Other Payment', 'Overtime', 'Pay Slip', 'Account List',
+                    'Payee', 'Payer', 'Income Type', 'Expense Type', 'Payment Type', 'Deposit', 'Expense', 'Transfer Balance',
+                    'Event', 'Announcement', 'Leave Type', 'Leave', 'Meeting', 'Ticket', 'Attendance', 'TimeSheet', 'Holiday',
+                    'Plan', 'Assets', 'Document', 'Employee Profile', 'Employee Last Login', 'Indicator', 'Appraisal',
+                    'Goal Tracking', 'Goal Type', 'Competencies', 'Competencies', 'Company Policy', 'Trainer', 'Training',
+                    'Training Type', 'Job Category', 'Job Stage', 'Job', 'Job Application', 'Job OnBoard', 'Job Application Note',
+                    'Job Application Skill', 'Custom Question', 'Interview Schedule', 'Career', 'Report', 'Performance Type'
+                ];
+
+                if(Auth::user()->type == 'super admin'){
+                    $modules[] = 'Language';
+                }
+                @endphp
+
+                <!-- Permissions Section (Editable) -->
+                <div class="permissions-section">
+                    <h5 class="mb-3">{{ __('Assign Permissions to Role') }}</h5>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>{{ __('Module') }}</th>
+                                    <th>{{ __('Manage') }}</th>
+                                    <th>{{ __('Create') }}</th>
+                                    <th>{{ __('Edit') }}</th>
+                                    <th>{{ __('Delete') }}</th>
+                                </tr>
+                            </thead>
+                            <tbody id="editPermissionsBody">
+                                @foreach ($modules as $module)
+                                    <tr>
+                                        <td>{{ ucfirst($module) }}</td>
+
+                                        @foreach (['Manage', 'Create', 'Edit', 'Delete'] as $action)
+                                            @php
+                                                $permission = "{$action}_{$module}";
+                                            @endphp
+                                            <td>
+                                                <div class="form-check">
+                                                    <input type="checkbox"
+                                                           name="permissions[]"
+                                                           value="{{ $permission }}"
+                                                           class="form-check-input"
+                                                           id="edit-permission-{{ $permission }}"
+                                                           {{ in_array($permission, (array) $permissions) ? 'checked' : '' }}>
+                                                    <label class="form-check-label visually-hidden" for="edit-permission-{{ $permission }}">{{ $action }}</label>
+                                                </div>
+                                            </td>
+                                        @endforeach
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">{{ __('Update') }}</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Cancel') }}</button>
+            </div>
+            {{ Form::close() }}
+        </div>
+    </div>
+</div>
 
 
 @endsection
+
 @section('script')
 <script>
-    function confirmDelete(event, formId) {
-        // Prevent the default link click behavior
-        event.preventDefault();
+    $(document).on('click', '.edit-role-btn', function (e) {
+        e.preventDefault();
+        const url = $(this).data('url');
+        const roleId = $(this).data('id');
+        const modalTitle = $(this).data('title');
 
-        const confirmationMessage = "{{ __('Are You Sure?') }}\n{{ __('This action cannot be undone. Do you want to continue?') }}";
+        $.ajax({
+            url: url,
+            type: 'GET',
+            success: function (response) {
+                if (response.role && response.permissions) {
+                    $('#editJobTitleModalLabel').text(modalTitle);
+                    $('#editRoleName').val(response.role.name);
+                    $('#edit-role-form').attr('action', '/roles/' + roleId);
 
-        if (confirm(confirmationMessage)) {
-            // Submit the form if user confirms
-            document.getElementById(formId).submit();
-        }
-    }
+                    $('#editPermissionsBody').empty();
+                    Object.keys(response.permissions).forEach(function (permissionId) {
+                        const permissionName = response.permissions[permissionId];
+                        const isChecked = response.role.permissions.some((p) => p.id == permissionId) ? 'checked' : '';
+
+                        const row = `
+                            <tr>
+                                <td>${permissionName}</td>
+                                @foreach (['Manage', 'Create', 'Edit', 'Delete'] as $action)
+                                    <td>
+                                        <input type="checkbox" name="permissions[]" value="${permissionId}" ${isChecked} class="form-check-input">
+                                    </td>
+                                @endforeach
+                            </tr>
+                        `;
+                        $('#editPermissionsBody').append(row);
+                    });
+
+                    $('#editJobTitleModal').modal('show');
+                }
+            },
+            error: function (xhr) {
+                console.error(xhr.responseJSON.message);
+                alert('Failed to fetch role data.');
+            },
+        });
+    });
 </script>
-
 @endsection
-

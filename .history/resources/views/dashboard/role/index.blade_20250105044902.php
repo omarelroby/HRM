@@ -202,19 +202,7 @@
 
 @endsection
 @section('script')
-<script>
-    function confirmDelete(event, formId) {
-        // Prevent the default link click behavior
-        event.preventDefault();
 
-        const confirmationMessage = "{{ __('Are You Sure?') }}\n{{ __('This action cannot be undone. Do you want to continue?') }}";
-
-        if (confirm(confirmationMessage)) {
-            // Submit the form if user confirms
-            document.getElementById(formId).submit();
-        }
-    }
-</script>
 
 @endsection
 

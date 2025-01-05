@@ -113,7 +113,7 @@ class RoleController extends Controller
     }
 
     public function edit(Role $role)
-    {
+    { 
 
         if(\Auth::user()->can('Edit Role'))
         {
@@ -132,7 +132,9 @@ class RoleController extends Controller
                 }
                 $permissions = $permissions->pluck('name', 'id')->toArray();
             }
-             
+
+
+
             return view('dashboard.role.edit', compact('role', 'permissions'));
         }
         else

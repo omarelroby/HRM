@@ -77,19 +77,18 @@
                                                 @endcan
                                                 @if($role->name != 'employee')
                                                 @can('Delete Role')
-                                                <a href="#"
-                                                   class="btn btn-danger btn-sm"
-                                                   data-toggle="tooltip"
-                                                   title="{{ __('Delete') }}"
-                                                   data-confirm="{{ __('Are You Sure?') . '|' . __('This action cannot be undone. Do you want to continue?') }}"
-                                                   onclick="confirmDelete(event, 'delete-form-{{$role->id}}')">
-                                                    <i class="fa fa-trash"></i>
-                                                </a>
-
-                                                {!! Form::open(['method' => 'DELETE', 'route' => ['roles.destroy', $role->id], 'id' => 'delete-form-'.$role->id, 'style' => 'display:none;']) !!}
-                                                {!! Form::close() !!}
+                                                    <a href="#"
+                                                       class="btn btn-danger btn-sm"
+                                                       data-toggle="tooltip"
+                                                       title="{{ __('Delete') }}"
+                                                       data-confirm="{{ __('Are You Sure?') . '|' . __('This action cannot be undone. Do you want to continue?') }}"
+                                                       onclick="confirmDelete('delete-form-{{$role->id}}')">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+                                                    {!! Form::open(['method' => 'DELETE', 'route' => ['roles.destroy', $role->id], 'id' => 'delete-form-'.$role->id, 'style' => 'display:none;']) !!}
+                                                    {!! Form::close() !!}
                                                 @endcan
-                                                @endif
+                                            @endif
 
                                             </div>
                                         </td>
@@ -201,20 +200,4 @@
 
 
 @endsection
-@section('script')
-<script>
-    function confirmDelete(event, formId) {
-        // Prevent the default link click behavior
-        event.preventDefault();
-
-        const confirmationMessage = "{{ __('Are You Sure?') }}\n{{ __('This action cannot be undone. Do you want to continue?') }}";
-
-        if (confirm(confirmationMessage)) {
-            // Submit the form if user confirms
-            document.getElementById(formId).submit();
-        }
-    }
-</script>
-
-@endsection
-
+ 

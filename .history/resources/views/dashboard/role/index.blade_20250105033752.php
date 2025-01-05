@@ -68,7 +68,9 @@
                                         <td>
                                             <div class="d-flex gap-1">
                                                 @can('Edit Role')
-                                                    <a href="{{ URL::to('roles/'.$role->id.'/edit') }}"
+                                                    <a href="#"
+                                                       data-url="{{ URL::to('roles/'.$role->id.'/edit') }}"
+                                                       data-id="{{ $role->id }}"
                                                        data-title="{{__('Edit Role')}}"
                                                        class="btn btn-success btn-sm edit-role-btn"
                                                        title="{{__('Edit')}}">
@@ -76,21 +78,19 @@
                                                     </a>
                                                 @endcan
                                                 @if($role->name != 'employee')
-                                                @can('Delete Role')
-                                                <a href="#"
-                                                   class="btn btn-danger btn-sm"
-                                                   data-toggle="tooltip"
-                                                   title="{{ __('Delete') }}"
-                                                   data-confirm="{{ __('Are You Sure?') . '|' . __('This action cannot be undone. Do you want to continue?') }}"
-                                                   onclick="confirmDelete(event, 'delete-form-{{$role->id}}')">
-                                                    <i class="fa fa-trash"></i>
-                                                </a>
-
-                                                {!! Form::open(['method' => 'DELETE', 'route' => ['roles.destroy', $role->id], 'id' => 'delete-form-'.$role->id, 'style' => 'display:none;']) !!}
-                                                {!! Form::close() !!}
-                                                @endcan
+                                                    @can('Delete Role')
+                                                        <a href="#"
+                                                           class="btn btn-danger btn-sm"
+                                                           data-toggle="tooltip"
+                                                           title="{{__('Delete')}}"
+                                                           data-confirm="{{ __('Are You Sure?') . '|' . __('This action cannot be undone. Do you want to continue?') }}"
+                                                           data-confirm-yes="document.getElementById('delete-form-{{$role->id}}').submit();">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                        {!! Form::open(['method' => 'DELETE', 'route' => ['roles.destroy', $role->id], 'id' => 'delete-form-'.$role->id]) !!}
+                                                        {!! Form::close() !!}
+                                                    @endcan
                                                 @endif
-
                                             </div>
                                         </td>
                                     </tr>
@@ -198,23 +198,54 @@
 </div>
 
 
+ 
 
 
 @endsection
+
 @section('script')
 <script>
-    function confirmDelete(event, formId) {
-        // Prevent the default link click behavior
-        event.preventDefault();
+    $(document).on('click', '.edit-role-btn', function (e) {
+        e.preventDefault();
+        const url = $(this).data('url');
+        const roleId = $(this).data('id');
+        const modalTitle = $(this).data('title');
 
-        const confirmationMessage = "{{ __('Are You Sure?') }}\n{{ __('This action cannot be undone. Do you want to continue?') }}";
+        $.ajax({
+            url: url,
+            type: 'GET',
+            success: function (response) {
+                if (response.role && response.permissions) {
+                    $('#editJobTitleModalLabel').text(modalTitle);
+                    $('#editRoleName').val(response.role.name);
+                    $('#edit-role-form').attr('action', '/roles/' + roleId);
 
-        if (confirm(confirmationMessage)) {
-            // Submit the form if user confirms
-            document.getElementById(formId).submit();
-        }
-    }
+                    $('#editPermissionsBody').empty();
+                    Object.keys(response.permissions).forEach(function (permissionId) {
+                        const permissionName = response.permissions[permissionId];
+                        const isChecked = response.role.permissions.some((p) => p.id == permissionId) ? 'checked' : '';
+
+                        const row = `
+                            <tr>
+                                <td>${permissionName}</td>
+                                @foreach (['Manage', 'Create', 'Edit', 'Delete'] as $action)
+                                    <td>
+                                        <input type="checkbox" name="permissions[]" value="${permissionId}" ${isChecked} class="form-check-input">
+                                    </td>
+                                @endforeach
+                            </tr>
+                        `;
+                        $('#editPermissionsBody').append(row);
+                    });
+
+                    $('#editJobTitleModal').modal('show');
+                }
+            },
+            error: function (xhr) {
+                console.error(xhr.responseJSON.message);
+                alert('Failed to fetch role data.');
+            },
+        });
+    });
 </script>
-
 @endsection
-

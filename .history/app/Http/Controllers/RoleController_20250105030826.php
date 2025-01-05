@@ -111,37 +111,40 @@ class RoleController extends Controller
 
 
     }
-
     public function edit(Role $role)
     {
-
-        if(\Auth::user()->can('Edit Role'))
-        {
+        if (\Auth::user()->can('Edit Role')) {
             $user = \Auth::user();
-            if($user->type == 'super admin' || $user->type == 'company')
-            {
-                $permissions = Permission::all()->pluck('name', 'id')->toArray();
+            $permissions = [];
 
-            }
-            else
-            {
-                $permissions = new Collection();
-                foreach($user->roles as $role1)
-                {
-                    $permissions = $permissions->merge($role1->permissions);
+            // Check the user type and load permissions accordingly
+            if ($user->type === 'super admin' || $user->type === 'company') {
+                $permissions = Permission::all()->pluck('name', 'id')->toArray(); // Fetch all permissions
+            } else {
+                $permissionsCollection = collect(); // Initialize an empty collection
+
+                // Merge permissions from user's roles
+                foreach ($user->roles as $userRole) {
+                    $permissionsCollection = $permissionsCollection->merge($userRole->permissions);
                 }
-                $permissions = $permissions->pluck('name', 'id')->toArray();
+
+                $permissions = $permissionsCollection->unique('id')->pluck('name', 'id')->toArray(); // Ensure unique permissions
             }
-             
-            return view('dashboard.role.edit', compact('role', 'permissions'));
-        }
-        else
-        {
-            return redirect()->back()->with('error', 'Permission denied.');
-        }
 
+            // Load role with its permissions
+            $role->load('permissions');
 
+            return response()->json([
+                'role' => $role,
+                'permissions' => $permissions,
+            ]);
+        } else {
+            return response()->json([
+                'error' => 'Permission denied.',
+            ], 403); // Return a 403 Forbidden response for better API handling
+        }
     }
+
 
     public function update(Request $request, Role $role)
     {

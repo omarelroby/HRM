@@ -117,6 +117,7 @@ class RoleController extends Controller
 
         if(\Auth::user()->can('Edit Role'))
         {
+
             $user = \Auth::user();
             if($user->type == 'super admin' || $user->type == 'company')
             {
@@ -130,9 +131,17 @@ class RoleController extends Controller
                 {
                     $permissions = $permissions->merge($role1->permissions);
                 }
-                $permissions = $permissions->pluck('name', 'id')->toArray();
+                $permissions = $permissions->get()->toArray();
             }
-             
+            $role = Role::with('permissions')->findOrFail($id); // Load role and its permissions
+            $permissions = Permission::all(); // Get all available permissions
+
+            return response()->json([
+                'role' => $role,
+                'permissions' => $permissions,
+            ]);
+
+
             return view('dashboard.role.edit', compact('role', 'permissions'));
         }
         else

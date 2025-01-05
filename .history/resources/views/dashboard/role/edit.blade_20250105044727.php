@@ -33,11 +33,11 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row my-2">
+                                <div class="row my-5">
                                     <div class="col-lg-12">
                                         @if(!empty($permissions))
                                             <div class="ibox ">
-                                                <div class="ibox-title my-2">
+                                                <div class="ibox-title">
                                                     <h5>{{__('Assign Permission to Roles')}}</h5>
                                                 </div>
                                                 <div class="ibox-content">

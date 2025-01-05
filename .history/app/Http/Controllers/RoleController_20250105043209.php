@@ -117,6 +117,7 @@ class RoleController extends Controller
 
         if(\Auth::user()->can('Edit Role'))
         {
+            dd($role);
             $user = \Auth::user();
             if($user->type == 'super admin' || $user->type == 'company')
             {
@@ -132,7 +133,9 @@ class RoleController extends Controller
                 }
                 $permissions = $permissions->pluck('name', 'id')->toArray();
             }
-             
+
+
+
             return view('dashboard.role.edit', compact('role', 'permissions'));
         }
         else

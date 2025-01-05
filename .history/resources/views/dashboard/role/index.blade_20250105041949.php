@@ -68,7 +68,9 @@
                                         <td>
                                             <div class="d-flex gap-1">
                                                 @can('Edit Role')
-                                                    <a href="{{ URL::to('roles/'.$role->id.'/edit') }}"
+                                                    <a href="#"
+                                                       data-url="{{ URL::to('roles/'.$role->id.'/edit') }}"
+                                                       data-id="{{ $role->id }}"
                                                        data-title="{{__('Edit Role')}}"
                                                        class="btn btn-success btn-sm edit-role-btn"
                                                        title="{{__('Edit')}}">
@@ -77,19 +79,18 @@
                                                 @endcan
                                                 @if($role->name != 'employee')
                                                 @can('Delete Role')
-                                                <a href="#"
-                                                   class="btn btn-danger btn-sm"
-                                                   data-toggle="tooltip"
-                                                   title="{{ __('Delete') }}"
-                                                   data-confirm="{{ __('Are You Sure?') . '|' . __('This action cannot be undone. Do you want to continue?') }}"
-                                                   onclick="confirmDelete(event, 'delete-form-{{$role->id}}')">
-                                                    <i class="fa fa-trash"></i>
-                                                </a>
-
-                                                {!! Form::open(['method' => 'DELETE', 'route' => ['roles.destroy', $role->id], 'id' => 'delete-form-'.$role->id, 'style' => 'display:none;']) !!}
-                                                {!! Form::close() !!}
+                                                    <a href="#"
+                                                       class="btn btn-danger btn-sm"
+                                                       data-toggle="tooltip"
+                                                       title="{{ __('Delete') }}"
+                                                       data-confirm="{{ __('Are You Sure?') . '|' . __('This action cannot be undone. Do you want to continue?') }}"
+                                                       onclick="confirmDelete('delete-form-{{$role->id}}')">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+                                                    {!! Form::open(['method' => 'DELETE', 'route' => ['roles.destroy', $role->id], 'id' => 'delete-form-'.$role->id, 'style' => 'display:none;']) !!}
+                                                    {!! Form::close() !!}
                                                 @endcan
-                                                @endif
+                                            @endif
 
                                             </div>
                                         </td>
@@ -198,23 +199,124 @@
 </div>
 
 
+ <!-- Edit Job Title Modal -->
+
+<div class="modal fade" id="editJobTitleModal" tabindex="-1" aria-labelledby="editJobTitleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editJobTitleModalLabel">{{ __('Edit Role') }}</h5>
+            </div>
+            {{Form::model($role,array('route' => array('roles.update', $role->id), 'method' => 'PUT')) }}
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        {{Form::label('name',__('Name'),['class'=>'form-control-label'])}}
+                        @if($role->name == 'employee')
+                            <p class="form-control">{{ $role->name }}</p>
+                        @else
+                            {{Form::text('name',null,array('class'=>'form-control','placeholder'=>__('Enter Role Name')))}}
+                        @endif
+                        @error('name')
+                        <span class="invalid-name" role="alert">
+                            <strong class="text-danger">{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    @if(!empty($permissions))
+                        <div class="ibox ">
+                            <div class="ibox-title">
+                                <h5>{{__('Assign Permission to Roles')}}</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-hover dataTables" >
+                                        <thead>
+                                            <tr>
+                                                <th>{{__('Module')}} </th>
+                                                <th>{{__('Permissions')}} </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="editPermissionsBody">
+                                           
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                </div>
+
+                <div class="col-12">
+                    <input type="submit" value="{{__('Update')}}" class="btn btn-primary">
+                    <input type="button" value="{{__('Cancel')}}" class="btn btn-white" data-dismiss="modal">
+                </div>
+            </div>
+        {{Form::close()}}
+
+        </div>
+    </div>
+</div>
 
 
 @endsection
+
 @section('script')
 <script>
-    function confirmDelete(event, formId) {
-        // Prevent the default link click behavior
-        event.preventDefault();
+    $(document).on('click', '.edit-role-btn', function (e) {
+        e.preventDefault();
+        const url = $(this).data('url');
+        const roleId = $(this).data('id');
+        const modalTitle = $(this).data('title');
 
+        $.ajax({
+            url: url,
+            type: 'GET',
+            success: function (response) {
+                if (response.role && response.permissions) {
+                     $('#editJobTitleModalLabel').text(modalTitle);
+                    $('#editRoleName').val(response.role.name);
+                    $('#edit-role-form').attr('action', '/roles/' + roleId);
+
+                    $('#editPermissionsBody').empty();
+                    Object.keys(response.permissions).forEach(function (permissionId) {
+                        const permissionName = response.permissions[permissionId];
+                        const isChecked = response.role.permissions.some((p) => p.id == permissionId) ? 'checked' : '';
+
+                        let row = `<tr>
+                            <td>${permissionName}</td>`;
+
+                        ['Manage', 'Create', 'Edit', 'Delete'].forEach(function(action) {
+                            row += `<td>
+                                        <input type="checkbox" name="permissions[]" value="${permissionId}-${action}" ${isChecked} class="form-check-input">
+                                    </td>`;
+                        });
+
+                        row += `</tr>`;
+                        $('#editPermissionsBody').append(row);
+                    });
+
+                    $('#editJobTitleModal').modal('show');
+                }
+            },
+            error: function (xhr) {
+                console.error(xhr.responseJSON.message);
+                alert('Failed to fetch role data.');
+            },
+        });
+    });
+
+    function confirmDelete(formId) {
         const confirmationMessage = "{{ __('Are You Sure?') }}\n{{ __('This action cannot be undone. Do you want to continue?') }}";
 
         if (confirm(confirmationMessage)) {
-            // Submit the form if user confirms
             document.getElementById(formId).submit();
         }
     }
 </script>
 
 @endsection
-

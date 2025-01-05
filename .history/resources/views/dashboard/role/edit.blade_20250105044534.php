@@ -33,11 +33,11 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row my-2">
+                                <div class="row">
                                     <div class="col-lg-12">
                                         @if(!empty($permissions))
                                             <div class="ibox ">
-                                                <div class="ibox-title my-2">
+                                                <div class="ibox-title">
                                                     <h5>{{__('Assign Permission to Roles')}}</h5>
                                                 </div>
                                                 <div class="ibox-content">
@@ -157,7 +157,7 @@
                                         @endif
                                     </div>
 
-                                    <div class="col-12 my-2">
+                                    <div class="col-12">
                                         <input type="submit" value="{{__('Update')}}" class="btn btn-primary">
                                         <input type="button" value="{{__('Cancel')}}" class="btn btn-white" data-dismiss="modal">
                                     </div>
