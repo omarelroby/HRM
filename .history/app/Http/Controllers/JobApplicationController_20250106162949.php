@@ -449,7 +449,7 @@ class JobApplicationController extends Controller
         $status     = JobOnBoard::$status;
 
 
-        return view('dashboard.jobApplication.onboardEdit', compact('jobOnBoard', 'status'));
+        return view('jobApplication.onboardEdit', compact('jobOnBoard', 'status'));
     }
 
     public function jobBoardDelete($id)

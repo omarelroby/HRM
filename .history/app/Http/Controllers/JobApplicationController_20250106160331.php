@@ -373,10 +373,7 @@ class JobApplicationController extends Controller
             $status       = JobOnBoard::$status;
             $applications = InterviewSchedule::select('interview_schedules.*', 'job_applications.name')->join('job_applications', 'interview_schedules.candidate', '=', 'job_applications.id')->where('interview_schedules.created_by', \Auth::user()->creatorId())->get()->pluck('name', 'candidate');
             $applications->prepend('-', '');
-            $jobs = Job::where('created_by', \Auth::user()->creatorId())->get()->pluck('title', 'id');
-            $jobs->prepend('All', '');
-            $id=0;
-            return view('dashboard.jobApplication.onboard', compact('id','jobOnBoards','applications','status','jobs'));
+            return view('dashboard.jobApplication.onboard', compact('jobOnBoards','applications','status'));
         }
         else
         {
@@ -449,7 +446,7 @@ class JobApplicationController extends Controller
         $status     = JobOnBoard::$status;
 
 
-        return view('dashboard.jobApplication.onboardEdit', compact('jobOnBoard', 'status'));
+        return view('jobApplication.onboardEdit', compact('jobOnBoard', 'status'));
     }
 
     public function jobBoardDelete($id)

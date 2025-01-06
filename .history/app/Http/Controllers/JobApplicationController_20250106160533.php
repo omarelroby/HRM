@@ -375,8 +375,7 @@ class JobApplicationController extends Controller
             $applications->prepend('-', '');
             $jobs = Job::where('created_by', \Auth::user()->creatorId())->get()->pluck('title', 'id');
             $jobs->prepend('All', '');
-            $id=0;
-            return view('dashboard.jobApplication.onboard', compact('id','jobOnBoards','applications','status','jobs'));
+            return view('dashboard.jobApplication.onboard', compact('jobOnBoards','applications','status','jobs'));
         }
         else
         {
@@ -449,7 +448,7 @@ class JobApplicationController extends Controller
         $status     = JobOnBoard::$status;
 
 
-        return view('dashboard.jobApplication.onboardEdit', compact('jobOnBoard', 'status'));
+        return view('jobApplication.onboardEdit', compact('jobOnBoard', 'status'));
     }
 
     public function jobBoardDelete($id)
