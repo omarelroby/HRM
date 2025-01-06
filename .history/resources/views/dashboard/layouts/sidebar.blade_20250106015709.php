@@ -174,7 +174,7 @@
                         </li>
                         <li class="submenu">
                             <a href="javascript:void(0);" class="subdrop {{ Request::is('job')  || Request::is('interview-schedule') || Request::is('custom-question') || Request::is('job-onboard') || Request::is('job.application.candidate')  ? 'active' : '' }}">
-                                <i class="ti ti-shopping-bag"></i><span class="submenu-title">{{ __('Recruitment') }}</span>
+                                <i class="ti ti-shopping"></i><span class="submenu-title">{{ __('Recruitment') }}</span>
                                 <span class="menu-arrow"></span>
                             </a>
                             <ul style="display: none;">

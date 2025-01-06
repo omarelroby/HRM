@@ -173,16 +173,13 @@
                             </ul>
                         </li>
                         <li class="submenu">
-                            <a href="javascript:void(0);" class="subdrop {{ Request::is('job')  || Request::is('interview-schedule') || Request::is('custom-question') || Request::is('job-onboard') || Request::is('job.application.candidate')  ? 'active' : '' }}">
-                                <i class="ti ti-shopping-bag"></i><span class="submenu-title">{{ __('Recruitment') }}</span>
+                            <a href="javascript:void(0);" class="subdrop {{ Request::is('training') || Request::is('trainer')  ? 'active' : '' }}">
+                                <i class="ti ti-activity"></i><span class="submenu-title">{{ __('Recruiment') }}</span>
                                 <span class="menu-arrow"></span>
                             </a>
                             <ul style="display: none;">
-                                <li><a class="{{ Request::is('job') ?'active' :'' }}" href="{{ route('job.index') }}">{{ __('Job') }}</a></li>
-                                <li><a class="{{ Request::is('job-application/candidate') ?'active' :'' }}" href="{{ route('job.application.candidate') }}">{{ __('Job Application') }}</a></li>
-                                <li><a class="{{ Request::is('job-onboard') ?'active' :'' }}" href="{{ route('job.on.board') }}">{{ __('Job On Board') }}</a></li>
-                                <li><a class="{{ Request::is('custom-question') ?'active' :'' }}" href="{{ route('custom-question.index') }}">{{ __('Custom Question') }}</a></li>
-                                <li><a class="{{ Request::is('interview-schedule') ?'active' :'' }}" href="{{ route('interview-schedule.index') }}">{{ __('Interview Schedule') }}</a></li>
+                                <li><a class="{{ Request::is('training') ?'active' :'' }}" href="{{ route('training.index') }}">{{ __('Training') }}</a></li>
+                                <li><a class="{{ Request::is('trainer') ?'active' :'' }}" href="{{ route('trainer.index') }}">{{ __('Trainer') }}</a></li>
 
                             </ul>
                         </li>
