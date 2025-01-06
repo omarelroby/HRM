@@ -132,11 +132,9 @@
                                                 <a href="{{ route('job.edit', $job->id) }}" class="btn btn-primary btn-sm" data-toggle="tooltip" title="{{ __('Edit') }}"><i class="fa fa-edit"></i></a>
                                             @endcan
                                             @can('Delete Job')
-                                            {!! Form::open(['method' => 'DELETE', 'route' => ['job.destroy', $job->id], 'onsubmit' => 'return confirm("{{ __("Are You Sure?") }}\n{{ __("This action cannot be undone. Do you want to continue?") }}");']) !!}
-                                                <button type="submit" class="btn btn-danger btn-sm delete-job" data-toggle="tooltip" title="{{ __('Delete') }}">
-                                                    <i class="fa fa-trash"></i>
-                                                </button>
-                                            {!! Form::close() !!}
+                                                <a href="#" class="btn btn-danger btn-sm" data-toggle="tooltip" title="{{ __('Delete') }}" data-confirm="{{ __('Are You Sure?').'|'.__('This action can not be undone. Do you want to continue?') }}" data-confirm-yes="document.getElementById('delete-form-{{ $job->id }}').submit();"><i class="fa fa-trash"></i></a>
+                                                {!! Form::open(['method' => 'DELETE', 'route' => ['job.destroy', $job->id], 'id' => 'delete-form-'.$job->id]) !!}
+                                                {!! Form::close() !!}
                                             @endcan
                                         </td>
                                     @endif

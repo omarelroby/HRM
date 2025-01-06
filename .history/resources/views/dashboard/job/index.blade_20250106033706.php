@@ -6,7 +6,68 @@
 
 @section('content')
 <div class="row">
+    <div class="row">
 
+        <!-- Total Plans -->
+        <div class="col-lg-3 col-md-6 d-flex">
+            <div class="card flex-fill">
+                <div class="card-body d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center overflow-hidden">
+                        <div>
+                            <span class="avatar avatar-lg bg-dark rounded-circle"><i class="ti ti-users"></i></span>
+                        </div>
+                        <div class="ms-2 overflow-hidden">
+                            <p class="fs-12 fw-medium mb-1 text-truncate">Total Employee</p>
+                            <h4>{{   }}</h4>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- /Total Plans -->
+
+        <!-- Total Plans -->
+        <div class="col-lg-3 col-md-6 d-flex">
+            <div class="card flex-fill">
+                <div class="card-body d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center overflow-hidden">
+                        <div>
+                            <span class="avatar avatar-lg bg-success rounded-circle"><i class="ti ti-user-share"></i></span>
+                        </div>
+                        <div class="ms-2 overflow-hidden">
+                            <p class="fs-12 fw-medium mb-1 text-truncate">Active</p>
+                            <h4>{{  }}</h4>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- /Total Plans -->
+
+        <!-- Inactive Plans -->
+        <div class="col-lg-3 col-md-6 d-flex">
+            <div class="card flex-fill">
+                <div class="card-body d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center overflow-hidden">
+                        <div>
+                            <span class="avatar avatar-lg bg-danger rounded-circle"><i class="ti ti-user-pause"></i></span>
+                        </div>
+                        <div class="ms-2 overflow-hidden">
+                            <p class="fs-12 fw-medium mb-1 text-truncate">InActive</p>
+                            <h4>{{   }}</h4>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- /Inactive Companies -->
+
+     
+
+    </div>
     <!-- Create Button -->
     <div class="d-flex justify-content-end mb-3">
         @can('Create Employee')
@@ -17,70 +78,7 @@
     </div>
     <!-- Job List Card -->
     <div class="col-lg-12">
-        <div class="row">
-
-            <!-- Total Plans -->
-            <div class="col-lg-4 col-md-6 d-flex">
-                <div class="card flex-fill">
-                    <div class="card-body d-flex align-items-center justify-content-between">
-                        <div class="d-flex align-items-center overflow-hidden">
-                            <div>
-                                <span class="avatar avatar-lg bg-dark rounded-circle"><i class="ti ti-users"></i></span>
-                            </div>
-                            <div class="ms-2 overflow-hidden">
-                                <p class="fs-12 fw-medium mb-1 text-truncate">Total Jobs</p>
-                                <h4> {{ $data['total'] }}</h4>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <!-- /Total Plans -->
-
-            <!-- Total Plans -->
-            <div class="col-lg-4 col-md-6 d-flex">
-                <div class="card flex-fill">
-                    <div class="card-body d-flex align-items-center justify-content-between">
-                        <div class="d-flex align-items-center overflow-hidden">
-                            <div>
-                                <span class="avatar avatar-lg bg-success rounded-circle"><i class="ti ti-user-share"></i></span>
-                            </div>
-                            <div class="ms-2 overflow-hidden">
-                                <p class="fs-12 fw-medium mb-1 text-truncate">Active Jobs</p>
-                                <h4> {{ $data['active'] }}</h4>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <!-- /Total Plans -->
-
-            <!-- Inactive Plans -->
-            <div class="col-lg-4 col-md-6 d-flex">
-                <div class="card flex-fill">
-                    <div class="card-body d-flex align-items-center justify-content-between">
-                        <div class="d-flex align-items-center overflow-hidden">
-                            <div>
-                                <span class="avatar avatar-lg bg-danger rounded-circle"><i class="ti ti-user-pause"></i></span>
-                            </div>
-                            <div class="ms-2 overflow-hidden">
-                                <p class="fs-12 fw-medium mb-1 text-truncate">InActive Jobse</p>
-                                <h4>{{ $data['in_active'] }} </h4>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <!-- /Inactive Companies -->
-
-
-
-        </div>
         <div class="card shadow-sm">
-
             <div class="card-header text-white">
                 <h5 class="card-title mb-0">{{ __('Job List') }}</h5>
             </div>
@@ -132,11 +130,9 @@
                                                 <a href="{{ route('job.edit', $job->id) }}" class="btn btn-primary btn-sm" data-toggle="tooltip" title="{{ __('Edit') }}"><i class="fa fa-edit"></i></a>
                                             @endcan
                                             @can('Delete Job')
-                                            {!! Form::open(['method' => 'DELETE', 'route' => ['job.destroy', $job->id], 'onsubmit' => 'return confirm("{{ __("Are You Sure?") }}\n{{ __("This action cannot be undone. Do you want to continue?") }}");']) !!}
-                                                <button type="submit" class="btn btn-danger btn-sm delete-job" data-toggle="tooltip" title="{{ __('Delete') }}">
-                                                    <i class="fa fa-trash"></i>
-                                                </button>
-                                            {!! Form::close() !!}
+                                                <a href="#" class="btn btn-danger btn-sm" data-toggle="tooltip" title="{{ __('Delete') }}" data-confirm="{{ __('Are You Sure?').'|'.__('This action can not be undone. Do you want to continue?') }}" data-confirm-yes="document.getElementById('delete-form-{{ $job->id }}').submit();"><i class="fa fa-trash"></i></a>
+                                                {!! Form::open(['method' => 'DELETE', 'route' => ['job.destroy', $job->id], 'id' => 'delete-form-'.$job->id]) !!}
+                                                {!! Form::close() !!}
                                             @endcan
                                         </td>
                                     @endif

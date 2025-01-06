@@ -133,11 +133,11 @@
                                             @endcan
                                             @can('Delete Job')
                                             {!! Form::open(['method' => 'DELETE', 'route' => ['job.destroy', $job->id], 'onsubmit' => 'return confirm("{{ __("Are You Sure?") }}\n{{ __("This action cannot be undone. Do you want to continue?") }}");']) !!}
-                                                <button type="submit" class="btn btn-danger btn-sm delete-job" data-toggle="tooltip" title="{{ __('Delete') }}">
+                                                <button type="submit" class="btn btn-danger btn-sm" data-toggle="tooltip" title="{{ __('Delete') }}">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
                                             {!! Form::close() !!}
-                                            @endcan
+                                        @endcan
                                         </td>
                                     @endif
                                 </tr>
