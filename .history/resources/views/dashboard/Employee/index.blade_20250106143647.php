@@ -52,7 +52,7 @@
                             <span class="avatar avatar-lg bg-dark rounded-circle"><i class="ti ti-users"></i></span>
                         </div>
                         <div class="ms-2 overflow-hidden">
-                            <p class="fs-12 fw-medium mb-1 text-truncate">{{ __('Total Employee') }}</p>
+                            <p class="fs-12 fw-medium mb-1 text-truncate">Total Employee</p>
                             <h4>{{ $employees->count() }}</h4>
                         </div>
                     </div>
@@ -71,7 +71,7 @@
                             <span class="avatar avatar-lg bg-success rounded-circle"><i class="ti ti-user-share"></i></span>
                         </div>
                         <div class="ms-2 overflow-hidden">
-                            <p class="fs-12 fw-medium mb-1 text-truncate">{{ __('Active') }}</p>
+                            <p class="fs-12 fw-medium mb-1 text-truncate">Active</p>
                             <h4>{{ $employees->where('is_active',1)->count() }}</h4>
                         </div>
                     </div>
@@ -90,7 +90,7 @@
                             <span class="avatar avatar-lg bg-danger rounded-circle"><i class="ti ti-user-pause"></i></span>
                         </div>
                         <div class="ms-2 overflow-hidden">
-                            <p class="fs-12 fw-medium mb-1 text-truncate">{{ __('InActive') }}</p>
+                            <p class="fs-12 fw-medium mb-1 text-truncate">InActive</p>
                             <h4>{{ $employees->where('is_active','!=',1)->count() }}</h4>
                         </div>
                     </div>
@@ -109,7 +109,7 @@
                             <span class="avatar avatar-lg bg-info rounded-circle"><i class="ti ti-user-plus"></i></span>
                         </div>
                         <div class="ms-2 overflow-hidden">
-                            <p class="fs-12 fw-medium mb-1 text-truncate">{{ __('New Joiners') }}</p>
+                            <p class="fs-12 fw-medium mb-1 text-truncate">New Joiners</p>
                             <h4>67</h4>
                         </div>
                     </div>
@@ -123,7 +123,7 @@
 
     <div class="card">
     <div class="card-header d-flex align-items-center justify-content-between flex-wrap bg-light p-3">
-        <h5 class="mb-0">{{ __('Employees List') }}</h5>
+        <h5 class="mb-0">Employees List</h5>
     </div>
     @if (session('success'))
     <div class="alert alert-success" style="text-align: center;">{{ session('success') }}</div>
@@ -158,13 +158,13 @@
                                         </div>
                                     </th>
                                     <th class="sorting">#</th>
-                                    <th class="sorting">{{ __('ID') }}</th>
-                                    <th class="sorting">{{ __('Name') }}</th>
-                                    <th class="sorting">{{ __('Email') }}</th>
-                                    <th class="sorting">{{ __('Job Title') }}</th>
-                                    <th class="sorting">{{ __('Department') }}</th>
-                                    <th class="sorting">{{ __('Joining Date') }}</th>
-                                    <th class="sorting">{{ __('Status') }}</th>
+                                    <th class="sorting">ID</th>
+                                    <th class="sorting">Name</th>
+                                    <th class="sorting">Email</th>
+                                    <th class="sorting">Job Title</th>
+                                    <th class="sorting">Department</th>
+                                    <th class="sorting">Joining Date</th>
+                                    <th class="sorting">Status</th>
                                     <th class="sorting" style="width: 60px;"></th>
                                 </tr>
                             </thead>
@@ -200,11 +200,11 @@
                                         <td>
                                             @if($employee->is_active)
                                                 <span class="badge badge-success d-inline-flex align-items-center badge-xs">
-                                                    <i class="ti ti-point-filled me-1"></i>{{ __('Active') }}
+                                                    <i class="ti ti-point-filled me-1"></i>Active
                                                 </span>
                                             @else
                                                 <span class="badge badge-danger d-inline-flex align-items-center badge-xs">
-                                                    <i class="ti ti-point-filled me-1"></i>{{ __('Inactive') }}
+                                                    <i class="ti ti-point-filled me-1"></i>Inactive
                                                 </span>
                                             @endif
                                         </td>

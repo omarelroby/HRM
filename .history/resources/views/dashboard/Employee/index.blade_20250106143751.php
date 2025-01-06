@@ -160,11 +160,11 @@
                                     <th class="sorting">#</th>
                                     <th class="sorting">{{ __('ID') }}</th>
                                     <th class="sorting">{{ __('Name') }}</th>
-                                    <th class="sorting">{{ __('Email') }}</th>
-                                    <th class="sorting">{{ __('Job Title') }}</th>
-                                    <th class="sorting">{{ __('Department') }}</th>
-                                    <th class="sorting">{{ __('Joining Date') }}</th>
-                                    <th class="sorting">{{ __('Status') }}</th>
+                                    <th class="sorting">Email</th>
+                                    <th class="sorting">Job Title</th>
+                                    <th class="sorting">Department</th>
+                                    <th class="sorting">Joining Date</th>
+                                    <th class="sorting">Status</th>
                                     <th class="sorting" style="width: 60px;"></th>
                                 </tr>
                             </thead>
@@ -200,11 +200,11 @@
                                         <td>
                                             @if($employee->is_active)
                                                 <span class="badge badge-success d-inline-flex align-items-center badge-xs">
-                                                    <i class="ti ti-point-filled me-1"></i>{{ __('Active') }}
+                                                    <i class="ti ti-point-filled me-1"></i>Active
                                                 </span>
                                             @else
                                                 <span class="badge badge-danger d-inline-flex align-items-center badge-xs">
-                                                    <i class="ti ti-point-filled me-1"></i>{{ __('Inactive') }}
+                                                    <i class="ti ti-point-filled me-1"></i>Inactive
                                                 </span>
                                             @endif
                                         </td>

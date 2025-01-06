@@ -200,11 +200,11 @@
                                         <td>
                                             @if($employee->is_active)
                                                 <span class="badge badge-success d-inline-flex align-items-center badge-xs">
-                                                    <i class="ti ti-point-filled me-1"></i>{{ __('Active') }}
+                                                    <i class="ti ti-point-filled me-1"></i>Active
                                                 </span>
                                             @else
                                                 <span class="badge badge-danger d-inline-flex align-items-center badge-xs">
-                                                    <i class="ti ti-point-filled me-1"></i>{{ __('Inactive') }}
+                                                    <i class="ti ti-point-filled me-1"></i>Inactive
                                                 </span>
                                             @endif
                                         </td>

@@ -346,7 +346,7 @@ class JobApplicationController extends Controller
         {
             $archive_application = JobApplication::where('created_by', \Auth::user()->creatorId())->where('is_archive', 1)->get();
 
-            return view('dashboard.jobApplication.candidate', compact('archive_application'));
+            return view('jobApplication.candidate', compact('archive_application'));
         }
         else
         {
