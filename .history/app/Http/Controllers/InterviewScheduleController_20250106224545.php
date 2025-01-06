@@ -25,13 +25,8 @@ class InterviewScheduleController extends Controller
             $arrSchedule[] = $arr;
         }
         $arrSchedule = str_replace('"[', '[', str_replace(']"', ']', json_encode($arrSchedule)));
-        $employees = User::where('created_by', \Auth::user()->creatorId())->where('type', 'employee')->orWhere('id', \Auth::user()->creatorId())->get()->pluck('name', 'id');
-        $employees->prepend('--', '');
 
-        $candidates = JobApplication::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
-        $candidates->prepend('--', '');
-        $candidate=0;
-        return view('dashboard.interviewSchedule.index', compact('arrSchedule', 'schedules','employees','candidates','candidate'));
+        return view('dashboard.interviewSchedule.index', compact('arrSchedule', 'schedules'));
     }
 
     public function create($candidate=0)

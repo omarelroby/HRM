@@ -30,8 +30,8 @@ class InterviewScheduleController extends Controller
 
         $candidates = JobApplication::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
         $candidates->prepend('--', '');
-        $candidate=0;
-        return view('dashboard.interviewSchedule.index', compact('arrSchedule', 'schedules','employees','candidates','candidate'));
+        $candidate=0
+        return view('dashboard.interviewSchedule.index', compact('arrSchedule', 'schedules','employees','candidates'));
     }
 
     public function create($candidate=0)

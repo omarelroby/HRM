@@ -25,13 +25,8 @@ class InterviewScheduleController extends Controller
             $arrSchedule[] = $arr;
         }
         $arrSchedule = str_replace('"[', '[', str_replace(']"', ']', json_encode($arrSchedule)));
-        $employees = User::where('created_by', \Auth::user()->creatorId())->where('type', 'employee')->orWhere('id', \Auth::user()->creatorId())->get()->pluck('name', 'id');
-        $employees->prepend('--', '');
 
-        $candidates = JobApplication::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
-        $candidates->prepend('--', '');
-        $candidate=0;
-        return view('dashboard.interviewSchedule.index', compact('arrSchedule', 'schedules','employees','candidates','candidate'));
+        return view('interviewSchedule.index', compact('arrSchedule', 'schedules'));
     }
 
     public function create($candidate=0)
@@ -87,7 +82,7 @@ class InterviewScheduleController extends Controller
     public function show(InterviewSchedule $interviewSchedule)
     {
         $stages=JobStage::where('created_by',\Auth::user()->creatorId())->get();
-        return view('dashboard.interviewSchedule.show', compact('interviewSchedule','stages'));
+        return view('interviewSchedule.show', compact('interviewSchedule','stages'));
     }
 
     public function edit(InterviewSchedule $interviewSchedule)
@@ -98,7 +93,7 @@ class InterviewScheduleController extends Controller
         $candidates = JobApplication::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
         $candidates->prepend('--', '');
 
-        return view('dashboard.interviewSchedule.edit', compact('employees', 'candidates', 'interviewSchedule'));
+        return view('interviewSchedule.edit', compact('employees', 'candidates', 'interviewSchedule'));
     }
 
     public function update(Request $request, InterviewSchedule $interviewSchedule)
