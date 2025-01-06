@@ -67,7 +67,7 @@
                 <li class="menu-title"><span>{{ __('Main menu') }}</span></li>
                 <li>
                     <ul>
-                        <li class="{{ Request::is('home')  ? 'active' : '' }}">
+                        <li>
                             <a href="{{ route('home') }}">
                                 <i class="ti ti-smart-home"></i><span>{{ __('Dashboard') }}</span>
                             </a>

@@ -20,15 +20,12 @@ class TicketController extends Controller
             $user = Auth::user();
             if($user->type == 'employee') {
                 $tickets = Ticket::where('employee_id', '=', \Auth::user()->id)->orWhere('ticket_created', \Auth::user()->id)->get();
-                $employees = User::where('created_by', '=', \Auth::user()->creatorId())->where('type', '=', 'employee')->get()->pluck('name', 'id');
 
             } else {
                 $tickets = Ticket::select('tickets.*')->join('users', 'tickets.created_by', '=', 'users.id')->where('users.created_by', '=', \Auth::user()->creatorId())->orWhere('tickets.created_by', \Auth::user()->creatorId())->get();
-                $employees = User::where('created_by', '=', \Auth::user()->creatorId())->where('type', '=', 'employee')->get()->pluck('name', 'id');
-
             }
 
-            return view('dashboard.ticket.index', compact('tickets','employees'));
+            return view('dashboard.ticket.index', compact('tickets'));
         } else {
             return redirect()->back()->with('error', __('Permission denied.'));
         }
@@ -214,7 +211,7 @@ class TicketController extends Controller
         }
 
 
-        return view('dashboard.ticket.reply', compact('ticket', 'ticketreply'));
+        return view('ticket.reply', compact('ticket', 'ticketreply'));
     }
 
     public function changereply(Request $request)

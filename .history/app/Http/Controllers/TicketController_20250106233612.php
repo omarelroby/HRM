@@ -214,7 +214,7 @@ class TicketController extends Controller
         }
 
 
-        return view('dashboard.ticket.reply', compact('ticket', 'ticketreply'));
+        return view('ticket.reply', compact('ticket', 'ticketreply'));
     }
 
     public function changereply(Request $request)

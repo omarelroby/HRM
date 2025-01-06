@@ -1974,7 +1974,9 @@
         "Primary": "رئيسي",
         "Muslim": "مسلم",
         "NON-MUSLIM": "غير مسلم",
-        "ID_qama_details": "تفاصيل هوية الإقامة",
+        "ID_qama_details": "تفاصيل هوية الإقامة"
+
+        {
             "Add Custom Question": "إضافة سؤال مخصص",
             "Subject": "الموضوع",
             "Enter Ticket Subject": "أدخل موضوع التذكرة",

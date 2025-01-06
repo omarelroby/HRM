@@ -67,7 +67,7 @@
                 <li class="menu-title"><span>{{ __('Main menu') }}</span></li>
                 <li>
                     <ul>
-                        <li class="{{ Request::is('home')  ? 'active' : '' }}">
+                        <li>
                             <a href="{{ route('home') }}">
                                 <i class="ti ti-smart-home"></i><span>{{ __('Dashboard') }}</span>
                             </a>
@@ -184,11 +184,6 @@
                                 <li><a class="{{ Request::is('custom-question') ?'active' :'' }}" href="{{ route('custom-question.index') }}">{{ __('Custom Question') }}</a></li>
                                 <li><a class="{{ Request::is('interview-schedule') ?'active' :'' }}" href="{{ route('interview-schedule.index') }}">{{ __('Interview Schedule') }}</a></li>
                             </ul>
-                        </li>
-                        <li class="{{ Request::is('ticket')  ? 'active' : '' }}">
-                            <a href="{{ route('ticket.index') }}">
-                                <i class="ti ti-smart-home"></i><span>{{ __('ticket') }}</span>
-                            </a>
                         </li>
                     </ul>
                 </li>

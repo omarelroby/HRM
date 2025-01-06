@@ -1232,7 +1232,8 @@
     "Primary": "Primary",
     "Muslim": "Muslim",
     "NON-MUSLIM": "NON-MUSLIM",
-     "ID_qama_details": "ID Qama Details",
+     "ID_qama_details": "ID Qama Details"
+     {
         "Add Custom Question": "Add Custom Question",
         "Subject": "Subject",
         "Enter Ticket Subject": "Enter Ticket Subject",
