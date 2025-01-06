@@ -8,7 +8,7 @@
         <div class="card ">
             <div class="card-body">
                 <div class="table-responsive">
-                    {{-- <table class="table table-striped table-bordered mt-3">
+                    <table class="table table-striped table-bordered mt-3">
                         <tbody>
                         <tr>
                             <td>{{__('Job Title')}}</td>
@@ -58,7 +58,7 @@
                         </tr>
 
                         </tbody>
-                    </table> --}}
+                    </table>
 
                 </div>
             </div>
@@ -66,7 +66,7 @@
     </div>
     <div class="col-md-8">
         <div class="card card-fluid">
-            {{-- <div class="card-body">
+            <div class="card-body">
                 <div class="col-12">
                     <div class="row">
 
@@ -117,7 +117,7 @@
                         </div>
                     </div>
                 </div>
-            </div> --}}
+            </div>
         </div>
     </div>
 </div>

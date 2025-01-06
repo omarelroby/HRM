@@ -178,6 +178,7 @@ class JobApplicationController extends Controller
 
     public function show($ids)
     {
+
         if(\Auth::user()->can('Show Job Application'))
         {
             $id             = Crypt::decrypt($ids);

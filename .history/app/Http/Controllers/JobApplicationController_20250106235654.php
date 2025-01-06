@@ -178,12 +178,15 @@ class JobApplicationController extends Controller
 
     public function show($ids)
     {
+
         if(\Auth::user()->can('Show Job Application'))
         {
             $id             = Crypt::decrypt($ids);
             $jobApplication = JobApplication::find($id);
+
             $notes = JobApplicationNote::where('application_id', $id)->get();
             $stages = JobStage::where('created_by', \Auth::user()->creatorId())->get();
+
             return view('dashboard.jobApplication.show', compact('jobApplication', 'notes', 'stages'));
         }
         else
