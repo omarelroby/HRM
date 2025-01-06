@@ -15,7 +15,7 @@ class CustomQuestionController extends Controller
             $questions = CustomQuestion::where('created_by', \Auth::user()->creatorId())->get();
             $is_required = CustomQuestion::$is_required;
 
-            return view('dashboard.customQuestion.index', compact('questions','is_required'));
+            return view('dashboard.customQuestion.index', compact('questions'));
         }
         else
         {
@@ -91,7 +91,7 @@ class CustomQuestionController extends Controller
             $customQuestion->is_required = $request->is_required;
             $customQuestion->save();
 
-            return redirect('custom-question')->with('success', __('Question successfully updated.'));
+            return redirect()->back()->with('success', __('Question successfully updated.'));
         }
         else
         {

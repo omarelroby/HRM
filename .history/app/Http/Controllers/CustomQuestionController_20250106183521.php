@@ -91,7 +91,7 @@ class CustomQuestionController extends Controller
             $customQuestion->is_required = $request->is_required;
             $customQuestion->save();
 
-            return redirect('custom-question')->with('success', __('Question successfully updated.'));
+            return redirect('custom-question.index')->with('success', __('Question successfully updated.'));
         }
         else
         {
