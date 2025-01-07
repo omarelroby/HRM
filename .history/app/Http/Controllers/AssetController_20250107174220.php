@@ -15,7 +15,7 @@ class AssetController extends Controller
     {
         if (\Auth::user()->can('Manage Assets')) {
             $assets = Asset::where('created_by', '=', \Auth::user()->creatorId())->get();
-            // $employeeId = $request->employee_id;
+            $employeeId = $request->employee_id;
 
             return view('dashboard.assets.index', compact('assets'));
         } else {
@@ -82,7 +82,7 @@ class AssetController extends Controller
         if (\Auth::user()->can('Edit Assets')) {
             $asset = Asset::find($id);
 
-            return view('dashboard.assets.edit', compact('asset'));
+            return view('assets.edit', compact('asset'));
         } else {
             return redirect()->back()->with('error', __('Permission denied.'));
         }
