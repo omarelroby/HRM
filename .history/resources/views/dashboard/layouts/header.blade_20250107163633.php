@@ -47,10 +47,5 @@
     <link rel="stylesheet" href="{{ asset('public/assets/css/style.css')}}">
     @yield('css')
     @stack('css')
-    <style>
-        .sidebar-inner.slimscroll {
-            height: calc(100vh); /* Adjust the height as needed */
-            overflow-y: auto; /* Enable vertical scrolling */
-        }
-    </style>
+   
 </head>

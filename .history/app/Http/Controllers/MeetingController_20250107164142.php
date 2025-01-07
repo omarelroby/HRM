@@ -27,18 +27,15 @@ class MeetingController extends Controller
                             ->where('meetings.employee_id', '["0"]');
                     })
                     ->get();
-                $branch      = Branch::where('created_by', '=', \Auth::user()->creatorId())->get();
-                $departments = Department::where('created_by', '=', Auth::user()->creatorId())->get();
-                $employees   = Employee::where('created_by', '=', \Auth::user()->creatorId())->get()->pluck('name', 'id');
+                    $branch      = Branch::where('created_by', '=', \Auth::user()->creatorId())->get();
+                    $departments = Department::where('created_by', '=', Auth::user()->creatorId())->get();
+                    $employees   = Employee::where('created_by', '=', \Auth::user()->creatorId())->get()->pluck('name', 'id');
 
             } else {
-                $branch      = Branch::where('created_by', '=', \Auth::user()->creatorId())->get();
-                $departments = Department::where('created_by', '=', Auth::user()->creatorId())->get();
-                $employees   = Employee::where('created_by', '=', \Auth::user()->creatorId())->get()->pluck('name', 'id');
                 $meetings = Meeting::where('created_by', '=', \Auth::user()->creatorId())->get();
             }
 
-            return view('dashboard.meeting.index', compact('meetings', 'employees','branch','employees','meetings'));
+            return view('dashboard.meeting.index', compact('meetings', 'employees'));
         } else {
             return redirect()->back()->with('error', __('Permission denied.'));
         }

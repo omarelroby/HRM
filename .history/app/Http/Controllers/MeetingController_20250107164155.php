@@ -38,7 +38,7 @@ class MeetingController extends Controller
                 $meetings = Meeting::where('created_by', '=', \Auth::user()->creatorId())->get();
             }
 
-            return view('dashboard.meeting.index', compact('meetings', 'employees','branch','employees','meetings'));
+            return view('dashboard.meeting.index', compact('meetings', 'employees'));
         } else {
             return redirect()->back()->with('error', __('Permission denied.'));
         }

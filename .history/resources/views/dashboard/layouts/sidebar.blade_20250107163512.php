@@ -205,12 +205,6 @@
                                 <i class="ti ti-video"></i><span>{{ __('zoom-meeting') }}</span>
                             </a>
                         </li>
-                        <li class="{{ Request::is('account-assets')  ? 'active' : '' }}">
-                            <a href="{{ route('account-assets.index') }}">
-                                <i class="ti ti-calculator"></i><span>{{ __('account-assets') }}</span>
-                            </a>
-                        </li>
-
                     </ul>
                 </li>
             </ul>

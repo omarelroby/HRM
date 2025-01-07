@@ -23,10 +23,8 @@ class ZoomMeetingController extends Controller
     {
         $created_by = \Auth::user()->creatorId();
         $ZoomMeetings = ZoomMeeting::where('created_by', $created_by)->get();
-        $employee_option = User::where('created_by', $created_by)->pluck('name', 'id');
-
         // $this->statusUpdate();
-        return view('dashboard.zoom-meeting.index', compact('ZoomMeetings','employee_option'));
+        return view('zoom_meeting.index', compact('ZoomMeetings'));
     }
 
 
@@ -43,7 +41,7 @@ class ZoomMeetingController extends Controller
         $data['topic'] = $request->title;
         $data['start_time'] = date('y:m:d H:i:s', strtotime($request->start_date));
         $data['duration'] = (int)$request->duration;
-        $data['password'] = $request->password;
+        $data['password'] = $request->password; 
         $data['host_video'] = 0;
         $data['participant_video'] = 0;
         $meeting_create = $this->createmitting($data);
@@ -55,7 +53,7 @@ class ZoomMeetingController extends Controller
             $start_url = isset($meeting_create['data']['start_url']) ? $meeting_create['data']['start_url'] : '';
             $join_url = isset($meeting_create['data']['join_url']) ? $meeting_create['data']['join_url'] : '';
             $status = isset($meeting_create['data']['status']) ? $meeting_create['data']['status'] : '';
-
+            
             $created_by = \Auth::user()->creatorId();
             $validator  = \Validator::make(
                 $request->all(),
@@ -113,7 +111,7 @@ class ZoomMeetingController extends Controller
     {
         $created_by = \Auth::user()->creatorId();
         $employee_option = User::where('created_by', $created_by)->pluck('name', 'id');
-        return view('dashboard.zoom-meeting.edit', compact('employee_option', 'ZoomMeeting'));
+        return view('zoom_meeting.edit', compact('employee_option', 'ZoomMeeting'));
     }
 
 
@@ -186,6 +184,6 @@ class ZoomMeetingController extends Controller
         $calandar = array_merge($arrMeeting);
         $calandar = str_replace('"[', '[', str_replace(']"', ']', json_encode($calandar)));
 
-        return view('dashboard.zoom-meeting.calendar', compact('calandar'));
+        return view('zoom_meeting.calendar', compact('calandar'));
     }
 }

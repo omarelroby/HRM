@@ -186,6 +186,6 @@ class ZoomMeetingController extends Controller
         $calandar = array_merge($arrMeeting);
         $calandar = str_replace('"[', '[', str_replace(']"', ']', json_encode($calandar)));
 
-        return view('dashboard.zoom-meeting.calendar', compact('calandar'));
+        return view('zoom-meeting.calendar', compact('calandar'));
     }
 }

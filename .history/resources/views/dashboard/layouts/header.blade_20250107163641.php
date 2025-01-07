@@ -49,7 +49,7 @@
     @stack('css')
     <style>
         .sidebar-inner.slimscroll {
-            height: calc(100vh); /* Adjust the height as needed */
+            height: calc(100vh - 150px); /* Adjust the height as needed */
             overflow-y: auto; /* Enable vertical scrolling */
         }
     </style>

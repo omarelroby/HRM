@@ -23,10 +23,11 @@ class ZoomMeetingController extends Controller
     {
         $created_by = \Auth::user()->creatorId();
         $ZoomMeetings = ZoomMeeting::where('created_by', $created_by)->get();
+        $created_by = \Auth::user()->creatorId();
         $employee_option = User::where('created_by', $created_by)->pluck('name', 'id');
 
         // $this->statusUpdate();
-        return view('dashboard.zoom-meeting.index', compact('ZoomMeetings','employee_option'));
+        return view('dashboard.zoom_meeting.index', compact('ZoomMeetings'));
     }
 
 
@@ -113,7 +114,7 @@ class ZoomMeetingController extends Controller
     {
         $created_by = \Auth::user()->creatorId();
         $employee_option = User::where('created_by', $created_by)->pluck('name', 'id');
-        return view('dashboard.zoom-meeting.edit', compact('employee_option', 'ZoomMeeting'));
+        return view('dashboard.zoom_meeting.edit', compact('employee_option', 'ZoomMeeting'));
     }
 
 
@@ -186,6 +187,6 @@ class ZoomMeetingController extends Controller
         $calandar = array_merge($arrMeeting);
         $calandar = str_replace('"[', '[', str_replace(']"', ']', json_encode($calandar)));
 
-        return view('dashboard.zoom-meeting.calendar', compact('calandar'));
+        return view('zoom_meeting.calendar', compact('calandar'));
     }
 }
