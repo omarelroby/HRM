@@ -187,12 +187,12 @@
                         </li>
                         <li class="{{ Request::is('ticket')  ? 'active' : '' }}">
                             <a href="{{ route('ticket.index') }}">
-                                <i class="ti ti-file-description"></i><span>{{ __('ticket') }}</span>
+                                <i class="ti ti-smart-home"></i><span>{{ __('ticket') }}</span>
                             </a>
                         </li>
-                        <li class="{{ Request::is('event')  ? 'active' : '' }}">
-                            <a href="{{ route('event.index') }}">
-                                <i class="ti ti-calendar"></i><span>{{ __('event') }}</span>
+                        <li class="{{ Request::is('ticket')  ? 'active' : '' }}">
+                            <a href="{{ route('ticket.index') }}">
+                                <i class="ti ti-smart-home"></i><span>{{ __('ticket') }}</span>
                             </a>
                         </li>
                     </ul>

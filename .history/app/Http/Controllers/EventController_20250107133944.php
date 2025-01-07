@@ -37,11 +37,9 @@ class EventController extends Controller
 
                 $arrEvents[] = $arr;
             }
-            $branch      = Branch::where('created_by', '=', \Auth::user()->creatorId())->get();
-            $departments = Department::where('created_by', '=', \Auth::user()->creatorId())->get();
-
             $arrEvents = str_replace('"[', '[', str_replace(']"', ']', json_encode($arrEvents)));
-             return view('dashboard.event.index', compact('arrEvents', 'employees','branch','departments'));
+
+            return view('dashboard.event.index', compact('arrEvents', 'employees'));
         } else {
             return redirect()->back()->with('error', __('Permission denied.'));
         }
@@ -164,7 +162,7 @@ class EventController extends Controller
             if ($event->created_by == Auth::user()->creatorId()) {
                 $employees = Employee::where('created_by', '=', \Auth::user()->creatorId())->get()->pluck('name', 'id');
 
-                return view('dashboard.event.edit', compact('event', 'employees'));
+                return view('event.edit', compact('event', 'employees'));
             } else {
                 return response()->json(['error' => __('Permission denied.')], 401);
             }

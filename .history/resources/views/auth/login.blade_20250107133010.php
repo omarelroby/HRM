@@ -42,7 +42,7 @@
                         <h3 class="text-center mb-4">{{ __('Login') }}</h3>
 
                         <!-- Email Input -->
-                        <div class="form-group my-2">
+                        <div class="form-group my">
                             <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
                                    placeholder="{{ __('Email') }}" value="{{ old('email') }}" required autofocus>
                             @error('email')
@@ -53,7 +53,7 @@
                         </div>
 
                         <!-- Password Input -->
-                        <div class="form-group my-2">
+                        <div class="form-group">
                             <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
                                    placeholder="{{ __('Password') }}" required>
                             @error('password')

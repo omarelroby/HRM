@@ -21,28 +21,46 @@ class EventController extends Controller
     public function index()
     {
         if (\Auth::user()->can('Manage Event')) {
+            // Fetch employees and events created by the current user
             $employees = Employee::where('created_by', '=', \Auth::user()->creatorId())->get();
-            $events    = Event::where('created_by', '=', \Auth::user()->creatorId())->get();
+            $events = Event::where('created_by', '=', \Auth::user()->creatorId())->get();
 
+            // Prepare events for FullCalendar
             $arrEvents = [];
             foreach ($events as $event) {
-                $arr['id']    = $event['id'];
-                $arr['title'] = $event['title'];
-                $arr['start'] = $event['start_date'];
-                $arr['end']   = $event['end_date'];
-                $arr['backgroundColor'] = $event['color'];
-                $arr['borderColor']     = "#fff";
-                $arr['textColor']       = "white";
-                $arr['url']             = route('event.edit', $event['id']);
-
-                $arrEvents[] = $arr;
+                // Validate event dates
+                if (!empty($event->start_date) && !empty($event->end_date)) {
+                    $arr = [
+                        'id' => $event->id,
+                        'title' => $event->title,
+                        'start' => $event->start_date,
+                        'end' => $event->end_date,
+                        'backgroundColor' => $event->color,
+                        'borderColor' => "#fff",
+                        'textColor' => "white",
+                        'url' => route('event.edit', $event->id),
+                    ];
+                    $arrEvents[] = $arr;
+                }
             }
-            $branch      = Branch::where('created_by', '=', \Auth::user()->creatorId())->get();
-            $departments = Department::where('created_by', '=', \Auth::user()->creatorId())->get();
 
-            $arrEvents = str_replace('"[', '[', str_replace(']"', ']', json_encode($arrEvents)));
-             return view('dashboard.event.index', compact('arrEvents', 'employees','branch','departments'));
+            // Sort events by start_date
+            usort($arrEvents, function ($a, $b) {
+                return strtotime($a['start']) - strtotime($b['start']);
+            });
+
+            // Convert events to JSON and prepare for FullCalendar
+            $arrEvents = json_encode($arrEvents);
+            $arrEvents = str_replace('"[', '[', str_replace(']"', ']', $arrEvents));
+
+            // Fetch branches and departments created by the current user
+            $branch = Branch::where('created_by', '=', \Auth::user()->creatorId())->get();
+            $departments = Department::where('created_by', '=', \Auth::user()->creatorId())->get();
+            dd(print_r($arrEvents));
+            // Return the view with the necessary data
+            return view('dashboard.event.index', compact('arrEvents', 'employees', 'branch', 'departments'));
         } else {
+            // Redirect if the user doesn't have permission
             return redirect()->back()->with('error', __('Permission denied.'));
         }
     }

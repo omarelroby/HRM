@@ -191,8 +191,8 @@
                             </a>
                         </li>
                         <li class="{{ Request::is('event')  ? 'active' : '' }}">
-                            <a href="{{ route('event.index') }}">
-                                <i class="ti ti-calendar"></i><span>{{ __('event') }}</span>
+                            <a href="{{ route('ticket.index') }}">
+                                <i class="ti ti-calendar"></i><span>{{ __('ticket') }}</span>
                             </a>
                         </li>
                     </ul>

@@ -53,7 +53,7 @@
                         </div>
 
                         <!-- Password Input -->
-                        <div class="form-group my-2">
+                        <div class="form-group my">
                             <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
                                    placeholder="{{ __('Password') }}" required>
                             @error('password')

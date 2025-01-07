@@ -319,7 +319,8 @@
                                         <label for="password" class="form-label">{{ __('Password') }} <span class="text-danger">*</span></label>
                                         <div class="pass-group">
                                             <input type="password" name="password" id="password" class="form-control">
-                                             <div id="password_error" class="invalid-feedback"></div>
+                                            <span class="ti toggle-password" id="togglePassword"></span>
+                                            <div id="password_error" class="invalid-feedback"></div>
                                         </div>
                                     </div>
                                 </div>

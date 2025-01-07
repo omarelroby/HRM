@@ -319,7 +319,8 @@
                                         <label for="password" class="form-label">{{ __('Password') }} <span class="text-danger">*</span></label>
                                         <div class="pass-group">
                                             <input type="password" name="password" id="password" class="form-control">
-                                             <div id="password_error" class="invalid-feedback"></div>
+                                            <span class="ti toggle-password ti-eye-off" id="togglePassword"></span>
+                                            <div id="password_error" class="invalid-feedback"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -329,7 +330,8 @@
                                         <label for="password_confirmation" class="form-label">{{ __('Confirm Password') }} <span class="text-danger">*</span></label>
                                         <div class="pass-group">
                                             <input type="password" name="password_confirmation" id="password_confirmation" class="form-control">
-                                             <div id="password_confirmation_error" class="invalid-feedback"></div>
+                                            <span class="ti toggle-password ti-eye-off" id="toggleConfirmPassword"></span>
+                                            <div id="password_confirmation_error" class="invalid-feedback"></div>
                                         </div>
                                     </div>
                                 </div>

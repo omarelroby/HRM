@@ -94,7 +94,7 @@
             </div>
         </div>
     </div>
-    <!-- Add Ticket Modal -->
+    <!-- Add Job Modal -->
 <div class="modal fade" id="addTrainingModal" tabindex="-1" aria-labelledby="addTrainingModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">

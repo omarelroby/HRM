@@ -319,7 +319,8 @@
                                         <label for="password" class="form-label">{{ __('Password') }} <span class="text-danger">*</span></label>
                                         <div class="pass-group">
                                             <input type="password" name="password" id="password" class="form-control">
-                                             <div id="password_error" class="invalid-feedback"></div>
+                                            <span class="ti toggle-password ti-eye-off" id="togglePassword"></span>
+                                            <div id="password_error" class="invalid-feedback"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -329,7 +330,8 @@
                                         <label for="password_confirmation" class="form-label">{{ __('Confirm Password') }} <span class="text-danger">*</span></label>
                                         <div class="pass-group">
                                             <input type="password" name="password_confirmation" id="password_confirmation" class="form-control">
-                                             <div id="password_confirmation_error" class="invalid-feedback"></div>
+                                            <span class="ti toggle-password ti-eye-off" id="toggleConfirmPassword"></span>
+                                            <div id="password_confirmation_error" class="invalid-feedback"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -1365,7 +1367,29 @@ document.addEventListener('DOMContentLoaded', function () {
 	});
 
 
+    document.addEventListener('DOMContentLoaded', function () {
+    // Function to toggle password visibility
+    function togglePasswordVisibility(inputId, toggleIconId) {
+        const toggleIcon = document.querySelector(toggleIconId);
+        const passwordInput = document.querySelector(inputId);
 
+        if (toggleIcon && passwordInput) {
+            toggleIcon.addEventListener('click', function () {
+                // Toggle the type attribute
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+
+                // Toggle the eye icon
+                this.classList.toggle('ti-eye-off');
+                this.classList.toggle('ti-eye');
+            });
+        }
+    }
+
+    // Apply toggling to both password fields
+    togglePasswordVisibility('#password', '#togglePassword');
+    togglePasswordVisibility('#password_confirmation', '#toggleConfirmPassword');
+});
 </script>
 
 @endsection

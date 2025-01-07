@@ -40,8 +40,8 @@ class EventController extends Controller
             $branch      = Branch::where('created_by', '=', \Auth::user()->creatorId())->get();
             $departments = Department::where('created_by', '=', \Auth::user()->creatorId())->get();
 
-            $arrEvents = str_replace('"[', '[', str_replace(']"', ']', json_encode($arrEvents)));
-             return view('dashboard.event.index', compact('arrEvents', 'employees','branch','departments'));
+            dd(print_r($arrEvents));
+            return view('dashboard.event.index', compact('arrEvents', 'employees','branch','departments'));
         } else {
             return redirect()->back()->with('error', __('Permission denied.'));
         }
