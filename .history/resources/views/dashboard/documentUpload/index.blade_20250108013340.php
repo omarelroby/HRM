@@ -14,70 +14,66 @@
             @endcan
         </div>
         <div class="col-lg-12">
-            <div class="card">
-                <div class="card shadow-sm border-0">
-                    <!-- Card Header -->
-                    <div class="card-header bg-gradient-primary text-white py-3">
-                        <h5 class="card-title mb-0">{{ __('Account Assets') }}</h5>
-                    </div>
+            <div class="card shadow-sm border-0">
+                <!-- Card Header -->
+                <div class="card-header bg-gradient-primary text-white py-3">
+                    <h5 class="card-title mb-0">{{ __('Account Assets') }}</h5>
+                </div>
 
-                    <!-- Card Body -->
-                    <div class="card-body p-0">
-                        <div class="table-responsive">
-                            <table class="table table-hover table-borderless table-striped align-middle mb-0">
-                                <thead class="thead-light">
+                <!-- Card Body -->
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover table-sm dataTables">
+                            <thead>
+                                <tr>
+                                    <th>{{ __('Name') }}</th>
+                                    <th>{{ __('Document') }}</th>
+                                    <th>{{ __('Role') }}</th>
+                                    <th>{{ __('Description') }}</th>
+                                    @if(Gate::check('Edit Document') || Gate::check('Delete Document'))
+                                        <th width="3%">{{ __('Action') }}</th>
+                                    @endif
+                                </tr>
+                            </thead>
+                            <tbody class="font-style">
+                                @foreach ($documents as $document)
+                                    @php
+                                        $documentPath = asset(Storage::url('uploads/documentUpload'));
+                                        $role = \Spatie\Permission\Models\Role::find($document->role);
+                                    @endphp
                                     <tr>
-                                        <th class="text-start ps-4">{{ __('Name') }}</th>
-                                        <th class="text-center">{{ __('Document') }}</th>
-                                        <th class="text-center">{{ __('Role') }}</th>
-                                        <th class="text-start">{{ __('Description') }}</th>
+                                        <td>{{ $document->name }}</td>
+                                        <td>
+                                            @if(!empty($document->document))
+                                                <a href="{{ $documentPath . '/' . $document->document }}" target="_blank" class="text-decoration-none">
+                                                    <i class="fas fa-download text-primary"></i>
+                                                </a>
+                                            @else
+                                                <span class="text-muted">-</span>
+                                            @endif
+                                        </td>
+                                        <td>{{ $role ? $role->name : 'All' }}</td>
+                                        <td>{{ $document->description }}</td>
                                         @if(Gate::check('Edit Document') || Gate::check('Delete Document'))
-                                            <th class="text-end pe-4" width="10%">{{ __('Action') }}</th>
+                                            <td class="text-right action-btns">
+                                                @can('Edit Document')
+                                                    <a href="#" data-url="{{ route('document-upload.edit', $document->id) }}" data-size="lg" data-ajax-popup="true" data-title="{{ __('Edit Document') }}" class="edit-icon btn btn-success btn-sm" data-toggle="tooltip" title="{{ __('Edit') }}">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+                                                @endcan
+                                                @can('Delete Document')
+                                                    <a href="#" class="delete-icon btn btn-danger btn-sm" data-toggle="tooltip" title="{{ __('Delete') }}" data-confirm="{{ __('Are You Sure?') . '|' . __('This action cannot be undone. Do you want to continue?') }}" data-confirm-yes="document.getElementById('delete-form-{{ $document->id }}').submit();">
+                                                        <i class="fas fa-trash"></i>
+                                                    </a>
+                                                    {!! Form::open(['method' => 'DELETE', 'route' => ['document-upload.destroy', $document->id], 'id' => 'delete-form-' . $document->id]) !!}
+                                                    {!! Form::close() !!}
+                                                @endcan
+                                            </td>
                                         @endif
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($documents as $document)
-                                        @php
-                                            $documentPath = asset(Storage::url('uploads/documentUpload'));
-                                            $role = \Spatie\Permission\Models\Role::find($document->role);
-                                        @endphp
-                                        <tr class="hover-shadow">
-                                            <td class="text-start ps-4">{{ $document->name }}</td>
-                                            <td class="text-center">
-                                                @if(!empty($document->document))
-                                                    <a href="{{ $documentPath . '/' . $document->document }}" target="_blank" class="text-decoration-none">
-                                                        <i class="fas fa-download text-primary"></i>
-                                                    </a>
-                                                @else
-                                                    <span class="text-muted">-</span>
-                                                @endif
-                                            </td>
-                                            <td class="text-center">{{ $role ? $role->name : 'All' }}</td>
-                                            <td class="text-start">{{ $document->description }}</td>
-                                            @if(Gate::check('Edit Document') || Gate::check('Delete Document'))
-                                                <td class="text-end pe-4">
-                                                    <div class="d-flex justify-content-end gap-2">
-                                                        @can('Edit Document')
-                                                            <a href="#" data-url="{{ route('document-upload.edit', $document->id) }}" data-size="lg" data-ajax-popup="true" data-title="{{ __('Edit Document') }}" class="btn btn-sm btn-outline-success" data-toggle="tooltip" title="{{ __('Edit') }}">
-                                                                <i class="fas fa-edit"></i>
-                                                            </a>
-                                                        @endcan
-                                                        @can('Delete Document')
-                                                            <a href="#" class="btn btn-sm btn-outline-danger" data-toggle="tooltip" title="{{ __('Delete') }}" data-confirm="{{ __('Are You Sure?') . '|' . __('This action cannot be undone. Do you want to continue?') }}" data-confirm-yes="document.getElementById('delete-form-{{ $document->id }}').submit();">
-                                                                <i class="fas fa-trash"></i>
-                                                            </a>
-                                                            {!! Form::open(['method' => 'DELETE', 'route' => ['document-upload.destroy', $document->id], 'id' => 'delete-form-' . $document->id, 'class' => 'd-none']) !!}
-                                                            {!! Form::close() !!}
-                                                        @endcan
-                                                    </div>
-                                                </td>
-                                            @endif
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
