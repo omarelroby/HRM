@@ -14,7 +14,7 @@ class DocumentController extends Controller
         {
             $documents = Document::where('created_by', '=', \Auth::user()->creatorId())->get();
 
-            return view('dashboard.document.index', compact('documents'));
+            return view('document.index', compact('documents'));
         }
         else
         {
@@ -78,7 +78,7 @@ class DocumentController extends Controller
             if($document->created_by == \Auth::user()->creatorId())
             {
 
-                return view('dashboard.document.edit', compact('document'));
+                return view('document.edit', compact('document'));
             }
             else
             {

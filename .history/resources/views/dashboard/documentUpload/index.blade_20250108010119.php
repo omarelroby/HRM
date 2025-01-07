@@ -36,51 +36,52 @@
                 <div class="card-body p-0">
                     <div class="table-responsive">
                         <table class="table table-striped table-hover table-sm dataTables">
-                            <!-- Table Header -->
-                            <thead class="bg-light">
+                            <thead>
                                 <tr>
-                                    <th>{{ __('Name') }}</th>
-                                    <th>{{ __('Purchase Date') }}</th>
-                                    <th>{{ __('Support Until') }}</th>
-                                    <th>{{ __('Amount') }}</th>
-                                    <th>{{ __('Description') }}</th>
-                                    @if(Gate::check('Edit Assets') || Gate::check('Delete Assets'))
-                                        <th width="120px">{{ __('Action') }}</th>
+                                    <th>{{__('Name')}}</th>
+                                    <th>{{__('Document')}}</th>
+                                    <th>{{__('Role')}}</th>
+                                    <th>{{__('Description')}}</th>
+                                    @if(Gate::check('Edit Document') || Gate::check('Delete Document'))
+                                        <th width="3%">{{__('Action')}}</th>
                                     @endif
                                 </tr>
                             </thead>
-
-                            <!-- Table Body -->
-                            <tbody>
-                                @foreach ($assets as $asset)
+                            <tbody class="font-style">
+                                @foreach ($documents as $document)
+                                    @php
+                                        $documentPath=asset(Storage::url('uploads/documentUpload'));
+                                        $roles = \Spatie\Permission\Models\Role::find($document->role);
+                                    @endphp
                                     <tr>
-                                        <td class="font-style">{{ $asset->name }}</td>
-                                        <td class="font-style">{{ \Auth::user()->dateFormat($asset->purchase_date) }}</td>
-                                        <td class="font-style">{{ \Auth::user()->dateFormat($asset->supported_date) }}</td>
-                                        <td class="font-style">{{ \Auth::user()->priceFormat($asset->amount) }}</td>
-                                        <td class="font-style">{{ $asset->description }}</td>
-                                        @if(Gate::check('Edit Assets') || Gate::check('Delete Assets'))
-                                            <td>
-                                                @can('Edit Assets')
-                                                <a href="{{ route('account-assets.edit',$asset->id) }}" class="btn btn-sm btn-warning" data-toggle="tooltip" title="{{ __('Edit Assets') }}">
-                                                    <i class="fas fa-edit"></i>
+                                        <td>{{ $document->name }}</td>
+                                        <td>
+                                            @if(!empty($document->document))
+                                                <a href="{{$documentPath.'/'.$document->document}}" target="_blank">
+                                                    <i class="fa fa-download"></i>
                                                 </a>
+                                            @else
+                                                <p>-</p>
+                                            @endif
+                                        </td>
+                                        <td>{{ !empty($roles)?$roles->name:'All' }}</td>
+                                        <td>{{ $document->description }}</td>
+                                        @if(Gate::check('Edit Document') || Gate::check('Delete Document'))
+                                            <td class="text-right action-btns">
+                                                @can('Edit Document')
+                                                    <a href="#" data-url="{{ route('document-upload.edit',$document->id)}}" data-size="lg" data-ajax-popup="true" data-title="{{__('Edit Document')}}" class="edit-icon btn btn-success" data-toggle="tooltip" data-original-title="{{__('Edit')}}"><i class="fa fa-edit"></i></a>
                                                 @endcan
-
-                                            @can('Delete Assets')
-                                                <form method="POST" action="{{ route('account-assets.destroy', $asset->id) }}" class="d-inline" onsubmit="return confirm('{{ __('Are You Sure?') }}\n{{ __('This action cannot be undone. Do you want to continue?') }}');">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="{{ __('Delete') }}">
-                                                        <i class="fas fa-trash"></i>
-                                                    </button>
-                                                </form>
-                                            @endcan
+                                                @can('Delete Document')
+                                                    <a href="#" class="delete-icon btn btn-danger" data-toggle="tooltip" data-original-title="{{__('Delete')}}" data-confirm="{{__('Are You Sure?').'|'.__('This action can not be undone. Do you want to continue?')}}" data-confirm-yes="document.getElementById('delete-form-{{$document->id}}').submit();"><i class="fa fa-trash"></i></a>
+                                                    {!! Form::open(['method' => 'DELETE', 'route' => ['document-upload.destroy', $document->id],'id'=>'delete-form-'.$document->id]) !!}
+                                                    {!! Form::close() !!}
+                                                @endif
                                             </td>
                                         @endif
                                     </tr>
                                 @endforeach
                             </tbody>
+                        </table>
                         </table>
                     </div>
                 </div>

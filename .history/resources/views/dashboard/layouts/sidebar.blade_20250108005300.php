@@ -217,17 +217,22 @@
                         </li>
                         <li class="{{ Request::is('company-policy')  ? 'active' : '' }}">
                             <a href="{{ route('company-policy.index') }}">
-                                <i class="ti ti-device-analytics"></i><span>{{ __('Company Policy') }}</span>
+                                <i class="ti ti-chevron-down"></i><span>{{ __('Company Policy') }}</span>
+                            </a>
+                        </li>
+                        <li class="{{ Request::is('company-policy')  ? 'active' : '' }}">
+                            <a href="{{ route('company-policy.index') }}">
+                                <i class="ti ti-chevron-down"></i><span>{{ __('Report') }}</span>
                             </a>
                         </li>
                         <li class="submenu">
                             <a href="javascript:void(0);" class="subdrop {{ Request::is('report.monthly.attendance') ? 'active' : '' }}">
-                                <i class="ti ti-chevron-down"></i><span class="submenu-title">{{ __('Report') }}</span>
+                                <i class="ti ti-chevron-down"></i><span class="submenu-title">{{ __('Recruitment') }}</span>
                                 <span class="menu-arrow"></span>
                             </a>
                             <ul style="display: none;">
-                                <li><a class="{{ Request::is('report.monthly.attendance') ?'active' :'' }}" href="{{ route('report.monthly.attendance') }}">{{ __('Monthly Attendance') }}</a></li>
-                                <li><a class="{{ Request::is('report.leave') ?'active' :'' }}" href="{{ route('report.leave') }}">{{ __('Job Application') }}</a></li>
+                                <li><a class="{{ Request::is('report.monthly.attendance') ?'active' :'' }}" href="{{ route('report.monthly.attendance.index') }}">{{ __('Monthly Attendance') }}</a></li>
+                                <li><a class="{{ Request::is('report.leave') ?'active' :'' }}" href="{{ route('report.leave.index') }}">{{ __('Job Application') }}</a></li>
                             </ul>
                         </li>
 

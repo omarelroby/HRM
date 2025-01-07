@@ -217,7 +217,7 @@
                         </li>
                         <li class="{{ Request::is('company-policy')  ? 'active' : '' }}">
                             <a href="{{ route('company-policy.index') }}">
-                                <i class="ti ti-device-analytics"></i><span>{{ __('Company Policy') }}</span>
+                                <i class="ti ti-chevron-down"></i><span>{{ __('Company Policy') }}</span>
                             </a>
                         </li>
                         <li class="submenu">

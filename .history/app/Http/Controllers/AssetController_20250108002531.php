@@ -16,7 +16,7 @@ class AssetController extends Controller
     {
         if (\Auth::user()->can('Manage Assets')) {
             $assets = Asset::where('created_by', '=', \Auth::user()->creatorId())->get();
-            $employees= Employee::where('created_by', '=', \Auth::user()->creatorId())->get()->pluck('name','id');
+            $employees= Employee::where('created_by', '=', \Auth::user()->creatorId())->get();
             // $employeeId = $request->employee_id;
 
             return view('dashboard.assets.index', compact('assets','employees'));
@@ -118,7 +118,7 @@ class AssetController extends Controller
                 $asset->description    = $request->description;
                 $asset->save();
 
-                return redirect('account-assets')->with('success', __('Assets successfully updated.'));
+                return back()->with('success', __('Assets successfully updated.'));
             } else {
                 return redirect()->back()->with('error', __('Permission denied.'));
             }

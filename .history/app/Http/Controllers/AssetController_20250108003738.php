@@ -118,7 +118,7 @@ class AssetController extends Controller
                 $asset->description    = $request->description;
                 $asset->save();
 
-                return redirect('account-assets')->with('success', __('Assets successfully updated.'));
+                return redirect('dashboard.assets.index')->with('success', __('Assets successfully updated.'));
             } else {
                 return redirect()->back()->with('error', __('Permission denied.'));
             }

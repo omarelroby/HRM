@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Exports\AssetsExport;
 use App\Imports\AssetsImport;
 use App\Models\Asset;
-use App\Models\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
@@ -16,10 +15,10 @@ class AssetController extends Controller
     {
         if (\Auth::user()->can('Manage Assets')) {
             $assets = Asset::where('created_by', '=', \Auth::user()->creatorId())->get();
-            $employees= Employee::where('created_by', '=', \Auth::user()->creatorId())->get()->pluck('name','id');
+            $employees= Employee::where('created_by', '=', \Auth::user()-
             // $employeeId = $request->employee_id;
 
-            return view('dashboard.assets.index', compact('assets','employees'));
+            return view('dashboard.assets.index', compact('assets'));
         } else {
             return redirect()->back()->with('error', __('Permission denied.'));
         }
@@ -118,7 +117,7 @@ class AssetController extends Controller
                 $asset->description    = $request->description;
                 $asset->save();
 
-                return redirect('account-assets')->with('success', __('Assets successfully updated.'));
+                return back()->with('success', __('Assets successfully updated.'));
             } else {
                 return redirect()->back()->with('error', __('Permission denied.'));
             }

@@ -1,15 +1,15 @@
 @extends('dashboard.layouts.master')
 
 @section('page-title')
-    {{ __('Manage Account Asset') }}
+    {{ __('Manage Ticket') }}
 @endsection
 
 @section('content')
     <div class="row">
         <div class="d-flex justify-content-end mb-4">
             @can('Create Assets')
-                <a href="#" data-bs-toggle="modal" data-bs-target="#addTrainingModal" class="btn btn-primary   me-3">
-                    <i class="fas fa-plus me-2"></i> {{ __('Create New Account Asset') }}
+                <a href="#" data-bs-toggle="modal" data-bs-target="#addTrainingModal" class="btn btn-primary btn-lg me-3">
+                    <i class="fas fa-plus me-2"></i> {{ __('Create New Ticket') }}
                 </a>
             @endcan
             <div class="d-flex">
@@ -29,7 +29,7 @@
             <div class="card shadow-sm border-0">
                 <!-- Card Header -->
                 <div class="card-header bg-gradient-primary text-white py-3">
-                    <h5 class="card-title mb-0">{{ __('Account Assets') }}</h5>
+                    <h5 class="card-title mb-0">{{ __('Ticket List') }}</h5>
                 </div>
 
                 <!-- Card Body -->
@@ -60,15 +60,16 @@
                                         <td class="font-style">{{ \Auth::user()->priceFormat($asset->amount) }}</td>
                                         <td class="font-style">{{ $asset->description }}</td>
                                         @if(Gate::check('Edit Assets') || Gate::check('Delete Assets'))
+                        
                                             <td>
                                                 @can('Edit Assets')
-                                                <a href="{{ route('account-assets.edit',$asset->id) }}" class="btn btn-sm btn-warning" data-toggle="tooltip" title="{{ __('Edit Assets') }}">
+                                                <a href="{{ route('assets.edit',$asset->id) }}" class="btn btn-sm btn-warning" data-toggle="tooltip" title="{{ __('Edit Assets') }}">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
                                                 @endcan
 
                                             @can('Delete Assets')
-                                                <form method="POST" action="{{ route('account-assets.destroy', $asset->id) }}" class="d-inline" onsubmit="return confirm('{{ __('Are You Sure?') }}\n{{ __('This action cannot be undone. Do you want to continue?') }}');">
+                                                <form method="POST" action="{{ route('assets.destroy', $asset->id) }}" class="d-inline" onsubmit="return confirm('{{ __('Are You Sure?') }}\n{{ __('This action cannot be undone. Do you want to continue?') }}');">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="{{ __('Delete') }}">

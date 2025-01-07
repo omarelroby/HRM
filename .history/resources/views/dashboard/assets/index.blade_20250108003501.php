@@ -1,14 +1,14 @@
 @extends('dashboard.layouts.master')
 
 @section('page-title')
-    {{ __('Manage Account Asset') }}
+    {{ __('Manage Ticket') }}
 @endsection
 
 @section('content')
     <div class="row">
         <div class="d-flex justify-content-end mb-4">
             @can('Create Assets')
-                <a href="#" data-bs-toggle="modal" data-bs-target="#addTrainingModal" class="btn btn-primary   me-3">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#addTrainingModal" class="btn btn-primary btn-lg me-3">
                     <i class="fas fa-plus me-2"></i> {{ __('Create New Account Asset') }}
                 </a>
             @endcan
@@ -29,7 +29,7 @@
             <div class="card shadow-sm border-0">
                 <!-- Card Header -->
                 <div class="card-header bg-gradient-primary text-white py-3">
-                    <h5 class="card-title mb-0">{{ __('Account Assets') }}</h5>
+                    <h5 class="card-title mb-0">{{ __('Ticket List') }}</h5>
                 </div>
 
                 <!-- Card Body -->

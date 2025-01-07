@@ -78,7 +78,7 @@ class DocumentController extends Controller
             if($document->created_by == \Auth::user()->creatorId())
             {
 
-                return view('dashboard.document.edit', compact('document'));
+                return view('document.edit', compact('document'));
             }
             else
             {

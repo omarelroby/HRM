@@ -36,7 +36,7 @@
                             {{ Form::label('description', __('Description'),['class'=>'form-control-label']) }}
                             {{ Form::textarea('description', null, array('class' => 'form-control')) }}
                         </div>
-                        <div class="col-12 my-3">
+                        <div class="col-12 my">
                             <input type="submit" value="{{__('Update')}}" class="btn btn-primary">
                             <input type="button" value="{{__('Cancel')}}" class="btn btn-white" data-dismiss="modal">
                         </div>

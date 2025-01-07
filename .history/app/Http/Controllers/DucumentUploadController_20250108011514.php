@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Document;
 use App\Models\DucumentUpload;
 use App\Models\Employee;
 use Illuminate\Http\Request;
@@ -64,50 +65,56 @@ class DucumentUploadController extends Controller
 
     public function store(Request $request)
     {
-
-        if(\Auth::user()->can('Create Document'))
-        {
+        if (\Auth::user()->can('Create Document')) {
+            // Validate the request
             $validator = \Validator::make(
-                $request->all(), [
-                                   'name' => 'required',
-                                   'document' => 'mimes:jpeg,png,jpg,svg,pdf,doc,zip|max:20480',
-                               ]
+                $request->all(),
+                [
+                    'name' => 'required',
+                    'document' => 'mimes:jpeg,png,jpg,svg,pdf,doc,zip|max:20480',
+                ]
             );
-            if($validator->fails())
-            {
-                $messages = $validator->getMessageBag();
 
+            if ($validator->fails()) {
+                $messages = $validator->getMessageBag();
                 return redirect()->back()->with('error', $messages->first());
             }
 
-            if(!empty($request->document))
-            {
+            // Handle file upload
+            $fileNameToStore = null;
+            if (!empty($request->document)) {
                 $filenameWithExt = $request->file('document')->getClientOriginalName();
-                $filename        = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-                $extension       = $request->file('document')->getClientOriginalExtension();
+                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                $extension = $request->file('document')->getClientOriginalExtension();
                 $fileNameToStore = $filename . '_' . time() . '.' . $extension;
-                $dir             = storage_path('uploads/documentUpload/');
+                $dir = storage_path('uploads/documentUpload/');
 
-                if(!file_exists($dir))
-                {
+                if (!file_exists($dir)) {
                     mkdir($dir, 0777, true);
                 }
                 $path = $request->file('document')->storeAs('uploads/documentUpload/', $fileNameToStore);
             }
 
-            $document              = new DucumentUpload();
-            $document->employee_id = $request->employee_id;
-            $document->name        = $request->name;
-            $document->document    = !empty($request->document) ? $fileNameToStore : '';
-            $document->role        = $request->role;
-            $document->description = $request->description;
-            $document->created_by  = \Auth::user()->creatorId();
-            $document->save();
+            // Create a new document record in the `documents` table (if required)
+            $documentRecord = new Document(); // Assuming you have a `Document` model
+            $documentRecord->name = $request->name;
+            $documentRecord->file_path = $fileNameToStore;
+            $documentRecord->created_by = \Auth::user()->creatorId();
+            $documentRecord->save();
+
+            // Create a new record in the `document_uploads` table
+            $documentUpload = new DucumentUpload(); // Assuming you have a `DocumentUpload` model
+            $documentUpload->employee_id = $request->employee_id;
+            $documentUpload->name = $request->name;
+            $documentUpload->document = $fileNameToStore;
+            $documentUpload->role = $request->role;
+            $documentUpload->description = $request->description;
+            $documentUpload->created_by = \Auth::user()->creatorId();
+            $documentUpload->document_id = $documentRecord->id; // Set the foreign key
+            $documentUpload->save();
 
             return redirect()->back()->with('success', __('Document successfully uploaded.'));
-        }
-        else
-        {
+        } else {
             return redirect()->back()->with('error', __('Permission denied.'));
         }
     }

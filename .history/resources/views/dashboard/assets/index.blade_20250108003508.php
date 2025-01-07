@@ -1,7 +1,7 @@
 @extends('dashboard.layouts.master')
 
 @section('page-title')
-    {{ __('Manage Account Asset') }}
+    {{ __('Manage Ticket') }}
 @endsection
 
 @section('content')
@@ -29,7 +29,7 @@
             <div class="card shadow-sm border-0">
                 <!-- Card Header -->
                 <div class="card-header bg-gradient-primary text-white py-3">
-                    <h5 class="card-title mb-0">{{ __('Account Assets') }}</h5>
+                    <h5 class="card-title mb-0">{{ __('Ticket List') }}</h5>
                 </div>
 
                 <!-- Card Body -->

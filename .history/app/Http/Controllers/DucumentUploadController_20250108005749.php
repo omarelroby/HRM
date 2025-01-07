@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\DucumentUpload;
-use App\Models\Employee;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 
@@ -17,10 +16,6 @@ class DucumentUploadController extends Controller
             if(\Auth::user()->type == 'company')
             {
                 $documents = DucumentUpload::where('created_by', \Auth::user()->creatorId())->get();
-                $roles = Role::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
-                $roles->prepend('All', '0');
-                $employees= Employee::where('created_by', \Auth::user()->creatorId())->get()->pluck('name','id');
-
             }
             else
             {
@@ -31,13 +26,9 @@ class DucumentUploadController extends Controller
                               0,
                           ]
                 )->where('created_by', \Auth::user()->creatorId())->get();
-                $roles = Role::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
-                $roles->prepend('All', '0');
-                $employees= Employee::where('created_by', \Auth::user()->creatorId())->get()->pluck('name','id');
-
             }
 
-            return view('dashboard.documentUpload.index', compact('documents','roles','employees'));
+            return view('dashboard.documentUpload.index', compact('documents'));
         }
         else
         {
@@ -53,7 +44,7 @@ class DucumentUploadController extends Controller
             $roles = Role::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
             $roles->prepend('All', '0');
             $employeeId = $request->employee_id;
-            return view('dashboard.documentUpload.create', compact('roles','employeeId'));
+            return view('documentUpload.create', compact('roles','employeeId'));
         }
         else
         {

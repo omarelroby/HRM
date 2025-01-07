@@ -1,15 +1,15 @@
 @extends('dashboard.layouts.master')
 
 @section('page-title')
-    {{ __('Manage Account Asset') }}
+    {{ __('Manage Ticket') }}
 @endsection
 
 @section('content')
     <div class="row">
         <div class="d-flex justify-content-end mb-4">
             @can('Create Assets')
-                <a href="#" data-bs-toggle="modal" data-bs-target="#addTrainingModal" class="btn btn-primary   me-3">
-                    <i class="fas fa-plus me-2"></i> {{ __('Create New Account Asset') }}
+                <a href="#" data-bs-toggle="modal" data-bs-target="#addTrainingModal" class="btn btn-primary btn-lg me-3">
+                    <i class="fas fa-plus me-2"></i> {{ __('Create New Ticket') }}
                 </a>
             @endcan
             <div class="d-flex">
@@ -27,16 +27,12 @@
         </div>
         <div class="col-lg-12">
             <div class="card shadow-sm border-0">
-                <!-- Card Header -->
-                <div class="card-header bg-gradient-primary text-white py-3">
-                    <h5 class="card-title mb-0">{{ __('Account Assets') }}</h5>
+                <div class="card-header  text-white py-3">
+                    <h5 class="card-title mb-0">{{ __('Ticket List') }}</h5>
                 </div>
-
-                <!-- Card Body -->
                 <div class="card-body p-0">
                     <div class="table-responsive">
                         <table class="table table-striped table-hover table-sm dataTables">
-                            <!-- Table Header -->
                             <thead class="bg-light">
                                 <tr>
                                     <th>{{ __('Name') }}</th>
@@ -45,12 +41,10 @@
                                     <th>{{ __('Amount') }}</th>
                                     <th>{{ __('Description') }}</th>
                                     @if(Gate::check('Edit Assets') || Gate::check('Delete Assets'))
-                                        <th width="120px">{{ __('Action') }}</th>
+                                        <th width="3%">{{ __('Action') }}</th>
                                     @endif
                                 </tr>
                             </thead>
-
-                            <!-- Table Body -->
                             <tbody>
                                 @foreach ($assets as $asset)
                                     <tr>
@@ -60,22 +54,19 @@
                                         <td class="font-style">{{ \Auth::user()->priceFormat($asset->amount) }}</td>
                                         <td class="font-style">{{ $asset->description }}</td>
                                         @if(Gate::check('Edit Assets') || Gate::check('Delete Assets'))
-                                            <td>
+                                            <td class="text-end">
                                                 @can('Edit Assets')
-                                                <a href="{{ route('account-assets.edit',$asset->id) }}" class="btn btn-sm btn-warning" data-toggle="tooltip" title="{{ __('Edit Assets') }}">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
+                                                    <a href="#" class="btn btn-sm btn-success edit-icon" data-url="{{ route('account-assets.edit', $asset->id) }}" data-ajax-popup="true" data-title="{{ __('Edit Assets') }}" data-toggle="tooltip" data-original-title="{{ __('Edit') }}">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
                                                 @endcan
-
-                                            @can('Delete Assets')
-                                                <form method="POST" action="{{ route('account-assets.destroy', $asset->id) }}" class="d-inline" onsubmit="return confirm('{{ __('Are You Sure?') }}\n{{ __('This action cannot be undone. Do you want to continue?') }}');">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="{{ __('Delete') }}">
+                                                @can('Delete Assets')
+                                                    <a href="#" class="btn btn-sm btn-danger delete-icon" data-toggle="tooltip" data-original-title="{{ __('Delete') }}" data-confirm="{{ __('Are You Sure?').'|'.__('This action can not be undone. Do you want to continue?') }}" data-confirm-yes="document.getElementById('delete-form-{{ $asset->id }}').submit();">
                                                         <i class="fas fa-trash"></i>
-                                                    </button>
-                                                </form>
-                                            @endcan
+                                                    </a>
+                                                    {!! Form::open(['method' => 'DELETE', 'route' => ['account-assets.destroy', $asset->id], 'id' => 'delete-form-'.$asset->id]) !!}
+                                                    {!! Form::close() !!}
+                                                @endcan
                                             </td>
                                         @endif
                                     </tr>
@@ -92,7 +83,7 @@
     <div class="modal fade" id="addTrainingModal" tabindex="-1" aria-labelledby="addTrainingModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
-                <div class="modal-header   text-white">
+                <div class="modal-header bg-primary text-white">
                     <h5 class="modal-title" id="addTrainingModalLabel">{{ __('Add Custom Question') }}</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -117,7 +108,7 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 {{ Form::label('supported_date', __('Support Until'), ['class' => 'form-label']) }}
-                                {{ Form::text('supported_date', '', ['class' => 'form-control datetimepicker']) }}
+                                {{ Form::text('supported_date', '', ['class' => 'form-control datepicker']) }}
                             </div>
                             <div class="col-12 mb-3">
                                 {{ Form::label('description', __('Description'), ['class' => 'form-label']) }}

@@ -17,10 +17,6 @@ class DucumentUploadController extends Controller
             if(\Auth::user()->type == 'company')
             {
                 $documents = DucumentUpload::where('created_by', \Auth::user()->creatorId())->get();
-                $roles = Role::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
-                $roles->prepend('All', '0');
-                $employees= Employee::where('created_by', \Auth::user()->creatorId())->get()->pluck('name','id');
-
             }
             else
             {
