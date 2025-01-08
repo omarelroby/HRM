@@ -2002,9 +2002,9 @@
             "Please enter a description.": "يرجى إدخال وصف.",
             "Please enter a description in Arabic.": "يرجى إدخال وصف بالعربية.",
             "ticket": "تذكرة",
-            "event": "حدث",
-            "meeting": "اجتماع",
-            "zoom-meeting": "اجتماع زوم",
-            "account-assets": "أصول الحساب"
+    "event": "حدث",
+    "meeting": "اجتماع",
+    "zoom-meeting": "اجتماع زوم",
+    "account-assets": "أصول الحساب"
         }
 

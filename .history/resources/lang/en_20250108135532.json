@@ -1258,12 +1258,13 @@
         "Please select a priority.": "Please select a priority.",
         "Please select an end date.": "Please select an end date.",
         "Please enter a description.": "Please enter a description.",
-        "Please enter a description in Arabic.": "Please enter a description in Arabic.",
-        "ticket": "Ticket",
-        "event": "Event",
-        "meeting": "Meeting",
-        "zoom-meeting": "Zoom Meeting",
-        "account-assets": "Account Assets"
+        "Please enter a description in Arabic.": "Please enter a description in Arabic."
+        {
+            "ticket": "Ticket",
+            "event": "Event",
+            "meeting": "Meeting",
+            "zoom-meeting": "Zoom Meeting",
+            "account-assets": "Account Assets"
         }
 
 
