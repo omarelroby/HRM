@@ -129,7 +129,7 @@ class DucumentUploadController extends Controller
 
             $ducumentUpload = DucumentUpload::find($id);
 
-            return view('documentUpload.edit', compact('roles', 'ducumentUpload'));
+            return view('dashboard.documentUpload.edit', compact('roles', 'ducumentUpload'));
         }
         else
         {
@@ -158,7 +158,7 @@ class DucumentUploadController extends Controller
             if(!empty($request->document))
             {
                 $filenameWithExt = $request->file('document')->getClientOriginalName();
-                $filename        = pathinfo(implode(' ',$filenameWithExt), PATHINFO_FILENAME);
+                $filename        = pathinfo($filenameWithExt, PATHINFO_FILENAME);
                 $extension       = $request->file('document')->getClientOriginalExtension();
                 $fileNameToStore = $filename . '_' . time() . '.' . $extension;
                 $dir             = storage_path('uploads/documentUpload/');
@@ -187,7 +187,7 @@ class DucumentUploadController extends Controller
             $document->description = $request->description;
             $document->save();
 
-            return redirect()->back()->with('success', __('Document successfully uploaded.'));
+            return redirect('document-upload')->with('success', __('Document successfully uploaded.'));
         }
         else
         {

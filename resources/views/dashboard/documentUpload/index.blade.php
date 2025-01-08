@@ -15,17 +15,17 @@
         </div>
         <div class="col-lg-12">
             <div class="card">
-                <div class="card shadow-sm border-0">
+                <div class="card shadow-sm">
                     <!-- Card Header -->
                     <div class="card-header bg-gradient-primary text-white py-3">
                         <h5 class="card-title mb-0">{{ __('Account Assets') }}</h5>
                     </div>
 
                     <!-- Card Body -->
-                    <div class="card-body p-0">
+                    <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-hover table-borderless table-striped align-middle mb-0">
-                                <thead class="thead-light">
+                            <table class="table table-striped table-bordered table-hover dataTables">
+                                    <thead class="thead-light">
                                     <tr>
                                         <th class="text-start ps-4">{{ __('Name') }}</th>
                                         <th class="text-center">{{ __('Document') }}</th>
@@ -59,16 +59,18 @@
                                                 <td class="text-end pe-4">
                                                     <div class="d-flex justify-content-end gap-2">
                                                         @can('Edit Document')
-                                                            <a href="#" data-url="{{ route('document-upload.edit', $document->id) }}" data-size="lg" data-ajax-popup="true" data-title="{{ __('Edit Document') }}" class="btn btn-sm btn-outline-success" data-toggle="tooltip" title="{{ __('Edit') }}">
+                                                            <a href="{{ route('document-upload.edit', $document->id) }}"  data-title="{{ __('Edit Document') }}" class="btn btn-sm btn-outline-success"  title="{{ __('Edit') }}">
                                                                 <i class="fas fa-edit"></i>
                                                             </a>
                                                         @endcan
                                                         @can('Delete Document')
-                                                            <a href="#" class="btn btn-sm btn-outline-danger" data-toggle="tooltip" title="{{ __('Delete') }}" data-confirm="{{ __('Are You Sure?') . '|' . __('This action cannot be undone. Do you want to continue?') }}" data-confirm-yes="document.getElementById('delete-form-{{ $document->id }}').submit();">
-                                                                <i class="fas fa-trash"></i>
-                                                            </a>
-                                                            {!! Form::open(['method' => 'DELETE', 'route' => ['document-upload.destroy', $document->id], 'id' => 'delete-form-' . $document->id, 'class' => 'd-none']) !!}
-                                                            {!! Form::close() !!}
+                                                            <form method="POST" action="{{ route('document-upload.destroy', $document->id) }}" class="d-inline" onsubmit="return confirm('{{ __('Are You Sure?') }}\n{{ __('This action cannot be undone. Do you want to continue?') }}');">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="{{ __('Delete') }}">
+                                                                    <i class="fas fa-trash"></i>
+                                                                </button>
+                                                            </form>
                                                         @endcan
                                                     </div>
                                                 </td>
