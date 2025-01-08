@@ -14,10 +14,7 @@ class DepartmentController extends Controller
         if(\Auth::user()->can('Manage Department'))
         {
             $departments = Department::where('created_by', '=', \Auth::user()->creatorId())->get();
-            $branch    = Branch::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
-            $employees = Employee::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
-
-            return view('dashboard.department.index', compact('departments','branch','employees'));
+            return view('department.index', compact('departments'));
         }
         else
         {
@@ -44,7 +41,7 @@ class DepartmentController extends Controller
         if(\Auth::user()->can('Create Department'))
         {
             $validator = \Validator::make(
-            $request->all(),
+            $request->all(), 
             [
                 'employee_id' => 'required',
                 'branch_id'   => 'required',
@@ -87,7 +84,7 @@ class DepartmentController extends Controller
             {
                 $branch    = Branch::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
                 $employees = Employee::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
-                return view('dashboard.department.edit', compact('department', 'branch','employees'));
+                return view('department.edit', compact('department', 'branch','employees'));
             }
             else
             {

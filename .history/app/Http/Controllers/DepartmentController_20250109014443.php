@@ -66,7 +66,7 @@ class DepartmentController extends Controller
             $department->created_by   = \Auth::user()->creatorId();
             $department->save();
 
-            return redirect()->route('department.index')->with('success', __('Department  successfully created.'));
+            return redirect()->route('dashboard.department.index')->with('success', __('Department  successfully created.'));
         }
         else
         {
@@ -87,7 +87,7 @@ class DepartmentController extends Controller
             {
                 $branch    = Branch::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
                 $employees = Employee::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
-                return view('dashboard.department.edit', compact('department', 'branch','employees'));
+                return view('department.edit', compact('department', 'branch','employees'));
             }
             else
             {
