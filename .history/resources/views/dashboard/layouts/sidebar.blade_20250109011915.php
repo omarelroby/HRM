@@ -282,6 +282,7 @@
                                 <li><a class="{{ Request::is('report.timesheet') ?'active' :'' }}" href="{{ route('report.timesheet') }}">{{ __('report timesheet') }}</a></li>
                             </ul>
                         </li>
+
                         <li class="{{ Request::is('settings')  ? 'active' : '' }}">
                             <a href="{{ route('settings.index') }}">
                                 <i class="ti ti-device-analytics    "></i><span>{{ __('System Setting') }}</span>

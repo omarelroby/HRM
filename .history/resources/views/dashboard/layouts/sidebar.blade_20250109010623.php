@@ -221,6 +221,16 @@
                             </a>
                         </li>
                         <li class="submenu">
+                            <a href="javascript:void(0);" class="subdrop {{ Request::is('report.monthly.attendance') ? 'active' : '' }}">
+                                <i class="ti ti-exchange"></i><span class="submenu-title">{{ __('Report') }}</span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul style="display: none;">
+                                <li><a class="{{ Request::is('report.monthly.attendance') ?'active' :'' }}" href="{{ route('report.monthly.attendance') }}">{{ __('Monthly Attendance') }}</a></li>
+                                <li><a class="{{ Request::is('report.leave') ?'active' :'' }}" href="{{ route('report.leave') }}">{{ __('Job Application') }}</a></li>
+                            </ul>
+                        </li>
+                        <li class="submenu">
                             <a href="javascript:void(0);" class="subdrop {{ Request::is('branch')
                              || Request::is('Department')
                              || Request::is('designation')
@@ -234,11 +244,6 @@
                              || Request::is('leavetype')
                              || Request::is('terminationtype')
                              || Request::is('goaltype')
-                             || Request::is('trainingtype')
-                             || Request::is('job-category')
-                             || Request::is('job-stage')
-                             || Request::is('performanceType')
-                             || Request::is('competencies')
                              ? 'active' : '' }}">
                                 <i class="ti ti-shopping-bag"></i><span class="submenu-title">{{ __('constant') }}</span>
                                 <span class="menu-arrow"></span>
@@ -247,7 +252,7 @@
                                 <li><a class="{{ Request::is('branch') ?'active' :'' }}" href="{{ route('branch.index') }}">{{ __('Branch') }}</a></li>
                                 <li><a class="{{ Request::is('department') ?'active' :'' }}" href="{{ route('department.index') }}">{{ __('Department') }}</a></li>
                                 <li><a class="{{ Request::is('designation') ?'active' :'' }}" href="{{ route('designation.index') }}">{{ __('Designation') }}</a></li>
-                                <li><a class="{{ Request::is('document') ?'active' :'' }}" href="{{ route('document.index') }}">{{ __('Document type') }}</a></li>
+                                <li><a class="{{ Request::is('document') ?'active' :'' }}" href="{{ route('document.index') }}">{{ __('Document  type') }}</a></li>
                                 <li><a class="{{ Request::is('awardtype') ?'active' :'' }}" href="{{ route('awardtype.index') }}">{{ __('Award Type') }}</a></li>
                                 <li><a class="{{ Request::is('paysliptype') ?'active' :'' }}" href="{{ route('paysliptype.index') }}">{{ __('Payslip Type') }}</a></li>
                                 <li><a class="{{ Request::is('allowanceoption') ?'active' :'' }}" href="{{ route('allowanceoption.index') }}">{{ __('allowance option') }}</a></li>
@@ -256,36 +261,8 @@
                                 <li><a class="{{ Request::is('paymenttype') ?'active' :'' }}" href="{{ route('paymenttype.index') }}">{{ __('payment type') }}</a></li>
                                 <li><a class="{{ Request::is('leavetype') ?'active' :'' }}" href="{{ route('leavetype.index') }}">{{ __('leave type') }}</a></li>
                                 <li><a class="{{ Request::is('terminationtype') ?'active' :'' }}" href="{{ route('terminationtype.index') }}">{{ __('termination type') }}</a></li>
-                                <li><a class="{{ Request::is('goaltype') ?'active' :'' }}" href="{{ route('goaltype.index') }}">{{ __('goal type') }}</a></li>
-                                <li><a class="{{ Request::is('trainingtype') ?'active' :'' }}" href="{{ route('trainingtype.index') }}">{{ __('training type') }}</a></li>
-                                <li><a class="{{ Request::is('job-category') ?'active' :'' }}" href="{{ route('job-category.index') }}">{{ __('job category') }}</a></li>
-                                <li><a class="{{ Request::is('job-stage') ?'active' :'' }}" href="{{ route('job-stage.index') }}">{{ __('job stage') }}</a></li>
-                                <li><a class="{{ Request::is('performanceType') ?'active' :'' }}" href="{{ route('performanceType.index') }}">{{ __('Performance Type') }}</a></li>
-                                <li><a class="{{ Request::is('competencies') ?'active' :'' }}" href="{{ route('competencies.index') }}">{{ __('competencies') }}</a></li>
+                                <li><a class="{{ Request::is('terminationtype') ?'active' :'' }}" href="{{ route('terminationtype.index') }}">{{ __('termination type') }}</a></li>
                              </ul>
-                        </li>
-                        <li class="submenu">
-                            <a href="javascript:void(0);" class="subdrop {{ Request::is('report.monthly.attendance')
-                            || Request::is('report.leave')
-                            || Request::is('report.account.statement')
-                            || Request::is('report.payroll')
-                            || Request::is('report.timesheet')
-                            ? 'active' : '' }}">
-                                <i class="ti ti-exchange"></i><span class="submenu-title">{{ __('Report') }}</span>
-                                <span class="menu-arrow"></span>
-                            </a>
-                            <ul style="display: none;">
-                                <li><a class="{{ Request::is('report.monthly.attendance') ?'active' :'' }}" href="{{ route('report.monthly.attendance') }}">{{ __('Monthly Attendance') }}</a></li>
-                                <li><a class="{{ Request::is('report.leave') ?'active' :'' }}" href="{{ route('report.leave') }}">{{ __('report leave') }}</a></li>
-                                <li><a class="{{ Request::is('report.account.statement') ?'active' :'' }}" href="{{ route('report.account.statement') }}">{{ __('report account statement') }}</a></li>
-                                <li><a class="{{ Request::is('report.payroll') ?'active' :'' }}" href="{{ route('report.payroll') }}">{{ __('report payroll') }}</a></li>
-                                <li><a class="{{ Request::is('report.timesheet') ?'active' :'' }}" href="{{ route('report.timesheet') }}">{{ __('report timesheet') }}</a></li>
-                            </ul>
-                        </li>
-                        <li class="{{ Request::is('settings')  ? 'active' : '' }}">
-                            <a href="{{ route('settings.index') }}">
-                                <i class="ti ti-device-analytics    "></i><span>{{ __('System Setting') }}</span>
-                            </a>
                         </li>
 
                     </ul>

@@ -221,6 +221,24 @@
                             </a>
                         </li>
                         <li class="submenu">
+                            <a href="javascript:void(0);" class="subdrop {{ Request::is('report.monthly.attendance')
+                            || Request::is('report.leave')
+                            || Request::is('report.account.statement')
+                            || Request::is('report.payroll')
+                            || Request::is('report.timesheet')
+                            ? 'active' : '' }}">
+                                <i class="ti ti-exchange"></i><span class="submenu-title">{{ __('Report') }}</span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul style="display: none;">
+                                <li><a class="{{ Request::is('report.monthly.attendance') ?'active' :'' }}" href="{{ route('report.monthly.attendance') }}">{{ __('Monthly Attendance') }}</a></li>
+                                <li><a class="{{ Request::is('report.leave') ?'active' :'' }}" href="{{ route('report.leave') }}">{{ __('report leave') }}</a></li>
+                                <li><a class="{{ Request::is('report.account.statement') ?'active' :'' }}" href="{{ route('report.account.statement') }}">{{ __('report account statement') }}</a></li>
+                                <li><a class="{{ Request::is('report.payroll') ?'active' :'' }}" href="{{ route('report.payroll') }}">{{ __('report payroll') }}</a></li>
+                                <li><a class="{{ Request::is('report.timesheet') ?'active' :'' }}" href="{{ route('report.timesheet') }}">{{ __('report timesheet') }}</a></li>
+                            </ul>
+                        </li>
+                        <li class="submenu">
                             <a href="javascript:void(0);" class="subdrop {{ Request::is('branch')
                              || Request::is('Department')
                              || Request::is('designation')
@@ -263,24 +281,6 @@
                                 <li><a class="{{ Request::is('performanceType') ?'active' :'' }}" href="{{ route('performanceType.index') }}">{{ __('Performance Type') }}</a></li>
                                 <li><a class="{{ Request::is('competencies') ?'active' :'' }}" href="{{ route('competencies.index') }}">{{ __('competencies') }}</a></li>
                              </ul>
-                        </li>
-                        <li class="submenu">
-                            <a href="javascript:void(0);" class="subdrop {{ Request::is('report.monthly.attendance')
-                            || Request::is('report.leave')
-                            || Request::is('report.account.statement')
-                            || Request::is('report.payroll')
-                            || Request::is('report.timesheet')
-                            ? 'active' : '' }}">
-                                <i class="ti ti-exchange"></i><span class="submenu-title">{{ __('Report') }}</span>
-                                <span class="menu-arrow"></span>
-                            </a>
-                            <ul style="display: none;">
-                                <li><a class="{{ Request::is('report.monthly.attendance') ?'active' :'' }}" href="{{ route('report.monthly.attendance') }}">{{ __('Monthly Attendance') }}</a></li>
-                                <li><a class="{{ Request::is('report.leave') ?'active' :'' }}" href="{{ route('report.leave') }}">{{ __('report leave') }}</a></li>
-                                <li><a class="{{ Request::is('report.account.statement') ?'active' :'' }}" href="{{ route('report.account.statement') }}">{{ __('report account statement') }}</a></li>
-                                <li><a class="{{ Request::is('report.payroll') ?'active' :'' }}" href="{{ route('report.payroll') }}">{{ __('report payroll') }}</a></li>
-                                <li><a class="{{ Request::is('report.timesheet') ?'active' :'' }}" href="{{ route('report.timesheet') }}">{{ __('report timesheet') }}</a></li>
-                            </ul>
                         </li>
                         <li class="{{ Request::is('settings')  ? 'active' : '' }}">
                             <a href="{{ route('settings.index') }}">

@@ -2006,32 +2006,6 @@
             "meeting": "اجتماع",
             "zoom-meeting": "اجتماع زوم",
             "account-assets": "أصول الحساب",
-            "report leave": "تقرير الإجازات",
-            "report account statement": "تقرير كشف الحساب",
-            "report payroll": "تقرير الرواتب",
-            "report timesheet": "تقرير الجدول الزمني",
-            "constant": "ثابت",
-            "Branch": "فرع",
-            "Department": "قسم",
-            "Designation": "تعيين",
-            "Document type": "نوع المستند",
-            "Award Type": "نوع الجائزة",
-            "Payslip Type": "نوع إيصال الراتب",
-            "allowance option": "خيار البدل",
-            "loanoption": "خيار القرض",
-            "deduction option": "خيار الخصم",
-            "payment type": "نوع الدفع",
-            "leave type": "نوع الإجازة",
-            "termination type": "نوع الإنهاء",
-            "goal type": "نوع الهدف",
-            "training type": "نوع التدريب",
-            "job category": "فئة الوظيفة",
-            "job stage": "مرحلة الوظيفة",
-            "Performance Type": "نوع الأداء",
-            "competencies": "الكفاءات"
-
-
-
-
+            
         }
 
