@@ -222,7 +222,7 @@
                         </li>
                         <li class="submenu">
                             <a href="javascript:void(0);" class="subdrop {{ Request::is('report.monthly.attendance') ? 'active' : '' }}">
-                                <i class="ti ti-exchange"></i><span class="submenu-title">{{ __('Report') }}</span>
+                                <i class="ti ti-exc"></i><span class="submenu-title">{{ __('Report') }}</span>
                                 <span class="menu-arrow"></span>
                             </a>
                             <ul style="display: none;">
@@ -232,7 +232,7 @@
                         </li>
                         <li class="submenu">
                             <a href="javascript:void(0);" class="subdrop {{ Request::is('job')  || Request::is('interview-schedule') || Request::is('custom-question') || Request::is('job-onboard') || Request::is('job.application.candidate')  ? 'active' : '' }}">
-                                <i class="ti ti-shopping-bag"></i><span class="submenu-title">{{ __('constant') }}</span>
+                                <i class="ti ti-shopping-bag"></i><span class="submenu-title">{{ __('constang') }}</span>
                                 <span class="menu-arrow"></span>
                             </a>
                             <ul style="display: none;">
