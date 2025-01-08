@@ -53,18 +53,20 @@
                                                 <p>-</p>
                                             @endif
                                         </td>
-                                      @if(Gate::check('Edit Company Policy') || Gate::check('Delete Company Policy'))
-                                      <td class="text-right action-btns">
-                                       @can('Edit Company Policy')
-                                        <!-- Reply Button -->
-                                        <a href="{{ route('company-policy.edit',$policy->id) }}"
-                                        class="btn btn-sm btn-success mr-2"
-                                        data-toggle="tooltip"
-                                        title="{{ __('Edit') }}"
-                                        aria-label="{{ __('Edit') }}">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                        @endcan
+                                        @if(Gate::check('Edit Company Policy') || Gate::check('Delete Company Policy'))
+                                            <td class="text-right action-btns">
+
+
+                                            @can('Edit Company Policy')
+                                              <!-- Reply Button -->
+                                              <a href="{{ route('company-policy.edit',$policy->id) }}"
+                                                class="btn btn-sm btn-success mr-2"
+                                                data-toggle="tooltip"
+                                                title="{{ __('Edit') }}"
+                                                aria-label="{{ __('Edit') }}">
+                                                 <i class="fa fa-edit"></i>
+                                             </a>
+                                             @endcan
 
                                          @can('Delete Company Policy')
                                          <form method="POST" action="{{ route('company-policy.destroy', $policy->id) }}" class="d-inline" onsubmit="return confirm('{{ __('Are You Sure?') }}\n{{ __('This action cannot be undone. Do you want to continue?') }}');">

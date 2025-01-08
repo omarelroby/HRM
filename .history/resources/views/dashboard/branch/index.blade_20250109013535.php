@@ -24,62 +24,7 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered table-hover dataTables">
-                            <thead>
-                                <tr>
-                                    <th>{{__('Branch')}}</th>
-                                    <th>{{__('Title')}}</th>
-                                    <th>{{__('Description')}}</th>
-                                    <th>{{__('Attachment')}}</th>
-                                    @if(Gate::check('Edit Company Policy') || Gate::check('Delete Company Policy'))
-                                        <th width="3%">{{__('Action')}}</th>
-                                    @endif
-                                </tr>
-                            </thead>
-                            <tbody class="font-style">
-                                @foreach ($companyPolicy as $policy)
-                                    @php
-                                        $policyPath=asset(Storage::url('uploads/companyPolicy'));
-                                    @endphp
-                                    <tr>
-                                        <td>{{ !empty($policy->branches)?$policy->branches->name:'' }}</td>
-                                        <td>{{ $policy->title }}</td>
-                                        <td>{{ $policy->description }}</td>
-                                        <td>
-                                            @if(!empty($policy->attachment))
-                                                <a href="{{$policyPath.'/'.$policy->attachment}}" target="_blank">
-                                                    <i class="fa fa-download"></i>
-                                                </a>
-                                            @else
-                                                <p>-</p>
-                                            @endif
-                                        </td>
-                                      @if(Gate::check('Edit Company Policy') || Gate::check('Delete Company Policy'))
-                                      <td class="text-right action-btns">
-                                       @can('Edit Company Policy')
-                                        <!-- Reply Button -->
-                                        <a href="{{ route('company-policy.edit',$policy->id) }}"
-                                        class="btn btn-sm btn-success mr-2"
-                                        data-toggle="tooltip"
-                                        title="{{ __('Edit') }}"
-                                        aria-label="{{ __('Edit') }}">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                        @endcan
-
-                                         @can('Delete Company Policy')
-                                         <form method="POST" action="{{ route('company-policy.destroy', $policy->id) }}" class="d-inline" onsubmit="return confirm('{{ __('Are You Sure?') }}\n{{ __('This action cannot be undone. Do you want to continue?') }}');">
-                                             @csrf
-                                             @method('DELETE')
-                                             <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="{{ __('Delete') }}">
-                                                 <i class="fas fa-trash"></i>
-                                             </button>
-                                         </form>
-                                         @endcan
-                                            </td>
-                                        @endif
-                                    </tr>
-                                @endforeach
-                            </tbody>
+                           
                         </table>
                     </div>
                 </div>

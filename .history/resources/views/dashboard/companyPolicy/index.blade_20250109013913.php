@@ -53,8 +53,8 @@
                                                 <p>-</p>
                                             @endif
                                         </td>
-                                      @if(Gate::check('Edit Company Policy') || Gate::check('Delete Company Policy'))
-                                      <td class="text-right action-btns">
+                                        @if(Gate::check('Edit Company Policy') || Gate::check('Delete Company Policy'))
+                                    <td class="text-right action-btns">
                                        @can('Edit Company Policy')
                                         <!-- Reply Button -->
                                         <a href="{{ route('company-policy.edit',$policy->id) }}"

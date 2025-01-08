@@ -82,7 +82,7 @@ class BranchController extends Controller
             if($branch->created_by == \Auth::user()->creatorId())
             {
                 $employees = Employee::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
-                return view('dashboard.branch.edit', compact('branch','employees'));
+                return view('branch.edit', compact('branch','employees'));
             }
             else
             {

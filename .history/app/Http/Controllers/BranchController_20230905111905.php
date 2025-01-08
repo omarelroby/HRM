@@ -13,9 +13,7 @@ class BranchController extends Controller
         if(\Auth::user()->can('Manage Branch'))
         {
             $branches = Branch::where('created_by', '=', \Auth::user()->creatorId())->get();
-            $employees = Employee::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
-
-            return view('dashboard.branch.index', compact('branches','employees'));
+            return view('branch.index', compact('branches'));
         }
         else
         {
@@ -41,7 +39,7 @@ class BranchController extends Controller
         if(\Auth::user()->can('Create Branch'))
         {
             $validator = \Validator::make(
-            $request->all(),
+            $request->all(), 
             [
                 'name'        => 'required',
                 'name_ar'     => 'required',
@@ -82,7 +80,7 @@ class BranchController extends Controller
             if($branch->created_by == \Auth::user()->creatorId())
             {
                 $employees = Employee::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
-                return view('dashboard.branch.edit', compact('branch','employees'));
+                return view('branch.edit', compact('branch','employees'));
             }
             else
             {
@@ -102,7 +100,7 @@ class BranchController extends Controller
             if($branch->created_by == \Auth::user()->creatorId())
             {
                 $validator = \Validator::make(
-                    $request->all(),
+                    $request->all(), 
                     [
                         'name'        => 'required',
                         'name_ar'     => 'required',

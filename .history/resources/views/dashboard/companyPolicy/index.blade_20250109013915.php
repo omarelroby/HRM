@@ -53,7 +53,7 @@
                                                 <p>-</p>
                                             @endif
                                         </td>
-                                      @if(Gate::check('Edit Company Policy') || Gate::check('Delete Company Policy'))
+                                        @if(Gate::check('Edit Company Policy') || Gate::check('Delete Company Policy'))
                                       <td class="text-right action-btns">
                                        @can('Edit Company Policy')
                                         <!-- Reply Button -->
