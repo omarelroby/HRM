@@ -108,7 +108,7 @@ class PerformanceTypeController extends Controller
         $performance_type->name_ar = $request->name_ar;
         $performance_type->save();
 
-        return redirect()->route('performanceType.index')->with('success', 'Performance Type updated successfully');
+        return redirect()->route('performanceType')->with('success', 'Performance Type updated successfully');
     }
 
     /**

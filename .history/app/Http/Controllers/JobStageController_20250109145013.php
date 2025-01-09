@@ -99,7 +99,7 @@ class JobStageController extends Controller
             $jobStage->created_by = \Auth::user()->creatorId();
             $jobStage->save();
 
-            return redirect()->route('job-stage.index')->with('success', __('Job stage  successfully updated.'));
+            return redirect()->route('job-category.index')->with('success', __('Job stage  successfully updated.'));
         }
         else
         {

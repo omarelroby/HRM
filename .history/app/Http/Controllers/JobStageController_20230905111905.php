@@ -13,7 +13,7 @@ class JobStageController extends Controller
         {
             $stages = JobStage::where('created_by', '=', \Auth::user()->creatorId())->orderBy('order', 'asc')->get();
 
-            return view('dashboard.jobStage.index', compact('stages'));
+            return view('jobStage.index', compact('stages'));
         }
         else
         {
@@ -70,7 +70,7 @@ class JobStageController extends Controller
 
     public function edit(JobStage $jobStage)
     {
-        return view('dashboard.jobStage.edit', compact('jobStage'));
+        return view('jobStage.edit', compact('jobStage'));
     }
 
 
@@ -99,7 +99,7 @@ class JobStageController extends Controller
             $jobStage->created_by = \Auth::user()->creatorId();
             $jobStage->save();
 
-            return redirect()->route('job-stage.index')->with('success', __('Job stage  successfully updated.'));
+            return redirect()->back()->with('success', __('Job stage  successfully updated.'));
         }
         else
         {

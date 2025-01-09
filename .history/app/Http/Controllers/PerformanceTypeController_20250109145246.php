@@ -78,7 +78,7 @@ class PerformanceTypeController extends Controller
     public function edit($id)
     {
         $performance_type  = Performance_Type::find($id);
-        return view('dashboard.performance_type.edit', compact('performance_type'));
+        return view('performance_type.edit', compact('performance_type'));
     }
 
     /**
@@ -108,7 +108,7 @@ class PerformanceTypeController extends Controller
         $performance_type->name_ar = $request->name_ar;
         $performance_type->save();
 
-        return redirect()->route('performanceType.index')->with('success', 'Performance Type updated successfully');
+        return redirect()->back()->with('success', 'Performance Type updated successfully');
     }
 
     /**
