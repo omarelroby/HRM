@@ -17,7 +17,7 @@ class DesignationController extends Controller
             $departments = Department::where('created_by', '=', \Auth::user()->creatorId())->get();
             $departments = $departments->pluck('name', 'id');
 
-            return view('dashboard.designation.index', compact('designations','departments'));
+            return view('dashboard.designation.index', compact('designations','dep'));
         }
         else
         {
@@ -91,7 +91,7 @@ class DesignationController extends Controller
                 $departments = Department::where('id', $designation->department_id)->first();
                 $departments = $departments->pluck('name', 'id');
 
-                return view('dashboard.designation.edit', compact('designation', 'departments'));
+                return view('designation.edit', compact('designation', 'departments'));
             }
             else
             {
