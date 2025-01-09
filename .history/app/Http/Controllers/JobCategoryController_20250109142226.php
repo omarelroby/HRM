@@ -112,11 +112,11 @@ class JobCategoryController extends Controller
             $jobCategory->title_ar = $request->title_ar;
             $jobCategory->save();
 
-            return redirect()->route('job-category.index')->with('success', __('Job category  successfully updated.'));
+            return redirect()->back()->with('success', __('Job category  successfully updated.'));
         }
         else
         {
-            return redirect()->back()->with('error', __('Permission denied.'));
+            return redirect()->route('job-category.index')->with('error', __('Permission denied.'));
         }
     }
 

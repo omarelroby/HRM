@@ -82,7 +82,7 @@ class GoalTypeController extends Controller
         {
             $goalType = GoalType::find($id);
 
-            return view('dashboard.goaltype.edit', compact('goalType'));
+            return view('goaltype.edit', compact('goalType'));
         }
         else
         {

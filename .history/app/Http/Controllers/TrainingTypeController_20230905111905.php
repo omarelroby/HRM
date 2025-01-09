@@ -14,7 +14,7 @@ class TrainingTypeController extends Controller
         {
             $trainingtypes = TrainingType::where('created_by', '=', \Auth::user()->creatorId())->get();
 
-            return view('dashboard.trainingtype.index', compact('trainingtypes'));
+            return view('trainingtype.index', compact('trainingtypes'));
         }
         else
         {
@@ -84,7 +84,7 @@ class TrainingTypeController extends Controller
             if($trainingType->created_by == \Auth::user()->creatorId())
             {
 
-                return view('dashboard.trainingtype.edit', compact('trainingType'));
+                return view('trainingtype.edit', compact('trainingType'));
             }
             else
             {

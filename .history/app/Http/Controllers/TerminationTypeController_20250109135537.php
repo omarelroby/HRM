@@ -77,7 +77,7 @@ class TerminationTypeController extends Controller
             if($terminationtype->created_by == \Auth::user()->creatorId())
             {
 
-                return view('dashboard.terminationtype.edit', compact('terminationtype'));
+                return view('terminationtype.edit', compact('terminationtype'));
             }
             else
             {

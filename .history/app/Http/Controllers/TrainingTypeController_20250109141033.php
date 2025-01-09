@@ -84,7 +84,7 @@ class TrainingTypeController extends Controller
             if($trainingType->created_by == \Auth::user()->creatorId())
             {
 
-                return view('dashboard.trainingtype.edit', compact('trainingType'));
+                return view('trainingtype.edit', compact('trainingType'));
             }
             else
             {

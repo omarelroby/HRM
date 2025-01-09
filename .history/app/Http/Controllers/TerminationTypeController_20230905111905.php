@@ -13,7 +13,7 @@ class TerminationTypeController extends Controller
         {
             $terminationtypes = TerminationType::where('created_by', '=', \Auth::user()->creatorId())->get();
 
-            return view('dashboard.terminationtype.index', compact('terminationtypes'));
+            return view('terminationtype.index', compact('terminationtypes'));
         }
         else
         {
@@ -77,7 +77,7 @@ class TerminationTypeController extends Controller
             if($terminationtype->created_by == \Auth::user()->creatorId())
             {
 
-                return view('dashboard.terminationtype.edit', compact('terminationtype'));
+                return view('terminationtype.edit', compact('terminationtype'));
             }
             else
             {

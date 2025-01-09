@@ -82,7 +82,7 @@ class LeaveTypeController extends Controller
             if($leavetype->created_by == \Auth::user()->creatorId())
             {
 
-                return view('dashboard.leavetype.edit', compact('leavetype'));
+                return view('leavetype.edit', compact('leavetype'));
             }
             else
             {

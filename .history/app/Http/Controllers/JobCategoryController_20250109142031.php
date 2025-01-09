@@ -25,7 +25,8 @@ class JobCategoryController extends Controller
 
     public function create(JobCategory $category)
     {
-         if(\Auth::user()->can('Edit Job Category'))
+        return view('jobCategory.create');
+        if(\Auth::user()->can('Edit Job Category'))
         {
             if($category->created_by == \Auth::user()->creatorId())
             {
@@ -112,7 +113,7 @@ class JobCategoryController extends Controller
             $jobCategory->title_ar = $request->title_ar;
             $jobCategory->save();
 
-            return redirect()->route('job-category.index')->with('success', __('Job category  successfully updated.'));
+            return redirect()->back()->with('success', __('Job category  successfully updated.'));
         }
         else
         {

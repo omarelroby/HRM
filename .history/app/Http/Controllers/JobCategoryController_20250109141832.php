@@ -23,24 +23,9 @@ class JobCategoryController extends Controller
     }
 
 
-    public function create(JobCategory $category)
+    public function create()
     {
-         if(\Auth::user()->can('Edit Job Category'))
-        {
-            if($category->created_by == \Auth::user()->creatorId())
-            {
-
-                return view('dashboard.leavetype.edit', compact('category'));
-            }
-            else
-            {
-                return response()->json(['error' => __('Permission denied.')], 401);
-            }
-        }
-        else
-        {
-            return response()->json(['error' => __('Permission denied.')], 401);
-        }
+        return view('jobCategory.create');
     }
 
 
@@ -85,7 +70,7 @@ class JobCategoryController extends Controller
 
     public function edit(JobCategory $jobCategory)
     {
-        return view('dashboard.jobCategory.edit', compact('jobCategory'));
+        return view('jobCategory.edit', compact('jobCategory'));
     }
 
 
@@ -112,7 +97,7 @@ class JobCategoryController extends Controller
             $jobCategory->title_ar = $request->title_ar;
             $jobCategory->save();
 
-            return redirect()->route('job-category.index')->with('success', __('Job category  successfully updated.'));
+            return redirect()->back()->with('success', __('Job category  successfully updated.'));
         }
         else
         {

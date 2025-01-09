@@ -14,7 +14,7 @@ class GoalTypeController extends Controller
         {
             $goaltypes = GoalType::where('created_by', '=', \Auth::user()->creatorId())->get();
 
-            return view('dashboard.goaltype.index', compact('goaltypes'));
+            return view('goaltype.index', compact('goaltypes'));
         }
         else
         {
@@ -82,7 +82,7 @@ class GoalTypeController extends Controller
         {
             $goalType = GoalType::find($id);
 
-            return view('dashboard.goaltype.edit', compact('goalType'));
+            return view('goaltype.edit', compact('goalType'));
         }
         else
         {
