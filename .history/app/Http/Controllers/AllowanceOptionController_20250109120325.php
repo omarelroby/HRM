@@ -12,9 +12,8 @@ class AllowanceOptionController extends Controller
         if(\Auth::user()->can('Manage Allowance Option'))
         {
             $allowanceoptions = AllowanceOption::where('created_by', '=', \Auth::user()->creatorId())->get();
-            $allowanceoptionCountWithPayrollDisplay = AllowanceOption::where('created_by', '=', \Auth::user()->creatorId())->WhereNotNull('payroll_dispaly')->count();
 
-            return view('dashboard.allowanceoption.index', compact('allowanceoptions','allowanceoptionCountWithPayrollDisplay'));
+            return view('dashboardallowanceoption.index', compact('allowanceoptions'));
         }
         else
         {
@@ -84,7 +83,7 @@ class AllowanceOptionController extends Controller
         {
             if($allowanceoption->created_by == \Auth::user()->creatorId())
             {
-                return view('dashboard.allowanceoption.edit', compact('allowanceoption'));
+                return view('allowanceoption.edit', compact('allowanceoption'));
             }
             else
             {

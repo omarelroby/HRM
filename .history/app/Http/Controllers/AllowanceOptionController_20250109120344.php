@@ -14,7 +14,7 @@ class AllowanceOptionController extends Controller
             $allowanceoptions = AllowanceOption::where('created_by', '=', \Auth::user()->creatorId())->get();
             $allowanceoptionCountWithPayrollDisplay = AllowanceOption::where('created_by', '=', \Auth::user()->creatorId())->WhereNotNull('payroll_dispaly')->count();
 
-            return view('dashboard.allowanceoption.index', compact('allowanceoptions','allowanceoptionCountWithPayrollDisplay'));
+            return view('dashboard.allowanceoption.index', compact('allowanceoptions'));
         }
         else
         {
