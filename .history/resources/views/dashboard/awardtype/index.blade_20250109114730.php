@@ -18,7 +18,7 @@
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered table-hover dataTables">
 
-                            <thead>
+                            
                                 <tr>
                                     <th>{{__('Department')}}</th>
                                     <th>{{__('Designation')}}</th>

@@ -13,7 +13,7 @@ class PayslipTypeController extends Controller
         {
             $paysliptypes = PayslipType::where('created_by', '=', \Auth::user()->creatorId())->get();
 
-            return view('dashboard.paysliptype.index', compact('paysliptypes'));
+            return view('paysliptype.index', compact('paysliptypes'));
         }
         else
         {
@@ -77,7 +77,7 @@ class PayslipTypeController extends Controller
             if($paysliptype->created_by == \Auth::user()->creatorId())
             {
 
-                return view('dashboard.paysliptype.edit', compact('paysliptype'));
+                return view('paysliptype.edit', compact('paysliptype'));
             }
             else
             {
@@ -99,7 +99,7 @@ class PayslipTypeController extends Controller
                 $validator = \Validator::make(
                     $request->all(), [
                                        'name' => 'required|max:20',
-                                       'name_ar' => 'required|max:20',
+                                       'name_ar' => 'required|max:20',    
                                    ]
                 );
 
@@ -109,7 +109,7 @@ class PayslipTypeController extends Controller
 
                     return redirect()->back()->with('error', $messages->first());
                 }
-
+                
                 $paysliptype->name = $request->name;
                 $paysliptype->name_ar = $request->name_ar;
                 $paysliptype->save();

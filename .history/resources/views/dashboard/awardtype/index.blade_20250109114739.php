@@ -18,7 +18,7 @@
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered table-hover dataTables">
 
-                            <thead>
+
                                 <tr>
                                     <th>{{__('Department')}}</th>
                                     <th>{{__('Designation')}}</th>
@@ -71,7 +71,7 @@
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header text-white">
-                <h5 class="modal-title" id="addTrainingModalLabel">{{ __('Add Designation') }}</h5>
+                <h5 class="modal-title" id="addTrainingModalLabel">{{ __('Add Award Type') }}</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="{{ __('Close') }}"></button>
             </div>
 

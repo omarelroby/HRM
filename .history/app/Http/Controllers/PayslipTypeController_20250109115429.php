@@ -77,7 +77,7 @@ class PayslipTypeController extends Controller
             if($paysliptype->created_by == \Auth::user()->creatorId())
             {
 
-                return view('dashboard.paysliptype.edit', compact('paysliptype'));
+                return view('dahboard.paysliptype.edit', compact('paysliptype'));
             }
             else
             {

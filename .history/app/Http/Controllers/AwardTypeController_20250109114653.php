@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PayslipType;
+use App\Models\AwardType;
 use Illuminate\Http\Request;
 
-class PayslipTypeController extends Controller
+class AwardTypeController extends Controller
 {
     public function index()
     {
-        if(\Auth::user()->can('Manage Payslip Type'))
+        if(\Auth::user()->can('Manage Award Type'))
         {
-            $paysliptypes = PayslipType::where('created_by', '=', \Auth::user()->creatorId())->get();
+            $awardtypes = AwardType::where('created_by', '=', \Auth::user()->creatorId())->get();
 
-            return view('dashboard.paysliptype.index', compact('paysliptypes'));
+            return view('dashboard.awardtype.index', compact('awardtypes'));
         }
         else
         {
@@ -23,9 +23,9 @@ class PayslipTypeController extends Controller
 
     public function create()
     {
-        if(\Auth::user()->can('Create Payslip Type'))
+        if(\Auth::user()->can('Create Award Type'))
         {
-            return view('paysliptype.create');
+            return view('awardtype.create');
         }
         else
         {
@@ -35,12 +35,12 @@ class PayslipTypeController extends Controller
 
     public function store(Request $request)
     {
-
-        if(\Auth::user()->can('Create Payslip Type'))
+        if(\Auth::user()->can('Create Award Type'))
         {
 
             $validator = \Validator::make(
                 $request->all(), [
+
                                    'name' => 'required|max:20',
                                    'name_ar' => 'required|max:20',
                                ]
@@ -51,13 +51,14 @@ class PayslipTypeController extends Controller
 
                 return redirect()->back()->with('error', $messages->first());
             }
-            $paysliptype             = new PayslipType();
-            $paysliptype->name       = $request->name;
-            $paysliptype->name_ar       = $request->name_ar;
-            $paysliptype->created_by = \Auth::user()->creatorId();
-            $paysliptype->save();
 
-            return redirect()->route('paysliptype.index')->with('success', __('PayslipType  successfully created.'));
+            $awardtype             = new AwardType();
+            $awardtype->name       = $request->name;
+            $awardtype->name_ar       = $request->name_ar;
+            $awardtype->created_by = \Auth::user()->creatorId();
+            $awardtype->save();
+
+            return redirect()->route('awardtype.index')->with('success', __('AwardType  successfully created.'));
         }
         else
         {
@@ -65,19 +66,19 @@ class PayslipTypeController extends Controller
         }
     }
 
-    public function show(PayslipType $paysliptype)
+    public function show(AwardType $awardtype)
     {
-        return redirect()->route('paysliptype.index');
+        return redirect()->route('awardtype.index');
     }
 
-    public function edit(PayslipType $paysliptype)
+    public function edit(AwardType $awardtype)
     {
-        if(\Auth::user()->can('Edit Payslip Type'))
+        if(\Auth::user()->can('Edit Award Type'))
         {
-            if($paysliptype->created_by == \Auth::user()->creatorId())
+            if($awardtype->created_by == \Auth::user()->creatorId())
             {
 
-                return view('dashboard.paysliptype.edit', compact('paysliptype'));
+                return view('awardtype.edit', compact('awardtype'));
             }
             else
             {
@@ -90,19 +91,19 @@ class PayslipTypeController extends Controller
         }
     }
 
-    public function update(Request $request, PayslipType $paysliptype)
+    public function update(Request $request, AwardType $awardtype)
     {
-        if(\Auth::user()->can('Edit Payslip Type'))
+        if(\Auth::user()->can('Edit Award Type'))
         {
-            if($paysliptype->created_by == \Auth::user()->creatorId())
+            if($awardtype->created_by == \Auth::user()->creatorId())
             {
                 $validator = \Validator::make(
                     $request->all(), [
+
                                        'name' => 'required|max:20',
                                        'name_ar' => 'required|max:20',
                                    ]
                 );
-
                 if($validator->fails())
                 {
                     $messages = $validator->getMessageBag();
@@ -110,11 +111,11 @@ class PayslipTypeController extends Controller
                     return redirect()->back()->with('error', $messages->first());
                 }
 
-                $paysliptype->name = $request->name;
-                $paysliptype->name_ar = $request->name_ar;
-                $paysliptype->save();
+                $awardtype->name = $request->name;
+                $awardtype->name_ar = $request->name_ar;
+                $awardtype->save();
 
-                return redirect()->route('paysliptype.index')->with('success', __('PayslipType successfully updated.'));
+                return redirect()->route('awardtype.index')->with('success', __('AwardType successfully updated.'));
             }
             else
             {
@@ -127,15 +128,15 @@ class PayslipTypeController extends Controller
         }
     }
 
-    public function destroy(PayslipType $paysliptype)
+    public function destroy(AwardType $awardtype)
     {
-        if(\Auth::user()->can('Delete Payslip Type'))
+        if(\Auth::user()->can('Delete Award Type'))
         {
-            if($paysliptype->created_by == \Auth::user()->creatorId())
+            if($awardtype->created_by == \Auth::user()->creatorId())
             {
-                $paysliptype->delete();
+                $awardtype->delete();
 
-                return redirect()->route('paysliptype.index')->with('success', __('PayslipType successfully deleted.'));
+                return redirect()->route('awardtype.index')->with('success', __('AwardType successfully deleted.'));
             }
             else
             {
@@ -147,6 +148,4 @@ class PayslipTypeController extends Controller
             return redirect()->back()->with('error', __('Permission denied.'));
         }
     }
-
-
 }

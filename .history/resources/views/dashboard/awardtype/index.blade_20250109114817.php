@@ -11,14 +11,14 @@
         <div class="col-lg-12">
             <div class="card shadow-sm">
                 <div class="card-header text-white">
-                    <h5 class="card-title mb-0">{{ __('Designations') }}</h5>
+                    <h5 class="card-title mb-0">{{ __('Award Types') }}</h5>
                 </div>
 
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered table-hover dataTables">
 
-                            <thead>
+
                                 <tr>
                                     <th>{{__('Department')}}</th>
                                     <th>{{__('Designation')}}</th>
@@ -71,46 +71,13 @@
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header text-white">
-                <h5 class="modal-title" id="addTrainingModalLabel">{{ __('Add Designation') }}</h5>
+                <h5 class="modal-title" id="addTrainingModalLabel">{{ __('Add Award Type') }}</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="{{ __('Close') }}"></button>
             </div>
 
             <!-- Modal Body -->
             <div class="modal-body">
 
-
-                {{Form::open(array('url'=>'designation','method'=>'post'))}}
-                <div class="row">
-                    <div class="col-12">
-                        <div class="form-group">
-                            {{ Form::label('department_id', __('Department'),['class'=>'form-control-label']) }}
-                            {{ Form::select('department_id', $departments,null, array('class' => 'form-control select2','required'=>'required')) }}
-                        </div>
-                        <div class="form-group">
-                            {{Form::label('name',__('Name'),['class'=>'form-control-label'])}}
-                            {{Form::text('name',null,array('class'=>'form-control','placeholder'=>__('Enter Designation Name')))}}
-                            @error('name')
-                            <span class="invalid-name" role="alert">
-                                <strong class="text-danger">{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            {{Form::label('name_ar',__('Name_ar'),['class'=>'form-control-label'])}}
-                            {{Form::text('name_ar',null,array('class'=>'form-control','placeholder'=>__('Enter Designation Name arabic')))}}
-                            @error('name_ar')
-                            <span class="invalid-name" role="alert">
-                                <strong class="text-danger">{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-light border me-2" data-bs-dismiss="modal">{{ __('Cancel') }}</button>
-                        <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
-                    </div>
-                </div>
-            {{Form::close()}}
 
 
             </div>
