@@ -76,7 +76,7 @@ class LoanOptionController extends Controller
             if($loanoption->created_by == \Auth::user()->creatorId())
             {
 
-                return view('dashboard.loanoption.edit', compact('loanoption'));
+                return view('dashboard..edit', compact('loanoption'));
             }
             else
             {

@@ -13,7 +13,7 @@ class DeductionOptionController extends Controller
         {
             $deductionoptions = DeductionOption::where('created_by', '=', \Auth::user()->creatorId())->get();
 
-            return view('dashboard.deductionoption.index', compact('deductionoptions'));
+            return view('deductionoption.index', compact('deductionoptions'));
         }
         else
         {
@@ -41,7 +41,7 @@ class DeductionOptionController extends Controller
             $validator = \Validator::make(
                 $request->all(), [
                                    'name' => 'required',
-                                   'name_ar' => 'required',
+                                   'name_ar' => 'required', 
                                ]
             );
             if($validator->fails())
@@ -78,7 +78,7 @@ class DeductionOptionController extends Controller
             if($deductionoption->created_by == \Auth::user()->creatorId())
             {
 
-                return view('dashboard.deductionoption.edit', compact('deductionoption'));
+                return view('deductionoption.edit', compact('deductionoption'));
             }
             else
             {
@@ -100,7 +100,7 @@ class DeductionOptionController extends Controller
                 $validator = \Validator::make(
                     $request->all(), [
                                        'name' => 'required',
-                                       'name_ar' => 'required',
+                                       'name_ar' => 'required',    
                                    ]
                 );
 

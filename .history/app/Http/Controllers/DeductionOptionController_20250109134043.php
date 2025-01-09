@@ -78,7 +78,7 @@ class DeductionOptionController extends Controller
             if($deductionoption->created_by == \Auth::user()->creatorId())
             {
 
-                return view('dashboard.deductionoption.edit', compact('deductionoption'));
+                return view('deductionoption.edit', compact('deductionoption'));
             }
             else
             {

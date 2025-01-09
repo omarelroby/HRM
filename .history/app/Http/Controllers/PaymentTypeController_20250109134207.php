@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\LoanOption;
+use App\Models\PaymentType;
 use Illuminate\Http\Request;
 
-class LoanOptionController extends Controller
+class PaymentTypeController extends Controller
 {
     public function index()
     {
-        if(\Auth::user()->can('Manage Loan Option'))
+        if(\Auth::user()->can('Manage Payment Type'))
         {
-            $loanoptions = LoanOption::where('created_by', '=', \Auth::user()->creatorId())->get();
+            $paymenttypes = PaymentType::where('created_by', '=', \Auth::user()->creatorId())->get();
 
-            return view('dashboard.loanoption.index', compact('loanoptions'));
+            return view('dashboard.paymenttype.index', compact('paymenttypes'));
         }
         else
         {
@@ -23,9 +23,9 @@ class LoanOptionController extends Controller
 
     public function create()
     {
-        if(\Auth::user()->can('Create Loan Option'))
+        if(\Auth::user()->can('Create Payment Type'))
         {
-            return view('loanoption.create');
+            return view('paymenttype.create');
         }
         else
         {
@@ -35,28 +35,28 @@ class LoanOptionController extends Controller
 
     public function store(Request $request)
     {
-        if(\Auth::user()->can('Create Loan Option'))
+        if(\Auth::user()->can('Create Payment Type'))
         {
 
             $validator = \Validator::make(
                 $request->all(), [
-                                   'name' => 'required|max:20',
-                                   'name_ar' => 'required|max:20',
+                                   'name' => 'required',
                                ]
             );
+
             if($validator->fails())
             {
                 $messages = $validator->getMessageBag();
 
                 return redirect()->back()->with('error', $messages->first());
             }
-            $loanoption             = new LoanOption();
-            $loanoption->name       = $request->name;
-            $loanoption->name_ar       = $request->name_ar;
-            $loanoption->created_by = \Auth::user()->creatorId();
-            $loanoption->save();
 
-            return redirect()->route('loanoption.index')->with('success', __('LoanOption  successfully created.'));
+            $paymenttype             = new PaymentType();
+            $paymenttype->name       = $request->name;
+            $paymenttype->created_by = \Auth::user()->creatorId();
+            $paymenttype->save();
+
+            return redirect()->route('paymenttype.index')->with('success', __('PaymentType  successfully created.'));
         }
         else
         {
@@ -64,19 +64,19 @@ class LoanOptionController extends Controller
         }
     }
 
-    public function show(LoanOption $loanoption)
+    public function show(PaymentType $paymenttype)
     {
-        return redirect()->route('loanoption.index');
+        return redirect()->route('paymenttype.index');
     }
 
-    public function edit(LoanOption $loanoption)
+    public function edit(PaymentType $paymenttype)
     {
-        if(\Auth::user()->can('Edit Loan Option'))
+        if(\Auth::user()->can('Edit Payment Type'))
         {
-            if($loanoption->created_by == \Auth::user()->creatorId())
+            if($paymenttype->created_by == \Auth::user()->creatorId())
             {
 
-                return view('dashboard.loanoption.edit', compact('loanoption'));
+                return view('paymenttype.edit', compact('paymenttype'));
             }
             else
             {
@@ -89,16 +89,16 @@ class LoanOptionController extends Controller
         }
     }
 
-    public function update(Request $request, LoanOption $loanoption)
+    public function update(Request $request, PaymentType $paymenttype)
     {
-        if(\Auth::user()->can('Edit Loan Option'))
+        if(\Auth::user()->can('Edit Payment Type'))
         {
-            if($loanoption->created_by == \Auth::user()->creatorId())
+            if($paymenttype->created_by == \Auth::user()->creatorId())
             {
                 $validator = \Validator::make(
                     $request->all(), [
                                        'name' => 'required|max:20',
-                                       'name_ar' => 'required|max:20',
+
                                    ]
                 );
                 if($validator->fails())
@@ -107,11 +107,10 @@ class LoanOptionController extends Controller
 
                     return redirect()->back()->with('error', $messages->first());
                 }
-                $loanoption->name = $request->name;
-                $loanoption->name_ar = $request->name_ar;
-                $loanoption->save();
+                $paymenttype->name = $request->name;
+                $paymenttype->save();
 
-                return redirect()->route('loanoption.index')->with('success', __('LoanOption successfully updated.'));
+                return redirect()->route('paymenttype.index')->with('success', __('PaymentType successfully updated.'));
             }
             else
             {
@@ -124,15 +123,15 @@ class LoanOptionController extends Controller
         }
     }
 
-    public function destroy(LoanOption $loanoption)
+    public function destroy(PaymentType $paymenttype)
     {
-        if(\Auth::user()->can('Delete Loan Option'))
+        if(\Auth::user()->can('Delete Payment Type'))
         {
-            if($loanoption->created_by == \Auth::user()->creatorId())
+            if($paymenttype->created_by == \Auth::user()->creatorId())
             {
-                $loanoption->delete();
+                $paymenttype->delete();
 
-                return redirect()->route('loanoption.index')->with('success', __('LoanOption successfully deleted.'));
+                return redirect()->route('paymenttype.index')->with('success', __('PaymentType successfully deleted.'));
             }
             else
             {

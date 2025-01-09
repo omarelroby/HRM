@@ -13,7 +13,7 @@ class LoanOptionController extends Controller
         {
             $loanoptions = LoanOption::where('created_by', '=', \Auth::user()->creatorId())->get();
 
-            return view('dashboard.loanoption.index', compact('loanoptions'));
+            return view('daloanoption.index', compact('loanoptions'));
         }
         else
         {
@@ -76,7 +76,7 @@ class LoanOptionController extends Controller
             if($loanoption->created_by == \Auth::user()->creatorId())
             {
 
-                return view('dashboard.loanoption.edit', compact('loanoption'));
+                return view('loanoption.edit', compact('loanoption'));
             }
             else
             {
