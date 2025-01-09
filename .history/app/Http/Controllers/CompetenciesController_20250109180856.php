@@ -16,7 +16,7 @@ class CompetenciesController extends Controller
             $user = \Auth::user();
             $performance_types = Performance_Type::where('created_by', '=', $user->creatorId())->get()->pluck('name', 'id');
 
-            return view('dashboard.competencies.index', compact('competencies','performance_types'));
+            return view('dashboard.competencies.index', compact('competencies','p'));
         } else {
             return redirect()->back()->with('error', __('Permission denied.'));
         }

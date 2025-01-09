@@ -49,15 +49,15 @@ class LanguageController extends Controller
                 $arrMessage[$fileName] = $fileData;
             }
         }
-
+        
         // $arrLabel = (new Collection($arrLabel))->paginate(20);
-        return view('dashboard.lang.index', compact('languages', 'currantLang', 'arrLabel', 'arrMessage'));
+        return view('lang.index', compact('languages', 'currantLang', 'arrLabel', 'arrMessage'));
 
     }
 
     public function storeLanguageData(Request $request, $currantLang)
     {
-
+      
         if(Auth::user()->can('Create Language'))
         {
             $Filesystem = new Filesystem();

@@ -26,14 +26,14 @@ class SettingsController extends Controller
                 $settings              = Utility::settings();
                 $admin_payment_setting = Utility::getAdminPaymentSetting();
 
-                return view('dashboard.setting.system_settings', compact('settings', 'admin_payment_setting'));
+                return view('setting.system_settings', compact('settings', 'admin_payment_setting'));
             } else {
                 $timezones = config('timezones');
                 $settings  = Utility::settings();
                 $ips       = IpRestrict::where('created_by', \Auth::user()->creatorId())->get();
                 $documents = CompanyDucumentUpload::where('created_by', \Auth::user()->creatorId())->get();
-
-                return view('dashboard.setting.company_settings', compact('user','settings', 'timezones', 'ips','documents'));
+         
+                return view('setting.company_settings', compact('user','settings', 'timezones', 'ips','documents'));
             }
         } else {
             return redirect()->back()->with('error', __('Permission denied.'));
@@ -157,11 +157,11 @@ class SettingsController extends Controller
 
     public function recaptchaSettingStore(Request $request)
     {
-
-
+    
+        
         $user = \Auth::user();
         $rules = [];
-
+    
         if($request->recaptcha_module == 'yes')
         {
             $rules['google_recaptcha_key'] = 'required|string|max:50';
@@ -233,7 +233,7 @@ class SettingsController extends Controller
     {
         if (\Auth::user()->type == 'company' || \Auth::user()->type == 'super admin') {
             $user = \Auth::user();
-
+            
             // $request->validate(
             // [
             //     'company_name' => 'required|string|max:255',
@@ -250,7 +250,7 @@ class SettingsController extends Controller
             // ]);
 
             $post = $request->all();
-
+            
             if (!isset($request->ip_restrict)) {
                 $post['ip_restrict'] = 'off';
             }
@@ -577,7 +577,7 @@ class SettingsController extends Controller
 
 
     public function twilio(Request $request)
-    {
+    { 
 
         $post = [];
         $post['twilio_sid'] = $request->input('twilio_sid');
@@ -590,7 +590,7 @@ class SettingsController extends Controller
         $post['twilio_announcement_notification'] = $request->has('twilio_announcement_notification') ? $request->input('twilio_announcement_notification') : 0;
         $post['twilio_ticket_notification'] = $request->has('twilio_ticket_notification') ? $request->input('twilio_ticket_notification') : 0;
         $post['twilio_event_notification'] = $request->has('twilio_event_notification') ? $request->input('twilio_event_notification') : 0;
-
+       
         if (isset($post) && !empty($post) && count($post) > 0) {
             $created_at = $updated_at = date('Y-m-d H:i:s');
 
@@ -875,9 +875,9 @@ class SettingsController extends Controller
 
     public function companyslate(Request $request)
     {
-        if(\Auth::user()->type == 'company' || \Auth::user()->type == 'super admin')
+        if(\Auth::user()->type == 'company' || \Auth::user()->type == 'super admin') 
         {
-            if($request->file)
+            if($request->file) 
             {
                 $request->validate(
                 [
@@ -889,7 +889,7 @@ class SettingsController extends Controller
                 $path1     = $request->file('file')->storeAs('uploads', $logoName);
             }
 
-            if($request->file_ar)
+            if($request->file_ar) 
             {
                 $request->validate(
                 [

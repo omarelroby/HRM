@@ -33,7 +33,7 @@ class SettingsController extends Controller
                 $ips       = IpRestrict::where('created_by', \Auth::user()->creatorId())->get();
                 $documents = CompanyDucumentUpload::where('created_by', \Auth::user()->creatorId())->get();
 
-                return view('dashboard.setting.company_settings', compact('user','settings', 'timezones', 'ips','documents'));
+                return view('dashboardsetting.company_settings', compact('user','settings', 'timezones', 'ips','documents'));
             }
         } else {
             return redirect()->back()->with('error', __('Permission denied.'));
