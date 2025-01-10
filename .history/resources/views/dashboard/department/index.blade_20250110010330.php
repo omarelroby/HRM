@@ -8,8 +8,13 @@
 
 @section('content')
     <div class="row">
-
-       
+        <div class="d-flex justify-content-end mb-3">
+            @can('Create Department')
+                <a href="#" data-bs-toggle="modal" data-bs-target="#addTrainingModal" class="btn btn-primary btn-lg">
+                    <i class="fas fa-plus"></i> {{ __('Create New Department') }}
+                </a>
+            @endcan
+        </div>
         <div class="col-lg-12">
             <div class="card shadow-sm">
                 <div class="card-header text-white">
@@ -23,7 +28,7 @@
                                 <tr>
                                     <th>{{__('Branch')}}</th>
                                     <th>{{__('Department')}}</th>
-                                    <th>{{__('Department Manager')}}</th>
+                                    {{-- <th>{{__('Department Manager')}}</th> --}}
                                     <th width="200px">{{ __('Action') }}</th>
                                 </tr>
                             </thead>

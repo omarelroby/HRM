@@ -8,8 +8,9 @@
 
 @section('content')
     <div class="row">
+        <div class="d-flex justify-content-end mb-3">
 
-       
+        </div>
         <div class="col-lg-12">
             <div class="card shadow-sm">
                 <div class="card-header text-white">
