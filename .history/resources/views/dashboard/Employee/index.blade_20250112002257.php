@@ -905,11 +905,9 @@
                                     <div class="form-group col-md-3">
                                         <label for="direct_manager" class="form-label">{{ __('direct_manager') }}</label>
                                         <select class="form-control" name="direct_manager" id="direct_manager">
-                                            <option value="{{ auth()->user()->id }}">{{ __('Select Direct Manager') }}</option>
-
                                             @if(count($employees) == 0)
                                             {
-                                                <option value="{{ auth()->user()->id }}">{{ __('CEO') }}</option>
+                                                <option value="{{ auth()->user()->id }}">{{ auth()->user()->id }}</option>
                                             }
                                             @else
                                             @foreach($employees as $id => $employee)
