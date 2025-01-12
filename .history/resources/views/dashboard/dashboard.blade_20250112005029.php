@@ -114,7 +114,7 @@
 
                     </div>
                     <div class="card-body">
-                        <div id="emp-departments">
+                        <div id="emp-department">
                             <!-- Chart will render here -->
                         </div>
                     </div>
@@ -562,87 +562,82 @@
 @endsection
 @push('scripts')
 <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            var departmentNames = @json($departmentNames ?? []); // Fallback to empty array if null
-            var employeeCounts = @json($total_employees ?? []); // Fallback to empty array if null
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Fetch data from server-side (using Laravel's @json directive)
+        var departmentNames = @json($departmentNames ?? []); // Fallback to empty array if null
+        var employeeCounts = @json($total_employees ?? []); // Fallback to empty array if null
 
-            // Check if the chart container exists
-            var chartContainer = document.getElementById("emp-departments");
-            if (!chartContainer) {
-                console.error("Chart container with ID 'emp-department' not found.");
-                return;
-            }
-
-            // Validate data before rendering the chart
-            if (departmentNames.length === 0 || employeeCounts.length === 0) {
-                console.error("Data for departments or employee counts is missing or invalid.");
-                return;
-            }
-
-            if (departmentNames.length !== employeeCounts.length) {
-                console.error("Mismatch in data: departmentNames and employeeCounts must have the same length.");
-                return;
-            }
-
-            // Chart configuration
-            var ctx = chartContainer.getContext('2d');
-            var chart = new Chart(ctx, {
-                type: 'bar', // Bar chart
-                data: {
-                    labels: departmentNames, // X-axis labels (department names)
-                    datasets: [{
-                        label: 'Number of Employees',
-                        data: employeeCounts, // Y-axis data (employee counts)
-                        backgroundColor: '#ea642b', // Bar color
-                        borderColor: '#ea642b', // Border color
-                        borderWidth: 1,
-                        borderRadius: 10, // Rounded corners for bars
-                        barPercentage: 0.8, // Adjust bar width
-                    }]
+        // Ensure there is data to render the chart
+        if (departmentNames.length > 0 && employeeCounts.length > 0) {
+            var options = {
+                series: [{
+                    data: employeeCounts
+                }],
+                chart: {
+                    type: 'bar',
+                    height: 350
                 },
-                options: {
-                    indexAxis: 'y', // Horizontal bar chart
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            display: false // Hide legend
-                        },
-                        tooltip: {
-                            enabled: true, // Enable tooltips
-                            callbacks: {
-                                label: function (context) {
-                                    return context.raw + " employees"; // Tooltip format
-                                }
-                            }
-                        }
-                    },
-                    scales: {
-                        x: {
-                            beginAtZero: true, // Start X-axis from zero
-                            title: {
-                                display: true,
-                                text: 'Number of Employees', // X-axis title
-                                font: {
-                                    size: 14,
-                                    weight: 'bold'
-                                }
-                            }
-                        },
-                        y: {
-                            title: {
-                                display: true,
-                                text: 'Departments', // Y-axis title
-                                font: {
-                                    size: 14,
-                                    weight: 'bold'
-                                }
-                            }
-                        }
+                colors: ['#ea642b'], // Set the bar color to orange
+                plotOptions: {
+                    bar: {
+                        borderRadius: 10,
+                        horizontal: true // Horizontal bar chart
                     }
+                },
+                dataLabels: {
+                    enabled: false // Disable data labels
+                },
+                grid: {
+                    show: false // Disable grid lines
+                },
+                xaxis: {
+                    categories: departmentNames // X-axis categories
                 }
-            });
-        });
+            };
+
+            var chart = new ApexCharts(document.querySelector("#emp-department"), options);
+            chart.render();
+        } else {
+            console.error("Data for departments or employee counts is missing or invalid.");
+        }
+    });
 </script>
+@endpush
+3. Key Fixes
+Proper Use of @json:
+
+Ensure $departmentNames and $total_employees are valid arrays passed from your controller.
+
+The @json directive converts PHP arrays to JSON format for use in JavaScript.
+
+Correct Placement of JavaScript:
+
+The JavaScript code is placed within the @push('scripts') section, which is a common practice in Laravel for adding scripts to the end of the page.
+
+Check for Missing Data:
+
+If $departmentNames or $total_employees is not defined, the ?? [] fallback ensures an empty array is used instead of throwing an error.
+
+4. Controller Example
+Ensure your controller is passing the required data to the view:
+
+php
+Copy
+public function dashboard()
+{
+    $departments = Department::withCount('employees')->get(); // Example query
+    $departmentNames = $departments->pluck('name')->toArray();
+    $total_employees = $departments->pluck('employees_count')->toArray();
+
+    return view('dashboard.dashboard', [
+        'departments' => $departments,
+        'departmentNames' => $departmentNames,
+        'total_employees' => $total_employees,
+    ]);
+}
+
+    </script>
 <script>
 let attendanceChart;
 document.addEventListener('DOMContentLoaded', function () {

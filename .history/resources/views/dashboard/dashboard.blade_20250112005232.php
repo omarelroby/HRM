@@ -114,7 +114,7 @@
 
                     </div>
                     <div class="card-body">
-                        <div id="emp-departments">
+                        <div id="emp-department">
                             <!-- Chart will render here -->
                         </div>
                     </div>

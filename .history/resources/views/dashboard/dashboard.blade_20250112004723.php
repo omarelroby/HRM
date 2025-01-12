@@ -114,9 +114,7 @@
 
                     </div>
                     <div class="card-body">
-                        <div id="emp-departments">
-                            <!-- Chart will render here -->
-                        </div>
+                        
                     </div>
                 </div>
 
@@ -567,7 +565,7 @@
             var employeeCounts = @json($total_employees ?? []); // Fallback to empty array if null
 
             // Check if the chart container exists
-            var chartContainer = document.getElementById("emp-departments");
+            var chartContainer = document.getElementById("emp-department");
             if (!chartContainer) {
                 console.error("Chart container with ID 'emp-department' not found.");
                 return;

@@ -665,8 +665,7 @@
                                             @foreach($employees as $id => $employee)
                                                 <option value="{{ $employee->id }}" {{ old('direct_manager') == $employee->id ? 'selected' : '' }}>{{ $employee->name }}</option>
                                             @endforeach
-                                            @endif
-                                        </select>a
+                                        </select>
                                     </div>
 
                                     <!-- Permission -->

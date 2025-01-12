@@ -66,7 +66,7 @@ class HomeController extends Controller
 
             $data['departmentNames'] = $departments->pluck('name'); // Unique department names
             $data['total_employees'] = $departments->pluck('total_employees'); // Count of each department
-            
+                dd($data);
             // Get total number of employees
             $data['employees'] = Employee::count();
             $data['all_employees'] = Employee::get()->take(8);

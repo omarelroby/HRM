@@ -114,7 +114,7 @@
 
                     </div>
                     <div class="card-body">
-                        <div id="emp-departments">
+                        <div id="emp-department">
                             <!-- Chart will render here -->
                         </div>
                     </div>
@@ -561,88 +561,7 @@
 
 @endsection
 @push('scripts')
-<script>
-        document.addEventListener("DOMContentLoaded", function () {
-            var departmentNames = @json($departmentNames ?? []); // Fallback to empty array if null
-            var employeeCounts = @json($total_employees ?? []); // Fallback to empty array if null
-
-            // Check if the chart container exists
-            var chartContainer = document.getElementById("emp-departments");
-            if (!chartContainer) {
-                console.error("Chart container with ID 'emp-department' not found.");
-                return;
-            }
-
-            // Validate data before rendering the chart
-            if (departmentNames.length === 0 || employeeCounts.length === 0) {
-                console.error("Data for departments or employee counts is missing or invalid.");
-                return;
-            }
-
-            if (departmentNames.length !== employeeCounts.length) {
-                console.error("Mismatch in data: departmentNames and employeeCounts must have the same length.");
-                return;
-            }
-
-            // Chart configuration
-            var ctx = chartContainer.getContext('2d');
-            var chart = new Chart(ctx, {
-                type: 'bar', // Bar chart
-                data: {
-                    labels: departmentNames, // X-axis labels (department names)
-                    datasets: [{
-                        label: 'Number of Employees',
-                        data: employeeCounts, // Y-axis data (employee counts)
-                        backgroundColor: '#ea642b', // Bar color
-                        borderColor: '#ea642b', // Border color
-                        borderWidth: 1,
-                        borderRadius: 10, // Rounded corners for bars
-                        barPercentage: 0.8, // Adjust bar width
-                    }]
-                },
-                options: {
-                    indexAxis: 'y', // Horizontal bar chart
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            display: false // Hide legend
-                        },
-                        tooltip: {
-                            enabled: true, // Enable tooltips
-                            callbacks: {
-                                label: function (context) {
-                                    return context.raw + " employees"; // Tooltip format
-                                }
-                            }
-                        }
-                    },
-                    scales: {
-                        x: {
-                            beginAtZero: true, // Start X-axis from zero
-                            title: {
-                                display: true,
-                                text: 'Number of Employees', // X-axis title
-                                font: {
-                                    size: 14,
-                                    weight: 'bold'
-                                }
-                            }
-                        },
-                        y: {
-                            title: {
-                                display: true,
-                                text: 'Departments', // Y-axis title
-                                font: {
-                                    size: 14,
-                                    weight: 'bold'
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-        });
-</script>
+ 
 <script>
 let attendanceChart;
 document.addEventListener('DOMContentLoaded', function () {
