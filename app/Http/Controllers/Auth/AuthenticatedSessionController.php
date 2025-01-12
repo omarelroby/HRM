@@ -53,7 +53,7 @@ class AuthenticatedSessionController extends Controller
     }*/
 
     public function store(LoginRequest $request)
-    {   
+    {
 
         if(env('RECAPTCHA_MODULE') == 'yes')
         {
@@ -66,7 +66,7 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
-        
+
         $user = Auth::user();
         if($user->is_active == 0)
         {
@@ -186,14 +186,14 @@ class AuthenticatedSessionController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Request $request)
-    {   
-       
+    {
+
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/login');
     }
 }

@@ -35,14 +35,23 @@
 					<div class="nav user-menu nav-list">
 
 						<div class="me-auto d-flex align-items-center" id="header-search">
-							<a id="toggle_btn" href="javascript:void(0);" class="btn btn-menubar me-1">
-								<i class="ti ti-arrow-bar-to-left"></i>
-							</a>
+                            <!-- Logout Form (Hidden) -->
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
 
-							<a href="https://smarthr.dreamstechnologies.com/html/template/profile-settings.html" class="btn btn-menubar">
-								<i class="ti ti-settings-cog"></i>
-							</a>
-						</div>
+                            <!-- Logout Link -->
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
+
+                            <!-- Logout Button -->
+                            <a id="toggle_btn" href="{{ route('logout') }}" class="btn btn-menubar me-1" title="Logout"
+                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <i class="ti ti-arrow-bar-to-left"></i>
+                            </a>
+                        </div>
 
 
 						<!-- /Horizontal Single -->
