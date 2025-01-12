@@ -511,31 +511,31 @@
                                                 <!-- Insurance Number -->
                                                 <div class="col-md-4">
                                                     <label for="insurance_number" class="form-label">{{ __('insurance_number') }}</label>
-                                                    <input type="text" name="insurance_number" id="insurance_number" class="form-control" value="{{ $employee->insurance_number??'' }}">
+                                                    <input type="text" name="insurance_number" id="insurance_number" class="form-control" value="{{ $employee->insurance_number }}">
                                                 </div>
 
                                                 <!-- Policy Number -->
                                                 <div class="col-md-4">
                                                     <label for="policy_number" class="form-label">{{ __('Policy_number') }}</label>
-                                                    <input type="text" name="policy_number" id="policy_number" class="form-control" value="{{ $employee->policy_number??'' }}"  >
+                                                    <input type="text" name="policy_number" id="policy_number" class="form-control" value="{{ old('policy_number') }}">
                                                 </div>
 
                                                 <!-- Insurance Start Date -->
                                                 <div class="col-md-4">
                                                     <label for="insurance_startdate" class="form-label">{{ __('insurance_startdate') }}</label>
-                                                    <input type="text" name="insurance_startdate" id="insurance_startdate" class="form-control datetimepicker" value="{{ $employee->insurance_startdate??'' }}"  >
+                                                    <input type="text" name="insurance_startdate" id="insurance_startdate" class="form-control datetimepicker" value="{{ old('insurance_startdate') ?? now() }}">
                                                 </div>
 
                                                 <!-- Category -->
                                                 <div class="col-md-4">
                                                     <label for="category" class="form-label">{{ __('Category') }}</label>
-                                                    <input type="text" name="category" id="category" class="form-control"  value="{{ $employee->category ??'' }}">
+                                                    <input type="text" name="category" id="category" class="form-control" value="{{ old('category') }}">
                                                 </div>
 
                                                 <!-- Cost -->
                                                 <div class="col-md-4">
                                                     <label for="cost" class="form-label">{{ __('Cost') }}</label>
-                                                    <input type="text" name="cost" id="cost" class="form-control"  value="{{ $employee->cost ??'' }}">
+                                                    <input type="text" name="cost" id="cost" class="form-control" value="{{ old('cost') }}">
                                                 </div>
 
                                                 <!-- Availability Health Insurance Council -->
@@ -682,33 +682,23 @@
                                     <!-- Uploading Record Permission -->
                                     <div class="form-group col-md-4">
                                         <div class="form-check mt-4">
-                                            <input type="hidden" name="uploading_record_permission" value="0">
-
-                                            <input
-                                                type="checkbox"
-                                                class="form-check-input"
-                                                id="uploading_record_permission"
-                                                name="uploading_record_permission"
-                                                value="1"
-                                                {{ $employee->uploading_record_permission == 1 ? 'checked' : '' }}>
-
+                                            <input type="checkbox" class="form-check-input" id="uploading_record_permission" name="uploading_record_permission" checked>
                                             <label class="form-check-label" for="uploading_record_permission">
                                                 {{ __('The_possibility_of_uploading_the_record_without_regard_to_the_geographical_location') }}
                                             </label>
                                         </div>
                                     </div>
-
                                     <div class="form-group col-md-2">
                                         <label for="employee_on_probation" class="form-label">{{ __('Is_the_employee_on_probation') }}</label>
                                         <div class="d-flex">
                                             <!-- Yes Option -->
                                             <div class="form-check me-3">
-                                                <input type="radio" id="yes" name="employee_on_probation" value="1" {{ $employee->employee_on_probation == 1 ? 'checked' : '' }} class="form-check-input">
+                                                <input type="radio" id="yes" name="employee_on_probation" value="1" class="form-check-input">
                                                 <label class="form-check-label" for="yes">{{ __('yes') }}</label>
                                             </div>
                                             <!-- No Option -->
                                             <div class="form-check">
-                                                <input type="radio" id="no" name="employee_on_probation" value="0" class="form-check-input" {{ $employee->employee_on_probation == 0 ? 'checked' : '' }}  >
+                                                <input type="radio" id="no" name="employee_on_probation" value="0" class="form-check-input" checked>
                                                 <label class="form-check-label" for="no">{{ __('no') }}</label>
                                             </div>
                                         </div>
@@ -742,11 +732,11 @@
                                     <label for="contract_duration" class="form-label">{{ __('contract_duration') }}</label>
                                     <div class="d-flex">
                                         <div class="form-check me-2">
-                                            <input class="form-check-input" type="radio" name="contract_duration" {{ $employee->contract_duration ==1 ? 'checked' : '' }} id="1year" value="1" checked>
+                                            <input class="form-check-input" type="radio" name="contract_duration" id="1year" value="1" checked>
                                             <label class="form-check-label" for="1year">{{ __('1year') }}</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="contract_duration" {{ $employee->contract_duration == 2 ? 'checked' : '' }} id="2year" value="2">
+                                            <input class="form-check-input" type="radio" name="contract_duration" id="2year" value="2">
                                             <label class="form-check-label" for="2year">{{ __('2year') }}</label>
                                         </div>
                                     </div>
@@ -768,7 +758,7 @@
                                     <div class="col-md-12">
                                         <div class="mb-3">
                                             <label for="annual_leave_entitlement" class="form-label">{{ __('annual_leave_entitlement') }}</label>
-                                            <input type="text" value="{{ $employee->annual_leave_entitlement ?? '' }}" name="annual_leave_entitlement" id="annual_leave_entitlement"
+                                            <input type="text" name="annual_leave_entitlement" id="annual_leave_entitlement"
                                                    class="form-control" value="{{ old('annual_leave_entitlement') }}">
                                         </div>
                                     </div>

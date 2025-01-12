@@ -529,13 +529,13 @@
                                                 <!-- Category -->
                                                 <div class="col-md-4">
                                                     <label for="category" class="form-label">{{ __('Category') }}</label>
-                                                    <input type="text" name="category" id="category" class="form-control"  value="{{ $employee->category ??'' }}">
+                                                    <input type="text" name="category" id="category" class="form-control" value="{{ old('category') }}">
                                                 </div>
 
                                                 <!-- Cost -->
                                                 <div class="col-md-4">
                                                     <label for="cost" class="form-label">{{ __('Cost') }}</label>
-                                                    <input type="text" name="cost" id="cost" class="form-control"  value="{{ $employee->cost ??'' }}">
+                                                    <input type="text" name="cost" id="cost" class="form-control" value="{{ old('cost') }}">
                                                 </div>
 
                                                 <!-- Availability Health Insurance Council -->
@@ -682,8 +682,6 @@
                                     <!-- Uploading Record Permission -->
                                     <div class="form-group col-md-4">
                                         <div class="form-check mt-4">
-                                            <input type="hidden" name="uploading_record_permission" value="0">
-
                                             <input
                                                 type="checkbox"
                                                 class="form-check-input"
@@ -691,7 +689,6 @@
                                                 name="uploading_record_permission"
                                                 value="1"
                                                 {{ $employee->uploading_record_permission == 1 ? 'checked' : '' }}>
-
                                             <label class="form-check-label" for="uploading_record_permission">
                                                 {{ __('The_possibility_of_uploading_the_record_without_regard_to_the_geographical_location') }}
                                             </label>

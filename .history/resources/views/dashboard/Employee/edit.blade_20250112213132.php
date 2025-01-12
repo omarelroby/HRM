@@ -529,13 +529,13 @@
                                                 <!-- Category -->
                                                 <div class="col-md-4">
                                                     <label for="category" class="form-label">{{ __('Category') }}</label>
-                                                    <input type="text" name="category" id="category" class="form-control"  value="{{ $employee->category ??'' }}">
+                                                    <input type="text" name="category" id="category" class="form-control" value="{{ old('category') }}">
                                                 </div>
 
                                                 <!-- Cost -->
                                                 <div class="col-md-4">
                                                     <label for="cost" class="form-label">{{ __('Cost') }}</label>
-                                                    <input type="text" name="cost" id="cost" class="form-control"  value="{{ $employee->cost ??'' }}">
+                                                    <input type="text" name="cost" id="cost" class="form-control" value="{{ old('cost') }}">
                                                 </div>
 
                                                 <!-- Availability Health Insurance Council -->

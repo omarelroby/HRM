@@ -529,7 +529,7 @@
                                                 <!-- Category -->
                                                 <div class="col-md-4">
                                                     <label for="category" class="form-label">{{ __('Category') }}</label>
-                                                    <input type="text" name="category" id="category" class="form-control"  value="{{ $employee->category ??'' }}">
+                                                    <input type="text" name="category" id="category" class="form-control"  value="{{ $employee->cost ??'' }}">
                                                 </div>
 
                                                 <!-- Cost -->
