@@ -181,7 +181,8 @@
                                             <div class="accordion-button">
                                                 <div class="d-flex align-items-center flex-fill">
                                                     <h5>{{ __('ID_qama_details') }}</h5>
-                                                     <a href="#" class="d-flex align-items-center collapsed collapse-arrow"  data-bs-toggle="collapse" data-bs-target="#primaryBorderTwo" aria-expanded="false" aria-controls="primaryBorderTwo">
+                                                    <a href="#" class="btn btn-sm btn-icon ms-auto" data-bs-toggle="modal" data-bs-target="#edit_bank"> </a>
+                                                    <a href="#" class="d-flex align-items-center collapsed collapse-arrow"  data-bs-toggle="collapse" data-bs-target="#primaryBorderTwo" aria-expanded="false" aria-controls="primaryBorderTwo">
                                                         <i class="ti ti-chevron-down fs-18"></i>
                                                     </a>
                                                 </div>
@@ -283,7 +284,8 @@
                                                             <div class="d-flex align-items-center justify-content-between flex-fill">
                                                                 <h5>{{ __('Address_in_Saudi_Arabia') }}</h5>
                                                                 <div class="d-flex">
-                                                                     <a href="#" class="d-flex align-items-center collapsed collapse-arrow" data-bs-toggle="collapse" data-bs-target="#primaryBorderFour" aria-expanded="false" aria-controls="primaryBorderFour">
+                                                                    <a href="#" class="btn btn-icon btn-sm"  data-bs-toggle="modal" data-bs-target="#edit_education"> </a>
+                                                                    <a href="#" class="d-flex align-items-center collapsed collapse-arrow" data-bs-toggle="collapse" data-bs-target="#primaryBorderFour" aria-expanded="false" aria-controls="primaryBorderFour">
                                                                         <i class="ti ti-chevron-down fs-18"></i>
                                                                     </a>
                                                                 </div>
