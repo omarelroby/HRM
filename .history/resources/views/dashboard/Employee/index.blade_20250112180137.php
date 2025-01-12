@@ -209,12 +209,12 @@
                                                 @php
                                                     // List of nullable columns
                                                     $nullableColumns = [
-                                                          'name_ar', 'dob', 'jobtitle_id',
+                                                          'name_ar', 'dob', 'nationality_id','jobtitle_id',
                                                         'phone', 'address', 'email', 'personal_email', 'password', 'employee_id', 'branch_id', 'department_id',
                                                         'designation_id',
-                                                             
-                                                          'insurance_number',
-                                                        'residence_number', 'passport_number', 'city', 'work_time', 'nationality_type',
+                                                          'tax_payer_id', 'salary_type', 'salary', 'expiry_date',
+                                                        'driving_license_number', 'driving_license', 'insurance_number', 'contract_number', 'commencement_date',
+                                                        'social_status', 'residence_number', 'passport_number', 'city', 'work_time', 'nationality_type',
                                                         'religion', 'out_of_saudia', 'employer_phone', 'place_of_issuance_of_ID_residence', 'iqama_issuance_date_Hijri',
                                                         'iqama_issuance_date_gregorian', 'iqama_issuance_expirydate_Hijri', 'iqama_issuance_expirydate_gregorian',
                                                         'iqama_attachment', 'place_of_issuance_of_passport', 'passport_issuance_date_gregorian', 'passport_issuance_expirydate_gregorian',
@@ -222,11 +222,12 @@
                                                         'mother_country', 'emergency_contact_name', 'emergency_contact_relationship', 'emergency_contact_address',
                                                         'emergency_contact_phone', 'custom_field_corona', 'custom_field_notes', 'Join_date_gregorian', 'Join_date_hijri',
                                                         'labor_hire_company', 'work_unit', 'class', 'direct_manager', 'permission', 'uploading_record_permission',
-                                                        'contract_type', 'contract_duration', 'employee_on_probation',
-                                                        'payment_type', 'employee_account_type',  'policy_number',
+                                                        'contract_type', 'contract_duration', 'employee_on_probation', 'probation_periods_duration', 'probation_periods_status',
+                                                        'payment_type', 'employee_account_type', 'bank_IBAN_number', 'policy_number',
                                                         'insurance_startdate', 'category', 'cost', 'availability_health_insurance_council', 'health_insurance_council_startdate',
-                                                        'insurance_document', 'annual_leave_entitlement', 'shift', 'location',
-
+                                                        'insurance_document', 'annual_leave_entitlement', 'shift', 'location', 'medical_insurance_number', 'medical_insurance_card_number',
+                                                        'medical_insurance_start_date', 'medical_insurance_end_date', 'medical_blood_type', 'medical_insurance_type',
+                                                        'medical_cover_ratio', 'medical_insurance_policy', 'insurance_company_id', 'login_image', 'national_id'
                                                     ];
 
                                                     // Check if any nullable column is null
@@ -234,7 +235,6 @@
                                                     foreach ($nullableColumns as $column) {
                                                         if (is_null($employee->$column)) {
                                                             $isIncomplete = true;
-
                                                             break;
                                                         }
                                                     }
@@ -893,7 +893,7 @@
                                     <label for="work_time" class="form-label">{{ __('job_type') }}</label>
                                     <select class="form-control" name="work_time" id="work_time">
                                         @foreach($job_types as $id => $type)
-                                            <option value="{{ $type->id }}" {{ old('work_time') == $id ? 'selected' : '' }}>{{ $type->name }}</option>
+                                            <option value="{{ $type }}" {{ old('work_time') == $id ? 'selected' : '' }}>{{ $type->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -902,7 +902,6 @@
                                     <div class="form-group col-md-3">
                                         <label for="work_unit" class="form-label">{{ __('work_unit') }}</label>
                                         <select class="form-control" name="work_unit" id="work_unit">
-                                            <option value="">{{   __('work_unit')}} /</option>
                                             @foreach($work_units as $id => $unit)
                                                 <option value="{{ $unit->id }}" {{ old('work_unit') == $id ? 'selected' : '' }}>{{ $unit->name }}</option>
                                             @endforeach

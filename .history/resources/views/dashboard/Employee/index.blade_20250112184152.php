@@ -207,40 +207,47 @@
                                         <td>
                                             <div class="d-flex align-items-center">
                                                 @php
-                                                    // List of nullable columns
-                                                    $nullableColumns = [
-                                                          'name_ar', 'dob', 'jobtitle_id',
-                                                        'phone', 'address', 'email', 'personal_email', 'password', 'employee_id', 'branch_id', 'department_id',
-                                                        'designation_id',
-                                                             
-                                                          'insurance_number',
-                                                        'residence_number', 'passport_number', 'city', 'work_time', 'nationality_type',
-                                                        'religion', 'out_of_saudia', 'employer_phone', 'place_of_issuance_of_ID_residence', 'iqama_issuance_date_Hijri',
-                                                        'iqama_issuance_date_gregorian', 'iqama_issuance_expirydate_Hijri', 'iqama_issuance_expirydate_gregorian',
-                                                        'iqama_attachment', 'place_of_issuance_of_passport', 'passport_issuance_date_gregorian', 'passport_issuance_expirydate_gregorian',
-                                                        'passport_attachment', 'building_number', 'street_name', 'region', 'country', 'postal_code', 'mother_city',
-                                                        'mother_country', 'emergency_contact_name', 'emergency_contact_relationship', 'emergency_contact_address',
-                                                        'emergency_contact_phone', 'custom_field_corona', 'custom_field_notes', 'Join_date_gregorian', 'Join_date_hijri',
-                                                        'labor_hire_company', 'work_unit', 'class', 'direct_manager', 'permission', 'uploading_record_permission',
-                                                        'contract_type', 'contract_duration', 'employee_on_probation',
-                                                        'payment_type', 'employee_account_type',  'policy_number',
-                                                        'insurance_startdate', 'category', 'cost', 'availability_health_insurance_council', 'health_insurance_council_startdate',
-                                                        'insurance_document', 'annual_leave_entitlement', 'shift', 'location',
+                                                // List of nullable columns
+                                                $nullableColumns = [
+                                                    'name_ar', 'dob', 'jobtitle_id', 'phone', 'address', 'email', 'personal_email', 'password',
+                                                    'employee_id', 'branch_id', 'department_id', 'designation_id', 'expiry_date', 'insurance_number',
+                                                    'contract_number', 'residence_number', 'passport_number', 'city', 'work_time', 'nationality_type',
+                                                    'religion', 'out_of_saudia', 'employer_phone', 'place_of_issuance_of_ID_residence',
+                                                    'iqama_issuance_date_Hijri', 'iqama_issuance_date_gregorian', 'iqama_issuance_expirydate_Hijri',
+                                                    'iqama_issuance_expirydate_gregorian', 'iqama_attachment', 'place_of_issuance_of_passport',
+                                                    'passport_issuance_date_gregorian', 'passport_issuance_expirydate_gregorian', 'passport_attachment',
+                                                    'building_number', 'street_name', 'region', 'country', 'postal_code', 'mother_city',
+                                                    'mother_country', 'emergency_contact_name', 'emergency_contact_relationship', 'emergency_contact_address',
+                                                    'emergency_contact_phone', 'custom_field_corona', 'custom_field_notes', 'Join_date_gregorian',
+                                                    'Join_date_hijri', 'labor_hire_company', 'work_unit', 'class', 'direct_manager', 'permission',
+                                                    'uploading_record_permission', 'contract_type', 'contract_duration', 'employee_on_probation',
+                                                    'payment_type', 'employee_account_type', 'policy_number', 'insurance_startdate', 'category',
+                                                    'cost', 'availability_health_insurance_council', 'health_insurance_council_startdate',
+                                                    'insurance_document', 'annual_leave_entitlement', 'shift', 'location',
+                                                ];
 
-                                                    ];
-
-                                                    // Check if any nullable column is null
-                                                    $isIncomplete = false;
-                                                    foreach ($nullableColumns as $column) {
-                                                        if (is_null($employee->$column)) {
-                                                            $isIncomplete = true;
-
-                                                            break;
-                                                        }
+                                                // Collect empty columns
+                                                $emptyColumns = [];
+                                                foreach ($nullableColumns as $column) {
+                                                    if (is_null($employee->$column)) {
+                                                        $emptyColumns[] = $column; // Add column to the list of empty columns
                                                     }
-                                                @endphp
+                                                }
 
-                                                @if ($isIncomplete)
+                                                // Display the empty columns
+                                                if (!empty($emptyColumns)) {
+                                                    echo '<h4>Empty Columns:</h4><ul>';
+                                                    foreach ($emptyColumns as $column) {
+                                                        echo '<li>' . $column . '</li>';
+                                                    }
+                                                    echo '</ul>';
+                                                } else {
+                                                    echo '<p>All fields are filled!</p>';
+                                                }
+                                            @endphp
+
+
+                                                {{-- @if ($isIncomplete)
                                                     <!-- Show "Complete Data" button if any column is null -->
                                                     <a href="{{ route('employee.edit', $employee->id) }}" class="btn btn-sm btn-warning me-2" title="Complete Data">
                                                         <i class="fas fa-exclamation-circle"></i> {{ __('Complete Data') }}
@@ -250,7 +257,7 @@
                                                     <a href="{{ route('employee.edit', $employee->id) }}" class="btn btn-sm btn-primary me-2" title="Edit">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
-                                                @endif
+                                                @endif --}}
 
                                                 <!-- Delete Button -->
                                                 <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_modal"

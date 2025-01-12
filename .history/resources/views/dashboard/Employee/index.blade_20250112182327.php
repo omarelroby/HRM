@@ -209,11 +209,11 @@
                                                 @php
                                                     // List of nullable columns
                                                     $nullableColumns = [
-                                                          'name_ar', 'dob', 'jobtitle_id',
+                                                          'name_ar', 'dob', 'nationality_id','jobtitle_id',
                                                         'phone', 'address', 'email', 'personal_email', 'password', 'employee_id', 'branch_id', 'department_id',
                                                         'designation_id',
-                                                             
-                                                          'insurance_number',
+                                                            'expiry_date',
+                                                          'insurance_number', 'contract_number',
                                                         'residence_number', 'passport_number', 'city', 'work_time', 'nationality_type',
                                                         'religion', 'out_of_saudia', 'employer_phone', 'place_of_issuance_of_ID_residence', 'iqama_issuance_date_Hijri',
                                                         'iqama_issuance_date_gregorian', 'iqama_issuance_expirydate_Hijri', 'iqama_issuance_expirydate_gregorian',
@@ -225,8 +225,9 @@
                                                         'contract_type', 'contract_duration', 'employee_on_probation',
                                                         'payment_type', 'employee_account_type',  'policy_number',
                                                         'insurance_startdate', 'category', 'cost', 'availability_health_insurance_council', 'health_insurance_council_startdate',
-                                                        'insurance_document', 'annual_leave_entitlement', 'shift', 'location',
-
+                                                        'insurance_document', 'annual_leave_entitlement', 'shift', 'location',  
+                                                        'medical_insurance_start_date', 'medical_insurance_end_date', 'medical_blood_type', 'medical_insurance_type',
+                                                        'medical_cover_ratio', 'medical_insurance_policy', 'insurance_company_id', 'login_image', 'national_id'
                                                     ];
 
                                                     // Check if any nullable column is null
@@ -234,7 +235,6 @@
                                                     foreach ($nullableColumns as $column) {
                                                         if (is_null($employee->$column)) {
                                                             $isIncomplete = true;
-
                                                             break;
                                                         }
                                                     }
