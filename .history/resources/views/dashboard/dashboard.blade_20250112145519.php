@@ -767,8 +767,8 @@ const ctx = document.getElementById('mySemiDonutChart').getContext('2d');
                 panY: false,
                 wheelX: "none",
                 wheelY: "none",
-                paddingLeft: 0,
-                paddingRight: 0,
+                paddingLeft: 0, // No padding on the left since Y-axis is on the right
+                paddingRight: 0, // No padding on the right
                 paddingTop: 20,
                 paddingBottom: 20
             }));
@@ -782,7 +782,7 @@ const ctx = document.getElementById('mySemiDonutChart').getContext('2d');
                 minorGridEnabled: true,
                 inversed: true,
                 location: 1,
-                width: am5.percent(40)
+                width: am5.percent(40) // Adjust as necessary
             });
 
             yRenderer.labels.template.setAll({
@@ -791,6 +791,13 @@ const ctx = document.getElementById('mySemiDonutChart').getContext('2d');
                 oversizedBehavior: "wrap",
                 textAlign: "right",
                 tooltipText: "{category}"
+            });
+
+            // Apply custom row background color
+            yRenderer.grid.template.setAll({
+                strokeOpacity: 0,          // Hide grid lines
+                fill: am5.color("#f8864f"), // Set the row background color
+                fillOpacity: 0.5           // Adjust transparency for better visibility
             });
 
             var yAxis = chart.yAxes.push(am5xy.CategoryAxis.new(root, {
@@ -804,15 +811,15 @@ const ctx = document.getElementById('mySemiDonutChart').getContext('2d');
             var xRenderer = am5xy.AxisRendererX.new(root, {
                 strokeOpacity: 0.1,
                 minGridDistance: 80,
-                width: am5.percent(70)
+                width: am5.percent(70) // X-axis takes 70% of the chart width
             });
 
             var xAxis = chart.xAxes.push(am5xy.ValueAxis.new(root, {
                 maxDeviation: 0,
                 min: 0,
-                strictMinMax: true,
-                extraMin: 0.01,
-                extraMax: 0.01,
+                strictMinMax: true, // Ensure the axis strictly adheres to min and max values
+                extraMin: 0.01, // Reduce extra space at the start of the X-axis
+                extraMax: 0.01, // Reduce extra space at the end of the X-axis
                 numberFormatter: am5.NumberFormatter.new(root, {
                     "numberFormat": "#,###a"
                 }),
@@ -839,10 +846,13 @@ const ctx = document.getElementById('mySemiDonutChart').getContext('2d');
                 strokeOpacity: 0
             });
 
-            // Set the same custom color for all columns
-            series.columns.template.setAll({
-                fill: am5.color("#f8864f"), // Your custom color
-                stroke: am5.color("#f8864f")
+            // Make each column a different color
+            series.columns.template.adapters.add("fill", function (fill, target) {
+                return chart.get("colors").getIndex(series.columns.indexOf(target));
+            });
+
+            series.columns.template.adapters.add("stroke", function (stroke, target) {
+                return chart.get("colors").getIndex(series.columns.indexOf(target));
             });
 
             // Set data dynamically from PHP
@@ -872,18 +882,26 @@ const ctx = document.getElementById('mySemiDonutChart').getContext('2d');
 
             // Axis sorting
             function sortCategoryAxis() {
+                // Sort by value
                 series.dataItems.sort(function (x, y) {
-                    return y.get("valueX") - x.get("valueX");
+                    return y.get("valueX") - x.get("valueX"); // Sort in descending order
                 });
 
+                // Go through each axis item
                 am5.array.each(yAxis.dataItems, function (dataItem) {
+                    // Get corresponding series item
                     var seriesDataItem = getSeriesItem(dataItem.get("category"));
 
                     if (seriesDataItem) {
+                        // Get index of series data item
                         var index = series.dataItems.indexOf(seriesDataItem);
+                        // Calculate delta position
                         var deltaPosition = (index - dataItem.get("index", 0)) / series.dataItems.length;
+                        // Set index to be the same as series data item index
                         dataItem.set("index", index);
+                        // Set deltaPosition instantly
                         dataItem.set("deltaPosition", -deltaPosition);
+                        // Animate delta position to 0
                         dataItem.animate({
                             key: "deltaPosition",
                             to: 0,
@@ -893,6 +911,7 @@ const ctx = document.getElementById('mySemiDonutChart').getContext('2d');
                     }
                 });
 
+                // Sort axis items by index
                 yAxis.dataItems.sort(function (x, y) {
                     return x.get("index") - y.get("index");
                 });
@@ -904,6 +923,5 @@ const ctx = document.getElementById('mySemiDonutChart').getContext('2d');
 
         }); // end am5.ready()
     </script>
-
 
 @endpush

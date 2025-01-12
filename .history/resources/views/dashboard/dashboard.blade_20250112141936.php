@@ -750,160 +750,161 @@ const ctx = document.getElementById('mySemiDonutChart').getContext('2d');
     <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
     <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
     <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+
+    <!-- Chart code -->
     <script>
         am5.ready(function() {
 
-            // Create root element
-            var root = am5.Root.new("chartdiv");
+        // Create root element
+        var root = am5.Root.new("chartdiv");
 
-            // Set themes
-            root.setThemes([
-                am5themes_Animated.new(root)
-            ]);
+        // Set themes
+        root.setThemes([
+          am5themes_Animated.new(root)
+        ]);
 
-            // Create chart
-            var chart = root.container.children.push(am5xy.XYChart.new(root, {
-                panX: false,
-                panY: false,
-                wheelX: "none",
-                wheelY: "none",
-                paddingLeft: 0,
-                paddingRight: 0,
-                paddingTop: 20,
-                paddingBottom: 20
-            }));
+        // Create chart
+        var chart = root.container.children.push(am5xy.XYChart.new(root, {
+          panX: false,
+          panY: false,
+          wheelX: "none",
+          wheelY: "none",
+          paddingLeft: 0
+        }));
 
-            // Hide zoom-out button
-            chart.zoomOutButton.set("forceHidden", true);
+        // Hide zoom-out button
+        chart.zoomOutButton.set("forceHidden", true);
 
-            // Create Y-axis renderer
-            var yRenderer = am5xy.AxisRendererY.new(root, {
-                minGridDistance: 30,
-                minorGridEnabled: true,
-                inversed: true,
-                location: 1,
-                width: am5.percent(40)
-            });
+        // Create axes
+        var yRenderer = am5xy.AxisRendererY.new(root, {
+          minGridDistance: 30,
+          minorGridEnabled: true
+        });
 
-            yRenderer.labels.template.setAll({
-                fontSize: 14,
-                maxWidth: 150,
-                oversizedBehavior: "wrap",
-                textAlign: "right",
-                tooltipText: "{category}"
-            });
+        yRenderer.grid.template.set("location", 1);
 
-            var yAxis = chart.yAxes.push(am5xy.CategoryAxis.new(root, {
-                maxDeviation: 0,
-                categoryField: "network",
-                renderer: yRenderer,
-                tooltip: am5.Tooltip.new(root, { themeTags: ["axis"] })
-            }));
+        var yAxis = chart.yAxes.push(am5xy.CategoryAxis.new(root, {
+          maxDeviation: 0,
+          categoryField: "network",
+          renderer: yRenderer,
+          tooltip: am5.Tooltip.new(root, { themeTags: ["axis"] })
+        }));
 
-            // Create X-axis
-            var xRenderer = am5xy.AxisRendererX.new(root, {
-                strokeOpacity: 0.1,
-                minGridDistance: 80,
-                width: am5.percent(70)
-            });
+        var xAxis = chart.xAxes.push(am5xy.ValueAxis.new(root, {
+          maxDeviation: 0,
+          min: 0,
+          numberFormatter: am5.NumberFormatter.new(root, {
+            "numberFormat": "#,###a"
+          }),
+          extraMax: 0.1,
+          renderer: am5xy.AxisRendererX.new(root, {
+            strokeOpacity: 0.1,
+            minGridDistance: 80
+          })
+        }));
 
-            var xAxis = chart.xAxes.push(am5xy.ValueAxis.new(root, {
-                maxDeviation: 0,
-                min: 0,
-                strictMinMax: true,
-                extraMin: 0.01,
-                extraMax: 0.01,
-                numberFormatter: am5.NumberFormatter.new(root, {
-                    "numberFormat": "#,###a"
-                }),
-                renderer: xRenderer
-            }));
+        // Add series
+        var series = chart.series.push(am5xy.ColumnSeries.new(root, {
+          name: "Series 1",
+          xAxis: xAxis,
+          yAxis: yAxis,
+          valueXField: "value",
+          categoryYField: "network",
+          tooltip: am5.Tooltip.new(root, {
+            pointerOrientation: "left",
+            labelText: "{valueX}"
+          })
+        }));
 
-            // Add series
-            var series = chart.series.push(am5xy.ColumnSeries.new(root, {
-                name: "Series 1",
-                xAxis: xAxis,
-                yAxis: yAxis,
-                valueXField: "value",
-                categoryYField: "network",
-                tooltip: am5.Tooltip.new(root, {
-                    pointerOrientation: "left",
-                    labelText: "{valueX}"
-                })
-            }));
+        // Rounded corners for columns
+        series.columns.template.setAll({
+          cornerRadiusTR: 5,
+          cornerRadiusBR: 5,
+          strokeOpacity: 0
+        });
 
-            // Rounded corners for columns
-            series.columns.template.setAll({
-                cornerRadiusTR: 5,
-                cornerRadiusBR: 5,
-                strokeOpacity: 0
-            });
+        // Make each column to be of a different color
+        series.columns.template.adapters.add("fill", function (fill, target) {
+          return chart.get("colors").getIndex(series.columns.indexOf(target));
+        });
 
-            // Set the same custom color for all columns
-            series.columns.template.setAll({
-                fill: am5.color("#f8864f"), // Your custom color
-                stroke: am5.color("#f8864f")
-            });
+        series.columns.template.adapters.add("stroke", function (stroke, target) {
+          return chart.get("colors").getIndex(series.columns.indexOf(target));
+        });
 
-            // Set data dynamically from PHP
-            var departmentNames = @json($departmentNames);
-            var totalEmployees = @json($total_employees);
+        // Set data dynamically from PHP
+        var departmentNames = @json($departmentNames);
+        var totalEmployees = @json($total_employees);
 
-            var data = departmentNames.map((name, index) => {
-                return {
-                    network: name,
-                    value: totalEmployees[index]
-                };
-            });
+        var data = departmentNames.map((name, index) => {
+            return {
+                network: name,
+                value: totalEmployees[index]
+            };
+        });
 
-            yAxis.data.setAll(data);
-            series.data.setAll(data);
-            sortCategoryAxis();
+        yAxis.data.setAll(data);
+        series.data.setAll(data);
+        sortCategoryAxis();
 
-            // Get series item by category
-            function getSeriesItem(category) {
-                for (var i = 0; i < series.dataItems.length; i++) {
-                    var dataItem = series.dataItems[i];
-                    if (dataItem.get("categoryY") == category) {
-                        return dataItem;
-                    }
-                }
+        // Get series item by category
+        function getSeriesItem(category) {
+          for (var i = 0; i < series.dataItems.length; i++) {
+            var dataItem = series.dataItems[i];
+            if (dataItem.get("categoryY") == category) {
+              return dataItem;
             }
+          }
+        }
 
-            // Axis sorting
-            function sortCategoryAxis() {
-                series.dataItems.sort(function (x, y) {
-                    return y.get("valueX") - x.get("valueX");
-                });
+        chart.set("cursor", am5xy.XYCursor.new(root, {
+          behavior: "none",
+          xAxis: xAxis,
+          yAxis: yAxis
+        }));
 
-                am5.array.each(yAxis.dataItems, function (dataItem) {
-                    var seriesDataItem = getSeriesItem(dataItem.get("category"));
+        // Axis sorting
+        function sortCategoryAxis() {
+          // Sort by value
+          series.dataItems.sort(function (x, y) {
+            return x.get("valueX") - y.get("valueX"); // descending
+          })
 
-                    if (seriesDataItem) {
-                        var index = series.dataItems.indexOf(seriesDataItem);
-                        var deltaPosition = (index - dataItem.get("index", 0)) / series.dataItems.length;
-                        dataItem.set("index", index);
-                        dataItem.set("deltaPosition", -deltaPosition);
-                        dataItem.animate({
-                            key: "deltaPosition",
-                            to: 0,
-                            duration: 1000,
-                            easing: am5.ease.out(am5.ease.cubic)
-                        });
-                    }
-                });
+          // Go through each axis item
+          am5.array.each(yAxis.dataItems, function (dataItem) {
+            // get corresponding series item
+            var seriesDataItem = getSeriesItem(dataItem.get("category"));
 
-                yAxis.dataItems.sort(function (x, y) {
-                    return x.get("index") - y.get("index");
-                });
+            if (seriesDataItem) {
+              // get index of series data item
+              var index = series.dataItems.indexOf(seriesDataItem);
+              // calculate delta position
+              var deltaPosition = (index - dataItem.get("index", 0)) / series.dataItems.length;
+              // set index to be the same as series data item index
+              dataItem.set("index", index);
+              // set deltaPosition instanlty
+              dataItem.set("deltaPosition", -deltaPosition);
+              // animate delta position to 0
+              dataItem.animate({
+                key: "deltaPosition",
+                to: 0,
+                duration: 1000,
+                easing: am5.ease.out(am5.ease.cubic)
+              })
             }
+          });
 
-            // Make stuff animate on load
-            series.appear(1000);
-            chart.appear(1000, 100);
+          // Sort axis items by index.
+          yAxis.dataItems.sort(function (x, y) {
+            return x.get("index") - y.get("index");
+          });
+        }
+
+        // Make stuff animate on load
+        series.appear(1000);
+        chart.appear(1000, 100);
 
         }); // end am5.ready()
     </script>
-
 
 @endpush

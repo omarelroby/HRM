@@ -750,7 +750,7 @@ const ctx = document.getElementById('mySemiDonutChart').getContext('2d');
     <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
     <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
     <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
-    <script>
+    <<script>
         am5.ready(function() {
 
             // Create root element
@@ -904,6 +904,5 @@ const ctx = document.getElementById('mySemiDonutChart').getContext('2d');
 
         }); // end am5.ready()
     </script>
-
 
 @endpush
