@@ -58,12 +58,11 @@
                             @endphp
 
                             <!-- Language Dropdown -->
-                            <li class="dropdown" style="{{ app()->getLocale() == 'en' ? 'margin-right: 50px;' : 'margin-left: 100;' }}">
+                            <li class="dropdown" style="{{ app()->getLocale()=='en'?margin-right:150px : }}">
                                 <a class="dropdown-toggle count-info" href="#" id="languageDropdown" role="button"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fa fa-globe text-warning fa-lg"></i> <!-- Increased icon size -->
                                 </a>
-
                                 <ul class="dropdown-menu {{ $currantLang == 'ar' ? 'dropdown-menu-left' : '' }}"
                                     aria-labelledby="languageDropdown"
                                     style="position: absolute; transform: translate3d(0px, 10px, 0px); top: 0px; right: 0px; width: 120px; min-width: 0; will-change: transform;">

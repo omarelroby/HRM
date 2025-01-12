@@ -32,13 +32,18 @@
 				</a>
 
 				<div class="header-user">
-                    <div class="nav user-menu nav-list">
-                        <!-- Logout Section -->
-                        <div class="me-auto d-flex align-items-center" id="header-search">
+					<div class="nav user-menu nav-list">
+
+						<div class="me-auto d-flex align-items-center" id="header-search">
                             <!-- Logout Form (Hidden) -->
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
                             </form>
+
+                            <!-- Logout Link -->
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            </a>
 
                             <!-- Logout Button -->
                             <a id="toggle_btn" href="{{ route('logout') }}" class="btn btn-menubar me-1" title="Logout"
@@ -47,47 +52,11 @@
                             </a>
                         </div>
 
-                        <!-- Language Dropdown Section -->
-                        <div class="d-flex align-items-center">
-                            @php
-                                use App\Models\Utility;
-                                $users = \Auth::user();
-                                $currantLang = $users->currentLanguage();
-                                $languages = Utility::languages();
-                                $profile = asset(Storage::url('uploads/avatar/'));
-                            @endphp
 
-                            <!-- Language Dropdown -->
-                            <li class="dropdown" style="{{ app()->getLocale() == 'en' ? 'margin-right: 50px;' : 'margin-left: 100;' }}">
-                                <a class="dropdown-toggle count-info" href="#" id="languageDropdown" role="button"
-                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa fa-globe text-warning fa-lg"></i> <!-- Increased icon size -->
-                                </a>
 
-                                <ul class="dropdown-menu {{ $currantLang == 'ar' ? 'dropdown-menu-left' : '' }}"
-                                    aria-labelledby="languageDropdown"
-                                    style="position: absolute; transform: translate3d(0px, 10px, 0px); top: 0px; right: 0px; width: 120px; min-width: 0; will-change: transform;">
-                                    <div class="dropdown-divider"></div> <!-- Divider after the first item -->
 
-                                    @foreach($languages as $key => $language)
-                                        @if($language != 'urdu') <!-- Skip 'urdu' language -->
-                                            <li>
-                                                <a class="dropdown-item @if($language == $currantLang) text-danger @endif"
-                                                   href="{{ route('change.language', $language) }}">
-                                                    @if($language == 'ar')
-                                                        العربية
-                                                    @else
-                                                        English
-                                                    @endif
-                                                </a>
-                                            </li>
-                                        @endif
-                                    @endforeach
-                                </ul>
-                            </li>
-                        </div>
-                    </div>
-                </div>
+					</div>
+				</div>
 
 				<!-- Mobile Menu -->
 				<div class="dropdown mobile-user-menu">

@@ -32,62 +32,108 @@
 				</a>
 
 				<div class="header-user">
-                    <div class="nav user-menu nav-list">
-                        <!-- Logout Section -->
-                        <div class="me-auto d-flex align-items-center" id="header-search">
+					<div class="nav user-menu nav-list">
+
+						<div class="me-auto d-flex align-items-center" id="header-search">
                             <!-- Logout Form (Hidden) -->
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
                             </form>
 
+                            <!-- Logout Link -->
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                
+                            </a>
+
                             <!-- Logout Button -->
                             <a id="toggle_btn" href="{{ route('logout') }}" class="btn btn-menubar me-1" title="Logout"
                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                <i class="ti ti-arrow-bar-to-left text-danger"></i> <!-- Bootstrap red color -->
+                                <i class="ti ti-arrow-bar-to-left"></i>
                             </a>
                         </div>
 
-                        <!-- Language Dropdown Section -->
-                        <div class="d-flex align-items-center">
+
+						<!-- /Horizontal Single -->
+
+						<div class="d-flex align-items-center">
+							<div class="me-1">
+								<a href="#" class="btn btn-menubar btnFullscreen">
+									<i class="ti ti-maximize"></i>
+								</a>
+							</div>
                             @php
-                                use App\Models\Utility;
-                                $users = \Auth::user();
-                                $currantLang = $users->currentLanguage();
-                                $languages = Utility::languages();
-                                $profile = asset(Storage::url('uploads/avatar/'));
-                            @endphp
-
-                            <!-- Language Dropdown -->
-                            <li class="dropdown" style="{{ app()->getLocale() == 'en' ? 'margin-right: 50px;' : 'margin-left: 100;' }}">
-                                <a class="dropdown-toggle count-info" href="#" id="languageDropdown" role="button"
-                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa fa-globe text-warning fa-lg"></i> <!-- Increased icon size -->
+                            use App\Models\Utility;
+                            $users = \Auth::user();
+                            $currantLang = $users->currentLanguage();
+                            $languages = Utility::languages();
+                            $profile = asset(Storage::url('uploads/avatar/'));
+                             @endphp
+                            <li class="dropdown">
+                                <a class="dropdown-toggle count-info" href="#" id="languageDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <!-- Increase size of the globe icon -->
+                                    <i class="fa fa-globe text-warning fa-1x"></i> <!-- Increase icon size here -->
                                 </a>
+                            <ul class="dropdown-menu   {{ $currantLang == 'ar' ? 'dropdown-menu-left' : '' }}"
+                                aria-labelledby="languageDropdown"
+                                style="position: absolute; transform: translate3d(0px, 30px, 0px); top: 0px; right: 0px; width:  80px; min-width: 0; will-change: transform;">
 
-                                <ul class="dropdown-menu {{ $currantLang == 'ar' ? 'dropdown-menu-left' : '' }}"
-                                    aria-labelledby="languageDropdown"
-                                    style="position: absolute; transform: translate3d(0px, 10px, 0px); top: 0px; right: 0px; width: 120px; min-width: 0; will-change: transform;">
-                                    <div class="dropdown-divider"></div> <!-- Divider after the first item -->
+                                <div class="dropdown-divider"></div> <!-- Divider after the first item -->
 
-                                    @foreach($languages as $key => $language)
-                                        @if($language != 'urdu') <!-- Skip 'urdu' language -->
-                                            <li>
-                                                <a class="dropdown-item @if($language == $currantLang) text-danger @endif"
-                                                   href="{{ route('change.language', $language) }}">
-                                                    @if($language == 'ar')
-                                                        العربية
-                                                    @else
-                                                        English
-                                                    @endif
-                                                </a>
-                                            </li>
-                                        @endif
-                                    @endforeach
-                                </ul>
+                                @foreach($languages as $key => $language)
+                                    @if($language != 'urdu') <!-- Skip 'urdu' language -->
+                                        <li>
+                                            <a class="dropdown-item @if($language == $currantLang) text-danger @endif"
+                                               href="{{ route('change.language', $language) }}">
+                                                @if($language == 'ar')
+                                                    العربية
+                                                @else
+                                                    English
+                                                @endif
+                                            </a>
+                                        </li>
+                                    @endif
+                                @endforeach
+                            </ul>
                             </li>
-                        </div>
-                    </div>
-                </div>
+
+                            </li>
+
+							<div class="dropdown me-1">
+								<a href="#" class="btn btn-menubar" data-bs-toggle="dropdown">
+									<i class="ti ti-layout-grid-remove"></i>
+								</a>
+								<div class="dropdown-menu dropdown-menu-end">
+									<div class="card mb-0 border-0 shadow-none">
+										<div class="card-header">
+											<h4>Applications</h4>
+										</div>
+										<div class="card-body">
+											<a href="https://smarthr.dreamstechnologies.com/html/template/calendar.html" class="d-block pb-2">
+												<span class="avatar avatar-md bg-transparent-dark me-2"><i class="ti ti-calendar text-gray-9"></i></span>Calendar
+											</a>
+											<a href="https://smarthr.dreamstechnologies.com/html/template/todo.html" class="d-block py-2">
+												<span class="avatar avatar-md bg-transparent-dark me-2"><i class="ti ti-subtask text-gray-9"></i></span>To Do
+											</a>
+											<a href="https://smarthr.dreamstechnologies.com/html/template/notes.html" class="d-block py-2">
+												<span class="avatar avatar-md bg-transparent-dark me-2"><i class="ti ti-notes text-gray-9"></i></span>Notes
+											</a>
+											<a href="https://smarthr.dreamstechnologies.com/html/template/file-manager.html" class="d-block py-2">
+												<span class="avatar avatar-md bg-transparent-dark me-2"><i class="ti ti-folder text-gray-9"></i></span>File Manager
+											</a>
+											<a href="https://smarthr.dreamstechnologies.com/html/template/kanban-view.html" class="d-block py-2">
+												<span class="avatar avatar-md bg-transparent-dark me-2"><i class="ti ti-layout-kanban text-gray-9"></i></span>Kanban
+											</a>
+											<a href="https://smarthr.dreamstechnologies.com/html/template/invoices.html" class="d-block py-2 pb-0">
+												<span class="avatar avatar-md bg-transparent-dark me-2"><i class="ti ti-file-invoice text-gray-9"></i></span>Invoices
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 
 				<!-- Mobile Menu -->
 				<div class="dropdown mobile-user-menu">
