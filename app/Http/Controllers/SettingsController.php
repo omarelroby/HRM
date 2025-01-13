@@ -43,6 +43,7 @@ class SettingsController extends Controller
     public function store(Request $request)
     {
 
+
         if (\Auth::user()->type == 'company' || \Auth::user()->type == 'super admin') {
             if ($request->logo) {
                 $request->validate(
@@ -408,25 +409,26 @@ class SettingsController extends Controller
 
     public function saveBusinessSettings(Request $request)
     {
-
         if (\Auth::user()->type == 'company' || \Auth::user()->type == 'super admin') {
-
             $user = \Auth::user();
+
+            // For Company Logo
             if ($request->company_logo) {
+                $request->validate([
+                    'company_logo' => 'image|mimes:png|max:20480',
+                ]);
 
-                $request->validate(
-                    [
-                        'company_logo' => 'image|mimes:png|max:20480',
-                    ]
-                );
+                $logoName = $user->id . '_logo.png';
+                $logoPath = storage_path('app/uploads/logo/' . $logoName);
 
-                $logoName     = $user->id . '_logo.png';
-                $path         = $request->file('company_logo')->storeAs('uploads/logo/', $logoName);
-                $company_logo = !empty($request->company_logo) ? $logoName : 'logo.png';
+                // Unlink old logo if it exists
+                if (file_exists($logoPath)) {
+                    unlink($logoPath);
+                }
 
-
+                $path = $request->file('company_logo')->storeAs('uploads/logo/', $logoName);
                 \DB::insert(
-                    'insert into settings (`value`, `name`,`created_by`) values (?, ?, ?) ON DUPLICATE KEY UPDATE `value` = VALUES(`value`) ',
+                    'insert into settings (`value`, `name`, `created_by`) values (?, ?, ?) ON DUPLICATE KEY UPDATE `value` = VALUES(`value`)',
                     [
                         $logoName,
                         'company_logo',
@@ -435,20 +437,23 @@ class SettingsController extends Controller
                 );
             }
 
-
+            // For Small Logo
             if ($request->company_small_logo) {
-                $request->validate(
-                    [
-                        'company_small_logo' => 'image|mimes:png|max:20480',
-                    ]
-                );
+                $request->validate([
+                    'company_small_logo' => 'image|mimes:png|max:20480',
+                ]);
+
                 $smallLogoName = $user->id . '_small_logo.png';
-                $path          = $request->file('company_small_logo')->storeAs('uploads/logo/', $smallLogoName);
+                $smallLogoPath = storage_path('app/uploads/logo/' . $smallLogoName);
 
-                $company_small_logo = !empty($request->company_small_logo) ? $smallLogoName : 'small_logo.png';
+                // Unlink old small logo if it exists
+                if (file_exists($smallLogoPath)) {
+                    unlink($smallLogoPath);
+                }
 
+                $path = $request->file('company_small_logo')->storeAs('uploads/logo/', $smallLogoName);
                 \DB::insert(
-                    'insert into settings (`value`, `name`,`created_by`) values (?, ?, ?) ON DUPLICATE KEY UPDATE `value` = VALUES(`value`) ',
+                    'insert into settings (`value`, `name`, `created_by`) values (?, ?, ?) ON DUPLICATE KEY UPDATE `value` = VALUES(`value`)',
                     [
                         $smallLogoName,
                         'company_small_logo',
@@ -457,19 +462,23 @@ class SettingsController extends Controller
                 );
             }
 
+            // For Favicon
             if ($request->company_favicon) {
-                $request->validate(
-                    [
-                        'company_favicon' => 'image|mimes:png|max:20480',
-                    ]
-                );
+                $request->validate([
+                    'company_favicon' => 'image|mimes:png|max:20480',
+                ]);
+
                 $favicon = $user->id . '_favicon.png';
-                $path    = $request->file('company_favicon')->storeAs('uploads/logo/', $favicon);
+                $faviconPath = storage_path('app/uploads/logo/' . $favicon);
 
-                $company_favicon = !empty($request->favicon) ? $favicon : 'favicon.png';
+                // Unlink old favicon if it exists
+                if (file_exists($faviconPath)) {
+                    unlink($faviconPath);
+                }
 
+                $path = $request->file('company_favicon')->storeAs('uploads/logo/', $favicon);
                 \DB::insert(
-                    'insert into settings (`value`, `name`,`created_by`) values (?, ?, ?) ON DUPLICATE KEY UPDATE `value` = VALUES(`value`) ',
+                    'insert into settings (`value`, `name`, `created_by`) values (?, ?, ?) ON DUPLICATE KEY UPDATE `value` = VALUES(`value`)',
                     [
                         $favicon,
                         'company_favicon',
@@ -478,15 +487,16 @@ class SettingsController extends Controller
                 );
             }
 
+            // Handle Other Settings
             if (!empty($request->title_text) || !empty($request->metakeyword) || !empty($request->metadesc)) {
                 $post = $request->all();
-
                 unset($post['_token'], $post['company_logo'], $post['company_small_logo'], $post['company_favicon']);
+
                 $settings = Utility::settings();
                 foreach ($post as $key => $data) {
                     if (in_array($key, array_keys($settings)) && !empty($data)) {
                         \DB::insert(
-                            'insert into settings (`value`, `name`,`created_by`) values (?, ?, ?) ON DUPLICATE KEY UPDATE `value` = VALUES(`value`) ',
+                            'insert into settings (`value`, `name`, `created_by`) values (?, ?, ?) ON DUPLICATE KEY UPDATE `value` = VALUES(`value`)',
                             [
                                 $data,
                                 $key,

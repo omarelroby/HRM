@@ -110,7 +110,7 @@
                         </div>
                         <div class="ms-2 overflow-hidden">
                             <p class="fs-12 fw-medium mb-1 text-truncate">{{ __('New Joiners') }}</p>
-                            <h4>{{ $new_join }}</h4>
+                            <h4>67</h4>
                         </div>
                     </div>
 

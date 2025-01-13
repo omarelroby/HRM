@@ -12,17 +12,17 @@
     <div class="sidebar-logo">
         <!-- Normal Logo -->
         <a href="{{ $logo.'/logo.png' }}" class="logo logo-normal">
-            <img style="width: 250; height:50;" src="{{ $logo.'/2_logo.png' }}" alt="Logo" class="logo-img">
+            <img style="width: 250; height:50;" src="{{  $logo.'/'.\Auth::user()->id.'_logo.png' }}" alt="Logo" class="logo-img">
         </a>
 
         <!-- Small Logo -->
         <a href="https://smarthr.dreamstechnologies.com/html/template/index.html" class="logo-small">
-            <img src="{{ $logo.'/2_logo.png' }}" alt="Logo" class="logo-img-small">
+            <img src="{{ $logo.'/'.\Auth::user()->id.'_logo.png' }}" alt="Logo" class="logo-img-small">
         </a>
 
         <!-- Dark Logo -->
         <a href="https://smarthr.dreamstechnologies.com/html/template/index.html" class="dark-logo">
-            <img src="{{ $logo.'/2_logo.png' }}" alt="Logo" class="logo-img-dark">
+            <img src="{{  $logo.'/'.\Auth::user()->id.'_logo.png'}}" alt="Logo" class="logo-img-dark">
         </a>
     </div>
 

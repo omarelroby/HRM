@@ -10,7 +10,7 @@
 	<meta name="keywords" content="admin, estimates, bootstrap, business, html5, responsive, Projects">
 	<meta name="author" content="Dreams technologies - Bootstrap Admin Template">
 	<meta name="robots" content="noindex, nofollow">
-	<title>Mwerdi Login</title>
+	<title>Smarthr Admin Template</title>
 
 	<!-- Favicon -->
 	<link rel="shortcut icon" type="image/x-icon" href="https://smarthr.dreamstechnologies.com/html/template/assets/img/favicon.png">
@@ -62,7 +62,7 @@
     <div class="main-wrapper">
         <div class="container-fluid">
             <div class="d-flex justify-content-center align-items-center vh-100">
-                <div class="col-md-8">
+                <div class="col-md-4">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
                         <h3 class="text-center mb-4">{{ __('Login') }}</h3>
@@ -114,32 +114,6 @@
                                 </a>
                             </div>
                         @endif
-
-                        <div class="login-or">
-                            <span class="span-or">Or</span>
-                        </div>
-                        <div class="mt-2">
-                            <div class="d-flex align-items-center justify-content-center flex-wrap">
-                                <div class="text-center me-2 flex-fill">
-                                    <a href="javascript:void(0);"
-                                        class="br-10 p-2 btn btn-info d-flex align-items-center justify-content-center">
-                                        <img class="img-fluid m-1" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/icons/facebook-logo.svg" alt="Facebook">
-                                    </a>
-                                </div>
-                                <div class="text-center me-2 flex-fill">
-                                    <a href="javascript:void(0);"
-                                        class="br-10 p-2 btn btn-outline-light border d-flex align-items-center justify-content-center">
-                                        <img class="img-fluid m-1" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/icons/google-logo.svg" alt="Facebook">
-                                    </a>
-                                </div>
-                                <div class="text-center flex-fill">
-                                    <a href="javascript:void(0);"
-                                        class="bg-dark br-10 p-2 btn btn-dark d-flex align-items-center justify-content-center">
-                                        <img class="img-fluid m-1" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/icons/apple-logo.svg" alt="Apple">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
                     </form>
                 </div>
             </div>

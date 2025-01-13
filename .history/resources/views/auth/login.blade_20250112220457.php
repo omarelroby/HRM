@@ -10,7 +10,7 @@
 	<meta name="keywords" content="admin, estimates, bootstrap, business, html5, responsive, Projects">
 	<meta name="author" content="Dreams technologies - Bootstrap Admin Template">
 	<meta name="robots" content="noindex, nofollow">
-	<title>Mwerdi Login</title>
+	<title>Smarthr Admin Template</title>
 
 	<!-- Favicon -->
 	<link rel="shortcut icon" type="image/x-icon" href="https://smarthr.dreamstechnologies.com/html/template/assets/img/favicon.png">
@@ -62,7 +62,7 @@
     <div class="main-wrapper">
         <div class="container-fluid">
             <div class="d-flex justify-content-center align-items-center vh-100">
-                <div class="col-md-8">
+                <div class="col-md-4">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
                         <h3 class="text-center mb-4">{{ __('Login') }}</h3>
@@ -114,7 +114,7 @@
                                 </a>
                             </div>
                         @endif
-
+                       
                         <div class="login-or">
                             <span class="span-or">Or</span>
                         </div>

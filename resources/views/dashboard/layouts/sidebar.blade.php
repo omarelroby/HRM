@@ -5,26 +5,43 @@
     $company_small_logo=Utility::getValByName('company_small_logo');
     $profile=asset(Storage::url('uploads/avatar/'));
 @endphp
+<style>
+    .sidebar-logo {
+        display: flex; /* Enable flexbox */
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Center vertically */
+        height: 100px; /* Adjust as needed to provide space for the logo */
+        background-color: #ffffff; /* Optional: Add a background color */
+        padding: 10px; /* Optional: Add padding for spacing */
+        border-right: 1px solid #e0e0e0; /* Optional: Add a bottom border */
+    }
 
+    .logo-img, .logo-img-small, .logo-img-dark {
+        display: block; /* Ensure the image is treated as a block element */
+        margin: 0 auto; /* Center the image horizontally */
+    }
+
+</style>
 
 <div class="sidebar mb-4" id="sidebar">
     <!-- Logo Section -->
     <div class="sidebar-logo">
         <!-- Normal Logo -->
-        <a href="{{ $logo.'/logo.png' }}" class="logo logo-normal">
-            <img style="width: 250; height:60px;" src="{{ $logo.'/2_logo.png' }}" alt="Logo" class="logo-img">
+        <a href="{{ route('home') }}" class="logo logo-normal">
+            <img style="width: 120px; height: 60px; object-fit: cover;" src="{{  $logo.'/'.\Auth::user()->id.'_logo.png' }}" alt="Logo" class="logo-img">
         </a>
 
         <!-- Small Logo -->
-        <a href="https://smarthr.dreamstechnologies.com/html/template/index.html" class="logo-small">
-            <img src="{{ $logo.'/2_logo.png' }}" alt="Logo" class="logo-img-small">
+        <a href="{{ route('home') }}" class="logo-small">
+            <img src="{{  $logo.'/'.\Auth::user()->id.'_logo.png' }}" alt="Logo" class="logo-img-small">
         </a>
 
         <!-- Dark Logo -->
-        <a href="https://smarthr.dreamstechnologies.com/html/template/index.html" class="dark-logo">
-            <img src="{{ $logo.'/2_logo.png' }}" alt="Logo" class="logo-img-dark">
+        <a href="{{ route('home') }}" class="dark-logo">
+            <img src="{{ $logo.'/'.\Auth::user()->id.'_logo.png' }}" alt="Logo" class="logo-img-dark">
         </a>
     </div>
+
 
     <!-- Profile Section -->
     <div class="modern-profile p-3 pb-0">
@@ -49,10 +66,10 @@
 
 
     <!-- Sidebar Menu -->
-    <div class="sidebar-inner slimscroll">
-        <div id="sidebar-menu " class="sidebar-menu">
-            <ul>
-                {{-- <li class="menu-title"><span>{{ __('Main menu') }}</span></li> --}}
+    <div class="sidebar-inner slimscroll" style="margin: 5px;">
+        <div id="sidebar-menu" class="sidebar-menu">
+            <ul >
+{{--                 <li class="menu-title" ><span>{{ __('Main menu') }}</span></li>--}}
                 <li>
                     <ul>
                         <li class="{{ Request::is('home')  ? 'active' : '' }}">
