@@ -280,21 +280,27 @@
                                         <label for="street_name" class="form-control-label">{{ __('Street_name') }}</label>
                                         <input type="text" id="street_name" value="{{ $employee->street_name }}" value="{{ $employee->street_name }}" name="street_name" value="{{ old('street_name') }}" class="form-control">
                                     </div>
-
-                                    <div class="form-group col-md-3">
-                                        <label for="region" class="form-control-label">{{ __('Region') }}</label>
-                                        <input type="text" id="region" value="{{ $employee->region }}" name="region"   class="form-control">
-                                    </div>
-
-                                    <div class="form-group col-md-3">
-                                        <label for="city" class="form-control-label">{{ __('City') }}</label>
-                                        <input type="text" id="city" value="{{ $employee->city }}" name="city"   class="form-control">
-                                    </div>
-
                                     <div class="form-group col-md-3">
                                         <label for="country" class="form-control-label">{{ __('Country') }}</label>
-                                        <input type="text" id="country" value="{{ $employee->country }}" name="country"   class="form-control">
+                                        <select id="country" name="country" class="form-control">
+                                            <option value="">{{ __('Select Country') }}</option>
+                                        </select>
                                     </div>
+                                    <div class="form-group col-md-3">
+                                        <label for="region" class="form-control-label">{{ __('Region') }}</label>
+                                        <select id="region" name="region" class="form-control" disabled>
+                                            <option value="">{{ __('Select Region') }}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label for="city" class="form-control-label">{{ __('City') }}</label>
+                                        <select id="city" name="city" class="form-control" disabled>
+                                            <option value="">{{ __('Select City') }}</option>
+                                        </select>
+                                    </div>
+
+
+
 
                                     <div class="form-group col-md-3">
                                         <label for="postal_code" class="form-control-label">{{ __('Postal_code') }}</label>
@@ -631,16 +637,18 @@
                                     </div>
 
                                         <!-- Labor Hire Company -->
-                                        <div class="form-group col-md-3">
-                                            <label for="labor_hire_company" class="form-label">{{ __('labor_hire_company') }}</label>
-                                            <select class="form-control" name="labor_hire_company" id="labor_hire_company">
-                                                @foreach($laborCompanies as $id => $company)
-                                                    <option value="{{ $company->id }}" {{ old('labor_hire_company') == $id ? 'selected' : '' }}>{{ $company->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+                                    <div class="form-group col-md-3">
+                                        <label for="labor_hire_company" class="form-label">{{ __('labor_hire_company') }}</label>
+                                        <select class="form-control" name="labor_hire_company" id="labor_hire_company">
+                                            <option value="0" {{ old('labor_hire_company') == '0' ? 'selected' : '' }}>NO LABOR</option>
+                                            @foreach($laborCompanies as $id => $company)
+                                                <option value="{{ $company->id }}" {{ $company->id == $employee->labor_hire_company ? 'selected' : '' }}>{{ $company->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
 
-                                        <!-- Branch -->
+
+                                    <!-- Branch -->
                                         <div class="form-group col-md-3">
                                             <label for="branch_id" class="form-label">{{ __('Branch') }}</label>
                                             <select required class="form-control" name="branch_id" id="branch_id">
@@ -989,5 +997,105 @@
 
 
 </script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const data = {
+            "Saudi Arabia": {
+                regions: {
+                    "Riyadh Province": ["Riyadh", "Al Kharj", "Al Majmaah"],
+                    "Makkah Province": ["Jeddah", "Makkah", "Taif"],
+                    "Eastern Province": ["Dammam", "Khobar", "Dhahran"]
+                }
+            },
+            "United Arab Emirates": {
+                regions: {
+                    "Abu Dhabi": ["Abu Dhabi City", "Al Ain"],
+                    "Dubai": ["Dubai City"]
+                }
+            },
+            "Egypt": {
+                regions: {
+                    "Cairo Governorate": ["Cairo", "Nasr City"],
+                    "Giza Governorate": ["Giza", "6th of October"]
+                }
+            }
+        };
 
+        const countrySelect = document.getElementById("country");
+        const regionSelect = document.getElementById("region");
+        const citySelect = document.getElementById("city");
+
+        // Populate countries
+        for (const country in data) {
+            const option = document.createElement("option");
+            option.value = country;
+            option.textContent = country;
+            if (country === "{{ $employee->country }}") {
+                option.selected = true; // Retain previously selected country
+            }
+            countrySelect.appendChild(option);
+        }
+
+        // Trigger change event to populate regions
+        if ("{{ $employee->country }}") {
+            populateRegions("{{ $employee->country }}", "{{ $employee->region }}");
+        }
+
+        // Populate regions and cities when country changes
+        countrySelect.addEventListener("change", function () {
+            populateRegions(this.value);
+        });
+
+        // Populate cities when region changes
+        regionSelect.addEventListener("change", function () {
+            populateCities(countrySelect.value, this.value);
+        });
+
+        // Function to populate regions
+        function populateRegions(selectedCountry, selectedRegion = "") {
+            regionSelect.innerHTML = '<option value="">{{ __('Select Region') }}</option>';
+            citySelect.innerHTML = '<option value="">{{ __('Select City') }}</option>';
+            citySelect.disabled = true;
+
+            if (selectedCountry && data[selectedCountry]) {
+                for (const region in data[selectedCountry].regions) {
+                    const option = document.createElement("option");
+                    option.value = region;
+                    option.textContent = region;
+                    if (region === selectedRegion) {
+                        option.selected = true; // Retain previously selected region
+                    }
+                    regionSelect.appendChild(option);
+                }
+                regionSelect.disabled = false;
+
+                if (selectedRegion) {
+                    populateCities(selectedCountry, selectedRegion, "{{ $employee->city }}");
+                }
+            } else {
+                regionSelect.disabled = true;
+            }
+        }
+
+        // Function to populate cities
+        function populateCities(selectedCountry, selectedRegion, selectedCity = "") {
+            citySelect.innerHTML = '<option value="">{{ __('Select City') }}</option>';
+            if (selectedCountry && selectedRegion && data[selectedCountry].regions[selectedRegion]) {
+                data[selectedCountry].regions[selectedRegion].forEach((city) => {
+                    const option = document.createElement("option");
+                    option.value = city;
+                    option.textContent = city;
+                    if (city === selectedCity) {
+                        option.selected = true; // Retain previously selected city
+                    }
+                    citySelect.appendChild(option);
+                });
+                citySelect.disabled = false;
+            } else {
+                citySelect.disabled = true;
+            }
+        }
+    });
+
+</script>
 @endsection

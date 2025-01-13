@@ -239,7 +239,7 @@ class ReportController extends Controller
             $filter['totalPending']  = $totalPending;
 
 
-            return view('report.leave', compact('department', 'branch', 'leaves', 'filterYear', 'filter'));
+            return view('dashboard.report.leave', compact('department', 'branch', 'leaves', 'filterYear', 'filter'));
         }
         else
         {
@@ -428,7 +428,7 @@ class ReportController extends Controller
             $accounts = $accounts->get();
 
 
-            return view('report.account_statement', compact('accountData', 'accountList', 'accounts', 'filterYear'));
+            return view('dashboard.report.account_statement', compact('accountData', 'accountList', 'accounts', 'filterYear'));
         }
         else
         {
@@ -627,10 +627,10 @@ class ReportController extends Controller
                 $carbonday            = \Carbon\Carbon::parse($attendancemovement->start_movement_date)->format('d');
                 $carbonmonth          = \Carbon\Carbon::parse($attendancemovement->start_movement_date)->format('m');
                 $carbonyear           = \Carbon\Carbon::parse($attendancemovement->start_movement_date)->format('Y');
-    
+
                 $begin_of_month = now()->setDay($carbonday)->setMonth($carbonmonth)->setYear($carbonyear);
                 $end_of_month   = $begin_of_month->clone()->addMonthNoOverflow()->subDay();
-    
+
                 for($i = $begin_of_month; $i <= ($end_of_month);  $i->addDay()){
                     $dates[] = $i->format('Y').'/'.$i->format('m').'/'.$i->format('d');
                 }
@@ -644,12 +644,12 @@ class ReportController extends Controller
             {
                 $attendances['id']   = $id;
                 $attendances['name'] = $employee;
-                
+
                 foreach($dates as $date)
                 {
                     $dt                 = Carbon::parse($date);
                     $employeeAttendance = AttendanceEmployee::where('employee_id', $id)->where('date', $date)->first();
-                    
+
                     if(!empty($employeeAttendance) && $employeeAttendance->status == 'Present')
                     {
                         $attendanceStatus[$date.'-'.$dt->format('l')] = 'P';
@@ -691,7 +691,7 @@ class ReportController extends Controller
                         {
                             $startDate           = Carbon::parse($absence->start_date);
                             array_push($datesArr,$startDate->addDays($i)->subDays(1)->format('Y/m/d'));
-                            
+
                             foreach($datesArr as $singleDate)
                             {
                                 $singledt     = Carbon::parse($singleDate);
@@ -711,13 +711,13 @@ class ReportController extends Controller
                                 }
                             }
                         }
-                    } 
+                    }
                 }
-                
+
                 $attendances['status'] = array_merge($attendanceStatus , $absenceStatus) ?? [];
                 $employeesAttendance[] = $attendances;
             }
-            
+
             $totalOverTime   = $ovetimeHours + ($overtimeMins / 60);
             $totalEarlyleave = $earlyleaveHours + ($earlyleaveMins / 60);
             $totalLate       = $lateHours + ($lateMins / 60);
@@ -731,8 +731,8 @@ class ReportController extends Controller
 
             $setting   = Salary_setting::where('created_by',\Auth::user()->id)->first() ?? [];
             $holidays  = Holiday::where('created_by',\Auth::user()->id)->pluck('date')->toarray();
-        
-            return view('report.monthlyAttendance', compact('employeesAttendance','setting','holidays','branch','department','dates', 'data'));
+
+            return view('dashboard.report.monthlyAttendance', compact('employeesAttendance','setting','holidays','branch','department','dates', 'data'));
         }
         else
         {
@@ -742,7 +742,7 @@ class ReportController extends Controller
 
     public function importFile(Request $request)
     {
-        return view('report.import');
+        return view('dashboard.report.import');
     }
 
     public function importMonthlyAttendance(Request $request)
@@ -809,7 +809,7 @@ class ReportController extends Controller
 
             $late1 = strtotime($late1) - strtotime("00:00:00");
             $late2 = strtotime($late2) - strtotime("00:00:00");
-            
+
             $late = \Carbon\Carbon::parse( ($late1 + $late2) )->format("H:i:s");
 
             //early Leaving
@@ -860,8 +860,8 @@ class ReportController extends Controller
                 $employeeAttendance->save();
             }
         }
-       
-        
+
+
         if (empty($errorArray)) {
             $data['status'] = 'success';
             $data['msg']    = __('Record successfully imported');
@@ -1056,5 +1056,5 @@ class ReportController extends Controller
 
         return response()->stream($callback, 200, $headers);
     }
-    
+
 }

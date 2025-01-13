@@ -13,7 +13,9 @@
         height: 100px; /* Adjust as needed to provide space for the logo */
         background-color: #ffffff; /* Optional: Add a background color */
         padding: 10px; /* Optional: Add padding for spacing */
+        /*border-bottom: 1px solid #e0e0e0; !* Optional: Add a bottom border *!*/
         border-right: 1px solid #e0e0e0; /* Optional: Add a bottom border */
+        z-index: 1;
     }
 
     .logo-img, .logo-img-small, .logo-img-dark {
@@ -28,7 +30,8 @@
     <div class="sidebar-logo">
         <!-- Normal Logo -->
         <a href="{{ route('home') }}" class="logo logo-normal">
-            <img style="width: 120px; height: 60px; object-fit: cover;" src="{{  $logo.'/'.\Auth::user()->id.'_logo.png' }}" alt="Logo" class="logo-img">
+
+            <img style="width: auto;   height: 80px; object-fit: cover;" src="{{  $logo.'/'.\Auth::user()->id.'_logo.png' }}" alt="Logo" class="logo-img">
         </a>
 
         <!-- Small Logo -->

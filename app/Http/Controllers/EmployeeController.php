@@ -148,7 +148,6 @@ class EmployeeController extends Controller
 
     public function store(Request $request)
     {
-         
 
         if (\Auth::user()->can('Create Employee')) {
             // Validation

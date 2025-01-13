@@ -567,21 +567,29 @@
                                         <label for="street_name" class="form-control-label">{{ __('Street_name') }}</label>
                                         <input type="text" id="street_name" name="street_name" value="{{ old('street_name') }}" class="form-control">
                                     </div>
+                                    <div class="form-group col-md-3">
+                                        <label for="country" class="form-control-label">{{ __('Country') }}</label>
+                                        <select id="country" name="country" class="form-control">
+                                            <option value="">{{ __('Select Country') }}</option>
+                                        </select>
+                                    </div>
 
                                     <div class="form-group col-md-3">
                                         <label for="region" class="form-control-label">{{ __('Region') }}</label>
-                                        <input type="text" id="region" name="region" value="{{ old('region') }}" class="form-control">
+                                        <select id="region" name="region" class="form-control" disabled>
+                                            <option value="">{{ __('Select Region') }}</option>
+                                        </select>
                                     </div>
 
                                     <div class="form-group col-md-3">
                                         <label for="city" class="form-control-label">{{ __('City') }}</label>
-                                        <input type="text" id="city" name="city" value="{{ old('city') }}" class="form-control">
+                                        <select id="city" name="city" class="form-control" disabled>
+                                            <option value="">{{ __('Select City') }}</option>
+                                        </select>
                                     </div>
 
-                                    <div class="form-group col-md-3">
-                                        <label for="country" class="form-control-label">{{ __('Country') }}</label>
-                                        <input type="text" id="country" name="country" value="{{ old('country') }}" class="form-control">
-                                    </div>
+
+
 
                                     <div class="form-group col-md-3">
                                         <label for="postal_code" class="form-control-label">{{ __('Postal_code') }}</label>
@@ -1415,5 +1423,99 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 </script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const data = {
+            "Saudi Arabia": {
+                regions: {
+                    "Riyadh Province": ["Riyadh", "Al Kharj", "Al Majmaah"],
+                    "Makkah Province": ["Jeddah", "Makkah", "Taif"],
+                    "Eastern Province": ["Dammam", "Khobar", "Dhahran"]
+                }
+            },
+            "United Arab Emirates": {
+                regions: {
+                    "Abu Dhabi": ["Abu Dhabi City", "Al Ain"],
+                    "Dubai": ["Dubai City"]
+                }
+            },
+            "Egypt": {
+                regions: {
+                    "Cairo Governorate": ["Cairo", "Nasr City"],
+                    "Giza Governorate": ["Giza", "6th of October"]
+                }
+            },
+            "Bahrain": {
+                regions: {
+                    "Capital": ["Jidd Ḩafş", "Manama", "Sitrah"],
+                    "Muharraq": ["Al Ḩadd", "Al Muharraq"]
+                }
+            },
+            "Yemen": {
+                regions: {
+                    "'Adan": ["Aden", "Al Buraiqeh", "Craiter"],
+                    "'Amran": ["Amran", "Raydah", "Shaharah"]
+                }
+            }
+        };
 
+        const countrySelect = document.getElementById("country");
+        const regionSelect = document.getElementById("region");
+        const citySelect = document.getElementById("city");
+
+        // Populate countries
+        for (const country in data) {
+            const option = document.createElement("option");
+            option.value = country;
+            option.textContent = country;
+            countrySelect.appendChild(option);
+        }
+
+        // Handle country change
+        countrySelect.addEventListener("change", function () {
+            const selectedCountry = this.value;
+
+            // Clear previous regions and cities
+            regionSelect.innerHTML = '<option value="">Select Region</option>';
+            citySelect.innerHTML = '<option value="">Select City</option>';
+            citySelect.disabled = true;
+
+            if (selectedCountry && data[selectedCountry]) {
+                // Populate regions
+                for (const region in data[selectedCountry].regions) {
+                    const option = document.createElement("option");
+                    option.value = region;
+                    option.textContent = region;
+                    regionSelect.appendChild(option);
+                }
+                regionSelect.disabled = false;
+            } else {
+                regionSelect.disabled = true;
+            }
+        });
+
+        // Handle region change
+        regionSelect.addEventListener("change", function () {
+            const selectedCountry = countrySelect.value;
+            const selectedRegion = this.value;
+
+            // Clear previous cities
+            citySelect.innerHTML = '<option value="">Select City</option>';
+
+            if (selectedCountry && selectedRegion && data[selectedCountry].regions[selectedRegion]) {
+                // Populate cities
+                data[selectedCountry].regions[selectedRegion].forEach((city) => {
+                    const option = document.createElement("option");
+                    option.value = city;
+                    option.textContent = city;
+                    citySelect.appendChild(option);
+                });
+                citySelect.disabled = false;
+            } else {
+                citySelect.disabled = true;
+            }
+        });
+    });
+
+</script>
 @endsection

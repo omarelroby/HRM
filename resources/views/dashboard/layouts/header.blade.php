@@ -5,18 +5,23 @@
 	<meta name="keywords" content="admin, estimates, bootstrap, business, html5, responsive, Projects">
 	<meta name="author" content="Dreams technologies - Bootstrap Admin Template">
 	<meta name="robots" content="noindex, nofollow">
-	<title>HRm</title>
+	<title>Mwerdi</title>
     <link rel="stylesheet" href="{{   asset('public/assets/plugins/tabler-icons/tabler-icons.css') }}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-
+     @php
+         $logo=asset(Storage::url('uploads/logo/'));
+         $company_logo=Utility::getValByName('company_logo');
+         $company_small_logo=Utility::getValByName('company_small_logo');
+         $profile=asset(Storage::url('uploads/avatar/'));
+     @endphp
 	<link rel="stylesheet" href="{{ asset('public/assets/css/style.css')}}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<link rel="stylesheet" href="{{ asset('public/assets/css/dataTables.bootstrap5.min.css')}} ">
 
 	<link rel="stylesheet" href=" {{   asset('public/assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('public/assets/css/bootstrap-datetimepicker.css') }}">
-	<link rel="shortcut icon" type="image/x-icon" href="{{   asset('public/assets/img/favicon.png') }} ">
+	<link rel="shortcut icon" type="image/x-icon" href="{{  $logo.'/'.\Auth::user()->id.'_favicon.png' }} ">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@4.3.0/dist/apexcharts.min.css">
 	{{-- <link rel="apple-touch-icon" sizes="180x180" href="{{   asset('public/assets/img/apple-touch-icon.png') }} "> --}}
 
