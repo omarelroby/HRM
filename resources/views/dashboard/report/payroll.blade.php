@@ -1,8 +1,8 @@
-@extends('layouts.admin')
+@extends('dashboard.layouts.master')
 @section('page-title')
     {{__('Manage Payroll')}}
 @endsection
-@push('script-page')
+@push('scripts')
     <script type="text/javascript" src="{{ asset('js/jszip.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/pdfmake.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/vfs_fonts.js') }}"></script>
@@ -68,82 +68,80 @@
     </script>
 @endpush
 
-@section('action-button')
-    <div class="row d-flex justify-content-end">
-        <div class="col-auto">
-            {{ Form::open(array('route' => array('report.payroll'),'method'=>'get','id'=>'report_payroll')) }}
-            <div class="all-select-box">
-                <div class="btn-box">
-                    <label class="text-type">{{__('Type')}}</label> <br>
-                    <div class="d-flex radio-check">
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" id="monthly" value="monthly" name="type" class="custom-control-input monthly" {{isset($_GET['type']) && $_GET['type']=='monthly' ?'checked':'checked'}}>
-                            <label class="custom-control-label" for="monthly">{{__('Monthly')}}</label>
-                        </div>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" id="yearly" value="yearly" name="type" class="custom-control-input yearly" {{isset($_GET['type']) && $_GET['type']=='yearly' ?'checked':''}}>
-                            <label class="custom-control-label" for="yearly">{{__('Yearly')}}</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 month">
-            <div class="all-select-box">
-                <div class="btn-box">
-                    {{Form::label('month',__('Month'),['class'=>'text-type'])}}
-                    {{Form::month('month',isset($_GET['month'])?$_GET['month']:date('Y-m'),array('class'=>'month-btn form-control'))}}
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 year d-none">
-            <div class="all-select-box">
-                <div class="btn-box">
-                    {{ Form::label('year', __('Year'),['class'=>'text-type']) }}
-                    <select class="form-control select2" id="year" name="year" tabindex="-1" aria-hidden="true">
-                        @for($filterYear['starting_year']; $filterYear['starting_year'] <= $filterYear['ending_year']; $filterYear['starting_year']++)
-                            <option {{(isset($_GET['year']) && $_GET['year'] == $filterYear['starting_year'] ?'selected':'')}} {{(!isset($_GET['year']) && date('Y') == $filterYear['starting_year'] ?'selected':'')}} value="{{$filterYear['starting_year']}}">{{$filterYear['starting_year']}}</option>
-                        @endfor
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12">
-            <div class="all-select-box">
-                <div class="btn-box">
-                    {{ Form::label('branch', __('Branch'),['class'=>'text-type']) }}
-                    {{ Form::select('branch', $branch,isset($_GET['branch'])?$_GET['branch']:'', array('class' => 'form-control select2')) }}
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12">
-            <div class="all-select-box">
-                <div class="btn-box">
-                    {{ Form::label('department', __('Department'),['class'=>'text-type']) }}
-                    {{ Form::select('department', $department,isset($_GET['department'])?$_GET['department']:'', array('class' => 'form-control select2')) }}
-                </div>
-            </div>
-        </div>
-        <div class="col-auto my-custom">
-            <a href="#" class="apply-btn btn btn-primary mt-4" onclick="document.getElementById('report_payroll').submit(); return false;" data-toggle="tooltip" data-original-title="{{__('apply')}}">
-                <span class="btn-inner--icon"><i class="fa fa-search"></i></span>
-            </a>
-            <a href="{{route('report.payroll')}}" class="reset-btn btn btn-danger mt-4" data-toggle="tooltip" data-original-title="{{__('Reset')}}">
-                <span class="btn-inner--icon"><i class="fa fa-trash"></i></span>
-            </a>
-            <a href="#" class="action-btn btn btn-info mt-4" onclick="saveAsPDF()" data-toggle="tooltip" data-original-title="{{__('Download')}}">
-                <span class="btn-inner--icon"><i class="fa fa-download"></i></span>
-            </a>
-        </div>
 
-    </div>
-    {{ Form::close() }}
-@endsection
 
 @section('content')
 
     <div id="printableArea" class="mt-4">
+        <div class="row d-flex justify-content-end">
+            <div class="col-auto">
+                {{ Form::open(array('route' => array('report.payroll'),'method'=>'get','id'=>'report_payroll')) }}
+                <div class="all-select-box">
+                    <div class="btn-box">
+                        <label class="text-type">{{__('Type')}}</label> <br>
+                        <div class="d-flex radio-check">
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="monthly" value="monthly" name="type" class="custom-control-input monthly" {{isset($_GET['type']) && $_GET['type']=='monthly' ?'checked':'checked'}}>
+                                <label class="custom-control-label" for="monthly">{{__('Monthly')}}</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="yearly" value="yearly" name="type" class="custom-control-input yearly" {{isset($_GET['type']) && $_GET['type']=='yearly' ?'checked':''}}>
+                                <label class="custom-control-label" for="yearly">{{__('Yearly')}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 month">
+                <div class="all-select-box">
+                    <div class="btn-box">
+                        {{Form::label('month',__('Month'),['class'=>'text-type'])}}
+                        {{Form::month('month',isset($_GET['month'])?$_GET['month']:date('Y-m'),array('class'=>'month-btn form-control'))}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 year d-none">
+                <div class="all-select-box">
+                    <div class="btn-box">
+                        {{ Form::label('year', __('Year'),['class'=>'text-type']) }}
+                        <select class="form-control select2" id="year" name="year" tabindex="-1" aria-hidden="true">
+                            @for($filterYear['starting_year']; $filterYear['starting_year'] <= $filterYear['ending_year']; $filterYear['starting_year']++)
+                                <option {{(isset($_GET['year']) && $_GET['year'] == $filterYear['starting_year'] ?'selected':'')}} {{(!isset($_GET['year']) && date('Y') == $filterYear['starting_year'] ?'selected':'')}} value="{{$filterYear['starting_year']}}">{{$filterYear['starting_year']}}</option>
+                            @endfor
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12">
+                <div class="all-select-box">
+                    <div class="btn-box">
+                        {{ Form::label('branch', __('Branch'),['class'=>'text-type']) }}
+                        {{ Form::select('branch', $branch,isset($_GET['branch'])?$_GET['branch']:'', array('class' => 'form-control select2')) }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12">
+                <div class="all-select-box">
+                    <div class="btn-box">
+                        {{ Form::label('department', __('Department'),['class'=>'text-type']) }}
+                        {{ Form::select('department', $department,isset($_GET['department'])?$_GET['department']:'', array('class' => 'form-control select2')) }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-auto my-custom">
+                <a href="#" class="apply-btn btn btn-primary mt-4" onclick="document.getElementById('report_payroll').submit(); return false;" data-toggle="tooltip" data-original-title="{{__('apply')}}">
+                    <span class="btn-inner--icon"><i class="fa fa-search"></i></span>
+                </a>
+                <a href="{{route('report.payroll')}}" class="reset-btn btn btn-danger mt-4" data-toggle="tooltip" data-original-title="{{__('Reset')}}">
+                    <span class="btn-inner--icon"><i class="fa fa-trash"></i></span>
+                </a>
+                <a href="#" class="action-btn btn btn-info mt-4" onclick="saveAsPDF()" data-toggle="tooltip" data-original-title="{{__('Download')}}">
+                    <span class="btn-inner--icon"><i class="fa fa-download"></i></span>
+                </a>
+            </div>
 
+        </div>
+        {{ Form::close() }}
         <div class="row mt-3">
             <div class="col">
                 <input type="hidden" value="{{  $filterYear['branch'] .' '.__('Branch') .' '.$filterYear['dateYearRange'].' '.$filterYear['type'].' '.__('Payroll Report of').' '. $filterYear['department'].' '.'Department'}}" id="filename">

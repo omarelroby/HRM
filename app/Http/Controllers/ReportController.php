@@ -568,7 +568,7 @@ class ReportController extends Controller
             $filterYear['starting_year'] = $starting_year;
             $filterYear['ending_year']   = $ending_year;
 
-            return view('report.payroll', compact('payslips', 'filterData', 'branch', 'department', 'filterYear'));
+            return view('dashboard.report.payroll', compact('payslips', 'filterData', 'branch', 'department', 'filterYear'));
         }
         else
         {
@@ -947,7 +947,7 @@ class ReportController extends Controller
             $filterYear['totalEmployee'] = count($timesheetFilters);
 
 
-            return view('report.timesheet', compact('timesheets', 'branch', 'department', 'filterYear', 'timesheetFilters'));
+            return view('dashboard.report.timesheet', compact('timesheets', 'branch', 'department', 'filterYear', 'timesheetFilters'));
         }
         else
         {

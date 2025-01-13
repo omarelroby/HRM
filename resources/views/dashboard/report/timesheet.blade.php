@@ -1,8 +1,8 @@
-@extends('layouts.admin')
+@extends('dashboard.layouts.master')
 @section('page-title')
     {{__('Manage Timesheet')}}
 @endsection
-@push('script-page')
+@push('scripts')
     <script type="text/javascript" src="{{ asset('js/html2pdf.bundle.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/jszip.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/pdfmake.js') }}"></script>
@@ -49,59 +49,56 @@
     </script>
 @endpush
 
-@section('action-button')
-    <div class="row d-flex justify-content-end">
-        <div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 col-12">
-            {{ Form::open(array('route' => array('report.timesheet'),'method'=>'get','id'=>'report_timesheet')) }}
-            <div class="all-select-box">
-                <div class="btn-box">
-                    {{Form::label('start_date',__('Start Date'),['class'=>'text-type'])}}
-                    {{Form::text('start_date',isset($_GET['start_date'])?$_GET['start_date']:date('Y-m-01'),array('class'=>'month-btn form-control datepicker'))}}
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 col-12">
-            <div class="all-select-box">
-                <div class="btn-box">
-                    {{Form::label('end_date',__('End Date'),['class'=>'text-type'])}}
-                    {{Form::text('end_date',isset($_GET['end_date'])?$_GET['end_date']:date('Y-m-t'),array('class'=>'month-btn form-control datepicker'))}}
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 col-12">
-            <div class="all-select-box">
-                <div class="btn-box">
-                    {{ Form::label('branch', __('Branch'),['class'=>'text-type']) }}
-                    {{ Form::select('branch', $branch,isset($_GET['branch'])?$_GET['branch']:'', array('class' => 'form-control select2')) }}
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 col-12">
-            <div class="all-select-box">
-                <div class="btn-box">
-                    {{ Form::label('department', __('Department'),['class'=>'text-type']) }}
-                    {{ Form::select('department', $department,isset($_GET['department'])?$_GET['department']:'', array('class' => 'form-control select2')) }}
-                </div>
-            </div>
-        </div>
-        <div class="col-auto my-custom">
-            <a href="#" class="apply-btn btn btn-primary mt-4" onclick="document.getElementById('report_timesheet').submit(); return false;" data-toggle="tooltip" data-original-title="{{__('apply')}}">
-                <span class="btn-inner--icon"><i class="fa fa-search"></i></span>
-            </a>
-            <a href="{{route('report.timesheet')}}" class="reset-btn btn btn-danger mt-4" data-toggle="tooltip" data-original-title="{{__('Reset')}}">
-                <span class="btn-inner--icon"><i class="fa fa-trash"></i></span>
-            </a>
-            <a href="#" class="action-btn btn btn-info mt-4" onclick="saveAsPDF()" data-toggle="tooltip" data-original-title="{{__('Download')}}">
-                <span class="btn-inner--icon"><i class="fa fa-download"></i></span>
-            </a>
-        </div>
-    </div>
-@endsection
 
 @section('content')
 
     <div id="printableArea" class="mt-4">
-
+        <div class="row d-flex justify-content-end">
+            <div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 col-12">
+                {{ Form::open(array('route' => array('report.timesheet'),'method'=>'get','id'=>'report_timesheet')) }}
+                <div class="all-select-box">
+                    <div class="btn-box">
+                        {{Form::label('start_date',__('Start Date'),['class'=>'text-type'])}}
+                        {{Form::text('start_date',isset($_GET['start_date'])?$_GET['start_date']:date('Y-m-01'),array('class'=>'month-btn form-control datepicker'))}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 col-12">
+                <div class="all-select-box">
+                    <div class="btn-box">
+                        {{Form::label('end_date',__('End Date'),['class'=>'text-type'])}}
+                        {{Form::text('end_date',isset($_GET['end_date'])?$_GET['end_date']:date('Y-m-t'),array('class'=>'month-btn form-control datepicker'))}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 col-12">
+                <div class="all-select-box">
+                    <div class="btn-box">
+                        {{ Form::label('branch', __('Branch'),['class'=>'text-type']) }}
+                        {{ Form::select('branch', $branch,isset($_GET['branch'])?$_GET['branch']:'', array('class' => 'form-control select2')) }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 col-12">
+                <div class="all-select-box">
+                    <div class="btn-box">
+                        {{ Form::label('department', __('Department'),['class'=>'text-type']) }}
+                        {{ Form::select('department', $department,isset($_GET['department'])?$_GET['department']:'', array('class' => 'form-control select2')) }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-auto my-custom">
+                <a href="#" class="apply-btn btn btn-primary mt-4" onclick="document.getElementById('report_timesheet').submit(); return false;" data-toggle="tooltip" data-original-title="{{__('apply')}}">
+                    <span class="btn-inner--icon"><i class="fa fa-search"></i></span>
+                </a>
+                <a href="{{route('report.timesheet')}}" class="reset-btn btn btn-danger mt-4" data-toggle="tooltip" data-original-title="{{__('Reset')}}">
+                    <span class="btn-inner--icon"><i class="fa fa-trash"></i></span>
+                </a>
+                <a href="#" class="action-btn btn btn-info mt-4" onclick="saveAsPDF()" data-toggle="tooltip" data-original-title="{{__('Download')}}">
+                    <span class="btn-inner--icon"><i class="fa fa-download"></i></span>
+                </a>
+            </div>
+        </div>
         <div class="row mt-3">
             <div class="col">
                 <input type="hidden" value="{{$filterYear['branch'] .' '.__('Branch') .' '.__('Timesheet Report').' '}}{{$filterYear['start_date'].' to '.$filterYear['end_date'].' '.__('of').' '.$filterYear['department'].' '.'Department'}}" id="filename">
@@ -187,7 +184,7 @@
                                     </tr>
                                 @endforeach
                             </tbody>
-                        
+
                         </table>
                     </div>
                 </div>
