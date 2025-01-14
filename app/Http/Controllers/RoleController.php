@@ -30,6 +30,7 @@ class RoleController extends Controller
                 $permissions = $permissions->pluck('name', 'id')->toArray();
 
             }
+
             return view('dashboard.role.index',compact('permissions'))->with('roles', $roles);
         }
         else
@@ -97,7 +98,7 @@ class RoleController extends Controller
                 $role->save();
                  foreach($request->permissions as $permission)
                 {
-                    
+
                     $p    = Permission::where('id', '=', $permission)->firstOrFail();
                     $role->givePermissionTo($p);
 

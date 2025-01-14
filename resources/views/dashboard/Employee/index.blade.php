@@ -1369,41 +1369,44 @@ document.addEventListener('DOMContentLoaded', function () {
             contentType: false,
             success: function(response) {
                 if (response.status === 'success') {
-                    // Close the Add Employee Modal
-                    // $('#addEmployeeModal').modal('hide');
-                    closeAddEmployeeModal();
-                    // Reset the form
-                    // $('#add_employee')[0].reset();
+                    closeAddEmployeeModal(); // Close modal
+                    $('#add_employee')[0].reset(); // Reset form
 
                     // Remove validation error states
-                    // $('#add_employee input, #add_employee select').removeClass('is-invalid');
-                    // $('.invalid-feedback').text('').hide();
+                    $('#add_employee input, #add_employee select').removeClass('is-invalid');
+                    $('.invalid-feedback').text('').hide();
 
-                    // // Show success message in a new modal
-                    // $('#successModal .modal-body').text(response.message);
-                    // $('#successModal').modal('show');
+                    // Show success message
+                    alert(response.message);
 
-                    // Optionally, refresh the employee table or page content
-                    // if ($.fn.DataTable) {
-                    //     $('#employeeTable').DataTable().ajax.reload();
-                    // }
+                    // Optionally, refresh the table
+                    if ($.fn.DataTable) {
+                        $('#employeeTable').DataTable().ajax.reload();
+                    }
                 }
             },
             error: function(xhr) {
-                // if (xhr.status === 422) {
-                //     // Handle validation errors
-                //     let errors = xhr.responseJSON.errors;
-                //     $.each(errors, function(key, error) {
-                //         let inputField = $(`#add_employee [name="${key}"]`);
-                //         inputField.addClass('is-invalid'); // Highlight input field
-                //         inputField.siblings('.invalid-feedback').text(error[0]).show(); // Show error message
-                //     });
-                // } else {
-                //     alert('An error occurred. Please try again.');
-                // }
+                if (xhr.status === 422) {
+                    // Handle validation errors
+                    let errors = xhr.responseJSON.errors;
+
+                    // Clear previous error states
+                    $('#add_employee input, #add_employee select').removeClass('is-invalid');
+                    $('.invalid-feedback').text('').hide();
+
+                    // Display new errors
+                    $.each(errors, function(key, error) {
+                        let inputField = $(`#add_employee [name="${key}"]`);
+                        inputField.addClass('is-invalid'); // Highlight input field
+                        inputField.siblings('.invalid-feedback').text(error[0]).show(); // Show error message
+                    });
+                } else {
+                    alert('An error occurred. Please try again.');
+                }
             }
         });
     });
+
 </script>
 
 <script>

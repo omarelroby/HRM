@@ -193,11 +193,17 @@
                                 <li><a class="{{ Request::is('interview-schedule') ?'active' :'' }}" href="{{ route('interview-schedule.index') }}">{{ __('Interview Schedule') }}</a></li>
                             </ul>
                         </li>
+                        <li class="{{ Request::is('tasks')  ? 'active' : '' }}">
+                            <a href="{{ route('tasks.index') }}">
+                                <i class="ti ti-clock"></i><span>{{ __('tasks') }}</span>
+                            </a>
+                        </li>
                         <li class="{{ Request::is('ticket')  ? 'active' : '' }}">
                             <a href="{{ route('ticket.index') }}">
                                 <i class="ti ti-file-description"></i><span>{{ __('ticket') }}</span>
                             </a>
                         </li>
+
                         <li class="{{ Request::is('event')  ? 'active' : '' }}">
                             <a href="{{ route('event.index') }}">
                                 <i class="ti ti-calendar"></i><span>{{ __('event') }}</span>

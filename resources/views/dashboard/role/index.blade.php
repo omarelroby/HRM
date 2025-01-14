@@ -160,7 +160,7 @@
                                                     'TimeSheet', 'Holiday', 'Plan', 'Assets', 'Document', 'Employee Profile', 'Employee Last Login', 'Indicator', 'Appraisal',
                                                     'Goal Tracking', 'Goal Type', 'Competencies', 'Company Policy', 'Trainer', 'Training', 'Training Type', 'Job Category',
                                                     'Job Stage', 'Job', 'Job Application', 'Job OnBoard', 'Job Application Note', 'Job Application Skill', 'Custom Question',
-                                                    'Interview Schedule', 'Career', 'Report', 'Performance Type'
+                                                    'Interview Schedule', 'Career', 'Report', 'Performance Type','tasks'
                                                 ];
                                                 if (Auth::user()->type == 'super admin') {
                                                     $modules[] = 'Language';

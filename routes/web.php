@@ -860,6 +860,12 @@ Route::resource('ticket', 'TicketController')->middleware(
         'XSS',
     ]
 );
+Route::resource('tasks', 'TasksController')->middleware(
+    [
+        'auth',
+        'XSS',
+    ]
+);
 
 Route::get('attendanceemployee/bulkattendance', 'AttendanceEmployeeController@bulkAttendance')->name('attendanceemployee.bulkattendance')->middleware(
     [
