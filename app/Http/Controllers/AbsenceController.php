@@ -13,7 +13,7 @@ class AbsenceController extends Controller
     public function absenceCreate($id)
     {
         $employee = Employee::find($id);
-        return view('absences.create', compact('employee'));
+        return view('dashboard.absences.create', compact('employee'));
     }
 
     public function store(Request $request)
@@ -40,6 +40,7 @@ class AbsenceController extends Controller
 
             if($attendancemovement->start_movement_date > $startDate || $attendancemovement->end_movement_date < $startDate)
             {
+
                 return redirect()->back()->with('error', __('The start date must be equal to or greater than the start movement date and the end date is equal to or less than the end movement date'));
             }
 

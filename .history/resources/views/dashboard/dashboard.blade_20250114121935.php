@@ -104,7 +104,37 @@
                     </div>
                 </div>
             </div>
-
+        <!-- Employees By Department -->
+        <div class="col-xxl-4 d-flex">
+            <div class="card flex-fill">
+                <div class="card-header pb-2 d-flex align-items-center justify-content-between flex-wrap">
+                    <h5 class="mb-2">Employees By Department</h5>
+                    <div class="dropdown mb-2">
+                        <a href="javascript:void(0);" class="btn btn-white border btn-sm d-inline-flex align-items-center" data-bs-toggle="dropdown">
+                            <i class="ti ti-calendar me-1"></i>This Week
+                        </a>
+                        <ul class="dropdown-menu  dropdown-menu-end p-3">
+                            <li>
+                                <a href="javascript:void(0);" class="dropdown-item rounded-1">This Month</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="dropdown-item rounded-1">This Week</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="dropdown-item rounded-1">Last Week</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div id="emp-department"></div>
+                    <p class="fs-13"><i class="ti ti-circle-filled me-2 fs-8 text-primary"></i>No of
+                        Employees increased by <span class="text-success fw-bold">+20%</span> from last Week
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- /Employees By Department -->
             <div class="col-xxl-4 col-xl-6 d-flex">
                 <div class="card flex-fill">
                     <div class="card-header pb-2 d-flex align-items-center justify-content-between flex-wrap">

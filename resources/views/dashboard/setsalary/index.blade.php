@@ -20,7 +20,7 @@
                             <tr>
                                 <th>{{__('Employee Id')}}</th>
                                 <th>{{__('Name')}}</th>
-                                <th>{{__('Payroll Type') }}</th>
+
                                 <th>{{__('Salary') }}</th>
                                 <th width="3%">{{ __('Action') }}</th>
                             </tr>
@@ -30,12 +30,12 @@
                                 <tr>
                                     <td class="Id">
                                         <a href="{{route('setsalary.show',$employee->id)}}"  data-toggle="tooltip" data-original-title="{{__('View')}}">
-                                            {{ \Auth::user()->employeeIdFormat($employee->employee_id) }}
+                                            {{ \Auth::user()->employeeIdFormat($employee->employee_id) ??'' }}
                                         </a>
                                     </td>
-                                    <td>{{ $employee->name }}</td>
-                                    <td>{{ $employee->salary_type() }}</td>
-                                    <td>{{ \Auth::user()->priceFormat($employee->salary) }}</td>
+                                    <td>{{ $employee->name ??'' }}</td>
+
+                                    <td>{{ \Auth::user()->priceFormat($employee->salary) ??'' }}</td>
                                     <td>
                                         <a href="{{route('setsalary.show',$employee->id)}}" class="edit-icon btn btn-success bg-success" data-toggle="tooltip" data-original-title="{{__('View')}}">
                                             <i class="fa fa-eye"></i>

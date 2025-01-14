@@ -16,11 +16,12 @@ class AllowanceController extends Controller
         $allowance_options = AllowanceOption::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
         $employee          = Employee::find($id);
 
-        return view('allowance.create', compact('employee', 'allowance_options'));
+        return view('dashboard.allowance.create', compact('employee', 'allowance_options'));
     }
 
     public function store(Request $request)
     {
+
         if(\Auth::user()->can('Create Allowance'))
         {
             $validator = \Validator::make(
@@ -46,7 +47,7 @@ class AllowanceController extends Controller
             $allowance->date             = $request->date;
             $allowance->created_by       = \Auth::user()->creatorId();
             $allowance->save();
-
+//            dd($allowance);
             return redirect()->back()->with('success', __('Allowance  successfully created.'));
         }
         else
@@ -89,14 +90,14 @@ class AllowanceController extends Controller
             if($allowance->created_by == \Auth::user()->creatorId())
             {
                 $validator = \Validator::make(
-                    $request->all(), 
+                    $request->all(),
                     [
 
                         'allowance_option' => 'required',
                         'title' => 'required',
                         'amount' => 'required',
                     ]);
-                    
+
                 if($validator->fails())
                 {
                     $messages = $validator->getMessageBag();
