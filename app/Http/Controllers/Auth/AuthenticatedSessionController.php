@@ -151,6 +151,9 @@ class AuthenticatedSessionController extends Controller
 
         }
 
+
+
+
         $user->last_login = date('Y-m-d H:i:s');
         $user->save();
         return redirect()->intended(RouteServiceProvider::HOME);

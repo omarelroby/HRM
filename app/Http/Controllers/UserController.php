@@ -35,6 +35,7 @@ class UserController extends Controller
             {
                 $roles = Role::where('created_by', '=', $user->creatorId())->where('name', '!=', 'employee')->get();
                 $users = User::where('created_by', '=', $user->creatorId())->where('user_status',1)->get();
+
             }
 
             return view('dashboard.user.index', compact('users','roles'));
@@ -51,7 +52,7 @@ class UserController extends Controller
         if(\Auth::user()->can('Create User'))
         {
             $user  = \Auth::user();
-            $roles = Role::where('created_by', '=', $user->creatorId())->where('name', '!=', 'employee')->get()->pluck('name', 'id');
+            $roles = Role::where('created_by', '=', $user->creatorId())->where('name', '!=', 'employee')->get();
             return view('user.create', compact('roles'));
         }
         else
@@ -62,84 +63,85 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        if(\Auth::user()->can('Create User'))
-        {
+        if (\Auth::user()->can('Create User')) {
             $default_language = DB::table('settings')->select('value')->where('name', 'default_language')->first();
-            $validator        = \Validator::make(
-            $request->all(), [
-                'name'     => 'required',
-                'email'    => 'required|unique:users',
-                'password' => 'required',
-            ]);
-            if($validator->fails())
-            {
+
+            $validator = \Validator::make(
+                $request->all(),
+                [
+                    'name'     => 'required',
+                    'email'    => 'required|unique:users',
+                    'password' => 'required',
+                ]
+            );
+
+            if ($validator->fails()) {
                 $messages = $validator->getMessageBag();
                 return redirect()->back()->with('error', $messages->first());
             }
-            if(\Auth::user()->type == 'super admin')
-            {
-                $user = User::create(
-                [
+
+            if (\Auth::user()->type == 'super admin') {
+                // Assign the "Company" role
+                $role_r = Role::where('name', 'Company')->first(); // Ensure the role exists
+
+                $user = User::create([
                     'name'       => $request['name'],
                     'email'      => $request['email'],
                     'password'   => Hash::make($request['password']),
                     'type'       => 'company',
-                    'plan'       => $plan = Plan::where('price', '<=', 0)->first()->id,
+                    'plan'       => Plan::where('price', '<=', 0)->first()->id,
                     'lang'       => !empty($default_language) ? $default_language->value : '',
                     'created_by' => \Auth::user()->id,
                 ]);
 
-                $user->assignRole('Company');
+                $user->assignRole($role_r->name);
+
                 $input               = $request->all();
                 $input['created_by'] = $user->id;
                 Salary_setting::create($input);
                 Utility::jobStage($user->id);
-                $role_r = Role::findById(2);
-            }
-            else
-            {
+            } else {
                 $objUser    = \Auth::user();
                 $total_user = $objUser->countUsers();
                 $plan       = Plan::find($objUser->plan);
 
-                if($total_user < $plan->max_users || $plan->max_users == -1)
-                {
-                    $role_r = Role::findById($request->role);
-                    $user   = User::create(
-                    [
-                        'name' => $request['name'],
-                        'email' => $request['email'],
-                        'password' => Hash::make($request['password']),
-                        'type' => $role_r->name,
-                        'lang' => !empty($default_language) ? $default_language->value : '',
+                if ($total_user < $plan->max_users || $plan->max_users == -1) {
+
+                    $role_r = Role::findById($request->role); // Ensure the role exists
+
+                    $user = User::create([
+                        'name'       => $request['name'],
+                        'email'      => $request['email'],
+                        'password'   => Hash::make($request['password']),
+                        'type'       => $role_r->name,
+                        'lang'       => !empty($default_language) ? $default_language->value : '',
                         'created_by' => \Auth::user()->id,
                     ]);
+
                     $user->assignRole($role_r);
-                }
-                else
-                {
+
+                } else {
                     return redirect()->back()->with('error', __('Your user limit is over, Please upgrade plan.'));
                 }
             }
+
+            // Notify the user via email
             $setings = Utility::settings();
-            if($setings['user_create'] == 1)
-            {
-                $user->type     = $role_r->name;
+            if ($setings['user_create'] == 1) {
+                $user->type     = $role_r->name ?? 'Unknown'; // Fallback if $role_r is undefined (shouldn't happen with this fix)
                 $user->password = $request['password'];
-                try
-                {
+                try {
                     Mail::to($user->email)->send(new UserCreate($user));
-                }
-                catch(\Exception $e)
-                {
+                } catch (\Exception $e) {
                     $smtp_error = __('E-Mail has been not sent due to SMTP configuration');
                 }
-
-                return redirect()->route('user.index')->with('success', __('User successfully created.') . (isset($smtp_error) ? $smtp_error : ''));
             }
-        }
-        else
-        {
+
+            return redirect()->route('user.index')->with(
+                'success',
+                __('User successfully created.') . (isset($smtp_error) ? $smtp_error : '')
+            );
+        } else {
             return response()->json(['error' => __('Permission denied.')], 401);
         }
     }

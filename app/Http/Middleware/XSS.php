@@ -25,36 +25,36 @@ class XSS
         {
             \App::setLocale(\Auth::user()->lang);
 
-            if(\Auth::user()->type == 'super admin')
-            {
-                if(Schema::hasTable('ch_messages'))
-                {
-
-                    if(Schema::hasColumn('ch_messages', 'type') == false)
-                    {
-
-                        Schema::drop('ch_messages');
-                        \DB::table('migrations')->where('migration', 'like', '%ch_messages%')->delete();
-                    }
-                }
-
-                $migrations = $this->getMigrations();
-                $dbMigrations           = $this->getExecutedMigrations();
-                $numberOfUpdatesPending = (count($migrations)+6) - count($dbMigrations);
-
-                if($numberOfUpdatesPending > 0)
-                {
-                    // run code like seeder only when new migration
-                    Utility::addNewData();
-                    return redirect()->route('LaravelUpdater::welcome');
-                }
-
-                $landingData = LandingPageSection::all()->count();
-                if($landingData == 0)
-                {
-                    Utility::add_landing_page_data();
-                }
-            }
+//            if(\Auth::user()->type == 'super admin')
+//            {
+//                if(Schema::hasTable('ch_messages'))
+//                {
+//
+//                    if(Schema::hasColumn('ch_messages', 'type') == false)
+//                    {
+//
+//                        Schema::drop('ch_messages');
+//                        \DB::table('migrations')->where('migration', 'like', '%ch_messages%')->delete();
+//                    }
+//                }
+//
+//                $migrations = $this->getMigrations();
+//                $dbMigrations           = $this->getExecutedMigrations();
+//                $numberOfUpdatesPending = (count($migrations)+6) - count($dbMigrations);
+//
+//                if($numberOfUpdatesPending > 0)
+//                {
+//                    // run code like seeder only when new migration
+//                    Utility::addNewData();
+//                    return redirect()->route('LaravelUpdater::welcome');
+//                }
+//
+//                $landingData = LandingPageSection::all()->count();
+//                if($landingData == 0)
+//                {
+//                    Utility::add_landing_page_data();
+//                }
+//            }
         }
 
         return $next($request);

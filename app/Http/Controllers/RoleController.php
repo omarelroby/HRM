@@ -71,11 +71,12 @@ class RoleController extends Controller
 
     public function store(Request $request)
     {
-
-
-        if(\Auth::user()->can('Create Role'))
+         if(\Auth::user()->can('Create Role'))
         {
-            $role = Role::where('name', '=', $request->name)->first();
+            $role = Role::where('name', '=', $request->name)
+                        ->where('created_by', '=', auth()->user()->creatorId())
+                        ->first();
+
             if(isset($role))
             {
                 return redirect()->back()->with('error', __('The Role has Already Been Taken.'));
@@ -96,6 +97,7 @@ class RoleController extends Controller
                 $role->name       = $name;
                 $role->created_by = \Auth::user()->creatorId();
                 $role->save();
+
                  foreach($request->permissions as $permission)
                 {
 
@@ -103,6 +105,7 @@ class RoleController extends Controller
                     $role->givePermissionTo($p);
 
                 }
+
 
                 return redirect('roles')->with('success', 'Role successfully created.');
             }

@@ -3,6 +3,15 @@
 @section('content')
 <div class="content">
   <div class="row">
+      <div class="d-flex justify-content-end mb-3">
+          @can('Create User')
+              <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6 col-6">
+                  <a href="#" data-bs-toggle="modal" data-bs-target="#addJobTitleModal" class="btn btn-primary">
+                      <i class="fa fa-plus"></i> {{ __('Create') }}
+                  </a>
+              </div>
+          @endcan
+      </div>
     <div class="col-12">
       <div class="card user-list-card">
         <div class="card-header d-flex justify-content-between align-items-center">
@@ -103,8 +112,66 @@
     </div>
   </div>
 </div>
-@endsection
-{{-- Delete Confirmation Modal --}}
+<div class="modal fade" id="addJobTitleModal" tabindex="-1" aria-labelledby="addJobTitleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header bg-light">
+                <h5 class="modal-title" id="addJobTitleModalLabel">{{ __('Add Training') }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body">
+                {!! Form::open(['route' => 'user.store','method' => 'post']) !!}
+                @csrf
+                <div class="row">
+
+                    <div class="form-group col-lg-6 col-md-6">
+                        {!! Form::label('name', __('Name'),['class'=>'form-control-label']) !!}
+                        {!! Form::text('name', null, ['class' => 'form-control','required' => 'required']) !!}
+                    </div>
+
+                    <div class="form-group col-lg-6 col-md-6">
+                        {!! Form::label('email', __('Email'),['class'=>'form-control-label']) !!}
+                        {!! Form::text('email', null, ['class' => 'form-control','required' => 'required']) !!}
+                    </div>
+
+                    <div class="form-group col-lg-6 col-md-6">
+                        {!! Form::label('password', __('Password'),['class'=>'form-control-label']) !!}
+                        {!! Form::password('password', ['class' => 'form-control','required' => 'required']) !!}
+                    </div>
+
+                    @if(\Auth::user()->type != 'super admin')
+                        <div class="form-group col-lg-6 col-md-6">
+                            <label for="role" class="form-control-label">{{ __('User Role') }}</label>
+                            <select name="role" id="role" class="form-control select2" required>
+                                @foreach($roles as $id => $role)
+                                    <option value="{{ $role->id }}"  >
+                                        {{ $role->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('role')
+                            <span class="invalid-role" role="alert">
+        <strong class="text-danger">{{ $message }}</strong>
+    </span>
+                            @enderror
+                        </div>
+                    @endif
+
+
+                    <div class="col-md-12 my-2">
+                        <input type="submit" value="{{__('Create')}}" class="btn btn-primary">
+                        <input type="button" value="{{__('Cancel')}}" class="btn btn-white" data-dismiss="modal">
+                    </div>
+                </div>
+                {!! Form::close() !!}
+
+            </div>
+        </div>
+    </div>
+</div>
 <div class="modal fade" id="delete_modal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-sm">
         <div class="modal-content">
@@ -128,6 +195,9 @@
         </div>
     </div>
 </div>
+
+@endsection
+{{-- Delete Confirmation Modal --}}
 {{-- End Delete Confirmation Modal --}}
 @section('script')
 <script>
