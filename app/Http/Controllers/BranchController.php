@@ -10,9 +10,10 @@ class BranchController extends Controller
 {
     public function index()
     {
-        if(\Auth::user()->can('Manage Branch'))
+        if(\Auth::user()->can('Manage Branch')||(auth()->user()->type='super admin'))
         {
-            $branches = Branch::where('created_by', '=', \Auth::user()->creatorId())->get();
+            $branches = Branch::where('created_by', '=', \Auth::user()->creatorId())
+                ->orWhere('created_by',1)->get();
             $employees = Employee::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
 
             return view('dashboard.branch.index', compact('branches','employees'));
@@ -25,9 +26,11 @@ class BranchController extends Controller
 
     public function create()
     {
-        if(\Auth::user()->can('Create Branch'))
+        if(\Auth::user()->can('Create Branch')||(auth()->user()->type='super admin'))
         {
-            $employees = Employee::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
+            $employees = Employee::where('created_by', \Auth::user()->creatorId())
+
+                ->get()->pluck('name', 'id');
             return view('branch.create',compact('employees'));
         }
         else
@@ -38,7 +41,7 @@ class BranchController extends Controller
 
     public function store(Request $request)
     {
-        if(\Auth::user()->can('Create Branch'))
+        if(\Auth::user()->can('Create Branch')||(auth()->user()->type='super admin'))
         {
             $validator = \Validator::make(
             $request->all(),
@@ -77,9 +80,9 @@ class BranchController extends Controller
 
     public function edit(Branch $branch)
     {
-        if(\Auth::user()->can('Edit Branch'))
+        if(\Auth::user()->can('Edit Branch')||(auth()->user()->type='super admin'))
         {
-            if($branch->created_by == \Auth::user()->creatorId())
+            if($branch->created_by == \Auth::user()->creatorId() || $branch->created_by == 1 )
             {
                 $employees = Employee::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
                 return view('dashboard.branch.edit', compact('branch','employees'));
@@ -97,9 +100,9 @@ class BranchController extends Controller
 
     public function update(Request $request, Branch $branch)
     {
-        if(\Auth::user()->can('Edit Branch'))
+        if(\Auth::user()->can('Edit Branch')||(auth()->user()->type='super admin'))
         {
-            if($branch->created_by == \Auth::user()->creatorId())
+            if($branch->created_by == \Auth::user()->creatorId() || $branch->created_by == 1)
             {
                 $validator = \Validator::make(
                     $request->all(),
@@ -135,9 +138,9 @@ class BranchController extends Controller
 
     public function destroy(Branch $branch)
     {
-        if(\Auth::user()->can('Delete Branch'))
+        if(\Auth::user()->can('Delete Branch')||(auth()->user()->type='super admin'))
         {
-            if($branch->created_by == \Auth::user()->creatorId())
+            if($branch->created_by == \Auth::user()->creatorId()|| $branch->created_by == 1)
             {
                 $branch->delete();
                 return redirect()->route('branch.index')->with('success', __('Branch successfully deleted.'));

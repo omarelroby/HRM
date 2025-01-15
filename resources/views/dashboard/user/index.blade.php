@@ -23,16 +23,24 @@
         <div class="alert alert-danger" style="text-align: center;">{{ session('error') }}</div>
         @endif
         <div class="card-body">
+
           <div class="row">
             @foreach ($users as $user)
               <div class="col-md-6 col-lg-4 col-xl-3 mb-4">
                 <div class="card user-card text-center">
                   <div class="card-body">
+
                     <div class="d-flex justify-content-between align-items-center mb-2">
                       <div class="w-100 text-center">
+
                         <h5 class="card-title mb-0">
-                          <a href="{{ route('user.show',$user->id) }}">{{ $user->name }}</a>
+                        <span class="avatar avatar-xl flex-shrink-0">
+                            <img src="{{$user->avatar?asset(Storage::url($user->avatar)):asset(Storage::url('uploads/avatar/company.png'))}}" class="rounded-circle" alt="img">
+                        </span>
+                         <a href="{{ route('user.show',$user->id) }}">{{ $user->name }}</a>
+
                         </h5>
+
                       </div>
                       <div class="dropdown">
                         <button class="btn btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -53,6 +61,7 @@
                         </ul>
                       </div>
                     </div>
+
                     <p class="card-text mb-2">{{ $user->type }}</p>
                     <span class="badge bg-pink-transparent fs-10 fw-medium">{{ $user->email ?? '' }}</span>
                     <br />
@@ -117,13 +126,14 @@
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header bg-light">
-                <h5 class="modal-title" id="addJobTitleModalLabel">{{ __('Add Training') }}</h5>
+                <h5 class="modal-title" id="addJobTitleModalLabel">{{ __('Add Company User') }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
             <!-- Modal Body -->
             <div class="modal-body">
-                {!! Form::open(['route' => 'user.store','method' => 'post']) !!}
+                {!! Form::open(['route' => 'user.store','method' => 'post', 'enctype' => 'multipart/form-data']) !!}
+
                 @csrf
                 <div class="row">
 
@@ -154,16 +164,30 @@
                             </select>
                             @error('role')
                             <span class="invalid-role" role="alert">
-        <strong class="text-danger">{{ $message }}</strong>
-    </span>
+                            <strong class="text-danger">{{ $message }}</strong>
+                            </span>
                             @enderror
                         </div>
+                    @endif
+                    @if(\Auth::user()->type == 'super admin')
+                        <div class="col-md-6 mb-3">
+                            {{ Form::label('logo', __('logo'), ['class' => 'form-control-label']) }}
+                            <div class="input-group">
+                                <input type="file" class="form-control" name="logo" id="logo" aria-label="Upload logo" required>
+                                <label for="logo" class="input-group-text bg-primary text-white">
+                                    <i class="fas fa-upload me-2"></i>{{ __('Choose File') }}
+                                </label>
+                            </div>
+                            <small class="form-text text-muted">{{ __('Allowed file types: PNG, JPEG') }}</small>
+                        </div>
+
+
                     @endif
 
 
                     <div class="col-md-12 my-2">
                         <input type="submit" value="{{__('Create')}}" class="btn btn-primary">
-                        <input type="button" value="{{__('Cancel')}}" class="btn btn-white" data-dismiss="modal">
+                        <button type="button" class="btn btn-outline-light border me-2" data-bs-dismiss="modal">{{ __('Cancel') }}</button>
                     </div>
                 </div>
                 {!! Form::close() !!}

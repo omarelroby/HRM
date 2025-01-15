@@ -84,15 +84,34 @@ class UserController extends Controller
                 // Assign the "Company" role
                 $role_r = Role::where('name', 'Company')->first(); // Ensure the role exists
 
+
+                if($request->hasFile('logo'))
+                {
+                    $filenameWithExt = $request->file('logo')->getClientOriginalName();
+                    $filename        = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                    $extension       = $request->file('logo')->getClientOriginalExtension();
+                    $fileNameToStore = $filename . '_' . time() . '.' . $extension;
+                    $dir             = storage_path('uploads/avatar/');
+
+
+                    if(!file_exists($dir))
+                    {
+                        mkdir($dir, 0777, true);
+                    }
+                    $path = $request->file('logo')->storeAs('uploads/avatar/', $fileNameToStore);
+
+                }
                 $user = User::create([
                     'name'       => $request['name'],
                     'email'      => $request['email'],
                     'password'   => Hash::make($request['password']),
                     'type'       => 'company',
+                    'avatar'       => $path??'',
                     'plan'       => Plan::where('price', '<=', 0)->first()->id,
                     'lang'       => !empty($default_language) ? $default_language->value : '',
                     'created_by' => \Auth::user()->id,
                 ]);
+
 
                 $user->assignRole($role_r->name);
 
