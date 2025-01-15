@@ -6,32 +6,42 @@ use App\Models\Absence;
 use App\Models\AccountList;
 use App\Models\Announcement;
 use App\Models\AttendanceEmployee;
+use App\Models\Bank;
+use App\Models\Branch;
 use App\Models\CompanyJobRequest;
 use App\Models\Department;
+use App\Models\Designation;
 use App\Models\Employee;
+use App\Models\Employee_shift;
 use App\Models\EmployeeContracts;
 use App\Models\EmployeeRequest;
 use App\Models\Event;
 use App\Models\Job;
 use App\Models\JobApplication;
+use App\Models\Jobtitle;
+use App\Models\Jobtype;
 use App\Models\Laborhirecompany;
 use App\Models\LandingPageSection;
 use App\Models\Meeting;
+use App\Models\Nationality;
 use App\Models\Order;
 use App\Models\Payees;
 use App\Models\Payer;
+use App\Models\Place;
 use App\Models\Plan;
 use App\Models\Task;
 use App\Models\Ticket;
 use App\Models\Trainer;
 use App\Models\User;
 use App\Models\Utility;
+use App\Models\Workunit;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use Spatie\Permission\Models\Role;
 
 
 class HomeController extends Controller
@@ -63,7 +73,7 @@ class HomeController extends Controller
                 $data['departmentNames'] = $departments->pluck('name'); // Unique department names
                 $data['total_employees'] = $departments->pluck('total_employees'); // Count of each department
                 // Get total number of employees
-                $data['employees'] = Employee::count();
+                $data['employees_count'] = Employee::count();
                 $data['all_employees'] = Employee::get()->take(8);
 
 
@@ -133,7 +143,27 @@ class HomeController extends Controller
                     'pending' => $statusCounts[2] ?? 0,
                     'canceled' => $statusCounts[3] ?? 0,
                 ];
+
                 $data['chartData'] = $chartData;
+                $data['employee_location'] = Place::where('created_by', \Auth::user()->creatorId())->get();
+                $data['employee_shifts']= Employee_shift::where('created_by', \Auth::user()->creatorId())->get();
+                $data['banks'] = Bank::where('created_by', \Auth::user()->creatorId())->get();
+                $data['roles'] = Role::where('created_by', '=', \Auth::user()->creatorId())->get();
+                $data['jobclasses'] = ['1','2'];
+                $data['branches']= Branch::where('created_by', \Auth::user()->creatorId())->get();
+                $data['work_units']= Workunit::where('created_by', \Auth::user()->creatorId())->get();
+                $data['job_types']= Jobtype::where('created_by', \Auth::user()->creatorId())->get();
+                $data['jobtitles']= Jobtitle::where('created_by', \Auth::user()->creatorId())->get();
+                $data['employees'] = Employee::where('created_by', \Auth::user()->creatorId())->get();
+                $data['nationalities']     = Nationality::where('created_by', \Auth::user()->creatorId())->get();
+                $data['designations']     = Designation::where('created_by', \Auth::user()->creatorId())->get();
+                $data['departments']  = Department::where('created_by', \Auth::user()->creatorId())->get();
+                $data['laborCompanies'] = Laborhirecompany::where('created_by', \Auth::user()->creatorId())->get();
+
+                $lastMonthStart = Carbon::now()->subMonth()->startOfMonth();
+                $lastMonthEnd = Carbon::now()->subMonth()->endOfMonth();
+                $data['new_join'] = Employee::whereBetween('Join_date_gregorian', [$lastMonthStart, $lastMonthEnd])->count();
+
                 return view('dashboard.dashboard', $data);
             }
             if(\auth()->user()->type=='company')
@@ -155,7 +185,7 @@ class HomeController extends Controller
                 $data['departmentNames'] = $departments->pluck('name'); // Unique department names
                 $data['total_employees'] = $departments->pluck('total_employees'); // Count of each department
                 // Get total number of employees
-                $data['employees'] = Employee::where('created_by',\auth()->user()->id)->count();
+                $data['employees_count'] = Employee::where('created_by',\auth()->user()->id)->count();
                 $data['all_employees'] = Employee::where('created_by',\auth()->user()->id)->get()->take(8);
 
 
@@ -237,7 +267,28 @@ class HomeController extends Controller
                     'pending' => $statusCounts[2] ?? 0,
                     'canceled' => $statusCounts[3] ?? 0,
                 ];
+
                 $data['chartData'] = $chartData;
+
+                $data['employee_location'] = Place::where('created_by', \Auth::user()->creatorId())->get();
+                $data['employee_shifts']= Employee_shift::where('created_by', \Auth::user()->creatorId())->get();
+                $data['banks'] = Bank::where('created_by', \Auth::user()->creatorId())->get();
+                $data['roles'] = Role::where('created_by', '=', \Auth::user()->creatorId())->get();
+                $data['jobclasses'] = ['1','2'];
+                $data['branches']= Branch::where('created_by', \Auth::user()->creatorId())->get();
+                $data['work_units']= Workunit::where('created_by', \Auth::user()->creatorId())->get();
+                $data['job_types']= Jobtype::where('created_by', \Auth::user()->creatorId())->get();
+                $data['jobtitles']= Jobtitle::where('created_by', \Auth::user()->creatorId())->get();
+                $data['employees'] = Employee::where('created_by', \Auth::user()->creatorId())->get();
+                $data['nationalities']     = Nationality::where('created_by', \Auth::user()->creatorId())->get();
+                $data['designations']     = Designation::where('created_by', \Auth::user()->creatorId())->get();
+                $data['departments']  = Department::where('created_by', \Auth::user()->creatorId())->get();
+                $data['laborCompanies'] = Laborhirecompany::where('created_by', \Auth::user()->creatorId())->get();
+
+                $lastMonthStart = Carbon::now()->subMonth()->startOfMonth();
+                $lastMonthEnd = Carbon::now()->subMonth()->endOfMonth();
+                $data['new_join'] = Employee::whereBetween('Join_date_gregorian', [$lastMonthStart, $lastMonthEnd])->count();
+
                 return view('dashboard.dashboard', $data);
             }
 

@@ -13,7 +13,8 @@ class BranchController extends Controller
         if(\Auth::user()->can('Manage Branch')||(auth()->user()->type='super admin'))
         {
             $branches = Branch::where('created_by', '=', \Auth::user()->creatorId())
-                ->orWhere('created_by',1)->get();
+                ->orWhere('created_by',1)
+                ->get();
             $employees = Employee::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
 
             return view('dashboard.branch.index', compact('branches','employees'));

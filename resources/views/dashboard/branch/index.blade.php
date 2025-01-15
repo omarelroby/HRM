@@ -9,10 +9,17 @@
 @section('content')
     <div class="row">
         <div class="d-flex justify-content-end mb-3">
-
+            @if(auth()->user()->type=='super admin')
                 <a href="#" data-bs-toggle="modal" data-bs-target="#addTrainingModal" class="btn btn-primary btn-lg">
                     <i class="fas fa-plus"></i> {{ __('Create New Branch') }}
                 </a>
+            @else
+                @can('Create Branch')
+                <a href="#" data-bs-toggle="modal" data-bs-target="#addTrainingModal" class="btn btn-primary btn-lg">
+                    <i class="fas fa-plus"></i> {{ __('Create New Branch') }}
+                </a>
+                @endcan
+            @endif
 
         </div>
         <div class="col-lg-12">
@@ -39,6 +46,22 @@
                                         <td>{{ $branch->name_ar }}</td>
                                         {{-- <td>{{ $branch->employees ? $branch->employees->name : '' }}</td> --}}
                                         <td class="text-right action-btns">
+                                            @if(auth()->user()->type=='super admin')
+                                                <a href="{{ route('branch.edit',$branch->id) }}"
+                                                   class="btn btn-sm btn-success mr-2"
+                                                   data-toggle="tooltip"
+                                                   title="{{ __('Edit') }}"
+                                                   aria-label="{{ __('Edit') }}">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                                <form method="POST" action="{{ route('branch.destroy', $branch->id) }}" class="d-inline" onsubmit="return confirm('{{ __('Are You Sure?') }}\n{{ __('This action cannot be undone. Do you want to continue?') }}');">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="{{ __('Delete') }}">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                            @else
                                             @can('Edit Branch')
                                              <!-- Reply Button -->
                                              <a href="{{ route('branch.edit',$branch->id) }}"
@@ -50,6 +73,7 @@
                                              </a>
                                              @endcan
 
+
                                               @can('Delete Branch')
                                               <form method="POST" action="{{ route('branch.destroy', $branch->id) }}" class="d-inline" onsubmit="return confirm('{{ __('Are You Sure?') }}\n{{ __('This action cannot be undone. Do you want to continue?') }}');">
                                                   @csrf
@@ -59,6 +83,8 @@
                                                   </button>
                                               </form>
                                               @endcan
+
+                                                @endif
                                                  </td>
                                     </tr>
                                 @endforeach

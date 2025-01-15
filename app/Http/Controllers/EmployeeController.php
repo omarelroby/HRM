@@ -170,6 +170,7 @@ class EmployeeController extends Controller
                 ], 422);
             }
 
+
             // Plan and Employee Count Check
             $objUser = User::find(\Auth::user()->creatorId());
             $total_employee = $objUser->countEmployees();
@@ -181,6 +182,7 @@ class EmployeeController extends Controller
                     'message' => __('Your employee limit is over. Please upgrade your plan.'),
                 ], 403);
             }
+
 
             // Create User
             $user = User::create([

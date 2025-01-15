@@ -12,7 +12,8 @@
                     <div class="card card-bg-1">
                         <div class="card-body p-0">
                             <span class="avatar avatar-xl avatar-rounded border border-2 border-white m-auto d-flex mb-2">
-                                <img src=" " class="w-auto h-auto" alt="Img">
+                                <img src=" {{auth()->user()->avatar?asset(Storage::url(auth()->user()->avatar)):asset(Storage::url('uploads/logo/user.png'))}}" class="w-auto h-auto" alt="Img">
+
                             </span>
                             <div class="text-center px-3 pb-3 border-bottom">
                                 <div class="mb-3">

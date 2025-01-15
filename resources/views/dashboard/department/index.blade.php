@@ -10,11 +10,17 @@
     <div class="row">
 
         <div class="d-flex justify-content-end mb-3">
+            @if(auth()->user()->type=='super admin')
+                <a href="#" data-bs-toggle="modal" data-bs-target="#addTrainingModal" class="btn btn-primary btn-lg">
+                    <i class="fas fa-plus"></i> {{ __('Create New Department') }}
+                </a>
+            @else
             @can('Create Department')
                 <a href="#" data-bs-toggle="modal" data-bs-target="#addTrainingModal" class="btn btn-primary btn-lg">
                     <i class="fas fa-plus"></i> {{ __('Create New Department') }}
                 </a>
             @endcan
+            @endif
         </div>
         <div class="col-lg-12">
             <div class="card shadow-sm">
@@ -44,6 +50,22 @@
 
 
                                         <td class="text-right action-btns">
+                                            @if(auth()->user()->type=='super admin')
+                                                <a href="{{ route('department.edit',$department->id) }}"
+                                                   class="btn btn-sm btn-success mr-2"
+                                                   data-toggle="tooltip"
+                                                   title="{{ __('Edit') }}"
+                                                   aria-label="{{ __('Edit') }}">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                                <form method="POST" action="{{ route('department.destroy', $department->id) }}" class="d-inline" onsubmit="return confirm('{{ __('Are You Sure?') }}\n{{ __('This action cannot be undone. Do you want to continue?') }}');">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="{{ __('Delete') }}">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                            @else
                                             @can('Edit Department')
                                              <!-- Reply Button -->
                                              <a href="{{ route('department.edit',$department->id) }}"
@@ -53,6 +75,7 @@
                                              aria-label="{{ __('Edit') }}">
                                                  <i class="fa fa-edit"></i>
                                              </a>
+
                                              @endcan
 
                                               @can('Delete Department')
@@ -64,6 +87,7 @@
                                                   </button>
                                               </form>
                                               @endcan
+                                            @endif
                                                  </td>
                                     </tr>
                                 @endforeach
