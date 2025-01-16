@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Department;
 use App\Models\Designation;
+use App\Models\Section;
 use Illuminate\Http\Request;
 
 class DesignationController extends Controller
@@ -14,10 +15,11 @@ class DesignationController extends Controller
         if(\Auth::user()->can('Manage Designation'))
         {
             $designations = Designation::where('created_by', '=', \Auth::user()->creatorId())->get();
-            $departments = Department::where('created_by', '=', \Auth::user()->creatorId())->get();
-            $departments = $departments->pluck('name', 'id');
+            $sections = Section::where('created_by', '=', \Auth::user()->creatorId())->get()->pluck('name', 'id');
 
-            return view('dashboard.designation.index', compact('designations','departments'));
+
+
+            return view('dashboard.designation.index', compact('designations','sections'));
         }
         else
         {
@@ -47,7 +49,7 @@ class DesignationController extends Controller
         {
             $validator = \Validator::make(
                 $request->all(), [
-                                   'department_id' => 'required',
+                                   'section_id' => 'required',
                                    'name' => 'required|max:20',
                                    'name_ar' => 'required|max:20',
                                ]
@@ -60,7 +62,7 @@ class DesignationController extends Controller
             }
 
             $designation                = new Designation();
-            $designation->department_id = $request->department_id;
+            $designation->section_id = $request->section_id;
             $designation->name          = $request->name;
             $designation->name_ar          = $request->name_ar;
             $designation->created_by    = \Auth::user()->creatorId();
@@ -88,10 +90,10 @@ class DesignationController extends Controller
             if($designation->created_by == \Auth::user()->creatorId())
             {
 
-                $departments = Department::where('id', $designation->department_id)->first();
-                $departments = $departments->pluck('name', 'id');
+                $sections= Section::where('id', $designation->section_id)->first();
+                $sections = $sections->pluck('name', 'id');
 
-                return view('dashboard.designation.edit', compact('designation', 'departments'));
+                return view('dashboard.designation.edit', compact('designation', 'sections'));
             }
             else
             {
@@ -112,7 +114,7 @@ class DesignationController extends Controller
             {
                 $validator = \Validator::make(
                     $request->all(), [
-                                       'department_id' => 'required',
+                                       'section_id' => 'required',
                                        'name' => 'required|max:20',
                                        'name_ar' => 'required|max:20',
                                    ]
@@ -125,7 +127,7 @@ class DesignationController extends Controller
                 }
                 $designation->name          = $request->name;
                 $designation->name_ar          = $request->name_ar;
-                $designation->department_id = $request->department_id;
+                $designation->section_id = $request->section_id;
                 $designation->save();
 
                 return redirect()->route('designation.index')->with('success', __('Designation  successfully updated.'));

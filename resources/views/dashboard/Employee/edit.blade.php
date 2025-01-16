@@ -90,27 +90,38 @@
                                 </div>
 
                                 <div class="col-md-4">
-                                    <div class="mb-3">
-                                        <label for="designati" class="form-label">{{ __('Departments') }}</label>
-                                        <select name="department_id" required id="designati" class="select select2-hidden-accessible">
-                                            <option value="">{{ __('Select') }}</option>
-                                            @foreach($departments as $department)
-                                                <option @if($department->id == $employee->department_id) selected @endif value="{{ $department->id }}">{{ $department->name }}</option>
-                                            @endforeach
-                                        </select>
-                                        <div id="" class="invalid-feedback"></div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group col-md-4">
-                                    {{ Form::label('designation_id', __('Designation'), ['class' => 'form-label']) }}
-                                    <select name="designation_id" class="select select2-hidden-accessible">
-                                        <option value="">{{ __('Select Designation') }}</option>
-                                        @foreach($designations as $designation)
-                                            <option @if($designation->id == $employee->designation_id) selected @endif value="{{ $designation->id }}">{{ $designation->name }}</option>
+                                    <label for="department" class="form-label">Departments</label>
+                                    <select id="department" name="department_id" class="form-control">
+                                        <option value="">Select Department</option>
+                                        @foreach($departments as $department)
+                                            <option value="{{ $department->id }}" {{ $employee->department_id == $department->id ? 'selected' : '' }}>
+                                                {{ $department->name }}
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>
+
+                                <div class="col-md-4">
+                                    <label for="sub_department" class="form-label">Sub-Departments</label>
+                                    <select id="sub_department" name="sub_dep_id" class="form-control" disabled>
+                                        <option value="">Select Sub-Department</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label for="section" class="form-label">Sections</label>
+                                    <select id="section" name="section_id" class="form-control" disabled>
+                                        <option value="">Select Section</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label for="designation" class="form-label">Designations</label>
+                                    <select id="designation" name="designation_id" class="form-control" disabled>
+                                        <option value="">Select Designation</option>
+                                    </select>
+                                </div>
+
 
                                 <div class="col-md-4">
                                     <div class="mb-3">
@@ -1098,4 +1109,89 @@
     });
 
 </script>
+<script>
+    $(document).ready(function () {
+        const subDepartmentSelect = $('#sub_department');
+        const sectionSelect = $('#section');
+        const designationSelect = $('#designation');
+
+        // Preselected values (replace these with dynamic PHP variables)
+        const selectedDepartment = "{{ $employee->department_id }}";
+        const selectedSubDepartment = "{{ $employee->sub_dep_id }}";
+        const selectedSection = "{{ $employee->section_id }}";
+        const selectedDesignation = "{{ $employee->designation_id }}";
+
+        // Helper function to populate dropdowns
+        function populateDropdown(url, targetSelect, selectedValue, callback) {
+            $.ajax({
+                url: url,
+                type: 'GET',
+                success: function (data) {
+                    targetSelect.html('<option value="">Select</option>');
+                    if (data.length > 0) {
+                        data.forEach(function (item) {
+                            targetSelect.append(
+                                `<option value="${item.id}" ${
+                                    selectedValue == item.id ? 'selected' : ''
+                                }>${item.name}</option>`
+                            );
+                        });
+                        targetSelect.prop('disabled', false);
+                        if (callback) callback();
+                    }
+                },
+                error: function () {
+                    alert('Failed to load data. Please try again.');
+                },
+            });
+        }
+
+        // Load sub-departments when department is selected
+        $('#department').on('change', function () {
+            const departmentId = $(this).val();
+            subDepartmentSelect.html('<option value="">Select Sub-Department</option>').prop('disabled', true);
+            sectionSelect.html('<option value="">Select Section</option>').prop('disabled', true);
+            designationSelect.html('<option value="">Select Designation</option>').prop('disabled', true);
+
+            if (departmentId) {
+                populateDropdown(`/get-sub-departments/${departmentId}`, subDepartmentSelect, null);
+            }
+        });
+
+        // Load sections when sub-department is selected
+        subDepartmentSelect.on('change', function () {
+            const subDepartmentId = $(this).val();
+            sectionSelect.html('<option value="">Select Section</option>').prop('disabled', true);
+            designationSelect.html('<option value="">Select Designation</option>').prop('disabled', true);
+
+            if (subDepartmentId) {
+                populateDropdown(`/get-sections/${subDepartmentId}`, sectionSelect, null);
+            }
+        });
+
+        // Load designations when section is selected
+        sectionSelect.on('change', function () {
+            const sectionId = $(this).val();
+            designationSelect.html('<option value="">Select Designation</option>').prop('disabled', true);
+
+            if (sectionId) {
+                populateDropdown(`/get-designations/${sectionId}`, designationSelect, null);
+            }
+        });
+
+        // Prepopulate on page load (edit mode)
+        if (selectedDepartment) {
+            populateDropdown(`/get-sub-departments/${selectedDepartment}`, subDepartmentSelect, selectedSubDepartment, function () {
+                if (selectedSubDepartment) {
+                    populateDropdown(`/get-sections/${selectedSubDepartment}`, sectionSelect, selectedSection, function () {
+                        if (selectedSection) {
+                            populateDropdown(`/get-designations/${selectedSection}`, designationSelect, selectedDesignation);
+                        }
+                    });
+                }
+            });
+        }
+    });
+</script>
+
 @endsection

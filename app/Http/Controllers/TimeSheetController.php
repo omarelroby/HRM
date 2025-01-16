@@ -42,7 +42,7 @@ class TimeSheetController extends Controller
                 $timeSheets = $timesheets->get();
             }
 
-            return view('dashboard.employeetimeSheet.index', compact('timeSheets', 'employeesList','employees'));
+            return view('dashboard.timeSheet.index', compact('timeSheets', 'employeesList','employees'));
         }
         else
         {
@@ -114,7 +114,7 @@ class TimeSheetController extends Controller
         {
             $employees = Employee::where('created_by', '=', \Auth::user()->creatorId())->get();
             $timeSheet = Timesheet::find($id);
-            return view('dashboard.employeetimeSheet.edit', compact('timeSheet', 'employees'));
+            return view('dashboard.timeSheet.edit', compact('timeSheet', 'employees'));
         }
         else
         {

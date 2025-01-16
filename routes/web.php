@@ -191,6 +191,22 @@ Route::resource('department', 'DepartmentController')->middleware(
         'XSS',
     ]
 );
+Route::resource('sub-department', 'SubDepartmentController')->middleware(
+    [
+        'auth',
+        'XSS',
+    ]
+);
+Route::resource('section', 'SectionController')->middleware(
+    [
+        'auth',
+        'XSS',
+    ]
+);
+Route::get('/get-sub-departments/{departmentId}', 'EmployeeController@getSubDepartments')->middleware(['auth', 'XSS']);
+Route::get('/get-sections/{subDepartmentId}', 'EmployeeController@getSections')->middleware(['auth', 'XSS']);
+Route::get('/get-designations/{sectionId}', 'EmployeeController@getDesignations')->middleware(['auth', 'XSS']);
+
 Route::resource('designation', 'DesignationController')->middleware(
     [
         'auth',

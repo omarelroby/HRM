@@ -17,10 +17,9 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered table-hover dataTables">
-
                             <thead>
                                 <tr>
-                                    <th>{{__('Department')}}</th>
+                                    <th>{{__('Section')}}</th>
                                     <th>{{__('Designation')}}</th>
                                     <th>{{__('Designation (ar)')}}</th>
                                      <th width="200px">{{ __('Action') }}</th>
@@ -29,10 +28,10 @@
                                 <tbody class="font-style">
                                 @foreach ($designations as $designation)
                                     @php
-                                        $department = \App\Models\Department::where('id', $designation->department_id)->first();
+                                        $section = \App\Models\Section::where('id', $designation->section_id)->first();
                                     @endphp
                                     <tr>
-                                        <td>{{ !empty($department->name)?$department->name:'' }}</td>
+                                        <td>{{ !empty($section->name)?$section->name:'' }}</td>
                                         <td>{{ $designation->name ??'' }}</td>
                                         <td>{{ $designation->name_ar }}</td>
 
@@ -85,8 +84,8 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="form-group">
-                            {{ Form::label('department_id', __('Department'),['class'=>'form-control-label']) }}
-                            {{ Form::select('department_id', $departments,null, array('class' => 'form-control select2','required'=>'required')) }}
+                            {{ Form::label('section_id', __('Department'),['class'=>'form-control-label']) }}
+                            {{ Form::select('section_id', $sections,null, array('class' => 'form-control select2','required'=>'required')) }}
                         </div>
                         <div class="form-group">
                             {{Form::label('name',__('Name'),['class'=>'form-control-label'])}}

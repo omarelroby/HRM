@@ -150,6 +150,13 @@
                             </ul>
                         </li>
                         @endif
+                        @if(\Auth::user()->can('Manage tasks'))
+                            <li class="{{ Request::is('tasks')  ? 'active' : '' }}">
+                                <a href="{{ route('tasks.index') }}">
+                                    <i class="ti ti-clock"></i><span>{{ __('tasks') }}</span>
+                                </a>
+                            </li>
+                        @endif
                         @if(\Auth::user()->can('Manage Set Salary'))
                         <li class="submenu">
                             <a href="javascript:void(0);" class="subdrop {{ Request::is('salary_setting') || Request::is('setsalary') ? 'active' : '' }}">
@@ -237,13 +244,7 @@
                             </ul>
                         </li>
                         @endif
-                        @if(\Auth::user()->can('Manage tasks'))
-                        <li class="{{ Request::is('tasks')  ? 'active' : '' }}">
-                            <a href="{{ route('tasks.index') }}">
-                                <i class="ti ti-clock"></i><span>{{ __('tasks') }}</span>
-                            </a>
-                        </li>
-                        @endif
+
                         @if(\Auth::user()->can('Manage Ticket'))
                         <li class="{{ Request::is('ticket')  ? 'active' : '' }}">
                             <a href="{{ route('ticket.index') }}">
@@ -312,6 +313,8 @@
                              || Request::is('job-stage')
                              || Request::is('performanceType')
                              || Request::is('competencies')
+                             || Request::is('sub-department')
+                             || Request::is('section')
                              ? 'active' : '' }}">
                                 <i class="ti ti-shopping-bag"></i><span class="submenu-title">{{ __('constant') }}</span>
                                 <span class="menu-arrow"></span>
@@ -319,6 +322,8 @@
                             <ul style="display: none;">
                                 <li><a class="{{ Request::is('branch') ?'active' :'' }}" href="{{ route('branch.index') }}">{{ __('Branch') }}</a></li>
                                 <li><a class="{{ Request::is('department') ?'active' :'' }}" href="{{ route('department.index') }}">{{ __('Department') }}</a></li>
+                                <li><a class="{{ Request::is('sub-department') ?'active' :'' }}" href="{{ route('sub-department.index') }}">{{ __('sub department') }}</a></li>
+                                <li><a class="{{ Request::is('section') ?'active' :'' }}" href="{{ route('section.index') }}">{{ __('Section') }}</a></li>
                                 <li><a class="{{ Request::is('designation') ?'active' :'' }}" href="{{ route('designation.index') }}">{{ __('Designation') }}</a></li>
                                 <li><a class="{{ Request::is('document') ?'active' :'' }}" href="{{ route('document.index') }}">{{ __('Document type') }}</a></li>
                                 <li><a class="{{ Request::is('awardtype') ?'active' :'' }}" href="{{ route('awardtype.index') }}">{{ __('Award Type') }}</a></li>

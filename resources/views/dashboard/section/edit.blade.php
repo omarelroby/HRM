@@ -11,20 +11,30 @@
             <div class="card shadow-sm">
                 <!-- Card Header -->
                 <div class="card-header  text-white">
-                    <h5 class="mb-0">{{ __('Update Designation') }}</h5>
+                    <h5 class="mb-0">{{ __('Update Department') }}</h5>
                 </div>
 
                 <!-- Card Body -->
                 <div class="card-body">
-                    {{Form::model($designation,array('route' => array('designation.update', $designation->id), 'method' => 'PUT')) }}
-                    <div class="row">
+                    {{Form::model($section,array('route' => array('section.update', $section->id), 'method' => 'PUT')) }}
+                    <div class="row ">
                         <div class="col-12">
                             <div class="form-group">
-                                {{ Form::label('section_id', __('Department'),['class'=>'form-control-label']) }}
-                                {{ Form::select('section_id', $sections,null, array('class' => 'form-control select2','required'=>'required')) }}
+                                {{Form::label('sub_dep_id',__('Sub Department'))}}
+                                {{Form::select('sub_dep_id',$sub_deps,null,array('class'=>'form-control select2 ','placeholder'=>__('select Branch')))}}
                             </div>
+                        </div>
+{{--
+                        <div class="col-md-12">
                             <div class="form-group">
-                                {{Form::label('name',__('Name'),['class'=>'form-control-label'])}}
+                                {{Form::label('employee_id',__('Employee'))}}
+                                {{Form::select('employee_id',$employees,null,array('class'=>'form-control select2','id'=>'employee_id','placeholder'=>__('Select Employee')))}}
+                            </div>
+                        </div> --}}
+
+                        <div class="col-12">
+                            <div class="form-group">
+                                {{Form::label('name',__('Name'))}}
                                 {{Form::text('name',null,array('class'=>'form-control','placeholder'=>__('Enter Department Name')))}}
                                 @error('name')
                                 <span class="invalid-name" role="alert">
@@ -32,9 +42,11 @@
                                 </span>
                                 @enderror
                             </div>
+                        </div>
+                        <div class="col-12">
                             <div class="form-group">
                                 {{Form::label('name_ar',__('Name_ar'),['class'=>'form-control-label'])}}
-                                {{Form::text('name_ar',null,array('class'=>'form-control','placeholder'=>__('Enter Designation Name arabic')))}}
+                                {{Form::text('name_ar',null,array('class'=>'form-control','placeholder'=>__('Enter Department Name arabic')))}}
                                 @error('name_ar')
                                 <span class="invalid-name" role="alert">
                                     <strong class="text-danger">{{ $message }}</strong>
@@ -48,7 +60,6 @@
                         </div>
                     </div>
                     {{Form::close()}}
-
 
 
 

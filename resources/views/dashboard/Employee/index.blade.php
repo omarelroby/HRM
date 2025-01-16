@@ -384,27 +384,34 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-md-4">
-                                    <div class="mb-3">
-                                        <label for="designati" class="form-label">{{ __('Departments') }}</label>
-                                        <select name="department_id" required id="designati" class="select select2-hidden-accessible">
-                                            <option value="">{{ __('Select') }}</option>
-                                            @foreach($departments as $department)
-                                                <option value="{{ $department->id }}">{{ $department->name }}</option>
-                                            @endforeach
-                                        </select>
-                                        <div id="" class="invalid-feedback"></div>
-                                    </div>
+                                    <label for="department" class="form-label">Departments</label>
+                                    <select id="department" name="department_id" class="form-control">
+                                        <option value="">Select Department</option>
+                                        @foreach($departments as $department)
+                                            <option value="{{ $department->id }}">{{ $department->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
 
-                                <div class="form-group col-md-4">
-                                    {{ Form::label('designation_id', __('Designation'), ['class' => 'form-label']) }}
-                                    <select name="designation_id" class="select select2-hidden-accessible">
-                                        <option value="">{{ __('Select Designation') }}</option>
-                                        @foreach($designations as $designation)
-                                            <option value="{{ $designation->id }}">{{ $designation->name }}</option>
-                                        @endforeach
+                                <div class="col-md-4">
+                                    <label for="sub_department" class="form-label">Sub-Departments</label>
+                                    <select id="sub_department" name="sub_dep_id" class="form-control" disabled>
+                                        <option value="">Select Sub-Department</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label for="section" class="form-label">Sections</label>
+                                    <select id="section" name="section_id" class="form-control" disabled>
+                                        <option value="">Select Section</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label for="designation" class="form-label">Designations</label>
+                                    <select id="designation" name="designation_id" class="form-control" disabled>
+                                        <option value="">Select Designation</option>
                                     </select>
                                 </div>
 
@@ -1521,4 +1528,103 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 </script>
+ <script>
+    $(document).ready(function () {
+        const subDepartmentSelect = $('#sub_department');
+        const sectionSelect = $('#section');
+        const designationSelect = $('#designation');
+
+        // Handle department change
+        $('#department').on('change', function () {
+            const departmentId = $(this).val();
+
+            // Clear previous sub-departments, sections, and designations
+            subDepartmentSelect.html('<option value="">Select Sub-Department</option>').prop('disabled', true);
+            sectionSelect.html('<option value="">Select Section</option>').prop('disabled', true);
+            designationSelect.html('<option value="">Select Designation</option>').prop('disabled', true);
+
+            if (departmentId) {
+                // Fetch sub-departments using AJAX
+                $.ajax({
+                    url: `/get-sub-departments/${departmentId}`,
+                    type: 'GET',
+                    success: function (data) {
+                        if (data.length > 0) {
+                            data.forEach(function (subDepartment) {
+                                subDepartmentSelect.append(
+                                    `<option value="${subDepartment.id}">${subDepartment.name}</option>`
+                                );
+                            });
+                            subDepartmentSelect.prop('disabled', false);
+                        }
+                    },
+                    error: function () {
+                        alert('Failed to load sub-departments. Please try again.');
+                    }
+                });
+            }
+        });
+
+        // Handle sub-department change
+        subDepartmentSelect.on('change', function () {
+            const subDepartmentId = $(this).val();
+
+            // Clear previous sections and designations
+            sectionSelect.html('<option value="">Select Section</option>').prop('disabled', true);
+            designationSelect.html('<option value="">Select Designation</option>').prop('disabled', true);
+
+            if (subDepartmentId) {
+                // Fetch sections using AJAX
+                $.ajax({
+                    url: `/get-sections/${subDepartmentId}`,
+                    type: 'GET',
+                    success: function (data) {
+                        if (data.length > 0) {
+                            data.forEach(function (section) {
+                                sectionSelect.append(
+                                    `<option value="${section.id}">${section.name}</option>`
+                                );
+                            });
+                            sectionSelect.prop('disabled', false);
+                        }
+                    },
+                    error: function () {
+                        alert('Failed to load sections. Please try again.');
+                    }
+                });
+            }
+        });
+
+        // Handle section change
+        sectionSelect.on('change', function () {
+            const sectionId = $(this).val();
+
+            // Clear previous designations
+            designationSelect.html('<option value="">Select Designation</option>').prop('disabled', true);
+
+            if (sectionId) {
+                // Fetch designations using AJAX
+                $.ajax({
+                    url: `/get-designations/${sectionId}`,
+                    type: 'GET',
+                    success: function (data) {
+                        if (data.length > 0) {
+                            data.forEach(function (designation) {
+                                designationSelect.append(
+                                    `<option value="${designation.id}">${designation.name}</option>`
+                                );
+                            });
+                            designationSelect.prop('disabled', false);
+                        }
+                    },
+                    error: function () {
+                        alert('Failed to load designations. Please try again.');
+                    }
+                });
+            }
+        });
+    });
+</script>
+
+
 @endsection

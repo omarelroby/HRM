@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Section;
+use App\Models\SubDepartment;
 use Carbon\Carbon;
 use App\Models\Branch;
 use App\Models\Jobtitle;
@@ -70,7 +72,6 @@ class EmployeeController extends Controller
                 $lastMonthEnd = Carbon::now()->subMonth()->endOfMonth();
                 $data['jobclasses'] = ['1','2'];
                 $data['banks'] = Bank::where('created_by', \Auth::user()->creatorId())->get();
-
                 $data['jobtitles']= Jobtitle::where('created_by', \Auth::user()->creatorId())->get();
                 $data['job_types']= Jobtype::where('created_by', \Auth::user()->creatorId())->get();
                 $data['work_units']= Workunit::where('created_by', \Auth::user()->creatorId())->get();
@@ -79,7 +80,6 @@ class EmployeeController extends Controller
                 $data['branches']= Branch::where('created_by', \Auth::user()->creatorId())->get();
                 $data['employee_shifts']= Employee_shift::where('created_by', \Auth::user()->creatorId())->get();
                 $data['employee_location'] = Place::where('created_by', \Auth::user()->creatorId())->get();
-
                 $data['new_join'] = Employee::whereBetween('Join_date_gregorian', [$lastMonthStart, $lastMonthEnd])->count();
 
             } else {
@@ -93,11 +93,10 @@ class EmployeeController extends Controller
                 $data['job_types']= Jobtype::where('created_by', \Auth::user()->creatorId())->get();
                 $data['jobtitles']= Jobtitle::where('created_by', \Auth::user()->creatorId())->get();
                 $data['employees'] = Employee::where('created_by', \Auth::user()->creatorId())->get();
-                $data['nationalities']     = Nationality::where('created_by', \Auth::user()->creatorId())->get();
-                $data['designations']     = Designation::where('created_by', \Auth::user()->creatorId())->get();
+                $data['nationalities']  = Nationality::where('created_by', \Auth::user()->creatorId())->get();
+                $data['designations'] = Designation::where('created_by', \Auth::user()->creatorId())->get();
                 $data['departments']  = Department::where('created_by', \Auth::user()->creatorId())->get();
                 $data['laborCompanies'] = Laborhirecompany::where('created_by', \Auth::user()->creatorId())->get();
-
                 $lastMonthStart = Carbon::now()->subMonth()->startOfMonth();
                 $lastMonthEnd = Carbon::now()->subMonth()->endOfMonth();
                 $data['new_join'] = Employee::whereBetween('Join_date_gregorian', [$lastMonthStart, $lastMonthEnd])->count();
@@ -156,21 +155,19 @@ class EmployeeController extends Controller
                 [
                     'name'           => 'required|string|max:255',
                     'name_ar'        => 'required|string|max:255',
+                    'designation_id'        => 'required',
                     'email'          => 'required|email|unique:users,email',
                     'password'       => 'required|string|min:8|confirmed',
                     'phone'          => 'required|numeric',
                     'document.*'     => 'nullable|mimes:jpeg,png,jpg,gif,svg,pdf,doc,zip|max:20480',
                 ]
             );
-
             if ($validator->fails()) {
                 return response()->json([
                     'status' => 'error',
                     'errors' => $validator->errors(),
                 ], 422);
             }
-
-
             // Plan and Employee Count Check
             $objUser = User::find(\Auth::user()->creatorId());
             $total_employee = $objUser->countEmployees();
@@ -305,7 +302,8 @@ class EmployeeController extends Controller
     public function update(Request $request, $id)
     {
 
-        // dd($request->personal_email);
+
+
         if (\Auth::user()->can('Edit Employee')) {
 
             if($request->has('update_organization_info'))
@@ -341,16 +339,17 @@ class EmployeeController extends Controller
                 'name'           => 'required',
                 'name_ar'        => 'required',
                 'email'          => 'required|unique:employees,email,'.$id,
-                'phone'          => 'required|unique:employees,phone,'.$id,
+                'phone'          => 'required',
                 'document.*'     => 'mimes:jpeg,png,jpg,gif,svg,pdf,doc,zip|max:20480',
             ]);
-
             if($validator->fails()) {
+
+
                 $messages = $validator->getMessageBag();
                 return redirect()->back()->with('error', $messages->first());
+
             }
 
-            $employee = Employee::findOrFail($id);
 
             if($request->document) {
                 foreach ($request->document as $key => $document) {
@@ -586,6 +585,7 @@ class EmployeeController extends Controller
             }
 
             if(\Auth::user()->type != 'employee') {
+
                 return redirect()->route('employee.index')->with('success', 'Employee successfully updated.');
             } else {
                 return redirect()->route('employee.show', \Illuminate\Support\Facades\Crypt::encrypt($employee->id))->with('success', 'Employee successfully updated.');
@@ -1033,4 +1033,22 @@ class EmployeeController extends Controller
             return response()->json(['error' => __('Permission denied.')], 401);
         }
     }
+    public function getSubDepartments($departmentId)
+    {
+        $subDepartments = SubDepartment::where('department_id', $departmentId)->get();
+        return response()->json($subDepartments);
+    }
+
+    public function getSections($subDepartmentId)
+    {
+        $sections = Section::where('sub_dep_id', $subDepartmentId)->get();
+        return response()->json($sections);
+    }
+
+    public function getDesignations($sectionId)
+    {
+        $designations = Designation::where('section_id', $sectionId)->get();
+        return response()->json($designations);
+    }
+
 }
