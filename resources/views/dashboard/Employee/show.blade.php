@@ -34,16 +34,23 @@
                                     <div class="d-flex align-items-center justify-content-between mb-2">
                                         <span class="d-inline-flex align-items-center">
                                             <i class="ti ti-star me-2"></i>
-                                            {{ __('Employee') }}
+                                            {{ __('Department') }}
                                         </span>
                                         <p class="text-dark">{{ $employee->department->name ?? 'N/A' }}</p>
                                     </div>
                                     <div class="d-flex align-items-center justify-content-between mb-2">
                                         <span class="d-inline-flex align-items-center">
-                                            <i class="ti ti-calendar-check me-2"></i>
-                                            {{ __('Date Of Join') }}
+                                            <i class="ti ti-star me-2"></i>
+                                            {{ __('Sub Department') }}
                                         </span>
-                                        <p class="text-dark">{{ $employee->Join_date_gregorian ??'N/A' }}</p>
+                                        <p class="text-dark">{{ $employee->sub_dep->name ?? 'N/A' }}</p>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-between mb-2">
+                                        <span class="d-inline-flex align-items-center">
+                                            <i class="ti ti-star me-2"></i>
+                                            {{ __('Section') }}
+                                        </span>
+                                        <p class="text-dark">{{ $employee->section->name ?? 'N/A' }}</p>
                                     </div>
                                     <div class="d-flex align-items-center justify-content-between">
                                         <span class="d-inline-flex align-items-center">
@@ -54,6 +61,14 @@
                                             <p class="text-gray-9 mb-0">{{ $employee->designation->name ?? 'N/A' }}</p>
                                         </div>
                                     </div>
+                                    <div class="d-flex align-items-center justify-content-between mb-2">
+                                        <span class="d-inline-flex align-items-center">
+                                            <i class="ti ti-calendar-check me-2"></i>
+                                            {{ __('Date Of Join') }}
+                                        </span>
+                                        <p class="text-dark">{{ $employee->Join_date_gregorian ??'N/A' }}</p>
+                                    </div>
+
                                     <div class="row gx-2 mt-3">
                                         <div class="col-12">
                                             <div>

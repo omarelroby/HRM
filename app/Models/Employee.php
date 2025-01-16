@@ -114,6 +114,14 @@ class Employee extends Model
         return $this->hasMany('App\Models\EmployeeDocument', 'employee_id', 'employee_id')->get();
     }
 
+    public function sub_dep()
+    {
+        return $this->belongsTo(SubDepartment::class, 'sub_dep_id', 'id');
+    }
+    public function section()
+    {
+        return $this->belongsTo(Section::class, 'section_id', 'id');
+    }
     public function salary_type()
     {
         return $this->hasOne('App\Models\PayslipType', 'id', 'salary_type')->pluck('name')->first();

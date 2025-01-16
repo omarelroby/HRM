@@ -21,6 +21,7 @@ class Department extends Model
         return $this->hasOne('App\Models\Employee', 'id', 'employee_id');
     }
 
+
     public function employeess()
     {
         return $this->hasMany('App\Models\Employee');
