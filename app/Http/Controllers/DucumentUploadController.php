@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Document;
+use App\Models\DocumentType;
 use App\Models\DucumentUpload;
 use App\Models\Employee;
 use Illuminate\Http\Request;
@@ -14,30 +16,12 @@ class DucumentUploadController extends Controller
     {
         if(\Auth::user()->can('Manage Document'))
         {
-            if(\Auth::user()->type == 'company')
-            {
-                $documents = DucumentUpload::where('created_by', \Auth::user()->creatorId())->get();
-                $roles = Role::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
-                $roles->prepend('All', '0');
-                $employees= Employee::where('created_by', \Auth::user()->creatorId())->get()->pluck('name','id');
 
-            }
-            else
-            {
-                $userRole  = \Auth::user()->roles->first();
-                $documents = DucumentUpload::whereIn(
-                    'role', [
-                              $userRole->id,
-                              0,
-                          ]
-                )->where('created_by', \Auth::user()->creatorId())->get();
-                $roles = Role::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
-                $roles->prepend('All', '0');
-                $employees= Employee::where('created_by', \Auth::user()->creatorId())->get()->pluck('name','id');
+            $documents = Document::where('created_by', \Auth::user()->creatorId())->get();
+            $documentTypes = DocumentType::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
+            $employees= Employee::where('created_by', \Auth::user()->creatorId())->get()->pluck('name','id');
 
-            }
-
-            return view('dashboard.documentUpload.index', compact('documents','roles','employees'));
+            return view('dashboard.documentUpload.index', compact('documents','documentTypes','employees'));
         }
         else
         {
@@ -70,6 +54,8 @@ class DucumentUploadController extends Controller
             $validator = \Validator::make(
                 $request->all(), [
                                    'name' => 'required',
+                                   'employee_id' => 'required',
+                                   'document_type_id' => 'required',
                                    'document' => 'mimes:jpeg,png,jpg,svg,pdf,doc,zip|max:20480',
                                ]
             );
@@ -95,13 +81,19 @@ class DucumentUploadController extends Controller
                 $path = $request->file('document')->storeAs('uploads/documentUpload/', $fileNameToStore);
             }
 
-            $document              = new DucumentUpload();
+            $document              = new Document();
             $document->employee_id = $request->employee_id;
             $document->name        = $request->name;
             $document->document    = !empty($request->document) ? $fileNameToStore : '';
-            $document->role        = $request->role;
+            $document->document_type_id  = $request->document_type_id;
             $document->description = $request->description;
             $document->created_by  = \Auth::user()->creatorId();
+            if($request->is_start_end_date=='on')
+            {
+                $document->is_start_end_date=1;
+                $document->start_date=$request->start_date;
+                $document->end_date=$request->end_date;
+            }
             $document->save();
 
             return redirect()->back()->with('success', __('Document successfully uploaded.'));
@@ -124,12 +116,12 @@ class DucumentUploadController extends Controller
 
         if(\Auth::user()->can('Edit Document'))
         {
-            $roles = Role::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
-            $roles->prepend('All', '0');
 
-            $ducumentUpload = DucumentUpload::find($id);
+            $document = Document::find($id);
+            $documentTypes = DocumentType::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
+            $employees= Employee::where('created_by', \Auth::user()->creatorId())->get()->pluck('name','id');
 
-            return view('dashboard.documentUpload.edit', compact('roles', 'ducumentUpload'));
+            return view('dashboard.documentUpload.edit', compact('employees','documentTypes', 'document'));
         }
         else
         {
@@ -141,10 +133,13 @@ class DucumentUploadController extends Controller
     {
         if(\Auth::user()->can('Edit Document'))
         {
+
             $validator = \Validator::make(
                 $request->all(), [
-                                   'name' => 'required',
-                                   'document' => 'mimes:jpeg,png,jpg,svg,pdf,doc,zip|max:20480',
+                    'name' => 'required',
+                    'employee_id' => 'required',
+                    'document_type_id' => 'required',
+                    'document' => 'mimes:jpeg,png,jpg,svg,pdf,doc,zip|max:20480',
                                ]
             );
             if($validator->fails())
@@ -176,15 +171,22 @@ class DucumentUploadController extends Controller
 
             }
 
-
-            $document->name = $request->name;
-            if(!empty($request->document))
+            $document              = Document::findOrFail($id);
+            $document->employee_id = $request->employee_id;
+            $document->name        = $request->name;
+            if($request->hasFile('document'))
             {
-                $document->document = !empty($request->document) ? $fileNameToStore : '';
+            $document->document    = !empty($request->document) ? $fileNameToStore : '';
             }
-
-            $document->role        = $request->role;
+            $document->document_type_id  = $request->document_type_id;
             $document->description = $request->description;
+            $document->created_by  = \Auth::user()->creatorId();
+            if($request->is_start_end_date=='on')
+            {
+            $document->is_start_end_date=1;
+            $document->start_date=$request->start_date;
+            $document->end_date=$request->end_date;
+            }
             $document->save();
 
             return redirect('document-upload')->with('success', __('Document successfully uploaded.'));
@@ -200,7 +202,7 @@ class DucumentUploadController extends Controller
     {
         if(\Auth::user()->can('Delete Document'))
         {
-            $document = DucumentUpload::find($id);
+            $document = Document::find($id);
             if($document->created_by == \Auth::user()->creatorId())
             {
                 $document->delete();

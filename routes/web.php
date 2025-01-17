@@ -882,6 +882,12 @@ Route::resource('tasks', 'TasksController')->middleware(
         'XSS',
     ]
 );
+Route::resource('document-type', 'DocumentTypeController')->middleware(
+    [
+        'auth',
+        'XSS',
+    ]
+);
 
 Route::get('attendanceemployee/bulkattendance', 'AttendanceEmployeeController@bulkAttendance')->name('attendanceemployee.bulkattendance')->middleware(
     [

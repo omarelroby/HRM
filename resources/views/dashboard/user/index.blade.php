@@ -15,7 +15,7 @@
     <div class="col-12">
       <div class="card user-list-card">
         <div class="card-header d-flex justify-content-between align-items-center">
-          <h5 class="text-center w-100">Users List</h5>
+          <h5 class="text-center w-100">{{__('Users List')}}</h5>
         </div>
         @if (session('success'))
         <div class="alert alert-success" style="text-align: center;">{{ session('success') }}</div>
@@ -127,7 +127,7 @@
             <!-- Modal Header -->
             <div class="modal-header bg-light">
                 <h5 class="modal-title" id="addJobTitleModalLabel">{{ __('Add Company User') }}</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+{{--                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--}}
             </div>
 
             <!-- Modal Body -->
