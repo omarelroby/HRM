@@ -102,6 +102,8 @@ class PaySlipController extends Controller
         ]);
 
         if($validator->fails()) {
+
+
             $messages = $validator->getMessageBag();
             return redirect()->back()->with('error', $messages->first());
         }
@@ -130,20 +132,15 @@ class PaySlipController extends Controller
                 return redirect()->route('payslip.index')->with('error', __('Please set Salary Setting.'));
             }
 
-
             foreach ($employees as $employee) {
-
-
-
             // if($employee->id = 91)
             // {
             //     $attendancemovement = AttendanceMovement::where('created_by', '=', \Auth::user()->creatorId())->whereNull('status')->first();
             //     $absences  = Absence::where('employee_id', '=', $employee->id)->whereBetween(DB::raw('DATE(created_at)'), [$attendancemovement->start_movement_date, $attendancemovement->end_movement_date])->get();
             //     return $absences;
             // }
-
-
                 $payslipEmployee =  PaySlip::where('salary_month', '=', $formate_month_year)->where('created_by', \Auth::user()->creatorId())->where('employee_id',$employee->id)->first();
+
 
                 if(!$payslipEmployee){
                     $payslipEmployee                       = new PaySlip();
@@ -166,8 +163,7 @@ class PaySlipController extends Controller
                 $payslipEmployee->created_by           = \Auth::user()->creatorId();
 
                 $payslipEmployee->save();
-
-                // slack
+                 // slack
                 $setting = Utility::settings(\Auth::user()->creatorId());
                 $month = date('M Y', strtotime($payslipEmployee->salary_month . ' ' . $payslipEmployee->time));
                 if(isset($setting['monthly_payslip_notification']) && $setting['monthly_payslip_notification'] == 1) {

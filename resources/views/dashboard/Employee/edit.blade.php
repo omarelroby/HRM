@@ -1127,7 +1127,7 @@
                 url: url,
                 type: 'GET',
                 success: function (data) {
-                    targetSelect.html('<option value="">Select</option>');
+                    targetSelect.html('<option value="0">Manager</option>');
                     if (data.length > 0) {
                         data.forEach(function (item) {
                             targetSelect.append(
@@ -1149,8 +1149,8 @@
         // Load sub-departments when department is selected
         $('#department').on('change', function () {
             const departmentId = $(this).val();
-            subDepartmentSelect.html('<option value="">Select Sub-Department</option>').prop('disabled', true);
-            sectionSelect.html('<option value="">Select Section</option>').prop('disabled', true);
+            subDepartmentSelect.html('<option value="0">Manager</option>').prop('disabled', true);
+            sectionSelect.html('<option value="0">Manager</option>').prop('disabled', true);
             designationSelect.html('<option value="">Select Designation</option>').prop('disabled', true);
 
             if (departmentId) {
@@ -1161,7 +1161,7 @@
         // Load sections when sub-department is selected
         subDepartmentSelect.on('change', function () {
             const subDepartmentId = $(this).val();
-            sectionSelect.html('<option value="">Select Section</option>').prop('disabled', true);
+            sectionSelect.html('<option value="0">Manager</option>').prop('disabled', true);
             designationSelect.html('<option value="">Select Designation</option>').prop('disabled', true);
 
             if (subDepartmentId) {

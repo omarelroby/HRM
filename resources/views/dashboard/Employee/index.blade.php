@@ -397,14 +397,14 @@
                                 <div class="col-md-4">
                                     <label for="sub_department" class="form-label">Sub-Departments</label>
                                     <select id="sub_department" name="sub_dep_id" class="form-control" disabled>
-                                        <option value="">Select Sub-Department</option>
+                                        <option value="0">Manger</option>
                                     </select>
                                 </div>
 
                                 <div class="col-md-4">
                                     <label for="section" class="form-label">Sections</label>
                                     <select id="section" name="section_id" class="form-control" disabled>
-                                        <option value="">Select Section</option>
+                                        <option value="0">Manager</option>
                                     </select>
                                 </div>
 
@@ -1539,8 +1539,8 @@ document.addEventListener('DOMContentLoaded', function () {
             const departmentId = $(this).val();
 
             // Clear previous sub-departments, sections, and designations
-            subDepartmentSelect.html('<option value="">Select Sub-Department</option>').prop('disabled', true);
-            sectionSelect.html('<option value="">Select Section</option>').prop('disabled', true);
+            subDepartmentSelect.html('<option value="0">Manager</option>').prop('disabled', true);
+            sectionSelect.html('<option value="0">Manager</option>').prop('disabled', true);
             designationSelect.html('<option value="">Select Designation</option>').prop('disabled', true);
 
             if (departmentId) {
@@ -1570,7 +1570,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const subDepartmentId = $(this).val();
 
             // Clear previous sections and designations
-            sectionSelect.html('<option value="">Select Section</option>').prop('disabled', true);
+            sectionSelect.html('<option value="0">Manager</option>').prop('disabled', true);
             designationSelect.html('<option value="">Select Designation</option>').prop('disabled', true);
 
             if (subDepartmentId) {

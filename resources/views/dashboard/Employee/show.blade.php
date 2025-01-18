@@ -17,63 +17,89 @@
                             </span>
                             <div class="text-center px-3 pb-3 border-bottom">
                                 <div class="mb-3">
-                                    <h5 class="d-flex align-items-center justify-content-center mb-1">{{ $employee->name ?? '' }}<i class="ti ti-discount-check-filled text-success ms-1"></i></h5>
+                                    <h5 class="d-flex align-items-center justify-content-center mb-1">
+                                        {{ $employee->name ?? '' }}
+                                        <i class="ti ti-discount-check-filled text-success ms-1"></i>
+                                    </h5>
                                     <span class="badge badge-soft-dark fw-medium me-2">
-                                        <i class="ti ti-point-filled me-1"></i>{{ $employee->jobtitle->name??'' }}
-                                    </span>
-                                    <span class="badge badge-soft-secondary fw-medium">{{ $employee->department->name ?? 'Deprment' }}</span>
+            <i class="ti ti-point-filled me-1"></i>{{ $employee->jobtitle->name ?? 'N/A' }}
+        </span>
+                                    <span class="badge badge-soft-secondary fw-medium">
+            {{ $employee->department->name ?? 'Department' }}
+        </span>
                                 </div>
                                 <div>
                                     <div class="d-flex align-items-center justify-content-between mb-2">
-                                        <span class="d-inline-flex align-items-center">
-                                            <i class="ti ti-id me-2"></i>
-                                            {{ __('Client ID') }}
-                                        </span>
-                                        <p class="text-dark">{{ \Auth::user()->employeeIdFormat($employee->employee_id) }} </p>
+            <span class="d-inline-flex align-items-center">
+                <i class="ti ti-id me-2"></i>
+                {{ __('Client ID') }}
+            </span>
+                                        <p class="text-dark">
+                                            {{ \Auth::user()->employeeIdFormat($employee->employee_id) }}
+                                        </p>
                                     </div>
                                     <div class="d-flex align-items-center justify-content-between mb-2">
-                                        <span class="d-inline-flex align-items-center">
-                                            <i class="ti ti-star me-2"></i>
-                                            {{ __('Department') }}
-                                        </span>
-                                        <p class="text-dark">{{ $employee->department->name ?? 'N/A' }}</p>
+            <span class="d-inline-flex align-items-center">
+                <i class="ti ti-star me-2"></i>
+                {{ __('Department') }}
+            </span>
+                                        <p class="text-dark">
+                                            {{ $employee->department->name ?? 'N/A' }}
+                                        </p>
                                     </div>
                                     <div class="d-flex align-items-center justify-content-between mb-2">
-                                        <span class="d-inline-flex align-items-center">
-                                            <i class="ti ti-star me-2"></i>
-                                            {{ __('Sub Department') }}
-                                        </span>
-                                        <p class="text-dark">{{ $employee->sub_dep->name ?? 'N/A' }}</p>
+            <span class="d-inline-flex align-items-center">
+                <i class="ti ti-star me-2"></i>
+                {{ __('Sub Department') }}
+            </span>
+                                        <p class="text-dark">
+                                            @if($employee->sub_dep_id == 0)
+                                                {{ $employee->department->name . ' Manager' }}
+                                            @else
+                                                {{ $employee->sub_dep->name ?? 'N/A' }}
+                                            @endif
+                                        </p>
                                     </div>
                                     <div class="d-flex align-items-center justify-content-between mb-2">
-                                        <span class="d-inline-flex align-items-center">
-                                            <i class="ti ti-star me-2"></i>
-                                            {{ __('Section') }}
-                                        </span>
-                                        <p class="text-dark">{{ $employee->section->name ?? 'N/A' }}</p>
+            <span class="d-inline-flex align-items-center">
+                <i class="ti ti-star me-2"></i>
+                {{ __('Section') }}
+            </span>
+                                        <p class="text-dark">
+                                            @if(empty($employee->section_id))
+                                                @if($employee->section_id == 0)
+                                                    {{ $employee->sub_dep?$employee->sub_dep->name . ' Manager' :'N/A' }}
+                                                @else
+                                                    {{ $employee->section?$employee->section->name : 'N/A' }}
+                                                @endif
+                                            @else
+                                                {{ $employee->section_id!=0?$employee->section->name : 'N/A' }}
+                                            @endif
+                                        </p>
                                     </div>
                                     <div class="d-flex align-items-center justify-content-between">
-                                        <span class="d-inline-flex align-items-center">
-                                            <i class="ti ti-calendar-check me-2"></i>
-                                            {{ __('Designations') }}
-                                        </span>
-                                        <div class="d-flex align-items-center">
-                                            <p class="text-gray-9 mb-0">{{ $employee->designation->name ?? 'N/A' }}</p>
-                                        </div>
+            <span class="d-inline-flex align-items-center">
+                <i class="ti ti-calendar-check me-2"></i>
+                {{ __('Designations') }}
+            </span>
+                                        <p class="text-dark">
+                                            {{ $employee->designation->name ?? 'N/A' }}
+                                        </p>
                                     </div>
                                     <div class="d-flex align-items-center justify-content-between mb-2">
-                                        <span class="d-inline-flex align-items-center">
-                                            <i class="ti ti-calendar-check me-2"></i>
-                                            {{ __('Date Of Join') }}
-                                        </span>
-                                        <p class="text-dark">{{ $employee->Join_date_gregorian ??'N/A' }}</p>
+            <span class="d-inline-flex align-items-center">
+                <i class="ti ti-calendar-check me-2"></i>
+                {{ __('Date Of Join') }}
+            </span>
+                                        <p class="text-dark">
+                                            {{ $employee->Join_date_gregorian ?? 'N/A' }}
+                                        </p>
                                     </div>
-
                                     <div class="row gx-2 mt-3">
                                         <div class="col-12">
-                                            <div>
-                                                <a href="{{ route('employee.edit',$employee->id) }}" class="btn btn-dark w-100" target="_blank"><i class="ti ti-edit me-1"></i>Edit Info</a>
-                                            </div>
+                                            <a href="{{ route('employee.edit', $employee->id) }}" class="btn btn-dark w-100" target="_blank">
+                                                <i class="ti ti-edit me-1"></i>Edit Info
+                                            </a>
                                         </div>
                                     </div>
                                 </div>

@@ -156,6 +156,7 @@
                             <ul style="display: none;">
                                 @if(\Auth::user()->can('Manage Employee'))
                                 <li><a href="{{ url('/employee') }}"  class="{{ Request::is('employee') ?'active' :'' }}">{{ __('Employee') }}</a></li>
+                                <li><a href="{{ url('/payslip') }}"  class="{{ Request::is('payslip') ?'active' :'' }}">{{ __('Payslip') }}</a></li>
                                 @endif
                                 @if(\Auth::user()->can('Manage TimeSheet'))
                                 <li><a href="{{ url('/timesheet') }}" class="{{ Request::is('timesheet') ?'active' :'' }}">{{ __('Timesheet') }}</a></li>
@@ -422,7 +423,7 @@
                                 <i class="ti ti-device-analytics    "></i><span>{{ __('System Setting') }}</span>
                             </a>
                         </li>
-                        
+
 
                     </ul>
                 </li>

@@ -155,7 +155,7 @@ class EmployeeController extends Controller
                 [
                     'name'           => 'required|string|max:255',
                     'name_ar'        => 'required|string|max:255',
-                    'designation_id'        => 'required',
+                    'department_id'        => 'required',
                     'email'          => 'required|email|unique:users,email',
                     'password'       => 'required|string|min:8|confirmed',
                     'phone'          => 'required|numeric',
@@ -390,6 +390,24 @@ class EmployeeController extends Controller
 
             $employee                        = Employee::findOrFail($id);
             $input                           = $request->all();
+            if($request->sub_dep_id==0)
+            {
+                $input['section_id']=null;
+            }
+            if($request->section_id==0)
+            {
+                $input['designation_id']=null;
+            }
+            if($request->section_id==null)
+            {
+                $input['section_id']=null;
+            }
+            if($request->designation_id==0)
+            {
+                $input['designation_id']=null;
+            }
+
+
 
             if($request->hasFile('iqama_attachment'))
             {
@@ -496,7 +514,7 @@ class EmployeeController extends Controller
             $input['expiry_date']            = $request['driving_license'] == 1 ? $request['expiry_date'] : null;
 
             $employee->fill($input)->save();
-
+//            dd($employee);
             // $employeeContract = EmployeeContracts::where('employee_id',$id)->first();
 
             // if($employeeContract)
