@@ -106,7 +106,7 @@
                     <div class="row">
                         <!-- Employee Selection -->
                         <div class="col-12 mb-3">
-                            {{ Form::label('employee_id', __('Ticket for Employee'), ['class' => 'form-label']) }}
+                            {{ Form::label('employee_id', __('Select Employee'), ['class' => 'form-label']) }}
                             {{ Form::select('employee_id', $employees, null, ['class' => 'form-select select2', 'placeholder' => __('Select Employee'), 'aria-label' => 'Select Employee']) }}
                         </div>
 

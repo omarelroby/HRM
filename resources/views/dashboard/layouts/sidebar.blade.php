@@ -1,6 +1,7 @@
 <!-- Sidebar -->
 @php
     $logo=asset(Storage::url('uploads/logo/'));
+    $avatar=asset(Storage::url('uploads/avatar/'));
     $company_logo=Utility::getValByName('company_logo');
     $company_small_logo=Utility::getValByName('company_small_logo');
     $profile=asset(Storage::url('uploads/avatar/'));
@@ -27,11 +28,12 @@
 
 <div class="sidebar mb-4" id="sidebar">
     <!-- Logo Section -->
+    @if(Storage::exists('uploads/logo/' . \Auth::user()->id . '_logo.png'))
     <div class="sidebar-logo">
         <!-- Normal Logo -->
         <a href="{{ route('home') }}" class="logo logo-normal">
 
-            <img style="width: auto;   height: 80px; object-fit: cover;" src="{{  $logo.'/'.\Auth::user()->id.'_logo.png' }}" alt="Logo" class="logo-img">
+            <img title="{{$logo.'/'.\Auth::user()->id.'_logo.png'}}" style="width: auto;    height: 80px; object-fit: cover;" src="{{  $logo.'/'.\Auth::user()->id.'_logo.png' }}" alt="Logo" class="logo-img">
         </a>
 
         <!-- Small Logo -->
@@ -44,6 +46,45 @@
             <img src="{{ $logo.'/'.\Auth::user()->id.'_logo.png' }}" alt="Logo" class="logo-img-dark">
         </a>
     </div>
+    @elseif(auth()->user()->avatar)
+
+        <div class="sidebar-logo">
+            <!-- Normal Logo -->
+            <a href="{{ route('home') }}" class="logo logo-normal">
+
+                <img style="width: auto;   height: 80px; object-fit: cover;" src="{{  asset(Storage::url(auth()->user()->avatar)) }}" alt="Logo" class="logo-img">
+            </a>
+
+            <!-- Small Logo -->
+            <a href="{{ route('home') }}" class="logo-small">
+                <img src="{{ asset(Storage::url(auth()->user()->avatar)) }}" alt="Logo" class="logo-img-small">
+            </a>
+
+            <!-- Dark Logo -->
+            <a href="{{ route('home') }}" class="dark-logo">
+                <img src="{{ asset(Storage::url(auth()->user()->avatar)) }}" alt="Logo" class="logo-img-dark">
+            </a>
+        </div>
+
+    @else
+        <div class="sidebar-logo">
+            <!-- Normal Logo -->
+            <a href="{{ route('home') }}" class="logo logo-normal">
+
+                <img style="width: auto;   height: 80px; object-fit: cover;" src="{{  asset(Storage::url('uploads/avatar/company.png'))}}" alt="Logo" class="logo-img">
+            </a>
+
+            <!-- Small Logo -->
+            <a href="{{ route('home') }}" class="logo-small">
+                <img src="{{ asset(Storage::url('uploads/avatar/company.png'))}}" alt="Logo" class="logo-img-small">
+            </a>
+
+            <!-- Dark Logo -->
+            <a href="{{ route('home') }}" class="dark-logo">
+                <img src="{{ asset(Storage::url('uploads/avatar/company.png')) }}" alt="Logo" class="logo-img-dark">
+            </a>
+        </div>
+    @endif
 
 
     <!-- Profile Section -->
@@ -376,13 +417,12 @@
                             </ul>
                         </li>
                         @endif
-                        @if(\Auth::user()->can('Manage System Settings') || \Auth::user()->can('Manage Company Settings') )
-                        <li class="{{ Request::is('settings')  ? 'active' : '' }}">
+                         <li class="{{ Request::is('settings')  ? 'active' : '' }}">
                             <a href="{{ route('settings.index') }}">
                                 <i class="ti ti-device-analytics    "></i><span>{{ __('System Setting') }}</span>
                             </a>
                         </li>
-                        @endif
+                        
 
                     </ul>
                 </li>
