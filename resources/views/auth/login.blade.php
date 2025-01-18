@@ -13,10 +13,10 @@
 	<title>Mwerdi Login</title>
 
 	<!-- Favicon -->
-	<link rel="shortcut icon" type="image/x-icon" href="https://smarthr.dreamstechnologies.com/html/template/assets/img/favicon.png">
+	<link rel="shortcut icon" type="image/x-icon" href="{{asset(Storage::url('uploads/logo/logo.png'))}}">
 
 	<!-- Apple Touch Icon -->
-	<link rel="apple-touch-icon" sizes="180x180" href="https://smarthr.dreamstechnologies.com/html/template/assets/img/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="{{asset(Storage::url('uploads/logo/logo.png'))}}">
 
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://smarthr.dreamstechnologies.com/html/template/assets/css/bootstrap.min.css">
@@ -35,7 +35,14 @@
 	<link rel="stylesheet" href="https://smarthr.dreamstechnologies.com/html/template/assets/css/style.css">
 
 </head>
-
+<style>
+    .element {
+        background-color: rgba(0, 0, 0, 0.8);
+        color: white;
+        text-align: center;
+        /*margin: 20px auto;*/
+    }
+</style>
 <body class="bg-white">
 
 	<div id="global-loader" style="display: none;">
@@ -48,103 +55,106 @@
 		<div class="container-fuild">
 			<div class="w-100 overflow-hidden position-relative flex-wrap d-block vh-100">
 				<div class="row">
-					<div class="col-lg-5">
+					<div class="col-lg-6">
 						<div class="d-lg-flex align-items-center justify-content-center d-none flex-wrap vh-100 bg-primary-transparent">
-							<div>
-								<img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/bg/authentication-bg-03.svg" alt="Img">
+							<div class="element">
+								<img style="height: 100vh; width: auto;opacity: .8" src="{{asset(Storage::url('uploads/logo/login.jpg'))}}" alt="Img">
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-7 col-md-12 col-sm-12">
+					<div class="col-lg-6 col-md-12 col-sm-12">
 						<div class="row justify-content-center align-items-center vh-100 overflow-auto flex-wrap ">
 							<div class="col-md-7 mx-auto vh-100">
 							    <!-- Main Wrapper -->
-    <div class="main-wrapper">
-        <div class="container-fluid">
-            <div class="d-flex justify-content-center align-items-center vh-100">
-                <div class="col-md-8">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-                        <h3 class="text-center mb-4">{{ __('Login') }}</h3>
-
-                        <!-- Email Input -->
-                        <div class="form-group my-2">
-                            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
-                                   placeholder="{{ __('Email') }}" value="{{ old('email') }}" required autofocus>
-                            @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-
-                        <!-- Password Input -->
-                        <div class="form-group my-2">
-                            <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
-                                   placeholder="{{ __('Password') }}" required>
-                            @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-
-                        <!-- reCAPTCHA -->
-                        @if(env('RECAPTCHA_MODULE') == 'yes')
-                            <div class="form-group">
-                                {!! NoCaptcha::display() !!}
-                                @error('g-recaptcha-response')
-                                    <span class="text-danger" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        @endif
-
-                        <!-- Submit Button -->
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary w-100">{{ __('Login') }}</button>
-                        </div>
-
-                        <!-- Forgot Password Link -->
-                        @if(Route::has('password.request'))
-                            <div class="text-center">
-                                <a href="{{ route('password.request') }}" class="text-muted">
-                                    {{ __('Forgot Your Password?') }}
-                                </a>
-                            </div>
-                        @endif
-
-                        <div class="login-or">
-                            <span class="span-or">Or</span>
-                        </div>
-                        <div class="mt-2">
-                            <div class="d-flex align-items-center justify-content-center flex-wrap">
-                                <div class="text-center me-2 flex-fill">
-                                    <a href="javascript:void(0);"
-                                        class="br-10 p-2 btn btn-info d-flex align-items-center justify-content-center">
-                                        <img class="img-fluid m-1" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/icons/facebook-logo.svg" alt="Facebook">
-                                    </a>
+            <div class="main-wrapper">
+                <div class="container-fluid">
+                    <div class="d-flex justify-content-center align-items-center vh-100">
+                        <div class="col-md-8">
+                            <form method="POST" action="{{ route('login') }}">
+                                @csrf
+                                <div>
+                                    <img   src="{{asset(Storage::url('uploads/logo/maing_logo.png'))}}" alt="Img">
                                 </div>
-                                <div class="text-center me-2 flex-fill">
-                                    <a href="javascript:void(0);"
-                                        class="br-10 p-2 btn btn-outline-light border d-flex align-items-center justify-content-center">
-                                        <img class="img-fluid m-1" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/icons/google-logo.svg" alt="Facebook">
-                                    </a>
+{{--                                <h3 class="text-center mb-4">{{ __('System') }}</h3>--}}
+
+                                <!-- Email Input -->
+                                <div class="form-group my-2">
+                                    <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
+                                           placeholder="{{ __('Email') }}" value="{{ old('email') }}" required autofocus>
+                                    @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
-                                <div class="text-center flex-fill">
-                                    <a href="javascript:void(0);"
-                                        class="bg-dark br-10 p-2 btn btn-dark d-flex align-items-center justify-content-center">
-                                        <img class="img-fluid m-1" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/icons/apple-logo.svg" alt="Apple">
-                                    </a>
+
+                                <!-- Password Input -->
+                                <div class="form-group my-2">
+                                    <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
+                                           placeholder="{{ __('Password') }}" required>
+                                    @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
-                            </div>
+
+                                <!-- reCAPTCHA -->
+                                @if(env('RECAPTCHA_MODULE') == 'yes')
+                                    <div class="form-group">
+                                        {!! NoCaptcha::display() !!}
+                                        @error('g-recaptcha-response')
+                                            <span class="text-danger" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                @endif
+
+                                <!-- Submit Button -->
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary w-100">{{ __('Login') }}</button>
+                                </div>
+
+                                <!-- Forgot Password Link -->
+                                @if(Route::has('password.request'))
+                                    <div class="text-center">
+                                        <a href="{{ route('password.request') }}" class="text-muted">
+                                            {{ __('Forgot Your Password?') }}
+                                        </a>
+                                    </div>
+                                @endif
+
+                                <div class="login-or">
+                                    <span class="span-or">Or</span>
+                                </div>
+                                <div class="mt-2">
+                                    <div class="d-flex align-items-center justify-content-center flex-wrap">
+                                        <div class="text-center me-2 flex-fill">
+                                            <a href="javascript:void(0);"
+                                                class="br-10 p-2 btn btn-info d-flex align-items-center justify-content-center">
+                                                <img class="img-fluid m-1" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/icons/facebook-logo.svg" alt="Facebook">
+                                            </a>
+                                        </div>
+                                        <div class="text-center me-2 flex-fill">
+                                            <a href="javascript:void(0);"
+                                                class="br-10 p-2 btn btn-outline-light border d-flex align-items-center justify-content-center">
+                                                <img class="img-fluid m-1" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/icons/google-logo.svg" alt="Facebook">
+                                            </a>
+                                        </div>
+                                        <div class="text-center flex-fill">
+                                            <a href="javascript:void(0);"
+                                                class="bg-dark br-10 p-2 btn btn-dark d-flex align-items-center justify-content-center">
+                                                <img class="img-fluid m-1" src="https://smarthr.dreamstechnologies.com/html/template/assets/img/icons/apple-logo.svg" alt="Apple">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
     <!-- /Main Wrapper -->
 							</div>
 

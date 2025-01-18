@@ -28,9 +28,8 @@
                     {{--                            <p>You have <span class="text-primary text-decoration-underline">21</span> Pending Approvals & <span class="text-primary text-decoration-underline">14</span> Leave Requests</p>--}}
                 </div>
             </div>
-            <div class="d-flex align-items-center flex-wrap mb-1">
-
-                <a href="#" class="btn btn-secondary btn-md me-2 mb-2" data-bs-toggle="modal" data-bs-target="#addEmployeeModal"><i class="ti ti-square-rounded-plus me-1"></i>{{__('Add New Employee')}}</a>
+            <div class="d-flex align-items-center flex-wrap mb-1" >
+                <a href="#" class="btn btn-secondary btn-md me-2 mb-2 mx-1" data-bs-toggle="modal" data-bs-target="#addEmployeeModal"><i class="ti ti-square-rounded-plus me-1"></i>{{__('Add New Employee')}}</a>
                 <a href="#" class="btn btn-primary btn-md mb-2" data-bs-toggle="modal" data-bs-target="#addTaskModal"><i class="ti ti-square-rounded-plus me-1"></i>{{__('Add Task')}}</a>
             </div>
         </div>
@@ -56,7 +55,7 @@
                                     <i class="ti ti-calendar-share fs-16"></i>
                                 </span>
 
-                                <h6 class="fs-13 fw-medium text-default mb-1">Attendance Overview</h6>
+                                <h6 class="fs-13 fw-medium text-default mb-1">{{__('Attendance Overview')}}</h6>
                                 <h3 class="mb-3">{{ $employeesWithAttendance .'/' .$employees_count ??0 }} <span class="fs-12 fw-medium text-success">
                                     <i class="fa-solid fa-caret-up me-1"></i>{{ $employeesWithAttendance?round($employeesWithAttendance/$employees * 100,2) : 0}}%</span></h3>
                                 <a href="attendance-employee.html" class="link-default">View All</a>
@@ -69,7 +68,7 @@
                                 <span class="avatar rounded-circle bg-pink mb-2">
                                     <i class="ti ti-checklist fs-16"></i>
                                 </span>
-                                <h6 class="fs-13 fw-medium text-default mb-1">Total No of Tasks</h6>
+                                <h6 class="fs-13 fw-medium text-default mb-1">{{__('Total No of Tasks')}}</h6>
                                 <h3 class="mb-3">{{ $complete_tasks .'/' .$tasks }}<span class="fs-12 fw-medium text-success">
                                     <i class="fa-solid fa-caret-up me-1"></i>{{ $complete_tasks ? round($complete_tasks/$tasks * 100,2):0}}%%</span></h3>
                                 <a href="tasks.html" class="link-default">View All</a>
@@ -82,7 +81,7 @@
                                 <span class="avatar rounded-circle bg-success mb-2">
                                     <i class="ti ti-users-group fs-16"></i>
                                 </span>
-                                <h6 class="fs-13 fw-medium text-default mb-1">Job Applicants</h6>
+                                <h6 class="fs-13 fw-medium text-default mb-1">{{__('Job Applicants')}}</h6>
                                 <h3 class="mb-3">{{ $job_app ??'0'}} <span class="fs-12 fw-medium text-success"><i class="fa-solid fa-caret-up me-1"></i> </span></h3>
                                 <a href="job-list.html" class="link-default">View All</a>
                             </div>
@@ -94,7 +93,7 @@
                                 <span class="avatar rounded-circle bg-info mb-2">
                                     <i class="ti ti-users-group fs-16"></i>
                                 </span>
-                                <h6 class="fs-13 fw-medium text-default mb-1">Employee Requests</h6>
+                                <h6 class="fs-13 fw-medium text-default mb-1">{{__('Employee Requests')}}</h6>
                                 <h3 class="mb-3">{{ $emp_req ??0 }} <span class="fs-12 fw-medium text-info"><i class="fa-solid fa-caret-up me-1"></i> </span></h3>
                                 <a href="job-list.html" class="link-default">View All</a>
                             </div>
@@ -106,7 +105,7 @@
                                 <span class="avatar rounded-circle bg-dark mb-2">
                                     <i class="ti ti-user-star fs-16"></i>
                                 </span>
-                                <h6 class="fs-13 fw-medium text-default mb-1">Labor Hiring</h6>
+                                <h6 class="fs-13 fw-medium text-default mb-1">{{__('Labor Hiring')}}</h6>
                                 <h3 class="mb-3">{{ $labor_hiring ??0}} <span class="fs-12 fw-medium text-dark"><i class="fa-solid fa-caret-up me-1"></i></span></h3>
                                 <a href="candidates.html" class="link-default">View All</a>
                             </div>
@@ -118,7 +117,7 @@
                                 <span class="avatar rounded-circle bg-secondary mb-2">
                                     <i class="ti ti-user-star fs-16"></i>
                                 </span>
-                                <h6 class="fs-13 fw-medium text-default mb-1">Trainers</h6>
+                                <h6 class="fs-13 fw-medium text-default mb-1">{{__('Trainers')}}</h6>
                                 <h3 class="mb-3">{{ $trainers ??'0' }} <span class="fs-12 fw-medium text-secondary"><i class="fa-solid fa-caret-up me-1"></i></span></h3>
                                 <a href="candidates.html" class="link-default">View All</a>
                             </div>
@@ -130,7 +129,7 @@
                                 <span class="avatar rounded-circle bg-danger mb-2">
                                     <i class="ti ti-user-star fs-16"></i>
                                 </span>
-                                <h6 class="fs-13 fw-medium text-default mb-1">Company Job Requests</h6>
+                                <h6 class="fs-13 fw-medium text-default mb-1">{{__('Company Job Requests')}}</h6>
                                 <h3 class="mb-3">{{ $comp_requests ??0}} <span class="fs-12 fw-medium text-danger"><i class="fa-solid fa-caret-up me-1"></i></span></h3>
                                 <a href="candidates.html" class="link-default">View All</a>
                             </div>
@@ -142,7 +141,8 @@
                                 <span class="avatar rounded-circle bg-purple mb-2">
                                     <i class="ti ti-user-star fs-16"></i>
                                 </span>
-                                <h6 class="fs-13 fw-medium text-default mb-1">Orders</h6>
+                                <h6 class="fs-13 fw-medium text-default mb-1">{{__('Orders')}}</h6>
+
                                 <h3 class="mb-3">{{ $orders ??'' }} <span class="fs-12 fw-medium text-purple"><i class="fa-solid fa-caret-up me-1"></i></span></h3>
                                 <a href="candidates.html" class="link-default">View All</a>
                             </div>
@@ -154,7 +154,7 @@
             <div class="col-xxl-4 col-xl-6 d-flex">
                 <div class="card flex-fill">
                     <div class="card-header pb-2 d-flex align-items-center justify-content-between flex-wrap">
-                        <h5 class="mb-2">Employees By Department</h5>
+                        <h5 class="mb-2">{{__('Employees By Department')}}</h5>
 
                     </div>
                     <div class="card-body">
@@ -171,7 +171,7 @@
             <div class="col-xxl-4 col-xl-6 d-flex">
                 <div class="card flex-fill">
             <div class="card-header pb-2 d-flex align-items-center justify-content-between flex-wrap">
-            <h5 class="mb-2">Clock-In/Out</h5>
+            <h5 class="mb-2">{{__('Clock-In/Out')}}</h5>
             <div class="d-flex align-items-center">
             <div class="dropdown mb-2">
 
@@ -268,7 +268,7 @@
             <div class="col-xxl-4 col-xl-6 d-flex">
                 <div class="card flex-fill">
                     <div class="card-header pb-2 d-flex align-items-center justify-content-between flex-wrap">
-                        <h5 class="mb-2">Attendance Overview</h5>
+                        <h5 class="mb-2">{{__('Attendance Overview')}}</h5>
 
                     </div>
                     <div class="card-body">
@@ -311,7 +311,7 @@
             <div class="col-xxl-4 d-flex">
                 <div class="card flex-fill">
                     <div class="card-header pb-2 d-flex align-items-center justify-content-between flex-wrap">
-                        <h5 class="mb-2">Job Applicants</h5>
+                        <h5 class="mb-2">{{__('Job Applicants')}}</h5>
                         <a href="#" class="btn btn-light btn-md mb-2">View All</a>
                     </div>
                     <div class="card-body">
@@ -376,7 +376,7 @@
             <div class="col-xxl-4 col-xl-6 d-flex">
                 <div class="card flex-fill">
                     <div class="card-header pb-2 d-flex align-items-center justify-content-between flex-wrap">
-                        <h5 class="mb-2">Employees</h5>
+                        <h5 class="mb-2">{{__('Employees')}}</h5>
                         <a href="employees.html" class="btn btn-light btn-md mb-2">View All</a>
                     </div>
                     <div class="card-body p-0">
@@ -425,7 +425,7 @@
              <div class="col-xxl-8 d-flex">
                 <div class="card flex-fill">
                     <div class="card-header pb-2 d-flex align-items-center justify-content-between flex-wrap">
-                        <h5 class="mb-2">Employee End Dates</h5>
+                        <h5 class="mb-2">{{__('Employee End Dates')}}</h5>
                         <div class="d-flex align-items-center">
                             <a href="javascript:void(0);" class="link-default me-2"><i class="ti ti-calendar-filled"></i></a>
                             <span class="fs-10 fw-medium d-inline-flex align-items-center badge badge-danger">
@@ -542,7 +542,7 @@
             <div class="col-xxl-4 col-xl-6 d-flex">
                 <div class="card flex-fill">
                     <div class="card-header pb-2 d-flex align-items-center justify-content-between flex-wrap">
-                        <h5 class="mb-2">Tasks Statistics</h5>
+                        <h5 class="mb-2">{{__('Tasks')}}</h5>
                         <a href="#" class="btn btn-light btn-md mb-2">View All</a>
                     </div>
                     <canvas id="taskStatusChart" width="400" height="400"></canvas>
@@ -554,7 +554,7 @@
             <div class="col-xxl-4 col-xl-6 d-flex">
                 <div class="card flex-fill">
                     <div class="card-header pb-2 d-flex align-items-center justify-content-between flex-wrap">
-                        <h5 class="mb-2">Tasks</h5>
+                        <h5 class="mb-2">{{__('Tasks employee')}}</h5>
                         <a href="tasks.html" class="btn btn-light btn-md mb-2">View All</a>
                     </div>
                     <div class="card-body p-0">

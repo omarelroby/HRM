@@ -94,6 +94,11 @@ class DucumentUploadController extends Controller
                 $document->start_date=$request->start_date;
                 $document->end_date=$request->end_date;
             }
+            if($request->is_contract=='on')
+            {
+                $document->is_contract=1;
+                $document->contract_specific=$request->contract_specific;
+            }
             $document->save();
 
             return redirect()->back()->with('success', __('Document successfully uploaded.'));
@@ -186,6 +191,23 @@ class DucumentUploadController extends Controller
             $document->is_start_end_date=1;
             $document->start_date=$request->start_date;
             $document->end_date=$request->end_date;
+            }
+            else{
+                $document->is_start_end_date=0;
+                $document->start_date='';
+                $document->end_date='';
+
+            }
+            if($request->is_contract=='on')
+            {
+                $document->is_contract=1;
+                $document->contract_specific=$request->contract_specific;
+            }
+            else
+            {
+                $document->is_contract=0;
+                $document->contract_specific='';
+
             }
             $document->save();
 

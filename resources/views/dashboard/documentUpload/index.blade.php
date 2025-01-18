@@ -25,63 +25,73 @@
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered table-hover dataTables">
-                                    <thead class="thead-light">
-                                    <tr>
-                                        <th class="text-start ps-4">{{ __('Name') }}</th>
-                                        <th class="text-start ps-4">{{ __('Employee') }}</th>
-                                        <th class="text-center">{{ __('Document') }}</th>
-                                        <th class="text-center">{{ __('Document Type') }}</th>
-                                        <th class="text-center">{{ __('Start Date') }}</th>
-                                        <th class="text-center">{{ __('End Date') }}</th>
-{{--                                        <th class="text-start">{{ __('Description') }}</th>--}}
-                                        @if(Gate::check('Edit Document') || Gate::check('Delete Document'))
-                                            <th class="text-end pe-4" width="10%">{{ __('Action') }}</th>
-                                        @endif
-                                    </tr>
+                                <thead class="thead-light">
+                                <tr>
+                                    <th class="text-start ps-4">{{ __('Name') }}</th>
+                                    <th class="text-start ps-4">{{ __('Employee') }}</th>
+                                    <th class="text-center">{{ __('Document') }}</th>
+                                    <th class="text-center">{{ __('Document Type') }}</th>
+                                    <th class="text-center">{{ __('Is Contract') }}</th>
+                                    <th class="text-center">{{ __('Specific Or Not Period') }}</th>
+                                    <th class="text-center">{{ __('Start Date') }}</th>
+                                    <th class="text-center">{{ __('End Date') }}</th>
+                                    @if(Gate::check('Edit Document') || Gate::check('Delete Document'))
+                                        <th class="text-end pe-4" width="10%">{{ __('Action') }}</th>
+                                    @endif
+                                </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($documents as $document)
-                                        @php
-                                            $documentPath = asset(Storage::url('uploads/documentUpload'));
-                                        @endphp
-                                        <tr class="hover-shadow">
-                                            <td class="text-start ps-4">{{ $document->name }}</td>
-                                            <td class="text-start ps-4">{{ $document->employee->name ??'' }}</td>
-                                            <td class="text-center">
-                                                @if(!empty($document->document))
-                                                    <a href="{{ $documentPath . '/' . $document->document }}" target="_blank" class="text-decoration-none">
-                                                        <i class="fas fa-download text-primary"></i>
-                                                    </a>
-                                                @else
-                                                    <span class="text-muted">-</span>
-                                                @endif
-                                            </td>
-                                            <td class="text-center">{{ $document->document_type->name??'' }}</td>
-                                            <td class="text-start">{{ $document->start_date ??'N/A' }}</td>
-                                            <td class="text-start">{{ $document->end_date ??'N/A' }}</td>
-{{--                                            <td class="text-start">{{ $document->description }}</td>--}}
-                                            @if(Gate::check('Edit Document') || Gate::check('Delete Document'))
-                                                <td class="text-end pe-4">
-                                                    <div class="d-flex justify-content-end gap-2">
-                                                        @can('Edit Document')
-                                                            <a href="{{ route('document-upload.edit', $document->id) }}"  data-title="{{ __('Edit Document') }}" class="btn btn-sm btn-outline-success"  title="{{ __('Edit') }}">
-                                                                <i class="fas fa-edit"></i>
-                                                            </a>
-                                                        @endcan
-                                                        @can('Delete Document')
-                                                            <form method="POST" action="{{ route('document-upload.destroy', $document->id) }}" class="d-inline" onsubmit="return confirm('{{ __('Are You Sure?') }}\n{{ __('This action cannot be undone. Do you want to continue?') }}');">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="{{ __('Delete') }}">
-                                                                    <i class="fas fa-trash"></i>
-                                                                </button>
-                                                            </form>
-                                                        @endcan
-                                                    </div>
-                                                </td>
+                                @foreach ($documents as $document)
+                                    @php
+                                        $documentPath = asset(Storage::url('uploads/documentUpload'));
+                                    @endphp
+                                    <tr class="hover-shadow">
+                                        <td class="text-start ps-4">{{ $document->name }}</td>
+                                        <td class="text-start ps-4">{{ $document->employee->name ?? '' }}</td>
+                                        <td class="text-center">
+                                            @if(!empty($document->document))
+                                                <a href="{{ $documentPath . '/' . $document->document }}" target="_blank" class="text-decoration-none">
+                                                    <i class="fas fa-download text-primary"></i>
+                                                </a>
+                                            @else
+                                                <span class="text-muted">-</span>
                                             @endif
-                                        </tr>
-                                    @endforeach
+                                        </td>
+                                        <td class="text-center">{{ $document->document_type->name ?? '' }}</td>
+                                        <td class="text-center">
+                    <span class="px-2 py-1 rounded text-white fw-bold {{ $document->is_contract ? 'bg-success' : 'bg-danger' }}">
+                        {{ $document->is_contract ? 'YES' : 'NO' }}
+                    </span>
+                                        </td>
+                                        <td class="text-center">
+                    <span class="px-2 py-1 rounded text-white fw-bold {{ $document->contract_specific==1 ? 'bg-success' : 'bg-danger' }}">
+                        {{ $document->contract_specific==1 ? 'YES' : 'NO' }}
+                    </span>
+                                        </td>
+                                        <td class="text-start">{{ $document->start_date ?? 'N/A' }}</td>
+                                        <td class="text-start">{{ $document->end_date ?? 'N/A' }}</td>
+                                        @if(Gate::check('Edit Document') || Gate::check('Delete Document'))
+                                            <td class="text-end pe-4">
+                                                <div class="d-flex justify-content-end gap-2">
+                                                    @can('Edit Document')
+                                                        <a href="{{ route('document-upload.edit', $document->id) }}" data-title="{{ __('Edit Document') }}" class="btn btn-sm btn-outline-success" title="{{ __('Edit') }}">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                    @endcan
+                                                    @can('Delete Document')
+                                                        <form method="POST" action="{{ route('document-upload.destroy', $document->id) }}" class="d-inline" onsubmit="return confirm('{{ __('Are You Sure?') }}\n{{ __('This action cannot be undone. Do you want to continue?') }}');">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="{{ __('Delete') }}">
+                                                                <i class="fas fa-trash"></i>
+                                                            </button>
+                                                        </form>
+                                                    @endcan
+                                                </div>
+                                            </td>
+                                        @endif
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -132,10 +142,31 @@
                         <div class="col-md-6 mb-3">
                             {{ Form::label('document_type_id', __('Document Type'), ['class' => 'form-label']) }}
                             {{ Form::select('document_type_id', $documentTypes, null, ['class' => 'form-control select2', 'placeholder' => __('Select Document Type'), 'aria-label' => 'Select Role']) }}
+                            <div class="form-group col-6">
+                                <div class="form-check">
+                                    <label class="form-check-label" for="showContractFields">
+                                        {{ __('If You Choosed Contract Type Press Here') }}
+                                    </label>
+                                    <input class="form-check-input" name="is_contract" type="checkbox" id="showContractFields">
+                                </div>
+                            </div>
+                        </div>
+                        <div id="contractFields" style="display: none;" class="row align-items-center">
+                            <div class="col-6">
+
+                            </div>
+                            <div class="col-6 mb-3">
+                                <label for="contract_specific" class="form-label">{{__('Specific Period Or Not')}}</label>
+                                <select id="contract_specific" name="contract_specific" class="form-select select2" aria-label="Select Contract Specific">
+                                    <option value="1"   selected>{{__('specified')}}</option>
+                                    <option value="2"    >{{__('not specified')}}</option>
+                                </select>
+                            </div>
+
                         </div>
 
                         <!-- Checkbox to show additional fields -->
-                        <div class="form-group col-12">
+                        <div class="form-group col-3">
                             <div class="form-check">
                                 <input class="form-check-input" name="is_start_end_date" type="checkbox" id="showDateFields">
                                 <label class="form-check-label" for="showDateFields">
@@ -155,6 +186,7 @@
                                 {{Form::date('end_date',null,array('class'=>'form-control'))}}
                             </div>
                         </div>
+
 
                         <!-- Description -->
                         <div class="col-md-12 mb-3">
@@ -178,6 +210,17 @@
         // JavaScript to toggle visibility of date fields
         document.getElementById('showDateFields').addEventListener('change', function() {
             const dateFields = document.getElementById('dateFields');
+            if (this.checked) {
+                dateFields.style.display = 'flex';
+            } else {
+                dateFields.style.display = 'none';
+            }
+        });
+    </script>
+    <script>
+        // JavaScript to toggle visibility of date fields
+        document.getElementById('showContractFields').addEventListener('change', function() {
+            const dateFields = document.getElementById('contractFields');
             if (this.checked) {
                 dateFields.style.display = 'flex';
             } else {
