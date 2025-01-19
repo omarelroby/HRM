@@ -385,7 +385,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="department" class="form-label">Departments</label>
+                                    <label for="department" class="form-label">{{__('Departments')}}</label>
                                     <select id="department" name="department_id" class="form-control">
                                         <option value="">Select Department</option>
                                         @foreach($departments as $department)
@@ -395,21 +395,21 @@
                                 </div>
 
                                 <div class="col-md-4">
-                                    <label for="sub_department" class="form-label">Sub-Departments</label>
+                                    <label for="sub_department" class="form-label">{{__('Sub Department')}}</label>
                                     <select id="sub_department" name="sub_dep_id" class="form-control" disabled>
                                         <option value="0">Manger</option>
                                     </select>
                                 </div>
 
                                 <div class="col-md-4">
-                                    <label for="section" class="form-label">Sections</label>
+                                    <label for="section" class="form-label">{{__('Section')}}</label>
                                     <select id="section" name="section_id" class="form-control" disabled>
                                         <option value="0">Manager</option>
                                     </select>
                                 </div>
 
                                 <div class="col-md-4">
-                                    <label for="designation" class="form-label">Designations</label>
+                                    <label for="designation" class="form-label">{{__('Designations')}}</label>
                                     <select id="designation" name="designation_id" class="form-control" disabled>
                                         <option value="">Select Designation</option>
                                     </select>
