@@ -422,122 +422,63 @@
 
              {{-- Card for End Dates --}}
 
-             <div class="col-xxl-8 d-flex">
-                <div class="card flex-fill">
-                    <div class="card-header pb-2 d-flex align-items-center justify-content-between flex-wrap">
-                        <h5 class="mb-2">{{__('Employee End Dates')}}</h5>
-                        <div class="d-flex align-items-center">
-                            <a href="javascript:void(0);" class="link-default me-2"><i class="ti ti-calendar-filled"></i></a>
-                            <span class="fs-10 fw-medium d-inline-flex align-items-center badge badge-danger">
-                                <i class="ti ti-circle-filled fs-5 me-1"></i>Expired Last 3 Months
-                            </span>
+
+
+
+            <div class="col-xxl-8 col-xl-12 d-flex">
+                    <div class="card flex-fill">
+                        <div class="card-header pb-2 d-flex align-items-center justify-content-between flex-wrap">
+                            <h5 class="mb-2">{{ __('Employee End Dates') }}</h5>
+                            <a href="{{url('/get-expiry-docs')}}" class="btn btn-light btn-md mb-2">{{ __('View All') }}</a>
                         </div>
-                        <a href="#" class="btn btn-light btn-md mb-2">View All</a>
-                    </div>
-                    <div class="card-body">
-                        {{-- Tabs Navigation --}}
-                        <ul class="nav nav-tabs tab-style-1 nav-justified d-sm-flex d-block p-0 mb-4" role="tablist">
-                            <li class="nav-item" role="presentation">
-                                <a class="nav-link fw-medium active" data-bs-toggle="tab" data-bs-target="#insurance-tab" href="#insurance-tab" role="tab">Insurance End Date</a>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <a class="nav-link fw-medium" data-bs-toggle="tab" data-bs-target="#worker-tab" href="#worker-tab" role="tab">Worker End Date</a>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <a class="nav-link fw-medium" data-bs-toggle="tab" data-bs-target="#contract-tab" href="#contract-tab" role="tab">Contract End Date</a>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <a class="nav-link fw-medium" data-bs-toggle="tab" data-bs-target="#residence-tab" href="#residence-tab" role="tab">Residence Expiry Date</a>
-                            </li>
-                        </ul>
 
-                        {{-- Tab Content --}}
-                        <div class="tab-content">
-                            {{-- Insurance End Date Tab --}}
-                            <div class="tab-pane fade active show" id="insurance-tab" role="tabpanel">
-                                <table class="table table-striped">
-                                    <thead>
+                        <div class="card-body p-0">
+                            @if ($records->isNotEmpty())
+                                <div class="table-responsive">
+                                    <div class="card-footer">
+                                        {{ $records->links('pagination::bootstrap-4') }}
+                                    </div>
+                                     <table class="table table-nowrap mb-0">
+                                        <thead>
                                         <tr>
-                                            <th>Employee Name</th>
-                                            <th>Insurance End Date</th>
+                                            <th>{{ __('Document Type') }}</th>
+                                            <th>{{ __('Document') }}</th>
+                                            <th>{{ __('Employee') }}</th>
+                                            <th>{{ __('Expiry Date') }}</th>
                                         </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($records as $employee)
-                                            <tr>
-                                                <td>{{ $employee->employees->name ?? 'N/A'}}</td>
-                                                <td>{{ $employee->insurance_enddate ?? 'N/A' }}</td>
-                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach ($records as $documentType => $documents)
+                                            @foreach ($documents as $record)
+                                                <tr>
+                                                    <!-- Document Type -->
+                                                    <td>
+                                            <span class="badge {{ $loop->parent->iteration % 2 === 0 ? 'bg-light text-dark' : 'bg-secondary text-white' }}">
+                                                {{ $documentType }}
+                                            </span>
+                                                    </td>
+                                                    <!-- Document Name -->
+                                                    <td>{{ $record->name ?? 'Unnamed Document' }}</td>
+                                                    <!-- Employee Name -->
+                                                    <td>{{ $record->employee->name ?? 'Unknown Employee' }}</td>
+                                                    <!-- Expiry Date -->
+                                                    <td>{{ \Carbon\Carbon::parse($record->end_date)->format('Y-m-d') ?? 'N/A' }}</td>
+                                                </tr>
+                                            @endforeach
                                         @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
+                                        </tbody>
+                                    </table>
 
-                            {{-- Worker End Date Tab --}}
-                            <div class="tab-pane fade" id="worker-tab" role="tabpanel">
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Employee ID</th>
-                                            <th>Worker End Date</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($records as $employee)
-                                            <tr>
-                                                <td>{{ $employee->employees->name ?? 'N/A'}}</td>
-                                                <td>{{ $employee->worker_enddate ?? 'N/A' }}</td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
+                                </div>
 
-                            {{-- Contract End Date Tab --}}
-                            <div class="tab-pane fade" id="contract-tab" role="tabpanel">
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Employee ID</th>
-                                            <th>Contract End Date</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($records as $employee)
-                                            <tr>
-                                                <td>{{ $employee->employees->name ?? 'N/A'}}</td>
-                                                <td>{{ $employee->contract_enddate ?? 'N/A' }}</td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
+                                <!-- Render pagination links -->
 
-                            {{-- Residence Expiry Date Tab --}}
-                            <div class="tab-pane fade" id="residence-tab" role="tabpanel">
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Employee ID</th>
-                                            <th>Residence Expiry Date</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($records as $employee)
-                                            <tr>
-                                                <td>{{ $employee->employees->name ?? 'N/A'}}</td>
-                                                <td>{{ $employee->residence_expiredate ?? 'N/A' }}</td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
+                            @else
+                                <p class="text-center py-4">{{ __('No records found.') }}</p>
+                            @endif
                         </div>
                     </div>
-                </div>
-            </div>
-
-             {{-- End Card for End Dates --}}
+                </div>             {{-- End Card for End Dates --}}
             {{-- Card for Task Status --}}
             <div class="col-xxl-4 col-xl-6 d-flex">
                 <div class="card flex-fill">
@@ -714,35 +655,28 @@
                                                 </div>
 
                                                 <div class="col-md-4">
-                                                    <label for="department" class="form-label">Departments</label>
-                                                    <select id="department" name="department_id" class="form-control">
-                                                        <option value="">Select Department</option>
-                                                        @foreach($departments as $department)
-                                                            <option value="{{ $department->id }}">{{ $department->name }}</option>
+                                                    <div class="mb-3">
+                                                        <label for="designati" class="form-label">{{ __('Departments') }}</label>
+                                                        <select name="department_id" required id="designati" class="select select2-hidden-accessible">
+                                                            <option value="">{{ __('Select') }}</option>
+                                                            @foreach($departments as $department)
+                                                                <option value="{{ $department->id }}">{{ $department->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        <div id="" class="invalid-feedback"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group col-md-4">
+                                                    {{ Form::label('designation_id', __('Designation'), ['class' => 'form-label']) }}
+                                                    <select name="designation_id" class="select select2-hidden-accessible">
+                                                        <option value="">{{ __('Select Designation') }}</option>
+                                                        @foreach($designations as $designation)
+                                                            <option value="{{ $designation->id }}">{{ $designation->name }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
 
-                                                <div class="col-md-4">
-                                                    <label for="sub_department" class="form-label">Sub-Departments</label>
-                                                    <select id="sub_department" name="sub_dep_id" class="form-control" disabled>
-                                                        <option value="0">Manger</option>
-                                                    </select>
-                                                </div>
-
-                                                <div class="col-md-4">
-                                                    <label for="section" class="form-label">Sections</label>
-                                                    <select id="section" name="section_id" class="form-control" disabled>
-                                                        <option value="0">Manager</option>
-                                                    </select>
-                                                </div>
-
-                                                <div class="col-md-4">
-                                                    <label for="designation" class="form-label">Designations</label>
-                                                    <select id="designation" name="designation_id" class="form-control" disabled>
-                                                        <option value="">Select Designation</option>
-                                                    </select>
-                                                </div>
                                                 <div class="col-md-4">
                                                     <div class="mb-3">
                                                         <label for="nationality_type" class="form-label">{{ __('Nationality Type') }}</label>
@@ -2282,102 +2216,5 @@ const ctx = document.getElementById('mySemiDonutChart').getContext('2d');
                             });
                         });
 
-                    </script>
-                    <script>
-                        $(document).ready(function () {
-                            const subDepartmentSelect = $('#sub_department');
-                            const sectionSelect = $('#section');
-                            const designationSelect = $('#designation');
-
-                            // Handle department change
-                            $('#department').on('change', function () {
-                                const departmentId = $(this).val();
-
-                                // Clear previous sub-departments, sections, and designations
-                                subDepartmentSelect.html('<option value="0">Manager</option>').prop('disabled', true);
-                                sectionSelect.html('<option value="0">Manager</option>').prop('disabled', true);
-                                designationSelect.html('<option value="">Select Designation</option>').prop('disabled', true);
-
-                                if (departmentId) {
-                                    // Fetch sub-departments using AJAX
-                                    $.ajax({
-                                        url: `/get-sub-departments/${departmentId}`,
-                                        type: 'GET',
-                                        success: function (data) {
-                                            if (data.length > 0) {
-                                                data.forEach(function (subDepartment) {
-                                                    subDepartmentSelect.append(
-                                                        `<option value="${subDepartment.id}">${subDepartment.name}</option>`
-                                                    );
-                                                });
-                                                subDepartmentSelect.prop('disabled', false);
-                                            }
-                                        },
-                                        error: function () {
-                                            alert('Failed to load sub-departments. Please try again.');
-                                        }
-                                    });
-                                }
-                            });
-
-                            // Handle sub-department change
-                            subDepartmentSelect.on('change', function () {
-                                const subDepartmentId = $(this).val();
-
-                                // Clear previous sections and designations
-                                sectionSelect.html('<option value="0">Manager</option>').prop('disabled', true);
-                                designationSelect.html('<option value="">Select Designation</option>').prop('disabled', true);
-
-                                if (subDepartmentId) {
-                                    // Fetch sections using AJAX
-                                    $.ajax({
-                                        url: `/get-sections/${subDepartmentId}`,
-                                        type: 'GET',
-                                        success: function (data) {
-                                            if (data.length > 0) {
-                                                data.forEach(function (section) {
-                                                    sectionSelect.append(
-                                                        `<option value="${section.id}">${section.name}</option>`
-                                                    );
-                                                });
-                                                sectionSelect.prop('disabled', false);
-                                            }
-                                        },
-                                        error: function () {
-                                            alert('Failed to load sections. Please try again.');
-                                        }
-                                    });
-                                }
-                            });
-
-                            // Handle section change
-                            sectionSelect.on('change', function () {
-                                const sectionId = $(this).val();
-
-                                // Clear previous designations
-                                designationSelect.html('<option value="">Select Designation</option>').prop('disabled', true);
-
-                                if (sectionId) {
-                                    // Fetch designations using AJAX
-                                    $.ajax({
-                                        url: `/get-designations/${sectionId}`,
-                                        type: 'GET',
-                                        success: function (data) {
-                                            if (data.length > 0) {
-                                                data.forEach(function (designation) {
-                                                    designationSelect.append(
-                                                        `<option value="${designation.id}">${designation.name}</option>`
-                                                    );
-                                                });
-                                                designationSelect.prop('disabled', false);
-                                            }
-                                        },
-                                        error: function () {
-                                            alert('Failed to load designations. Please try again.');
-                                        }
-                                    });
-                                }
-                            });
-                        });
                     </script>
 @endsection

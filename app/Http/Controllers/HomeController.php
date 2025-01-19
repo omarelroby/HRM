@@ -11,6 +11,7 @@ use App\Models\Branch;
 use App\Models\CompanyJobRequest;
 use App\Models\Department;
 use App\Models\Designation;
+use App\Models\Document;
 use App\Models\Employee;
 use App\Models\Employee_shift;
 use App\Models\EmployeeContracts;
@@ -38,6 +39,7 @@ use App\Models\Workunit;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -58,6 +60,7 @@ class HomeController extends Controller
             if(\auth()->user()->type=='super admin')
             {
                 $user = Auth::user();
+
                 $departments = Department::select('name')
                     ->withCount('employeess') // Count employees for each department
                     ->get()
@@ -123,15 +126,20 @@ class HomeController extends Controller
                     ->get()
                     ->take(6);
                 // Get the current date and calculate the date for 3 months ago
-                $threeMonthsAgo = Carbon::now()->subMonths(3);
-                $data['records'] = EmployeeContracts::where(function ($query) use ($threeMonthsAgo) {
-                    $query->whereBetween('contract_enddate', [$threeMonthsAgo, Carbon::now()])
-                        ->orWhereBetween('insurance_enddate', [$threeMonthsAgo, Carbon::now()])
-                        ->orWhereBetween('worker_enddate', [$threeMonthsAgo, Carbon::now()])
-                        ->orWhereBetween('residence_expiredate', [$threeMonthsAgo, Carbon::now()]);
-                })->distinct()
-                    ->take(10)
-                    ->get();
+                 $threeMonthsFromNow = Carbon::now()->addMonths(3);
+                $records = Document::with('document_type', 'employee')
+                    ->whereBetween('end_date', [Carbon::now(), $threeMonthsFromNow])
+                    ->whereNotNull('end_date')
+                    ->where('created_by', auth()->user()->id)
+                    ->paginate(10); // Paginate records with 10 per page
+
+                $groupedRecords = $records->getCollection()->groupBy(function ($record) {
+                    return $record->document_type->name ?? 'Other';
+                });
+
+                $records->setCollection(collect($groupedRecords));
+
+                $data['records'] = $records;
                 // Query to count tasks by status
                 $statusCounts = Task::select(DB::raw('status, COUNT(*) as count'))
                     ->groupBy('status')
@@ -169,6 +177,20 @@ class HomeController extends Controller
             if(\auth()->user()->type=='company')
             {
                 $user = Auth::user();
+                $threeMonthsFromNow = Carbon::now()->addMonths(3);
+                 $records = Document::with('document_type', 'employee')
+                    ->whereBetween('end_date', [Carbon::now(), $threeMonthsFromNow])
+                    ->whereNotNull('end_date')
+                    ->where('created_by', auth()->user()->id)
+                    ->paginate(10); // Paginate records with 10 per page
+
+                 $groupedRecords = $records->getCollection()->groupBy(function ($record) {
+                    return $record->document_type->name ?? 'Other';
+                });
+
+                 $records->setCollection(collect($groupedRecords));
+
+                $data['records'] = $records;
                 $departments = Department::select('name')
                     ->withCount('employeess') // Count employees for each department
                     ->get()
@@ -184,12 +206,8 @@ class HomeController extends Controller
 
                 $data['departmentNames'] = $departments->pluck('name'); // Unique department names
                 $data['total_employees'] = $departments->pluck('total_employees'); // Count of each department
-                // Get total number of employees
                 $data['employees_count'] = Employee::where('created_by',\auth()->user()->id)->count();
                 $data['all_employees'] = Employee::where('created_by',\auth()->user()->id)->get()->take(8);
-
-
-                // Get employees with status 'Present' today
                 $data['employeesWithAttendance'] = AttendanceEmployee::where('status', 'Present')
                     ->where('created_by',\auth()->user()->id)
                     ->where('date', today())
@@ -246,15 +264,7 @@ class HomeController extends Controller
                     ->take(6);
                 // Get the current date and calculate the date for 3 months ago
                 $threeMonthsAgo = Carbon::now()->subMonths(3);
-                $data['records'] = EmployeeContracts::where(function ($query) use ($threeMonthsAgo) {
-                    $query->whereBetween('contract_enddate', [$threeMonthsAgo, Carbon::now()])
-                        ->orWhereBetween('insurance_enddate', [$threeMonthsAgo, Carbon::now()])
-                        ->orWhereBetween('worker_enddate', [$threeMonthsAgo, Carbon::now()])
-                        ->orWhereBetween('residence_expiredate', [$threeMonthsAgo, Carbon::now()]);
-                })->distinct()
-                    ->where('created_by',\auth()->user()->id)
-                    ->take(10)
-                    ->get();
+
                 // Query to count tasks by status
                 $statusCounts = Task::select(DB::raw('status, COUNT(*) as count'))
                     ->groupBy('status')
@@ -290,6 +300,67 @@ class HomeController extends Controller
                 $data['new_join'] = Employee::whereBetween('Join_date_gregorian', [$lastMonthStart, $lastMonthEnd])->count();
 
                 return view('dashboard.dashboard', $data);
+            }
+            if(auth()->user()->type=='employee')
+            {
+                $employee=Employee::where('user_id',auth()->user()->id)->firstOrFail();
+                if(empty($employee->sub_dep_id) &&$employee->sub_dep_id==0)
+                {
+//                    dd('sub_dep_0');
+                    $threeMonthsFromNow = Carbon::now()->addMonths(3);
+                    $records = Document::with('document_type', 'employee')
+                        ->whereHas('employee',function ($query) use ($employee){
+                            $query->where('department_id',$employee->department_id);
+                        })
+                        ->whereBetween('end_date', [Carbon::now(), $threeMonthsFromNow])
+                        ->whereNotNull('end_date')
+                        ->paginate(20); // Paginate records with 10 per page
+
+                    $groupedRecords = $records->getCollection()->groupBy(function ($record) {
+                        return $record->document_type->name ?? 'Other';
+                    });
+
+                    $records->setCollection(collect($groupedRecords));
+                    $data['records'] = $records;
+                }
+                elseif(empty($employee->section_id) && $employee->section_id==0)
+                {
+
+                    $threeMonthsFromNow = Carbon::now()->addMonths(3);
+                    $records = Document::with('document_type', 'employee')
+                        ->whereHas('employee',function ($query) use ($employee){
+                            $query->where('sub_dep_id',$employee->sub_dep_id);
+                        })
+                        ->whereBetween('end_date', [Carbon::now(), $threeMonthsFromNow])
+                        ->whereNotNull('end_date')
+                        ->paginate(20); // Paginate records with 10 per page
+
+                    $groupedRecords = $records->getCollection()->groupBy(function ($record) {
+                        return $record->document_type->name ?? 'Other';
+                    });
+
+                    $records->setCollection(collect($groupedRecords));
+                    $data['records'] = $records;
+                }
+                else{
+//                    dd('all');
+                    $threeMonthsFromNow = Carbon::now()->addMonths(3);
+                    $records = Document::with('document_type', 'employee')
+
+                        ->whereBetween('end_date', [Carbon::now(), $threeMonthsFromNow])
+                        ->whereNotNull('end_date')
+                        ->paginate(20); // Paginate records with 10 per page
+
+                    $groupedRecords = $records->getCollection()->groupBy(function ($record) {
+                        return $record->document_type->name ?? 'Other';
+                    });
+
+                    $records->setCollection(collect($groupedRecords));
+                    $data['records'] = $records;
+                }
+                return view('dashboard.EmployeeDashboard', $data);
+
+
             }
 
         }

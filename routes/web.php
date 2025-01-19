@@ -888,6 +888,12 @@ Route::resource('document-type', 'DocumentTypeController')->middleware(
         'XSS',
     ]
 );
+Route::get('get-expiry-docs', 'DocumentController@expiry_docs')->middleware(
+    [
+        'auth',
+        'XSS',
+    ]
+);
 
 Route::get('attendanceemployee/bulkattendance', 'AttendanceEmployeeController@bulkAttendance')->name('attendanceemployee.bulkattendance')->middleware(
     [

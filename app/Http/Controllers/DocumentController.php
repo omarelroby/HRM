@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Document;
+use App\Models\Employee;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class DocumentController extends Controller
@@ -149,5 +152,98 @@ class DocumentController extends Controller
         {
             return redirect()->back()->with('error', __('Permission denied.'));
         }
+    }
+    public function expiry_docs()
+    {
+        if(auth()->user()->type=='company')
+        {
+            $threeMonthsFromNow = Carbon::now()->addMonths(3);
+            $records = Document::with('document_type', 'employee')
+                ->whereBetween('end_date', [Carbon::now(), $threeMonthsFromNow])
+                ->whereNotNull('end_date')
+                ->where('created_by', auth()->user()->id)
+                ->paginate(20); // Paginate records with 10 per page
+
+            $groupedRecords = $records->getCollection()->groupBy(function ($record) {
+                return $record->document_type->name ?? 'Other';
+            });
+
+            $records->setCollection(collect($groupedRecords));
+//            dd($records);
+            $data['records'] = $records;
+        }
+        else
+        {
+            $threeMonthsFromNow = Carbon::now()->addMonths(3);
+            $records = Document::with('document_type', 'employee')
+                ->whereBetween('end_date', [Carbon::now(), $threeMonthsFromNow])
+                ->whereNotNull('end_date')
+                ->paginate(20); // Paginate records with 10 per page
+
+            $groupedRecords = $records->getCollection()->groupBy(function ($record) {
+                return $record->document_type->name ?? 'Other';
+            });
+
+            $records->setCollection(collect($groupedRecords));
+
+            $data['records'] = $records;
+        }
+        if(auth()->user()->type=='employee')
+        {
+            $employee=Employee::where('user_id',auth()->user()->id)->firstOrFail();
+            if($employee->sub_dep_id==0)
+            {
+                $threeMonthsFromNow = Carbon::now()->addMonths(3);
+                $records = Document::with('document_type', 'employee')
+                    ->whereHas('employee',function ($query) use ($employee){
+                        $query->where('department_id',$employee->department_id);
+                    })
+                    ->whereBetween('end_date', [Carbon::now(), $threeMonthsFromNow])
+                    ->whereNotNull('end_date')
+                    ->paginate(20); // Paginate records with 10 per page
+
+                $groupedRecords = $records->getCollection()->groupBy(function ($record) {
+                    return $record->document_type->name ?? 'Other';
+                });
+
+                $records->setCollection(collect($groupedRecords));
+                $data['records'] = $records;
+            }
+            elseif($employee->section_id==0)
+            {
+                $threeMonthsFromNow = Carbon::now()->addMonths(3);
+                $records = Document::with('document_type', 'employee')
+                    ->whereHas('employee',function ($query) use ($employee){
+                        $query->where('sub_dep_id',$employee->sub_dep_id);
+                    })
+                    ->whereBetween('end_date', [Carbon::now(), $threeMonthsFromNow])
+                    ->whereNotNull('end_date')
+                    ->paginate(20); // Paginate records with 10 per page
+
+                $groupedRecords = $records->getCollection()->groupBy(function ($record) {
+                    return $record->document_type->name ?? 'Other';
+                });
+
+                $records->setCollection(collect($groupedRecords));
+                $data['records'] = $records;
+            }
+            else{
+                $threeMonthsFromNow = Carbon::now()->addMonths(3);
+                $records = Document::with('document_type', 'employee')
+
+                    ->whereBetween('end_date', [Carbon::now(), $threeMonthsFromNow])
+                    ->whereNotNull('end_date')
+                    ->paginate(20); // Paginate records with 10 per page
+
+                $groupedRecords = $records->getCollection()->groupBy(function ($record) {
+                    return $record->document_type->name ?? 'Other';
+                });
+
+                $records->setCollection(collect($groupedRecords));
+                $data['records'] = $records;
+            }
+        }
+
+        return view('dashboard.employeeDocs',$data);
     }
 }
