@@ -72,7 +72,7 @@ class HomeController extends Controller
                         ];
                     })
                     ->values(); // Reset indices
-//                dd($departments);
+ 
                 $data['departmentNames'] = $departments->pluck('name'); // Unique department names
                 $data['total_employees'] = $departments->pluck('total_employees'); // Count of each department
                 $data['employees_count'] = Employee::where('created_by',\auth()->user()->id)->count();
