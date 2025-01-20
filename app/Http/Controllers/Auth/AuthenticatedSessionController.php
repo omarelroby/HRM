@@ -77,155 +77,139 @@ class AuthenticatedSessionController extends Controller
         {
             $free_plan = Plan::where('price', '=', '0.0')->first();
             $plan      = Plan::find($user->plan);
+            if($plan) {
+                if ($user->plan != $free_plan->id) {
+                    if (date('Y-m-d') > $user->plan_expire_date && $plan->duration != 'unlimited') {
+                        $user->plan = $free_plan->id;
+                        $user->plan_expire_date = null;
+                        $user->save();
 
-            if($user->plan != $free_plan->id)
-            {
-                if(date('Y-m-d') > $user->plan_expire_date && $plan->duration != 'unlimited')
-                {
-                    $user->plan             = $free_plan->id;
-                    $user->plan_expire_date = null;
-                    $user->save();
+                        $users = User::where('created_by', '=', \Auth::user()->creatorId())->get();
+                        $employees = Employee::where('created_by', '=', \Auth::user()->creatorId())->get();
 
-                    $users     = User::where('created_by', '=', \Auth::user()->creatorId())->get();
-                    $employees = Employee::where('created_by', '=', \Auth::user()->creatorId())->get();
-
-                    if($free_plan->max_users == -1)
-                    {
-                        foreach($users as $user)
-                        {
-                            $user->is_active = 1;
-                            $user->save();
-                        }
-                    }
-                    else
-                    {
-                        $userCount = 0;
-                        foreach($users as $user)
-                        {
-                            $userCount++;
-                            if($userCount <= $free_plan->max_users)
-                            {
+                        if ($free_plan->max_users == -1) {
+                            foreach ($users as $user) {
                                 $user->is_active = 1;
                                 $user->save();
                             }
-                            else
-                            {
-                                $user->is_active = 0;
-                                $user->save();
+                        } else {
+                            $userCount = 0;
+                            foreach ($users as $user) {
+                                $userCount++;
+                                if ($userCount <= $free_plan->max_users) {
+                                    $user->is_active = 1;
+                                    $user->save();
+                                } else {
+                                    $user->is_active = 0;
+                                    $user->save();
+                                }
                             }
+
                         }
 
-                    }
 
-
-                    if($free_plan->max_employees == -1)
-                    {
-                        foreach($employees as $employee)
-                        {
-                            $employee->is_active = 1;
-                            $employee->save();
-                        }
-                    }
-                    else
-                    {
-                        $employeeCount = 0;
-                        foreach($employees as $employee)
-                        {
-                            $employeeCount++;
-                            if($employeeCount <= $free_plan->max_customers)
-                            {
+                        if ($free_plan->max_employees == -1) {
+                            foreach ($employees as $employee) {
                                 $employee->is_active = 1;
                                 $employee->save();
                             }
-                            else
-                            {
-                                $employee->is_active = 0;
-                                $employee->save();
+                        } else {
+                            $employeeCount = 0;
+                            foreach ($employees as $employee) {
+                                $employeeCount++;
+                                if ($employeeCount <= $free_plan->max_customers) {
+                                    $employee->is_active = 1;
+                                    $employee->save();
+                                } else {
+                                    $employee->is_active = 0;
+                                    $employee->save();
+                                }
                             }
                         }
-                    }
 
-                    return redirect()->route('home')->with('error', 'Your plan expired limit is over, please upgrade your plan');
+                        return redirect()->route('home')->with('error', 'Your plan expired limit is over, please upgrade your plan');
+                    }
                 }
             }
-
         }
         if($user->type == 'employee')
         {
             $free_plan = Plan::where('price', '=', '0.0')->first();
             $plan      = Plan::find($user->plan);
-
-            if($user->plan != $free_plan->id)
+            if($plan)
             {
-                if(date('Y-m-d') > $user->plan_expire_date && $plan->duration != 'unlimited')
+                if($user->plan != $free_plan->id)
                 {
-                    $user->plan             = $free_plan->id;
-                    $user->plan_expire_date = null;
-                    $user->save();
-
-                    $users     = User::where('created_by', '=', \Auth::user()->creatorId())->get();
-                    $employees = Employee::where('created_by', '=', \Auth::user()->creatorId())->get();
-
-                    if($free_plan->max_users == -1)
+                    if(date('Y-m-d') > $user->plan_expire_date && $plan->duration != 'unlimited')
                     {
-                        foreach($users as $user)
+                        $user->plan             = $free_plan->id;
+                        $user->plan_expire_date = null;
+                        $user->save();
+
+                        $users     = User::where('created_by', '=', \Auth::user()->creatorId())->get();
+                        $employees = Employee::where('created_by', '=', \Auth::user()->creatorId())->get();
+
+                        if($free_plan->max_users == -1)
                         {
-                            $user->is_active = 1;
-                            $user->save();
-                        }
-                    }
-                    else
-                    {
-                        $userCount = 0;
-                        foreach($users as $user)
-                        {
-                            $userCount++;
-                            if($userCount <= $free_plan->max_users)
+                            foreach($users as $user)
                             {
                                 $user->is_active = 1;
                                 $user->save();
                             }
-                            else
+                        }
+                        else
+                        {
+                            $userCount = 0;
+                            foreach($users as $user)
                             {
-                                $user->is_active = 0;
-                                $user->save();
+                                $userCount++;
+                                if($userCount <= $free_plan->max_users)
+                                {
+                                    $user->is_active = 1;
+                                    $user->save();
+                                }
+                                else
+                                {
+                                    $user->is_active = 0;
+                                    $user->save();
+                                }
                             }
+
                         }
 
-                    }
 
-
-                    if($free_plan->max_employees == -1)
-                    {
-                        foreach($employees as $employee)
+                        if($free_plan->max_employees == -1)
                         {
-                            $employee->is_active = 1;
-                            $employee->save();
-                        }
-                    }
-                    else
-                    {
-                        $employeeCount = 0;
-                        foreach($employees as $employee)
-                        {
-                            $employeeCount++;
-                            if($employeeCount <= $free_plan->max_customers)
+                            foreach($employees as $employee)
                             {
                                 $employee->is_active = 1;
                                 $employee->save();
                             }
-                            else
+                        }
+                        else
+                        {
+                            $employeeCount = 0;
+                            foreach($employees as $employee)
                             {
-                                $employee->is_active = 0;
-                                $employee->save();
+                                $employeeCount++;
+                                if($employeeCount <= $free_plan->max_customers)
+                                {
+                                    $employee->is_active = 1;
+                                    $employee->save();
+                                }
+                                else
+                                {
+                                    $employee->is_active = 0;
+                                    $employee->save();
+                                }
                             }
                         }
+
+                        return redirect()->route('home')->with('error', 'Your plan expired limit is over, please upgrade your plan');
                     }
-
-                    return redirect()->route('home')->with('error', 'Your plan expired limit is over, please upgrade your plan');
                 }
-            }
 
+            }
         }
 
 

@@ -27,6 +27,6 @@ class EmployeeRequest extends Model
 
     public function employees()
     {
-        return $this->hasOne('App\Models\Employee', 'id', 'employee_id');
+        return $this->belongsTo('App\Models\Employee',   'employee_id');
     }
 }

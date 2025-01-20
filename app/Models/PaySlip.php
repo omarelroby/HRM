@@ -29,7 +29,7 @@ class PaySlip extends Model
 
     public function employees()
     {
-        return $this->hasOne('App\Models\Employee', 'id', 'employee_id');
+        return $this->belongsTo('App\Models\Employee',   'employee_id');
     }
 
     public static function insurance($id,$type)
@@ -115,7 +115,7 @@ class PaySlip extends Model
         }else{
             $basicSalary = $employee->basic_salary;
         }
-        $total = $basicSalary + collect(json_decode($employee->allowance))->sum('amount') + collect(json_decode($employee->overtime))->sum('rate') + 
+        $total = $basicSalary + collect(json_decode($employee->allowance))->sum('amount') + collect(json_decode($employee->overtime))->sum('rate') +
         collect(json_decode($employee->other_payment))->sum('amount') ;
         return $total;
     }
@@ -123,7 +123,7 @@ class PaySlip extends Model
     public static function getTotalDeduction($employee){
         $total = $employee->insurance($employee->id,'employee') +
         $employee->medical_insurance($employee->id,'employee') +
-        (collect(json_decode($employee->absence))->where('type','A')->sum('number_of_days') * $employee->getEmployeeSalaryPerDay($employee->id) * Utility::salary_setting()->absence_with_permission_discount ) 
+        (collect(json_decode($employee->absence))->where('type','A')->sum('number_of_days') * $employee->getEmployeeSalaryPerDay($employee->id) * Utility::salary_setting()->absence_with_permission_discount )
         + (collect(json_decode($employee->absence))->where('type','X')->sum('number_of_days') * ($employee->getEmployeeSalaryPerDay($employee->id) * Utility::salary_setting()->absence_without_permission_discount ) ) +
         ((collect(json_decode($employee->absence))->where('type','S')->sum('number_of_days') * $employee->getEmployeeSalaryPerDay($employee->id) * Utility::salary_setting()->sick_absence_discount)) +
         collect(json_decode($employee->loan))->sum('amount') +
