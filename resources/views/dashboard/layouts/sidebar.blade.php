@@ -36,6 +36,7 @@
             <img title="{{$logo.'/'.\Auth::user()->id.'_logo.png'}}" style="width: auto;    height: 80px; object-fit: cover;" src="{{  $logo.'/'.\Auth::user()->id.'_logo.png' }}" alt="Logo" class="logo-img">
         </a>
 
+
         <!-- Small Logo -->
         <a href="{{ route('home') }}" class="logo-small">
             <img src="{{  $logo.'/'.\Auth::user()->id.'_logo.png' }}" alt="Logo" class="logo-img-small">
@@ -119,6 +120,11 @@
                         <li class="{{ Request::is('home')  ? 'active' : '' }}">
                             <a href="{{ route('home') }}">
                                 <i class="ti ti-smart-home"></i><span>{{ __('Dashboard') }}</span>
+                            </a>
+                        </li>
+                        <li class="{{ Request::is('companystructure')  ? 'active' : '' }}">
+                            <a href="{{ url('/companystructure') }}">
+                                <i class="ti ti-binary-tree"></i><span>{{ __('Company Structure') }}</span>
                             </a>
                         </li>
                         @if(\Auth::user()->can('Manage User'))
