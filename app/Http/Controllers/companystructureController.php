@@ -17,7 +17,7 @@ class companystructureController extends Controller
             $segment           = null;
             $lang              = app()->getLocale() == 'ar' ? '_ar' : '';
             $CompanyStructures = CompanyStructure::whereNull('parent')->where('created_by', '=', \Auth::user()->creatorId())->get();
-            return view('companystructures.index', compact('CompanyStructures','segment','lang'));
+            return view('dashboard.companystructures.index', compact('CompanyStructures','segment','lang'));
         }
         else
         {
@@ -62,7 +62,7 @@ class companystructureController extends Controller
         if(\Auth::user()->can('Create Branch'))
         {
             $validator = \Validator::make(
-            $request->all(), 
+            $request->all(),
             [
                 'name'        => 'required',
                 'name_ar'     => 'required',
@@ -128,12 +128,12 @@ class companystructureController extends Controller
             if($companystructure->created_by == \Auth::user()->creatorId())
             {
                 $validator = \Validator::make(
-                    $request->all(), 
+                    $request->all(),
                     [
                         'name'        => 'required',
                         'name_ar'     => 'required',
                     ]);
-                
+
                 if($validator->fails())
                 {
                     $messages = $validator->getMessageBag();
