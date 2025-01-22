@@ -53,7 +53,7 @@
                 {{ __('Sub Department') }}
             </span>
                                         <p class="text-dark">
-                                            @if($employee->sub_dep_id == 0)
+                                            @if($employee->sub_dep_id == '0')
                                                 {{ $employee->department->name . ' Manager' }}
                                             @else
                                                 {{ $employee->sub_dep->name ?? 'N/A' }}
@@ -67,13 +67,13 @@
             </span>
                                         <p class="text-dark">
                                             @if(empty($employee->section_id))
-                                                @if($employee->section_id == 0)
+                                                @if($employee->section_id == '0')
                                                     {{ $employee->sub_dep?$employee->sub_dep->name . ' Manager' :'N/A' }}
                                                 @else
                                                     {{ $employee->section?$employee->section->name : 'N/A' }}
                                                 @endif
                                             @else
-                                                {{ $employee->section_id!=0?$employee->section->name : 'N/A' }}
+                                                {{ $employee->section_id!='0'?$employee->section->name : 'N/A' }}
                                             @endif
                                         </p>
                                     </div>

@@ -1,3 +1,78 @@
+@extends('dashboard.layouts.master')
+
+@section('page-title')
+    {{ __('Company Structures') }}
+@endsection
+
+<style>
+    #chart-container {
+        font-family: Arial;
+        height: auto;
+
+        border: 2px dashed #aaa;
+        border-radius: 5px;
+        overflow: auto;
+        text-align: center;
+        direction: ltr;
+    }
+    .page-wrapper .content {
+        padding: 24px;
+        padding-bottom: 0;
+        min-height: calc(20vh - 105px);
+    }
+    .orgchart {
+        background: #fff;
+    }
+    .orgchart td.left, .orgchart td.right, .orgchart td.top {
+        border-color: #aaa;
+
+    }
+    .orgchart td>.down {
+        background-color: #aaa;
+    }
+    .orgchart .middle-level .title {
+        background-color: #006699;
+    }
+    .orgchart .middle-level .content {
+        border-color: #006699;
+    }
+    .orgchart .product-dept .title {
+        background-color: #009933;
+    }
+    .orgchart .product-dept .content {
+        border-color: #009933;
+    }
+    .orgchart .rd-dept .title {
+        background-color: #993366;
+    }
+    .orgchart .rd-dept .content {
+        border-color: #993366;
+
+    }
+    .orgchart .pipeline1 .title {
+        background-color: #996633;
+    }
+    .orgchart .pipeline1 .content {
+        border-color: #996633;
+    }
+    .orgchart .frontend1 .title {
+        background-color: #cc0066;
+    }
+    .orgchart .frontend1 .content {
+        border-color: #cc0066;
+    }
+
+    #github-link {
+        position: fixed;
+        top: 0px;
+        right: 10px;
+        font-size: 3em;
+    }
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/orgchart/3.1.1/css/jquery.orgchart.min.css" integrity="sha512-bCaZ8dJsDR+slK3QXmhjnPDREpFaClf3mihutFGH+RxkAcquLyd9iwewxWQuWuP5rumVRl7iGbSDuiTvjH1kLw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
 @section('content')
     <style>
         .page-wrapper .content {
@@ -5,22 +80,22 @@
         }
         #chart-container {
             width: 100%;
-            height: 500px;
+            height: 700px;
             border: 1px solid #ccc;
             overflow: auto;
         }
     </style>
 
-    <div class="all-button-box row d-flex justify-content-end my-2">
-        @can('Create Branch')
-            <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6 col-6 my-2">
-                <a href="#" data-bs-toggle="modal" data-bs-target="#addTrainingModal" class="btn btn-primary btn-lg"
-                   data-title="{{__('Create New Structure')}}">
-                    <i class="fa fa-plus"></i> {{__('Create')}}
-                </a>
-            </div>
-        @endcan
-    </div>
+{{--    <div class="all-button-box row d-flex justify-content-end my-2">--}}
+{{--        @can('Create Branch')--}}
+{{--            <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6 col-6 my-2">--}}
+{{--                <a href="#" data-bs-toggle="modal" data-bs-target="#addTrainingModal" class="btn btn-primary btn-lg"--}}
+{{--                   data-title="{{__('Create New Structure')}}">--}}
+{{--                    <i class="fa fa-plus"></i> {{__('Create')}}--}}
+{{--                </a>--}}
+{{--            </div>--}}
+{{--        @endcan--}}
+{{--    </div>--}}
 
     <div id="chart-container"></div>
 
@@ -44,12 +119,12 @@
                                 {{Form::select('employee_id',$employees,null,array('class'=>'form-control select2', 'id'=>'parent'))}}
                             </div>
                         </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                {{Form::label('parent',__('Select The Parent'))}}
-                                {{Form::select('parent',$structure_tree,null,array('class'=>'form-control select2', 'id'=>'parent'))}}
-                            </div>
-                        </div>
+{{--                        <div class="col-md-12">--}}
+{{--                            <div class="form-group">--}}
+{{--                                {{Form::label('parent',__('Select The Parent'))}}--}}
+{{--                                {{Form::select('parent',$structure_tree,null,array('class'=>'form-control select2', 'id'=>'parent'))}}--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
 
                         <div class="col-12">
                             <div class="form-group">

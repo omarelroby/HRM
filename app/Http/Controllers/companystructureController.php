@@ -5,27 +5,134 @@ namespace App\Http\Controllers;
 use App\Models\CompanyStructure;
 use App\Models\CompanyStructureEmployee;
 use App\Http\Resources\CompanyStructureResource;
+use App\Models\Department;
+use App\Models\Designation;
 use App\Models\Employee;
+use App\Models\Section;
+use App\Models\SubDepartment;
 use Illuminate\Http\Request;
 
 class companystructureController extends Controller
 {
     public function index()
     {
-        if(\Auth::user()->can('Manage Branch'))
-        {
-            $segment           = null;
-            $lang              = app()->getLocale() == 'ar' ? '_ar' : '';
-             $employees         = Employee::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
-            $CompanyStructures = CompanyStructure::where('parent',0)->where('created_by', '=', \Auth::user()->creatorId())->get();
-            return view('dashboard.companystructures.index', compact('employees','CompanyStructures','segment','lang'));
-        }
-        else
-        {
-            return redirect()->back()->with('error', __('Permission denied.'));
-        }
+        $lang = app()->getLocale() == 'ar' ? '_ar' : '';
+        $userCreatorId = \Auth::user()->creatorId();
+
+        // Fetch departments, sub-departments, sections, and designations
+        $departments = Department::where('created_by', $userCreatorId)->get();
+        $subDepartments = SubDepartment::where('created_by', $userCreatorId)->get();
+        $sections = Section::where('created_by', $userCreatorId)->get();
+        $designations = Designation::where('created_by', $userCreatorId)->get();
+
+        // Fetch employees grouped by department, sub-department, section, and designation
+        $employees = Employee::where('created_by', $userCreatorId)
+            ->with(['departments', 'sub_dep', 'section', 'designation'])
+            ->get()
+            ->groupBy(['department_id', 'sub_dep_id', 'section_id', 'designation_id']);
+
+
+        $structureTree = $this->buildStructureTree($departments, $subDepartments, $sections, $designations, $employees, $lang);
+//        dd($structureTree);
+        return view('dashboard.companystructures.main', compact('structureTree', 'lang', 'employees'));
     }
 
+    private function buildStructureTree($departments, $subDepartments, $sections, $designations, $employees, $lang)
+    {
+        $tree = [];
+
+        foreach ($departments as $department) {
+            $departmentNode = [
+                'id' => 'dept-' . $department->id,
+                'name' => $department->{'name' . $lang},
+                'title' => 'Department',
+                'children' => [],
+            ];
+
+            // Add department managers (employees with sub_dep_id = 0)
+            if (isset($employees[$department->id][0])) {
+                foreach ($employees[$department->id][0] as $sectionGroup) {
+                    foreach ($sectionGroup as $designationGroup) {
+                        foreach ($designationGroup as $employee) {
+                            $departmentNode['children'][] = [
+                                'id' => 'emp-' . $employee->id,
+                                'name' => $employee->name,
+                                'title' => $employee->position . ' - ' . $department->{'name' . $lang} . ' Manager',
+                            ];
+                        }
+                    }
+                }
+            }
+
+            // Add sub-departments
+            foreach ($subDepartments->where('department_id', $department->id) as $subDepartment) {
+                $subDepartmentNode = [
+                    'id' => 'subdept-' . $subDepartment->id,
+                    'name' => $subDepartment->{'name' . $lang},
+                    'title' => 'Sub-Department',
+                    'children' => [],
+                ];
+
+                // Add sub-department managers (employees with sub_dep_id = current sub-department and section_id = 0)
+                if (isset($employees[$department->id][$subDepartment->id][0])) {
+                    foreach ($employees[$department->id][$subDepartment->id][0] as $designationGroup) {
+                        foreach ($designationGroup as $employee) {
+                            $subDepartmentNode['children'][] = [
+                                'id' => 'emp-' . $employee->id,
+                                'name' => $employee->name,
+                                'title' => $employee->position . ' - ' . $subDepartment->{'name' . $lang} . ' Manager',
+                            ];
+                        }
+                    }
+                }
+
+                // Add sections as children of the sub-department
+                foreach ($sections->where('sub_dep_id', $subDepartment->id) as $section) {
+                    $sectionNode = [
+                        'id' => 'section-' . $section->id,
+                        'name' => $section->{'name' . $lang},
+                        'title' => 'Section',
+                        'children' => [],
+                    ];
+
+                    // Add designations under the section
+                    foreach ($designations->where('section_id', $section->id) as $designation) {
+                        $designationNode = [
+                            'id' => 'designation-' . $designation->id,
+                            'name' => $designation->{'name' . $lang},
+                            'title' => 'Designation: ' . $designation->{'name' . $lang},
+                            'children' => [],
+                        ];
+
+                        // Add employees under the designation
+                        if (isset($employees[$department->id][$subDepartment->id][$section->id][$designation->id])) {
+                            foreach ($employees[$department->id][$subDepartment->id][$section->id][$designation->id] as $employee) {
+                                $designationNode['children'][] = [
+                                    'id' => 'emp-' . $employee->id,
+                                    'name' => $employee->name,
+                                    'title' => $employee->job_title,
+                                ];
+                            }
+                        }
+
+                        // Add the designation node to the section
+                        $sectionNode['children'][] = $designationNode;
+                    }
+
+                    // Add the section node to the sub-department
+                    $subDepartmentNode['children'][] = $sectionNode;
+                }
+
+                // Add the sub-department node to the department
+                $departmentNode['children'][] = $subDepartmentNode;
+            }
+
+            // Add the department node to the tree
+            $tree[] = $departmentNode;
+        }
+
+        return $tree;
+    }
     public function index2($id)
     {
         if(\Auth::user()->can('Manage Branch'))
@@ -254,7 +361,7 @@ class companystructureController extends Controller
     }
     public function reset()
     {
-        dd('reset');
+//        dd('reset');
         if (\Auth::user()->can('Create Branch')) {
             // Delete all records from the company_structures table
             CompanyStructure::where('created_by', \Auth::user()->creatorId())->delete();
