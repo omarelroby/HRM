@@ -10,6 +10,7 @@ class CompanyStructure extends Model
         'name',
         'name_ar',
         'parent',
+        'employee_id',
         'created_by',
     ];
 
@@ -21,6 +22,10 @@ class CompanyStructure extends Model
     public function children()
     {
         return $this->hasMany(self::class, 'parent', 'id');
+    }
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class, 'employee_id', 'id');
     }
 
     public function employees()

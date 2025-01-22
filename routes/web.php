@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\companystructureController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -247,6 +248,12 @@ Route::resource('jobtitle', 'JobtitleController')->middleware(
         'XSS',
     ]
 );
+
+Route::delete('/companystructure/reset', 'CompanyStructureController@reset')->name('companystructure.reset')->middleware(
+    [
+        'auth',
+        'XSS',
+    ]);
 Route::resource('category', 'CategoryController')->middleware(
     [
         'auth',

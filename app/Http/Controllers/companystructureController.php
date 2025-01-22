@@ -16,8 +16,9 @@ class companystructureController extends Controller
         {
             $segment           = null;
             $lang              = app()->getLocale() == 'ar' ? '_ar' : '';
-            $CompanyStructures = CompanyStructure::whereNull('parent')->where('created_by', '=', \Auth::user()->creatorId())->get();
-            return view('dashboard.companystructures.index', compact('CompanyStructures','segment','lang'));
+             $employees         = Employee::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
+            $CompanyStructures = CompanyStructure::where('parent',0)->where('created_by', '=', \Auth::user()->creatorId())->get();
+            return view('dashboard.companystructures.index', compact('employees','CompanyStructures','segment','lang'));
         }
         else
         {
@@ -32,15 +33,76 @@ class companystructureController extends Controller
             $segment           = null;
             $lang              = app()->getLocale() == 'ar' ? '_ar' : '';
             $parentTree        = CompanyStructure::where('id',$id)->first();
-            $structure_tree    = CompanyStructure::with('children')->where('parent',$id)->where('created_by', '=', \Auth::user()->creatorId())->get();
+            $structure_tree    = CompanyStructure::with('parent')
+                ->where('parent',$id)
+                ->where('created_by', '=', \Auth::user()->creatorId())
+                ->get();        // to get child and parents.
             $CompanyStructures = CompanyStructureResource::collection($structure_tree);
-            return view('companystructures.index2', compact('parentTree','CompanyStructures','segment','lang'));
+            $employee_in_comp_structure   = CompanyStructure::
+                  whereNotNull('parent')
+                ->where('created_by', '=', \Auth::user()->creatorId())
+                ->pluck('employee_id')
+                ->toArray();
+            $employees         = Employee::where('created_by', \Auth::user()->creatorId())
+                ->whereNotIn('id',$employee_in_comp_structure)
+                ->get()
+                ->pluck('name', 'id');
+            if(count($employee_in_comp_structure) > 0)
+            {
+                $employees = Employee::where('created_by', \Auth::user()->creatorId())
+                    ->whereNotIn('id',$employee_in_comp_structure)
+                    ->get()
+                    ->pluck('name', 'id');
+                if(count($employee_in_comp_structure)==1)
+                {
+                    $structure_tree    = CompanyStructure::
+                          where('parent',0)
+                        ->where('created_by', '=', \Auth::user()->creatorId())
+                        ->get()
+                         ->pluck('name', 'id');
+                }
+                else{
+                    if(count($employee_in_comp_structure)>1)
+                    {
+                        $all_comp_struct=CompanyStructure::pluck('id')->toArray();
+                        $structure_tree    = CompanyStructure::
+                            whereIn('id',$all_comp_struct)
+                             ->where('created_by', '=', \Auth::user()->creatorId())
+                            ->get()
+                            ->pluck('name', 'id');
+                    }
+                    else{
+                        $structure_tree    = CompanyStructure::
+                        where('parent',$id)
+                            ->where('created_by', '=', \Auth::user()->creatorId())
+                            ->get()
+                            ->pluck('name', 'id');
+                    }
+
+
+                }
+
+
+
+            }
+            else{
+                $employees         = Employee::where('created_by', \Auth::user()->creatorId())
+                    ->get()
+                    ->pluck('name', 'id');
+
+            }
+
+
+             return view('dashboard.companystructures.index2', compact('structure_tree','id','employees','parentTree','CompanyStructures','segment','lang'));
+
         }
         else
         {
             return redirect()->back()->with('error', __('Permission denied.'));
         }
     }
+
+
 
     public function create(Request $request)
     {
@@ -59,6 +121,7 @@ class companystructureController extends Controller
 
     public function store(Request $request)
     {
+//        dd($request->all());
         if(\Auth::user()->can('Create Branch'))
         {
             $validator = \Validator::make(
@@ -77,14 +140,22 @@ class companystructureController extends Controller
             $companystructure                = new CompanyStructure();
             $companystructure->name          = $request->name;
             $companystructure->name_ar       = $request->name_ar;
-            $companystructure->parent        = $request->parent;
+            $companystructure->employee_id        = $request->employee_id??null;
+            if($request->filled('parent'))
+            {
+                $companystructure->parent        = $request->parent  ;
+
+            }
+            else{
+                $companystructure->parent        = 0  ;
+            }
             $companystructure->created_by    = \Auth::user()->creatorId();
             $companystructure->save();
-
+//            dd($companystructure);
             $companystructure->employees()->sync($request->employees);
             return back();
 
-            //return redirect()->route('companystructure.index')->with('success', __('Branch  successfully created.'));
+//            return redirect()->route('companystructure.index')->with('success', __('Branch  successfully created.'));
         }
         else
         {
@@ -108,7 +179,7 @@ class companystructureController extends Controller
                 $lang         = app()->getLocale() == 'ar' ? '_ar' : '';
                 $employees    = Employee::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
                 $selectedEmployees = $companystructure->employees->pluck('id')->toArray();
-                return view('companystructures.edit', compact('lang','companystructure','employees' , 'selectedEmployees'));
+                return view('dashboard.companystructures.edit', compact('lang','companystructure','employees' , 'selectedEmployees'));
             }
             else
             {
@@ -168,6 +239,7 @@ class companystructureController extends Controller
             if($companystructure->created_by == \Auth::user()->creatorId())
             {
                 $companystructure->delete();
+
                 return redirect()->route('companystructure.index')->with('success', __('Branch successfully deleted.'));
             }
             else
@@ -177,6 +249,18 @@ class companystructureController extends Controller
         }
         else
         {
+            return redirect()->back()->with('error', __('Permission denied.'));
+        }
+    }
+    public function reset()
+    {
+        dd('reset');
+        if (\Auth::user()->can('Create Branch')) {
+            // Delete all records from the company_structures table
+            CompanyStructure::where('created_by', \Auth::user()->creatorId())->delete();
+
+            return redirect()->route('companystructure.index')->with('success', __('All company structures have been reset successfully.'));
+        } else {
             return redirect()->back()->with('error', __('Permission denied.'));
         }
     }
