@@ -167,7 +167,8 @@ class UserController extends Controller
 
         public function show($id)
         {
-            $employee= Employee::findOrFail($id);
+
+            $employee= Employee::where('user_id',$id)->first();
             return view('dashboard.user.show',compact('employee'));
         }
 

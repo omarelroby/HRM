@@ -112,7 +112,7 @@ class TimeSheetController extends Controller
 
         if(\Auth::user()->can('Edit TimeSheet'))
         {
-            $employees = Employee::where('created_by', '=', \Auth::user()->creatorId())->get();
+            $employees = Employee::where('created_by', '=', \Auth::user()->creatorId())->get()->pluck('name', 'id');
             $timeSheet = Timesheet::find($id);
             return view('dashboard.timeSheet.edit', compact('timeSheet', 'employees'));
         }

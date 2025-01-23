@@ -1,187 +1,183 @@
 @extends('dashboard.layouts.master')
 
 @section('page-title')
-    {{ __('Company Structures') }}
+    {{ __('Edit Timesheet Entry') }}
 @endsection
 
-<style>
-    #chart-container {
-        font-family: Arial;
-        height: auto;
-
-        border: 2px dashed #aaa;
-        border-radius: 5px;
-        overflow: auto;
-        text-align: center;
-        direction: ltr;
-    }
-    .page-wrapper .content {
-        padding: 24px;
-        padding-bottom: 0;
-        min-height: calc(20vh - 105px);
-    }
-    .orgchart {
-        background: #fff;
-    }
-    .orgchart td.left, .orgchart td.right, .orgchart td.top {
-        border-color: #aaa;
-
-    }
-    .orgchart td>.down {
-        background-color: #aaa;
-    }
-    .orgchart .middle-level .title {
-        background-color: #006699;
-    }
-    .orgchart .middle-level .content {
-        border-color: #006699;
-    }
-    .orgchart .product-dept .title {
-        background-color: #009933;
-    }
-    .orgchart .product-dept .content {
-        border-color: #009933;
-    }
-    .orgchart .rd-dept .title {
-        background-color: #993366;
-    }
-    .orgchart .rd-dept .content {
-        border-color: #993366;
-
-    }
-    .orgchart .pipeline1 .title {
-        background-color: #996633;
-    }
-    .orgchart .pipeline1 .content {
-        border-color: #996633;
-    }
-    .orgchart .frontend1 .title {
-        background-color: #cc0066;
-    }
-    .orgchart .frontend1 .content {
-        border-color: #cc0066;
-    }
-
-    #github-link {
-        position: fixed;
-        top: 0px;
-        right: 10px;
-        font-size: 3em;
-    }
-
-</style>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/orgchart/3.1.1/css/jquery.orgchart.min.css" integrity="sha512-bCaZ8dJsDR+slK3QXmhjnPDREpFaClf3mihutFGH+RxkAcquLyd9iwewxWQuWuP5rumVRl7iGbSDuiTvjH1kLw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-
 @section('content')
-    <style>
-        .page-wrapper .content {
-            min-height: calc(10vh - 105px);
-        }
-        #chart-container {
-            width: 100%;
-            height: 700px;
-            border: 1px solid #ccc;
-            overflow: auto;
-        }
-    </style>
-
-{{--    <div class="all-button-box row d-flex justify-content-end my-2">--}}
-{{--        @can('Create Branch')--}}
-{{--            <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6 col-6 my-2">--}}
-{{--                <a href="#" data-bs-toggle="modal" data-bs-target="#addTrainingModal" class="btn btn-primary btn-lg"--}}
-{{--                   data-title="{{__('Create New Structure')}}">--}}
-{{--                    <i class="fa fa-plus"></i> {{__('Create')}}--}}
-{{--                </a>--}}
-{{--            </div>--}}
-{{--        @endcan--}}
-{{--    </div>--}}
-
-    <div id="chart-container"></div>
-
-    <!-- Modal for creating new structure -->
-    <div class="modal fade" id="addTrainingModal" tabindex="-1" aria-labelledby="addTrainingModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-                <!-- Modal Header -->
-                <div class="modal-header text-white">
-                    <h5 class="modal-title" id="addTrainingModalLabel">{{ __('Add Branch') }}</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="{{ __('Close') }}"></button>
+    <!-- Specific Version (2.2.16) -->
+     <div class="container-fluid">
+        <!-- Timesheet Edit Form -->
+        <div class="row justify-content-center mb-4">
+            <div class="col-xxl-8 col-xl-10">
+                <div class="card card-rounded shadow-sm">
+                    <!-- Your existing timesheet form content here -->
                 </div>
+            </div>
+        </div>
 
-                <!-- Modal Body -->
-                <div class="modal-body">
-                    {{Form::open(array('url'=>'companystructure','method'=>'post'))}}
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                {{Form::label('employee_id',__('Select The Employee'))}}
-                                {{Form::select('employee_id',$employees,null,array('class'=>'form-control select2', 'id'=>'parent'))}}
-                            </div>
-                        </div>
-{{--                        <div class="col-md-12">--}}
-{{--                            <div class="form-group">--}}
-{{--                                {{Form::label('parent',__('Select The Parent'))}}--}}
-{{--                                {{Form::select('parent',$structure_tree,null,array('class'=>'form-control select2', 'id'=>'parent'))}}--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-
-                        <div class="col-12">
-                            <div class="form-group">
-                                {{Form::label('name',__('Name'),['class'=>'form-control-label'])}}
-                                {{Form::text('name',null,array('class'=>'form-control','placeholder'=>__('Enter Name')))}}
-                                @error('name')
-                                <span class="invalid-name" role="alert">
-                                    <strong class="text-danger">{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="col-12">
-                            <div class="form-group">
-                                {{Form::label('name_ar',__('Name_ar'),['class'=>'form-control-label'])}}
-                                {{Form::text('name_ar',null,array('class'=>'form-control','placeholder'=>__('Enter Name arabic')))}}
-                                @error('name_ar')
-                                <span class="invalid-name" role="alert">
-                                    <strong class="text-danger">{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="col-12 my-2">
-                            <input type="submit" value="{{__('Create')}}" class="btn btn-primary">
-                            <button type="button" class="btn btn-outline-light border me-2" data-bs-dismiss="modal">{{ __('Cancel') }}</button>
-                        </div>
+        <!-- Company Structure Diagram -->
+        <div class="row justify-content-center">
+            <div class="col-xxl-11">
+                <div class="card card-rounded shadow-sm">
+                    <div class="card-header   text-white">
+                        <h3 class="card-title mb-0">{{ __('Company Organization Chart') }}</h3>
                     </div>
-                    {{Form::close()}}
+                    <div class="card-body p-0">
+                        <div class="d-flex justify-content-between align-items-center p-3 bg-light">
+                            <div class="d-flex gap-2">
+                                <button id="zoomToFit" class="btn btn-sm btn-outline-secondary">
+                                    <i class="fas fa-expand"></i> {{ __('Zoom to Fit') }}
+                                </button>
+
+{{--                                <button id="expandAll" class="btn btn-sm btn-outline-secondary">--}}
+{{--                                    <i class="fas fa-plus-circle"></i> {{ __('Expand All') }}--}}
+{{--                                </button>--}}
+{{--                                <button id="collapseAll" class="btn btn-sm btn-outline-secondary">--}}
+{{--                                    <i class="fas fa-minus-circle"></i> {{ __('Collapse All') }}--}}
+{{--                                </button>--}}
+                            </div>
+                        </div>
+                        <div id="myDiagramDiv" style="height: 700px; background-color: #ffffff;"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Hidden textarea for GoJS model data -->
+    <textarea id="mySavedModel" style="display: none;">
+        @json($structureTree, JSON_PRETTY_PRINT)
+    </textarea>
 @endsection
 
-@push('scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/orgchart/3.1.1/js/jquery.orgchart.min.js"
-            integrity="sha512-alnBKIRc2t6LkXj07dy2CLCByKoMYf2eQ5hLpDmjoqO44d3JF8LSM4PptrgvohTQT0LzKdRasI/wgLN0ONNgmA=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+@section('script')
+    <!-- Required GoJS Library -->
+    <script src="https://unpkg.com/gojs/release/go.js"></script>
 
     <script>
-        'use strict';
-        (function($){
-            $(function() {
-                var datascource = {
-                    'name': 'Organization',
-                    'title': 'Root',
-                    'children': @json($structureTree)
-                };
+        let myDiagram;
 
-                $('#chart-container').orgchart({
-                    'data': datascource,
-                    'nodeContent': 'title'
-                });
+        function init() {
+            const $ = go.GraphObject.make;
+
+            myDiagram = $(go.Diagram, "myDiagramDiv", {
+                initialContentAlignment: go.Spot.Center,
+                "undoManager.isEnabled": true,
+                "clickCreatingTool.archetypeNodeData": {
+                    name: "(New person)",
+                    title: "(Title)",
+                    dept: "(Dept)",
+                    email: "(Email)",
+                    phone: "(Phone)"
+                },
+                layout: $(go.TreeLayout, {
+                    treeStyle: go.TreeStyle.LastParents,
+                    arrangement: go.TreeArrangement.Horizontal,
+                    angle: 90,
+                    layerSpacing: 35,
+                    alternateAngle: 90,
+                    alternateLayerSpacing: 35,
+                    alternateAlignment: go.TreeAlignment.Bus,
+                    alternateNodeSpacing: 20
+                })
             });
-        })(jQuery);
+
+            // Define the node template
+            myDiagram.nodeTemplate =
+                $(go.Node, "Spot",
+                    {
+                        minSize: new go.Size(280, 120),
+                        selectionAdorned: true,
+                        isShadowed: true,
+                        shadowOffset: new go.Point(0, 2)
+                    },
+                    // Main body
+                    $(go.Panel, "Auto",
+                        $(go.Shape, "RoundedRectangle", {
+                            fill: "#ffffff",
+                            stroke: "#e5e7eb",
+                            strokeWidth: 1
+                        }),
+                        $(go.Panel, "Table", { margin: 12 },
+                            $(go.RowColumnDefinition, { row: 0, background: "#f3f4f6" }),
+                            $(go.Panel, "Horizontal", { row: 0, columnSpan: 3 },
+                                $(go.TextBlock, {
+                                    font: "500 14px bold InterVariable, sans-serif",
+                                    stroke: "#111827",
+                                    margin: 4
+                                }, new go.Binding("text", "name")),
+                                $(go.TextBlock, {
+                                    font: "500 12px InterVariable, sans-serif",
+                                    stroke: "#15803d",
+                                    margin: 2
+                                }, new go.Binding("text", "dept"))
+                            ),
+                            $(go.TextBlock, {
+                                row: 1,
+                                columnSpan: 3,
+                                font: "14px InterVariable, sans-serif",
+                                stroke: "#6b7280",
+                                margin: 4
+                            }, new go.Binding("text", "title")),
+                            $(go.TextBlock, {
+                                row: 2,
+                                columnSpan: 3,
+                                font: "12px InterVariable, sans-serif",
+                                stroke: "#4b5563",
+                                margin: 2
+                            }, new go.Binding("text", "email")),
+                            $(go.TextBlock, {
+                                row: 3,
+                                columnSpan: 3,
+                                font: "12px InterVariable, sans-serif",
+                                stroke: "#4b5563",
+                                margin: 2
+                            }, new go.Binding("text", "phone")),
+                            $(go.Picture, {
+                                row: 0,
+                                column: 2,
+                                rowSpan: 4,
+                                alignment: go.Spot.Right,
+                                source: "https://mwaredi.com/storage/uploads/logo/user.png",
+                                desiredSize: new go.Size(30, 30),
+                                margin: 4
+                            }, new go.Binding("source", "pic"))
+                        )
+                    ),
+                    $(go.Shape, "RoundedLeftRectangle", {
+                        alignment: go.Spot.Left,
+                        width: 6,
+                        strokeWidth: 0,
+                        fill: "#3b82f6"
+                    })
+                );
+
+            // Link template
+            myDiagram.linkTemplate =
+                $(go.Link, { routing: go.Routing.Orthogonal, corner: 5 },
+                    $(go.Shape, { stroke: "#9ca3af", strokeWidth: 2 })
+                );
+
+            load();
+        }
+
+        function load() {
+            try {
+                const modelData = JSON.parse(document.getElementById('mySavedModel').value);
+                myDiagram.model = new go.TreeModel(modelData.nodeDataArray || []);
+            } catch (error) {
+                console.error('Error loading diagram data:', error);
+                myDiagram.model = new go.TreeModel([]);
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            init();
+
+            document.getElementById('zoomToFit').addEventListener('click', () => {
+                myDiagram.commandHandler.zoomToFit();
+            });
+        });
     </script>
-@endpush
+@endsection

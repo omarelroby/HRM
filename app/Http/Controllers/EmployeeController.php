@@ -1016,7 +1016,7 @@ class EmployeeController extends Controller
     {
         $users = User::where('created_by', \Auth::user()->creatorId())->get();
 
-        return view('dashboard.employee.lastLogin', compact('users'));
+        return view('dashboard.Employee.lastlogin', compact('users'));
     }
 
     public function employeeJson(Request $request)
