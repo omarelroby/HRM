@@ -28,7 +28,9 @@
                                             <i class="ti ti-id me-2"></i>
                                             {{ __('Client ID') }}
                                         </span>
+                                        @if(!empty($employee->employee_id))
                                         <p class="text-dark">{{ \Auth::user()->employeeIdFormat($employee->employee_id) }} </p>
+                                        @endif
                                     </div>
                                     <div class="d-flex align-items-center justify-content-between mb-2">
                                         <span class="d-inline-flex align-items-center">
@@ -56,7 +58,9 @@
                                     <div class="row gx-2 mt-3">
                                         <div class="col-12">
                                             <div>
+                                                @if(!empty($employee->id))
                                                 <a href="{{ route('employee.edit',$employee->id) }}" class="btn btn-dark w-100" target="_blank"><i class="ti ti-edit me-1"></i>Edit Info</a>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -139,13 +143,13 @@
                                     </span>
                                     <p class="text-dark text-end">{{ $employee->nationality->name ?? 'N/A' }}</p>
                                 </div>
-                                <div class="d-flex align-items-center justify-content-between mb-2">
-                                    <span class="d-inline-flex align-items-center">
-                                        <i class="ti ti-bookmark-plus me-2"></i>
-                                        {{ __('Religion') }}
-                                    </span>
-                                    <p class="text-dark text-end">{{ $employee->religion ? 'Muslim' : 'NON-MUSLIM' }}</p>
-                                </div>
+{{--                                <div class="d-flex align-items-center justify-content-between mb-2">--}}
+{{--                                    <span class="d-inline-flex align-items-center">--}}
+{{--                                        <i class="ti ti-bookmark-plus me-2"></i>--}}
+{{--                                        {{ __('Religion') }}--}}
+{{--                                    </span>--}}
+{{--                                    <p class="text-dark text-end">{{ $employee->religion ? 'Muslim' : 'NON-MUSLIM' }}</p>--}}
+{{--                                </div>--}}
                             </div>
                         </div>
                     </div>

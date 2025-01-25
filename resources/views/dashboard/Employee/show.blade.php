@@ -22,36 +22,36 @@
                                         <i class="ti ti-discount-check-filled text-success ms-1"></i>
                                     </h5>
                                     <span class="badge badge-soft-dark fw-medium me-2">
-            <i class="ti ti-point-filled me-1"></i>{{ $employee->jobtitle->name ?? 'N/A' }}
-        </span>
-                                    <span class="badge badge-soft-secondary fw-medium">
-            {{ $employee->department->name ?? 'Department' }}
-        </span>
+                                <i class="ti ti-point-filled me-1"></i>{{ $employee->jobtitle->name ?? 'N/A' }}
+                            </span>
+                                                        <span class="badge badge-soft-secondary fw-medium">
+                                {{ $employee->department->name ?? 'Department' }}
+                            </span>
                                 </div>
                                 <div>
                                     <div class="d-flex align-items-center justify-content-between mb-2">
-            <span class="d-inline-flex align-items-center">
-                <i class="ti ti-id me-2"></i>
-                {{ __('Client ID') }}
-            </span>
+                                    <span class="d-inline-flex align-items-center">
+                                        <i class="ti ti-id me-2"></i>
+                                        {{ __('Client ID') }}
+                                    </span>
                                         <p class="text-dark">
                                             {{ \Auth::user()->employeeIdFormat($employee->employee_id) }}
                                         </p>
                                     </div>
                                     <div class="d-flex align-items-center justify-content-between mb-2">
-            <span class="d-inline-flex align-items-center">
-                <i class="ti ti-star me-2"></i>
-                {{ __('Department') }}
-            </span>
+                                    <span class="d-inline-flex align-items-center">
+                                        <i class="ti ti-star me-2"></i>
+                                        {{ __('Department') }}
+                                    </span>
                                         <p class="text-dark">
                                             {{ $employee->department->name ?? 'N/A' }}
                                         </p>
                                     </div>
                                     <div class="d-flex align-items-center justify-content-between mb-2">
-            <span class="d-inline-flex align-items-center">
-                <i class="ti ti-star me-2"></i>
-                {{ __('Sub Department') }}
-            </span>
+                                    <span class="d-inline-flex align-items-center">
+                                        <i class="ti ti-star me-2"></i>
+                                        {{ __('Sub Department') }}
+                                    </span>
                                         <p class="text-dark">
                                             @if($employee->sub_dep_id == '0')
                                                 {{ $employee->department->name . ' Manager' }}
@@ -61,10 +61,10 @@
                                         </p>
                                     </div>
                                     <div class="d-flex align-items-center justify-content-between mb-2">
-            <span class="d-inline-flex align-items-center">
-                <i class="ti ti-star me-2"></i>
-                {{ __('Section') }}
-            </span>
+                                    <span class="d-inline-flex align-items-center">
+                                        <i class="ti ti-star me-2"></i>
+                                        {{ __('Section') }}
+                                    </span>
                                         <p class="text-dark">
                                             @if(empty($employee->section_id))
                                                 @if($employee->section_id == '0')
@@ -78,25 +78,25 @@
                                         </p>
                                     </div>
                                     <div class="d-flex align-items-center justify-content-between">
-            <span class="d-inline-flex align-items-center">
-                <i class="ti ti-calendar-check me-2"></i>
-                {{ __('Designations') }}
-            </span>
+                                    <span class="d-inline-flex align-items-center">
+                                        <i class="ti ti-calendar-check me-2"></i>
+                                        {{ __('Designations') }}
+                                    </span>
                                         <p class="text-dark">
                                             {{ $employee->designation->name ?? 'N/A' }}
                                         </p>
                                     </div>
                                     <div class="d-flex align-items-center justify-content-between mb-2">
-            <span class="d-inline-flex align-items-center">
-                <i class="ti ti-calendar-check me-2"></i>
-                {{ __('Date Of Join') }}
-            </span>
+                                    <span class="d-inline-flex align-items-center">
+                                        <i class="ti ti-calendar-check me-2"></i>
+                                        {{ __('Date Of Join') }}
+                                    </span>
                                         <p class="text-dark">
                                             {{ $employee->Join_date_gregorian ?? 'N/A' }}
                                         </p>
                                     </div>
                                     <div class="row gx-2 mt-3">
-                                        <div class="col-12">
+                                        <div class="col-6">
                                             <a href="{{ route('employee.edit', $employee->id) }}" class="btn btn-dark w-100" target="_blank">
                                                 <i class="ti ti-edit me-1"></i>Edit Info
                                             </a>
@@ -316,8 +316,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
+
+                                        <div class="col-md-12">
                                             <div class="accordion-item">
                                                 <div class="row">
                                                     <div class="accordion-header" id="headingFour">
@@ -394,7 +394,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-12">
                                             <div class="accordion-item">
                                                 <div class="row">
                                                     <div class="accordion-header" id="headingFive">
@@ -448,7 +448,94 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                        <div class="col-md-12">
+                                            <div class="accordion-item">
+                                                <div class="row">
+                                                    <div class="accordion-header" id="headingFive">
+                                                        <div class="accordion-button collapsed">
+                                                            <div class="d-flex align-items-center justify-content-between flex-fill">
+                                                                <h5>{{ __('Documents') }}</h5>
+                                                                <div class="d-flex">
+                                                                     <a href="#" class="d-flex align-items-center collapsed collapse-arrow" data-bs-toggle="collapse" data-bs-target="#primaryBorderFive2" aria-expanded="false" aria-controls="primaryBorderFive2">
+                                                                        <i class="ti ti-chevron-down fs-18"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div id="primaryBorderFive2" class="accordion-collapse collapse border-top" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
+                                                        <div class="accordion-body">
+                                                            <div>
+                                                                <div class="mb-3">
+                                                                    <div class="d-flex align-items-center justify-content-between">
+                                                                        <div>
+                                                                            <h6 class="d-inline-flex align-items-center fw-medium">
+                                                                                {{ __('Documents') }}
+                                                                            </h6>
+                                                                            <span class="d-flex align-items-center badge bg-secondary-transparent mt-1"><i class="ti ti-point-filled me-1"></i>{{ $employee->address ??'N/A' }}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="card-body">
+                                                                    <div class="table-responsive">
+                                                                        <table class="table table-striped table-bordered table-hover dataTables">
+                                                                            <thead class="thead-light">
+                                                                            <tr>
+                                                                                <th class="text-start ps-4">{{ __('Name') }}</th>
+                                                                                <th class="text-start ps-4">{{ __('Employee') }}</th>
+                                                                                <th class="text-center">{{ __('Document') }}</th>
+                                                                                <th class="text-center">{{ __('Document Type') }}</th>
+                                                                                <th class="text-center">{{ __('Is Contract') }}</th>
+                                                                                <th class="text-center">{{ __('Specific Or Not Period') }}</th>
+                                                                                <th class="text-center">{{ __('Start Date') }}</th>
+                                                                                <th class="text-center">{{ __('End Date') }}</th>
+
+                                                                            </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                            @foreach ($documents as $document)
+                                                                                @php
+                                                                                    $documentPath = asset(Storage::url('uploads/documentUpload'));
+                                                                                @endphp
+                                                                                <tr class="hover-shadow">
+                                                                                    <td class="text-start ps-4">{{ $document->name }}</td>
+                                                                                    <td class="text-start ps-4">{{ $document->employee->name ?? '' }}</td>
+                                                                                    <td class="text-center">
+                                                                                        @if(!empty($document->document))
+                                                                                            <a href="{{ $documentPath . '/' . $document->document }}" target="_blank" class="text-decoration-none">
+                                                                                                <i class="fas fa-download text-primary"></i>
+                                                                                            </a>
+                                                                                        @else
+                                                                                            <span class="text-muted">-</span>
+                                                                                        @endif
+                                                                                    </td>
+                                                                                    <td class="text-center">{{ $document->document_type->name ?? '' }}</td>
+                                                                                    <td class="text-center">
+                    <span class="px-2 py-1 rounded text-white fw-bold {{ $document->is_contract ? 'bg-success' : 'bg-danger' }}">
+                        {{ $document->is_contract ? 'YES' : 'NO' }}
+                    </span>
+                                                                                    </td>
+                                                                                    <td class="text-center">
+                    <span class="px-2 py-1 rounded text-white fw-bold {{ $document->contract_specific==1 ? 'bg-success' : 'bg-danger' }}">
+                        {{ $document->contract_specific==1 ? 'YES' : 'NO' }}
+                    </span>
+                                                                                    </td>
+                                                                                    <td class="text-start">{{ $document->start_date ?? 'N/A' }}</td>
+                                                                                    <td class="text-start">{{ $document->end_date ?? 'N/A' }}</td>
+
+                                                                                </tr>
+                                                                            @endforeach
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
 
                                 </div>
                             </div>

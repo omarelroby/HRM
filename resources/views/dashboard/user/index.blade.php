@@ -37,7 +37,7 @@
                         <span class="avatar avatar-xl flex-shrink-0">
                             <img src="{{$user->avatar?asset(Storage::url($user->avatar)):asset(Storage::url('uploads/avatar/company.png'))}}" class="rounded-circle" alt="img">
                         </span>
-                         <a href="{{ route('user.show',$user->id) }}">{{ $user->name }}</a>
+                         <a href="#">{{ $user->name }}</a>
 
                         </h5>
 

@@ -16,9 +16,9 @@
         vertical-align: middle;
     }
 </style>
-@endpush
+@endsection
 
-@section('scripts')
+@section('script')
 <script src="{{ asset('js/bootstrap-toggle.js') }}"></script>
 <script>
     $(document).ready(function () {

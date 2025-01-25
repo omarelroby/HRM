@@ -36,7 +36,7 @@
                             <tbody class="font-style">
                                 @foreach ($sub_deps as $sub)
                                     <tr>
-                                        <td>{{ !empty($sub->department_id)?$sub->department->name:'' }}</td>
+                                        <td>{{ $sub->department->name ?? '' }}</td>
                                         <td>{{ $sub->name ??''}}</td>
                                         <td>{{ $sub->name_ar ??''}}</td>
                                         {{-- <td>{{ $department->employees ? $department->employees->name : '' }}</td> --}}

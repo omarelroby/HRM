@@ -531,10 +531,10 @@
                                         <label for="iqama_issuance_expirydate_Hijri" class="form-label">{{ __('Iqama_issuance_expirydate_Hijri') }}</label>
                                         <input type="text" class="form-control hijri-date-input" id="iqama_issuance_expirydate_Hijri" name="iqama_issuance_expirydate_Hijri">
                                     </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="iqama_attachment" class="form-label">{{ __('Iqama_attachment') }}</label>
-                                        <input type="file" class="form-control" id="iqama_attachment" name="iqama_attachment">
-                                    </div>
+{{--                                    <div class="form-group col-md-6">--}}
+{{--                                        <label for="iqama_attachment" class="form-label">{{ __('Iqama_attachment') }}</label>--}}
+{{--                                        <input type="file" class="form-control" id="iqama_attachment" name="iqama_attachment">--}}
+{{--                                    </div>--}}
                                 </div>
 
                                 <div class="row">
@@ -556,10 +556,10 @@
                                         <input type="text" class="form-control hijri-date-input" id="passport_issuance_date_gregorian" name="passport_issuance_date_gregorian">
                                     </div>
 
-                                    <div class="form-group col-md-6">
-                                        <label for="passport_attachment" class="form-label">{{ __('Passport_attachment') }}</label>
-                                        <input type="file" class="form-control" id="passport_attachment" name="passport_attachment">
-                                    </div>
+{{--                                    <div class="form-group col-md-6">--}}
+{{--                                        <label for="passport_attachment" class="form-label">{{ __('Passport_attachment') }}</label>--}}
+{{--                                        <input type="file" class="form-control" id="passport_attachment" name="passport_attachment">--}}
+{{--                                    </div>--}}
                                 </div>
 
                                 <div class="row">

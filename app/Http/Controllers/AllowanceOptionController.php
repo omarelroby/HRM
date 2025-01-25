@@ -41,8 +41,8 @@ class AllowanceOptionController extends Controller
         {
             $validator = \Validator::make(
                 $request->all(), [
-                                   'name' => 'required|max:200',
-                                   'name_ar' => 'required|max:200',
+                                   'name' => 'required',
+                                   'name_ar' => 'required',
                                ]);
 
             if($validator->fails())
@@ -105,8 +105,8 @@ class AllowanceOptionController extends Controller
             {
                 $validator = \Validator::make(
                     $request->all(), [
-                                       'name' => 'required|max:200',
-                                       'name_ar' => 'required|max:200',
+                                       'name' => 'required',
+                                       'name_ar' => 'required',
 
                                    ]
                 );

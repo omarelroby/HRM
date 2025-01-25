@@ -666,7 +666,7 @@ class EmployeeController extends Controller
             $empId = base64_decode($id);
             // $empId = Crypt::decryptString($decoded);
             $lang                    = app()->getLocale() == 'ar' ? '_ar' : '';
-            $documents               = Document::where('created_by', \Auth::user()->creatorId())->get();
+            $documents               = Document::where('employee_id', $empId)->get();
             $branches                = Branch::where('created_by', \Auth::user()->creatorId())->get()->pluck('name'.$lang, 'id');
             $departments             = Department::where('created_by', \Auth::user()->creatorId())->get()->pluck('name'.$lang, 'id');
             $designations            = Designation::where('created_by', \Auth::user()->creatorId())->get()->pluck('name'.$lang, 'id');
@@ -694,7 +694,7 @@ class EmployeeController extends Controller
             $banks                   = Bank::where('created_by', \Auth::user()->creatorId())->get()->pluck('name'.$lang, 'id');
             $employee_shifts         = Employee_shift::where('created_by', \Auth::user()->creatorId())->get();
             $assets                  = Asset::where('employee_id',$empId)->get();
-            $documents               = DucumentUpload::where('employee_id',$empId)->get();
+//            $documents               = DucumentUpload::where('employee_id',$empId)->get();
             $leaves                  = EmployeeRequest::where('employee_id', '=', $employee->id)->get();
             $employees               = Employee::select('id', 'name')->where('id',$empId)->where('created_by', \Auth::user()->creatorId())->pluck('name', 'id');
 
@@ -1015,7 +1015,6 @@ class EmployeeController extends Controller
     public function lastLogin()
     {
         $users = User::where('created_by', \Auth::user()->creatorId())->get();
-
         return view('dashboard.Employee.lastlogin', compact('users'));
     }
 
