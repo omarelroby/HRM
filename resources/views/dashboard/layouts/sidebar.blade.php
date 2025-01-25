@@ -205,6 +205,7 @@
                                 </a>
                             </li>
                         @endif
+
                         @if(\Auth::user()->can('Manage Employee'))
                             <li class="{{ Request::is('document-type')  ? 'active' : '' }}">
                                 <a href="{{ route('document-type.index') }}">

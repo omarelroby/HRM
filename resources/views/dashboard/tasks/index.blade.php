@@ -158,7 +158,7 @@
                         <tr>
                             <td>{{ __('Start Date') }}</td>
                             <td>
-                                <input type="text" name="start_date" class="form-control datepicker" placeholder="{{ __('Select Start Date') }}" required>
+                                <input type="text" name="start_date" class="form-control datetimepicker" placeholder="{{ __('Select Start Date') }}" required>
                                 <div class="invalid-feedback">{{ __('Please select a start date.') }}</div>
                             </td>
                         </tr>
@@ -167,7 +167,7 @@
                         <tr>
                             <td>{{ __('Due Date') }}</td>
                             <td>
-                                <input type="text" name="due_date" class="form-control datepicker" placeholder="{{ __('Select Due Date') }}" required>
+                                <input type="text" name="due_date" class="form-control datetimepicker" placeholder="{{ __('Select Due Date') }}" required>
                                 <div class="invalid-feedback">{{ __('Please select a due date.') }}</div>
                             </td>
                         </tr>
@@ -242,6 +242,51 @@
         });
     });
 </script>
+    <script>
+        $(function () {
+            $('.datetimepicker').datetimepicker({
+                format: 'DD/MM/YYYY',
+                icons: {
+                    time: 'ti ti-time',
+                    date: 'ti ti-calendar',
+                    up: 'ti ti-chevron-up',
+                    down: 'ti ti-chevron-down',
+                },
+                widgetPositioning: {
+                    horizontal: 'auto',
+                    vertical: 'bottom'
+                },
+                // Append to body to avoid overflow issues
+                widgetParent: 'body'
+            });
+        });
+        $(document).ready(function () {
+            $(document).on('change', '#employee_account_type', function () {
+                if ($(this).val() == '0') {
+                    // Show Salary Card Info and Hide IBAN Info
+                    $('#salary_card_number_info').removeClass('d-none').show();
+                    $('#IBAN_number_info').addClass('d-none').hide();
+                } else if ($(this).val() == '1') {
+                    // Show IBAN Info and Hide Salary Card Info
+                    $('#IBAN_number_info').removeClass('d-none').show();
+                    $('#salary_card_number_info').addClass('d-none').hide();
+                }
+
+            });
+
+        });
+        $(document).on('change' ,'#employee_account_type', function() {
+            if($(this).val() == 0)
+            {
+                $('#salary_card_number_info').css('display','block');
+                $('#IBAN_number_info').css('display','none');
+            }else{
+                $('#salary_card_number_info').css('display','none');
+                $('#IBAN_number_info').css('display','block');
+            }
+        });
+
+    </script>
 @endsection
 
 @push('scripts')
