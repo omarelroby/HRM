@@ -466,16 +466,7 @@
                                                     <div id="primaryBorderFive2" class="accordion-collapse collapse border-top" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
                                                         <div class="accordion-body">
                                                             <div>
-                                                                <div class="mb-3">
-                                                                    <div class="d-flex align-items-center justify-content-between">
-                                                                        <div>
-                                                                            <h6 class="d-inline-flex align-items-center fw-medium">
-                                                                                {{ __('Documents') }}
-                                                                            </h6>
-                                                                            <span class="d-flex align-items-center badge bg-secondary-transparent mt-1"><i class="ti ti-point-filled me-1"></i>{{ $employee->address ??'N/A' }}</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
+
                                                                 <div class="card-body">
                                                                     <div class="table-responsive">
                                                                         <table class="table table-striped table-bordered table-hover dataTables">
@@ -528,6 +519,553 @@
                                                                             </tbody>
                                                                         </table>
                                                                     </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <div class="col-md-12">
+                                        <div class="accordion-item">
+                                            <div class="row">
+                                                <div class="accordion-header" id="salaryHeading">
+                                                    <div class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#salaryCollapse" aria-expanded="false" aria-controls="salaryCollapse">
+                                                        <div class="d-flex align-items-center justify-content-between flex-fill">
+                                                            <h5>{{ __('Salary') }}</h5>
+                                                            <div class="d-flex">
+                            <span class="collapse-arrow">
+                                <i class="ti ti-chevron-down fs-18"></i>
+                            </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="salaryCollapse" class="accordion-collapse collapse border-top" aria-labelledby="salaryHeading" data-bs-parent="#salaryAccordion">
+                                                    <div class="accordion-body">
+                                                            <div>
+
+                                                                <div class="card-body">
+                                                                    <div class="accordion-body">
+                                                                        <div>
+
+                                                                            <div class="card-body">
+                                                                                <div class="row">
+
+                                                                                    <div class="col-12">
+                                                                                        <div class="row">
+
+
+                                                                                            <div class="col-md-6">
+                                                                                                <div class="card min-height-253">
+                                                                                                    <div class="card-header">
+
+                                                                                                        <div class="row">
+                                                                                                            <div class="col">
+                                                                                                                <h6 class="mb-0" >{{__('Employee Salary')}}</h6>
+                                                                                                            </div>
+
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <div class="card-body">
+                                                                                                        <div class="project-info d-flex text-sm">
+                                                                                                            {{--                                <div class="project-info-inner mr-3 col-6">--}}
+                                                                                                            {{--                                    <b class="m-0"> {{__('Payslip Type') }} </b>--}}
+                                                                                                            {{--                                    <div class="project-amnt pt-1">{{ $employee->salary_type() }}</div>--}}
+                                                                                                            {{--                                </div>--}}
+                                                                                                            <div class="project-info-inner mr-3 col-6">
+                                                                                                                <b class="m-0" style="color: red;"> {{__('Salary') }} </b>
+                                                                                                                <div class="project-amnt pt-1" style="color: red;">{{ number_format($employee->salary,2)  ??0 }} SAR</div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+
+                                                                                            <div class="col-md-6">
+                                                                                                <div class="card min-height-253">
+                                                                                                    <div class="card-header">
+                                                                                                        <div class="row">
+                                                                                                            <div class="col">
+                                                                                                                <h6 class="mb-0">{{__('social_insurance')}}</h6>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <div class="card-body">
+                                                                                                        <div class="project-info d-flex text-sm">
+                                                                                                            <div class="project-info-inner mr-3 col-6">
+                                                                                                                <b class="m-0"> {{__('on_employee') }} </b>
+                                                                                                                <div class="project-amnt pt-1"> {{  \Auth::user()->priceFormat($employee->insurance($employee->id,'employee'))}} </div>
+                                                                                                            </div>
+                                                                                                            <div class="project-info-inner mr-3 col-6">
+                                                                                                                <b class="m-0"> {{__('on_company') }} </b>
+                                                                                                                <div class="project-amnt pt-1">{{  \Auth::user()->priceFormat($employee->insurance($employee->id,'company'))}}</div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+
+                                                                                            <div class="col-md-6">
+                                                                                                <div class="card min-height-253">
+                                                                                                    <div class="card-header">
+                                                                                                        <div class="row">
+                                                                                                            <div class="col">
+                                                                                                                <h6 class="mb-0">{{__('Medical_insurance')}}</h6>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <div class="card-body">
+                                                                                                        <div class="project-info d-flex text-sm">
+                                                                                                            <div class="project-info-inner mr-3 col-6">
+                                                                                                                <b class="m-0"> {{__('on_employee') }} </b>
+                                                                                                                <div class="project-amnt pt-1"> {{  \Auth::user()->priceFormat($employee->medical_insurance($employee->id,'employee'))}} </div>
+                                                                                                            </div>
+                                                                                                            <div class="project-info-inner mr-3 col-6">
+                                                                                                                <b class="m-0"> {{__('on_company') }} </b>
+                                                                                                                <div class="project-amnt pt-1">{{  \Auth::user()->priceFormat($employee->medical_insurance($employee->id,'company'))}}</div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+
+                                                                                            {{-- Delays --}}
+                                                                                            <div class="col-md-6">
+                                                                                                <div class="card min-height-253">
+                                                                                                    <div class="card-header">
+                                                                                                        <div class="row">
+                                                                                                            <div class="col">
+                                                                                                                <h6 class="mb-0">{{__('Delays')}}</h6>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <div class="card-body">
+                                                                                                        <div class="project-info d-flex text-sm">
+
+                                                                                                            <div class="project-info-inner mr-3 col-3">
+                                                                                                                <b class="m-0"> 0 - 15 m </b>
+                                                                                                                <div class="project-amnt pt-1"> {{$employee->getEmployeeDelays(0 , 15)}} </div>
+                                                                                                            </div>
+
+                                                                                                            <div class="project-info-inner mr-3 col-3">
+                                                                                                                <b class="m-0"> 16 - 30 m </b>
+                                                                                                                <div class="project-amnt pt-1"> {{$employee->getEmployeeDelays(16 , 30)}} </div>
+                                                                                                            </div>
+
+                                                                                                            <div class="project-info-inner mr-3 col-3">
+                                                                                                                <b class="m-0"> 31 - 60 m </b>
+                                                                                                                <div class="project-amnt pt-1"> {{$employee->getEmployeeDelays(31 , 60)}} </div>
+                                                                                                            </div>
+
+                                                                                                            <div class="project-info-inner mr-3 col-3">
+                                                                                                                <b class="m-0"> 61 - ... m </b>
+                                                                                                                <div class="project-amnt pt-1"> {{$employee->getEmployeeDelays(61 , null)}} </div>
+                                                                                                            </div>
+
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+
+                                                                                            {{-- overtime --}}
+                                                                                            <div class="col-md-6">
+                                                                                                <div class="card min-height-253">
+                                                                                                    <div class="card-header">
+                                                                                                        <div class="row">
+                                                                                                            <div class="col">
+                                                                                                                <h6 class="mb-0">{{__('Attendance OverTime')}}</h6>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <div class="card-body">
+                                                                                                        <div class="project-info d-flex text-sm">
+
+                                                                                                            <div class="project-info-inner mr-3 col-3">
+                                                                                                                <b class="m-0"> 0 - 15 m </b>
+                                                                                                                <div class="project-amnt pt-1"> {{$employee->getEmployeeOverTimes(0 , 15)}} </div>
+                                                                                                            </div>
+
+                                                                                                            <div class="project-info-inner mr-3 col-3">
+                                                                                                                <b class="m-0"> 16 - 30 m </b>
+                                                                                                                <div class="project-amnt pt-1"> {{$employee->getEmployeeOverTimes(16 , 30)}} </div>
+                                                                                                            </div>
+
+                                                                                                            <div class="project-info-inner mr-3 col-3">
+                                                                                                                <b class="m-0"> 31 - 60 m </b>
+                                                                                                                <div class="project-amnt pt-1"> {{$employee->getEmployeeOverTimes(31 , 60)}} </div>
+                                                                                                            </div>
+
+                                                                                                            <div class="project-info-inner mr-3 col-3">
+                                                                                                                <b class="m-0"> 61 - ... m </b>
+                                                                                                                <div class="project-amnt pt-1"> {{$employee->getEmployeeOverTimes(61 , null)}} </div>
+                                                                                                            </div>
+
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+
+                                                                                            <div class="col-md-6">
+                                                                                                <div class="card ">
+                                                                                                    <div class="card-header ">
+                                                                                                        <div class="row">
+                                                                                                            <div class="col">
+                                                                                                                <h6 class="mb-0">{{__('Allowance')}}</h6>
+                                                                                                            </div>
+
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <div class="table-responsive">
+                                                                                                        <table class="table table-striped mb-0">
+                                                                                                            <thead>
+                                                                                                            <tr>
+                                                                                                                <th>{{__('Employee Name')}}</th>
+                                                                                                                <th>{{__('Allownace Option')}}</th>
+                                                                                                                <th>{{__('Title')}}</th>
+                                                                                                                <th>{{__('Amount')}}</th>
+                                                                                                                <th>{{__('Action')}}</th>
+                                                                                                            </tr>
+                                                                                                            </thead>
+                                                                                                            <tbody>
+                                                                                                            @foreach ($allowances as $allowance)
+                                                                                                                <tr>
+                                                                                                                    <td>{{ !empty($allowance->employee())?$allowance->employee()->name:'' }}</td>
+                                                                                                                    <td>{{ !empty($allowance->allowance_option())?$allowance->allowance_option()->name:'' }}</td>
+                                                                                                                    <td>{{ $allowance->title }}</td>
+                                                                                                                    <td>{{  \Auth::user()->priceFormat($allowance->amount) }}</td>
+                                                                                                                    <td>
+
+
+                                                                                                                        @can('Delete Allowance')
+                                                                                                                            <form method="POST" action="{{ route('allowance.destroy', $allowance->id) }}" class="d-inline" onsubmit="return confirm('{{ __('Are You Sure?') }}\n{{ __('This action cannot be undone. Do you want to continue?') }}');">
+                                                                                                                                @csrf
+                                                                                                                                @method('DELETE')
+                                                                                                                                <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="{{ __('Delete') }}">
+                                                                                                                                    <i class="fas fa-trash"></i>
+                                                                                                                                </button>
+                                                                                                                            </form>
+                                                                                                                        @endcan
+
+                                                                                                                    </td>
+                                                                                                                </tr>
+                                                                                                            @endforeach
+                                                                                                            </tbody>
+                                                                                                        </table>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+
+                                                                                            <div class="col-md-6">
+                                                                                                <div class="card">
+                                                                                                    <div class="card-header">
+                                                                                                        <div class="row">
+                                                                                                            <div class="col">
+                                                                                                                <h6 class="mb-0">{{__('Commission')}}</h6>
+                                                                                                            </div>
+
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <div class="table-responsive">
+                                                                                                        <table class="table table-striped mb-0">
+                                                                                                            <thead>
+                                                                                                            <tr>
+                                                                                                                <th>{{__('Employee Name')}}</th>
+                                                                                                                <th>{{__('Title')}}</th>
+                                                                                                                <th>{{__('Amount')}}</th>
+                                                                                                                <th>{{__('Action')}}</th>
+                                                                                                            </tr>
+                                                                                                            </thead>
+                                                                                                            <tbody>
+                                                                                                            @foreach ($commissions as $commission)
+                                                                                                                <tr>
+                                                                                                                    <td>{{ !empty($commission->employee())?$commission->employee()->name:'' }}</td>
+                                                                                                                    <td>{{ $commission->title }}</td>
+                                                                                                                    <td>{{ $commission->amount }} {{$commission->type}}</td>
+                                                                                                                    <td class="text-right">
+
+                                                                                                                        @can('Delete Commission')
+                                                                                                                            <form method="POST" action="{{ route('commission.destroy', $commission->id) }}" class="d-inline" onsubmit="return confirm('{{ __('Are You Sure?') }}\n{{ __('This action cannot be undone. Do you want to continue?') }}');">
+                                                                                                                                @csrf
+                                                                                                                                @method('DELETE')
+                                                                                                                                <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="{{ __('Delete') }}">
+                                                                                                                                    <i class="fas fa-trash"></i>
+                                                                                                                                </button>
+                                                                                                                            </form>
+                                                                                                                        @endcan
+                                                                                                                    </td>
+                                                                                                                </tr>
+                                                                                                            @endforeach
+                                                                                                            </tbody>
+                                                                                                        </table>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+
+                                                                                            <div class="col-md-6">
+                                                                                                <div class="card">
+                                                                                                    <div class="card-header">
+                                                                                                        <div class="row">
+                                                                                                            <div class="col">
+                                                                                                                <h6 class="mb-0">{{__('Loan')}}</h6>
+                                                                                                            </div>
+
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <div class="table-responsive">
+                                                                                                        <table class="table table-striped mb-0">
+                                                                                                            <thead>
+                                                                                                            <tr>
+                                                                                                                <th>{{__('Employee')}}</th>
+                                                                                                                <th>{{__('Loan Options')}}</th>
+                                                                                                                <th>{{__('Title')}}</th>
+                                                                                                                <th>{{__('Loan Amount')}}</th>
+                                                                                                                <th>{{__('Start Date')}}</th>
+                                                                                                                <th>{{__('End Date')}}</th>
+                                                                                                                <th>{{__('Action')}}</th>
+                                                                                                            </tr>
+                                                                                                            </thead>
+                                                                                                            <tbody>
+                                                                                                            @foreach ($loans as $loan)
+                                                                                                                <tr>
+                                                                                                                    <td>{{ !empty($loan->employee())?$loan->employee()->name:'' }}</td>
+                                                                                                                    <td>{{!empty( $loan->loan_option())? $loan->loan_option()->name:'' }}</td>
+                                                                                                                    <td>{{ $loan->title }}</td>
+                                                                                                                    <td>{{  \Auth::user()->priceFormat($loan->amount) }}</td>
+                                                                                                                    <td>{{  \Auth::user()->dateFormat($loan->start_date) }}</td>
+                                                                                                                    <td>{{ \Auth::user()->dateFormat( $loan->end_date) }}</td>
+                                                                                                                    <td class="text-right">
+
+                                                                                                                        @can('Delete Loan')
+                                                                                                                            <form method="POST" action="{{ route('loan.destroy', $loan->id) }}" class="d-inline" onsubmit="return confirm('{{ __('Are You Sure?') }}\n{{ __('This action cannot be undone. Do you want to continue?') }}');">
+                                                                                                                                @csrf
+                                                                                                                                @method('DELETE')
+                                                                                                                                <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="{{ __('Delete') }}">
+                                                                                                                                    <i class="fas fa-trash"></i>
+                                                                                                                                </button>
+                                                                                                                            </form>
+                                                                                                                        @endcan
+                                                                                                                    </td>
+                                                                                                                </tr>
+                                                                                                            @endforeach
+                                                                                                            </tbody>
+                                                                                                        </table>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+
+                                                                                            <div class="col-md-6">
+                                                                                                <div class="card">
+                                                                                                    <div class="card-header">
+                                                                                                        <div class="row">
+                                                                                                            <div class="col">
+                                                                                                                <h6 class="mb-0">{{__('Saturation Deduction')}}</h6>
+                                                                                                            </div>
+
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <div class="table-responsive">
+                                                                                                        <table class="table table-striped mb-0">
+                                                                                                            <thead>
+                                                                                                            <tr>
+                                                                                                                <th>{{__('Employee Name')}}</th>
+                                                                                                                <th>{{__('Deduction Option')}}</th>
+                                                                                                                <th>{{__('Title')}}</th>
+                                                                                                                <th>{{__('Amount')}}</th>
+                                                                                                                <th>{{__('Action')}}</th>
+                                                                                                            </tr>
+                                                                                                            </thead>
+                                                                                                            <tbody>
+                                                                                                            @foreach ($saturationdeductions as $saturationdeduction)
+                                                                                                                <tr>
+                                                                                                                    <td>{{ !empty($saturationdeduction->employee())?$saturationdeduction->employee()->name:'' }}</td>
+                                                                                                                    <td>{{ !empty($saturationdeduction->deduction_option())?$saturationdeduction->deduction_option()->name:'' }}</td>
+                                                                                                                    <td>{{ $saturationdeduction->title }}</td>
+                                                                                                                    <td>{{ \Auth::user()->priceFormat( $saturationdeduction->amount) }}</td>
+                                                                                                                    <td class="text-right">
+                                                                                                                        @can('Delete Saturation Deduction')
+                                                                                                                            <form method="POST" action="{{ route('saturationdeduction.destroy', $saturationdeduction->id) }}" class="d-inline" onsubmit="return confirm('{{ __('Are You Sure?') }}\n{{ __('This action cannot be undone. Do you want to continue?') }}');">
+                                                                                                                                @csrf
+                                                                                                                                @method('DELETE')
+                                                                                                                                <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="{{ __('Delete') }}">
+                                                                                                                                    <i class="fas fa-trash"></i>
+                                                                                                                                </button>
+                                                                                                                            </form>
+                                                                                                                        @endcan
+                                                                                                                    </td>
+                                                                                                                </tr>
+                                                                                                            @endforeach
+                                                                                                            </tbody>
+                                                                                                        </table>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+
+                                                                                            <div class="col-md-6">
+                                                                                                <div class="card">
+                                                                                                    <div class="card-header">
+                                                                                                        <div class="row">
+                                                                                                            <div class="col">
+                                                                                                                <h6 class="mb-0">{{__('Other Payment')}}</h6>
+                                                                                                            </div>
+
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <div class="table-responsive">
+                                                                                                        <table class="table table-striped mb-0">
+                                                                                                            <thead>
+                                                                                                            <tr>
+                                                                                                                <th>{{__('Employee')}}</th>
+                                                                                                                <th>{{__('Title')}}</th>
+                                                                                                                <th>{{__('Amount')}}</th>
+                                                                                                                <th>{{__('Action')}}</th>
+                                                                                                            </tr>
+                                                                                                            </thead>
+                                                                                                            <tbody>
+                                                                                                            @foreach ($otherpayments as $otherpayment)
+                                                                                                                <tr>
+                                                                                                                    <td>{{ !empty($otherpayment->employee())?$otherpayment->employee()->name:'' }}</td>
+                                                                                                                    <td>{{ $otherpayment->title }}</td>
+                                                                                                                    <td>{{  \Auth::user()->priceFormat($otherpayment->amount) }}</td>
+                                                                                                                    <td class="text-right">
+
+                                                                                                                        @can('Delete Other Payment')
+                                                                                                                            <form method="POST" action="{{ route('otherpayment.destroy', $otherpayment->id) }}" class="d-inline" onsubmit="return confirm('{{ __('Are You Sure?') }}\n{{ __('This action cannot be undone. Do you want to continue?') }}');">
+                                                                                                                                @csrf
+                                                                                                                                @method('DELETE')
+                                                                                                                                <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="{{ __('Delete') }}">
+                                                                                                                                    <i class="fas fa-trash"></i>
+                                                                                                                                </button>
+                                                                                                                            </form>
+                                                                                                                        @endcan
+                                                                                                                    </td>
+                                                                                                                </tr>
+                                                                                                            @endforeach
+                                                                                                            </tbody>
+                                                                                                        </table>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+
+                                                                                            <div class="col-md-6">
+                                                                                                <div class="card">
+                                                                                                    <div class="card-header">
+                                                                                                        <div class="row">
+                                                                                                            <div class="col">
+                                                                                                                <h6 class="mb-0">{{__('Overtime')}}</h6>
+                                                                                                            </div>
+
+
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <div class="table-responsive">
+                                                                                                        <table class="table table-striped mb-0">
+                                                                                                            <thead>
+                                                                                                            <tr>
+                                                                                                                <th>{{__('Employee Name')}}</th>
+                                                                                                                <th>{{__('Overtime Title')}}</th>
+                                                                                                                <th>{{__('Number of days')}}</th>
+                                                                                                                <th>{{__('Hours')}}</th>
+                                                                                                                <th>{{__('Rate')}}</th>
+                                                                                                                <th>{{__('Action')}}</th>
+                                                                                                            </tr>
+                                                                                                            </thead>
+                                                                                                            <tbody>
+                                                                                                            @foreach ($overtimes as $overtime)
+                                                                                                                <tr>
+                                                                                                                    <td>{{ !empty($overtime->employee())?$overtime->employee()->name:'' }}</td>
+                                                                                                                    <td>{{ $overtime->title }}</td>
+                                                                                                                    <td>{{ $overtime->number_of_days }}</td>
+                                                                                                                    <td>{{ $overtime->hours }}</td>
+                                                                                                                    <td>{{  \Auth::user()->priceFormat($overtime->rate) }}</td>
+                                                                                                                    <td class="text-right">
+
+                                                                                                                        @can('Delete Overtime')
+                                                                                                                            <form method="POST" action="{{ route('overtime.destroy', $overtime->id) }}" class="d-inline" onsubmit="return confirm('{{ __('Are You Sure?') }}\n{{ __('This action cannot be undone. Do you want to continue?') }}');">
+                                                                                                                                @csrf
+                                                                                                                                @method('DELETE')
+                                                                                                                                <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="{{ __('Delete') }}">
+                                                                                                                                    <i class="fas fa-trash"></i>
+                                                                                                                                </button>
+                                                                                                                            </form>
+                                                                                                                        @endcan
+                                                                                                                    </td>
+                                                                                                                </tr>
+                                                                                                            @endforeach
+                                                                                                            </tbody>
+                                                                                                        </table>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+
+                                                                                            <div class="col-md-6">
+                                                                                                <div class="card">
+                                                                                                    <div class="card-header">
+                                                                                                        <div class="row">
+                                                                                                            <div class="col">
+                                                                                                                <h6 class="mb-0">{{__('Absences')}}</h6>
+                                                                                                            </div>
+
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <div class="table-responsive">
+                                                                                                        <table class="table table-striped mb-0">
+                                                                                                            <thead>
+                                                                                                            <tr>
+                                                                                                                <th>{{__('Employee Name')}}</th>
+                                                                                                                <th>{{__('Absent Type')}}</th>
+                                                                                                                <th>{{__('Number of days')}}</th>
+                                                                                                                <th>{{__('Start Date')}}</th>
+                                                                                                                <th>{{__('Action')}}</th>
+                                                                                                            </tr>
+                                                                                                            </thead>
+                                                                                                            <tbody>
+                                                                                                            @foreach ($absences as $absence)
+                                                                                                                <tr>
+                                                                                                                    <td>{{ !empty($absence->employee())?$absence->employee()->name:'' }}</td>
+                                                                                                                    <td>{{ $absence->type }}</td>
+                                                                                                                    <td>{{ $absence->number_of_days }}</td>
+                                                                                                                    <td>{{ $absence->start_date }}</td>
+                                                                                                                    <td class="text-right">
+
+                                                                                                                        @can('Delete Overtime')
+                                                                                                                            <form method="POST" action="{{ route('absence.destroy', $absence->id) }}" class="d-inline" onsubmit="return confirm('{{ __('Are You Sure?') }}\n{{ __('This action cannot be undone. Do you want to continue?') }}');">
+                                                                                                                                @csrf
+                                                                                                                                @method('DELETE')
+                                                                                                                                <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="{{ __('Delete') }}">
+                                                                                                                                    <i class="fas fa-trash"></i>
+                                                                                                                                </button>
+                                                                                                                            </form>
+                                                                                                                        @endcan
+                                                                                                                    </td>
+                                                                                                                </tr>
+                                                                                                            @endforeach
+                                                                                                            </tbody>
+                                                                                                        </table>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="modal fade" id="dynamicModal" tabindex="-1" role="dialog" aria-labelledby="dynamicModalLabel" aria-hidden="true">
+                                                                                    <div class="modal-dialog modal-lg" role="document">
+                                                                                        <div class="modal-content">
+                                                                                            <div class="modal-header">
+                                                                                                <h5 class="modal-title" id="dynamicModalLabel">Modal Title</h5>
+                                                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                                            </div>
+                                                                                            <div class="modal-body">
+
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
                                                                 </div>
                                                             </div>
                                                         </div>

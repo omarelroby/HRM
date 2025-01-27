@@ -3,7 +3,9 @@
 @section('page-title')
     {{ __('Manage Timesheet') }}
 @endsection
-
+@push('css')
+    <link href="https://cdn.jsdelivr.net/npm/hijri-datepicker@latest/css/bootstrap-hijri-datepicker.min.css" rel="stylesheet">
+@endpush
 @section('content')
     <div class="container-fluid">
         <div class="row">
@@ -106,7 +108,7 @@
                                 @foreach ($timeSheets as $timeSheet)
                                     <tr>
                                         @if (\Auth::user()->type != 'employee')
-                                            <td>{{  $timeSheet->employees->name }}</td>
+                                            <td>{{  $timeSheet->employees->name??'' }}</td>
                                         @endif
                                         <td>{{ \Auth::user()->dateFormat($timeSheet->date) }}</td>
                                         <td class="text-center">
@@ -186,20 +188,20 @@
                             </div>
                         @endif
 
-                        <div class="col-md-6">
-                            <div class="form-floating">
-                                {{ Form::text('date', '', [
-                                    'class' => 'form-control datepicker',
-                                    'id' => 'date',
-                                    'required' => 'required',
-                                    'placeholder' => __('YYYY-MM-DD')
-                                ]) }}
-                                {{ Form::label('date', __('Date'), ['class' => 'form-label']) }}
-                                <div class="invalid-feedback">
-                                    {{ __('Please select a date') }}
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="date"
+                                           name="date"
+                                           id="date"
+                                           class="form-control datepicker"
+                                           placeholder="{{ __('YYYY-MM-DD') }}"
+                                           required>
+                                    <label for="date" class="form-label">{{ __('Date') }}</label>
+                                    <div class="invalid-feedback">
+                                        {{ __('Please select a date') }}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
                         <div class="col-md-6">
                             <div class="form-floating">
@@ -259,57 +261,66 @@
         </div>
     </div>
 
-    @push('scripts')
-        <script>
-            $(document).ready(function() {
-                // Initialize datepicker
-                $('.datepicker').hijriDatePicker({
-                    format: 'YYYY-M-D',
-                    showSwitcher: false,
-                    hijri: false,
-                    useCurrent: true,
-                    locale: 'en',
-                    showTodayButton: true,
-                    icons: {
-                        today: 'fas fa-calendar-check'
-                    }
-                });
-
-                // Initialize Select2
-                $('.select2').select2({
-                    dropdownParent: $('#addTrainingModal'),
-                    width: '100%',
-                    placeholder: "{{ __('Select Employee') }}",
-                    allowClear: true
-                });
-
-                // Bootstrap form validation
-                var forms = document.querySelectorAll('.needs-validation');
-                Array.prototype.slice.call(forms).forEach(function(form) {
-                    form.addEventListener('submit', function(event) {
-                        if (!form.checkValidity()) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                        }
-                        form.classList.add('was-validated');
-                    }, false);
-                });
-            });
-        </script>
-        <script>
-            $(function () {
-                $(".gregorian-date , .datepicker").hijriDatePicker({
-                    format:'YYYY-M-D',
-                    showSwitcher: false,
-                    hijri:false,
-                    useCurrent: true,
-                });
-            });
-        </script>
-    @endpush
 
 @endsection
+@push('scripts')
+    {{-- Hijri Datepicker JS --}}
+    <script src="https://cdn.jsdelivr.net/npm/hijri-datepicker@latest/js/bootstrap-hijri-datepicker.min.js"></script>
+    <script>
+        // Initialize Select2
+        $('.select2').select2({
+            dropdownParent: $('#addTrainingModal'),
+            width: '100%',
+            placeholder: "{{ __('Select Employee') }}",
+            allowClear: true
+        });
 
+        // Bootstrap form validation
+        var forms = document.querySelectorAll('.needs-validation');
+        Array.prototype.slice.call(forms).forEach(function(form) {
+            form.addEventListener('submit', function(event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+
+    </script>
+    <script>
+        $(document).ready(function() {
+            // Initialize Hijri Datepicker
+            $(".datepicker").hijriDatePicker({
+                format: 'YYYY-MM-DD',
+                hijri: false, // Show Gregorian calendar
+                showSwitcher: false,
+                useCurrent: true,
+                locale: 'en'
+            });
+
+            // Initialize Select2
+            $('.select2').select2({
+                dropdownParent: $('#addTrainingModal'),
+                width: '100%',
+                placeholder: "{{ __('Select Employee') }}",
+                allowClear: true
+            });
+
+            // Bootstrap form validation
+            var forms = document.querySelectorAll('.needs-validation');
+            Array.prototype.slice.call(forms).forEach(function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        });
+    </script>
+@endpush
 @section('css')
     <style>
         .card-rounded {

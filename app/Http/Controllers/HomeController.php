@@ -72,7 +72,7 @@ class HomeController extends Controller
                         ];
                     })
                     ->values(); // Reset indices
- 
+
                 $data['departmentNames'] = $departments->pluck('name'); // Unique department names
                 $data['total_employees'] = $departments->pluck('total_employees'); // Count of each department
                 $data['employees_count'] = Employee::where('created_by',\auth()->user()->id)->count();
@@ -81,7 +81,7 @@ class HomeController extends Controller
 
                 // Get employees with status 'Present' today
                 $data['employeesWithAttendance'] = AttendanceEmployee::where('status', 'Present')
-                    ->where('date', today())
+                    ->where('date', today()->format('Y-m-d'))
                     ->count();
 
                 // Get other counts
@@ -97,19 +97,19 @@ class HomeController extends Controller
 
                 // Get attendance status for today
                 $data['attend_emp'] = AttendanceEmployee::where('status', 'Present')
-                    ->where('date', today())
+                    ->where('date', today()->format('Y-m-d'))
                     ->get()
                     ->take(3);
 
                 // Get employees who came early (before 08:00:00)
                 $data['early_arrivals'] = AttendanceEmployee::where('status', 'Present')
-                    ->where('date', today())
+                    ->where('date', today()->format('Y-m-d'))
                     ->where('clock_in', '<=', '09:00:00') // Customize based on early arrival time
                     ->get();
 
                 // Get employees who came late (after 08:00:00)
                 $data['late_arrivals'] = AttendanceEmployee::where('status', 'Present')
-                    ->where('date', today())
+                    ->where('date', today()->format('Y-m-d'))
                     ->where('clock_in', '>', '09:00:00') // Customize based on late arrival time
                     ->get();
 
@@ -175,6 +175,7 @@ class HomeController extends Controller
             }
             if(\auth()->user()->type=='company' || \auth()->user()->type=='hr'  )
             {
+
                 $user = Auth::user();
                 $threeMonthsFromNow = Carbon::now()->addMonths(3);
                  $records = Document::with('document_type', 'employee')
@@ -208,7 +209,7 @@ class HomeController extends Controller
                 $data['all_employees'] = Employee::where('created_by',\auth()->user()->id)->get()->take(8);
                 $data['employeesWithAttendance'] = AttendanceEmployee::where('status', 'Present')
                     ->where('created_by',\auth()->user()->id)
-                    ->where('date', today())
+                    ->where('date', today()->format('Y-m-d'))
                     ->count();
 
                 // Get other counts
@@ -228,21 +229,21 @@ class HomeController extends Controller
 
                 // Get attendance status for today
                 $data['attend_emp'] = AttendanceEmployee::where('status', 'Present')
-                    ->where('date', today())
-                    ->get()
-                    ->where('created_by',\auth()->user()->id)
-                    ->take(3);
+                    ->where('date', today()->format('Y-m-d'))  // Format to string
+                    ->where('created_by', auth()->id())
+                    ->take(3)
+                    ->get();
 
                 // Get employees who came early (before 08:00:00)
                 $data['early_arrivals'] = AttendanceEmployee::where('status', 'Present')
-                    ->where('date', today())
+                    ->where('date', today()->format('Y-m-d'))
                     ->where('created_by',\auth()->user()->id)
                     ->where('clock_in', '<=', '09:00:00') // Customize based on early arrival time
                     ->get();
 
                 // Get employees who came late (after 08:00:00)
                 $data['late_arrivals'] = AttendanceEmployee::where('status', 'Present')
-                    ->where('date', today())
+                    ->where('date', today()->format('Y-m-d'))
                     ->where('created_by',\auth()->user()->id)
                     ->where('clock_in', '>', '09:00:00') // Customize based on late arrival time
                     ->get();
@@ -302,6 +303,7 @@ class HomeController extends Controller
             }
             if(auth()->user()->type=='employee')
             {
+//                dd('d');
                 $employee=Employee::where('user_id',auth()->user()->id)->firstOrFail();
                 if(empty($employee->sub_dep_id) &&$employee->sub_dep_id==0)
                 {
@@ -315,7 +317,7 @@ class HomeController extends Controller
                             $query->where('department_id',$employee->department_id);
                         })
                         ->where('status', 'Present')
-                        ->where('date', today())
+                        ->where('date', today()->format('Y-m-d'))
                         ->count();
                     $data['attend_emp'] = AttendanceEmployee::with('employee' )
                         ->whereHas('employee',function ($query) use ($employee){
@@ -323,7 +325,7 @@ class HomeController extends Controller
                         })
 
                         ->where('status', 'Present')
-                        ->where('date', today())
+                        ->where('date', today()->format('Y-m-d'))
                         ->get()
                         ->take(4);
                     $data['employees_count'] = Employee::where('department_id',$employee->department_id)->count();
@@ -375,7 +377,7 @@ class HomeController extends Controller
                             $query->where('department_id',$employee->department_id);
                         })
                         ->where('status', 'Present')
-                        ->where('date', today())
+                        ->where('date', today()->format('Y-m-d'))
                         ->where('clock_in', '<=', '09:00:00') // Customize based on early arrival time
                         ->get();
 
@@ -385,7 +387,7 @@ class HomeController extends Controller
                             $query->where('department_id',$employee->department_id);
                         })
                         -> where('status', 'Present')
-                        ->where('date', today())
+                        ->where('date', today()->format('Y-m-d'))
                         ->where('clock_in', '>', '09:00:00') // Customize based on late arrival time
                         ->get();
 
@@ -457,8 +459,9 @@ class HomeController extends Controller
                             $query->where('sub_dep_id',$employee->sub_dep_id);
                         })
                         ->where('status', 'Present')
-                        ->where('date', today())
+                        ->where('date', today()->format('Y-m-d'))
                         ->count();
+
                     $data['employees_count'] = Employee::where('sub_dep_id',$employee->sub_dep_id)->count();
 
                     $data['tasks'] = Task::with('employee')
@@ -505,7 +508,7 @@ class HomeController extends Controller
                         })
 
                         ->where('status', 'Present')
-                        ->where('date', today())
+                        ->where('date', today()->format('Y-m-d'))
                         ->get()
                         ->take(4);
 
@@ -514,7 +517,7 @@ class HomeController extends Controller
                             $query->where('sub_dep_id',$employee->sub_dep_id);
                         })
                         ->where('status', 'Present')
-                        ->where('date', today())
+                        ->where('date', today()->format('Y-m-d'))
                         ->where('clock_in', '<=', '09:00:00') // Customize based on early arrival time
                         ->get();
 
@@ -524,7 +527,7 @@ class HomeController extends Controller
                             $query->where('sub_dep_id',$employee->sub_dep_id);
                         })
                         -> where('status', 'Present')
-                        ->where('date', today())
+                        ->where('date', today()->format('Y-m-d'))
                         ->where('clock_in', '>', '09:00:00') // Customize based on late arrival time
                         ->get();
 
@@ -586,7 +589,7 @@ class HomeController extends Controller
                             $query->where('sub_dep_id',$employee->sub_dep_id);
                         })
                         ->where('status', 'Present')
-                        ->where('date', today())
+                        ->where('date', today()->format('Y-m-d'))
                         ->count();
                     $data['employees_count'] = Employee::where('sub_dep_id',$employee->sub_dep_id)->count();
                     $data['payslip'] = PaySlip::with('employees')
@@ -650,7 +653,7 @@ class HomeController extends Controller
                         })
 
                         ->where('status', 'Present')
-                        ->where('date', today())
+                        ->where('date', today()->format('Y-m-d'))
                         ->get()
 
                         ->take(4);
@@ -660,7 +663,7 @@ class HomeController extends Controller
                             $query->where('sub_dep_id',$employee->sub_dep_id);
                         })
                         ->where('status', 'Present')
-                        ->where('date', today())
+                        ->where('date', today()->format('Y-m-d'))
                         ->where('clock_in', '<=', '09:00:00') // Customize based on early arrival time
                         ->get();
 
@@ -670,7 +673,7 @@ class HomeController extends Controller
                             $query->where('sub_dep_id',$employee->sub_dep_id);
                         })
                         -> where('status', 'Present')
-                        ->where('date', today())
+                        ->where('date', today()->format('Y-m-d'))
                         ->where('clock_in', '>', '09:00:00') // Customize based on late arrival time
                         ->get();
 
@@ -682,6 +685,7 @@ class HomeController extends Controller
                     $data['records'] = $records;
 
                 }
+
                 return view('dashboard.EmployeeDashboard', $data);
 
 

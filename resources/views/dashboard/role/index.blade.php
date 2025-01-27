@@ -150,44 +150,43 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @php
-                                                $modules = [
-                                                    'User', 'Role', 'Award', 'Transfer', 'Resignation', 'Travel', 'Promotion', 'Complaint', 'Warning', 'Termination',
-                                                    'Department', 'Designation', 'Document Type', 'Branch', 'Award Type', 'Termination Type', 'Employee', 'Payslip Type',
-                                                    'Allowance Option', 'Loan Option', 'Deduction Option', 'Set Salary', 'Allowance', 'Commission', 'Loan', 'Saturation Deduction',
-                                                    'Other Payment', 'Overtime', 'Pay Slip', 'Account List', 'Payee', 'Payer', 'Income Type', 'Expense Type', 'Payment Type',
-                                                    'Deposit', 'Expense', 'Transfer Balance', 'Event', 'Announcement', 'Leave Type', 'Leave', 'Meeting', 'Ticket', 'Attendance',
-                                                    'TimeSheet', 'Holiday', 'Plan', 'Assets', 'Document', 'Employee Profile', 'Employee Last Login', 'Indicator', 'Appraisal',
-                                                    'Goal Tracking', 'Goal Type', 'Competencies', 'Company Policy', 'Trainer', 'Training', 'Training Type', 'Job Category',
-                                                    'Job Stage', 'Job', 'Job Application', 'Job OnBoard', 'Job Application Note', 'Job Application Skill', 'Custom Question',
-                                                    'Interview Schedule', 'Career', 'Report', 'Performance Type','tasks'
-                                                ];
-                                                if (Auth::user()->type == 'super admin') {
-                                                    $modules[] = 'Language';
-                                                }
-                                            @endphp
+                                        @php
+                                            $modules = [
+                                                'User', 'Role', 'Award', 'Transfer', 'Resignation', 'Travel', 'Promotion', 'Complaint', 'Warning', 'Termination',
+                                                'Department', 'Designation', 'Document Type', 'Branch', 'Award Type', 'Termination Type', 'Employee', 'Payslip Type',
+                                                'Allowance Option', 'Loan Option', 'Deduction Option', 'Set Salary', 'Allowance', 'Commission', 'Loan', 'Saturation Deduction',
+                                                'Other Payment', 'Overtime', 'Pay Slip', 'Account List', 'Payee', 'Payer', 'Income Type', 'Expense Type', 'Payment Type',
+                                                'Deposit', 'Expense', 'Transfer Balance', 'Event', 'Announcement', 'Leave Type', 'Leave', 'Meeting', 'Ticket', 'Attendance',
+                                                'TimeSheet', 'Holiday', 'Plan', 'Assets', 'Document', 'Employee Profile', 'Employee Last Login', 'Indicator', 'Appraisal',
+                                                'Goal Tracking', 'Goal Type', 'Competencies', 'Company Policy', 'Trainer', 'Training', 'Training Type', 'Job Category',
+                                                'Job Stage', 'Job', 'Job Application', 'Job OnBoard', 'Job Application Note', 'Job Application Skill', 'Custom Question',
+                                                'Interview Schedule', 'Career', 'Report', 'Performance Type','tasks'
+                                            ];
+                                            if (Auth::user()->type == 'super admin') {
+                                                $modules[] = 'Language';
+                                            }
+                                        @endphp
 
-                                            @foreach($modules as $module)
-                                                <tr>
-                                                    <td>{{ ucfirst($module) }}</td>
-                                                    <td>
-                                                        <div class="row">
-                                                            {{-- Loop through permission types --}}
-                                                            @foreach(['Manage', 'Create', 'Edit', 'Delete', 'Show', 'Move', 'Client Permission', 'Invite User', 'Buy', 'Add'] as $action)
-                                                                @if(in_array($action . ' ' . $module, (array) $permissions))
-                                                                    @php $key = array_search($action . ' ' . $module, $permissions); @endphp
-                                                                    <div class="col-md-3 mb-2">
-                                                                        <div class="custom-control custom-checkbox">
-                                                                            {{ Form::checkbox('permissions[]', $key, false, ['class' => 'custom-control-input', 'id' => 'permission' . $key]) }}
-                                                                            {{ Form::label('permission' . $key, $action, ['class' => 'custom-control-label font-weight-500']) }}
-                                                                        </div>
+                                        @foreach($modules as $module)
+                                            <tr>
+                                                <td>{{ __(ucfirst($module)) }}</td>
+                                                <td>
+                                                    <div class="row">
+                                                        @foreach(['Manage', 'Create', 'Edit', 'Delete', 'Show', 'Move', 'Client Permission', 'Invite User', 'Buy', 'Add'] as $action)
+                                                            @if(in_array($action . ' ' . $module, (array) $permissions))
+                                                                @php $key = array_search($action . ' ' . $module, $permissions); @endphp
+                                                                <div class="col-md-3 mb-2">
+                                                                    <div class="custom-control custom-checkbox">
+                                                                        {{ Form::checkbox('permissions[]', $key, false, ['class' => 'custom-control-input', 'id' => 'permission' . $key]) }}
+                                                                        {{ Form::label('permission' . $key, __($action), ['class' => 'custom-control-label font-weight-500']) }}
                                                                     </div>
-                                                                @endif
-                                                            @endforeach
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
+                                                                </div>
+                                                            @endif
+                                                        @endforeach
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                         </tbody>
                                     </table>
                                 </div>

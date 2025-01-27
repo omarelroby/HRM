@@ -1,4 +1,6 @@
 @extends('dashboard.layouts.master')
+@section('css')
+
 
 @section('content')
 <div class="content">
@@ -217,8 +219,8 @@
                                                         'residence_number', 'passport_number', 'city', 'work_time', 'nationality_type',
                                                         'religion', 'out_of_saudia', 'employer_phone', 'place_of_issuance_of_ID_residence', 'iqama_issuance_date_Hijri',
                                                         'iqama_issuance_date_gregorian', 'iqama_issuance_expirydate_Hijri', 'iqama_issuance_expirydate_gregorian',
-                                                        'iqama_attachment', 'place_of_issuance_of_passport', 'passport_issuance_date_gregorian', 'passport_issuance_expirydate_gregorian',
-                                                        'passport_attachment', 'building_number', 'street_name', 'region', 'country', 'postal_code', 'mother_city',
+                                                           'place_of_issuance_of_passport', 'passport_issuance_date_gregorian', 'passport_issuance_expirydate_gregorian',
+                                                        'building_number', 'street_name', 'region', 'country', 'postal_code', 'mother_city',
                                                         'mother_country', 'emergency_contact_name', 'emergency_contact_relationship', 'emergency_contact_address',
                                                         'emergency_contact_phone', 'custom_field_corona', 'custom_field_notes', 'Join_date_gregorian', 'Join_date_hijri',
                                                         'labor_hire_company', 'work_unit', 'class', 'direct_manager', 'permission', 'uploading_record_permission',
@@ -234,11 +236,12 @@
                                                     foreach ($nullableColumns as $column) {
                                                         if (is_null($employee->$column)) {
                                                             $isIncomplete = true;
-
+                                                            $x=$column;
                                                             break;
                                                         }
                                                     }
                                                 @endphp
+
 
                                                 @if ($isIncomplete)
                                                     <!-- Show "Complete Data" button if any column is null -->
@@ -553,7 +556,7 @@
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label for="passport_issuance_date_gregorian" class="form-label">{{ __('Passport_issuance_date_gregorian') }}</label>
-                                        <input type="text" class="form-control hijri-date-input" id="passport_issuance_date_gregorian" name="passport_issuance_date_gregorian">
+                                        <input type="text" class="form-control datetimepicker" id="passport_issuance_date_gregorian" name="passport_issuance_date_gregorian">
                                     </div>
 
 {{--                                    <div class="form-group col-md-6">--}}
@@ -1289,8 +1292,8 @@ document.addEventListener('DOMContentLoaded', function () {
    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-   <script src="{{ asset('assets/js/bootstrap-hijri-datetimepicker.js') }}"></script>
-   <script src="{{ asset('assets/js/bootstrap-hijri-datepicker.js') }}"></script>
+   <script src="{{ asset('public/assets/js/bootstrap-hijri-datetimepicker.js') }}"></script>
+   <script src="{{ asset('public/assets/js/bootstrap-hijri-datepicker.js') }}"></script>
    <script>
     document.addEventListener('DOMContentLoaded', function () {
         const paymentTypeInputs = document.querySelectorAll('input[name="payment_type"]');
@@ -1328,10 +1331,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
     </script>
-
-
-
-    <script>
+ <script>
         document.addEventListener('DOMContentLoaded', function () {
             const selectAllCheckbox = document.getElementById('select-all');
             const checkboxes = document.querySelectorAll('.datatable tbody .form-check-input');

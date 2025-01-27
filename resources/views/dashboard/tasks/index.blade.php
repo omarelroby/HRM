@@ -57,8 +57,8 @@
                         {{ $task->status == 2 ? 'bg-danger' : '' }}
                         {{ $task->status == 3 ? 'bg-primary' : '' }}">
                         @switch($task->status)
-                            @case(0) {{ __('Active') }} @break
-                            @case(1) {{ __('Pending') }} @break
+                            @case(1) {{ __('Active') }} @break
+                            @case(0) {{ __('Pending') }} @break
                             @case(2) {{ __('Canceled') }} @break
                             @case(3) {{ __('Finished') }} @break
                         @endswitch
@@ -177,8 +177,8 @@
                             <td>{{ __('Status') }}</td>
                             <td>
                                 <select name="status" class="form-control select2" required>
-                                    <option value="0">{{ __('Active') }}</option>
-                                    <option selected value="1">{{ __('Pending') }}</option>
+                                    <option value="1">{{ __('Active') }}</option>
+                                    <option selected value="0">{{ __('Pending') }}</option>
                                     <option value="2">{{ __('Canceled') }}</option>
                                     <option value="3">{{ __('Finished') }}</option>
                                 </select>

@@ -23,10 +23,10 @@ class TimeSheetController extends Controller
             }
             else
             {
-                $employeesList = Employee::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'user_id');
+                $employeesList = Employee::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
                 $employeesList->prepend('All', '');
                 $timesheets = TimeSheet::where('created_by', \Auth::user()->creatorId());
-                $employees = Employee::where('created_by', '=', \Auth::user()->creatorId())->get()->pluck('name', 'user_id');
+                $employees = Employee::where('created_by', '=', \Auth::user()->creatorId())->get()->pluck('name', 'id');
 
                 if(!empty($request->start_date) && !empty($request->end_date))
                 {

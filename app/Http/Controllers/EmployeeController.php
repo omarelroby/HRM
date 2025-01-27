@@ -2,6 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Commission;
+use App\Models\DeductionOption;
+use App\Models\Loan;
+use App\Models\LoanOption;
+use App\Models\OtherPayment;
+use App\Models\Overtime;
+use App\Models\PayslipType;
+use App\Models\SaturationDeduction;
 use App\Models\Section;
 use App\Models\SubDepartment;
 use Carbon\Carbon;
@@ -830,11 +838,23 @@ class EmployeeController extends Controller
 
             $employee_shifts             = Employee_shift::where('created_by', \Auth::user()->creatorId())->get();
             $employee_location           = Place::where('created_by', \Auth::user()->creatorId())->get();
+            $payslip_type      = PayslipType::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
+            $allowance_options = AllowanceOption::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
+            $loan_options      = LoanOption::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
+            $deduction_options = DeductionOption::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
+
+            $allowances           = Allowance::where('employee_id', $id)->get();
+            $commissions          = Commission::where('employee_id', $id)->get();
+            $loans                = Loan::where('employee_id', $id)->get();
+            $saturationdeductions = SaturationDeduction::where('employee_id', $id)->get();
+            $otherpayments        = OtherPayment::where('employee_id', $id)->get();
+            $overtimes            = Overtime::where('employee_id', $id)->get();
+            $absences             = Absence::where('employee_id', $id)->get();
 
             return view('dashboard.Employee.show', compact('employee','lang','setting','holidays','employees','assets','documents','employeesAttendance','dates', 'data',
             'leaves','employee_shifts','banks','allowance_options','roles','jobclasses','job_types','work_units','laborCompanies','qualifications',
             'jobtitles','nationalities','categories','attandance_employees','employeeContract','employeeFollowers','employeesId', 'branches', 'departments', 'designations',
-            'documents','employee_tracking_dates','employee_shifts','employee_location'));
+            'documents','employee_tracking_dates','absences','payslip_type','overtimes','otherpayments','saturationdeductions','loans','commissions','allowances','loan_options','deduction_options','employee_shifts','employee_location'));
         } else {
             return redirect()->back()->with('error', __('Permission denied.'));
         }

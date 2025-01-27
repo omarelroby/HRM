@@ -12,6 +12,8 @@ class Commission extends Model
         'amount',
         'type',
         'created_by',
+        'commission_amount',
+        'precentage',
     ];
 
     public function employee()
