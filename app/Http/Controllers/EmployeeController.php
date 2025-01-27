@@ -2,6 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Commission;
+use App\Models\DeductionOption;
+use App\Models\Loan;
+use App\Models\LoanOption;
+use App\Models\OtherPayment;
+use App\Models\Overtime;
+use App\Models\PayslipType;
+use App\Models\SaturationDeduction;
 use App\Models\Section;
 use App\Models\SubDepartment;
 use Carbon\Carbon;
@@ -666,7 +674,7 @@ class EmployeeController extends Controller
             $empId = base64_decode($id);
             // $empId = Crypt::decryptString($decoded);
             $lang                    = app()->getLocale() == 'ar' ? '_ar' : '';
-            $documents               = Document::where('created_by', \Auth::user()->creatorId())->get();
+            $documents               = Document::where('employee_id', $empId)->get();
             $branches                = Branch::where('created_by', \Auth::user()->creatorId())->get()->pluck('name'.$lang, 'id');
             $departments             = Department::where('created_by', \Auth::user()->creatorId())->get()->pluck('name'.$lang, 'id');
             $designations            = Designation::where('created_by', \Auth::user()->creatorId())->get()->pluck('name'.$lang, 'id');
@@ -694,7 +702,7 @@ class EmployeeController extends Controller
             $banks                   = Bank::where('created_by', \Auth::user()->creatorId())->get()->pluck('name'.$lang, 'id');
             $employee_shifts         = Employee_shift::where('created_by', \Auth::user()->creatorId())->get();
             $assets                  = Asset::where('employee_id',$empId)->get();
-            $documents               = DucumentUpload::where('employee_id',$empId)->get();
+//            $documents               = DucumentUpload::where('employee_id',$empId)->get();
             $leaves                  = EmployeeRequest::where('employee_id', '=', $employee->id)->get();
             $employees               = Employee::select('id', 'name')->where('id',$empId)->where('created_by', \Auth::user()->creatorId())->pluck('name', 'id');
 
@@ -830,11 +838,23 @@ class EmployeeController extends Controller
 
             $employee_shifts             = Employee_shift::where('created_by', \Auth::user()->creatorId())->get();
             $employee_location           = Place::where('created_by', \Auth::user()->creatorId())->get();
+            $payslip_type      = PayslipType::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
+            $allowance_options = AllowanceOption::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
+            $loan_options      = LoanOption::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
+            $deduction_options = DeductionOption::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
+
+            $allowances           = Allowance::where('employee_id', $id)->get();
+            $commissions          = Commission::where('employee_id', $id)->get();
+            $loans                = Loan::where('employee_id', $id)->get();
+            $saturationdeductions = SaturationDeduction::where('employee_id', $id)->get();
+            $otherpayments        = OtherPayment::where('employee_id', $id)->get();
+            $overtimes            = Overtime::where('employee_id', $id)->get();
+            $absences             = Absence::where('employee_id', $id)->get();
 
             return view('dashboard.Employee.show', compact('employee','lang','setting','holidays','employees','assets','documents','employeesAttendance','dates', 'data',
             'leaves','employee_shifts','banks','allowance_options','roles','jobclasses','job_types','work_units','laborCompanies','qualifications',
             'jobtitles','nationalities','categories','attandance_employees','employeeContract','employeeFollowers','employeesId', 'branches', 'departments', 'designations',
-            'documents','employee_tracking_dates','employee_shifts','employee_location'));
+            'documents','employee_tracking_dates','absences','payslip_type','overtimes','otherpayments','saturationdeductions','loans','commissions','allowances','loan_options','deduction_options','employee_shifts','employee_location'));
         } else {
             return redirect()->back()->with('error', __('Permission denied.'));
         }
@@ -1015,8 +1035,7 @@ class EmployeeController extends Controller
     public function lastLogin()
     {
         $users = User::where('created_by', \Auth::user()->creatorId())->get();
-
-        return view('dashboard.employee.lastLogin', compact('users'));
+        return view('dashboard.Employee.lastlogin', compact('users'));
     }
 
     public function employeeJson(Request $request)

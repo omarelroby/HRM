@@ -57,8 +57,8 @@
                         {{ $task->status == 2 ? 'bg-danger' : '' }}
                         {{ $task->status == 3 ? 'bg-primary' : '' }}">
                         @switch($task->status)
-                            @case(0) {{ __('Active') }} @break
-                            @case(1) {{ __('Pending') }} @break
+                            @case(1) {{ __('Active') }} @break
+                            @case(0) {{ __('Pending') }} @break
                             @case(2) {{ __('Canceled') }} @break
                             @case(3) {{ __('Finished') }} @break
                         @endswitch
@@ -158,7 +158,7 @@
                         <tr>
                             <td>{{ __('Start Date') }}</td>
                             <td>
-                                <input type="text" name="start_date" class="form-control datepicker" placeholder="{{ __('Select Start Date') }}" required>
+                                <input type="text" name="start_date" class="form-control datetimepicker" placeholder="{{ __('Select Start Date') }}" required>
                                 <div class="invalid-feedback">{{ __('Please select a start date.') }}</div>
                             </td>
                         </tr>
@@ -167,7 +167,7 @@
                         <tr>
                             <td>{{ __('Due Date') }}</td>
                             <td>
-                                <input type="text" name="due_date" class="form-control datepicker" placeholder="{{ __('Select Due Date') }}" required>
+                                <input type="text" name="due_date" class="form-control datetimepicker" placeholder="{{ __('Select Due Date') }}" required>
                                 <div class="invalid-feedback">{{ __('Please select a due date.') }}</div>
                             </td>
                         </tr>
@@ -177,8 +177,8 @@
                             <td>{{ __('Status') }}</td>
                             <td>
                                 <select name="status" class="form-control select2" required>
-                                    <option value="0">{{ __('Active') }}</option>
-                                    <option selected value="1">{{ __('Pending') }}</option>
+                                    <option value="1">{{ __('Active') }}</option>
+                                    <option selected value="0">{{ __('Pending') }}</option>
                                     <option value="2">{{ __('Canceled') }}</option>
                                     <option value="3">{{ __('Finished') }}</option>
                                 </select>
@@ -242,6 +242,51 @@
         });
     });
 </script>
+    <script>
+        $(function () {
+            $('.datetimepicker').datetimepicker({
+                format: 'DD/MM/YYYY',
+                icons: {
+                    time: 'ti ti-time',
+                    date: 'ti ti-calendar',
+                    up: 'ti ti-chevron-up',
+                    down: 'ti ti-chevron-down',
+                },
+                widgetPositioning: {
+                    horizontal: 'auto',
+                    vertical: 'bottom'
+                },
+                // Append to body to avoid overflow issues
+                widgetParent: 'body'
+            });
+        });
+        $(document).ready(function () {
+            $(document).on('change', '#employee_account_type', function () {
+                if ($(this).val() == '0') {
+                    // Show Salary Card Info and Hide IBAN Info
+                    $('#salary_card_number_info').removeClass('d-none').show();
+                    $('#IBAN_number_info').addClass('d-none').hide();
+                } else if ($(this).val() == '1') {
+                    // Show IBAN Info and Hide Salary Card Info
+                    $('#IBAN_number_info').removeClass('d-none').show();
+                    $('#salary_card_number_info').addClass('d-none').hide();
+                }
+
+            });
+
+        });
+        $(document).on('change' ,'#employee_account_type', function() {
+            if($(this).val() == 0)
+            {
+                $('#salary_card_number_info').css('display','block');
+                $('#IBAN_number_info').css('display','none');
+            }else{
+                $('#salary_card_number_info').css('display','none');
+                $('#IBAN_number_info').css('display','block');
+            }
+        });
+
+    </script>
 @endsection
 
 @push('scripts')

@@ -33,12 +33,13 @@ class CommissionController extends Controller
 
                 return redirect()->back()->with('error', $messages->first());
             }
-
             $commission              = new Commission();
             $commission->employee_id = $request->employee_id;
             $commission->title       = $request->title;
             $commission->type        = $request->type;
             $commission->amount      = $request->amount;
+            $commission->precentage      = $request->precentage??null;
+            $commission->commission_amount      = $request->total_budget??null;
             $commission->date        = $request->date;
             $commission->created_by  = \Auth::user()->creatorId();
             $commission->save();

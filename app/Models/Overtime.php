@@ -11,7 +11,8 @@ class Overtime extends Model
         'title',
         'number_of_days',
         'hours',
-        'rate',
+        'avg_hour',
+        'amount',
         'created_by',
     ];
 

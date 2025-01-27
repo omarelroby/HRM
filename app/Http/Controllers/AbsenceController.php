@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Employee;
 use App\Models\Absence;
 use App\Models\AttendanceMovement;
+use App\Models\Salary_setting;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -26,28 +27,73 @@ class AbsenceController extends Controller
                 'type'           => 'required',
                 'number_of_days' => 'required',
                 'start_date'     => 'required|date',
+                'end_date'     => 'required|date',
             ]);
 
             if($validator->fails())
             {
+//                dd('vv');
+
                 $messages = $validator->getMessageBag();
                 return redirect()->back()->with('error', $messages->first());
             }
-
-            $attendancemovement  = AttendanceMovement::where('created_by', '=', \Auth::user()->creatorId())->whereNull('status')->first();
+            $employee=Employee::findOrFail($request->employee_id);
+//            $attendancemovement  = AttendanceMovement::where('created_by', '=', \Auth::user()->creatorId())->whereNull('status')->first();
             $startDate           = Carbon::parse($request->start_date);
             $endDate             = $startDate->addDays($request->number_of_days)->subDays(1);
 
-            if($attendancemovement->start_movement_date > $startDate || $attendancemovement->end_movement_date < $startDate)
-            {
-
-                return redirect()->back()->with('error', __('The start date must be equal to or greater than the start movement date and the end date is equal to or less than the end movement date'));
-            }
+//            if($attendancemovement->start_movement_date > $startDate || $attendancemovement->end_movement_date < $startDate)
+//            {
+//                dd('ss');
+//
+//                return redirect()->back()->with('error', __('The start date must be equal to or greater than the start movement date and the end date is equal to or less than the end movement date'));
+//            }
 
             $input               = $request->only(['employee_id','type','number_of_days','start_date']);
             $input['end_date']   = $endDate;
             $input['created_by'] = \Auth::user()->creatorId();
-            $Absence             = Absence::create($input);
+            $setting=Salary_setting::where('created_by',auth()->user()->id)->first();
+            $abs_with_permission=Absence::where('employee_id',$request->employee_id)->where('type','A')->get()->sum('number_of_days');
+            $abs_without_permission=Absence::where('employee_id',$request->employee_id)->where('type','X')->get()->sum('number_of_days');
+
+            if($request->type=='S')
+            {
+                if($request->number_of_days<=30)
+                {
+                    $input['discount_amount'] = 0;
+                }
+                elseif($request->number_of_days >30 && $request->number_of_days <=90 )
+                {
+//                    dd('dd');
+                    $input['discount_amount'] = ($employee->salary*25)/100;
+                }
+                elseif($request->number_of_days>=90 && $request->number_of_days<=120)
+                {
+                    $input['discount_amount'] = $employee->salary;
+                }
+                else{
+                    $input['discount_amount'] = $employee->salary;
+//                    $days=$request->number_of_days-120;
+
+                }
+
+            }
+            elseif($request->type=='A')
+            {
+                $input['discount_amount']=0;
+
+            }
+            elseif($request->type=='X')
+            {
+                $input['discount_amount']=0;
+
+            }
+            else{
+                $input['discount_amount']=0;
+                $setting->annual_vacations=$setting->annual_vacations-$request->number_of_days;
+                $setting->save();
+            }
+            Absence::create($input);
 
             return redirect()->back()->with('success', __('Absence  successfully created.'));
         }

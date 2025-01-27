@@ -14,7 +14,10 @@ class RoleController extends Controller
     {
         if(\Auth::user()->can('Manage Role'))
         {
-            $roles = Role::where('created_by', '=', \Auth::user()->creatorId())->get();
+            $roles = Role::where('created_by', '=', \Auth::user()->creatorId())
+                ->orWhere('name','employee')
+                ->orWhere('name','hr')
+                ->get();
             $user = \Auth::user();
             if($user->type == 'super admin' || $user->type == 'company')
             {
@@ -30,7 +33,6 @@ class RoleController extends Controller
                 $permissions = $permissions->pluck('name', 'id')->toArray();
 
             }
-
             return view('dashboard.role.index',compact('permissions'))->with('roles', $roles);
         }
         else

@@ -141,10 +141,10 @@
                                 @if(\Auth::user()->can('Manage Role'))
                                 <li><a href="{{ url('/roles') }}" class="{{ Request::is('roles') ?'active' :'' }}">{{ __('roles') }}</a></li>
                                 @endif
-                                @if(\Auth::user()->can('Manage Employee Profile'))
+{{--                                @if(\Auth::user()->can('Manage Employee Profile'))--}}
 
-                                <li><a href="{{ url('/employee-profile') }}" class="{{ Request::is('employee-profile') ?'active' :'' }}">{{ __('Employee Profile') }}</a></li>
-                                @endif
+{{--                                <li><a href="{{ url('/employee-profile') }}" class="{{ Request::is('employee-profile') ?'active' :'' }}">{{ __('Employee Profile') }}</a></li>--}}
+{{--                                @endif--}}
                                 @if(\Auth::user()->can('Manage Employee Last Login'))
 
                                 <li><a href="{{ url('/lastlogin') }}" class="{{ Request::is('lastlogin') ?'active' :'' }}">{{ __('Last Login') }}</a></li>
@@ -205,6 +205,7 @@
                                 </a>
                             </li>
                         @endif
+
                         @if(\Auth::user()->can('Manage Employee'))
                             <li class="{{ Request::is('document-type')  ? 'active' : '' }}">
                                 <a href="{{ route('document-type.index') }}">

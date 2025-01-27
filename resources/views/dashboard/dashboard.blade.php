@@ -57,7 +57,9 @@
 
                                 <h6 class="fs-13 fw-medium text-default mb-1">{{__('Attendance Overview')}}</h6>
                                 <h3 class="mb-3">{{ $employeesWithAttendance .'/' .$employees_count ??0 }} <span class="fs-12 fw-medium text-success">
+                                   @if($employees_count!=0)
                                     <i class="fa-solid fa-caret-up me-1"></i>{{ $employeesWithAttendance?round($employeesWithAttendance/$employees_count * 100,2) : 0}}%</span></h3>
+                                @endif
                                 <a href="attendance-employee.html" class="link-default">View All</a>
                             </div>
                         </div>
@@ -1619,8 +1621,8 @@
                     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 
                     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-                    <script src="{{ asset('assets/js/bootstrap-hijri-datetimepicker.js') }}"></script>
-                    <script src="{{ asset('assets/js/bootstrap-hijri-datepicker.js') }}"></script>
+                    <script src="{{ asset('public/assets/js/bootstrap-hijri-datetimepicker.js') }}"></script>
+                    <script src="{{ asset('public/assets/js/bootstrap-hijri-datepicker.js') }}"></script>
                     <script>
                         document.addEventListener('DOMContentLoaded', function () {
                             const paymentTypeInputs = document.querySelectorAll('input[name="payment_type"]');

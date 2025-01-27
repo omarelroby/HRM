@@ -28,7 +28,7 @@ class OvertimeController extends Controller
                 'employee_id' => 'required',
                 'title' => 'required',
                 'hours' => 'required',
-                'rate' => 'required',
+                'avg_hour' => 'required',
             ]);
 
             if($validator->fails())
@@ -42,7 +42,8 @@ class OvertimeController extends Controller
             $overtime->title          = $request->title;
             $overtime->number_of_days = $request->number_of_days ?? 0;
             $overtime->hours          = $request->hours;
-            $overtime->rate           = $request->rate;
+            $overtime->avg_hour           = $request->avg_hour;
+            $overtime->amount           = $request->avg_hour*$request->hours;
             $overtime->date           = $request->date;
             $overtime->created_by     = \Auth::user()->creatorId();
             $overtime->save();

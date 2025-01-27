@@ -17,7 +17,6 @@ class CompanyStructureResource extends JsonResource
         $lang              = app()->getLocale() == 'ar' ? '_ar' : '';
         return [
             'name'        =>  $this->employee->name,
-
             'title'       => $this['name'.$lang],
             'children'    => CompanyStructureResource::collection($this->children),
         ];

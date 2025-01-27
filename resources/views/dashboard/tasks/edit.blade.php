@@ -70,8 +70,8 @@
                                 <td>{{ __('Status') }}</td>
                                 <td>
                                     <select name="status" class="form-control select2" required>
-                                        <option @if($task->status=='0') selected @endif value="0">{{ __('Active') }}</option>
-                                        <option @if($task->status=='1') selected @endif selected value="1">{{ __('Pending') }}</option>
+                                        <option @if($task->status=='1') selected @endif value="1">{{ __('Active') }}</option>
+                                        <option @if($task->status=='0') selected @endif selected value="0">{{ __('Pending') }}</option>
                                         <option @if($task->status=='2') selected @endif value="2">{{ __('Canceled') }}</option>
                                         <option @if($task->status=='3') selected @endif value="3">{{ __('Finished') }}</option>
                                     </select>

@@ -145,16 +145,16 @@ class UserController extends Controller
             }
 
             // Notify the user via email
-            $setings = Utility::settings();
-            if ($setings['user_create'] == 1) {
-                $user->type     = $role_r->name ?? 'Unknown'; // Fallback if $role_r is undefined (shouldn't happen with this fix)
-                $user->password = $request['password'];
-                try {
-                    Mail::to($user->email)->send(new UserCreate($user));
-                } catch (\Exception $e) {
-                    $smtp_error = __('E-Mail has been not sent due to SMTP configuration');
-                }
-            }
+//            $setings = Utility::settings();
+//            if ($setings['user_create'] == 1) {
+//                $user->type     = $role_r->name ?? 'Unknown'; // Fallback if $role_r is undefined (shouldn't happen with this fix)
+//                $user->password = $request['password'];
+//                try {
+//                    Mail::to($user->email)->send(new UserCreate($user));
+//                } catch (\Exception $e) {
+//                    $smtp_error = __('E-Mail has been not sent due to SMTP configuration');
+//                }
+//            }
 
             return redirect()->route('user.index')->with(
                 'success',
@@ -167,7 +167,8 @@ class UserController extends Controller
 
         public function show($id)
         {
-            $employee= Employee::findOrFail($id);
+
+            $employee= Employee::where('user_id',$id)->first();
             return view('dashboard.user.show',compact('employee'));
         }
 

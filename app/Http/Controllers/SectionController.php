@@ -47,8 +47,8 @@ class SectionController extends Controller
             $request->all(),
             [
                  'sub_dep_id'   => 'required',
-                'name'        => 'required|max:20',
-                'name_ar'     => 'required|max:20',
+                'name'        => 'required',
+                'name_ar'     => 'required',
             ]);
 
             if($validator->fails())
@@ -94,8 +94,8 @@ class SectionController extends Controller
                 [
 
                     'sub_dep_id'   => 'required',
-                    'name'        => 'required|max:20',
-                    'name_ar'     => 'required|max:20',
+                    'name'        => 'required',
+                    'name_ar'     => 'required',
                 ]);
 
                 if($validator->fails())

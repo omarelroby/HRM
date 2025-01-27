@@ -441,7 +441,7 @@ class Employee extends Model
 
     public function designation()
     {
-        return $this->hasOne('App\Models\Designation', 'id', 'designation_id');
+        return $this->belongsTo('App\Models\Designation',  'designation_id');
     }
 
     public function salaryType()
