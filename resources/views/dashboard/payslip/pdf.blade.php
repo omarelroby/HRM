@@ -7,38 +7,48 @@
         <a href="#" class="btn btn-xs rounded-pill btn-warning" onclick="saveAsPDF()"><span class="fa fa-download"></span></a>
         <a title="Mail Send" href="{{route('payslip.send',[$employee->id,$payslip->salary_month])}}" class="btn btn-xs rounded-pill btn-primary"><span class="fa fa-paper-plane"></span></a>
     </div>
-    <div class="invoice" id="printableArea">
-        <div class="invoice-print">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="invoice-title">
-                        <h6 class="mb-3">{{__('Payslip')}}</h6>
-                        <div class="invoice-number">
-                            <img src="{{$logo.'/'.(isset($company_logo) && !empty($company_logo)?$company_logo:'logo.png')}}" width="170px;">
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row text-sm">
-                        <div class="col-md-6">
-                            <address>
-                                <strong>{{__('Name')}} :</strong> {{$employee->name}}<br>
-                                <strong>{{__('Position')}} :</strong> {{__('Employee')}}<br>
-                                <strong>{{__('Salary Date')}} :</strong> {{\Auth::user()->dateFormat( $payslip->created_at)}}<br>
-                            </address>
-                        </div>
-                        <div class="col-md-6 text-md-right">
-                            <address>
-                                <strong>{{\Utility::getValByName('company_name')}} </strong><br>
-                                {{\Utility::getValByName('company_address')}} , {{\Utility::getValByName('company_city')}},<br>
-                                {{\Utility::getValByName('company_state')}}-{{\Utility::getValByName('company_zipcode')}}<br>
-                                <strong>{{__('Salary Slip')}} :</strong> {{ $payslip->salary_month}}<br>
-                            </address>
-                        </div>
+    <div class="card-body p-4" id="printableArea">
+        <div class="text-center mb-4">
+            <img src="{{$logo.'/'.($company_logo ?: 'logo.png')}}"
+                 class="img-fluid mb-3"
+                 alt="Company Logo"
+                 style="max-height: 60px">
+        </div>
+
+        <!-- Header Section -->
+        <div class="row border-bottom pb-4 mb-4">
+            <div class="col-md-6">
+                <div class="d-flex flex-column">
+                    <h6 class="fw-bold text-dark mb-2">{{ __('Employee Details') }}</h6>
+                    <div class="text-muted">
+                        <p class="mb-1"><strong>{{ __('Name') }}:</strong> {{ $employee->name }}</p>
+                        <p class="mb-1"><strong>{{ __('Position') }}:</strong> {{ __('Employee') }}</p>
+                        <p class="mb-0"><strong>{{ __('Salary Date') }}:</strong>
+                            {{ \Auth::user()->dateFormat($payslip->created_at) }}</p>
                     </div>
                 </div>
             </div>
 
-            <div class="row mt-2">
+            <div class="col-md-6 mt-3 mt-md-0">
+                <div class="d-flex flex-column text-md-end">
+                    <h6 class="fw-bold text-dark mb-2">{{ __('Company Details') }}</h6>
+                    <div class="text-muted">
+                        <p class="mb-1">{{ \Utility::getValByName('company_name') }}</p>
+                        <p class="mb-1">
+                            {{ \Utility::getValByName('company_address') }},
+                            {{ \Utility::getValByName('company_city') }}
+                        </p>
+                        <p class="mb-0">
+                            {{ \Utility::getValByName('company_state') }} -
+                            {{ \Utility::getValByName('company_zipcode') }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row mt-2">
                 <div class="col-md-12">
                     <div class="table-responsive">
                         <table class="table table-striped table-hover table-md">
@@ -61,8 +71,8 @@
                                 </tr>
                             @endforeach
                             @foreach($payslipDetail['earning']['commission'] as $commission)
-                                <?php 
-                                 $commission->amount = $commission->type == '$' ? $commission->amount :  $totalSalary * ($commission->amount) / 100 ;
+                                <?php
+//                                 $commission->amount = $commission->type == '$' ? $commission->amount :  $totalSalary * ($commission->amount) / 100 ;
                                 ?>
                                 <tr>
                                     <td>{{__('Commission')}}</td>
@@ -114,6 +124,13 @@
                                         <td class="text-right">{{  \Auth::user()->priceFormat( $deduction->amount)}}</td>
                                     </tr>
                                 @endforeach
+                                @foreach($payslipDetail['absence']['absence'] as $absence)
+                                    <tr>
+                                        <td>{{__('Absence')}}</td>
+                                        <td>{{$absence->type}}</td>
+                                        <td class="text-right">{{  \Auth::user()->priceFormat( $absence->discount_amount)}}</td>
+                                    </tr>
+                                @endforeach
 
                                 <tr>
                                     <td>{{__('social_insurance')}}</td>
@@ -130,23 +147,27 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="row mt-4">
-                        <div class="col-lg-8">
 
-                        </div>
-                        <div class="col-lg-4 text-right text-sm">
-                            <div class="invoice-detail-item pb-2">
-                                <div class="invoice-detail-name font-weight-bold">{{__('Total Earning')}}</div>
-                                <div class="invoice-detail-value">{{ \Auth::user()->priceFormat($payslipDetail['totalEarning'])}}</div>
-                            </div>
-                            <div class="invoice-detail-item">
-                                <div class="invoice-detail-name font-weight-bold">{{__('Total Deduction')}}</div>
-                                <div class="invoice-detail-value">{{ \Auth::user()->priceFormat($payslipDetail['totalDeduction'] + $insurance)}}</div>
-                            </div>
-                            <hr class="mt-2 mb-2">
-                            <div class="invoice-detail-item">
-                                <div class="invoice-detail-name font-weight-bold">{{__('Net Salary')}}</div>
-                                <div class="invoice-detail-value invoice-detail-value-lg">{{ \Auth::user()->priceFormat( ($payslip->basic_salary + $payslipDetail['totalEarning']) - ($payslipDetail['totalDeduction'] + $insurance) )}}</div>
+                    <!-- Totals -->
+                    <div class="row mt-4" style="direction: ltr">
+                        <div class="col-lg-8"></div>
+                        <div class="col-lg-8">
+                            <div class="bg-light p-3 rounded">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span class="fw-medium">{{ __('Total Earnings') }}:</span>
+                                    <span class="fw-bold">{{ \Auth::user()->priceFormat($payslipDetail['totalEarning']) }}</span>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span class="fw-medium">{{ __('Total Deductions') }}:</span>
+                                    <span class="fw-bold">{{ \Auth::user()->priceFormat($payslipDetail['totalDeduction'] + $insurance) }}</span>
+                                </div>
+                                <hr>
+                                <div class="d-flex justify-content-between">
+                                    <span class="fw-bold">{{ __('Net Salary') }}:</span>
+                                    <span class="fw-bold text-primary">
+                            {{ \Auth::user()->priceFormat(($payslip->basic_salary + $payslipDetail['totalEarning']) - ($payslipDetail['totalDeduction'] + $insurance)) }}
+                        </span>
+                                </div>
                             </div>
                         </div>
                     </div>

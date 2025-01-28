@@ -177,18 +177,23 @@ class Utility extends Model
         $earning['totalCommission']   = $employee->get_total_commission($employeeId);
         $earning['otherPayment']      = OtherPayment::where('employee_id', $employeeId)->get();
         $earning['totalOtherPayment'] = OtherPayment::where('employee_id', $employeeId)->get()->sum('amount');
-        $earning['overTime']          = Overtime::select('id', 'title')->selectRaw('number_of_days * hours* rate as amount')->where('employee_id', $employeeId)->get();
-        $earning['totalOverTime']     = Overtime::selectRaw('number_of_days * hours* rate as total')->where('employee_id', $employeeId)->get()->sum('total');
+        $earning['overTime']          = Overtime::select('id', 'title')->selectRaw('hours* avg_hour as amount')->where('employee_id', $employeeId)->get();
+        $earning['totalOverTime']     = Overtime::selectRaw('hours* avg_hour as total')->where('employee_id', $employeeId)->get()->sum('total');
 
         $deduction['loan']           = Loan::where('employee_id', $employeeId)->get();
         $deduction['totalLoan']      = Loan::where('employee_id', $employeeId)->get()->sum('amount');
         $deduction['deduction']      = SaturationDeduction::where('employee_id', $employeeId)->get();
         $deduction['totalDeduction'] = SaturationDeduction::where('employee_id', $employeeId)->get()->sum('amount');
 
+        $absence['absence']           = Absence::where('employee_id', $employeeId)->get();
+        $total_absence['absence'] = Absence::where('employee_id', $employeeId)->get()->sum('discount_amount');
+
         $payslip['earning']        = $earning;
         $payslip['totalEarning']   = $earning['totalAllowance'] + $earning['totalCommission'] + $earning['totalOtherPayment'] + $earning['totalOverTime'];
         $payslip['deduction']      = $deduction;
-        $payslip['totalDeduction'] = $deduction['totalLoan'] + $deduction['totalDeduction'];
+        $payslip['absence']      = $absence;
+        $payslip['totalDeduction'] = $deduction['totalLoan'] + $deduction['totalDeduction']+$total_absence['absence'];
+        $payslip['total_absence'] = $total_absence['absence'];
 
         return $payslip;
     }
@@ -557,7 +562,7 @@ class Utility extends Model
 
     public static function send_telegram_msg($resp)
     {
-        
+
         $settings  = Utility::settings(\Auth::user()->creatorId());
 
         $msg = $resp;

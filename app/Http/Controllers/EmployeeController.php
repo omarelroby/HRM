@@ -850,8 +850,42 @@ class EmployeeController extends Controller
             $otherpayments        = OtherPayment::where('employee_id', $id)->get();
             $overtimes            = Overtime::where('employee_id', $id)->get();
             $absences             = Absence::where('employee_id', $id)->get();
+            $setting=Salary_setting::where('created_by',auth()->user()->id)->first();
+            $total_sick=Absence::where('employee_id',$id)->where('type','S')->get()->sum('number_of_days');
+            $total_sick_amount=Absence::where('employee_id',$id)->where('type','S')->get()->sum('discount_amount');
+            $abs_with_permission=Absence::where('employee_id',$id)->where('type','A')->get()->sum('number_of_days');
+            $abs_without_permission=Absence::where('employee_id',$id)->where('type','X')->get()->sum('number_of_days');
+            $insurance_amount=($employee->salary*$setting->saudi_employee_insurance_percentage)/100;
+            $employee->net_salary =  ($allowances->sum('amount')+$employee->salary+$overtimes->sum('amount')+$commissions->sum('amount')+$otherpayments->sum('amount'))-($loans->sum('amount')+$insurance_amount+$absences->sum('discount_amount')+$saturationdeductions->sum('amount'));
+            $abs_without_permission_amount=0;
+            $abs_with_permission_amount=0;
 
-            return view('dashboard.Employee.show', compact('employee','lang','setting','holidays','employees','assets','documents','employeesAttendance','dates', 'data',
+            if($abs_with_permission>0) {
+                if ($abs_with_permission >= $setting->annual_vacations) {
+                    // If absence with permission exceeds annual vacation balance
+                    $abs_with_permission_amount = ($employee->salary * $setting->absence_with_permission_discount) / 100;
+
+                    $employee->net_salary -= $abs_with_permission_amount;
+                } else {
+                    // If absence with permission is within annual vacation balance
+
+                    $abs_with_permission_amount = 0;
+                }
+            }
+            if($abs_without_permission>0)
+            {
+                if ($abs_without_permission > $setting->annual_vacations) {
+                    // If absence without permission exceeds annual vacation balance
+                    $abs_without_permission_amount = ($employee->salary * $setting->absence_without_permission_discount) / 100;
+                    $employee->net_salary -= $abs_without_permission_amount;
+
+                } else {
+
+                    $abs_without_permission_amount = 0;
+                }
+            }
+            $employee->save();
+            return view( 'dashboard.Employee.show', compact('total_sick','abs_with_permission','abs_without_permission','total_sick_amount','abs_with_permission_amount','abs_without_permission_amount','employee','lang','setting','holidays','employees','assets','documents','employeesAttendance','dates', 'data',
             'leaves','employee_shifts','banks','allowance_options','roles','jobclasses','job_types','work_units','laborCompanies','qualifications',
             'jobtitles','nationalities','categories','attandance_employees','employeeContract','employeeFollowers','employeesId', 'branches', 'departments', 'designations',
             'documents','employee_tracking_dates','absences','payslip_type','overtimes','otherpayments','saturationdeductions','loans','commissions','allowances','loan_options','deduction_options','employee_shifts','employee_location'));
