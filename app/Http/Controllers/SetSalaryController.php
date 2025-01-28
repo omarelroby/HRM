@@ -88,6 +88,7 @@ class SetSalaryController extends Controller
 
     public function show($id)
     {
+
         $payslip_type      = PayslipType::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
         $allowance_options = AllowanceOption::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
         $loan_options      = LoanOption::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
@@ -96,7 +97,7 @@ class SetSalaryController extends Controller
         {
             $total_sick_amount=0;
 
-            $currentEmployee      = Employee::where('user_id', '=', \Auth::user()->id)->first();
+            $currentEmployee      = Employee::findOrFail('user_id', '=', \Auth::user()->id)->first();
             $allowances           = Allowance::where('employee_id', $currentEmployee->id)->get();
             $commissions          = Commission::where('employee_id', $currentEmployee->id)->get();
             $loans                = Loan::where('employee_id', $currentEmployee->id)->get();
@@ -147,6 +148,7 @@ class SetSalaryController extends Controller
         else
         {
 
+
             $total_sick_amount=0;
             $allowances           = Allowance::where('employee_id', $id)->get();
             $commissions          = Commission::where('employee_id', $id)->get();
@@ -161,6 +163,7 @@ class SetSalaryController extends Controller
             $total_sick_amount=Absence::where('employee_id',$id)->where('type','S')->get()->sum('discount_amount');
             $abs_with_permission=Absence::where('employee_id',$id)->where('type','A')->get()->sum('number_of_days');
             $abs_without_permission=Absence::where('employee_id',$id)->where('type','X')->get()->sum('number_of_days');
+
             $insurance_amount=($employee->salary*$setting->saudi_employee_insurance_percentage)/100;
             $employee->net_salary =  ($allowances->sum('amount')+$employee->salary+$overtimes->sum('amount')+$commissions->sum('amount')+$otherpayments->sum('amount'))-($loans->sum('amount')+$insurance_amount+$absences->sum('discount_amount')+$saturationdeductions->sum('amount'));
             $abs_without_permission_amount=0;

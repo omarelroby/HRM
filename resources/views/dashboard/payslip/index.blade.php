@@ -74,9 +74,9 @@
             @can('Create Pay Slip')
             <div class="col-xl-3 col-lg-4 col-md-6 d-flex align-items-center">
                 <div class="d-flex gap-2">
-                    <a id="payrollexport" href="#" class="btn btn-outline-success">
-                        {{ __('Export') }} <i class="fa fa-file-excel-o"></i>
-                    </a>
+{{--                    <a id="payrollexport" href="#" class="btn btn-outline-success">--}}
+{{--                        {{ __('Export') }} <i class="fa fa-file-excel-o"></i>--}}
+{{--                    </a>--}}
                     <a id="payrollpdf" target="_blank" href="#" class="btn btn-outline-info">
                         {{ __('Monthly Payroll Log') }} <i class="fa fa-file-pdf-o"></i>
                     </a>

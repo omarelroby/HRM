@@ -34,9 +34,9 @@
             text-align:center;
             width:5%;
         }
-        
+
     </style>
-  
+
 
     <body>
         <div class="card container mt-4 bg-none card-box">
@@ -50,7 +50,7 @@
                 <div class="row text-sm">
                     <div class="col-md-4">
                         <address style="text-align:right">
-                            <p> {{\Utility::getValByName('company_name')}} </p> 
+                            <p> {{\Utility::getValByName('company_name')}} </p>
                             <p> {{__('Created By')}}  {{\Auth()->user()->name}} </p>
                             <p></p>
                         </address>
@@ -80,7 +80,7 @@
                                 <th>الوظيفة</th>
                                 <th>أيام العمل</th>
                                 <th>الأساسى الفعلى</th>
-                                
+
                                 @foreach($allowoptions as $option)
                                     <th>{{$option['name'.$lang]}}</th>
                                 @endforeach
@@ -90,9 +90,9 @@
                                 <th>نسبة المبيعات</th>
                                 <th>مستحقات أخرى</th>
                                 <th>إجمالى المستحق</th>
-                                
+
                                 <th>تأمينات الموظف الإجتماعية</th>
-                                <th>تأمينات الموظف الطبية</th>
+{{--                                <th>تأمينات الموظف الطبية</th>--}}
                                 <th>غياب</th>
                                 <th>مرضى</th>
                                 <th>سلف مقدمة</th>
@@ -110,21 +110,21 @@
                             @foreach($payslip as $employee)
                                 @php
                                     $allowances               = json_decode($employee->allowance);
-                                    $totalBasicSalary         += !empty($employee->basic_salary) ? $employee->basic_salary : 0; 
+                                    $totalBasicSalary         += !empty($employee->basic_salary) ? $employee->basic_salary : 0;
                                     $totalOtherAllowance      += collect(json_decode($employee->allowance))->whereNotIn('allowance_option',$allowoptions->pluck('id'))->sum('amount');
-                                    $totalOverTime            += collect(json_decode($employee->overtime))->sum('rate');
+                                    $totalOverTime            += collect(json_decode($employee->overtime))->sum('amount');
                                     $totalCommission          += collect(json_decode($employee->commission))->sum('amount');
                                     $totalOtherPayment        += collect(json_decode($employee->other_payment))->sum('amount');
-                                    $totalDue                 += $employee->getTotalDue($employee);
+                                    $totalDue                 += collect(json_decode($employee->overtime))->sum('amount')+collect(json_decode($employee->allowance))->whereNotIn('allowance_option',$allowoptions->pluck('id'))->sum('amount')+collect(json_decode($employee->commission))->sum('amount')+collect(json_decode($employee->other_payment))->sum('amount');
                                     $totalinsurance           += $employee->insurance($employee->id,'employee');
-                                    $totalMedicalInsurance    += $employee->medical_insurance($employee->id,'employee');
-                                    $totalAbsence             += (collect(json_decode($employee->absence))->where('type','A')->sum('number_of_days') * $employee->getEmployeeSalaryPerDay($employee->id)) * $salarysetting->absence_with_permission_discount
-                                    + ( collect(json_decode($employee->absence))->where('type','X')->sum('number_of_days') * ($employee->getEmployeeSalaryPerDay($employee->id) * $salarysetting->absence_without_permission_discount ) );
-                                    $totalAbsence_S           += (collect(json_decode($employee->absence))->where('type','S')->sum('number_of_days') * $employee->getEmployeeSalaryPerDay($employee->id) * $salarysetting->sick_absence_discount);
+//                                    $totalMedicalInsurance    += $employee->medical_insurance($employee->id,'employee');
+//                                    $totalAbsence             += (collect(json_decode($employee->absence))->where('type','A')->sum('number_of_days') * $employee->getEmployeeSalaryPerDay($employee->id)) * $salarysetting->absence_with_permission_discount
+//                                    + ( collect(json_decode($employee->absence))->where('type','X')->sum('number_of_days') * ($employee->getEmployeeSalaryPerDay($employee->id) * $salarysetting->absence_without_permission_discount ) );
+//                                    $totalAbsence_S           += (collect(json_decode($employee->absence))->where('type','S')->sum('number_of_days') * $employee->getEmployeeSalaryPerDay($employee->id) * $salarysetting->sick_absence_discount);
                                     $totalLoan                += collect(json_decode($employee->loan))->sum('amount');
                                     $totalsaturationDeduction += collect(json_decode($employee->saturation_deduction))->sum('amount');
-                                    $totalDeduction           += $employee->getTotalDeduction($employee);
-                                    $totalNetSalary           += $employee->getNetSalary($employee);
+                                    $totalDeduction           += collect(json_decode($employee->loan))->sum('amount')+collect(json_decode($employee->saturation_deduction))->sum('amount')+$employee->insurance($employee->id,'employee');
+                                    $totalNetSalary           += $employee->net_salary;
                                 @endphp
                                 <tr>
                                     <td>{{\Auth::user()->employeeIdFormat($employee->employee_id)}}</td>
@@ -132,7 +132,7 @@
                                     <td>{{ $employee->employee($employee->id) ? $employee->employee($employee->id)->jobtitle['name'.$lang] : '' }}</td>
                                     <td>{{$employee->workdays($employee->id)}}</td>
                                     <td>{{!empty($employee->basic_salary) ? \Auth::user()->priceFormat($employee->basic_salary) : '0'}}</td>
-                                    
+
                                     @foreach($allowoptions as $option)
                                         @php $totalallowance += collect(json_decode($employee->allowance))->where('allowance_option',$option->id)->sum('amount') @endphp
                                         <td> {{collect(json_decode($employee->allowance))->where('allowance_option',$option->id)->sum('amount')}} </td>
@@ -142,27 +142,27 @@
                                         {{ collect(json_decode($employee->allowance))->whereNotIn('allowance_option',$allowoptions->pluck('id'))->sum('amount') }}
                                     </td>
 
-                                    <td>{{collect(json_decode($employee->overtime))->sum('rate') }}</td>
+                                    <td>{{collect(json_decode($employee->overtime))->sum('amount') }}</td>
 
                                     <td>{{collect(json_decode($employee->commission))->sum('amount') }}</td>
 
                                     <td> {{collect(json_decode($employee->other_payment))->sum('amount') }} </td>
 
                                     <td>
-                                        {{ $employee->getTotalDue($employee) }}
+                                        {{collect(json_decode($employee->overtime))->sum('amount')+collect(json_decode($employee->allowance))->whereNotIn('allowance_option',$allowoptions->pluck('id'))->sum('amount')+collect(json_decode($employee->commission))->sum('amount')+collect(json_decode($employee->other_payment))->sum('amount') }}
                                     </td>
 
                                     <td>{{$employee->insurance($employee->id,'employee')}}</td>
-                                    <td>{{$employee->medical_insurance($employee->id,'employee')}}</td>
-                                    <td>{{(collect(json_decode($employee->absence))->where('type','A')->sum('number_of_days') * $employee->getEmployeeSalaryPerDay($employee->id)  * $salarysetting->absence_with_permission_discount) 
-                                    + (collect(json_decode($employee->absence))->where('type','X')->sum('number_of_days') * ($employee->getEmployeeSalaryPerDay($employee->id) * $salarysetting->absence_without_permission_discount ) ) }}</td>
-                                    <td>{{(collect(json_decode($employee->absence))->where('type','S')->sum('number_of_days') * $employee->getEmployeeSalaryPerDay($employee->id) * $salarysetting->sick_absence_discount) }}</td>
+{{--                                    <td>{{$employee->medical_insurance($employee->id,'employee')}}</td>--}}
+                                    <td>{{(collect(json_decode($employee->absence))->where('type','A')->sum('discount_amount') )
+                                    + (collect(json_decode($employee->absence))->where('type','X')->sum('discount_amount')  ) }}</td>
+                                    <td>{{(collect(json_decode($employee->absence))->where('type','S')->sum('discount_amount')  ) }}</td>
                                     <td>{{collect(json_decode($employee->loan))->sum('amount') }}</td>
                                     <td>{{collect(json_decode($employee->saturation_deduction))->sum('amount') }}</td>
-                                    <td>{{$employee->getTotalDeduction($employee)}}</td>
-                                    
+                                    <td>{{collect(json_decode($employee->loan))->sum('amount')+collect(json_decode($employee->saturation_deduction))->sum('amount')+$employee->insurance($employee->id,'employee')}}</td>
+
                                     <td>
-                                        {{$employee->getNetSalary($employee)}}
+                                        {{number_format($employee->net_salary,2)}}
                                     </td>
                                 </tr>
                             @endforeach
@@ -183,7 +183,7 @@
                                 <td>{{\Auth::user()->priceFormat($totalOtherPayment)}}</td>
                                 <td>{{\Auth::user()->priceFormat($totalDue)}}</td>
                                 <td>{{\Auth::user()->priceFormat($totalinsurance)}}</td>
-                                <td>{{\Auth::user()->priceFormat($totalMedicalInsurance)}}</td>
+{{--                                <td>{{\Auth::user()->priceFormat($totalMedicalInsurance)}}</td>--}}
                                 <td>{{\Auth::user()->priceFormat($totalAbsence)}}</td>
                                 <td>{{\Auth::user()->priceFormat($totalAbsence_S)}}</td>
                                 <td>{{\Auth::user()->priceFormat($totalLoan)}}</td>
@@ -192,7 +192,7 @@
                                 <td>{{\Auth::user()->priceFormat($totalNetSalary)}}</td>
                             </tr>
                         </tbody>
-                    </table>    
+                    </table>
 
                 </div>
 

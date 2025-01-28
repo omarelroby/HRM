@@ -38,7 +38,7 @@ class PaySlipController extends Controller
                 [
                     'created_by' => \Auth::user()->creatorId(),
                 ]
-            )->first();
+            )->get();
 
             // return date('m');
 
@@ -80,7 +80,7 @@ class PaySlipController extends Controller
             $year = [
                 date('Y') =>  date('Y'),
             ];
-            // dd($employees);
+//             dd($employees);
              return view('dashboard.payslip.index', compact('employees', 'month', 'year', 'months', 'years'));
         } else {
             return redirect()->back()->with('error', __('Permission denied.'));
@@ -151,7 +151,7 @@ class PaySlipController extends Controller
                 $payslipEmployee->net_payble           = $employee->net_salary??0;
                 $payslipEmployee->salary_month         = $formate_month_year;
                 $payslipEmployee->status               = 0;
-                $payslipEmployee->basic_salary         = !empty($employee->salary) ? $employee->salary : 0;
+                $payslipEmployee->basic_salary         =   $employee->salary ?? 0;
 
                 $payslipEmployee->allowance            = Employee::allowance($employee->id);
                 $payslipEmployee->commission           = Employee::commission($employee->id);
@@ -318,7 +318,6 @@ class PaySlipController extends Controller
     {
         $Employees       = PaySlip::where('salary_month', $date)->where('created_by', \Auth::user()->creatorId())->get();
         $unpaidEmployees = PaySlip::where('salary_month', $date)->where('created_by', \Auth::user()->creatorId())->where('status', '=', 0)->get();
-
         return view('dashboard.payslip.bulkcreate', compact('Employees', 'unpaidEmployees', 'date'));
     }
 
@@ -354,7 +353,7 @@ class PaySlipController extends Controller
         $totalSalary   = $employee->get_totalsalary();
         $insurance     = $employee->insurance($payslip->employee_id,'employee');
         $payslipDetail = Utility::employeePayslipDetail($id);
-//        dd($payslipDetail);
+
         return view('dashboard.payslip.pdf', compact('payslip', 'employee', 'payslipDetail','totalSalary','insurance'));
     }
 
@@ -387,6 +386,7 @@ class PaySlipController extends Controller
                 'employees.employee_id',
                 'employees.name',
                 'employees.residence_number',
+                'employees.net_salary',
                 'employees.Join_date_gregorian',
                 'employees.jobtitle_id',
                 'payslip_types.name as payroll_type',
@@ -412,8 +412,7 @@ class PaySlipController extends Controller
             }
         )->where('employees.created_by', \Auth::user()->creatorId())->get();
 
-        $payslip = $payslip->where('employee_id','!=', 118);
-
+//        dd($payslip);
         $allowoptions    = AllowanceOption::where('created_by',\Auth::user()->creatorId())->where('payroll_dispaly',1)->get();
 
         $totalBasicSalary = $totalallowance = $totalOtherAllowance = $totalOverTime = $totalCommission = $totalOtherPayment =
@@ -479,7 +478,7 @@ class PaySlipController extends Controller
             }
         )->where('employees.created_by', \Auth::user()->creatorId())->get();
 
-        $payslip = $payslip->where('employee_id','!=', 118);
+//        $payslip = $payslip->where('employee_id','!=', 118);
 
         return view('payslip.payrollbarpdf', compact('payslip','months','year','month'));
     }
