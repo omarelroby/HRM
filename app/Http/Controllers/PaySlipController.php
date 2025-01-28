@@ -147,7 +147,8 @@ class PaySlipController extends Controller
                     $payslipEmployee->employee_id          = $employee->id;
                 }
 
-                $payslipEmployee->net_payble           = $employee->get_net_salary();
+
+                $payslipEmployee->net_payble           = $employee->net_salary??0;
                 $payslipEmployee->salary_month         = $formate_month_year;
                 $payslipEmployee->status               = 0;
                 $payslipEmployee->basic_salary         = !empty($employee->salary) ? $employee->salary : 0;
@@ -215,7 +216,10 @@ class PaySlipController extends Controller
     public function search_json(Request $request)
     {
         $formate_month_year = $request->datePicker;
-        $validatePaysilp    = PaySlip::where('salary_month', '=', $formate_month_year)->where('created_by', \Auth::user()->creatorId())->get()->toarray();
+        $validatePaysilp    = PaySlip::where('salary_month', '=', $formate_month_year)
+                            ->where('created_by', \Auth::user()->creatorId())
+                            ->get()
+                            ->toarray();
 
         if (empty($validatePaysilp))
         {
@@ -230,6 +234,7 @@ class PaySlipController extends Controller
                     'employees.employee_id',
                     'employees.name',
                     'employees.residence_number',
+                    'employees.net_salary',
                     'employees.Join_date_gregorian',
                     'employees.jobtitle_id',
                     'payslip_types.name as payroll_type',
@@ -254,7 +259,7 @@ class PaySlipController extends Controller
                     $join->leftjoin('payslip_types', 'payslip_types.id', '=', 'employees.salary_type');
                 }
             )->where('employees.created_by', \Auth::user()->creatorId())->get();
-
+//            dd($paylip_employee->pluck('allowance'));
 
             foreach ($paylip_employee as $employee) {
                 if (Auth::user()->type == 'employee') {
@@ -262,7 +267,7 @@ class PaySlipController extends Controller
                         $tmp   = [];
                         $tmp[] = $employee->id;
                         $tmp[] = $employee->name;
-                        $tmp[] = $employee->payroll_type;
+//                        $tmp[] = $employee->payroll_type;
                         $tmp[] = $employee->pay_slip_id;
                         $tmp[] = !empty($employee->basic_salary) ? \Auth::user()->priceFormat($employee->basic_salary) : '-';
                         $tmp[] =  \Auth::user()->priceFormat($employee->getNetSalary($employee));
@@ -279,10 +284,10 @@ class PaySlipController extends Controller
                     $tmp[] = $employee->id;
                     $tmp[] = \Auth::user()->employeeIdFormat($employee->employee_id);
                     $tmp[] = $employee->name;
-                    $tmp[] = $employee->payroll_type;
+//                    $tmp[] = $employee->payroll_type;
                     $tmp[] = !empty($employee->basic_salary) ? \Auth::user()->priceFormat($employee->basic_salary) : '-';
-                    $tmp[] = \Auth::user()->priceFormat($employee->getNetSalary($employee));
-                    if($employee->status == 1) {
+                    $tmp[] = !empty($employee->net_salary) ? \Auth::user()->priceFormat($employee->net_salary) : '-';
+                     if($employee->status == 1) {
                         $tmp[] = 'Paid';
                     } else {
                         $tmp[] = 'UnPaid';
@@ -314,13 +319,14 @@ class PaySlipController extends Controller
         $Employees       = PaySlip::where('salary_month', $date)->where('created_by', \Auth::user()->creatorId())->get();
         $unpaidEmployees = PaySlip::where('salary_month', $date)->where('created_by', \Auth::user()->creatorId())->where('status', '=', 0)->get();
 
-        return view('payslip.bulkcreate', compact('Employees', 'unpaidEmployees', 'date'));
+        return view('dashboard.payslip.bulkcreate', compact('Employees', 'unpaidEmployees', 'date'));
     }
 
     public function bulkpayment(Request $request, $date)
     {
-        $unpaidEmployees = PaySlip::where('salary_month', $date)->where('created_by', \Auth::user()->creatorId())->where('status', '=', 0)->get();
 
+        $unpaidEmployees = PaySlip::where('salary_month', $date)->where('created_by', \Auth::user()->creatorId())->where('status', '=', 0)->get();
+//        dd($date);
         foreach ($unpaidEmployees as $employee) {
             $employee->status = 1;
             $employee->save();
@@ -348,7 +354,7 @@ class PaySlipController extends Controller
         $totalSalary   = $employee->get_totalsalary();
         $insurance     = $employee->insurance($payslip->employee_id,'employee');
         $payslipDetail = Utility::employeePayslipDetail($id);
-
+//        dd($payslipDetail);
         return view('dashboard.payslip.pdf', compact('payslip', 'employee', 'payslipDetail','totalSalary','insurance'));
     }
 

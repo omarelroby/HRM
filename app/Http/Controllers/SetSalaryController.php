@@ -94,6 +94,8 @@ class SetSalaryController extends Controller
         $deduction_options = DeductionOption::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
         if(\Auth::user()->type == 'employee')
         {
+            $total_sick_amount=0;
+
             $currentEmployee      = Employee::where('user_id', '=', \Auth::user()->id)->first();
             $allowances           = Allowance::where('employee_id', $currentEmployee->id)->get();
             $commissions          = Commission::where('employee_id', $currentEmployee->id)->get();
@@ -103,8 +105,43 @@ class SetSalaryController extends Controller
             $overtimes            = Overtime::where('employee_id', $currentEmployee->id)->get();
             $employee             = Employee::where('user_id', '=', \Auth::user()->id)->first();
             $absences             = Absence::where('employee_id', $currentEmployee->id)->get();
-            $employee->net_salary =  ($allowances->sum('amount')+$employee->salary+$overtimes->sum('amount')+$commissions->sum('amount')+$otherpayments->sum('amount'))-($loans->sum('discount_amount')+$absences->sum('amount')+$saturationdeductions->sum('amount'));
-            return view('dashboard.setsalary.employee_salary', compact('absences', 'employee', 'payslip_type', 'allowance_options', 'commissions', 'loan_options', 'overtimes', 'otherpayments', 'saturationdeductions', 'loans', 'deduction_options', 'allowances'));
+            $setting=Salary_setting::where('created_by',auth()->user()->id)->first();
+            $total_sick=Absence::where('employee_id',$id)->where('type','S')->get()->sum('number_of_days');
+            $total_sick_amount=Absence::where('employee_id',$id)->where('type','S')->get()->sum('discount_amount');
+            $abs_with_permission=Absence::where('employee_id',$id)->where('type','A')->get()->sum('number_of_days');
+            $abs_without_permission=Absence::where('employee_id',$id)->where('type','X')->get()->sum('number_of_days');
+            $insurance_amount=($employee->salary*$setting->saudi_employee_insurance_percentage)/100;
+            $employee->net_salary =  ($allowances->sum('amount')+$employee->salary+$overtimes->sum('amount')+$commissions->sum('amount')+$otherpayments->sum('amount'))-($loans->sum('amount')+$insurance_amount+$absences->sum('discount_amount')+$saturationdeductions->sum('amount'));
+            $abs_without_permission_amount=0;
+            $abs_with_permission_amount=0;
+
+            if($abs_with_permission>0) {
+                if ($abs_with_permission >= $setting->annual_vacations) {
+                    // If absence with permission exceeds annual vacation balance
+                    $abs_with_permission_amount = ($employee->salary * $setting->absence_with_permission_discount) / 100;
+
+                    $employee->net_salary -= $abs_with_permission_amount;
+                } else {
+                    // If absence with permission is within annual vacation balance
+
+                    $abs_with_permission_amount = 0;
+                }
+            }
+            if($abs_without_permission>0)
+            {
+                if ($abs_without_permission > $setting->annual_vacations) {
+                    // If absence without permission exceeds annual vacation balance
+                    $abs_without_permission_amount = ($employee->salary * $setting->absence_without_permission_discount) / 100;
+                    $employee->net_salary -= $abs_without_permission_amount;
+
+                } else {
+
+                    $abs_without_permission_amount = 0;
+                }
+            }
+            $employee->save();
+
+            return view('dashboard.setsalary.employee_salary', compact('abs_without_permission_amount','abs_with_permission_amount','abs_with_permission','abs_without_permission','total_sick_amount','total_sick','absences', 'employee', 'payslip_type', 'allowance_options', 'commissions', 'loan_options', 'overtimes', 'otherpayments', 'saturationdeductions', 'loans', 'deduction_options', 'allowances'));
 
         }
         else
@@ -153,6 +190,7 @@ class SetSalaryController extends Controller
                     $abs_without_permission_amount = 0;
                 }
             }
+            $employee->save();
 
 
             return view('dashboard.setsalary.employee_salary', compact('total_sick_amount','total_sick','abs_with_permission','abs_without_permission','abs_without_permission_amount','abs_with_permission_amount','absences', 'employee', 'payslip_type', 'allowance_options', 'commissions', 'loan_options', 'overtimes', 'otherpayments', 'saturationdeductions', 'loans', 'deduction_options', 'allowances'));

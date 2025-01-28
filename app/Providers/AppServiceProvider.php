@@ -44,7 +44,7 @@ class AppServiceProvider extends ServiceProvider
         Schema::enableForeignKeyConstraints();
 
         //compose all the views....
-        view()->composer('*', function ($view) 
+        view()->composer('*', function ($view)
         {
             if(\Auth::check())
             {
@@ -66,9 +66,9 @@ class AppServiceProvider extends ServiceProvider
 
                 $depts    = json_encode($depts);
                 $empcount = json_encode($empcount);
-                view()->share('depts', $depts); 
-                view()->share('empcount', $empcount); 
-                view()->share('lang', $lang);  
+                view()->share('depts', $depts);
+                view()->share('empcount', $empcount);
+                view()->share('lang', $lang);
 
                 $companies = User::where('type','company')->get();
                 foreach($companies as $company){
@@ -80,8 +80,8 @@ class AppServiceProvider extends ServiceProvider
                 $companies    = json_encode($companies->pluck('name'));
                 $companyEmployeesCount = json_encode($companyEmployeesCount);
 
-                view()->share('companies', $companies); 
-                view()->share('companyEmployeesCount', $companyEmployeesCount); 
+                view()->share('companies', $companies);
+                view()->share('companyEmployeesCount', $companyEmployeesCount);
 
 
 
@@ -112,10 +112,10 @@ class AppServiceProvider extends ServiceProvider
                 //     $expenseData[] = $expenseTotal;
                 //     $expenseCount  += $expenseTotal;
                 // }
-                
+
                 // $pieChartData = [$expenseCount == 0 ? 1 : $expenseCount,$incomeCount == 0 ? 1 : $incomeCount];
-                // view()->share('pieChartData', $pieChartData); 
-                
+                // view()->share('pieChartData', $pieChartData);
+
                 $today = date('Y-m-d');
                 $month = date('m');
 
@@ -139,7 +139,7 @@ class AppServiceProvider extends ServiceProvider
                 {
                     $payslips = PaySlip::select('pay_slips.*', 'employees.name')->leftjoin('employees', 'pay_slips.employee_id', '=', 'employees.id')->where('pay_slips.salary_month',$month_year)->where('pay_slips.employee_id', \Auth::user()->id)->get();
                 }
-                
+
 
                 $totalBasicSalary = $totalNetSalary = $totalAllowance = $totalCommision = $totalLoan = $totalSaturationDeduction = $totalOtherPayment = $totalOverTime = 0;
 
@@ -183,11 +183,11 @@ class AppServiceProvider extends ServiceProvider
                     $overtimes = json_decode($payslip->overtime);
                     foreach($overtimes as $overtime)
                     {
-                        $days  = $overtime->number_of_days;
+//                        $days  = $overtime->number_of_days;
                         $hours = $overtime->hours;
-                        $rate  = $overtime->rate;
+                        $rate  = $overtime->avg_hour;
 
-                        $totalOverTime += ($rate * $hours) * $days;
+                        $totalOverTime += $rate * $hours;
                     }
 
 
@@ -204,20 +204,20 @@ class AppServiceProvider extends ServiceProvider
 
                 $pieChartData = [$totalBasicSalary == 0 ? 1 : $totalBasicSalary,$totalNetSalary == 0 ? 1 : $totalNetSalary ,
                 $totalAllowance == 0 ? 1 : $totalAllowance,$totalCommision == 0 ? 1 : $totalCommision];
-                view()->share('pieChartData', $pieChartData); 
+                view()->share('pieChartData', $pieChartData);
 
                 view()->share('filterData', $filterData);
 
                 // timesheet
                 $attendanceEmployee = AttendanceEmployee::where('date', $today)->where('status','Present')->pluck('employee_id')->toArray();
                 $totalemployees     = Employee::where('created_by', \Auth::user()->creatorId())->get();
-                
+
 
                 $joinedEmployees   = Employee::where('created_by', \Auth::user()->creatorId())->whereMonth('Join_date_gregorian', $month)->count();
                 $offboardEmployees = EmployeeContracts::where('created_by', \Auth::user()->creatorId())->whereMonth('contract_enddate', $month)->count();
-                
+
                 //dd($offboardEmployees);
-                
+
                 view()->share('attendanceEmployee', $attendanceEmployee);
                 view()->share('totalemployees', $totalemployees);
                 view()->share('joinedEmployees', $joinedEmployees);
@@ -236,6 +236,6 @@ class AppServiceProvider extends ServiceProvider
                 view()->share('settings', $settings);
 
             }
-        });  
+        });
     }
 }

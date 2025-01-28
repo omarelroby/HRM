@@ -577,6 +577,11 @@
                                                                                                                 <b class="m-0" style="color: red;"> {{__('Salary') }} </b>
                                                                                                                 <div class="project-amnt pt-1" style="color: red;">{{ number_format($employee->salary,2)  ??0 }} SAR</div>
                                                                                                             </div>
+                                                                                                                 <div class="project-info-inner mr-3 col-6">
+                                                                                                                    <b class="m-0"> {{__('Net Salary') }} </b>
+                                                                                                                    <div class="project-amnt pt-1">{{ number_format($employee->net_salary,2)  ??0 }} SAR</div>
+                                                                                                                </div>
+
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </div>
@@ -773,6 +778,8 @@
                                                                                                                 <th>{{__('Employee Name')}}</th>
                                                                                                                 <th>{{__('Title')}}</th>
                                                                                                                 <th>{{__('Amount')}}</th>
+                                                                                                                <th>{{__('Type')}}</th>
+                                                                                                                <th>{{__('Commission Amount')}}</th>
                                                                                                                 <th>{{__('Action')}}</th>
                                                                                                             </tr>
                                                                                                             </thead>
@@ -781,7 +788,10 @@
                                                                                                                 <tr>
                                                                                                                     <td>{{ !empty($commission->employee())?$commission->employee()->name:'' }}</td>
                                                                                                                     <td>{{ $commission->title }}</td>
-                                                                                                                    <td>{{ $commission->amount }} {{$commission->type}}</td>
+                                                                                                                    <td>{{ $commission->amount }} SAR</td>
+                                                                                                                    <td>{{   $commission->type  }} </td>
+                                                                                                                    <td>{{   $commission->commission_amount  }} </td>
+
                                                                                                                     <td class="text-right">
 
                                                                                                                         @can('Delete Commission')
@@ -964,8 +974,10 @@
                                                                                                             <tr>
                                                                                                                 <th>{{__('Employee Name')}}</th>
                                                                                                                 <th>{{__('Overtime Title')}}</th>
-                                                                                                                <th>{{__('Number of days')}}</th>
+                                                                                                                {{--                                    <th>{{__('Number of days')}}</th>--}}
                                                                                                                 <th>{{__('Hours')}}</th>
+                                                                                                                <th>{{__('Avg Hour')}}</th>
+                                                                                                                <th>{{__('amount')}}</th>
                                                                                                                 <th>{{__('Rate')}}</th>
                                                                                                                 <th>{{__('Action')}}</th>
                                                                                                             </tr>
@@ -975,8 +987,10 @@
                                                                                                                 <tr>
                                                                                                                     <td>{{ !empty($overtime->employee())?$overtime->employee()->name:'' }}</td>
                                                                                                                     <td>{{ $overtime->title }}</td>
-                                                                                                                    <td>{{ $overtime->number_of_days }}</td>
+                                                                                                                    {{--                                        <td>{{ $overtime->number_of_days }}</td>--}}
                                                                                                                     <td>{{ $overtime->hours }}</td>
+                                                                                                                    <td>{{ $overtime->avg_hour }}</td>
+                                                                                                                    <td>{{ $overtime->amount }}</td>
                                                                                                                     <td>{{  \Auth::user()->priceFormat($overtime->rate) }}</td>
                                                                                                                     <td class="text-right">
 
@@ -1005,29 +1019,45 @@
                                                                                                             <div class="col">
                                                                                                                 <h6 class="mb-0">{{__('Absences')}}</h6>
                                                                                                             </div>
-
+                                                                                                            @can('Create Overtime')
+                                                                                                                <div class="col text-right">
+                                                                                                                    <a href="#" style="background-color: #e55b2c; border: none;" data-url="{{ route('absences.create',$employee->id) }}" data-size="md" data-ajax-popup="true" data-title="{{__('Create absence')}}" data-toggle="tooltip" data-original-title="{{__('Create absence')}}" class="btn btn-info">
+                                                                                                                        <i class="fa fa-plus"></i>
+                                                                                                                    </a>
+                                                                                                                </div>
+                                                                                                            @endcan
                                                                                                         </div>
                                                                                                     </div>
                                                                                                     <div class="table-responsive">
                                                                                                         <table class="table table-striped mb-0">
                                                                                                             <thead>
                                                                                                             <tr>
-                                                                                                                <th>{{__('Employee Name')}}</th>
-                                                                                                                <th>{{__('Absent Type')}}</th>
-                                                                                                                <th>{{__('Number of days')}}</th>
-                                                                                                                <th>{{__('Start Date')}}</th>
-                                                                                                                <th>{{__('Action')}}</th>
+                                                                                                                <th>{{ __('Employee Name') }}</th>
+                                                                                                                <th>{{ __('Absent Type') }}</th>
+                                                                                                                <th>{{ __('Number of days') }}</th>
+                                                                                                                <th>{{ __('Start Date') }}</th>
+                                                                                                                <th>{{ __('End Date') }}</th>
+                                                                                                                <th>{{ __('Amount') }}</th>
+                                                                                                                <th>{{ __('Action') }}</th>
                                                                                                             </tr>
                                                                                                             </thead>
                                                                                                             <tbody>
+                                                                                                            @php
+                                                                                                                $totalAbsenceWithPermission = 0;
+                                                                                                                $totalDiscountAmount = 0;
+                                                                                                            @endphp
+
                                                                                                             @foreach ($absences as $absence)
+
+
                                                                                                                 <tr>
-                                                                                                                    <td>{{ !empty($absence->employee())?$absence->employee()->name:'' }}</td>
+                                                                                                                    <td>{{ !empty($absence->employee()) ? $absence->employee()->name : '' }}</td>
                                                                                                                     <td>{{ $absence->type }}</td>
                                                                                                                     <td>{{ $absence->number_of_days }}</td>
                                                                                                                     <td>{{ $absence->start_date }}</td>
+                                                                                                                    <td>{{ $absence->end_date }}</td>
+                                                                                                                    <td>{{ $absence->discount_amount }}</td>
                                                                                                                     <td class="text-right">
-
                                                                                                                         @can('Delete Overtime')
                                                                                                                             <form method="POST" action="{{ route('absence.destroy', $absence->id) }}" class="d-inline" onsubmit="return confirm('{{ __('Are You Sure?') }}\n{{ __('This action cannot be undone. Do you want to continue?') }}');">
                                                                                                                                 @csrf
@@ -1040,10 +1070,33 @@
                                                                                                                     </td>
                                                                                                                 </tr>
                                                                                                             @endforeach
+
+                                                                                                            <!-- Display total absence with permission and discount amount -->
+                                                                                                            <tr>
+                                                                                                                <td colspan="2"><strong>{{ __('Total Absence with Permission') }}</strong></td>
+                                                                                                                <td><strong>{{ $abs_with_permission }}</strong></td>
+                                                                                                                <td colspan="2"><strong>{{ __('Total Discount Amount') }}</strong></td>
+                                                                                                                <td><strong>{{ $abs_with_permission_amount }}</strong></td>
+                                                                                                                <td></td>
+                                                                                                            </tr>
+                                                                                                            <!-- Display total absence with permission and discount amount -->
+                                                                                                            <tr>
+                                                                                                                <td colspan="2"><strong>{{ __('Total Absence with Out Permission') }}</strong></td>
+                                                                                                                <td><strong>{{ $abs_without_permission }}</strong></td>
+                                                                                                                <td colspan="2"><strong>{{ __('Total Amount Absence With Out Permission') }}</strong></td>
+                                                                                                                <td><strong>{{ $abs_without_permission_amount }}</strong></td>
+                                                                                                                <td></td>
+                                                                                                            </tr>
+                                                                                                            <tr>
+                                                                                                                <td colspan="2"><strong>{{ __('Total Sick') }}</strong></td>
+                                                                                                                <td><strong>{{ $total_sick }}</strong></td>
+                                                                                                                <td colspan="2"><strong>{{ __('Total Amount Sick') }}</strong></td>
+                                                                                                                <td><strong>{{ $total_sick_amount }}</strong></td>
+                                                                                                                <td></td>
+                                                                                                            </tr>
                                                                                                             </tbody>
                                                                                                         </table>
-                                                                                                    </div>
-                                                                                                </div>
+                                                                                                    </div>                    </div>
                                                                                             </div>
 
                                                                                         </div>

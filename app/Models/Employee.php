@@ -129,90 +129,53 @@ class Employee extends Model
 
     public function get_net_salary()
     {
-        $employee        = Employee::where('id', '=', $this->id)->first();
-        $employee_salary = (!empty($employee->salary) ? $employee->salary : 0);
+        $employee = Employee::where('id', $this->id)->first();
+        $employee_salary = $employee->salary ?? 0;
 
-        //allowance
-        $allowances      = Allowance::where('employee_id', '=', $this->id)->get();
-        $total_allowance = 0;
-        foreach ($allowances as $allowance) {
-            $total_allowance = $allowance->amount + $total_allowance;
-        }
+        // Fetch all related data in one go
+        $allowances = Allowance::where('employee_id', $this->id)->get();
+        $commissions = Commission::where('employee_id', $this->id)->get();
+        $loans = Loan::where('employee_id', $this->id)->get();
+        $saturation_deductions = SaturationDeduction::where('employee_id', $this->id)->get();
+        $other_payments = OtherPayment::where('employee_id', $this->id)->get();
+        $over_times = Overtime::where('employee_id', $this->id)->get();
 
-        //Insurances
-        $allinsurances                = Allowance::where('employee_id', '=', $this->id)->get();
-        $total_allowance_insurance    = 0;
-        foreach ($allinsurances as $insurance) {
-            if($insurance->allowance_options->insurance_active == 1)
-            {
-                $total_allowance_insurance = $insurance->amount + $total_allowance_insurance;
+        // Calculate totals
+        $total_allowance = $allowances->sum('amount');
+        $total_commission = $commissions->sum(function($commission) use ($employee_salary, $total_allowance) {
+            return $commission->type == '$' ? $commission->amount : ($employee_salary + $total_allowance) * ($commission->amount / 100);
+        });
+        $total_loan = $loans->sum('amount');
+        $total_saturation_deduction = $saturation_deductions->sum('amount');
+        $total_other_payment = $other_payments->sum('amount');
+        $total_over_time = $over_times->sum(function($over_time) {
+            return $over_time->number_of_days * $over_time->hours * $over_time->rate;
+        });
 
-            }
-        }
-        $employee_insurance_percentage = $employee->nationality_type == 1 ? Salary_setting::value('saudi_employee_insurance_percentage') : Salary_setting::value('Nonsaudi_employee_insurance_percentage');
-        $total_employee_insurance = $total_allowance_insurance + $employee_salary;
-        $final_employee_insurance = $total_employee_insurance * ($employee_insurance_percentage / 100);
+        // Insurance calculation
+        $insurance_percentage = $employee->nationality_type == 1
+            ? Salary_setting::value('saudi_employee_insurance_percentage')
+            : Salary_setting::value('Nonsaudi_employee_insurance_percentage');
+        $total_insurance = ($employee_salary + $total_allowance) * ($insurance_percentage / 100);
 
-        //commission
-        $commissions      = Commission::where('employee_id', '=', $this->id)->get();
-        $total_commission = 0;
-        $totalSalary      = $employee_salary + $total_allowance;
-        foreach ($commissions as $commission) {
-            $commission->amount = $commission->type == '$' ? $commission->amount :  $totalSalary * ($commission->amount) / 100 ;
-            $total_commission = $commission->amount + $total_commission;
-        }
-
-        //Loan
-        $loans      = Loan::where('employee_id', '=', $this->id)->get();
-        $total_loan = 0;
-        foreach ($loans as $loan) {
-            $total_loan = $loan->amount + $total_loan;
-        }
-
-        //Saturation Deduction
-        $saturation_deductions      = SaturationDeduction::where('employee_id', '=', $this->id)->get();
-        $total_saturation_deduction = 0;
-        foreach ($saturation_deductions as $saturation_deduction) {
-            $total_saturation_deduction = $saturation_deduction->amount + $total_saturation_deduction;
-        }
-
-        //$total_saturation_deduction = $total_saturation_deduction + $final_employee_insurance;
-
-        //OtherPayment
-        $other_payments      = OtherPayment::where('employee_id', '=', $this->id)->get();
-        $total_other_payment = 0;
-        foreach ($other_payments as $other_payment) {
-            $total_other_payment = $other_payment->amount + $total_other_payment;
-        }
-
-        //Overtime
-        $over_times      = Overtime::where('employee_id', '=', $this->id)->get();
-        $total_over_time = 0;
-        foreach ($over_times as $over_time) {
-            $total_work      = $over_time->number_of_days * $over_time->hours;
-            $amount          = $total_work * $over_time->rate;
-            $total_over_time = $amount + $total_over_time;
-        }
-
-
-        //Net Salary Calculate
-        $advance_salary = $total_allowance + $total_commission - $total_loan - $total_saturation_deduction + $total_other_payment + $total_over_time;
-        $net_salary     = (!empty($employee->salary) ? $employee->salary : 0) + $advance_salary;
+        // Net Salary Calculation
+        $net_salary = $employee_salary + $total_allowance + $total_commission + $total_other_payment + $total_over_time
+            - $total_loan - $total_saturation_deduction - $total_insurance;
+//        dd($net_salary);
         return $net_salary;
     }
-
     public function get_totalsalary()
     {
         $employee        = Employee::where('id', '=', $this->id)->first();
         $employee_salary = (!empty($employee->salary) ? $employee->salary : 0);
 
-        $allowances      = Allowance::where('employee_id', '=', $this->id)->get();
-        $total_allowance = 0;
-        foreach ($allowances as $allowance) {
-            $total_allowance = $allowance->amount + $total_allowance;
-        }
+        $allowances      = Allowance::where('employee_id', '=', $this->id)->sum('amount');
+//        $total_allowance = 0;
+//        foreach ($allowances as $allowance) {
+//            $total_allowance = $allowance->amount + $total_allowance;
+//        }
 
-        $totalSalary      = $employee_salary + $total_allowance;
+        $totalSalary      = $employee_salary + $allowances;
 
         return $totalSalary;
     }
@@ -280,7 +243,7 @@ class Employee extends Model
         $total_commission = 0;
         $totalSalary      = $employee->get_totalsalary();
         foreach ($commissions as $commission) {
-            $commission->amount = $commission->type == '$' ? $commission->amount :  $totalSalary * ($commission->amount) / 100 ;
+//            $commission->amount = $commission->type == '$' ? $commission->amount :  $commission->amount ;
             $total_commission = $commission->amount + $total_commission;
         }
         $commission_json = json_encode($commissions);
@@ -297,7 +260,7 @@ class Employee extends Model
         $total_commission = 0;
         $totalSalary      = $employee->get_totalsalary();
         foreach ($commissions as $commission) {
-            $commission->amount = $commission->type == '$' ? $commission->amount :  $totalSalary * ($commission->amount) / 100 ;
+//            $commission->amount = $commission->type == '$' ? $commission->amount :  $totalSalary * ($commission->amount) / 100 ;
             $total_commission = $commission->amount + $total_commission;
         }
         return $total_commission;
