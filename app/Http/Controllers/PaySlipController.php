@@ -80,7 +80,7 @@ class PaySlipController extends Controller
             $year = [
                 date('Y') =>  date('Y'),
             ];
-//             dd($employees);
+
              return view('dashboard.payslip.index', compact('employees', 'month', 'year', 'months', 'years'));
         } else {
             return redirect()->back()->with('error', __('Permission denied.'));
@@ -452,6 +452,8 @@ class PaySlipController extends Controller
                 'employees.id',
                 'employees.employee_id',
                 'employees.name',
+                'employees.branch_id',
+                'employees.department_id',
                 'employees.residence_number',
                 'employees.Join_date_gregorian',
                 'employees.jobtitle_id',
@@ -478,9 +480,7 @@ class PaySlipController extends Controller
             }
         )->where('employees.created_by', \Auth::user()->creatorId())->get();
 
-//        $payslip = $payslip->where('employee_id','!=', 118);
-
-        return view('payslip.payrollbarpdf', compact('payslip','months','year','month'));
+        return view('dashboard.payslip.payrollbarpdf', compact('payslip','months','year','month'));
     }
 
     public function employeePayrollbarpdf($id,$month,$year)

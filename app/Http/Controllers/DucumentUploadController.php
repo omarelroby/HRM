@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Department;
+use App\Models\departments;
 use App\Models\Document;
 use App\Models\DocumentType;
 use App\Models\DucumentUpload;
@@ -12,23 +14,43 @@ use Spatie\Permission\Models\Role;
 class DucumentUploadController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        if(\Auth::user()->can('Manage Document'))
-        {
-
-            $documents = Document::where('created_by', \Auth::user()->creatorId())->get();
-            $documentTypes = DocumentType::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
-            $employees= Employee::where('created_by', \Auth::user()->creatorId())->get()->pluck('name','id');
-
-            return view('dashboard.documentUpload.index', compact('documents','documentTypes','employees'));
-        }
-        else
-        {
+        // Check if the user has permission to manage documents
+        if (!\Auth::user()->can('Manage Document')) {
             return redirect()->back()->with('error', __('Permission denied.'));
         }
-    }
 
+        // Base query for documents
+        $documents = Document::where('created_by', \Auth::user()->creatorId());
+
+        // Filter by employee_id if provided
+        if ($request->has('employee_id') && $request->employee_id) {
+            $documents->where('employee_id', $request->employee_id);
+        }
+        if ($request->has('document_type') && $request->document_type) {
+            $documents->where('document_type_id', $request->document_type);
+        }
+
+        // Filter by department_id if provided
+        if ($request->has('department_id') && $request->department_id) {
+            $documents->whereHas('employee', function ($q) use ($request) {
+                $q->where('department_id', $request->department_id);
+            });
+        }
+
+        // Fetch filtered documents
+        $documents = $documents->get();
+
+        // Fetch additional data for the view
+        $documentTypes = DocumentType::where('created_by', \Auth::user()->creatorId())->pluck('name', 'id');
+        $employees = Employee::where('created_by', \Auth::user()->creatorId())->pluck('name', 'id');
+        $departments = Department::where('created_by', \Auth::user()->creatorId())->get();
+        $types = DocumentType::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
+
+        // Return the view with data
+        return view('dashboard.documentUpload.index', compact('types','departments', 'documents', 'documentTypes', 'employees'));
+    }
 
     public function create(Request $request)
     {

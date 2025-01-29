@@ -23,6 +23,51 @@
 
                     <!-- Card Body -->
                     <div class="card-body">
+                        <!-- Filters for Department and Employee -->
+                        <div class="row mb-4">
+                            <form action="{{ route('document-upload.index') }}" method="GET" class="row g-3">
+
+                                <div class="col-md-4">
+                                    <label for="departmentFilter">{{ __('Department') }}</label>
+                                    <select  name="department_id" class="form-select">
+                                        <option value="">{{ __('All Departments') }}</option>
+                                        @foreach($departments as $department)
+                                            <option value="{{ $department->id }}" {{ request('department_id') == $department->id ? 'selected' : '' }}>
+                                                {{ $department->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="employeeFilter">{{ __('Employee') }}</label>
+                                    <select id="employeeFilter" name="employee_id" class="form-select">
+                                        <option value="">{{ __('All Employees') }}</option>
+                                        @foreach($employees as $id => $employee)
+                                            <option value="{{ $id }}" {{ request('employee_id') == $id ? 'selected' : '' }}>
+                                                {{ $employee }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="document_type">{{ __('Document Type') }}</label>
+                                    <select   name="document_type" class="form-select">
+                                        <option value="">{{ __('Document Type') }}</option>
+                                        @foreach($types as $id => $type)
+                                            <option value="{{ $id }}" {{ request('document_type') == $id ? 'selected' : '' }}>
+                                                {{ $type }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <button type="submit" class="btn btn-primary">{{ __('Filter') }}</button>
+                                    <a href="{{ route('document-upload.index') }}" class="btn btn-secondary">{{ __('Reset') }}</a>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Table -->
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered table-hover dataTables">
                                 <thead class="thead-light">
@@ -59,14 +104,14 @@
                                         </td>
                                         <td class="text-center">{{ $document->document_type->name ?? '' }}</td>
                                         <td class="text-center">
-                    <span class="px-2 py-1 rounded text-white fw-bold {{ $document->is_contract ? 'bg-success' : 'bg-danger' }}">
-                        {{ $document->is_contract ? 'YES' : 'NO' }}
-                    </span>
+                                        <span class="px-2 py-1 rounded text-white fw-bold {{ $document->is_contract ? 'bg-success' : 'bg-danger' }}">
+                                            {{ $document->is_contract ? 'YES' : 'NO' }}
+                                        </span>
                                         </td>
                                         <td class="text-center">
-                    <span class="px-2 py-1 rounded text-white fw-bold {{ $document->contract_specific==1 ? 'bg-success' : 'bg-danger' }}">
-                        {{ $document->contract_specific==1 ? 'YES' : 'NO' }}
-                    </span>
+                                        <span class="px-2 py-1 rounded text-white fw-bold {{ $document->contract_specific==1 ? 'bg-success' : 'bg-danger' }}">
+                                            {{ $document->contract_specific==1 ? 'YES' : 'NO' }}
+                                        </span>
                                         </td>
                                         <td class="text-start">{{ $document->start_date ?? 'N/A' }}</td>
                                         <td class="text-start">{{ $document->end_date ?? 'N/A' }}</td>
@@ -233,8 +278,6 @@
 
 @push('scripts')
     <script>
-        $(document).ready(function () {
-            $('[data-toggle="tooltip"]').tooltip();
-        });
+
     </script>
 @endpush

@@ -64,28 +64,34 @@
                     {{ Form::select('year', $year, null, ['class' => 'form-control select2', 'placeholder' => 'Select Year']) }}
                 </div>
             </div>
-
-            <div class="col-xl-3 col-lg-4 col-md-6 d-flex align-items-center">
+            @can('Create Pay Slip')
+            <div class="col-xl-2 col-lg-4 col-md-6 d-flex align-items-center">
                 <button type="submit" class="btn btn-primary w-100">
                     <i class="fa fa-file-text-o"></i> {{ __('Generate Payslip') }}
                 </button>
             </div>
-
-            @can('Create Pay Slip')
-            <div class="col-xl-3 col-lg-4 col-md-6 d-flex align-items-center">
-                <div class="d-flex gap-2">
-{{--                    <a id="payrollexport" href="#" class="btn btn-outline-success">--}}
-{{--                        {{ __('Export') }} <i class="fa fa-file-excel-o"></i>--}}
-{{--                    </a>--}}
-                    <a id="payrollpdf" target="_blank" href="#" class="btn btn-outline-info">
-                        {{ __('Monthly Payroll Log') }} <i class="fa fa-file-pdf-o"></i>
-                    </a>
-                    <a id="payrollbarpdf" target="_blank" href="#" class="btn btn-outline-info">
-                        {{ __('Salary Bar') }} <i class="fa fa-file-pdf-o"></i>
-                    </a>
-                </div>
+            <div class="col-xl-2 col-lg-4 col-md-6 d-flex align-items-center">
+            <a id="payrollpdf" target="_blank" href="#" class="btn btn-outline-success flex-grow-1">
+                {{ __('Monthly Payroll Log') }} <i class="fa fa-file-pdf-o"></i>
+            </a>
+            </div>
+            <div class="col-xl-2 col-lg-4 col-md-6 d-flex align-items-center">
+                <a id="payrollbarpdf" target="_blank" href="#" class="btn btn-outline-info flex-grow-1">
+                    {{ __('Salary Bar') }} <i class="fa fa-file-pdf-o"></i>
+                </a>
             </div>
             @endcan
+
+{{--                <div class="col-xl-3 col-lg-4 col-md-6 d-flex align-items-center">--}}
+{{--                    <div class="d-flex gap-2 w-100">--}}
+{{--                        --}}{{-- <a id="payrollexport" href="#" class="btn btn-outline-success flex-grow-1">--}}
+{{--                            {{ __('Export') }} <i class="fa fa-file-excel-o"></i>--}}
+{{--                        </a> --}}
+
+
+{{--                    </div>--}}
+{{--                </div>--}}
+
         </div>
         {{ Form::close() }}
         @endcan

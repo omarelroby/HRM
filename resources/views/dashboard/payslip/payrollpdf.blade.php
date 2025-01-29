@@ -115,13 +115,12 @@
                                     $totalOverTime            += collect(json_decode($employee->overtime))->sum('amount');
                                     $totalCommission          += collect(json_decode($employee->commission))->sum('amount');
                                     $totalOtherPayment        += collect(json_decode($employee->other_payment))->sum('amount');
-                                    $totalDue                 += collect(json_decode($employee->overtime))->sum('amount')+collect(json_decode($employee->allowance))->whereNotIn('allowance_option',$allowoptions->pluck('id'))->sum('amount')+collect(json_decode($employee->commission))->sum('amount')+collect(json_decode($employee->other_payment))->sum('amount');
+                                    $totalDue                 += collect(json_decode($employee->overtime))->sum('amount')
+                                                                +collect(json_decode($employee->allowance)) ->sum('amount')
+                                                                +collect(json_decode($employee->commission))->sum('amount')
+                                                                +collect(json_decode($employee->other_payment))->sum('amount');
                                     $totalinsurance           += $employee->insurance($employee->id,'employee');
-//                                    $totalMedicalInsurance    += $employee->medical_insurance($employee->id,'employee');
-//                                    $totalAbsence             += (collect(json_decode($employee->absence))->where('type','A')->sum('number_of_days') * $employee->getEmployeeSalaryPerDay($employee->id)) * $salarysetting->absence_with_permission_discount
-//                                    + ( collect(json_decode($employee->absence))->where('type','X')->sum('number_of_days') * ($employee->getEmployeeSalaryPerDay($employee->id) * $salarysetting->absence_without_permission_discount ) );
-//                                    $totalAbsence_S           += (collect(json_decode($employee->absence))->where('type','S')->sum('number_of_days') * $employee->getEmployeeSalaryPerDay($employee->id) * $salarysetting->sick_absence_discount);
-                                    $totalLoan                += collect(json_decode($employee->loan))->sum('amount');
+                                     $totalLoan                += collect(json_decode($employee->loan))->sum('amount');
                                     $totalsaturationDeduction += collect(json_decode($employee->saturation_deduction))->sum('amount');
                                     $totalDeduction           += collect(json_decode($employee->loan))->sum('amount')+collect(json_decode($employee->saturation_deduction))->sum('amount')+$employee->insurance($employee->id,'employee');
                                     $totalNetSalary           += $employee->net_salary;
@@ -149,7 +148,7 @@
                                     <td> {{collect(json_decode($employee->other_payment))->sum('amount') }} </td>
 
                                     <td>
-                                        {{collect(json_decode($employee->overtime))->sum('amount')+collect(json_decode($employee->allowance))->whereNotIn('allowance_option',$allowoptions->pluck('id'))->sum('amount')+collect(json_decode($employee->commission))->sum('amount')+collect(json_decode($employee->other_payment))->sum('amount') }}
+                                        {{collect(json_decode($employee->allowance)) ->sum('amount')+collect(json_decode($employee->overtime))->sum('amount')+collect(json_decode($employee->allowance))->whereNotIn('allowance_option',$allowoptions->pluck('id'))->sum('amount')+collect(json_decode($employee->commission))->sum('amount')+collect(json_decode($employee->other_payment))->sum('amount') }}
                                     </td>
 
                                     <td>{{$employee->insurance($employee->id,'employee')}}</td>
@@ -159,7 +158,14 @@
                                     <td>{{(collect(json_decode($employee->absence))->where('type','S')->sum('discount_amount')  ) }}</td>
                                     <td>{{collect(json_decode($employee->loan))->sum('amount') }}</td>
                                     <td>{{collect(json_decode($employee->saturation_deduction))->sum('amount') }}</td>
-                                    <td>{{collect(json_decode($employee->loan))->sum('amount')+collect(json_decode($employee->saturation_deduction))->sum('amount')+$employee->insurance($employee->id,'employee')}}</td>
+                                    <td>{{
+                                        collect(json_decode($employee->loan))->sum('amount')
+                                        +collect(json_decode($employee->saturation_deduction))->sum('amount')
+                                        +$employee->insurance($employee->id,'employee')
+                                        +collect(json_decode($employee->absence))->where('type','S')->sum('discount_amount')
+                                        +collect(json_decode($employee->absence))->where('type','A')->sum('discount_amount') )
+                                        + (collect(json_decode($employee->absence))->where('type','X')->sum('discount_amount')
+                                        }}</td>
 
                                     <td>
                                         {{number_format($employee->net_salary,2)}}

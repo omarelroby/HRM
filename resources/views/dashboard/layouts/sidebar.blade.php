@@ -154,28 +154,36 @@
                         @endif
                         @if(\Auth::user()->can('Manage Employee'))
                          <li class="submenu">
-                            <a href="javascript:void(0);" class="subdrop {{ Request::is('employee')|| Request::is('attendancemovement')|| Request::is('salary_component_type')|| Request::is('holiday') || Request::is('timesheet')|| Request::is('request_types')  || Request::is('payslip') || Request::is('jobtitle')||Request::is('nationality') || Request::is('labor_companies') || Request::is('employee_shifts') || Request::is('place')|| Request::is('jobtypes') || Request::is('banks')  ? 'active' : '' }}">
+                            <a href="javascript:void(0);" class="subdrop {{ Request::is('employee')|| Request::is('attendancemovement')|| Request::is('salary_component_type')|| Request::is('holiday')  || Request::is('request_types')   || Request::is('jobtitle')||Request::is('nationality') || Request::is('labor_companies') || Request::is('employee_shifts') || Request::is('place')|| Request::is('jobtypes') || Request::is('banks')  ? 'active' : '' }}">
                                 <i class="ti ti-user-circle"></i>
                                 <span class="submenu-title">{{ __('Employee') }}</span>
                                 <span class="menu-arrow"></span>
                             </a>
                             <ul style="display: none;">
                                 @if(\Auth::user()->can('Manage Employee'))
-                                <li><a href="{{ url('/employee') }}"  class="{{ Request::is('employee') ?'active' :'' }}">{{ __('Employee') }}</a></li>
-                                <li><a href="{{ url('/payslip') }}"  class="{{ Request::is('payslip') ?'active' :'' }}">{{ __('Payslip') }}</a></li>
+                                <li><a href="{{ url('/employee') }}"  class="{{ Request::is('employee') ?'active' :'' }}"> {{ __('Employee') }}  </a></li>
                                 @endif
-                                @if(\Auth::user()->can('Manage TimeSheet'))
-                                <li><a href="{{ url('/timesheet') }}" class="{{ Request::is('timesheet') ?'active' :'' }}">{{ __('Timesheet') }}</a></li>
+                                @if(\Auth::user()->can('Manage tasks'))
+                                        <li class="{{ Request::is('tasks')  ? 'active' : '' }}">
+                                            <a href="{{ route('tasks.index') }}">
+                                                {{ __('tasks') }}
+                                            </a>
+                                        </li>
                                 @endif
 
+
                                 <li class="submenu">
-                                    <a href="javascript:void(0);" class="subdrop {{ Request::is('jobtitle')|| Request::is('attendancemovement')|| Request::is('salary_component_type')|| Request::is('holiday') || Request::is('nationality')|| Request::is('request_types') || Request::is('labor_companies') || Request::is('workunits') || Request::is('employee_shifts') || Request::is('place')|| Request::is('jobtypes') || Request::is('banks') ?'active' :'' }}">
+                                    <a href="javascript:void(0);" class="subdrop {{ Request::is('jobtitle') || Request::is('document-type')|| Request::is('attendancemovement')|| Request::is('salary_component_type')|| Request::is('holiday') || Request::is('nationality')|| Request::is('request_types') || Request::is('labor_companies') || Request::is('workunits') || Request::is('employee_shifts') || Request::is('place')|| Request::is('jobtypes') || Request::is('banks') ?'active' :'' }}">
                                         <i class="ti ti-user-circle"></i><span class="submenu-title">{{ __('Employee Setting') }}</span>
                                         <span class="menu-arrow"></span>
                                     </a>
                                     @if(\Auth::user()->can('Manage Employee'))
                                     <ul style="display: none;">
-
+                                        <li>
+                                            <a href="{{ route('document-type.index') }}" class="{{ Request::is('document-type')  ? 'active' : '' }}">
+                                                {{ __('Documents Types') }}
+                                            </a>
+                                        </li>
                                         <li><a href="{{ url('/jobtitle') }}" class="{{ Request::is('jobtitle') ?'active' :'' }}">{{ __('Job Titles') }}</a></li>
 
                                          <li><a href="{{ url('/nationality') }}" class="{{ Request::is('nationality') ?'active' :'' }}">{{ __('Nationality') }}</a></li>
@@ -198,18 +206,135 @@
                             </ul>
                         </li>
                         @endif
-                        @if(\Auth::user()->can('Manage tasks'))
-                            <li class="{{ Request::is('tasks')  ? 'active' : '' }}">
-                                <a href="{{ route('tasks.index') }}">
-                                    <i class="ti ti-clock"></i><span>{{ __('tasks') }}</span>
+                        @if(\Auth::user()->can('Manage Set Salary'))
+                            <li class="submenu">
+                                <a href="javascript:void(0);" class="subdrop {{ Request::is('salary_setting') || Request::is('setsalary')|| Request::is('payslip') ? 'active' : '' }}">
+                                    <i class="ti ti-file-description"></i><span class="submenu-title">{{ __('Payroll') }}</span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <ul style="display: none;">
+                                    <li><a href="{{ route('salary_setting.index') }}"  class="{{ Request::is('salary_setting') ?'active' :'' }}">{{ __('Salary Data Settings') }}</a></li>
+                                    <li><a href="{{ route('setsalary.index') }}"  class="{{ Request::is('setsalary') ?'active' :'' }}">{{ __('Determine Salary') }}</a></li>
+                                    <li><a href="{{ url('/payslip') }}"  class="{{ Request::is('payslip') ?'active' :'' }}">{{ __('Payslip') }}</a></li>
+
+                                </ul>
+                            </li>
+                        @endif
+
+
+
+
+                        @if(\Auth::user()->can('Manage Attendance'))
+                            <li class="submenu">
+                                <a href="javascript:void(0);" class="subdrop {{ Request::is('employee_requests') || Request::is('attendanceemployee') || Request::is('timesheet') || Request::is('attendanceemployee/bulkattendance') ? 'active' : '' }}">
+                                    <i class="ti ti-clock"></i><span class="submenu-title">{{ __('Timesheet') }}</span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <ul style="display: none;">
+                                    @if(\Auth::user()->can('Manage TimeSheet'))
+                                    <li><a class="{{ Request::is('timesheet') ?'active' :'' }}" href="{{ route('timesheet.index') }}">{{ __('Timesheet') }}</a></li>
+                                    @endif
+                                    <li class="submenu">
+                                        <a href="javascript:void(0);" class="subdrop {{ Request::is('attendanceemployee') || Request::is('attendanceemployee/bulkattendance') || Request::is('employee_requests') ?'active' :'' }}">
+                                            <i class="ti ti-box"></i><span class="submenu-title">{{ __('Attendance') }}</span>
+                                            <span class="menu-arrow"></span>
+                                        </a>
+                                        <ul style="display: none;">
+                                            <li><a class="{{ Request::is('attendanceemployee') ?'active' :'' }}" href="{{ route('attendanceemployee.index') }}">{{ __('Attendance History') }}</a></li>
+                                            <li><a class="{{ Request::is('attendanceemployee/bulkattendance') ?'active' :'' }}" href="{{ route('attendanceemployee.bulkattendance') }}">{{ __('Collective attendance') }}</a></li>
+                                            <li><a class="{{ Request::is('employee_requests') ?'active' :'' }}" href="{{ route('employee_requests.index') }}">{{ __('Employee Request Management') }}</a></li>
+
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endif
+                        @if(\Auth::user()->can('Manage Indicator') || \Auth::user()->can('Manage Appraisal') || \Auth::user()->can('Manage Goal Tracking') )
+                            <li class="submenu">
+                                <a href="javascript:void(0);" class="subdrop {{ Request::is('indicator') || Request::is('goaltracking') || Request::is('appraisal') ? 'active' : '' }}">
+                                    <i class="ti ti-chart-line"></i><span class="submenu-title">{{ __('Performance') }}</span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <ul style="display: none;">
+
+                                    @if(\Auth::user()->can('Manage Indicator'))
+                                        <li><a class="{{ Request::is('indicator') ?'active' :'' }}" href="{{ route('indicator.index') }}">{{ __('indicators') }}</a></li>
+                                    @endif
+                                    @if(\Auth::user()->can('Manage Appraisal'))
+                                        <li><a class="{{ Request::is('appraisal') ?'active' :'' }}" href="{{ route('appraisal.index') }}">{{ __('Appraisals') }}</a></li>
+                                    @endif
+                                    @if(\Auth::user()->can('Manage Goal Tracking'))
+                                        <li><a class="{{ Request::is('goaltracking') ?'active' :'' }}" href="{{ route('goaltracking.index') }}">{{ __('Goal Tracking') }}</a></li>
+                                    @endif
+                                </ul>
+                            </li>
+                        @endif
+                        @if(\Auth::user()->can('Manage Training') ||\Auth::user()->can('Manage Trainer')  )
+                            <li class="submenu">
+                                <a href="javascript:void(0);" class="subdrop {{ Request::is('training') || Request::is('trainer')  ? 'active' : '' }}">
+                                    <i class="ti ti-activity"></i><span class="submenu-title">{{ __('Training') }}</span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <ul style="display: none;">
+                                    @if(\Auth::user()->can('Manage Training'))
+                                        <li><a class="{{ Request::is('training') ?'active' :'' }}" href="{{ route('training.index') }}">{{ __('Training') }}</a></li>
+                                    @endif
+                                    @if(\Auth::user()->can('Manage Trainer'))
+
+                                        <li><a class="{{ Request::is('trainer') ?'active' :'' }}" href="{{ route('trainer.index') }}">{{ __('Trainer') }}</a></li>
+                                    @endif
+                                </ul>
+                            </li>
+                        @endif
+
+                        @if(\Auth::user()->can('Manage Job Category') ||\Auth::user()->can('Manage Job')  )
+                            <li class="submenu">
+                                <a href="javascript:void(0);" class="subdrop {{ Request::is('job')  || Request::is('interview-schedule') || Request::is('custom-question') || Request::is('job-onboard') || Request::is('job.application.candidate')  ? 'active' : '' }}">
+                                    <i class="ti ti-shopping-bag"></i><span class="submenu-title">{{ __('Recruitment') }}</span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <ul style="display: none;">
+                                    @if(\Auth::user()->can('Manage Job'))
+                                        <li><a class="{{ Request::is('job') ?'active' :'' }}" href="{{ route('job.index') }}">{{ __('Job') }}</a></li>
+                                    @endif
+                                    <li><a class="{{ Request::is('job-application/candidate') ?'active' :'' }}" href="{{ route('job.application.candidate') }}">{{ __('Job Application') }}</a></li>
+                                    <li><a class="{{ Request::is('job-onboard') ?'active' :'' }}" href="{{ route('job.on.board') }}">{{ __('Job On Board') }}</a></li>
+                                    <li><a class="{{ Request::is('custom-question') ?'active' :'' }}" href="{{ route('custom-question.index') }}">{{ __('Custom Question') }}</a></li>
+                                    <li><a class="{{ Request::is('interview-schedule') ?'active' :'' }}" href="{{ route('interview-schedule.index') }}">{{ __('Interview Schedule') }}</a></li>
+                                </ul>
+                            </li>
+                        @endif
+                        @if(\Auth::user()->can('Manage Ticket'))
+                            <li class="{{ Request::is('ticket')  ? 'active' : '' }}">
+                                <a href="{{ route('ticket.index') }}">
+                                    <i class="ti ti-file-description"></i><span>{{ __('ticket') }}</span>
+                                </a>
+                            </li>
+                        @endif
+                        @if(\Auth::user()->can('Manage Event'))
+                            <li class="{{ Request::is('event')  ? 'active' : '' }}">
+                                <a href="{{ route('event.index') }}">
+                                    <i class="ti ti-calendar"></i><span>{{ __('event') }}</span>
+                                </a>
+                            </li>
+                        @endif
+                        @if(\Auth::user()->can('Manage Meeting'))
+                            <li class="{{ Request::is('meeting')  ? 'active' : '' }}">
+                                <a href="{{ route('meeting.index') }}">
+                                    <i class="ti ti-clock"></i><span>{{ __('meeting') }}</span>
                                 </a>
                             </li>
                         @endif
 
-                        @if(\Auth::user()->can('Manage Employee'))
-                            <li class="{{ Request::is('document-type')  ? 'active' : '' }}">
-                                <a href="{{ route('document-type.index') }}">
-                                    <i class="ti ti-file-description"></i><span>{{ __('Documents Types') }}</span>
+                        <li class="{{ Request::is('zoom-meeting')  ? 'active' : '' }}">
+                            <a href="{{ route('zoom-meeting.index') }}">
+                                <i class="ti ti-video"></i><span>{{ __('zoom-meeting') }}</span>
+                            </a>
+                        </li>
+                        @if(\Auth::user()->can('Manage Assets'))
+                            <li class="{{ Request::is('account-assets')  ? 'active' : '' }}">
+                                <a href="{{ route('account-assets.index') }}">
+                                    <i class="ti ti-calculator"></i><span>{{ __('account-assets') }}</span>
                                 </a>
                             </li>
                         @endif
@@ -220,128 +345,11 @@
                                 </a>
                             </li>
                         @endif
-                        @if(\Auth::user()->can('Manage Set Salary'))
-                        <li class="submenu">
-                            <a href="javascript:void(0);" class="subdrop {{ Request::is('salary_setting') || Request::is('setsalary') ? 'active' : '' }}">
-                                <i class="ti ti-file-description"></i><span class="submenu-title">{{ __('Payroll') }}</span>
-                                <span class="menu-arrow"></span>
-                            </a>
-                            <ul style="display: none;">
-                                <li><a href="{{ route('salary_setting.index') }}"  class="{{ Request::is('salary_setting') ?'active' :'' }}">{{ __('Salary Data Settings') }}</a></li>
-                                <li><a href="{{ route('setsalary.index') }}"  class="{{ Request::is('setsalary') ?'active' :'' }}">{{ __('Determine Salary') }}</a></li>
-                            </ul>
-                        </li>
-                        @endif
-                        @if(\Auth::user()->can('Manage Indicator') || \Auth::user()->can('Manage Appraisal') || \Auth::user()->can('Manage Goal Tracking') )
-                        <li class="submenu">
-                            <a href="javascript:void(0);" class="subdrop {{ Request::is('indicator') || Request::is('goaltracking') || Request::is('appraisal') ? 'active' : '' }}">
-                                <i class="ti ti-chart-line"></i><span class="submenu-title">{{ __('Performance') }}</span>
-                                <span class="menu-arrow"></span>
-                            </a>
-                        <ul style="display: none;">
 
-                        @if(\Auth::user()->can('Manage Indicator'))
-                        <li><a class="{{ Request::is('indicator') ?'active' :'' }}" href="{{ route('indicator.index') }}">{{ __('indicators') }}</a></li>
-                            @endif
-                        @if(\Auth::user()->can('Manage Appraisal'))
-                        <li><a class="{{ Request::is('appraisal') ?'active' :'' }}" href="{{ route('appraisal.index') }}">{{ __('Appraisals') }}</a></li>
-                            @endif
-                        @if(\Auth::user()->can('Manage Goal Tracking'))
-                        <li><a class="{{ Request::is('goaltracking') ?'active' :'' }}" href="{{ route('goaltracking.index') }}">{{ __('Goal Tracking') }}</a></li>
-                            @endif
-                        </ul>
-                        </li>
-                        @endif
-                        @if(\Auth::user()->can('Manage Attendance'))
-                        <li class="submenu">
-                            <a href="javascript:void(0);" class="subdrop {{ Request::is('employee_requests') || Request::is('attendanceemployee') || Request::is('attendanceemployee/bulkattendance') ? 'active' : '' }}">
-                                <i class="ti ti-clock"></i><span class="submenu-title">{{ __('Time Statement') }}</span>
-                                <span class="menu-arrow"></span>
-                            </a>
-                            <ul style="display: none;">
-                                <li><a class="{{ Request::is('employee_requests') ?'active' :'' }}" href="{{ route('employee_requests.index') }}">{{ __('Employee Request Management') }}</a></li>
-                                <li class="submenu">
-                                    <a href="javascript:void(0);" class="subdrop {{ Request::is('attendanceemployee') || Request::is('attendanceemployee/bulkattendance')  ?'active' :'' }}">
-                                        <i class="ti ti-box"></i><span class="submenu-title">{{ __('Attendance') }}</span>
-                                        <span class="menu-arrow"></span>
-                                    </a>
-                                    <ul style="display: none;">
-                                        <li><a class="{{ Request::is('attendanceemployee') ?'active' :'' }}" href="{{ route('attendanceemployee.index') }}">{{ __('Attendance History') }}</a></li>
-                                        <li><a class="{{ Request::is('attendanceemployee/bulkattendance') ?'active' :'' }}" href="{{ route('attendanceemployee.bulkattendance') }}">{{ __('Collective attendance') }}</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        @endif
-                        @if(\Auth::user()->can('Manage Training') ||\Auth::user()->can('Manage Trainer')  )
-                        <li class="submenu">
-                            <a href="javascript:void(0);" class="subdrop {{ Request::is('training') || Request::is('trainer')  ? 'active' : '' }}">
-                                <i class="ti ti-activity"></i><span class="submenu-title">{{ __('Training') }}</span>
-                                <span class="menu-arrow"></span>
-                            </a>
-                            <ul style="display: none;">
-                                @if(\Auth::user()->can('Manage Training'))
-                                <li><a class="{{ Request::is('training') ?'active' :'' }}" href="{{ route('training.index') }}">{{ __('Training') }}</a></li>
-                                @endif
-                                @if(\Auth::user()->can('Manage Trainer'))
 
-                                <li><a class="{{ Request::is('trainer') ?'active' :'' }}" href="{{ route('trainer.index') }}">{{ __('Trainer') }}</a></li>
-                                    @endif
-                            </ul>
-                        </li>
-                        @endif
-                        @if(\Auth::user()->can('Manage Job Category') ||\Auth::user()->can('Manage Job')  )
-                        <li class="submenu">
-                            <a href="javascript:void(0);" class="subdrop {{ Request::is('job')  || Request::is('interview-schedule') || Request::is('custom-question') || Request::is('job-onboard') || Request::is('job.application.candidate')  ? 'active' : '' }}">
-                                <i class="ti ti-shopping-bag"></i><span class="submenu-title">{{ __('Recruitment') }}</span>
-                                <span class="menu-arrow"></span>
-                            </a>
-                            <ul style="display: none;">
-                                @if(\Auth::user()->can('Manage Job'))
-                                <li><a class="{{ Request::is('job') ?'active' :'' }}" href="{{ route('job.index') }}">{{ __('Job') }}</a></li>
-                                @endif
-                                <li><a class="{{ Request::is('job-application/candidate') ?'active' :'' }}" href="{{ route('job.application.candidate') }}">{{ __('Job Application') }}</a></li>
-                                <li><a class="{{ Request::is('job-onboard') ?'active' :'' }}" href="{{ route('job.on.board') }}">{{ __('Job On Board') }}</a></li>
-                                <li><a class="{{ Request::is('custom-question') ?'active' :'' }}" href="{{ route('custom-question.index') }}">{{ __('Custom Question') }}</a></li>
-                                <li><a class="{{ Request::is('interview-schedule') ?'active' :'' }}" href="{{ route('interview-schedule.index') }}">{{ __('Interview Schedule') }}</a></li>
-                            </ul>
-                        </li>
-                        @endif
 
-                        @if(\Auth::user()->can('Manage Ticket'))
-                        <li class="{{ Request::is('ticket')  ? 'active' : '' }}">
-                            <a href="{{ route('ticket.index') }}">
-                                <i class="ti ti-file-description"></i><span>{{ __('ticket') }}</span>
-                            </a>
-                        </li>
-                        @endif
-                        @if(\Auth::user()->can('Manage Event'))
-                        <li class="{{ Request::is('event')  ? 'active' : '' }}">
-                            <a href="{{ route('event.index') }}">
-                                <i class="ti ti-calendar"></i><span>{{ __('event') }}</span>
-                            </a>
-                        </li>
-                        @endif
-                        @if(\Auth::user()->can('Manage Meeting'))
-                        <li class="{{ Request::is('meeting')  ? 'active' : '' }}">
-                            <a href="{{ route('meeting.index') }}">
-                                <i class="ti ti-clock"></i><span>{{ __('meeting') }}</span>
-                            </a>
-                        </li>
-                        @endif
 
-                        <li class="{{ Request::is('zoom-meeting')  ? 'active' : '' }}">
-                            <a href="{{ route('zoom-meeting.index') }}">
-                                <i class="ti ti-video"></i><span>{{ __('zoom-meeting') }}</span>
-                            </a>
-                        </li>
-                        @if(\Auth::user()->can('Manage Assets'))
-                        <li class="{{ Request::is('account-assets')  ? 'active' : '' }}">
-                            <a href="{{ route('account-assets.index') }}">
-                                <i class="ti ti-calculator"></i><span>{{ __('account-assets') }}</span>
-                            </a>
-                        </li>
-                        @endif
+
 {{--                        @if(\Auth::user()->can('Manage Document'))--}}
 {{--                        <li class="{{ Request::is('document-upload')  ? 'active' : '' }}">--}}
 {{--                            <a href="{{ route('document-upload.index') }}">--}}

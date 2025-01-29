@@ -11,7 +11,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title> {{__('Salary Receipt')}} </title>        
+        <title> {{__('Salary Receipt')}} </title>
     </head>
 
     <style>
@@ -119,7 +119,7 @@
         }
 
         .scissor {
-     
+
             margin: 16px 0px;
         }
 
@@ -174,7 +174,7 @@
               }).join('');
               return t=="number"?~~s:s;
             }
-            
+
             function pounds(y) {
                 y = parseInt(y);
                 y = replaceNumerals(y);
@@ -227,7 +227,7 @@
                 } while(false);
                 return str.reverse().join(' ');
             }
-            
+
             function pounds_en(y) {
                 y = parseInt(y);
                 y = replaceNumerals_en(y);
@@ -287,7 +287,7 @@
                 var dg = ['صفر', 'واحد', 'اثنين', 'ثلاثة', 'أربعة', 'خمسة', 'ستة', 'سبعة', 'ثمانية', 'تسعة'];
                 var tn = ['عشرة', 'أحد عشر', 'اثني عشر', 'ثلاثة عشر', 'أربعة عشر', 'خمسة عشر', 'ستة عشر', 'سبعة عشر', 'ثمانية عشر', 'تسعة عشر'];
                 var tw = ['عشرون', 'ثلاثون', 'الأربعين', 'خمسين', 'ستين', 'السبعين', 'ثمانين', 'تسعين'];
-                
+
                     s = s.toString();
                     s = s.replace(/[\, ]/g,'');
                     if (s != parseFloat(s)) return 'ليس رقم';
@@ -320,7 +320,7 @@
                             sk=0;
                         }
                     }
-                
+
                     if (x != s.length) {
                         var y = s.length;
                         str += 'point ';
@@ -328,32 +328,32 @@
                             str += dg[n[i]] +' ';
                     }
                     return str.replace(/\s+/g,' ');
-                
-                
-                
+
+
+
             }
-    
+
             function numberToEnglish(n, custom_join_character) {
 
                 var string = n.toString(),
                     units, tens, scales, start, end, chunks, chunksLen, chunk, ints, i, word, words;
-                
+
                 var and = custom_join_character || 'and';
-                
+
                 /* Is number zero? */
                 if (parseInt(string) === 0) {
                     return 'zero';
                 }
-                
+
                 /* Array of units as words */
                 units = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
-                
+
                 /* Array of tens as words */
                 tens = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
-                
+
                 /* Array of scales as words */
                 scales = ['', 'thousand', 'million', 'billion', 'trillion', 'quadrillion', 'quintillion', 'sextillion', 'septillion', 'octillion', 'nonillion', 'decillion', 'undecillion', 'duodecillion', 'tredecillion', 'quatttuor-decillion', 'quindecillion', 'sexdecillion', 'septen-decillion', 'octodecillion', 'novemdecillion', 'vigintillion', 'centillion'];
-                
+
                 /* Split user arguemnt into 3 digit chunks from right to left */
                 start = string.length;
                 chunks = [];
@@ -361,63 +361,63 @@
                     end = start;
                     chunks.push(string.slice((start = Math.max(0, start - 3)), end));
                 }
-                
+
                 /* Check if function has enough scale words to be able to stringify the user argument */
                 chunksLen = chunks.length;
                 if (chunksLen > scales.length) {
                     return '';
                 }
-                
+
                 /* Stringify each integer in each chunk */
                 words = [];
                 for (i = 0; i < chunksLen; i++) {
-                
+
                     chunk = parseInt(chunks[i]);
-                
+
                     if (chunk) {
-                
+
                         /* Split chunk into array of individual integers */
                         ints = chunks[i].split('').reverse().map(parseFloat);
-                
+
                         /* If tens integer is 1, i.e. 10, then add 10 to units integer */
                         if (ints[1] === 1) {
                             ints[0] += 10;
                         }
-                
+
                         /* Add scale word if chunk is not zero and array item exists */
                         if ((word = scales[i])) {
                             words.push(word);
                         }
-                
+
                         /* Add unit word if array item exists */
                         if ((word = units[ints[0]])) {
                             words.push(word);
                         }
-                
+
                         /* Add tens word if array item exists */
                         if ((word = tens[ints[1]])) {
                             words.push(word);
                         }
-                
+
                         /* Add 'and' string after units or tens integer if: */
                         if (ints[0] || ints[1]) {
-                
+
                             /* Chunk has a hundreds integer or chunk is the first of multiple chunks */
                             if (ints[2] || !i && chunksLen) {
                                 words.push(and);
                             }
-                
+
                         }
-                
+
                         /* Add hundreds word if array item exists */
                         if ((word = units[ints[2]])) {
                             words.push(word + ' hundred');
                         }
-                
+
                     }
-                
+
                 }
-                
+
                 return words.reverse().join(' ');
 
             }
@@ -452,7 +452,7 @@
 
     </script>
 
-    <body>   
+    <body>
         <div @if(env('SITE_RTL') == 'on' || app()->getLocale() == "ar") class="ar" @endif id="printableArea">
             @foreach($payslip as $employee)
             @php
@@ -517,10 +517,10 @@
                                 </tr>
                             @endforeach
 
-                            @if(collect(json_decode($employee->overtime))->sum('rate') != 0)
+                            @if(collect(json_decode($employee->overtime))->sum('amount') != 0)
                                 <tr>
                                     <td>وقت إضافى</td>
-                                    <td>{{\Auth::user()->priceFormat(collect(json_decode($employee->overtime))->sum('rate') )}}</td>
+                                    <td>{{\Auth::user()->priceFormat(collect(json_decode($employee->overtime))->sum('amount') )}}</td>
                                     <td></td>
                                 </tr>
                             @endif
@@ -540,7 +540,7 @@
                                     <td></td>
                                 </tr>
                             @endif
-                            
+
                             @if($employee->insurance($employee->id,'employee') != 0)
                                 <tr>
                                     <td>تأمينات الموظف الإجتماعية</td>
@@ -549,24 +549,18 @@
                                 </tr>
                             @endif
 
-                            @if($employee->medical_insurance($employee->id,'employee') != 0)
-                                <tr>
-                                    <td>تأمينات الموظف الطبية</td>
-                                    <td></td>
-                                    <td>{{\Auth::user()->priceFormat( $employee->medical_insurance($employee->id,'employee') ) }}</td>
-                                </tr>
-                            @endif
 
 
-                            @if((collect(json_decode($employee->absence))->where('type','A')->sum('number_of_days') * $employee->getEmployeeSalaryPerDay($employee->id)) != 0)
+
+                            @if((collect(json_decode($employee->absence))->where('type','A')->sum('discount_amount')))
                                 <tr>
                                     <td>غياب بإذن</td>
                                     <td></td>
-                                    <td>{{\Auth::user()->priceFormat( (collect(json_decode($employee->absence))->where('type','A')->sum('number_of_days') * $employee->getEmployeeSalaryPerDay($employee->id)) ) }}</td>
+                                    <td>{{\Auth::user()->priceFormat( (collect(json_decode($employee->absence))->where('type','A')->sum('discount_amount')  ) ) }}</td>
                                 </tr>
                             @endif
 
-                            @if(( collect(json_decode($employee->absence))->where('type','X')->sum('number_of_days') * ($employee->getEmployeeSalaryPerDay($employee->id) * 2 ) ) != 0)
+                            @if(( collect(json_decode($employee->absence))->where('type','X')->sum('discount_amount') ))
                                 <tr>
                                     <td>غياب بدون إذن</td>
                                     <td></td>
@@ -574,11 +568,11 @@
                                 </tr>
                             @endif
 
-                            @if((collect(json_decode($employee->absence))->where('type','S')->sum('number_of_days') * $employee->getEmployeeSalaryPerDay($employee->id) * 0.25))
+                            @if((collect(json_decode($employee->absence))->where('type','S')->sum('discount_amount') ))
                                 <tr>
                                     <td>مرضى</td>
                                     <td></td>
-                                    <td>{{\Auth::user()->priceFormat( (collect(json_decode($employee->absence))->where('type','S')->sum('number_of_days') * $employee->getEmployeeSalaryPerDay($employee->id) * 0.25) ) }}</td>
+                                    <td>{{\Auth::user()->priceFormat( (collect(json_decode($employee->absence))->where('type','S')->sum('discount_amount')  )) }}</td>
                                 </tr>
                             @endif
 
@@ -594,15 +588,29 @@
                                 <tr>
                                     <td>إستقطاعات أخرى</td>
                                     <td></td>
-                                    <td>{{\Auth::user()->priceFormat( collect(json_decode($employee->saturation_deduction))->sum('amount') ) }}</td>
+                                    <td>{{ \Auth::user()->priceFormat( collect(json_decode($employee->saturation_deduction))->sum('amount') ) }}</td>
                                 </tr>
                             @endif
 
                             <tfoot>
                                 <tr>
-                                    <td><strong> {{__('Total')}} </strong> - [{{$employee->getNetSalary($employee)}}]</td>
-                                    <td class="text-green">{{ \Auth::user()->priceFormat($employee->getTotalDue($employee) ) }}</td>
-                                    <td class="text-danger">{{ \Auth::user()->priceFormat($employee->getTotalDeduction($employee)) }}</td>
+                                    <td><strong> {{__('Total')}} </strong> : {{number_format($employee->net_payble,2)??''}}</td>
+                                    <td class="text-green"> {{ number_format(
+                                                                  collect(json_decode($employee->commission))->sum('amount')
+                                                                + collect(json_decode($employee->overtime))->sum('amount')
+                                                                + collect(json_decode($employee->other_payment))->sum('amount')
+                                                                + collect(json_decode($employee->allowance))->sum('amount')
+                                                                ,2)}}</td>
+                                    <td class="text-danger">
+                                                                 {{ number_format(
+                                                                    $employee->insurance($employee->id,'employee')
+                                                                + collect(json_decode($employee->absence))->where('type','A')->sum('discount_amount')
+                                                                + collect(json_decode($employee->absence))->where('type','X')->sum('discount_amount')
+                                                                + collect(json_decode($employee->absence))->where('type','S')->sum('discount_amount')
+                                                                + collect(json_decode($employee->loan))->sum('amount')
+                                                                + collect(json_decode($employee->saturation_deduction))->sum('amount')
+                                                                ,2)}}
+                                                                 </td>
                                 </tr>
                             </tfoot>
                         </table>
@@ -612,15 +620,15 @@
                                 <span>
                                     @if(env('SITE_RTL') == 'on' || app()->getLocale() == "ar")
                                         @if( $employee->getNetSalary($employee) > 0)
-                                            <script> MoneyToWords( {{  $employee->getNetSalary($employee) }} ) </script>
+                                            <script> MoneyToWords( {{  $employee->net_payble }} ) </script>
                                         @else
-                                            - <script> MoneyToWords( {{  abs( $employee->getNetSalary($employee) ) }} ) </script>
-                                        @endif 
+                                            - <script> MoneyToWords( {{  abs( $employee->net_payble ) }} ) </script>
+                                        @endif
                                     @else
                                         @if( $employee->getNetSalary($employee) > 0)
-                                            <script> MoneyToWords( {{  $employee->getNetSalary($employee) }} ) </script>
+                                            <script> MoneyToWords( {{  $employee->net_payble }} ) </script>
                                         @else
-                                            - <script> MoneyToWords( {{  abs( $employee->getNetSalary($employee) ) }} ) </script>
+                                            - <script> MoneyToWords( {{  abs( $employee->net_payble ) }} ) </script>
                                         @endif
                                     @endif
                                 </span>
@@ -632,7 +640,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div id="scissors">
                         <div></div>
                     </div>
@@ -673,15 +681,15 @@
                             @foreach($allowances as $allowance)
                                 <tr>
                                     <td>{{$allowance['title']}}</td>
-                                    <td>{{\Auth::user()->priceFormat($allowance['amount'])}}</td>
+                                    <td>{{ number_format($allowance['amount'], 2) }}</td>
                                     <td></td>
                                 </tr>
                             @endforeach
 
-                            @if(collect(json_decode($employee->overtime))->sum('rate') != 0)
+                            @if(collect(json_decode($employee->overtime))->sum('amount') != 0)
                                 <tr>
                                     <td>وقت إضافى</td>
-                                    <td>{{\Auth::user()->priceFormat(collect(json_decode($employee->overtime))->sum('rate') )}}</td>
+                                    <td>{{ number_format(collect(json_decode($employee->overtime))->sum('amount'), 2) }}</td>
                                     <td></td>
                                 </tr>
                             @endif
@@ -689,7 +697,7 @@
                             @if(collect(json_decode($employee->commission))->sum('amount') != 0)
                                 <tr>
                                     <td>نسبة المبيعات</td>
-                                    <td>{{\Auth::user()->priceFormat( collect(json_decode($employee->commission))->sum('amount') )}}</td>
+                                    <td>{{ number_format(collect(json_decode($employee->commission))->sum('amount'), 2) }}</td>
                                     <td></td>
                                 </tr>
                             @endif
@@ -697,50 +705,40 @@
                             @if(collect(json_decode($employee->other_payment))->sum('amount') != 0)
                                 <tr>
                                     <td>مستحقات أخرى</td>
-                                    <td>{{\Auth::user()->priceFormat( collect(json_decode($employee->other_payment))->sum('amount') )}}</td>
+                                    <td>{{ number_format(collect(json_decode($employee->other_payment))->sum('amount'), 2) }}</td>
                                     <td></td>
                                 </tr>
                             @endif
-                            
 
                             @if($employee->insurance($employee->id,'employee') != 0)
                                 <tr>
                                     <td>تأمينات الموظف الإجتماعية</td>
                                     <td></td>
-                                    <td>{{\Auth::user()->priceFormat( $employee->insurance($employee->id,'employee') ) }}</td>
+                                    <td>{{ number_format($employee->insurance($employee->id,'employee'), 2) }}</td>
                                 </tr>
                             @endif
 
-                            @if($employee->medical_insurance($employee->id,'employee') != 0)
-                                <tr>
-                                    <td>تأمينات الموظف الطبية</td>
-                                    <td></td>
-                                    <td>{{\Auth::user()->priceFormat( $employee->medical_insurance($employee->id,'employee') ) }}</td>
-                                </tr>
-                            @endif
-
-
-                            @if((collect(json_decode($employee->absence))->where('type','A')->sum('number_of_days') * $employee->getEmployeeSalaryPerDay($employee->id)) != 0)
+                            @if((collect(json_decode($employee->absence))->where('type','A')->sum('discount_amount')))
                                 <tr>
                                     <td>غياب بإذن</td>
                                     <td></td>
-                                    <td>{{\Auth::user()->priceFormat( (collect(json_decode($employee->absence))->where('type','A')->sum('number_of_days') * $employee->getEmployeeSalaryPerDay($employee->id)) ) }}</td>
+                                    <td>{{ number_format(collect(json_decode($employee->absence))->where('type','A')->sum('discount_amount'), 2) }}</td>
                                 </tr>
                             @endif
 
-                            @if(( collect(json_decode($employee->absence))->where('type','X')->sum('number_of_days') * ($employee->getEmployeeSalaryPerDay($employee->id) * 2 ) ) != 0)
+                            @if(( collect(json_decode($employee->absence))->where('type','X')->sum('discount_amount') ))
                                 <tr>
                                     <td>غياب بدون إذن</td>
                                     <td></td>
-                                    <td>{{\Auth::user()->priceFormat( ( collect(json_decode($employee->absence))->where('type','X')->sum('number_of_days') * ($employee->getEmployeeSalaryPerDay($employee->id) * 2 ) )  ) }}</td>
+                                    <td>{{ number_format(( collect(json_decode($employee->absence))->where('type','X')->sum('number_of_days') * ($employee->getEmployeeSalaryPerDay($employee->id) * 2 ) ), 2) }}</td>
                                 </tr>
                             @endif
 
-                            @if((collect(json_decode($employee->absence))->where('type','S')->sum('number_of_days') * $employee->getEmployeeSalaryPerDay($employee->id) * 0.25))
+                            @if((collect(json_decode($employee->absence))->where('type','S')->sum('discount_amount') ))
                                 <tr>
                                     <td>مرضى</td>
                                     <td></td>
-                                    <td>{{\Auth::user()->priceFormat( (collect(json_decode($employee->absence))->where('type','S')->sum('number_of_days') * $employee->getEmployeeSalaryPerDay($employee->id) * 0.25) ) }}</td>
+                                    <td>{{ number_format(collect(json_decode($employee->absence))->where('type','S')->sum('discount_amount'), 2) }}</td>
                                 </tr>
                             @endif
 
@@ -748,7 +746,7 @@
                                 <tr>
                                     <td>سلف مقدمة</td>
                                     <td></td>
-                                    <td>{{\Auth::user()->priceFormat( collect(json_decode($employee->loan))->sum('amount') ) }}</td>
+                                    <td>{{ number_format(collect(json_decode($employee->loan))->sum('amount'), 2) }}</td>
                                 </tr>
                             @endif
 
@@ -756,16 +754,34 @@
                                 <tr>
                                     <td>إستقطاعات أخرى</td>
                                     <td></td>
-                                    <td>{{\Auth::user()->priceFormat( collect(json_decode($employee->saturation_deduction))->sum('amount') ) }}</td>
+                                    <td>{{ number_format(collect(json_decode($employee->saturation_deduction))->sum('amount'), 2) }}</td>
                                 </tr>
                             @endif
 
                             <tfoot>
-                                <tr>
-                                    <td><strong> {{__('Total')}} </strong> - [{{$employee->getNetSalary($employee)}}]</td>
-                                    <td class="text-green">{{ \Auth::user()->priceFormat($employee->getTotalDue($employee) ) }}</td>
-                                    <td class="text-danger">{{ \Auth::user()->priceFormat($employee->getTotalDeduction($employee)) }}</td>
-                                </tr>
+                            <tr>
+                                <td><strong>{{__('Total')}}</strong> : {{ number_format($employee->net_payble, 2) ?? '' }}</td>
+                                <td class="text-green">
+                                    {{ number_format(
+                                        collect(json_decode($employee->commission))->sum('amount')
+                                        + collect(json_decode($employee->overtime))->sum('amount')
+                                        + collect(json_decode($employee->other_payment))->sum('amount')
+                                        + collect(json_decode($employee->allowance))->sum('amount'),
+                                        2
+                                    ) }}
+                                </td>
+                                <td class="text-danger">
+                                    {{ number_format(
+                                        $employee->insurance($employee->id,'employee')
+                                        + collect(json_decode($employee->absence))->where('type','A')->sum('discount_amount')
+                                        + (collect(json_decode($employee->absence))->where('type','X')->sum('number_of_days') * ($employee->getEmployeeSalaryPerDay($employee->id) * 2))
+                                        + collect(json_decode($employee->absence))->where('type','S')->sum('discount_amount')
+                                        + collect(json_decode($employee->loan))->sum('amount')
+                                        + collect(json_decode($employee->saturation_deduction))->sum('amount'),
+                                        2
+                                    ) }}
+                                </td>
+                            </tr>
                             </tfoot>
                         </table>
 
@@ -774,15 +790,15 @@
                                 <span>
                                     @if(env('SITE_RTL') == 'on' || app()->getLocale() == "ar")
                                         @if( $employee->getNetSalary($employee) > 0)
-                                            <script> MoneyToWords( {{  $employee->getNetSalary($employee) }} ) </script>
+                                            <script> MoneyToWords( {{  $employee->net_payble }} ) </script>
                                         @else
-                                            - <script> MoneyToWords( {{  abs( $employee->getNetSalary($employee) ) }} ) </script>
-                                        @endif 
+                                            - <script> MoneyToWords( {{  abs( $employee->net_payble ) }} ) </script>
+                                        @endif
                                     @else
                                         @if( $employee->getNetSalary($employee) > 0)
-                                            <script> MoneyToWords( {{  $employee->getNetSalary($employee) }} ) </script>
+                                            <script> MoneyToWords( {{  $employee->net_payble }} ) </script>
                                         @else
-                                            - <script> MoneyToWords( {{  abs( $employee->getNetSalary($employee) ) }} ) </script>
+                                            - <script> MoneyToWords( {{  abs( $employee->net_payble ) }} ) </script>
                                         @endif
                                     @endif
                                 </span>
@@ -802,7 +818,7 @@
 
         <script type="text/javascript" src="{{ asset('js/html2pdf.bundle.min.js') }}"></script>
 
-        <script> 
+        <script>
             function saveAsPDF() {
                 var element = document.getElementById('printableArea');
                 var opt = {
