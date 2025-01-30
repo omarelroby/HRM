@@ -6,6 +6,7 @@ use App\Models\Allowance;
 use App\Models\AllowanceOption;
 use App\Models\Commission;
 use App\Models\DeductionOption;
+use App\Models\Department;
 use App\Models\Employee;
 use App\Models\AttendanceMovement;
 use App\Models\Loan;
@@ -19,6 +20,7 @@ use App\Models\SaturationDeduction;
 use App\Models\AttendanceEmployee;
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Facades\Auth;
 
 class SetSalaryController extends Controller
 {
@@ -26,13 +28,41 @@ class SetSalaryController extends Controller
     {
         if(\Auth::user()->can('Manage Set Salary'))
         {
-            $employees = Employee::where(
-                [
-                    'created_by' => \Auth::user()->creatorId(),
-                ]
-            )->get();
+            if(\Auth::user()->type == 'employee')
+            {
 
+                $department = Department::findOrFail(Auth::user()->employee->department_id);
+                if ($department) {
+                    // Check if the employee is a department manager
+                    if (\Auth::user()->employee->department_id == $department->id && \Auth::user()->employee->sub_dep_id == 0) {
+                        // Show all employees in the department
+                        $employeesIds = $department->employeess->pluck('id');
+                         $employees = Employee::whereIn('id', $employeesIds)->get();
+
+
+                    }
+                    // Check if the employee is a sub-department manager
+                    elseif (\Auth::user()->employee->section_id == 0) {
+                        // Show only employees in the sub-department
+                        $employeesIds = Employee::where('sub_dep_id', \Auth::user()->employee->sub_dep_id)->pluck('id');
+                         $employees = Employee::whereIn('id', $employeesIds)->get();
+                    }
+                    else{
+                         $employees = Employee::where('id',\Auth::user()->employee->id)->get();
+                    }
+                }
                 return view('dashboard.setsalary.index', compact( 'employees') );
+            }
+            else
+            {
+                $employees = Employee::where(
+                    [
+                        'created_by' => \Auth::user()->creatorId(),
+                    ]
+                )->get();
+                return view('dashboard.setsalary.index', compact( 'employees') );
+            }
+
             }
 
 
@@ -97,7 +127,7 @@ class SetSalaryController extends Controller
         {
             $total_sick_amount=0;
 
-            $currentEmployee      = Employee::findOrFail('user_id', '=', \Auth::user()->id)->first();
+            $currentEmployee      = Employee::where('user_id', '=', \Auth::user()->id)->first();
             $allowances           = Allowance::where('employee_id', $currentEmployee->id)->get();
             $commissions          = Commission::where('employee_id', $currentEmployee->id)->get();
             $loans                = Loan::where('employee_id', $currentEmployee->id)->get();
@@ -106,7 +136,7 @@ class SetSalaryController extends Controller
             $overtimes            = Overtime::where('employee_id', $currentEmployee->id)->get();
             $employee             = Employee::where('user_id', '=', \Auth::user()->id)->first();
             $absences             = Absence::where('employee_id', $currentEmployee->id)->get();
-            $setting=Salary_setting::where('created_by',auth()->user()->id)->first();
+            $setting=Salary_setting::where('created_by',auth()->user()->created_by)->first();
             $total_sick=Absence::where('employee_id',$id)->where('type','S')->get()->sum('number_of_days');
             $total_sick_amount=Absence::where('employee_id',$id)->where('type','S')->get()->sum('discount_amount');
             $abs_with_permission=Absence::where('employee_id',$id)->where('type','A')->get()->sum('number_of_days');

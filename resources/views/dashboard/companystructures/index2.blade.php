@@ -42,6 +42,80 @@
         }
 
     </style>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+        }
+
+        .org-chart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            margin: 20px;
+        }
+
+        .level {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .node {
+            text-align: center;
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            max-width: 150px;
+        }
+
+        .node img {
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+        }
+
+        .node h3 {
+            margin: 10px 0 5px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .node p {
+            margin: 0;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .line {
+            width: 2px;
+            background: #ccc;
+            position: relative;
+        }
+
+        .line::before,
+        .line::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 2px;
+            background: #ccc;
+        }
+
+        .line::before {
+            top: 0;
+            left: -20px;
+        }
+
+        .line::after {
+            top: 0;
+            right: -20px;
+        }
+    </style>
+
 
     <div class="all-button-box row d-flex justify-content-end my-4">
         @can('Create Branch')

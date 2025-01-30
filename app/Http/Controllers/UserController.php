@@ -31,11 +31,16 @@ class UserController extends Controller
                 $roles = Role::where('created_by', '=', $user->creatorId())->where('name', '!=', 'employee')->get();
                 $users = User::where('created_by', '=', $user->creatorId())->where('user_status',1)->where('type', '=', 'company')->get();
             }
-            else
+
+            elseif(\Auth::user()->type == 'company')
             {
                 $roles = Role::where('created_by', '=', $user->creatorId())->where('name', '!=', 'employee')->get();
                 $users = User::where('created_by', '=', $user->creatorId())->where('user_status',1)->get();
 
+            }
+            else
+            {
+                return redirect()->back()->with('error', __('Permission denied.'));
             }
 
             return view('dashboard.user.index', compact('users','roles'));

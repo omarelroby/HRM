@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Allowance;
 use App\Models\AllowanceOption;
 use App\Models\Commission;
+use App\Models\Department;
 use App\Models\Employee;
 use App\Models\Loan;
 use App\Models\AttendanceMovement;
@@ -30,10 +31,76 @@ class PaySlipController extends Controller
 {
     public function index()
     {
-        // $response = Http::get('https://ifconfig.co/ip');
-        // $ip = trim($response->body());
 
-        if (\Auth::user()->can('Manage Pay Slip') || \Auth::user()->type == 'employee') {
+
+        if ( \Auth::user()->type == 'employee') {
+            $department = Department::findOrFail(Auth::user()->employee->department_id);
+            if ($department) {
+
+                if (\Auth::user()->employee->department_id == $department->id && \Auth::user()->employee->sub_dep_id == 0) {
+
+                    $employeesIds = $department->employeess->pluck('id');
+                    $employees = Employee::whereIn('id', $employeesIds)->get();
+
+
+                }
+                // Check if the employee is a sub-department manager
+                elseif (\Auth::user()->employee->section_id == 0) {
+                    // Show only employees in the sub-department
+                    $employeesIds = Employee::where('sub_dep_id', \Auth::user()->employee->sub_dep_id)->pluck('id');
+                    $employees = Employee::whereIn('id', $employeesIds)->get();
+
+                }
+                else{
+                    $employees = Employee::where('id',\Auth::user()->employee->id)->get();
+                }
+            }
+
+            $months = [
+                '01' => __('JAN'),
+                '02' => __('FEB'),
+                '03' => __('MAR'),
+                '04' => __('APR'),
+                '05' => __('MAY'),
+                '06' => __('JUN'),
+                '07' => __('JUL'),
+                '08' => __('AUG'),
+                '09' => __('SEP'),
+                '10' => __('OCT'),
+                '11' => __('NOV'),
+                '12' => __('DEC'),
+            ];
+
+            $month = [
+                date('m') => strtoupper(now()->monthName),
+            ];
+
+
+
+            $years = [
+                '2020' => '2020',
+                '2021' => '2021',
+                '2022' => '2022',
+                '2023' => '2023',
+                '2024' => '2024',
+                '2025' => '2025',
+                '2026' => '2026',
+                '2027' => '2027',
+                '2028' => '2028',
+                '2029' => '2029',
+                '2030' => '2030',
+            ];
+
+            $year = [
+                date('Y') =>  date('Y'),
+            ];
+
+            return view('dashboard.payslip.index', compact('employees', 'month', 'year', 'months', 'years'));
+
+        }
+        elseif(\Auth::user()->type == 'super admin')
+
+        {
             $employees = Employee::where(
                 [
                     'created_by' => \Auth::user()->creatorId(),
@@ -81,8 +148,65 @@ class PaySlipController extends Controller
                 date('Y') =>  date('Y'),
             ];
 
-             return view('dashboard.payslip.index', compact('employees', 'month', 'year', 'months', 'years'));
-        } else {
+            return view('dashboard.payslip.index', compact('employees', 'month', 'year', 'months', 'years'));
+
+        }
+        elseif(\Auth::user()->type == 'company')
+        {
+            if(\Auth::user()->can('Manage Pay Slip'))
+            {
+                $employees = Employee::where(
+                    [
+                        'created_by' => \Auth::user()->creatorId(),
+                    ]
+                )->get();
+
+                // return date('m');
+
+                $months = [
+                    '01' => __('JAN'),
+                    '02' => __('FEB'),
+                    '03' => __('MAR'),
+                    '04' => __('APR'),
+                    '05' => __('MAY'),
+                    '06' => __('JUN'),
+                    '07' => __('JUL'),
+                    '08' => __('AUG'),
+                    '09' => __('SEP'),
+                    '10' => __('OCT'),
+                    '11' => __('NOV'),
+                    '12' => __('DEC'),
+                ];
+
+                $month = [
+                    date('m') => strtoupper(now()->monthName),
+                ];
+
+
+
+                $years = [
+                    '2020' => '2020',
+                    '2021' => '2021',
+                    '2022' => '2022',
+                    '2023' => '2023',
+                    '2024' => '2024',
+                    '2025' => '2025',
+                    '2026' => '2026',
+                    '2027' => '2027',
+                    '2028' => '2028',
+                    '2029' => '2029',
+                    '2030' => '2030',
+                ];
+
+                $year = [
+                    date('Y') =>  date('Y'),
+                ];
+
+                return view('dashboard.payslip.index', compact('employees', 'month', 'year', 'months', 'years'));
+
+            }
+        }
+        else {
             return redirect()->back()->with('error', __('Permission denied.'));
         }
     }
@@ -270,7 +394,7 @@ class PaySlipController extends Controller
 //                        $tmp[] = $employee->payroll_type;
                         $tmp[] = $employee->pay_slip_id;
                         $tmp[] = !empty($employee->basic_salary) ? \Auth::user()->priceFormat($employee->basic_salary) : '-';
-                        $tmp[] =  \Auth::user()->priceFormat($employee->getNetSalary($employee));
+                        $tmp[] =  !empty($employee->net_salary) ? \Auth::user()->priceFormat($employee->net_salary) : '-';
                         if ($employee->status == 1) {
                             $tmp[] = 'paid';
                         } else {

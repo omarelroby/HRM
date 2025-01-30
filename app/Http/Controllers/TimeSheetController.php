@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\TimesheetExport;
 use App\Imports\TimesheetImport;
+use App\Models\Department;
 use App\Models\Employee;
 use App\Models\TimeSheet;
 use Illuminate\Http\Request;
@@ -17,9 +18,40 @@ class TimeSheetController extends Controller
         if(\Auth::user()->can('Manage TimeSheet'))
         {
             $employeesList = [];
-            if(\Auth::user()->type == 'employee')
-            {
-                $timeSheets = TimeSheet::where('employee_id', \Auth::user()->id)->get();
+            $user= \Auth::user()->id;
+            if (\Auth::user()->type == 'employee') {
+                $department = Department::findOrFail(Auth::user()->employee->department_id);
+
+                if ($department) {
+                    $employee = \Auth::user()->employee;
+
+                    // Department Manager (no sub-department)
+                    if ($employee->sub_dep_id == 0) {
+                        $employeesIds = $department->employeess->pluck('id');
+                        $timeSheets = TimeSheet::whereIn('employee_id', $employeesIds)
+                            ->whereHas('employees', function ($query) use ($employeesIds) {
+                                $query->whereIn('id', $employeesIds);
+                            })->get();
+                        $employees = Employee::whereIn('id', $employeesIds)->get()->pluck('name', 'id');
+                    }
+                    // Sub-Department Manager (no section)
+                    elseif ($employee->section_id == 0) {
+                        $employeesIds = Employee::where('sub_dep_id', $employee->sub_dep_id)->pluck('id');
+                        $timeSheets = TimeSheet::whereIn('employee_id', $employeesIds)
+                            ->whereHas('employees', function ($query) use ($employeesIds) {
+                                $query->whereIn('id', $employeesIds);
+                            })->get();
+                        $employees = Employee::whereIn('id', $employeesIds)->get()->pluck('name', 'id');
+                    }
+                    // Regular Employee
+                    else {
+                        $timeSheets = TimeSheet::where('employee_id', $employee->id)
+                            ->whereHas('employees', function ($query) use ($employee) {
+                                $query->where('id', $employee->id);
+                            })->get();
+                        $employees = Employee::where('id', $employee->id)->get()->pluck('name', 'id');
+                    }
+                }
             }
             else
             {
@@ -69,10 +101,10 @@ class TimeSheetController extends Controller
     {
         if(\Auth::user()->can('Create TimeSheet'))
         {
-            $timeSheet = new Timesheet();
+            $timeSheet = new TimeSheet();
             if(\Auth::user()->type == 'employee')
             {
-                $timeSheet->employee_id = \Auth::user()->id;
+                $timeSheet->employee_id = \Auth::user()->employee->id;
             }
             else
             {

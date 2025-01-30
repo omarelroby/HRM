@@ -6,6 +6,18 @@
 
 @section('content')
 <div class="row">
+    <div class="row d-flex justify-content-end mt-3">
+        @if (\Auth::user()->type == 'employee')
+            @can('Create Leave')
+                <div class="col-auto">
+                    <a   class="btn btn-primary"
+                       data-bs-toggle="modal" data-bs-target="#addTrainingModal" data-title="{{ __('Create New Request') }}">
+                        <i class="fas fa-plus"></i> {{ __('Create') }}
+                    </a>
+                </div>
+            @endcan
+        @endif
+    </div>
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
@@ -60,8 +72,8 @@
                                     <td class="text-center">
                                         @if ($leave->status == 0)
                                             @can('Edit Leave')
-                                                <a href="#" data-url="{{ URL::to('employee_requests/' . $leave->id . '/edit') }}" data-size="lg"
-                                                   data-ajax-popup="true" data-title="{{ __('Edit Request') }}" class="btn btn-sm btn-success"
+                                                <a href="{{ URL::to('employee_requests/' . $leave->id . '/edit') }}"   data-size="lg"
+                                                     data-title="{{ __('Edit Request') }}" class="btn btn-sm btn-success"
                                                    title="{{ __('Edit') }}">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
@@ -95,19 +107,93 @@
         </div>
     </div>
 </div>
-
-<div class="row d-flex justify-content-end mt-3">
-    @if (\Auth::user()->type == 'employee')
-        @can('Create Leave')
-            <div class="col-auto">
-                <a href="#" data-url="{{ route('employee_requests.create') }}" class="btn btn-primary"
-                   data-ajax-popup="true" data-title="{{ __('Create New Request') }}">
-                    <i class="fas fa-plus"></i> {{ __('Create') }}
-                </a>
+<div class="modal fade" id="addTrainingModal" tabindex="-1" aria-labelledby="addTrainingModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header text-white">
+                <h5 class="modal-title" id="addTrainingModalLabel">{{ __('Add Custom Question') }}</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-        @endcan
-    @endif
+
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <div class="card bg-none card-box">
+                    {{Form::open(array('url'=>'employee_requests','method'=>'post'))}}
+                    @if($employeeId) {{ Form::hidden('employee_id',$employeeId, array()) }} @endif
+                    @if(\Auth::user()->type !='employee')
+                        @if(!$employeeId)
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        {{Form::label('employee_id',__('Employee'))}}
+                                        {{Form::select('employee_id',$employees,null,array('class'=>'form-control select2','id'=>'employee_id','placeholder'=>__('Select Employee')))}}
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                    @endif
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                {{Form::label('request_type_id',__('Request_type'))}}
+                                <select name="request_type_id" id="request_type_id" class="form-control select2">
+                                    @foreach($requesttypes as $requesttype)
+                                        <option value="{{ $requesttype->id }}">{{$requesttype['name'.$lang]}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{Form::label('start_date',__('Start Date'))}}
+                                {{Form::date('start_date',null,array('class'=>'form-control   datepicker'))}}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{Form::label('end_date',__('End Date'))}}
+                                {{Form::date('end_date',null,array('class'=>'form-control gregorian-date datepicker'))}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                {{Form::label('request_reason',__('Request Reason'))}}
+                                {{Form::textarea('request_reason',null,array('class'=>'form-control','placeholder'=>__('Request Reason')))}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                {{Form::label('request_reason_ar',__('Request Reason ar'))}}
+                                {{Form::textarea('request_reason_ar',null,array('class'=>'form-control','placeholder'=>__('Request Reason ar')))}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <input type="submit" value="{{__('Create')}}" class="btn btn-primary">
+                            <input type="button" value="{{__('Cancel')}}" class="btn btn-white" data-bs-dismiss="modal">
+                        </div>
+                    </div>
+
+                    {{Form::close()}}
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
 </div>
+
 @endsection
 
 @section('script')
@@ -117,5 +203,15 @@
             document.getElementById('delete-form-' + id).submit();
         }
     }
+</script>
+<script>
+    $(function () {
+        $(".gregorian-date , .datepicker").hijriDatePicker({
+            format:'YYYY-M-D',
+            showSwitcher: false,
+            hijri:false,
+            useCurrent: true,
+        });
+    });
 </script>
 @endsection

@@ -301,396 +301,147 @@ class HomeController extends Controller
 
                 return view('dashboard.dashboard', $data);
             }
-            if(auth()->user()->type=='employee')
-            {
-//                dd('d');
-                $employee=Employee::where('user_id',auth()->user()->id)->firstOrFail();
-                if(empty($employee->sub_dep_id) &&$employee->sub_dep_id==0)
-                {
-                    $data['all_tasks'] = Task::with('employee')
-                        ->whereHas('employee', function ($query) use ($employee) {
-                            $query->where('department_id', $employee->department_id);
-                        })->take(15)->get();
+            if (auth()->user()->type == 'employee') {
+                $user = auth()->user();
+                $employee = Employee::where('user_id', $user->id)->firstOrFail();
+                $data = [];
 
-                    $data['employeesWithAttendance']  = AttendanceEmployee::with('employee' )
-                        ->whereHas('employee',function ($query) use ($employee){
-                            $query->where('department_id',$employee->department_id);
-                        })
-                        ->where('status', 'Present')
-                        ->where('date', today()->format('Y-m-d'))
-                        ->count();
-                    $data['attend_emp'] = AttendanceEmployee::with('employee' )
-                        ->whereHas('employee',function ($query) use ($employee){
-                            $query->where('department_id',$employee->department_id);
-                        })
+                // Determine the scope based on employee role
+                if (empty($employee->sub_dep_id) && $employee->sub_dep_id == 0) {
+                    // Department Manager
+                    $scopeColumn = 'department_id';
+                    $scopeValue = $employee->department_id;
+                } elseif (empty($employee->section_id) && $employee->section_id == 0) {
+                    // Sub-Department Manager
+                    $scopeColumn = 'sub_dep_id';
+                    $scopeValue = $employee->sub_dep_id;
+                } else {
+                    // Regular Employee
+                    $scopeColumn = 'section_id';
+                    $scopeValue = $employee->section_id;
+                }
 
-                        ->where('status', 'Present')
-                        ->where('date', today()->format('Y-m-d'))
-                        ->get()
-                        ->take(4);
-                    $data['employees_count'] = Employee::where('department_id',$employee->department_id)->count();
+                // Fetch common data for all roles
+                $data['all_tasks'] = Task::with('employee')
+                    ->whereHas('employee', function ($query) use ($scopeColumn, $scopeValue) {
+                        $query->where($scopeColumn, $scopeValue);
+                    })
+                    ->take(15)
+                    ->get();
 
-                     $data['tasks'] = Task::with('employee')
-                        ->whereHas('employee', function ($query) use ($employee) {
-                            $query->where('department_id', $employee->department_id);
-                        })
-                        ->count();
-                     $data['complete_tasks'] = Task::with('employee')
-                        ->whereHas('employee', function ($query) use ($employee) {
-                            $query->where('department_id', $employee->department_id);
-                        })
-                        ->where('status', 1) // Assuming status 1 means "completed"
-                        ->count();
+                $data['employeesWithAttendance'] = AttendanceEmployee::with('employee')
+                    ->whereHas('employee', function ($query) use ($scopeColumn, $scopeValue) {
+                        $query->where($scopeColumn, $scopeValue);
+                    })
+                    ->where('status', 'Present')
+                    ->where('date', today()->format('Y-m-d'))
+                    ->count();
 
-                    $data['emp_req'] = EmployeeRequest::with('employees')
-                        ->whereHas('employees', function ($query) use ($employee) {
-                            $query->where('department_id', $employee->department_id);
-                        })
-                        ->count();
-                    $data['payslip'] = PaySlip::with('employees')
-                        ->whereHas('employees', function ($query) use ($employee) {
-                            $query->where('department_id', $employee->department_id);
-                        })
-                        ->count();
+                $data['attend_emp'] = AttendanceEmployee::with('employee')
+                    ->whereHas('employee', function ($query) use ($scopeColumn, $scopeValue) {
+                        $query->where($scopeColumn, $scopeValue);
+                    })
+                    ->where('status', 'Present')
+                    ->where('date', today()->format('Y-m-d'))
+                    ->get()
+                    ->take(4);
 
-                    $departments = Department::select('id', 'name')
-                        ->withCount(['employees' => function ($query) use ($employee) {
-                            // Only include departments relevant to the logged-in employee
-                            $query->where('department_id', $employee->department_id);
-                        }])
-                        ->get()
-                        ->map(function ($department) {
-                            return [
-                                'name' => $department->name,
-                                'total_employees' => $department->employees_count, // Use the correct `withCount` alias
-                            ];
-                        });
+                $data['employees_count'] = Employee::where($scopeColumn, $scopeValue)->count();
 
-                    $data['departmentNames'] = $departments->pluck('name');
-                    $data['total_employees'] = $departments->pluck('total_employees');
+                $data['tasks'] = Task::with('employee')
+                    ->whereHas('employee', function ($query) use ($scopeColumn, $scopeValue) {
+                        $query->where($scopeColumn, $scopeValue);
+                    })
+                    ->count();
 
+                $data['complete_tasks'] = Task::with('employee')
+                    ->whereHas('employee', function ($query) use ($scopeColumn, $scopeValue) {
+                        $query->where($scopeColumn, $scopeValue);
+                    })
+                    ->where('status', 1) // Assuming status 1 means "completed"
+                    ->count();
 
+                $data['emp_req'] = EmployeeRequest::with('employees')
+                    ->whereHas('employees', function ($query) use ($scopeColumn, $scopeValue) {
+                        $query->where($scopeColumn, $scopeValue);
+                    })
+                    ->count();
 
+                $data['payslip'] = PaySlip::with('employees')
+                    ->whereHas('employees', function ($query) use ($scopeColumn, $scopeValue) {
+                        $query->where($scopeColumn, $scopeValue);
+                    })
+                    ->count();
 
-                    $data['early_arrivals'] = AttendanceEmployee::with('employee' )
-                        ->whereHas('employee',function ($query) use ($employee){
-                            $query->where('department_id',$employee->department_id);
-                        })
-                        ->where('status', 'Present')
-                        ->where('date', today()->format('Y-m-d'))
-                        ->where('clock_in', '<=', '09:00:00') // Customize based on early arrival time
-                        ->get();
-
-                    // Get employees who came late (after 08:00:00)
-                    $data['late_arrivals'] = AttendanceEmployee::with('employee' )
-                        ->whereHas('employee',function ($query) use ($employee){
-                            $query->where('department_id',$employee->department_id);
-                        })
-                        -> where('status', 'Present')
-                        ->where('date', today()->format('Y-m-d'))
-                        ->where('clock_in', '>', '09:00:00') // Customize based on late arrival time
-                        ->get();
-
-                    $employees = Employee::where('department_id', $employee->department_id)->count();
-                    $data['absent_employees'] = $employees - ($data['early_arrivals']->count() + $data['late_arrivals']->count());
-
-
-                    $threeMonthsFromNow = Carbon::now()->addMonths(3);
-                    $records = Document::with('document_type', 'employee')
-                        ->whereHas('employee',function ($query) use ($employee){
-                            $query->where('department_id',$employee->department_id);
-                        })
-                        ->whereBetween('end_date', [Carbon::now(), $threeMonthsFromNow])
-                        ->whereNotNull('end_date')
-                        ->paginate(20);
-
-                    $groupedRecords = $records->getCollection()->groupBy(function ($record) {
-                        return $record->document_type->name ?? 'Other';
+                $departments = Department::select('id', 'name')
+                    ->withCount(['employees' => function ($query) use ($scopeColumn, $scopeValue) {
+                        $query->where($scopeColumn, $scopeValue);
+                    }])
+                    ->get()
+                    ->map(function ($department) {
+                        return [
+                            'name' => $department->name,
+                            'total_employees' => $department->employees_count,
+                        ];
                     });
 
-                    $records->setCollection(collect($groupedRecords));
-                    $data['records'] = $records;
+                $data['departmentNames'] = $departments->pluck('name');
+                $data['total_employees'] = $departments->pluck('total_employees');
 
-                    $statusCounts = Task::with(  'employee')
-                        ->whereHas('employee',function ($query) use ($employee){
-                            $query->where('department_id',$employee->department_id);
-                        })->select(DB::raw('status, COUNT(*) as count'))
-                        ->groupBy('status')
-                        ->pluck('count', 'status');
+                $data['early_arrivals'] = AttendanceEmployee::with('employee')
+                    ->whereHas('employee', function ($query) use ($scopeColumn, $scopeValue) {
+                        $query->where($scopeColumn, $scopeValue);
+                    })
+                    ->where('status', 'Present')
+                    ->where('date', today()->format('Y-m-d'))
+                    ->where('clock_in', '<=', '09:00:00') // Customize based on early arrival time
+                    ->get();
 
-                    // Prepare data for the chart
-                    $chartData = [
-                        'active' => $statusCounts[1] ?? 0,
-                        'pending' => $statusCounts[0] ?? 0,
-                        'canceled' => $statusCounts[2] ?? 0,
-                        'finished' => $statusCounts[3] ?? 0,
-                    ];
+                $data['late_arrivals'] = AttendanceEmployee::with('employee')
+                    ->whereHas('employee', function ($query) use ($scopeColumn, $scopeValue) {
+                        $query->where($scopeColumn, $scopeValue);
+                    })
+                    ->where('status', 'Present')
+                    ->where('date', today()->format('Y-m-d'))
+                    ->where('clock_in', '>', '09:00:00') // Customize based on late arrival time
+                    ->get();
 
-                    $data['chartData'] = $chartData;
+                $employees = Employee::where($scopeColumn, $scopeValue)->count();
+                $data['absent_employees'] = $employees - ($data['early_arrivals']->count() + $data['late_arrivals']->count());
 
+                $threeMonthsFromNow = Carbon::now()->addMonths(3);
+                $records = Document::with('document_type', 'employee')
+                    ->whereHas('employee', function ($query) use ($scopeColumn, $scopeValue) {
+                        $query->where($scopeColumn, $scopeValue);
+                    })
+                    ->whereBetween('end_date', [Carbon::now(), $threeMonthsFromNow])
+                    ->whereNotNull('end_date')
+                    ->paginate(20);
 
-//                    dd($data['chartData']);
+                $groupedRecords = $records->getCollection()->groupBy(function ($record) {
+                    return $record->document_type->name ?? 'Other';
+                });
 
-                }
-                elseif(empty($employee->section_id) && $employee->section_id==0)
-                {
-                    $data['all_tasks'] = Task::with('employee')
-                        ->whereHas('employee', function ($query) use ($employee) {
-                            $query->where('sub_dep_id', $employee->sub_dep_id);
-                        })->take(15)->get();
-                    $statusCounts = Task::with(  'employee')
-                        ->whereHas('employee',function ($query) use ($employee){
-                            $query->where('sub_dep_id',$employee->sub_dep_id);
-                        })->select(DB::raw('status, COUNT(*) as count'))
-                        ->groupBy('status')
-                        ->pluck('count', 'status');
+                $records->setCollection(collect($groupedRecords));
+                $data['records'] = $records;
 
-                    // Prepare data for the chart
-                    $chartData = [
-                        'active' => $statusCounts[1] ?? 0,
-                        'pending' => $statusCounts[0] ?? 0,
-                        'canceled' => $statusCounts[2] ?? 0,
-                        'finished' => $statusCounts[3] ?? 0,
-                    ];
+                $statusCounts = Task::with('employee')
+                    ->whereHas('employee', function ($query) use ($scopeColumn, $scopeValue) {
+                        $query->where($scopeColumn, $scopeValue);
+                    })
+                    ->select(DB::raw('status, COUNT(*) as count'))
+                    ->groupBy('status')
+                    ->pluck('count', 'status');
 
-                    $data['chartData'] = $chartData;
-                    $data['employeesWithAttendance']  = AttendanceEmployee::with('employee' )
-                        ->whereHas('employee',function ($query) use ($employee){
-                            $query->where('sub_dep_id',$employee->sub_dep_id);
-                        })
-                        ->where('status', 'Present')
-                        ->where('date', today()->format('Y-m-d'))
-                        ->count();
-
-                    $data['employees_count'] = Employee::where('sub_dep_id',$employee->sub_dep_id)->count();
-
-                    $data['tasks'] = Task::with('employee')
-                        ->whereHas('employee', function ($query) use ($employee) {
-                            $query->where('sub_dep_id', $employee->sub_dep_id);
-                        })
-                        ->count();
-                    $data['complete_tasks'] = Task::with('employee')
-                        ->whereHas('employee', function ($query) use ($employee) {
-                            $query->where('sub_dep_id', $employee->sub_dep_id);
-                        })
-                        ->where('status', 1) // Assuming status 1 means "completed"
-                        ->count();
-                    $data['emp_req'] = EmployeeRequest::with('employees')
-                        ->whereHas('employees', function ($query) use ($employee) {
-                            $query->where('sub_dep_id', $employee->sub_dep_id);
-                        })
-                        ->count();
-                    $data['payslip'] = PaySlip::with('employees')
-                                            ->whereHas('employees', function ($query) use ($employee) {
-                                                $query->where('sub_dep_id', $employee->sub_dep_id);
-                                            })
-                                            ->count();
-
-                    $departments = Department::select('id', 'name')
-                        ->withCount(['employees' => function ($query) use ($employee) {
-                            // Only include departments relevant to the logged-in employee
-                            $query->where('sub_dep_id', $employee->sub_dep_id);
-                        }])
-                        ->get()
-                        ->map(function ($department) {
-                            return [
-                                'name' => $department->name,
-                                'total_employees' => $department->employees_count, // Use the correct `withCount` alias
-                            ];
-                        });
-
-                    $data['departmentNames'] = $departments->pluck('name');
-                    $data['total_employees'] = $departments->pluck('total_employees');
-
-                    $data['attend_emp'] = AttendanceEmployee::with('employee' )
-                        ->whereHas('employee',function ($query) use ($employee){
-                            $query->where('sub_dep_id',$employee->sub_dep_id);
-                        })
-
-                        ->where('status', 'Present')
-                        ->where('date', today()->format('Y-m-d'))
-                        ->get()
-                        ->take(4);
-
-                    $data['early_arrivals'] = AttendanceEmployee::with('employee' )
-                        ->whereHas('employee',function ($query) use ($employee){
-                            $query->where('sub_dep_id',$employee->sub_dep_id);
-                        })
-                        ->where('status', 'Present')
-                        ->where('date', today()->format('Y-m-d'))
-                        ->where('clock_in', '<=', '09:00:00') // Customize based on early arrival time
-                        ->get();
-
-                    // Get employees who came late (after 08:00:00)
-                    $data['late_arrivals'] = AttendanceEmployee::with('employee' )
-                        ->whereHas('employee',function ($query) use ($employee){
-                            $query->where('sub_dep_id',$employee->sub_dep_id);
-                        })
-                        -> where('status', 'Present')
-                        ->where('date', today()->format('Y-m-d'))
-                        ->where('clock_in', '>', '09:00:00') // Customize based on late arrival time
-                        ->get();
-
-                    $employees = Employee::where('sub_dep_id', $employee->sub_dep_id)->count();
-                    $data['absent_employees'] = $employees - ($data['early_arrivals']->count() + $data['late_arrivals']->count());
-
-
-                    $threeMonthsFromNow = Carbon::now()->addMonths(3);
-                    $records = Document::with('document_type', 'employee')
-                        ->whereHas('employee',function ($query) use ($employee){
-                            $query->where('sub_dep_id',$employee->sub_dep_id);
-                        })
-                        ->whereBetween('end_date', [Carbon::now(), $threeMonthsFromNow])
-                        ->whereNotNull('end_date')
-                        ->paginate(20);
-
-                    $groupedRecords = $records->getCollection()->groupBy(function ($record) {
-                        return $record->document_type->name ?? 'Other';
-                    });
-
-                    $records->setCollection(collect($groupedRecords));
-                    $data['records'] = $records;
-
-                }
-                else{
-                    $data['all_tasks'] = Task::with('employee')
-                        ->whereHas('employee', function ($query) use ($employee) {
-                            $query->where('sub_dep_id', $employee->sub_dep_id);
-                        })->take(15)->get();
-                    $statusCounts = Task::with(  'employee')
-                        ->whereHas('employee',function ($query) use ($employee){
-                            $query->where('sub_dep_id',$employee->sub_dep_id);
-                        })->select(DB::raw('status, COUNT(*) as count'))
-                        ->groupBy('status')
-                        ->pluck('count', 'status');
-
-                    // Prepare data for the chart
-                    $chartData = [
-                        'active' => $statusCounts[1] ?? 0,
-                        'pending' => $statusCounts[0] ?? 0,
-                        'canceled' => $statusCounts[2] ?? 0,
-                        'finished' => $statusCounts[3] ?? 0,
-                    ];
-
-                    $data['chartData'] = $chartData;
-
-                    $threeMonthsFromNow = Carbon::now()->addMonths(3);
-                    $records = Document::with('document_type', 'employee')
-
-                        ->whereBetween('end_date', [Carbon::now(), $threeMonthsFromNow])
-                        ->whereNotNull('end_date')
-                        ->paginate(20); // Paginate records with 10 per page
-
-                    $groupedRecords = $records->getCollection()->groupBy(function ($record) {
-                        return $record->document_type->name ?? 'Other';
-                    });
-                    $data['employeesWithAttendance']  = AttendanceEmployee::with('employee' )
-                        ->whereHas('employee',function ($query) use ($employee){
-                            $query->where('sub_dep_id',$employee->sub_dep_id);
-                        })
-                        ->where('status', 'Present')
-                        ->where('date', today()->format('Y-m-d'))
-                        ->count();
-                    $data['employees_count'] = Employee::where('sub_dep_id',$employee->sub_dep_id)->count();
-                    $data['payslip'] = PaySlip::with('employees')
-                        ->whereHas('employees', function ($query) use ($employee) {
-                            $query->where('sub_dep_id', $employee->sub_dep_id);
-                        })
-                        ->count();
-
-                    $departments = Department::select('id', 'name')
-                        ->withCount(['employees' => function ($query) use ($employee) {
-                            $query->where('sub_dep_id', $employee->sub_dep_id); // Filter employees by the logged-in employee's department
-                        }])
-                        ->get()
-                        ->map(function ($department) {
-                            return [
-                                'name' => $department->name,
-                                'total_employees' => $department->employees_count,
-                            ];
-                        });
-
-                    $data['departmentNames'] = $departments->pluck('name'); // Get department names
-                    $data['total_employees'] = $departments->pluck('total_employees'); // Get total employees in each department
-//                    $data['employees_count'] = $departments->sum('total_employees'); // Sum of all employees in the filtered departments
-
-                    $data['tasks'] = Task::with('employee')
-                        ->whereHas('employee', function ($query) use ($employee) {
-                            $query->where('sub_dep_id', $employee->sub_dep_id);
-                        })
-                        ->count();
-                    $data['complete_tasks'] = Task::with('employee')
-                        ->whereHas('employee', function ($query) use ($employee) {
-                            $query->where('sub_dep_id', $employee->sub_dep_id);
-                        })
-                        ->where('status', 1) // Assuming status 1 means "completed"
-                        ->count();
-
-                    $data['emp_req'] = EmployeeRequest::with('employees')
-                        ->whereHas('employees', function ($query) use ($employee) {
-                            $query->where('sub_dep_id', $employee->sub_dep_id);
-                        })
-                        ->count();
-                    $departments = Department::select('id', 'name')
-                        ->withCount(['employees' => function ($query) use ($employee) {
-                            // Only include departments relevant to the logged-in employee
-                            $query->where('sub_dep_id', $employee->sub_dep_id);
-                        }])
-                        ->get()
-                        ->map(function ($department) {
-                            return [
-                                'name' => $department->name,
-                                'total_employees' => $department->employees_count, // Use the correct `withCount` alias
-                            ];
-                        });
-
-                    $data['departmentNames'] = $departments->pluck('name');
-                    $data['total_employees'] = $departments->pluck('total_employees');
-
-                    $data['attend_emp'] = AttendanceEmployee::with('employee' )
-                        ->whereHas('employee',function ($query) use ($employee){
-                            $query->where('sub_dep_id',$employee->sub_dep_id);
-                        })
-
-                        ->where('status', 'Present')
-                        ->where('date', today()->format('Y-m-d'))
-                        ->get()
-
-                        ->take(4);
-
-                    $data['early_arrivals'] = AttendanceEmployee::with('employee' )
-                        ->whereHas('employee',function ($query) use ($employee){
-                            $query->where('sub_dep_id',$employee->sub_dep_id);
-                        })
-                        ->where('status', 'Present')
-                        ->where('date', today()->format('Y-m-d'))
-                        ->where('clock_in', '<=', '09:00:00') // Customize based on early arrival time
-                        ->get();
-
-                    // Get employees who came late (after 08:00:00)
-                    $data['late_arrivals'] = AttendanceEmployee::with('employee' )
-                        ->whereHas('employee',function ($query) use ($employee){
-                            $query->where('sub_dep_id',$employee->sub_dep_id);
-                        })
-                        -> where('status', 'Present')
-                        ->where('date', today()->format('Y-m-d'))
-                        ->where('clock_in', '>', '09:00:00') // Customize based on late arrival time
-                        ->get();
-
-                    $employees = Employee::where('sub_dep_id', $employee->sub_dep_id)->count();
-                    $data['absent_employees'] = $employees - ($data['early_arrivals']->count() + $data['late_arrivals']->count());
-
-
-                    $records->setCollection(collect($groupedRecords));
-                    $data['records'] = $records;
-
-                }
+                $data['chartData'] = [
+                    'active' => $statusCounts[1] ?? 0,
+                    'pending' => $statusCounts[0] ?? 0,
+                    'canceled' => $statusCounts[2] ?? 0,
+                    'finished' => $statusCounts[3] ?? 0,
+                ];
 
                 return view('dashboard.EmployeeDashboard', $data);
-
-
             }
-
         }
     }
 

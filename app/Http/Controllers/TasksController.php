@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Department;
 use App\Models\Employee;
 use App\Mail\TicketSend;
 use App\Models\Task;
@@ -29,10 +30,30 @@ class TasksController extends Controller
                 $employees = Employee::where('created_by', '=', \Auth::user()->id)->get()->pluck('name', 'id');
 
             } else {
-                $tasks= Task::whereHas('employee',function ($query) use ($user) {
-                    $query->where('created_by',$user->id);
-                })->get();
-                $employees = Employee::where('created_by', '=', \Auth::user()->id)->get()->pluck('name', 'id');
+                $department = Department::findOrFail(Auth::user()->employee->department_id);
+                if ($department) {
+                    // Check if the employee is a department manager
+                    if (\Auth::user()->employee->department_id == $department->id && \Auth::user()->employee->sub_dep_id == 0) {
+                        // Show all employees in the department
+                        $employeesIds = $department->employeess->pluck('id');
+                        $tasks = Task::whereIn('employee_id', $employeesIds)->get();
+                        $employees = Employee::whereIn('id', $employeesIds)->get()->pluck('name', 'id');
+
+
+                    }
+                    // Check if the employee is a sub-department manager
+                    elseif (\Auth::user()->employee->section_id == 0) {
+                        // Show only employees in the sub-department
+                        $employeesIds = Employee::where('sub_dep_id', \Auth::user()->employee->sub_dep_id)->pluck('id');
+                        $tasks = Task::whereIn('employee_id', $employeesIds)->get();
+                        $employees = Employee::whereIn('id', $employeesIds)->get()->pluck('name', 'id');
+                    }
+                    else{
+                        $tasks = Task::where('employee_id',  \Auth::user()->employee->id)->get();
+                        $employees = Employee::where('id',\Auth::user()->employee->id)->get()->pluck('name', 'id');
+                    }
+                }
+
 
             }
 

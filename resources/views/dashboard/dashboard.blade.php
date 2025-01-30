@@ -1,5 +1,59 @@
 @extends('dashboard.layouts.master')
 @include('dashboard.layouts.header')
+@push('css')
+    <style>
+        /* Add the CSS code below */
+        .attendance-container {
+            max-width: 700px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        .attendance-container h2 {
+            margin-bottom: 15px;
+            font-size: 20px;
+            color: #333;
+        }
+        .office-time {
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        .btn {
+            flex: 1;
+            padding: 10px 15px;
+            font-size: 14px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .btn-clock-in {
+            background-color: #5cb85c;
+            color: white;
+        }
+        .btn-clock-in:hover {
+            background-color: #4cae4c;
+        }
+        .btn-clock-out {
+            background-color: #d9534f;
+            color: white;
+        }
+        .btn-clock-out:hover {
+            background-color: #c9302c;
+        }
+    </style>
+
+@endpush
 @section('content')
 
     <div class="d-md-flex d-block align-items-center justify-content-between page-breadcrumb mb-3">
@@ -13,6 +67,17 @@
                 </ol>
             </nav>
         </div>
+
+                <div class="attendance-container">
+                    <h2>Mark Attendance</h2>
+                    <p class="office-time">My Office Time: 09:00 to 18:00</p>
+                    <div class="btn-container">
+                        <button class="btn btn-clock-in">Clock In</button>
+                        <button class="btn btn-clock-out">Clock Out</button>
+                    </div>
+                </div>
+
+
     </div>
     <!-- /Breadcrumb -->
 
@@ -28,6 +93,8 @@
                     {{--                            <p>You have <span class="text-primary text-decoration-underline">21</span> Pending Approvals & <span class="text-primary text-decoration-underline">14</span> Leave Requests</p>--}}
                 </div>
             </div>
+
+
             <div class="d-flex align-items-center flex-wrap mb-1" >
                 <a href="#" class="btn btn-secondary btn-md me-2 mb-2 mx-1" data-bs-toggle="modal" data-bs-target="#addEmployeeModal"><i class="ti ti-square-rounded-plus me-1"></i>{{__('Add New Employee')}}</a>
                 <a href="#" class="btn btn-primary btn-md mb-2" data-bs-toggle="modal" data-bs-target="#addTaskModal"><i class="ti ti-square-rounded-plus me-1"></i>{{__('Add Task')}}</a>

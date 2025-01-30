@@ -24,49 +24,79 @@ class AttendanceEmployeeController extends Controller
             $department = Department::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
             $department->prepend('All', '');
 
-            if(\Auth::user()->type == 'employee')
-            {
+            if (\Auth::user()->type == 'employee') {
 
-                $emp = !empty(\Auth::user()->employee) ? \Auth::user()->employee->id : 0;
-                $employees = Employee::where('created_by', '=', Auth::user()->creatorId())->get()->pluck('name', 'id');
+                $user = \Auth::user();
+                $employee = $user->employee;
+                $emp = $employee ? $employee->id : 0;
 
+                // Initialize attendance query
                 $attendanceEmployee = AttendanceEmployee::where('employee_id', $emp);
 
-                if($request->type == 'monthly' && !empty($request->month))
-                {
+                // Apply date filters based on request type
+                if ($request->type == 'monthly' && !empty($request->month)) {
                     $month = date('m', strtotime($request->month));
-                    $year  = date('Y', strtotime($request->month));
+                    $year = date('Y', strtotime($request->month));
 
                     $start_date = date($year . '-' . $month . '-01');
-                    $end_date   = date($year . '-' . $month . '-t');
+                    $end_date = date($year . '-' . $month . '-t');
 
-                    $attendanceEmployee->whereBetween(
-                        'date', [
-                                  $start_date,
-                                  $end_date,
-                              ]
-                    );
-                }
-                elseif($request->type == 'daily' && !empty($request->date))
-                {
+                    $attendanceEmployee->whereBetween('date', [$start_date, $end_date]);
+                } elseif ($request->type == 'daily' && !empty($request->date)) {
                     $attendanceEmployee->where('date', $request->date);
-                }
-                else
-                {
-                    $month      = date('m');
-                    $year       = date('Y');
+                } else {
+                    // Default to current month
+                    $month = date('m');
+                    $year = date('Y');
                     $start_date = date($year . '-' . $month . '-01');
-                    $end_date   = date($year . '-' . $month . '-t');
+                    $end_date = date($year . '-' . $month . '-t');
 
-                    $attendanceEmployee->whereBetween(
-                        'date', [
-                                  $start_date,
-                                  $end_date,
-                              ]
-                    );
+                    $attendanceEmployee->whereBetween('date', [$start_date, $end_date]);
                 }
+
+                // Fetch attendance data
                 $attendanceEmployee = $attendanceEmployee->get();
 
+                // Fetch employees based on department hierarchy
+                $employees = collect();
+                if ($employee && $employee->department_id) {
+                    $department = Department::find($employee->department_id);
+
+                    if ($department) {
+                        // Department Manager (no sub-department)
+                        if ($employee->sub_dep_id == 0) {
+                            $employeesIds = $department->employeess->pluck('id');
+                            $attendanceEmployee = AttendanceEmployee::whereIn('employee_id', $employeesIds)->get();
+                            $employees = Employee::whereIn('id', $employeesIds)->get()
+                                ->pluck('name', 'id');
+
+
+                        }
+                        // Sub-Department Manager (no section)
+                        elseif ($employee->section_id == 0) {
+                            $employeesIds = Employee::where('sub_dep_id', $employee->sub_dep_id)
+                                ->pluck('id');
+                            $attendanceEmployee = AttendanceEmployee::whereIn('employee_id', $employeesIds)
+                                ->get()
+                                 ;
+                            $employees = Employee::whereIn('id', $employeesIds)->get()
+                                ->pluck('name', 'id');
+                        }
+                        // Regular Employee
+                        else {
+                            $attendanceEmployee= AttendanceEmployee::where('employee_id', $employee->id)
+                                ->get()
+                                 ;
+                            $employees = Employee::where('id', \auth()->user()->employee->id)->get()
+                                ->pluck('name', 'id');
+                        }
+                    }
+                } else {
+                    // Fallback for employees without department assignments
+                    $employees = Employee::where('created_by', $user->creatorId())
+                        ->get()
+                        ->pluck('name', 'id');
+                }
             }
             else {
                 $employees = Employee::where('created_by', '=', Auth::user()->creatorId())->get()->pluck('name', 'id');

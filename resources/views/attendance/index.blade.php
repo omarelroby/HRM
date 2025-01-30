@@ -106,9 +106,9 @@
                                         <table class="table table-striped table-bordered table-hover dataTables" >
                                         <thead>
                                             <tr>
-                                                @if(\Auth::user()->type!='employee')
-                                                    <th>{{__('Employee')}}</th>
-                                                @endif
+
+                                                      <th>{{__('Employee')}}</th>
+
                                                 <th>{{__('Date')}}</th>
                                                 <th>{{__('Status')}}</th>
                                                 <th>{{__('Clock In')}}</th>
@@ -124,9 +124,9 @@
                                         <tbody>
                                             @foreach ($attendanceEmployee as $attendance)
                                                 <tr>
-                                                    @if(\Auth::user()->type!='employee')
-                                                        <td>{{!empty($attendance->employee)?$attendance->employee->name:'' }}</td>
-                                                    @endif
+
+                                                    <td>{{!empty($attendance->employee)?$attendance->employee->name:'' }}</td>
+
                                                     <td>{{ \Auth::user()->dateFormat($attendance->date) }}</td>
                                                     <td>{{ $attendance->status }}</td>
                                                     <td>{{ ($attendance->clock_in !='00:00:00') ?\Auth::user()->timeFormat( $attendance->clock_in):'00:00' }} </td>
@@ -149,7 +149,7 @@
                                                 </tr>
                                             @endforeach
                                         </tbody>
-                                        
+
                                         </table>
                                     </div>
                                 </div>

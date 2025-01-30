@@ -75,7 +75,6 @@ class EmployeeController extends Controller
                 $data['departments']  = Department::where('created_by', \Auth::user()->creatorId())->get();
                 $data['nationalities']     = Nationality::where('created_by', \Auth::user()->creatorId())->get();
                 $data['designations']     = Designation::where('created_by', \Auth::user()->creatorId())->get();
-                $data['employees'] = Employee::where('user_id', '=', Auth::user()->id)->get();
                 $lastMonthStart = Carbon::now()->subMonth()->startOfMonth();
                 $lastMonthEnd = Carbon::now()->subMonth()->endOfMonth();
                 $data['jobclasses'] = ['1','2'];
@@ -89,6 +88,30 @@ class EmployeeController extends Controller
                 $data['employee_shifts']= Employee_shift::where('created_by', \Auth::user()->creatorId())->get();
                 $data['employee_location'] = Place::where('created_by', \Auth::user()->creatorId())->get();
                 $data['new_join'] = Employee::whereBetween('Join_date_gregorian', [$lastMonthStart, $lastMonthEnd])->count();
+                if (\Auth::user()->employee) {
+
+                    $department = Department::findOrFail(Auth::user()->employee->department_id);
+                    if ($department) {
+                        // Check if the employee is a department manager
+                        if (\Auth::user()->employee->department_id == $department->id && \Auth::user()->employee->sub_dep_id == 0) {
+                            // Show all employees in the department
+                            $employeesIds = $department->employeess->pluck('id');
+                             $data['employees'] = Employee::whereIn('id', $employeesIds)->get();
+                        }
+                        // Check if the employee is a sub-department manager
+                        elseif (\Auth::user()->employee->section_id == 0) {
+                            // Show only employees in the sub-department
+                            $employeesIds = Employee::where('sub_dep_id', \Auth::user()->employee->sub_dep_id)->pluck('id');
+                            $data['employees'] = Employee::whereIn('id', $employeesIds)->get();
+
+                         }
+                        else{
+                            $data['employees'] = Employee::where('id',  \Auth::user()->employee->id)->get();
+
+                        }
+                    }
+                }
+
 
             } else {
                 $data['employee_location'] = Place::where('created_by', \Auth::user()->creatorId())->get();

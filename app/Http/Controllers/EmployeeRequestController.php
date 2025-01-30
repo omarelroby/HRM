@@ -19,64 +19,66 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class EmployeeRequestController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        if(\Auth::user()->can('Manage Leave'))
-        {
-            $lang         = app()->getLocale() == 'ar' ? '_ar' : '';
-            $leaves       = EmployeeRequest::where('created_by', '=', \Auth::user()->creatorId())->get();
+        if (\Auth::user()->can('Manage Leave')) {
+            $lang = app()->getLocale() == 'ar' ? '_ar' : '';
 
-            if(\Auth::user()->type == 'employee')
-            {
-                $user     = \Auth::user();
-                $employee = Employee::where('user_id', '=', $user->id)->first();
-                $leaves   = EmployeeRequest::where('employee_id', '=', $employee->id)->get();
 
-                if(\Auth::user()->employee){
-                    $department = Department::where('employee_id', \Auth::user()->employee->id)->first();
-                    if($department)
-                    {
-                        $employeesIds = $department->employeess->pluck('id');
-                        $leaves = EmployeeRequest::whereIn('employee_id',$employeesIds)->get();
-                    }
+            if (\Auth::user()->type == 'employee') {
+                $employeeId = $request->employee_id;
+                $lang = app()->getLocale() == 'ar' ? '_ar' : '';
 
-                    $branch = Branch::where('employee_id', \Auth::user()->employee->id)->first();
-                    if($branch)
-                    {
-                        $employeesIds = $branch->employeess->pluck('id');
-                        $leaves = EmployeeRequest::whereIn('employee_id',$employeesIds)->get();
+                $employees = Employee::where('user_id', '=', \Auth::user()->id)->get()->pluck('name', 'id');
+                $requesttypes = RequestType::where('created_by', '=', \Auth::user()->creatorId())->get();
+                if (\Auth::user()->employee) {
+
+                    $department = Department::findOrFail(Auth::user()->employee->department_id);
+                    if ($department) {
+                        // Check if the employee is a department manager
+                        if (\Auth::user()->employee->department_id == $department->id && \Auth::user()->employee->sub_dep_id == 0) {
+                            // Show all employees in the department
+                            $employeesIds = $department->employeess->pluck('id');
+                            $leaves = EmployeeRequest::whereIn('employee_id', $employeesIds)->get();
+                        }
+                        // Check if the employee is a sub-department manager
+                        elseif (\Auth::user()->employee->section_id == 0) {
+                            // Show only employees in the sub-department
+                            $employeesIds = Employee::where('sub_dep_id', \Auth::user()->employee->sub_dep_id)->pluck('id');
+                            $leaves = EmployeeRequest::whereIn('employee_id', $employeesIds)->get();
+                        }
+                        else{
+                            $leaves = EmployeeRequest::where('employee_id',  \Auth::user()->employee->id)->get();
+
+                        }
                     }
                 }
-            }
-            else
-            {
+            } else {
+                $employees = Employee::where('created_by', '=', \Auth::user()->creatorId())->get()->pluck('name', 'id');
+                $employeeId = $request->employee_id;
+
+                $requesttypes = RequestType::where('created_by', '=', \Auth::user()->creatorId())->get();
+
                 $leaves = EmployeeRequest::where('created_by', '=', \Auth::user()->creatorId())->get();
-                if(\Auth::user()->employee)
-                {
+                if (\Auth::user()->employee) {
                     $department = Department::where('employee_id', \Auth::user()->employee->id)->first();
-                    if($department)
-                    {
+                    if ($department) {
                         $employeesIds = $department->employeess->pluck('id');
-                        $leaves = EmployeeRequest::whereIn('employee_id',$employeesIds)->get();
+                        $leaves = EmployeeRequest::whereIn('employee_id', $employeesIds)->get();
                     }
 
                     $branch = Branch::where('employee_id', \Auth::user()->employee->id)->first();
-                    if($branch)
-                    {
+                    if ($branch) {
                         $employeesIds = $branch->employeess->pluck('id');
-                        $leaves = EmployeeRequest::whereIn('employee_id',$employeesIds)->get();
+                        $leaves = EmployeeRequest::whereIn('employee_id', $employeesIds)->get();
                     }
                 }
-
             }
-            return view('dashboard.employee_requests.index', compact('leaves','lang'));
-        }
-        else
-        {
+            return view('dashboard.employee_requests.index', compact('leaves', 'lang', 'employees', 'requesttypes', 'employeeId'));
+        } else {
             return redirect()->back()->with('error', __('Permission denied.'));
         }
     }
-
     public function create(Request $request)
     {
         if(\Auth::user()->can('Create Leave'))
@@ -138,18 +140,18 @@ class EmployeeRequestController extends Controller
             $input['created_by']       = \Auth::user()->creatorId();
             $employee_request          = EmployeeRequest::create($input);
 
-            if($employee->department->employees)
-            {
-                $newnotification              = new Notification;
-                $newnotification->user_id     = $employee->department->employees->user_id;
-                $newnotification->type        = 'employee_requests';
-                $newnotification->title       = $employee_request->requestType->name;
-                $newnotification->title_ar    = $employee_request->requestType->name_ar;
-                $newnotification->body        = 'Employee '.Auth::user()->name.' Want '.$employee_request->requestType->name.' Request';
-                $newnotification->body_ar     = 'الموظف '.Auth::user()->name.' يريد طلب '.$employee_request->requestType->name_ar;
-                $newnotification->created_by  = Auth::user()->id;
-                $newnotification->save();
-            }
+//            if($employee->department->employees)
+//            {
+//                $newnotification              = new Notification;
+//                $newnotification->user_id     = $employee->department->employees->user_id;
+//                $newnotification->type        = 'employee_requests';
+//                $newnotification->title       = $employee_request->requestType->name;
+//                $newnotification->title_ar    = $employee_request->requestType->name_ar;
+//                $newnotification->body        = 'Employee '.Auth::user()->name.' Want '.$employee_request->requestType->name.' Request';
+//                $newnotification->body_ar     = 'الموظف '.Auth::user()->name.' يريد طلب '.$employee_request->requestType->name_ar;
+//                $newnotification->created_by  = Auth::user()->id;
+//                $newnotification->save();
+//            }
 
             return redirect()->back()->with('success', __('Request  successfully created.'));
         }
@@ -174,7 +176,7 @@ class EmployeeRequestController extends Controller
                 $lang         = app()->getLocale() == 'ar' ? '_ar' : '';
                 $employees    = Employee::where('created_by', '=', \Auth::user()->creatorId())->get()->pluck('name', 'id');
                 $leavetypes   = RequestType::where('created_by', '=', \Auth::user()->creatorId())->get()->pluck('name'.$lang, 'id');
-                return view('employee_requests.edit', compact('employee_request','employeeId', 'employees', 'leavetypes'));
+                return view('dashboard.employee_requests.edit', compact('employee_request','employeeId', 'employees', 'leavetypes'));
             }
             else
             {
@@ -211,7 +213,7 @@ class EmployeeRequestController extends Controller
                 $input    = $request->all();
                 $employee_request->update($input);
 
-                return redirect()->back()->with('success', __('Leave successfully updated.'));
+                return redirect('employee_requests')->with('success', __('Leave successfully updated.'));
             }
             else
             {

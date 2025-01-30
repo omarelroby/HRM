@@ -127,30 +127,33 @@
                                 <i class="ti ti-binary-tree"></i><span>{{ __('Company Structure') }}</span>
                             </a>
                         </li>
-                        @if(\Auth::user()->can('Manage User'))
-                        <li class="submenu">
-                            <a href="javascript:void(0);" class="subdrop {{ Request::is('user')|| Request::is('roles')|| Request::is('employee-profile')|| Request::is('lastlogin')    ? 'active' : '' }}">
-                                <i class="ti ti-user-circle"></i>
-                                <span class="submenu-title">{{ __('Users') }}</span>
-                                <span class="menu-arrow"></span>
-                            </a>
-                            <ul style="display: none;">
-                                @if(\Auth::user()->can('Manage User'))
-                                <li><a href="{{ url('/user') }}"  class="{{ Request::is('user') ?'active' :'' }}">{{ __('User') }}</a></li>
-                                @endif
-                                @if(\Auth::user()->can('Manage Role'))
-                                <li><a href="{{ url('/roles') }}" class="{{ Request::is('roles') ?'active' :'' }}">{{ __('roles') }}</a></li>
-                                @endif
-{{--                                @if(\Auth::user()->can('Manage Employee Profile'))--}}
 
-{{--                                <li><a href="{{ url('/employee-profile') }}" class="{{ Request::is('employee-profile') ?'active' :'' }}">{{ __('Employee Profile') }}</a></li>--}}
-{{--                                @endif--}}
-                                @if(\Auth::user()->can('Manage Employee Last Login'))
+                        @if( auth()->user()->type=='company' ||  auth()->user()->type=='super admin' )
+                            @if(\Auth::user()->can('Manage User') )
+                            <li class="submenu">
+                                <a href="javascript:void(0);" class="subdrop {{ Request::is('user')|| Request::is('roles')|| Request::is('employee-profile')|| Request::is('lastlogin')    ? 'active' : '' }}">
+                                    <i class="ti ti-user-circle"></i>
+                                    <span class="submenu-title">{{ __('Users') }}</span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <ul style="display: none;">
+                                    @if(\Auth::user()->can('Manage User'))
+                                    <li><a href="{{ url('/user') }}"  class="{{ Request::is('user') ?'active' :'' }}">{{ __('User') }}</a></li>
+                                    @endif
+                                    @if(\Auth::user()->can('Manage Role'))
+                                    <li><a href="{{ url('/roles') }}" class="{{ Request::is('roles') ?'active' :'' }}">{{ __('roles') }}</a></li>
+                                    @endif
+    {{--                                @if(\Auth::user()->can('Manage Employee Profile'))--}}
 
-                                <li><a href="{{ url('/lastlogin') }}" class="{{ Request::is('lastlogin') ?'active' :'' }}">{{ __('Last Login') }}</a></li>
-                                @endif
-                            </ul>
-                        </li>
+    {{--                                <li><a href="{{ url('/employee-profile') }}" class="{{ Request::is('employee-profile') ?'active' :'' }}">{{ __('Employee Profile') }}</a></li>--}}
+    {{--                                @endif--}}
+                                    @if(\Auth::user()->can('Manage Employee Last Login'))
+
+                                    <li><a href="{{ url('/lastlogin') }}" class="{{ Request::is('lastlogin') ?'active' :'' }}">{{ __('Last Login') }}</a></li>
+                                    @endif
+                                </ul>
+                            </li>
+                            @endif
                         @endif
                         @if(\Auth::user()->can('Manage Employee'))
                          <li class="submenu">
@@ -171,7 +174,7 @@
                                         </li>
                                 @endif
 
-
+                                @if(\Auth::user()->type!='employee')
                                 <li class="submenu">
                                     <a href="javascript:void(0);" class="subdrop {{ Request::is('jobtitle') || Request::is('document-type')|| Request::is('attendancemovement')|| Request::is('salary_component_type')|| Request::is('holiday') || Request::is('nationality')|| Request::is('request_types') || Request::is('labor_companies') || Request::is('workunits') || Request::is('employee_shifts') || Request::is('place')|| Request::is('jobtypes') || Request::is('banks') ?'active' :'' }}">
                                         <i class="ti ti-user-circle"></i><span class="submenu-title">{{ __('Employee Setting') }}</span>
@@ -185,9 +188,7 @@
                                             </a>
                                         </li>
                                         <li><a href="{{ url('/jobtitle') }}" class="{{ Request::is('jobtitle') ?'active' :'' }}">{{ __('Job Titles') }}</a></li>
-
                                          <li><a href="{{ url('/nationality') }}" class="{{ Request::is('nationality') ?'active' :'' }}">{{ __('Nationality') }}</a></li>
-
                                          <li><a href="{{ url('/labor_companies') }}" class="{{ Request::is('labor_companies') ?'active' :'' }}">{{ __('labor_companies') }}</a></li>
                                          <li><a href="{{ url('/workunits') }}" class="{{ Request::is('workunits') ?'active' :'' }}">{{ __('workunits') }}</a></li>
                                          <li><a href="{{ url('/employee_shifts') }}" class="{{ Request::is('employee_shifts') ?'active' :'' }}">{{ __('employee_shifts') }}</a></li>
@@ -203,6 +204,7 @@
                                      </ul>
                                     @endif
                                 </li>
+                                @endif
                             </ul>
                         </li>
                         @endif
@@ -213,8 +215,10 @@
                                     <span class="menu-arrow"></span>
                                 </a>
                                 <ul style="display: none;">
+                                    @if(\Auth::user()->type!='employee')
                                     <li><a href="{{ route('salary_setting.index') }}"  class="{{ Request::is('salary_setting') ?'active' :'' }}">{{ __('Salary Data Settings') }}</a></li>
-                                    <li><a href="{{ route('setsalary.index') }}"  class="{{ Request::is('setsalary') ?'active' :'' }}">{{ __('Determine Salary') }}</a></li>
+                                    @endif
+                                        <li><a href="{{ route('setsalary.index') }}"  class="{{ Request::is('setsalary') ?'active' :'' }}">{{ __('Determine Salary') }}</a></li>
                                     <li><a href="{{ url('/payslip') }}"  class="{{ Request::is('payslip') ?'active' :'' }}">{{ __('Payslip') }}</a></li>
 
                                 </ul>
@@ -240,9 +244,11 @@
                                             <span class="menu-arrow"></span>
                                         </a>
                                         <ul style="display: none;">
+
                                             <li><a class="{{ Request::is('attendanceemployee') ?'active' :'' }}" href="{{ route('attendanceemployee.index') }}">{{ __('Attendance History') }}</a></li>
+                                            @if(\Auth::user()->type!='employee')
                                             <li><a class="{{ Request::is('attendanceemployee/bulkattendance') ?'active' :'' }}" href="{{ route('attendanceemployee.bulkattendance') }}">{{ __('Collective attendance') }}</a></li>
-                                            <li><a class="{{ Request::is('employee_requests') ?'active' :'' }}" href="{{ route('employee_requests.index') }}">{{ __('Employee Request Management') }}</a></li>
+                                            @endif
 
                                         </ul>
                                     </li>
@@ -311,7 +317,9 @@
                                 </a>
                             </li>
                         @endif
-                        @if(\Auth::user()->can('Manage Event'))
+                        <li><a class="{{ Request::is('employee_requests') ?'active' :'' }}" href="{{ route('employee_requests.index') }}"><i class="ti ti-file-description"></i><span>{{ __('Employee Requests') }}</span> </a></li>
+
+                    @if(\Auth::user()->can('Manage Event'))
                             <li class="{{ Request::is('event')  ? 'active' : '' }}">
                                 <a href="{{ route('event.index') }}">
                                     <i class="ti ti-calendar"></i><span>{{ __('event') }}</span>
@@ -364,7 +372,7 @@
                             </a>
                         </li>
                         @endif
-
+                        @if(\Auth::user()->type!='employee')
                         <li class="submenu">
                             <a href="javascript:void(0);" class="subdrop {{ Request::is('branch')
                              || Request::is('Department')
@@ -413,6 +421,7 @@
                                 <li><a class="{{ Request::is('competencies') ?'active' :'' }}" href="{{ route('competencies.index') }}">{{ __('competencies') }}</a></li>
                              </ul>
                         </li>
+                        @endif
                         @if(\Auth::user()->can('Manage Report'))
                         <li class="submenu">
                             <a href="javascript:void(0);" class="subdrop {{ Request::is('report/monthly/attendance')

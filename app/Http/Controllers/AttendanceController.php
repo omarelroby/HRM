@@ -30,11 +30,65 @@ class AttendanceController extends Controller
                 $employees = Employee::where('created_by', '=', \Auth::user()->id)->get()->pluck('name', 'id');
 
             } else {
-                $attendance= AttendanceEmployee::whereHas('employee',function ($query) use ($user) {
-                    $query->where('created_by',$user->id);
-                })->get();
-                $employees = Employee::where('created_by', '=', \Auth::user()->id)->get()->pluck('name', 'id');
+                $user = \Auth::user();
+                $employees = collect();
+                $attendance = collect();
 
+                // For company/super admin with department access
+                if ($user->employee && $user->employee->department_id) {
+                    $department = Department::find($user->employee->department_id);
+
+                    if ($department) {
+                        // Department Manager
+                        if ($user->employee->sub_dep_id == 0) {
+                            $employeesIds = $department->employeess->pluck('id');
+
+                            $attendance = AttendanceEmployee::whereIn('employee_id', $employeesIds)
+                                ->whereHas('employee', function($q) use ($user) {
+                                    $q->where('created_by', $user->id);
+                                })->get();
+
+                            $employees = Employee::whereIn('id', $employeesIds)
+                                ->get()
+                                ->pluck('name', 'id');
+
+
+                            // Sub-Department Manager
+                        } elseif ($user->employee->section_id == 0) {
+                            $employeesIds = Employee::where('sub_dep_id', $user->employee->sub_dep_id)
+                                ->pluck('id');
+
+                            $attendance = AttendanceEmployee::whereIn('employee_id', $employeesIds)
+                                ->whereHas('employee', function($q) use ($user) {
+                                    $q->where('created_by', $user->id);
+                                })->get();
+
+                            $employees = Employee::whereIn('id', $employeesIds)
+                                ->get()
+                                ->pluck('name', 'id');
+
+                            // Regular Company User with employee record
+                        } else {
+                            $attendance = AttendanceEmployee::where('employee_id', $user->employee->id)
+                                ->whereHas('employee', function($q) use ($user) {
+                                    $q->where('created_by', $user->id);
+                                })->get();
+
+                            $employees = Employee::where('id', $user->employee->id)
+                                ->get()
+                                ->pluck('name', 'id');
+                        }
+                    }
+                } else {
+                    // Fallback for users without department assignments
+                    $attendance = AttendanceEmployee::whereHas('employee', function($q) use ($user) {
+                        $q->where('created_by', $user->id);
+                    })->get();
+
+                    $employees = Employee::where('created_by', $user->id)
+                        ->get()
+                        ->pluck('name', 'id');
+                }
             }
 
             return view('dashboard.attendance.index', compact('attendance','employees'));

@@ -95,9 +95,9 @@
                             <table class="table table-hover table-striped align-middle dataTables">
                                 <thead class="table-light">
                                 <tr>
-                                    @if (\Auth::user()->type != 'employee')
-                                        <th>{{ __('Employee') }}</th>
-                                    @endif
+
+                                    <th>{{ __('Employee') }}</th>
+
                                     <th>{{ __('Date') }}</th>
                                     <th class="text-center">{{ __('Hours') }}</th>
                                     <th>{{ __('Description') }}</th>
@@ -107,9 +107,9 @@
                                 <tbody>
                                 @foreach ($timeSheets as $timeSheet)
                                     <tr>
-                                        @if (\Auth::user()->type != 'employee')
+
                                             <td>{{  $timeSheet->employees->name??'' }}</td>
-                                        @endif
+
                                         <td>{{ \Auth::user()->dateFormat($timeSheet->date) }}</td>
                                         <td class="text-center">
                                             <span class="badge bg-primary rounded-pill px-3 py-2">

@@ -109,9 +109,9 @@
                     <table class="table table-striped table-bordered align-middle">
                         <thead>
                             <tr>
-                                @if (\Auth::user()->type != 'employee')
+
                                 <th>{{ __('Employee') }}</th>
-                                @endif
+
                                 <th>{{ __('Date') }}</th>
                                 <th>{{ __('Status') }}</th>
                                 <th>{{ __('Clock In') }}</th>
@@ -127,9 +127,9 @@
                         <tbody>
                             @foreach ($attendanceEmployee as $attendance)
                             <tr>
-                                @if (\Auth::user()->type != 'employee')
+
                                 <td>{{ $attendance->employee->name ?? '' }}</td>
-                                @endif
+
                                 <td>{{ \Auth::user()->dateFormat($attendance->date) }}</td>
                                 <td>{{ $attendance->status }}</td>
                                 <td>{{ $attendance->clock_in != '00:00:00' ? \Auth::user()->timeFormat($attendance->clock_in) : '00:00' }}</td>

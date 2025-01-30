@@ -7,7 +7,7 @@
 @section('content')
     <div class="row">
         <div class="d-flex justify-content-end mb-4">
-            @can('Create Assets')
+            @can('Create Document')
                 <a href="#" data-bs-toggle="modal" data-bs-target="#addDocumentModal" class="btn btn-primary me-3">
                     <i class="fas fa-plus me-2"></i> {{ __('Upload New Document') }}
                 </a>
