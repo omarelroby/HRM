@@ -567,5 +567,9 @@ class AttendanceEmployeeController extends Controller
             return redirect()->back()->with('error', __('Permission denied.'));
         }
     }
+    public function markAttendance(Request $request)
+    {
+        dd($request->all());
+    }
 
 }

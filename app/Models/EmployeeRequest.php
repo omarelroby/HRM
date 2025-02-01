@@ -18,6 +18,7 @@ class EmployeeRequest extends Model
         'request_reason_ar',
         'status',
         'created_by',
+        'reject_reason',
     ];
 
     public function requestType()

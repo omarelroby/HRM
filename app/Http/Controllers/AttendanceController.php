@@ -225,5 +225,56 @@ class AttendanceController extends Controller
         }
 
     }
+    public function markAttendance(Request $request)
+    {
+        dd($request->all());
+        $request->validate([
+            'action' => 'required|in:clock-in,clock-out',
+        ]);
+
+        // Get the authenticated user
+        $user = auth()->user();
+
+        // Get the current date
+        $currentDate = now()->toDateString();
+
+        // Check if the user has already clocked in/out today
+        $attendance = Attendance::where('user_id', $user->id)
+            ->whereDate('date', $currentDate)
+            ->first();
+
+        // Handle clock-in
+        if ($request->action == 'clock-in') {
+            if ($attendance && $attendance->clock_in) {
+                return response()->json(['error' => 'You have already clocked in today.'], 400);
+            }
+
+            // Create or update the attendance record
+            Attendance::updateOrCreate(
+                ['user_id' => $user->id, 'date' => $currentDate],
+                ['clock_in' => now()]
+            );
+
+            return response()->json(['success' => true, 'message' => 'Clock In successful.']);
+        }
+
+        // Handle clock-out
+        if ($request->action == 'clock-out') {
+            if (!$attendance || !$attendance->clock_in) {
+                return response()->json(['error' => 'You must clock in before clocking out.'], 400);
+            }
+
+            if ($attendance->clock_out) {
+                return response()->json(['error' => 'You have already clocked out today.'], 400);
+            }
+
+            // Update the attendance record
+            $attendance->update(['clock_out' => now()]);
+
+            return response()->json(['success' => true, 'message' => 'Clock Out successful.']);
+        }
+
+        return response()->json(['error' => 'Invalid action.'], 400);
+    }
 
 }

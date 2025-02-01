@@ -67,17 +67,6 @@
                 </ol>
             </nav>
         </div>
-
-                <div class="attendance-container">
-                    <h2>Mark Attendance</h2>
-                    <p class="office-time">My Office Time: 09:00 to 18:00</p>
-                    <div class="btn-container">
-                        <button class="btn btn-clock-in">Clock In</button>
-                        <button class="btn btn-clock-out">Clock Out</button>
-                    </div>
-                </div>
-
-
     </div>
     <!-- /Breadcrumb -->
 

@@ -1,5 +1,63 @@
 @extends('dashboard.layouts.master')
 @include('dashboard.layouts.header')
+@push('css')
+    <style>
+        /* Add the CSS code below */
+        .attendance-container {
+            max-width: 700px;
+            margin: 50px auto;
+            height: auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        .attendance-container h2 {
+            margin-bottom: 15px;
+            font-size: 20px;
+            color: #333;
+        }
+        .office-time {
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        .btn {
+            flex: 1;
+            padding: 10px 15px;
+            font-size: 14px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .btn-clock-in {
+            background-color: #5cb85c;
+            color: white;
+            width: 250px;
+        }
+        .btn-clock-in:hover {
+            background-color: #4cae4c;
+        }
+        .btn-clock-out {
+            background-color: #d9534f;
+            color: white;
+            width: 250px;
+        }
+        .btn-clock-out:hover {
+            background-color: #c9302c;
+        }
+    </style>
+
+
+@endpush
 @section('content')
 
     <div class="d-md-flex d-block align-items-center justify-content-between page-breadcrumb mb-3">
@@ -44,8 +102,27 @@
             </div>
         @endif
 {{--            first card widget--}}
+
+            <div class="col-md-4 d-flex card">
+                <div class="card-body">
+                    <div class="attendance-container">
+                        <h2>Mark Attendance</h2>
+                        <p class="office-time">My Office Time: 09:00 to 18:00</p>
+                        <div class="btn-container">
+                            <form id="attendance-form">
+                                @csrf <!-- Add CSRF token for security -->
+                                <input type="hidden" name="action" id="action" value=""> <!-- Hidden field to store action (clock-in/clock-out) -->
+                                <button type="button"  class="btn btn-clock-in my-2" onclick="handleAttendance('clock-in')">Clock In</button>
+                                <button type="button" class="btn btn-clock-out" onclick="handleAttendance('clock-out')">Clock Out</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
     <div class="col-xxl-4 d-flex">
         <div class="row flex-fill">
+
             <div class="col-md-6 d-flex">
                 <div class="card flex-fill">
                     <div class="card-body">
@@ -164,8 +241,9 @@
                                         <div class="d-flex align-items-center">
                                             <a href="javascript:void(0);" class="link-default me-2"><i class="ti ti-clock-share"></i></a>
                                             <span class="fs-10 fw-medium d-inline-flex align-items-center badge badge-success">
-            <i class="ti ti-circle-filled fs-5 me-1"></i>{{ $hours }} hrs {{ $minutes }} min
-        </span>
+                                            <i class="ti ti-circle-filled fs-5 me-1">
+                                            </i>{{ $hours }} hrs {{ $minutes }} min
+                                        </span>
                                         </div>
                                     </div>
 
@@ -718,5 +796,36 @@
                         height: auto;
                     }
                 </style>
+                <script>
+                    function handleAttendance(action) {
+                        // Set the action value in the hidden input field
+                        document.getElementById('action').value = action;
+
+                        // Get the form data
+                        const form = document.getElementById('attendance-form');
+                        const formData = new FormData(form);
+
+                        // Send the data to the server using fetch
+                        fetch('/mark-attendance', {
+                            method: 'POST',
+                            headers: {
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}', // Include CSRF token
+                            },
+                            body: formData
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    alert(data.message); // Show success message
+                                } else {
+                                    alert(data.error); // Show error message
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                                alert('An error occurred. Please try again.');
+                            });
+                    }
+                </script>
 @endsection
 

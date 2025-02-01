@@ -1,4 +1,3 @@
-
 @extends('dashboard.layouts.master')
 
 @section('page-title')
@@ -6,104 +5,104 @@
 @endsection
 
 @section('content')
-    <div class="row">
-        <div class="card bg-none card-box">
-            {{Form::model($employee_request,array('route' => array('employee_requests.update', $employee_request->id), 'method' => 'PUT')) }}
-            @if($employeeId) {{ Form::hidden('employee_id',$employeeId, array()) }} @endif
-            @if(\Auth::user()->type !='employee')
-                @if(!$employeeId)
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                {{Form::label('employee_id',__('Employee'))}}
-                                {{Form::select('employee_id',$employees,null,array('class'=>'form-control select2','id'=>'employee_id','placeholder'=>__('Select Employee')))}}
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card bg-none card-box">
+                <div class="card-header">
+                    <h4 class="card-title">{{ __('Edit Employee Request') }}</h4>
+                </div>
+                <div class="card-body">
+                    {{ Form::model($employee_request, ['route' => ['employee_requests.update', $employee_request->id], 'method' => 'PUT', 'class' => 'form-horizontal']) }}
+
+                    @if($employeeId)
+                        {{ Form::hidden('employee_id', $employeeId, ['class' => 'form-control']) }}
+                    @endif
+
+                    @if(\Auth::user()->type != 'employee' && !$employeeId)
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                {{ Form::label('employee_id', __('Employee'), ['class' => 'form-control-label required']) }}
+                                {{ Form::select('employee_id', $employees, null, ['class' => 'form-control select2', 'placeholder' => __('Select Employee'), 'required' => 'required']) }}
                             </div>
                         </div>
-                    </div>
-                @endif
-            @endif
+                    @endif
 
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        {{Form::label('request_type_id',__('Request_type'))}}
-                        {{Form::select('request_type_id',$leavetypes,null,array('class'=>'form-control select2','placeholder'=>__('Select Leave Type')))}}
-                    </div>
-                </div>
-
-
-
-                <div class="col-md-4">
-                    <div class="form-group">
-                        {{Form::label('start_date',__('Start Date'))}}
-                        {{Form::date('start_date',null,array('class'=>'form-control datepicker'))}}
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        {{Form::label('end_date',__('End Date'))}}
-                        {{Form::date('end_date',null,array('class'=>'form-control datepicker'))}}
-                    </div>
-                </div>
-                </div>
-
-
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        {{Form::label('request_reason',__('Request Reason'))}}
-                        {{Form::textarea('request_reason',null,array('class'=>'form-control','placeholder'=>__('Request Reason')))}}
-                    </div>
-                </div>
-
-
-
-
-                <div class="col-md-6">
-                    <div class="form-group">
-                        {{Form::label('request_reason_ar',__('Request Reason ar'))}}
-                        {{Form::textarea('request_reason_ar',null,array('class'=>'form-control','placeholder'=>__('Request Reason ar')))}}
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                @role('Company')
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            {{Form::label('status',__('Status'))}}
-                            <select name="status" id="" class="form-control select2">
-                                <option value="">{{__('Select Status')}}</option>
-                                <option value="pending" @if($employee_request->status=='Pending') selected="" @endif>{{__('Pending')}}</option>
-                                <option value="approval" @if($employee_request->status=='Approval') selected="" @endif>{{__('Approval')}}</option>
-                                <option value="reject" @if($employee_request->status=='Reject') selected="" @endif>{{__('Reject')}}</option>
-                            </select>
+                    <div class="form-group row">
+                        <div class="col-md-6">
+                            {{ Form::label('request_type_id', __('Request Type'), ['class' => 'form-control-label required']) }}
+                            {{ Form::select('request_type_id', $leavetypes, null, ['class' => 'form-control select2', 'placeholder' => __('Select Leave Type'), 'required' => 'required']) }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ Form::label('start_date', __('Start Date'), ['class' => 'form-control-label required']) }}
+                            {{ Form::date('start_date', null, ['class' => 'form-control datepicker', 'required' => 'required']) }}
                         </div>
                     </div>
-                </div>
-                @endrole
-                <div class="row">
-                    <div class="col-12 my-2">
-                        <input type="submit" value="{{__('Update')}}" class="btn btn-primary">
-                        <input type="button" value="{{__('Cancel')}}" class="btn btn-white" data-dismiss="modal">
+
+                    <div class="form-group row">
+                        <div class="col-md-6">
+                            {{ Form::label('end_date', __('End Date'), ['class' => 'form-control-label required']) }}
+                            {{ Form::date('end_date', null, ['class' => 'form-control datepicker', 'required' => 'required']) }}
+                        </div>
                     </div>
+
+                    @php
+                        // Get the employee's department, sub-department, and section
+                        $employee = \Auth::user()->getEmployee($employee_request->employee_id);
+                        $employeeDepartment = $employee->department_id ?? null;
+                        $employeeSubDepartment = $employee->sub_dep_id ?? null;
+                        $employeeSection = $employee->section_id ?? null;
+
+                        // Get the authenticated user's department, sub-department, and section
+                        $authUserDepartment = \Auth::user()->employee->department_id ?? null;
+                        $authUserSubDepartment = \Auth::user()->employee->sub_dep_id ?? null;
+                        $authUserSection = \Auth::user()->employee->section_id ?? null;
+                    @endphp
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            {{ Form::label('request_reason', __('Request Reason'), ['class' => 'form-control-label required']) }}
+                            {{ Form::textarea('request_reason', null, ['class' => 'form-control', 'placeholder' => __('Enter Request Reason'), 'rows' => 3, 'required' => 'required']) }}
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            {{ Form::label('request_reason_ar', __('Request Reason AR'), ['class' => 'form-control-label required']) }}
+                            {{ Form::textarea('request_reason_ar', null, ['class' => 'form-control', 'placeholder' => __('Enter Request Reason'), 'rows' => 3, 'required' => 'required']) }}
+                        </div>
+                    </div>
+                @if($employeeDepartment && $authUserSubDepartment == 0)
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                {{ Form::label('reject_reason', __('Reject Request Reason'), ['class' => 'form-control-label required']) }}
+                                {{ Form::textarea('reject_reason', null, ['class' => 'form-control', 'placeholder' => __('Enter Request Reason'), 'rows' => 3, 'required' => 'required']) }}
+                            </div>
+                        </div>
+                    @endif
+
+                    @if($employeeSubDepartment && empty($authUserSection) && $authUserSubDepartment != 0)
+
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                {{ Form::label('reject_reason', __('Request Reason'), ['class' => 'form-control-label required']) }}
+                                {{ Form::textarea('reject_reason', null, ['class' => 'form-control', 'placeholder' => __('Enter Request Reason'), 'rows' => 3, 'required' => 'required']) }}
+                            </div>
+                        </div>
+                    @endif
+
+                    <div class="form-group row mb-0 my-2">
+                        <div class="col-md-12 text-right">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> {{ __('Update') }}
+                            </button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                <i class="fas fa-times"></i> {{ __('Cancel') }}
+                            </button>
+                        </div>
+                    </div>
+                    {{ Form::close() }}
                 </div>
-                {{Form::close()}}
             </div>
-
-            <script>
-                $(function () {
-                    $(".gregorian-date , .datepicker").hijriDatePicker({
-                        format:'YYYY-M-D',
-                        showSwitcher: false,
-                        hijri:false,
-                        useCurrent: true,
-                    });
-                });
-            </script>
+        </div>
     </div>
-
 @endsection
 
 @section('script')
@@ -113,30 +112,14 @@
                 document.getElementById('delete-form-' + id).submit();
             }
         }
-    </script>
-    <script>
+
         $(function () {
-            $(".gregorian-date , .datepicker").hijriDatePicker({
-                format:'YYYY-M-D',
+            $(".gregorian-date, .datepicker").hijriDatePicker({
+                format: 'YYYY-M-D',
                 showSwitcher: false,
-                hijri:false,
+                hijri: false,
                 useCurrent: true,
             });
         });
     </script>
 @endsection
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

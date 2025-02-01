@@ -64,22 +64,85 @@
                                         @elseif ($leave->status == 2)
                                             <span class="badge bg-danger">{{ __('Reject By Department Manager') }}</span>
                                         @elseif ($leave->status == 3)
-                                            <span class="badge bg-success">{{ __('Approve By Branch Manager') }}</span>
+                                            <span class="badge bg-info">{{ __('Approve By Sub Department Manager') }}</span>
                                         @elseif ($leave->status == 4)
-                                            <span class="badge bg-danger">{{ __('Reject By Branch Manager') }}</span>
+                                            <span class="badge bg-danger">{{ __('Reject By Sub Department Manager') }}</span>
+                                        @elseif ($leave->status == 5)
+                                            <span class="badge bg-primary">{{ __('Approve By Company Manager') }}</span>
+                                        @elseif ($leave->status == 6)
+                                            <span class="badge bg-danger">{{ __('Reject By Company Manager') }}</span>
                                         @endif
                                     </td>
-                                    <td class="text-center">
-                                        @if ($leave->status == 0)
-                                            @can('Edit Leave')
-                                                <a href="{{ URL::to('employee_requests/' . $leave->id . '/edit') }}"   data-size="lg"
-                                                     data-title="{{ __('Edit Request') }}" class="btn btn-sm btn-success"
-                                                   title="{{ __('Edit') }}">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                            @endcan
+
+                                        <td class="text-center">
+                                            @if ($leave->status == 0)
+                                                @php
+                                                    // Get the employee's department, sub-department, and section
+                                                    $employee = \Auth::user()->getEmployee($leave->employee_id);
+                                                    $employeeDepartment = $employee->department_id ?? null;
+                                                    $employeeSubDepartment = $employee->sub_dep_id ?? null;
+                                                    $employeeSection = $employee->section_id ?? null;
+
+                                                    // Get the authenticated user's department, sub-department, and section
+                                                    $authUserDepartment = \Auth::user()->employee->department_id ?? null;
+                                                    $authUserSubDepartment = \Auth::user()->employee->sub_dep_id ?? null;
+                                                    $authUserSection = \Auth::user()->employee->section_id ??null  ;                                            ;
+
+
+                                                @endphp
+                                                {{-- Show buttons for department manager if the employee is in the same department and sub_dep_id is 0 --}}
+                                                @if ( $employeeDepartment && $authUserSubDepartment == 0)
+                                                    <button class="btn btn-sm btn-success approve-btn" data-id="{{ $leave->id }}" title="{{$authUserSubDepartment }}">
+                                                        <i class="fas fa-check"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-danger decline-btn" data-id="{{ $leave->id }}" title="{{ __('Reject') }}">
+                                                        <i class="fas fa-times"></i>
+                                                    </button>
+                                                @endif
+                                                {{-- Show buttons for sub-department manager if the employee is in the same sub-department and section_id is 0 --}}
+                                                @if ( $employeeSubDepartment  && empty($authUserSection) && $authUserSubDepartment != 0)
+                                                    <button class="btn btn-sm btn-success approve-btn" data-id="{{ $leave->id }}" title="{{ $authUserSection }}">
+                                                        <i class="fas fa-check"></i>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-danger decline-btn" data-id="{{ $leave->id }}" title="{{ __('Reject') }}">
+                                                        <i class="fas fa-times"></i>
+                                                    </button>
+                                                @endif
                                         @endif
 
+                                                <!-- Add this to your Blade template -->
+                                                <div class="modal fade" id="rejectReasonModal" tabindex="-1" role="dialog" aria-labelledby="rejectReasonModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="rejectReasonModalLabel">{{ __('reject Request Reason') }}</h5>
+
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <textarea id="rejectReason" class="form-control" placeholder="{{ __('Enter reason for rejection...') }}" rows="3" required></textarea>
+                                                            </div>
+                                                            <div class="modal-footer my-2">
+                                                                <button type="button" class="btn btn-secondary mx-1" data-bs-dismiss="modal">{{ __('Cancel') }}</button>
+                                                                <button type="button" class="btn btn-primary" id="submitRejectReason">{{ __('Submit') }}</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        @can('Edit Leave')
+                                            <a href="{{ URL::to('employee_requests/' . $leave->id . '/edit') }}"   data-size="lg"
+                                                 data-title="{{ __('Edit Request') }}" class="btn btn-sm btn-success"
+                                               title="{{ __('Edit') }}">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                        @endcan
+
+                                        @if(in_array($leave->status, [2,4,6]))
+                                            <button class="btn btn-sm btn-info view-reason-btn"
+                                                    data-reason="{{ $leave->reject_reason??'' }}"
+                                                    title="{{ __('View Request Reason') }}">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        @endif
                                         @can('Delete Leave')
                                             <button class="btn btn-sm btn-danger" title="{{ __('Delete') }}"
                                                 onclick="deleteConfirmation({{ $leave->id }})">
@@ -103,6 +166,23 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Add this modal at the bottom of your Blade template -->
+<div class="modal fade" id="viewReasonModal" tabindex="-1" role="dialog" aria-labelledby="viewReasonModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="viewReasonModalLabel">{{ __('Reject Request Reason') }}</h5>
+
+            </div>
+            <div class="modal-body">
+                <p id="requestReasonText"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Close') }}</button>
             </div>
         </div>
     </div>
@@ -212,6 +292,78 @@
             hijri:false,
             useCurrent: true,
         });
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Approve button handler
+        document.querySelectorAll('.approve-btn').forEach(function(button) {
+            button.addEventListener('click', function() {
+                const leaveId = this.getAttribute('data-id');
+                if (confirm('{{ __("Are you sure you want to approve this request?") }}')) {
+                    updateStatus(leaveId, 1);
+                }
+            });
+        });
+
+        // Decline button handler
+        document.querySelectorAll('.decline-btn').forEach(function(button) {
+            button.addEventListener('click', function() {
+                const leaveId = this.getAttribute('data-id');
+                // Store leave ID in modal and show
+                $('#rejectReasonModal').data('leaveId', leaveId).modal('show');
+            });
+        });
+
+        // Submit rejection reason handler
+        document.getElementById('submitRejectReason').addEventListener('click', function() {
+            const leaveId = $('#rejectReasonModal').data('leaveId');
+            const reason = document.getElementById('rejectReason').value.trim();
+
+            if (reason) {
+                updateStatus(leaveId, 2, reason);
+                $('#rejectReasonModal').modal('hide');
+                document.getElementById('rejectReason').value = ''; // Clear input
+            }
+        });
+
+        function updateStatus(leaveId, status, reason = null) {
+            const payload = { status: status };
+            if (reason) payload.reason = reason;
+
+            fetch(`/employee_requests/${leaveId}/update-status`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify(payload)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert(data.success);
+                        location.reload();
+                    } else {
+                        alert(data.error);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // View request reason handler
+        document.querySelectorAll('.view-reason-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const reason = this.getAttribute('data-reason');
+                document.getElementById('requestReasonText').textContent = reason;
+                $('#viewReasonModal').modal('show');
+            });
+        });
+
+        // Keep your existing approve/decline logic here
     });
 </script>
 @endsection

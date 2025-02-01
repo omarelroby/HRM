@@ -844,6 +844,7 @@ Route::get('employee_requests/{id}/action', 'EmployeeRequestController@action')-
         'XSS',
     ]
 );
+Route::post('/employee_requests/{id}/update-status','EmployeeRequestController@actionupdateStatus')->name('employee_requests.update_status');
 Route::post('employee_requests/changeaction', 'EmployeeRequestController@changeaction')->name('employee_requests.changeaction')->middleware(
     [
         'auth',
@@ -908,6 +909,7 @@ Route::get('attendanceemployee/bulkattendance', 'AttendanceEmployeeController@bu
         'XSS',
     ]
 );
+Route::post('/mark-attendance', 'AttendanceEmployeeController@markAttendance')->name('mark.attendance');
 Route::post('attendanceemployee/bulkattendance', 'AttendanceEmployeeController@bulkAttendanceData')->name('attendanceemployee.bulkattendance')->middleware(
     [
         'auth',

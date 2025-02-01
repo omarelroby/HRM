@@ -74,6 +74,7 @@ class EmployeeRequestController extends Controller
                     }
                 }
             }
+
             return view('dashboard.employee_requests.index', compact('leaves', 'lang', 'employees', 'requesttypes', 'employeeId'));
         } else {
             return redirect()->back()->with('error', __('Permission denied.'));
@@ -207,6 +208,8 @@ class EmployeeRequestController extends Controller
                 if($validator->fails())
                 {
                     $messages = $validator->getMessageBag();
+
+
                     return redirect()->back()->with('error', $messages->first());
                 }
 
@@ -327,5 +330,55 @@ class EmployeeRequestController extends Controller
 
         return $leave_counts;
 
+    }
+    public function actionupdateStatus(Request $request, $id)
+    {
+
+        if (auth()->user()->type == 'employee') {
+            $emp_request = EmployeeRequest::findOrFail($id);
+            $dep = auth()->user()->employee->department_id;
+            $sub_dep = auth()->user()->employee->sub_dep_id;
+            $section_id = auth()->user()->employee->section_id;
+
+            if ($dep && $sub_dep == 0) {
+                if ($request->status == 1) {
+                    $emp_request->status = 1;
+                } else {
+                    $emp_request->status = 2;
+                    $emp_request->reject_reason = $request->reason;
+                }
+                $emp_request->save();
+            } elseif ($sub_dep && $section_id == 0) {
+                if ($request->status == 1) {
+                    $emp_request->status = 3;
+                } else {
+                    $emp_request->status = 4;
+                    $emp_request->reject_reason = $request->reason;
+
+                }
+                $emp_request->save();
+            }
+
+            return response()->json(['success' => __('Status updated successfully.'),'status' => 1]);
+        }
+        elseif (auth()->user()->type == 'company')
+        {
+            $emp_request = EmployeeRequest::findOrFail($id);
+            if ($request->status == 1) {
+                $emp_request->status =5;
+
+            } else {
+                $emp_request->status = 6;
+                $emp_request->reject_reason = $request->reason;
+
+            }
+            $emp_request->save();
+
+            return response()->json(['success' => __('Status updated successfully.'),'status' => 1]);
+
+        }
+        else {
+            return response()->json(['error' => __('Permission denied.')], 403);
+        }
     }
 }
