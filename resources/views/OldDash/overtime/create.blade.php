@@ -14,8 +14,8 @@
             {{ Form::number('hours',null, array('class' => 'form-control ','onkeyup' => 'calculateOvertimeRate('.$employee->id.')','required'=>'required','step'=>'0.01')) }}
         </div>
         <div class="form-group col-md-6">
-            {{ Form::label('rate', __('Rate'),['class'=>'form-control-label']) }}
-            {{ Form::number('rate',null, array('class' => 'form-control ','required'=>'required','step'=>'0.01')) }}
+            {{ Form::label('avg_hour', __('Avg Hour'),['class'=>'form-control-label']) }}
+            {{ Form::number('avg_hour',null, array('class' => 'form-control ','required'=>'required','step'=>'0.01')) }}
         </div>
         <div class="col-12">
             <input type="submit" value="{{__('Create')}}" class="btn btn-primary">

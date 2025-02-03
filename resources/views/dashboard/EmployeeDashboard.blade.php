@@ -2,6 +2,67 @@
 @include('dashboard.layouts.header')
 @push('css')
     <style>
+
+        /* Attendance Form Styling */
+        .attendance-form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .attendance-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .btn-clock-in {
+            background-color: #28a745; /* Green for clock-in */
+            color: white;
+        }
+
+        .btn-clock-in:hover:not(:disabled) {
+            background-color: #218838;
+            transform: translateY(-2px);
+        }
+
+        .btn-clock-out {
+            background-color: #dc3545; /* Red for clock-out */
+            color: white;
+        }
+
+        .btn-clock-out:hover:not(:disabled) {
+            background-color: #c82333;
+            transform: translateY(-2px);
+        }
+
+        /* Icons */
+        .fas {
+            font-size: 18px;
+        }
         /* Add the CSS code below */
         .attendance-container {
             max-width: 700px;
@@ -107,19 +168,38 @@
                 <div class="card-body">
                     <div class="attendance-container">
                         <h2>Mark Attendance</h2>
-                        <p class="office-time">My Office Time: 09:00 to 18:00</p>
+                        <p class="office-time">My Office Time: 09:00 to 17:00</p>
                         <div class="btn-container">
-                            <form id="attendance-form">
+                            <form id="attendance-form" class="attendance-form">
                                 @csrf <!-- Add CSRF token for security -->
                                 <input type="hidden" name="action" id="action" value=""> <!-- Hidden field to store action (clock-in/clock-out) -->
-                                <button type="button"  class="btn btn-clock-in my-2" onclick="handleAttendance('clock-in')">Clock In</button>
-                                <button type="button" class="btn btn-clock-out" onclick="handleAttendance('clock-out')">Clock Out</button>
+
+                                <div class="attendance-buttons">
+                                    @if($emp_att && $emp_att->clock_in)
+                                        <button type="button" class="btn btn-clock-in disabled" disabled>
+                                            <i class="fas fa-sign-in-alt"></i> Clocked In Today at: {{ $emp_att->clock_in }}
+                                        </button>
+                                    @else
+                                        <button type="button" class="btn btn-clock-in" onclick="handleAttendance('clock-in')">
+                                            <i class="fas fa-sign-in-alt"></i> Clock In
+                                        </button>
+                                    @endif
+
+                                    @if($emp_att && $emp_att->clock_out)
+                                        <button type="button" class="btn btn-clock-out disabled" disabled>
+                                            <i class="fas fa-sign-out-alt"></i> Clocked Out Today at: {{ $emp_att->clock_out }}
+                                        </button>
+                                    @else
+                                        <button type="button" class="btn btn-clock-out" onclick="handleAttendance('clock-out')">
+                                            <i class="fas fa-sign-out-alt"></i> Clock Out
+                                        </button>
+                                    @endif
+                                </div>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
-
     <div class="col-xxl-4 d-flex">
         <div class="row flex-fill">
 
@@ -811,14 +891,16 @@
                             headers: {
                                 'X-CSRF-TOKEN': '{{ csrf_token() }}', // Include CSRF token
                             },
-                            body: formData
+                            body: formData,
+
                         })
                             .then(response => response.json())
                             .then(data => {
                                 if (data.success) {
                                     alert(data.message); // Show success message
+                                    window.location.reload(); // Reload the page
                                 } else {
-                                    alert(data.error); // Show error message
+                                    alert(data.message); // Show error message
                                 }
                             })
                             .catch(error => {

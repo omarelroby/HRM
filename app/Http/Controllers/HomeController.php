@@ -101,43 +101,34 @@ class HomeController extends Controller
                     ->get()
                     ->take(3);
 
-                // Get employees who came early (before 08:00:00)
                 $data['early_arrivals'] = AttendanceEmployee::where('status', 'Present')
                     ->where('date', today()->format('Y-m-d'))
                     ->where('clock_in', '<=', '09:00:00') // Customize based on early arrival time
                     ->get();
-
-                // Get employees who came late (after 08:00:00)
                 $data['late_arrivals'] = AttendanceEmployee::where('status', 'Present')
                     ->where('date', today()->format('Y-m-d'))
                     ->where('clock_in', '>', '09:00:00') // Customize based on late arrival time
                     ->get();
-
                 $employees = Employee::count();
                 $data['absent_employees'] = $employees - ($data['early_arrivals']->count() + $data['late_arrivals']->count());
                 $data['openings'] = Job::select('id', 'title', 'position')
                     ->where('status', 'active')
                     ->get()
                     ->take(6);
-
                 $data['applicants'] = JobApplication::select('job', 'name', 'phone', 'profile', 'rating', 'skill', 'country', 'state', 'city', 'gender', 'dob')
                     ->with('jobRelation')
                     ->get()
                     ->take(6);
-                // Get the current date and calculate the date for 3 months ago
-                 $threeMonthsFromNow = Carbon::now()->addMonths(3);
+                $threeMonthsFromNow = Carbon::now()->addMonths(3);
                 $records = Document::with('document_type', 'employee')
                     ->whereBetween('end_date', [Carbon::now(), $threeMonthsFromNow])
                     ->whereNotNull('end_date')
                     ->where('created_by', auth()->user()->id)
                     ->paginate(10); // Paginate records with 10 per page
-
                 $groupedRecords = $records->getCollection()->groupBy(function ($record) {
                     return $record->document_type->name ?? 'Other';
                 });
-
                 $records->setCollection(collect($groupedRecords));
-
                 $data['records'] = $records;
                 // Query to count tasks by status
                 $statusCounts = Task::select(DB::raw('status, COUNT(*) as count'))
@@ -150,7 +141,6 @@ class HomeController extends Controller
                     'pending' => $statusCounts[2] ?? 0,
                     'canceled' => $statusCounts[3] ?? 0,
                 ];
-
                 $data['chartData'] = $chartData;
                 $data['employee_location'] = Place::where('created_by', \Auth::user()->creatorId())->get();
                 $data['employee_shifts']= Employee_shift::where('created_by', \Auth::user()->creatorId())->get();
@@ -166,7 +156,6 @@ class HomeController extends Controller
                 $data['designations']     = Designation::where('created_by', \Auth::user()->creatorId())->get();
                 $data['departments']  = Department::where('created_by', \Auth::user()->creatorId())->get();
                 $data['laborCompanies'] = Laborhirecompany::where('created_by', \Auth::user()->creatorId())->get();
-
                 $lastMonthStart = Carbon::now()->subMonth()->startOfMonth();
                 $lastMonthEnd = Carbon::now()->subMonth()->endOfMonth();
                 $data['new_join'] = Employee::whereBetween('Join_date_gregorian', [$lastMonthStart, $lastMonthEnd])->count();
@@ -439,6 +428,13 @@ class HomeController extends Controller
                     'canceled' => $statusCounts[2] ?? 0,
                     'finished' => $statusCounts[3] ?? 0,
                 ];
+                $now = Carbon::now();
+                $currentDate = $now->toDateString();
+                $data['emp_att'] = AttendanceEmployee::where('employee_id', \auth()->user()->employee->id)
+                    ->where('date', $currentDate)
+                    ->latest()
+                    ->first();
+
 
                 return view('dashboard.EmployeeDashboard', $data);
             }
@@ -447,41 +443,39 @@ class HomeController extends Controller
 
     public function getlanguvage($period)
     {
+        $departments = Department::select('name')
+            ->withCount('employeess') // Count employees for each department
+            ->get()
+            ->groupBy('name') // Group by department name
+            ->map(function ($group) use ($period) {
+                // Apply period-based filtering
+                if ($period === 'This Week') {
+                    $group = $group->filter(function ($employee) {
+                        return $employee->created_at->between(now()->startOfWeek(), now()->endOfWeek());
+                    });
+                } elseif ($period === 'This Month') {
+                    $group = $group->filter(function ($employee) {
+                        return $employee->created_at->month === now()->month;
+                    });
+                } elseif ($period === 'Last Week') {
+                    $group = $group->filter(function ($employee) {
+                        return $employee->created_at->between(now()->subWeek()->startOfWeek(), now()->subWeek()->endOfWeek());
+                    });
+                }
 
+                return [
+                    'name' => $group->first()->name, // Take the first instance's name
+                    'total_employees' => $group->count(), // Count employees after filtering
+                ];
+            })
+            ->values(); // Reset indices
 
-$departments = Department::select('name')
-    ->withCount('employeess') // Count employees for each department
-    ->get()
-    ->groupBy('name') // Group by department name
-    ->map(function ($group) use ($period) {
-        // Apply period-based filtering
-        if ($period === 'This Week') {
-            $group = $group->filter(function ($employee) {
-                return $employee->created_at->between(now()->startOfWeek(), now()->endOfWeek());
-            });
-        } elseif ($period === 'This Month') {
-            $group = $group->filter(function ($employee) {
-                return $employee->created_at->month === now()->month;
-            });
-        } elseif ($period === 'Last Week') {
-            $group = $group->filter(function ($employee) {
-                return $employee->created_at->between(now()->subWeek()->startOfWeek(), now()->subWeek()->endOfWeek());
-            });
-        }
-
-        return [
-            'name' => $group->first()->name, // Take the first instance's name
-            'total_employees' => $group->count(), // Count employees after filtering
+        $data = [
+        'departmentNames' => $departments->pluck('name'), // Unique department names
+        'totalEmployees' => $departments->pluck('total_employees'), // Count of each department with period filter applied
         ];
-    })
-    ->values(); // Reset indices
 
-$data = [
-'departmentNames' => $departments->pluck('name'), // Unique department names
-'totalEmployees' => $departments->pluck('total_employees'), // Count of each department with period filter applied
-];
-
-return response()->json($data);
+        return response()->json($data);
 
     }
 

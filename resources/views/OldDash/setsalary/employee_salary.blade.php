@@ -15,8 +15,6 @@
                     <h3> {{$employee->name}} </h3>
                 </div>
 
-
-
                 <div class="col-md-6">
                     <div class="card min-height-253">
                         <div class="card-header">
@@ -493,11 +491,6 @@
                                 <div class="col">
                                     <h6 class="mb-0">{{__('Absences')}}</h6>
                                 </div>
-                                @if(session('error'))
-                                    <div class="alert alert-danger">
-                                        {{ session('error') }}
-                                    </div>
-                                @endif
                                 @can('Create Overtime')
                                     <div class="col text-right">
                                         <a href="#" data-url="{{ route('absences.create',$employee->id) }}" data-size="md" data-ajax-popup="true" data-title="{{__('Create absence')}}" data-toggle="tooltip" data-original-title="{{__('Create absence')}}" class="btn btn-info">

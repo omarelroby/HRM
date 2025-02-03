@@ -9,6 +9,7 @@ use App\Models\Employee;
 use App\Models\IpRestrict;
 use App\Models\User;
 use App\Models\Utility;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -567,9 +568,106 @@ class AttendanceEmployeeController extends Controller
             return redirect()->back()->with('error', __('Permission denied.'));
         }
     }
+
+
     public function markAttendance(Request $request)
     {
-        dd($request->all());
-    }
 
+
+        // Define start and end times for the workday
+        $startTime = "09:00:00"; // Example start time
+        $endTime = "17:00:00";   // Example end time
+
+        // Initialize variables
+        $late = '00:00:00';
+        $earlyLeaving = '00:00:00';
+        $overtime = '00:00:00';
+
+        // Get the current date and time using Carbon
+        $now = Carbon::now();
+        $currentDate = $now->toDateString(); // Current date in Y-m-d format
+        $currentTime = $now->toTimeString(); // Current time in H:i:s format
+
+        // Get the authenticated user
+        $user = auth()->user();
+
+        // Handle clock-in action
+        if ($request->action === 'clock-in') {
+            // Calculate late time
+            $totalLateSeconds = strtotime($currentTime) - strtotime($startTime);
+
+            if ($totalLateSeconds > 0) {
+                $hours = floor($totalLateSeconds / 3600);
+                $mins  = floor($totalLateSeconds / 60 % 60);
+                $secs  = floor($totalLateSeconds % 60);
+                $late  = sprintf('%02d:%02d:%02d', $hours, $mins, $secs);
+            }
+
+            // Save clock-in time and late time to the database
+            AttendanceEmployee::updateOrCreate(
+                ['employee_id' => $user->employee->id, 'date' => $currentDate,'status' => 'Present'],
+                ['clock_in' => $currentTime, 'late' => $late]
+            );
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Clocked in successfully!',
+                'late' => $late,
+            ]);
+        }
+
+        // Handle clock-out action
+        if ($request->action === 'clock-out') {
+            // Fetch the attendance record for the current date
+            $attendance = AttendanceEmployee::where('employee_id', $user->employee->id)
+                ->where('date', $currentDate)
+                ->first();
+
+            if (!$attendance) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'You must clock in before clocking out.',
+                ]);
+            }
+
+            // Calculate early leaving time
+            $totalEarlyLeavingSeconds = strtotime($endTime) - strtotime($currentTime);
+
+            if ($totalEarlyLeavingSeconds > 0) {
+                $hours = floor($totalEarlyLeavingSeconds / 3600);
+                $mins  = floor($totalEarlyLeavingSeconds / 60 % 60);
+                $secs  = floor($totalEarlyLeavingSeconds % 60);
+                $earlyLeaving = sprintf('%02d:%02d:%02d', $hours, $mins, $secs);
+            }
+
+            // Calculate overtime
+            if (strtotime($currentTime) > strtotime($endTime)) {
+                $totalOvertimeSeconds = strtotime($currentTime) - strtotime($endTime);
+                $hours = floor($totalOvertimeSeconds / 3600);
+                $mins  = floor($totalOvertimeSeconds / 60 % 60);
+                $secs  = floor($totalOvertimeSeconds % 60);
+                $overtime = sprintf('%02d:%02d:%02d', $hours, $mins, $secs);
+            }
+
+            // Save clock-out time, early leaving time, and overtime to the database
+            $attendance->update([
+                'clock_out' => $currentTime,
+                'early_leaving' => $earlyLeaving,
+                'overtime' => $overtime,
+            ]);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Clocked out successfully!',
+                'early_leaving' => $earlyLeaving,
+                'overtime' => $overtime,
+            ]);
+        }
+
+        // Default response for invalid action
+        return response()->json([
+            'success' => false,
+            'message' => 'Invalid action.',
+        ]);
+    }
 }

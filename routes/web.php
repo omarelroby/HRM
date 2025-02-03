@@ -1,7 +1,6 @@
 <?php
 
-use App\Http\Controllers\companystructureController;
-use App\Http\Controllers\HomeController;
+ use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -890,6 +889,20 @@ Route::resource('tasks', 'TasksController')->middleware(
         'XSS',
     ]
 );
+Route::resource('mac-address', 'MacAddressController')->middleware(
+    [
+        'auth',
+        'XSS',
+    ]
+);
+Route::resource('sub-request-type', 'SubRequestTypeController')->middleware(
+    [
+        'auth',
+        'XSS',
+    ]
+);
+
+Route::get('/get-sub-request-types', 'SubRequestTypeController@getSubRequestTypes')->name('get.sub_request_types');
 Route::resource('document-type', 'DocumentTypeController')->middleware(
     [
         'auth',

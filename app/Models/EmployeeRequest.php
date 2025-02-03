@@ -19,6 +19,7 @@ class EmployeeRequest extends Model
         'status',
         'created_by',
         'reject_reason',
+        'sub_request_type_id',
     ];
 
     public function requestType()

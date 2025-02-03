@@ -17,7 +17,7 @@
 @endsection
 
 @section('content')
-
+    
     <div class="row">
         <div class="col-lg-12">
             <div class="ibox ">
@@ -54,7 +54,7 @@
                                     </tr>
                                 @endforeach
                             </tbody>
-
+                        
                         </table>
                     </div>
                 </div>

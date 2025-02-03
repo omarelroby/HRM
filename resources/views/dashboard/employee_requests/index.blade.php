@@ -82,31 +82,61 @@
                                                     $employeeDepartment = $employee->department_id ?? null;
                                                     $employeeSubDepartment = $employee->sub_dep_id ?? null;
                                                     $employeeSection = $employee->section_id ?? null;
-
-                                                    // Get the authenticated user's department, sub-department, and section
                                                     $authUserDepartment = \Auth::user()->employee->department_id ?? null;
                                                     $authUserSubDepartment = \Auth::user()->employee->sub_dep_id ?? null;
                                                     $authUserSection = \Auth::user()->employee->section_id ??null  ;                                            ;
 
 
                                                 @endphp
-                                                {{-- Show buttons for department manager if the employee is in the same department and sub_dep_id is 0 --}}
-                                                @if ( $employeeDepartment && $authUserSubDepartment == 0)
+                                            @if(auth()->user()->type=='company')
+                                                 @if ($employeeDepartment && $authUserSubDepartment == 0)
+
                                                     <button class="btn btn-sm btn-success approve-btn" data-id="{{ $leave->id }}" title="{{$authUserSubDepartment }}">
                                                         <i class="fas fa-check"></i>
                                                     </button>
                                                     <button class="btn btn-sm btn-danger decline-btn" data-id="{{ $leave->id }}" title="{{ __('Reject') }}">
                                                         <i class="fas fa-times"></i>
                                                     </button>
+
+
                                                 @endif
                                                 {{-- Show buttons for sub-department manager if the employee is in the same sub-department and section_id is 0 --}}
                                                 @if ( $employeeSubDepartment  && empty($authUserSection) && $authUserSubDepartment != 0)
-                                                    <button class="btn btn-sm btn-success approve-btn" data-id="{{ $leave->id }}" title="{{ $authUserSection }}">
+
+                                                    <button class="btn btn-sm btn-success approve-btn" data-id="{{ $leave->id }}" title="{{ auth()->user()->employee->id }}">
                                                         <i class="fas fa-check"></i>
                                                     </button>
                                                     <button class="btn btn-sm btn-danger decline-btn" data-id="{{ $leave->id }}" title="{{ __('Reject') }}">
                                                         <i class="fas fa-times"></i>
                                                     </button>
+
+
+                                                @endif
+                                                @else
+                                                    @if ($employeeDepartment && $authUserSubDepartment == 0)
+                                                        @if($leave->employee_id != Auth::user()->employee->id )
+                                                            <button class="btn btn-sm btn-success approve-btn" data-id="{{ $leave->id }}" title="{{$authUserSubDepartment }}">
+                                                                <i class="fas fa-check"></i>
+                                                            </button>
+                                                            <button class="btn btn-sm btn-danger decline-btn" data-id="{{ $leave->id }}" title="{{ __('Reject') }}">
+                                                                <i class="fas fa-times"></i>
+                                                            </button>
+                                                        @endif
+
+                                                    @endif
+                                                    {{-- Show buttons for sub-department manager if the employee is in the same sub-department and section_id is 0 --}}
+                                                    @if ( $employeeSubDepartment  && empty($authUserSection) && $authUserSubDepartment != 0)
+                                                        @if($leave->employee_id != Auth::user()->employee->id )
+
+                                                            <button class="btn btn-sm btn-success approve-btn" data-id="{{ $leave->id }}" title="{{ auth()->user()->employee->id }}">
+                                                                <i class="fas fa-check"></i>
+                                                            </button>
+                                                            <button class="btn btn-sm btn-danger decline-btn" data-id="{{ $leave->id }}" title="{{ __('Reject') }}">
+                                                                <i class="fas fa-times"></i>
+                                                            </button>
+
+                                                        @endif
+                                                    @endif
                                                 @endif
                                         @endif
 
@@ -215,14 +245,31 @@
                     @endif
 
                     <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                {{Form::label('request_type_id',__('Request_type'))}}
-                                <select name="request_type_id" id="request_type_id" class="form-control select2">
-                                    @foreach($requesttypes as $requesttype)
-                                        <option value="{{ $requesttype->id }}">{{$requesttype['name'.$lang]}}</option>
-                                    @endforeach
-                                </select>
+
+                        <div class="row">
+                            <!-- Request Type Dropdown -->
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {{ Form::label('request_type_id', __('Request Type')) }}
+                                    <select name="request_type_id" id="request_type_id" class="form-control select2">
+                                        <option value="">{{ __('Select Request Type') }}</option>
+                                        @foreach($requesttypes as $requesttype)
+                                            <option value="{{ $requesttype->id }}">{{ $requesttype['name'.$lang] }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sub Request Type Dropdown (Initially Hidden) -->
+                        <div class="row" id="sub_request_type_row" style="display: none;">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {{ Form::label('sub_request_type_id', __('Sub Request Type')) }}
+                                    <select name="sub_request_type_id" id="sub_request_type_id" class="form-control select2">
+                                        <option value="">{{ __('Select Sub Request Type') }}</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -283,6 +330,54 @@
             document.getElementById('delete-form-' + id).submit();
         }
     }
+</script>
+<script>
+    $(document).ready(function () {
+        // Initialize Select2 for dropdowns
+        $('.select2').select2({
+            placeholder: "{{ __('Select an option') }}",
+            allowClear: true
+        });
+
+        // Handle change event for request_type dropdown
+        $('#request_type_id').change(function () {
+            const requestTypeId = $(this).val();
+
+            if (requestTypeId) {
+                // Fetch sub_request_types via AJAX
+                $.ajax({
+                                                                                                            url: "{{ route('get.sub_request_types') }}",
+                    type: "GET",
+                    data: {
+                        request_type_id: requestTypeId
+                    },
+                    success: function (response) {
+                        if (response.length > 0) {
+                            // Populate sub_request_type dropdown
+                            $('#sub_request_type_id').empty().append('<option value="">{{ __('Select Sub Request Type') }}</option>');
+                            $.each(response, function (key, value) {
+                                $('#sub_request_type_id').append('<option value="' + value.id + '">' + value['name{{ $lang }}'] + '</option>');
+                            });
+
+                            // Show the sub_request_type dropdown
+                            $('#sub_request_type_row').show();
+                        } else {
+                            // Hide the sub_request_type dropdown if no data is found
+                            $('#sub_request_type_row').hide();
+                            $('#sub_request_type_id').empty().append('<option value="">{{ __('No Sub Request Types Found') }}</option>');
+                        }
+                    },
+                    error: function (xhr) {
+                        console.error(xhr);
+                    }
+                });
+            } else {
+                // Hide the sub_request_type dropdown if no request_type is selected
+                $('#sub_request_type_row').hide();
+                $('#sub_request_type_id').empty().append('<option value="">{{ __('Select Sub Request Type') }}</option>');
+            }
+        });
+    });
 </script>
 <script>
     $(function () {

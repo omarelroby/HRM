@@ -196,6 +196,7 @@
                                          <li><a href="{{ url('/jobtypes') }}" class="{{ Request::is('jobtypes') ?'active' :'' }}">{{ __('job_type') }}</a></li>
                                          <li><a href="{{ url('/banks') }}" class="{{ Request::is('banks') ?'active' :'' }}">{{ __('banks') }}</a></li>
                                          <li><a href="{{ url('/request_types') }}" class="{{ Request::is('request_types') ?'active' :'' }}">{{ __('request_types') }}</a></li>
+                                         <li><a href="{{ url('/sub-request-type') }}" class="{{ Request::is('sub-request-type') ?'active' :'' }}">{{ __('sub request type') }}</a></li>
                                          <li><a href="{{ url('/holiday') }}" class="{{ Request::is('holiday') ?'active' :'' }}">{{ __('holiday') }}</a></li>
 
                                          <li><a href="{{ url('/salary_component_type') }}" class="{{ Request::is('salary_component_type') ?'active' :'' }}">{{ __('salary_component_type') }}</a></li>
@@ -248,6 +249,9 @@
                                             <li><a class="{{ Request::is('attendanceemployee') ?'active' :'' }}" href="{{ route('attendanceemployee.index') }}">{{ __('Attendance History') }}</a></li>
                                             @if(\Auth::user()->type!='employee')
                                             <li><a class="{{ Request::is('attendanceemployee/bulkattendance') ?'active' :'' }}" href="{{ route('attendanceemployee.bulkattendance') }}">{{ __('Collective attendance') }}</a></li>
+                                            @endif
+                                            @if(\Auth::user()->type=='company')
+                                            <li><a class="{{ Request::is('mac-address') ?'active' :'' }}" href="{{ route('mac-address.index') }}">{{ __('Control Mac Address To Sign Attendance') }}</a></li>
                                             @endif
 
                                         </ul>

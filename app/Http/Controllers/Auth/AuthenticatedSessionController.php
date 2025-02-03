@@ -211,6 +211,12 @@ class AuthenticatedSessionController extends Controller
 
             }
         }
+        if($user->type=='super admin')
+        {
+            $user->last_login = date('Y-m-d H:i:s');
+            $user->save();
+            return redirect()->route('home');
+        }
 
 
 

@@ -37,7 +37,7 @@
                                 @foreach ($branches as $branch)
                                     <tr>
                                         <td>{{ $branch->name }}</td>
-                                        {{-- <td>{{ $branch->employees ? $branch->employees->name : '' }}</td> --}}
+                                        <td>{{ $branch->employees ? $branch->employees->name : '' }}</td>
                                         <td class="Action text-right">
                                             <span>
                                                 @can('Edit Branch')

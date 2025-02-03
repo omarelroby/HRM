@@ -7,7 +7,7 @@
         </div>
         <div class="col-12">
             <input type="submit" value="{{__('Bulk Payment')}}" class="btn btn-primary">
-            <input type="button" value="{{__('Cancel')}}" class="btn btn-white" data-dismiss="modal">
+            <input type="button" value="{{__('Cancel')}}" class="btn btn-white" data-bs-dismiss="modal">
         </div>
     </div>
     {{Form::close()}}

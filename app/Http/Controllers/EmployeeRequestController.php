@@ -192,43 +192,44 @@ class EmployeeRequestController extends Controller
 
     public function update(Request $request, EmployeeRequest $employee_request)
     {
-        if(\Auth::user()->can('Edit Leave'))
-        {
-            if($employee_request->created_by == Auth::user()->creatorId())
-            {
-                $validator = \Validator::make(
-                $request->all(), [
-                    'request_type_id'   => 'required',
-                    'start_date'        => 'required',
-                    'end_date'          => 'required',
-                    'request_reason'    => 'required',
-                    'request_reason_ar' => 'required',
-                ]);
+        if (\Auth::user()->can('Edit Leave')) {
+            if ($employee_request->created_by == Auth::user()->creatorId()) {
+//                $validator = \Validator::make(
+//                    $request->all(),
+//                    [
+//                        'request_type_id'   => 'required',
+//                        'start_date'        => 'required',
+//                        'end_date'          => 'required',
+//                        'request_reason'    => 'required',
+//                        'request_reason_ar' => 'required',
+//                        'status'            => 'required|in:0,1,2,3,4,5,6', // Validate status values
+//                        'reject_reason'     => 'required_if:status,2,4,6', // Reject reason is required for status 2, 4, 6
+//                    ]
+//                );
+//
+//                if ($validator->fails()) {
+//                    $messages = $validator->getMessageBag();
+//                    return redirect()->back()->with('error', $messages->first());
+//                }
 
-                if($validator->fails())
-                {
-                    $messages = $validator->getMessageBag();
+                // Update the employee request
+                $input = $request->all();
 
-
-                    return redirect()->back()->with('error', $messages->first());
+                // Clear reject_reason if status is not 2, 4, or 6
+                if (!in_array($request->status, [2, 4, 6])) {
+                    $input['reject_reason'] = null;
                 }
 
-                $input    = $request->all();
                 $employee_request->update($input);
 
                 return redirect('employee_requests')->with('success', __('Leave successfully updated.'));
-            }
-            else
-            {
+            } else {
                 return redirect()->back()->with('error', __('Permission denied.'));
             }
-        }
-        else
-        {
+        } else {
             return redirect()->back()->with('error', __('Permission denied.'));
         }
     }
-
     public function destroy(EmployeeRequest $employee_request)
     {
         if(\Auth::user()->can('Delete Leave'))

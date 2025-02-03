@@ -4,12 +4,12 @@
 @endsection
 
 @section('action-button')
-
+   
     <div class="wrapper wrapper-content animated fadeInRight ecommerce">
         <div class="ibox-content m-b-sm border-bottom">
             {{ Form::open(array('route' => array('employee.profile'),'method'=>'get','id'=>'employee_profile_filter')) }}
                 <div class="row">
-
+                    
                         <div class="col-sm-3">
                             <div class="form-group">
                                 {{ Form::label('branch', __('Branch'),['class'=>'text-type']) }}
@@ -55,7 +55,7 @@
                         <div class="product-imitation">
                             <img style="width:100px;height:100px;" src="{{!empty($employee->user->avatar) ? asset(Storage::url('uploads/avatar')).'/'.$employee->user->avatar : asset(Storage::url('uploads/avatar')).'/avatar.png'}}" class="avatar rounded-circle avatar-xl">
                         </div>
-                        <div class="product-desc">
+                        <div class="product-desc">                            
                             <h5>{{ $employee->name }}</h5>
                             <div class="small m-t-xs">
                                 <div class="sal-right-card">

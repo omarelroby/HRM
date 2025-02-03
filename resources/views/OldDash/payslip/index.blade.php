@@ -2,64 +2,14 @@
 @section('page-title')
     {{__('Payslip')}}
 @endsection
-@section('action-button')
-    @can('Create Pay Slip')
-        {{Form::open(array('route'=>array('payslip.store'),'method'=>'POST','class'=>'w-100','id'=>'payslip_form'))}}
-            <div class="row d-flex">
 
-                <div class="col-xl-2 col-lg-2 col-md-6">
-                    <div class="all-select-box">
-                        <div class="btn-box">
-                            {{Form::label('month',__('Select Month'),['class'=>'text-type'])}}
-                            {{Form::select('month',$month,null,array('class'=>'form-control month select2' ))}}
-                        </div>
-                    </div>
-                </div>
 
-                <div class="col-xl-2 col-lg-2 col-md-6">
-                    <div class="all-select-box">
-                        <div class="btn-box">
-                            {{Form::label('year',__('Select Year'),['class'=>'text-type'])}}
-                            {{Form::select('year',$year,null,array('class'=>'form-control year select2' ))}}
-                        </div>
-                    </div>
-                </div>
-
-                <div style="margin-top:2%;" class="col-xl-2 col-lg-2 col-md-6 col-auto text-right payslip-btn">
-                    <a href="#" class="btn btn-primary btn-icon-only w-100 width-auto" onclick="document.getElementById('payslip_form').submit(); return false;">
-                        {{__('Generate Payslip')}}
-                    </a>
-                </div>
-
-                @can('Create Pay Slip')
-                    <div style="margin-top:2%;" class="col-xl-2 col-lg-2 col-md-6 col-auto text-right payslip-btn">
-                        <a  id="payrollexport" href="#" class="btn btn-success w-100 btn-icon-only width-auto">
-                        {{ __('Export') }} <i class="fa fa-file-excel-o"></i>
-                        </a>
-                    </div>
-
-                    <div style="margin-top:2%;" class="col-xl-2 col-lg-2 col-md-6 col-auto text-right payslip-btn">
-                        <a id="payrollpdf" target="_blank" href="#" class="btn btn-info w-100 btn-icon-only width-auto">
-                            {{ __('Monthly payroll Log') }} <i class="fa fa-file-pdf-o"></i>
-                        </a>
-                    </div>
-
-                    <div style="margin-top:2%;" class="col-xl-2 col-lg-2 col-md-6 col-auto text-right payslip-btn">
-                        <a id="payrollbarpdf" target="_blank" href="#" class="btn btn-info w-100 btn-icon-only width-auto">
-                            {{ __('salary bar') }} <i class="fa fa-file-pdf-o"></i>
-                        </a>
-                    </div>
-                @endcan
-            </div>
-        {{ Form::close() }}
-    @endcan
-@endsection
 
 @section('content')
     <div style="width:100%;" class="row">
         <div class="col-12">
             <div class="card">
-
+                @can('Create Pay Slip')
                 <div class="card-header">
                     <form>
                         <div class="d-flex justify-content-between w-100">
@@ -85,6 +35,7 @@
                         </div>
                     </form>
                 </div>
+                @endcan
 
                 <div class="col-lg-12">
                     <div class="ibox ">
@@ -133,7 +84,7 @@
                             var year  = $(".year_date").val();
                             var datePicker = year + '-' + month;
                             var id = data[0];
-                            console.log(data);
+
                             if (data[6] == 'Paid')
                                 return '<div class="badge badge-pill badge-success"><a href="#" class="text-white">' + data[6] + '</a></div>';
                             else
