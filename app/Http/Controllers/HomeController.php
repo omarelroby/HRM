@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AboutUs;
 use App\Models\Absence;
 use App\Models\AccountList;
 use App\Models\Announcement;
@@ -17,6 +18,7 @@ use App\Models\Employee_shift;
 use App\Models\EmployeeContracts;
 use App\Models\EmployeeRequest;
 use App\Models\Event;
+use App\Models\HomeSection;
 use App\Models\Job;
 use App\Models\JobApplication;
 use App\Models\Jobtitle;
@@ -440,7 +442,12 @@ class HomeController extends Controller
             }
         }
     }
-
+    public function landing_page()
+    {
+        $data['homeSection']=HomeSection::firstOrFail();
+        $data['about']=AboutUs::firstOrFail();
+        return view('front.index',$data);
+    }
     public function getlanguvage($period)
     {
         $departments = Department::select('name')

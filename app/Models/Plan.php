@@ -15,7 +15,8 @@ class Plan extends Model
         'max_employees',
         'max_venders',
         'description',
-        'image',
+        'chat_gpt',
+        'storage',
     ];
 
     public static $arrDuration = [

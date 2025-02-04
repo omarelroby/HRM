@@ -1,6 +1,8 @@
 <?php
 
  use App\Http\Controllers\HomeController;
+use App\Http\Controllers\HomeSectionController;
+use App\Http\Controllers\LocaleController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -35,10 +37,16 @@ Route::get('/check', 'HomeController@check')->middleware(
 
 Route::get('/password/resets/{lang?}', 'Auth\LoginController@showLinkRequestForm')->name('change.langPass');
 
-Route::get('/', 'HomeController@index')->name('home')->middleware(['XSS']);
+Route::get('/', 'HomeController@landing_page')->name('landingPage')->middleware(['XSS']);
+
+Route::get('/home-sections',   'HomeSectionController@index' )->name('home-sections.index')->middleware(['XSS']);
+Route::get('/about-us',   'AboutUsController@index' )->name('about-us.index')->middleware(['XSS']);
+Route::put('/about-us/{aboutUs}', 'AboutUsController@update')->name('about-us.update')->middleware(['XSS']);;
+
 Route::get('/about', 'HomeController@about')->name('about')->middleware(['XSS']);
 Route::get('/solutions', 'HomeController@solutions')->name('solutions')->middleware(['XSS']);
 Route::get('/pricing', 'HomeController@pricing')->name('pricing')->middleware(['XSS']);
+Route::get('/locale/{locale}', [LocaleController::class, 'setLocale'])->name('locale.set');
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware(
     [

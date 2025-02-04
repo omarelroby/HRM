@@ -15,10 +15,11 @@ class PlanController extends Controller
     {
         if (\Auth::user()->can('Manage Plan')) {
             $plans                 = Plan::get();
+            $arrDuration = Plan::$arrDuration;
 
             $admin_payment_setting = Utility::getAdminPaymentSetting();
 
-            return view('plan.index', compact('plans', 'admin_payment_setting'));
+            return view('dashboard.plan.index', compact('plans', 'admin_payment_setting','arrDuration'));
         } else {
             return redirect()->back()->with('error', __('Permission denied.'));
         }
@@ -40,9 +41,8 @@ class PlanController extends Controller
     public function store(Request $request)
     {
         if (\Auth::user()->can('Create Plan')) {
-            $admin_payment_setting = Utility::getAdminPaymentSetting();
-            if (!empty($admin_payment_setting) && ($admin_payment_setting['is_stripe_enabled'] == 'on' || $admin_payment_setting['is_paypal_enabled'] == 'on' || $admin_payment_setting['is_paystack_enabled'] == 'on' || $admin_payment_setting['is_flutterwave_enabled'] == 'on' || $admin_payment_setting['is_razorpay_enabled'] == 'on' || $admin_payment_setting['is_mercado_enabled'] == 'on' || $admin_payment_setting['is_paytm_enabled'] == 'on' || $admin_payment_setting['is_mollie_enabled'] == 'on' || $admin_payment_setting['is_paypal_enabled'] == 'on' || $admin_payment_setting['is_skrill_enabled'] == 'on' || $admin_payment_setting['is_coingate_enabled'] == 'on')) {
-                $validator = \Validator::make(
+//            $admin_payment_setting = Utility::getAdminPaymentSetting();
+                 $validator = \Validator::make(
                     $request->all(),
                     [
                         'name'          => 'required|unique:plans',
@@ -58,15 +58,14 @@ class PlanController extends Controller
                 }
 
                 $post = $request->all();
+                $post['chat_gpt']=$request->chat_gpt?1:0;
 
                 if (Plan::create($post)) {
                     return redirect()->back()->with('success', __('Plan Successfully created.'));
                 } else {
                     return redirect()->back()->with('error', __('Something is wrong.'));
                 }
-            } else {
-                return redirect()->back()->with('error', __('Please set stripe/paypal api key & secret key for add new plan'));
-            }
+
         } else {
             return redirect()->back()->with('error', __('Permission denied.'));
         }
@@ -79,7 +78,7 @@ class PlanController extends Controller
             $arrDuration = Plan::$arrDuration;
             $plan        = Plan::find($plan_id);
 
-            return view('plan.edit', compact('plan', 'arrDuration'));
+            return view('dashboard.plan.edit', compact('plan', 'arrDuration'));
         } else {
             return redirect()->back()->with('error', __('Permission denied.'));
         }
@@ -89,9 +88,8 @@ class PlanController extends Controller
     public function update(Request $request, $plan_id)
     {
         if (\Auth::user()->can('Edit Plan')) {
-            $admin_payment_setting = Utility::getAdminPaymentSetting();
-            if (!empty($admin_payment_setting) &&  ($admin_payment_setting['is_stripe_enabled'] == 'on' || $admin_payment_setting['is_paypal_enabled'] == 'on' || $admin_payment_setting['is_paystack_enabled'] == 'on' || $admin_payment_setting['is_flutterwave_enabled'] == 'on' || $admin_payment_setting['is_razorpay_enabled'] == 'on' || $admin_payment_setting['is_mercado_enabled'] == 'on' || $admin_payment_setting['is_paytm_enabled'] == 'on' || $admin_payment_setting['is_mollie_enabled'] == 'on' || $admin_payment_setting['is_paypal_enabled'] == 'on' || $admin_payment_setting['is_skrill_enabled'] == 'on' || $admin_payment_setting['is_coingate_enabled'] == 'on')) {
-                $plan = Plan::find($plan_id);
+//            $admin_payment_setting = Utility::getAdminPaymentSetting();
+                 $plan = Plan::find($plan_id);
                 if (!empty($plan)) {
                     $validator = \Validator::make(
                         $request->all(),
@@ -109,18 +107,17 @@ class PlanController extends Controller
                     }
 
                     $post = $request->all();
+                    $post['chat_gpt']=$request->chat_gpt?1:0;
 
                     if ($plan->update($post)) {
-                        return redirect()->back()->with('success', __('Plan successfully updated.'));
+                        return redirect('plans')->with('success', __('Plan successfully updated.'));
                     } else {
                         return redirect()->back()->with('error', __('Something is wrong.'));
                     }
                 } else {
                     return redirect()->back()->with('error', __('Plan not found.'));
                 }
-            } else {
-                return redirect()->back()->with('error', __('Please set stripe/paypal api key & secret key for add new plan'));
-            }
+
         } else {
             return redirect()->back()->with('error', __('Permission denied.'));
         }
@@ -128,13 +125,14 @@ class PlanController extends Controller
 
     public function destroy($id)
     {
-        $user = \Auth::user();
-        $user = User::where('id', '=',  $user->id)->first();
-        $user->requested_plan = "0";
-        $user->save();
+//        $user = \Auth::user();
+//        $user = User::where('id', '=',  $user->id)->first();
+//        $user->requested_plan = "0";
+//        $user->save();
 
         $plan = Plan::findOrFail($id);
-        PlanRequest::where('plan_id', $plan->id)->where('user_id', '=',  $user->id)->delete();
+        $plan->delete();
+//        PlanRequest::where('plan_id', $plan->id)->where('user_id', '=',  $user->id)->delete();
 
         return redirect()->route('plans.index')->with('success', 'Plan request successfully deleted.');
     }

@@ -2,6 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\AboutUs;
+use App\Models\HomeSection;
 use App\Models\LandingPageSection;
 use App\Models\Utility;
 use Closure;
@@ -56,6 +58,19 @@ class XSS
 //                }
 //            }
         }
+        // In a seeder or middleware
+        HomeSection::firstOrCreate([
+            'title' => 'Default Title',
+            'title_ar' => 'عنوان افتراضي',
+            'description' => 'Default description',
+            'description_ar' => 'وصف افتراضي',
+        ]);
+        AboutUs::firstOrCreate([
+            'title' => 'Default Title',
+            'title_ar' => 'عنوان افتراضي',
+            'description' => 'Default description',
+            'description_ar' => 'وصف افتراضي',
+        ]);
 
         return $next($request);
     }
