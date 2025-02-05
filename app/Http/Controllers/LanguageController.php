@@ -31,15 +31,14 @@ class LanguageController extends Controller
             $dir = base_path() . '/resources/lang/en';
         }
         $arrLabel   = json_decode(file_get_contents($dir . '.json'));
-
         $arrFiles   = array_diff(
             scandir($dir), array(
                              '..',
                              '.',
                          )
         );
-        $arrMessage = [];
 
+        $arrMessage = [];
         foreach($arrFiles as $file)
         {
             $fileName = basename($file, ".php");
@@ -58,8 +57,9 @@ class LanguageController extends Controller
     public function storeLanguageData(Request $request, $currantLang)
     {
 
-        if(Auth::user()->can('Create Language'))
-        {
+
+
+
             $Filesystem = new Filesystem();
             $dir        = base_path() . '/resources/lang/';
             if(!is_dir($dir))
@@ -78,11 +78,13 @@ class LanguageController extends Controller
 
             if(!is_dir($langFolder))
             {
+
                 mkdir($langFolder);
                 chmod($langFolder, 0777);
             }
             if(isset($request->message) && !empty($request->message))
             {
+
                 foreach($request->message as $fileName => $fileData)
                 {
                     $content = "<?php return [";
@@ -92,14 +94,12 @@ class LanguageController extends Controller
                 }
             }
 
+
             return redirect()->route('manage.language', [$currantLang])->with('success', __('Language save successfully.'));
         }
-        else
-       {
-            return redirect()->back();
-       }
 
-    }
+
+
 
     public function buildArray($fileData)
     {

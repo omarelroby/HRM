@@ -11,7 +11,9 @@
                        class="btn btn-primary btn-icon-only width-auto"
                        data-ajax-popup="true"
                        data-title="{{__('Create New')}}"
-                       data-toggle="modal" data-target="#createNationalityModal">
+                       data-toggle="modal"
+                       data-target="#createNationalityModal"
+                    >
                         <i class="fa fa-plus"></i> {{__('Create')}}
                     </a>
                 </div>

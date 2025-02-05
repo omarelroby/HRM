@@ -22,7 +22,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h5>{{__('Job type list')}}</h5>
+                    <h5>{{__('Holidays')}}</h5>
                 </div>
                 @if (session('success'))
                 <div class="alert alert-success" style="text-align: center;">{{ session('success') }}</div>

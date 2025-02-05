@@ -1,9 +1,15 @@
 @extends('dashboard.layouts.master')
 
 @section('content')
-    <h1>Home Sections</h1>
-    <a href="{{ route('home-sections.create') }}" class="btn btn-primary">Add New Section</a>
+    <div class="row">
+        <a href="{{ route('home-sections.create') }}" class="btn btn-primary">Add New Section</a>
 
+        <div class="col-lg-12">
+            <div class="card shadow-sm">
+                <div class="card-header text-white">
+                    <h5 class="mb-0">{{ __('Update About Us') }}</h5>
+                </div>
+                <div class="card-body">
     <table class="table">
         <thead>
         <tr>
@@ -36,4 +42,8 @@
         @endforeach
         </tbody>
     </table>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection

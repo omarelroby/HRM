@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\AboutUs;
+use App\Models\FrontSetting;
 use App\Models\HomeSection;
 use App\Models\LandingPageSection;
 use App\Models\Utility;
@@ -71,6 +72,20 @@ class XSS
             'description' => 'Default description',
             'description_ar' => 'وصف افتراضي',
         ]);
+
+
+        // Ensure a default FrontSetting exists
+        FrontSetting::firstOrCreate([
+            'address'   => 'Default Address',
+            'email'     => 'default@example.com',
+            'twitter'   => 'https://twitter.com/default',
+            'instagram' => 'https://instagram.com/default',
+            'facebook'  => 'https://facebook.com/default',
+            'linkedin'  => 'https://linkedin.com/default',
+            'phone'     => '000-000-0000',
+        ]);
+
+
 
         return $next($request);
     }

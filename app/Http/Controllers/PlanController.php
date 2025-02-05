@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Plan;
+use App\Models\PlanRequests;
 use App\Models\Utility;
 use App\Models\PlanRequest;
 use App\Models\User;
@@ -183,5 +184,21 @@ class PlanController extends Controller
         } else {
             return redirect()->back()->with('error', __('Permission denied.'));
         }
+    }
+    public  function plan_requests(Request $request)
+    {
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'phone' => 'required|string|max:255',
+            'email' => 'required|string|max:255',
+            'plan_id' => 'required',
+         ]);
+
+
+        PlanRequests::create($validated);
+
+        return redirect()->back()->with('success', 'Plan Request added successfully.');
+
     }
 }

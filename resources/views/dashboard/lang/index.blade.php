@@ -7,22 +7,7 @@
 @endsection
 
 @section('content')
-<div class="all-button-box row d-flex justify-content-end">
-    <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6 col-6">
-        <a href="#" data-url="{{ route('create.language') }}" class="btn btn-primary btn-icon-only width-auto" data-ajax-popup="true" data-title="{{__('Create New Language')}}">
-            <i class="fa fa-plus"></i> {{__('Create')}}
-        </a>
-    </div>
-    @if($currantLang != (!empty(env('default_language')) ? env('default_language') : 'en'))
-        <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6 col-6">
-            <a href="#!" class="btn btn-xs btn-icon icon-left btn-danger width-auto" data-toggle="tooltip" data-original-title="{{__('Delete')}}" data-confirm="{{__('Are You Sure?').' | '.__('This action can not be undone. Do you want to continue?')}}" data-confirm-yes="document.getElementById('delete-form-{{$currantLang}}').submit();">
-                <i class="fa fa-trash"></i> {{ __('Delete')}}
-            </a>
-            {!! Form::open(['method' => 'DELETE', 'route' => ['lang.destroy', $currantLang],'id'=>'delete-form-'.$currantLang]) !!}
-            {!! Form::close() !!}
-        </div>
-    @endif
-</div>
+
 <div class="card">
 
     <div class="card-body">

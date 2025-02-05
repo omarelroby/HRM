@@ -164,6 +164,11 @@
                                     <i class="ti ti-subtask"></i><span>{{ __('Plan') }}</span>
                                 </a>
                             </li>
+                            <li class="{{ Request::is('plan-requests')  ? 'active' : '' }}">
+                                <a href="{{ url('/plan-requests') }}">
+                                    <i class="ti ti-git-pull-request"></i><span>{{ __('Plan Requests') }}</span>
+                                </a>
+                            </li>
                             <li class="submenu">
                                 <a href="javascript:void(0);" class="subdrop {{ Request::is('user')     ? 'active' : '' }}">
                                     <i class="ti ti-user-circle"></i>
@@ -174,8 +179,9 @@
 
                                         <li><a href="{{ url('/home-sections') }}" class="{{ Request::is('home-sections') ?'active' :'' }}">{{ __('Home Section') }}</a></li>
                                         <li><a href="{{ url('/about-us') }}" class="{{ Request::is('about-us') ?'active' :'' }}">{{ __('About Us') }}</a></li>
-                                        <li><a href="{{ url('/lastlogin') }}" class="{{ Request::is('lastlogin') ?'active' :'' }}">{{ __('Last Login') }}</a></li>
-                                        <li><a href="{{ url('/lastlogin') }}" class="{{ Request::is('lastlogin') ?'active' :'' }}">{{ __('Last Login') }}</a></li>
+                                        <li><a href="{{ url('/clients') }}" class="{{ Request::is('clients') ?'active' :'' }}">{{ __('Clients') }}</a></li>
+                                        <li><a href="{{ url('/features') }}" class="{{ Request::is('features') ?'active' :'' }}">{{ __('Features') }}</a></li>
+                                        <li><a href="{{ url('/front-setting') }}" class="{{ Request::is('front-setting') ?'active' :'' }}">{{ __('Setting') }}</a></li>
 
                                 </ul>
                             </li>

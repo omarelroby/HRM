@@ -18,6 +18,8 @@ use App\Models\Employee_shift;
 use App\Models\EmployeeContracts;
 use App\Models\EmployeeRequest;
 use App\Models\Event;
+use App\Models\Feature;
+use App\Models\FrontSetting;
 use App\Models\HomeSection;
 use App\Models\Job;
 use App\Models\JobApplication;
@@ -446,6 +448,10 @@ class HomeController extends Controller
     {
         $data['homeSection']=HomeSection::firstOrFail();
         $data['about']=AboutUs::firstOrFail();
+        $data['setting']=FrontSetting::firstOrFail();
+        $data['clients']=\App\Models\Client::all();
+        $data['plans']=Plan::all();
+        $data['features']=Feature::all();
         return view('front.index',$data);
     }
     public function getlanguvage($period)

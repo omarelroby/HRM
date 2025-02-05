@@ -31,9 +31,63 @@
     <link href="{{asset('public/front/assets/vendor/aos/aos.css')}}" rel="stylesheet">
     <link href="{{asset('public/front/assets/vendor/swiper/swiper-bundle.min.css')}}" rel="stylesheet">
     <link href="{{asset('public/front/assets/vendor/glightbox/css/glightbox.min.css')}}" rel="stylesheet">
+    <!-- Bootstrap CSS (Already included in most themes) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
 
     <!-- Main CSS File -->
     <link href="{{asset('public/front/assets/css/main.css')}}" rel="stylesheet">
+    <style>
+        /* Modal background */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Modal content */
+        .modal-content {
+            background: white;
+            padding: 20px;
+            width: auto;
+            border-radius: 10px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Close button */
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        /* Button */
+        button {
+            padding: 10px 20px;
+            border: none;
+            background: #007BFF;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
 <style>
     body {
         font-family:
@@ -54,6 +108,11 @@
     .arabic-text {
         font-family: 'Cairo', sans-serif;
     }
+    h1, h2, h3, h4, h5, h6,
+    span {
+        font-family: 'Cairo', sans-serif;
+    }
+
     @endif
 /* Language Dropdown Container */
     .language-dropdown {
@@ -144,6 +203,56 @@
         transform: translateX(2px);
         transition: transform 0.2s ease;
     }
+    .client-card {
+        position: relative;
+        width: 150px; /* Equal width */
+        height: 150px; /* Equal height */
+        overflow: hidden;
+        border-radius: 10px;
+    }
+
+    /* Parent Container */
+    .client-container {
+        width: 150px; /* Set a fixed width or use max-width */
+        height: auto;
+        text-align: center;
+    }
+
+    /* Background Image */
+    .client-image {
+        width: 100%;
+        height: 150px; /* Equal height */
+        background-size: cover;
+        background-position: center;
+        opacity: 1;
+        border-radius: 10px;
+    }
+
+    /* Client Name Under Image */
+    .client-name {
+        width: 100%; /* Matches the image width */
+        text-align: center;
+        font-weight: bold;
+        font-size: 16px;
+        color: rgba(0, 0, 0, 0.7);;
+
+        padding: 8px;
+        border-radius: 0 0 10px 10px; /* Rounded bottom corners */
+    }
+    .icon {
+        text-align: center; /* Center the icon */
+        margin-bottom: 1rem; /* Add some space below the icon */
+    }
+    .icon-img {
+        width: 50px; /* Adjust size as needed */
+        height: 50px; /* Adjust size as needed */
+        object-fit: contain; /* Ensures the image fits within the dimensions */
+        display: block; /* Ensures the image is treated as a block element */
+        margin: 0 auto; /* Centers the image horizontally */
+    }
+
+
+
 
 </style>
 </head>
@@ -155,50 +264,55 @@
     <div class="topbar d-flex align-items-center">
         <div class="container d-flex justify-content-center justify-content-md-between">
             <div class="contact-info d-flex align-items-center">
-                <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">contact@example.com</a></i>
-                <i class="bi bi-phone d-flex align-items-center ms-4"><span>+1 5589 55488 55</span></i>
+                <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">{{$setting->email}}</a></i>
+                <i class="bi bi-phone d-flex align-items-center ms-4"><span>{{$setting->phone}}</span></i>
             </div>
             <div class="social-links d-none d-md-flex align-items-center">
-                <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a>
-                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+                <a href="{{$setting->twitter}}" target="_blank" class="twitter"><i class="bi bi-twitter-x"></i></a>
+                <a href="{{$setting->facebook}}" target="_blank" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="{{$setting->instagram}}" target="_blank" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="{{$setting->linkedin}}" target="_blank" class="linkedin"><i class="bi bi-linkedin"></i></a>
             </div>
         </div>
-        <!-- Language Dropdown Section -->
-        <div class="language-dropdown">
-            <!-- Dropdown Toggle Button -->
-            <button class="dropdown-toggle" id="languageDropdown">
-                <i class="fa text-white fa-globe text-warning fa-lg"></i>
-                <span class="current-language">
-            @if(app()->getLocale() == 'en')
-                        English
-                    @else
-                        عربي
-                    @endif
-        </span>
-            </button>
 
-            <!-- Dropdown Menu -->
-            <ul class="dropdown-menu" id="dropdownMenu">
-                <!-- English Option -->
-                <li>
-                    <a class="dropdown-item @if(app()->getLocale() == 'en') text-danger @endif"
-                       href="{{ route('change.language', 'en') }}">
-                        En
-                    </a>
-                </li>
+        <div class="d-flex align-items-center">
+            <!-- Login Button -->
 
-                <!-- Arabic Option -->
-                <li>
-                    <a class="dropdown-item @if(app()->getLocale() == 'ar') text-danger @endif"
-                       href="{{ route('change.language', 'ar') }}">
-                        ع
-                    </a>
-                </li>
-            </ul>
+
+            <div class="language-dropdown me-3">
+                <button class="dropdown-toggle" id="languageDropdown">
+                    <i class="fa text-white fa-globe text-warning fa-lg"></i>
+                    <span class="current-language">
+                    @if(app()->getLocale() == 'en')
+                            English
+                        @else
+                            عربي
+                        @endif
+                </span>
+                </button>
+
+
+                <ul class="dropdown-menu" id="dropdownMenu">
+                    <li>
+                        <a class="dropdown-item @if(app()->getLocale() == 'en') text-danger @endif"
+                           href="{{ route('change.language', 'en') }}">
+                            En
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item @if(app()->getLocale() == 'ar') text-danger @endif"
+                           href="{{ route('change.language', 'ar') }}">
+                            ع
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
         </div>
-    </div><!-- End Top Bar -->
+        <a href="{{ route('login') }}" class="text-dark px-3 py-2 d-flex align-items-center mx-5" style="background-color: white; border-radius: 5px;">
+            <i class="bi bi-box-arrow-in-right me-2"></i> Login
+        </a>
+    </div>
 
     <div class="branding d-flex align-items-center">
 
@@ -211,10 +325,9 @@
 
             <nav id="navmenu" class="navmenu" @if(app()->getLocale()=='ar') dir="rtl" @endif>
                 <ul>
-                    <li><a href="#hero" class="active">{{__('Home')}}</a></li>
-                    <li><a href="#about">{{__('About')}}</a></li>
-                    <li><a href="#services">Services</a></li>
-
+                    <li><a href="#hero" class="active"><span>{{__('Home')}}</span></a></li>
+                    <li><a href="#about"><span>{{__('About')}}</span></a></li>
+                    <li><a href="#services"><span> {{__('Features')}}</span></a></li>
                     <li><a href="#team">Team</a></li>
 
                     <li><a href="#contact">Contact</a></li>
@@ -236,7 +349,7 @@
         @if(app()->getLocale()=='ar')
         <div class="container" data-aos="fade-up" data-aos-delay="100" dir="rtl">
             <div class="row justify-content-start">
-                <div class="col-lg-8">
+                <div class="col-lg-12">
                     <h2>{{$homeSection->title_ar}}</h2>
                     <p>{{$homeSection->description_ar}}</p>
                     <a href="#about" class="btn-get-started">{{__('Get Started')}}</a>
@@ -246,7 +359,7 @@
         @else
             <div class="container" data-aos="fade-up" data-aos-delay="100" dir="rtl">
                 <div class="row justify-content-start">
-                    <div class="col-lg-8">
+                    <div class="col-lg-12">
                         <h2>{{$homeSection->title}}</h2>
                         <p>{{$homeSection->description}}</p>
                         <a href="#about" class="btn-get-started">{{__('Get Started')}}</a>
@@ -258,7 +371,7 @@
     </section><!-- /Hero Section -->
 
     <!-- About Section -->
-    <section id="about" class="about section">
+    <section id="about" class="about section ">
         @if(app()->getLocale()=='ar')
         <!-- Section Title -->
         <div class="container section-title" dir="rtl" data-aos="fade-up">
@@ -268,13 +381,10 @@
             <p>{{$about->title_ar}}</p>
         </div><!-- End Section Title -->
         <div class="container" dir="rtl">
-
-            <div class="row gy-4">
-
-
-
-                <div class="col-lg-6 order-2 order-lg-1 content" data-aos="fade-up" data-aos-delay="200">
-                    {!! $about->description_ar !!}                </div>
+            <div class="row">
+                <div class="col-lg-12 order-2 order-lg-1 content  " data-aos="fade-up" data-aos-delay="200">
+                    {!! $about->description_ar !!}
+                </div>
 
             </div>
 
@@ -295,7 +405,7 @@
 {{--                        <img src="assets/img/about.jpg" class="img-fluid" alt="">--}}
 {{--                    </div>--}}
 
-                    <div class="col-lg-6 order-2 order-lg-1 content" data-aos="fade-up" data-aos-delay="200">
+                    <div class="col-lg-12 order-2 order-lg-1 content" data-aos="fade-up" data-aos-delay="200">
                     {!! $about->description !!}
                      </div>
 
@@ -309,9 +419,7 @@
 
     <!-- Clients Section -->
     <section id="clients" class="clients section light-background">
-
         <div class="container">
-
             <div class="swiper init-swiper">
                 <script type="application/json" class="swiper-config">
                     {
@@ -347,115 +455,66 @@
                     }
                 </script>
                 <div class="swiper-wrapper align-items-center">
-                    <div class="swiper-slide"><img src="{{asset('public/front/assets/img/clients/client-1.png')}}" class="img-fluid" alt=""></div>
-                    <div class="swiper-slide"><img src="{{asset('public/front/assets/img/clients/client-1.png')}} " class="img-fluid" alt=""></div>
-                    <div class="swiper-slide"><img src="{{asset('public/front/assets/img/clients/client-1.png')}} " class="img-fluid" alt=""></div>
-                    <div class="swiper-slide"><img src="{{asset('public/front/assets/img/clients/client-1.png')}} " class="img-fluid" alt=""></div>
-                    <div class="swiper-slide"><img src="{{asset('public/front/assets/img/clients/client-1.png')}} " class="img-fluid" alt=""></div>
-                    <div class="swiper-slide"><img src="{{asset('public/front/assets/img/clients/client-1.png')}} " class="img-fluid" alt=""></div>
-                    <div class="swiper-slide"><img src="{{asset('public/front/assets/img/clients/client-1.png')}} " class="img-fluid" alt=""></div>
-                    <div class="swiper-slide"><img src="{{asset('public/front/assets/img/clients/client-1.png')}} " class="img-fluid" alt=""></div>
+                    @foreach($clients as $client)
+                        <div class="swiper-slide">
+                            <div class="client-container">
+                                <div class="client-image" style="background-image: url('{{ asset('storage/app/public/'.$client->image) }}');"></div>
+                                @if(app()->getLocale()=='ar')
+                                <div class="client-name">{{ $client->name_ar??'' }}</div>
+                                @else
+                                <div class="client-name">{{ $client->name??'' }}</div>
+                                @endif
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
+
+
             </div>
-
         </div>
-
-    </section><!-- /Clients Section -->
+    </section>
 
     <!-- Services Section -->
     <section id="services" class="services section">
 
-        <!-- Section Title -->
         <div class="container section-title" data-aos="fade-up">
-            <span>Services</span>
-            <h2>Services</h2>
-            <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-        </div><!-- End Section Title -->
+            <span>{{__('Features')}}</span>
+            <h2>{{__('Features')}}</h2>
+         </div>
 
         <div class="container">
-
             <div class="row gy-4">
-
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-                    <div class="service-item  position-relative">
-                        <div class="icon">
-                            <i class="bi bi-activity"></i>
+                @if(app()->getLocale() == 'ar')
+                    @foreach($features as $feature)
+                        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                            <div class="service-item position-relative">
+                                <div class="icon">
+                                    <img src="{{ asset('storage/app/public/' . ($feature->icon ?? 'default-icon.png')) }}" alt="{{ $feature->title }}" class="icon-img">
+                                </div>
+                                <a href="#" class="stretched-link">
+                                    <h3>{{ $feature->title }}</h3>
+                                </a>
+                                <p>{{ $feature->description }}</p>
+                            </div>
                         </div>
-                        <a href="#" class="stretched-link">
-                            <h3>Nesciunt Mete</h3>
-                        </a>
-                        <p>Provident nihil minus qui consequatur non omnis maiores. Eos accusantium minus dolores iure perferendis tempore et consequatur.</p>
-                    </div>
-                </div><!-- End Service Item -->
-
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-                    <div class="service-item position-relative">
-                        <div class="icon">
-                            <i class="bi bi-broadcast"></i>
+                    @endforeach
+                @else
+                    @foreach($features as $feature)
+                        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                            <div class="service-item position-relative">
+                                <div class="icon">
+                                    <img src="{{ asset('storage/app/public/' . ($feature->icon ?? 'default-icon.png')) }}" alt="{{ $feature->title_ar }}" class="icon-img">
+                                </div>
+                                <a href="#" class="stretched-link">
+                                    <h3>{{ $feature->title_ar }}</h3>
+                                </a>
+                                <p>{{ $feature->description_ar }}</p>
+                            </div>
                         </div>
-                        <a href="#" class="stretched-link">
-                            <h3>Eosle Commodi</h3>
-                        </a>
-                        <p>Ut autem aut autem non a. Sint sint sit facilis nam iusto sint. Libero corrupti neque eum hic non ut nesciunt dolorem.</p>
-                    </div>
-                </div><!-- End Service Item -->
-
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-                    <div class="service-item position-relative">
-                        <div class="icon">
-                            <i class="bi bi-easel"></i>
-                        </div>
-                        <a href="#" class="stretched-link">
-                            <h3>Ledo Markt</h3>
-                        </a>
-                        <p>Ut excepturi voluptatem nisi sed. Quidem fuga consequatur. Minus ea aut. Vel qui id voluptas adipisci eos earum corrupti.</p>
-                    </div>
-                </div><!-- End Service Item -->
-
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
-                    <div class="service-item position-relative">
-                        <div class="icon">
-                            <i class="bi bi-bounding-box-circles"></i>
-                        </div>
-                        <a href="#" class="stretched-link">
-                            <h3>Asperiores Commodit</h3>
-                        </a>
-                        <p>Non et temporibus minus omnis sed dolor esse consequatur. Cupiditate sed error ea fuga sit provident adipisci neque.</p>
-                        <a href="#" class="stretched-link"></a>
-                    </div>
-                </div><!-- End Service Item -->
-
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
-                    <div class="service-item position-relative">
-                        <div class="icon">
-                            <i class="bi bi-calendar4-week"></i>
-                        </div>
-                        <a href="#" class="stretched-link">
-                            <h3>Velit Doloremque</h3>
-                        </a>
-                        <p>Cumque et suscipit saepe. Est maiores autem enim facilis ut aut ipsam corporis aut. Sed animi at autem alias eius labore.</p>
-                        <a href="#" class="stretched-link"></a>
-                    </div>
-                </div><!-- End Service Item -->
-
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
-                    <div class="service-item position-relative">
-                        <div class="icon">
-                            <i class="bi bi-chat-square-text"></i>
-                        </div>
-                        <a href="#" class="stretched-link">
-                            <h3>Dolori Architecto</h3>
-                        </a>
-                        <p>Hic molestias ea quibusdam eos. Fugiat enim doloremque aut neque non et debitis iure. Corrupti recusandae ducimus enim.</p>
-                        <a href="#" class="stretched-link"></a>
-                    </div>
-                </div><!-- End Service Item -->
-
+                    @endforeach
+                @endif
             </div>
-
-        </div>
-
-    </section><!-- /Services Section -->
+        </div>    </section><!-- /Services Section -->
 
     <!-- Call To Action Section -->
     <section id="call-to-action" class="call-to-action section dark-background">
@@ -466,9 +525,15 @@
             <div class="row justify-content-center" data-aos="zoom-in" data-aos-delay="100">
                 <div class="col-xl-10">
                     <div class="text-center">
-                        <h3>Call To Action</h3>
-                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                        <a class="cta-btn" href="#">Call To Action</a>
+                        <h3>{{__('Contact Us')}}</h3>
+                        @if(app()->getLocale()=='ar')
+                        <p>{{$homeSection->description_ar ??''}}</p>
+                        @else
+                            <p>{{$homeSection->description??''}}</p>
+
+                        @endif
+
+                        <a class="cta-btn" href="#contact">{{__('Contact Us')}}</a>
                     </div>
                 </div>
             </div>
@@ -476,72 +541,132 @@
 
     </section><!-- /Call To Action Section -->
 
-   
+
     <!-- Pricing Section -->
     <section id="pricing" class="pricing section">
 
         <!-- Section Title -->
         <div class="container section-title" data-aos="fade-up">
-            <span>Pricing</span>
-            <h2>Pricing</h2>
-            <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+            <span>{{__('Pricing')}}</span>
+            <h2>{{__('Pricing')}}</h2>
+{{--            <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>--}}
         </div><!-- End Section Title -->
 
         <div class="container">
-
             <div class="row g-4 g-lg-0">
+                @foreach($plans as $plan)
+                    <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="{{ $loop->index * 100 + 100 }}">
+                        <div class="pricing-item card shadow-sm border-0">
+                            <div class="card-header text-white position-relative" style="background-color: {{ ['#f27439', '#24314e', '#ffa508'][$loop->index % 3] }};">
+                                <h3 class="card-title mb-0 text-center text-white">{{ $plan->name }}</h3>
+                            </div>
 
-                <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="pricing-item">
-                        <h3>Free Plan</h3>
-                        <h4><sup>$</sup>0<span> / month</span></h4>
-                        <ul>
-                            <li><i class="bi bi-check"></i> <span>Quam adipiscing vitae proin</span></li>
-                            <li><i class="bi bi-check"></i> <span>Nec feugiat nisl pretium</span></li>
-                            <li><i class="bi bi-check"></i> <span>Nulla at volutpat diam uteera</span></li>
-                            <li class="na"><i class="bi bi-x"></i> <span>Pharetra massa massa ultricies</span></li>
-                            <li class="na"><i class="bi bi-x"></i> <span>Massa ultricies mi quis hendrerit</span></li>
-                        </ul>
-                        <div class="text-center"><a href="#" class="buy-btn">Buy Now</a></div>
+                            <div class="card-body">
+                                <div class="text-center mb-4">
+                                    <h4 class="display-4 font-weight-bold text-primary">
+                                        <sup>{{ env('CURRENCY_SYMBOL', '$') }}</sup>{{ $plan->price }}
+                                        <span class="text-muted">/ {{ __('month') }}</span>
+                                    </h4>
+                                </div>
+
+                                <ul class="list-unstyled">
+                                    <li class="{{ $plan->max_employees ? '' : 'na' }} mb-3">
+                                        <i class="bi bi-{{ $plan->max_employees ? 'check' : 'x' }}"></i>
+                                        <span>{{ $plan->max_users == -1 ? __('Unlimited') : $plan->max_users }}</span>&nbsp;&nbsp;
+                                        <span>{{ __('Users') }}</span>
+                                    </li>
+                                    <li class="{{ $plan->max_employees ? '' : 'na' }} mb-3">
+                                        <i class="bi bi-{{ $plan->max_employees ? 'check' : 'x' }}"></i>
+                                        <span>{{ $plan->max_employees == -1 ? __('Unlimited') : $plan->max_employees }}</span>&nbsp;&nbsp;
+                                        <span>{{ __('Employees') }}</span>
+                                    </li>
+
+                                    <!-- Chat GPT -->
+                                    <li class="{{ $plan->chat_gpt ? '' : 'na' }} mb-3">
+                                        <i class="bi bi-{{ $plan->chat_gpt ? 'check' : 'x' }}"></i>
+                                        <span>{{ $plan->chat_gpt ? __('Enabled') : __('Disabled') }}</span>&nbsp;&nbsp;
+                                        <span>{{ __('chat-gpt') }}</span>
+                                    </li>
+
+                                    <!-- Storage -->
+                                    @if($plan->storage)
+                                        <li class="mb-3">
+                                            <i class="bi bi-check"></i>
+                                            <span>{{ $plan->storage }} GB</span>&nbsp;&nbsp;
+                                            <span>{{ __('storage') }}</span>
+                                        </li>
+                                    @else
+                                        <li class="na mb-3">
+                                            <i class="bi bi-x"></i>
+                                            <span>{{ __('Disabled') }}</span>&nbsp;&nbsp;
+                                            <span>{{ __('storage') }}</span>
+                                        </li>
+                                    @endif
+                                </ul>
+
+                                <div class="text-center mt-4">
+                                    @if($plan->price > 0)
+
+                                        <a href="javascript:void(0);"
+                                           class="btn btn-outline-primary openModalBtn"
+                                           data-plan-id="{{ $plan->id }}">
+                                            {{ __('Subscribe') }}
+                                        </a>
+
+
+
+                                    @else
+                                        <span class="btn btn-outline-success btn-block">
+                                    <i class="fas fa-gift mr-1"></i>{{__('Free')}}
+                                </span>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div><!-- End Pricing Item -->
-
-                <div class="col-lg-4 featured" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="pricing-item">
-                        <h3>Business Plan</h3>
-                        <h4><sup>$</sup>29<span> / month</span></h4>
-                        <ul>
-                            <li><i class="bi bi-check"></i> <span>Quam adipiscing vitae proin</span></li>
-                            <li><i class="bi bi-check"></i> <span>Nec feugiat nisl pretium</span></li>
-                            <li><i class="bi bi-check"></i> <span>Nulla at volutpat diam uteera</span></li>
-                            <li><i class="bi bi-check"></i> <span>Pharetra massa massa ultricies</span></li>
-                            <li><i class="bi bi-check"></i> <span>Massa ultricies mi quis hendrerit</span></li>
-                        </ul>
-                        <div class="text-center"><a href="#" class="buy-btn">Buy Now</a></div>
-                    </div>
-                </div><!-- End Pricing Item -->
-
-                <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="pricing-item">
-                        <h3>Developer Plan</h3>
-                        <h4><sup>$</sup>49<span> / month</span></h4>
-                        <ul>
-                            <li><i class="bi bi-check"></i> <span>Quam adipiscing vitae proin</span></li>
-                            <li><i class="bi bi-check"></i> <span>Nec feugiat nisl pretium</span></li>
-                            <li><i class="bi bi-check"></i> <span>Nulla at volutpat diam uteera</span></li>
-                            <li><i class="bi bi-check"></i> <span>Pharetra massa massa ultricies</span></li>
-                            <li><i class="bi bi-check"></i> <span>Massa ultricies mi quis hendrerit</span></li>
-                        </ul>
-                        <div class="text-center"><a href="#" class="buy-btn">Buy Now</a></div>
-                    </div>
-                </div><!-- End Pricing Item -->
-
+                @endforeach
             </div>
+        </div>
+        <div id="modal" class="modal" style="display: none">
+            <div class="modal-dialog modal-xl" role="document">
+                <div class="modal-content">
+                    <span class="close-btn">&times;</span>
+                    <h2>{{ __('Plan Request') }}</h2>
+                    <div class="col-lg-12">
+                        <form id="planForm" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="400">
+                            @csrf
+                            <input type="hidden" name="plan_id" id="plan_id">
 
+                            <div class="row gy-4">
+                                <div class="col-md-12">
+                                    <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
+                                </div>
+
+                                <div class="col-md-12">
+                                    <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
+                                </div>
+
+                                <div class="col-md-12">
+                                    <input type="text" class="form-control" name="phone" placeholder="Your Phone" required="">
+                                </div>
+
+                                <div class="col-md-12 text-center">
+                                    <div class="loading" style="display: none;">Loading...</div>
+                                     <div class="sent-message text-success" style="display: none;  "><span style="color: white">Your message has been sent. Thank you!</span></div>
+
+                                    <button type="submit">{{ __('Send') }}</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
 
-    </section><!-- /Pricing Section -->
+        <!-- Bootstrap Modal -->
 
+
+    </section>
     <!-- Team Section -->
     <section id="team" class="team section">
 
@@ -637,7 +762,7 @@
                     <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="200">
                         <i class="bi bi-geo-alt"></i>
                         <h3>Address</h3>
-                        <p>A108 Adam Street, New York, NY 535022</p>
+                        <p>{{$setting->address??''}}</p>
                     </div>
                 </div><!-- End Info Item -->
 
@@ -645,7 +770,7 @@
                     <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="300">
                         <i class="bi bi-telephone"></i>
                         <h3>Call Us</h3>
-                        <p>+1 5589 55488 55</p>
+                        <p>{{$setting->phone??''}}</p>
                     </div>
                 </div><!-- End Info Item -->
 
@@ -653,7 +778,7 @@
                     <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="400">
                         <i class="bi bi-envelope"></i>
                         <h3>Email Us</h3>
-                        <p>info@example.com</p>
+                        <p>{{$setting->email??''}}</p>
                     </div>
                 </div><!-- End Info Item -->
 
@@ -700,7 +825,7 @@
 
         </div>
 
-    </section><!-- /Contact Section -->
+    </section>
 
 </main>
 
@@ -710,18 +835,17 @@
         <div class="row gy-4">
             <div class="col-lg-4 col-md-6">
                 <div class="footer-about">
-                    <a href="index.html" class="logo sitename">Day</a>
+                    <a href="index.html" class="logo sitename">Mwerdi</a>
                     <div class="footer-contact pt-3">
-                        <p>A108 Adam Street</p>
-                        <p>New York, NY 535022</p>
-                        <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
-                        <p><strong>Email:</strong> <span>info@example.com</span></p>
+                        {{$setting->address??''}}
+                        <p class="mt-3"><strong>Phone:</strong> <span>{{$setting->phone??''}}</span></p>
+                        <p><strong>Email:</strong> <span> {{$setting->email??''}} </span></p>
                     </div>
                     <div class="social-links d-flex mt-4">
-                        <a href=""><i class="bi bi-twitter-x"></i></a>
-                        <a href=""><i class="bi bi-facebook"></i></a>
-                        <a href=""><i class="bi bi-instagram"></i></a>
-                        <a href=""><i class="bi bi-linkedin"></i></a>
+                        <a href="{{$setting->twitter }}" target="_blank"><i class="bi bi-twitter-x"></i></a>
+                        <a href="{{$setting->facebook }}" target="_blank"><i class="bi bi-facebook"></i></a>
+                        <a href="{{$setting->instagram }}" target="_blank"><i class="bi bi-instagram"></i></a>
+                        <a href="{{$setting->linkedin }}" target="_blank"><i class="bi bi-linkedin"></i></a>
                     </div>
                 </div>
             </div>
@@ -731,7 +855,7 @@
                 <ul>
                     <li><a href="#">{{__('Home')}}</a></li>
                     <li><a href="#">{{__('About us')}}</a></li>
-                    <li><a href="#">Services</a></li>
+                    <li><a href="#">{{__('Features')}}</a></li>
                     <li><a href="#">Terms of service</a></li>
                     <li><a href="#">Privacy policy</a></li>
                 </ul>
@@ -792,6 +916,9 @@
 
 <!-- Main JS File -->
 <script src="{{asset('public/front/assets/js/main.js')}}"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const dropdownToggle = document.getElementById('languageDropdown');
@@ -811,6 +938,75 @@
         });
     });
 </script>
+
+
+<script>
+    $(document).ready(function () {
+        const modal = $("#modal");
+        const closeModalBtn = $(".close-btn");
+
+        // Open modal when clicking Subscribe button
+        $(document).on("click", ".openModalBtn", function () {
+            let planId = $(this).data("plan-id");
+            $("#plan_id").val(planId); // Set the plan_id in the form
+            modal.show();
+        });
+
+        // Close modal when clicking the close button
+        closeModalBtn.click(function () {
+            modal.hide();
+        });
+
+        // Close modal when clicking outside the modal content
+        $(window).click(function (event) {
+            if ($(event.target).is(modal)) {
+                modal.hide();
+            }
+        });
+
+        // Handle form submission via AJAX
+        $("#planForm").submit(function (e) {
+            e.preventDefault();
+            let form = $(this);
+            let formData = form.serialize(); // Serialize form data
+
+            $(".loading").show();
+            $(".error-message").hide();
+            $(".sent-message").hide();
+
+            $.ajax({
+                url: "{{ route('plan.request') }}", // Laravel route
+                type: "POST",
+                data: formData,
+                success: function (response) {
+                    $(".loading").hide();
+                    $(".sent-message").show();
+                    form[0].reset(); // Reset form fields
+                    // Close modal after 9 seconds
+                    setTimeout(() => {
+                        modal.hide();
+                    }, 9000);
+
+                    // Reload page after 2 seconds
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1500);
+                },
+                error: function (xhr) {
+                    $(".loading").hide();
+                    let errors = xhr.responseJSON.errors;
+                    let errorMessage = "";
+                    $.each(errors, function (key, value) {
+                        errorMessage += value + "<br>";
+                    });
+                    $(".error-message").html(errorMessage).show();
+                },
+            });
+        });
+    });
+
+</script>
+
 </body>
 
 </html>

@@ -38,14 +38,23 @@ Route::get('/check', 'HomeController@check')->middleware(
 Route::get('/password/resets/{lang?}', 'Auth\LoginController@showLinkRequestForm')->name('change.langPass');
 
 Route::get('/', 'HomeController@landing_page')->name('landingPage')->middleware(['XSS']);
+//landing page
+Route::get('/home-sections',   'HomeSectionController@index' )->name('home-sections.index')->middleware(['auth','XSS']);
+Route::get('/about-us',   'AboutUsController@index' )->name('about-us.index')->middleware(['auth','XSS']);
+Route::put('/about-us/{aboutUs}', 'AboutUsController@update')->name('about-us.update')->middleware(['auth','XSS']);;
+Route::get('/front-setting',   'FrontSettingController@index' )->name('front-setting.index')->middleware(['auth','XSS']);
+Route::put('/front-setting/{frontSetting}', 'FrontSettingController@update')->name('front-setting.update')->middleware(['auth','XSS']);;
+Route::put('/home-sections/{homeSection}', 'HomeSectionController@update')->name('home-sections.update')->middleware(['auth','XSS']);;
+Route::resource('clients', 'ClientsController')->middleware(['auth','XSS']);
+Route::resource('features', 'FeaturesController')->middleware(['auth','XSS']);
 
-Route::get('/home-sections',   'HomeSectionController@index' )->name('home-sections.index')->middleware(['XSS']);
-Route::get('/about-us',   'AboutUsController@index' )->name('about-us.index')->middleware(['XSS']);
-Route::put('/about-us/{aboutUs}', 'AboutUsController@update')->name('about-us.update')->middleware(['XSS']);;
 
-Route::get('/about', 'HomeController@about')->name('about')->middleware(['XSS']);
-Route::get('/solutions', 'HomeController@solutions')->name('solutions')->middleware(['XSS']);
-Route::get('/pricing', 'HomeController@pricing')->name('pricing')->middleware(['XSS']);
+Route::post('/plan-request', 'PlanController@plan_requests')->name('plan.request');
+Route::resource('plan-requests', 'PlanRequestsController')->middleware(['auth','XSS']);
+
+Route::get('/about', 'HomeController@about')->name('about')->middleware(['auth','XSS']);
+Route::get('/solutions', 'HomeController@solutions')->name('solutions')->middleware(['auth','XSS']);
+Route::get('/pricing', 'HomeController@pricing')->name('pricing')->middleware([ 'XSS']);
 Route::get('/locale/{locale}', [LocaleController::class, 'setLocale'])->name('locale.set');
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware(
