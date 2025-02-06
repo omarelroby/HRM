@@ -33,11 +33,93 @@
     <link href="{{asset('public/front/assets/vendor/glightbox/css/glightbox.min.css')}}" rel="stylesheet">
     <!-- Bootstrap CSS (Already included in most themes) -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-
     <!-- Main CSS File -->
     <link href="{{asset('public/front/assets/css/main.css')}}" rel="stylesheet">
     <style>
+        /* General Reset */
+
+
+        /* Body Styling */
+
+        /* Form Container */
+        .form-container {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        /* Form Title */
+        .form-container h2 {
+            margin-bottom: 1.5rem;
+            color: #333;
+            font-size: 1.5rem;
+        }
+
+        /* Form Group */
+        .form-group {
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+
+        /* Labels */
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+        /* Input Fields */
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        /* Input Focus Effect */
+        .form-group input:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 4px rgba(0, 123, 255, 0.25);
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Hover Effect for Button */
+        .submit-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 576px) {
+            .form-container {
+                padding: 1.5rem;
+            }
+
+            .form-container h2 {
+                font-size: 1.25rem;
+                    }
+        }
+    </style>
+<style>
         /* Modal background */
         .modal {
             display: none;
@@ -58,7 +140,7 @@
             background: white;
             padding: 20px;
             width: auto;
-            border-radius: 10px;
+
             text-align: center;
             position: relative;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
@@ -80,14 +162,14 @@
             background: #007BFF;
             color: white;
             font-size: 16px;
-            border-radius: 5px;
+
             cursor: pointer;
         }
 
         button:hover {
             background: #0056b3;
         }
-    </style>
+</style>
 <style>
     body {
         font-family:
@@ -130,10 +212,7 @@
         align-items: center;
     }
 
-    .dropdown-toggle i {
-        color: #ffc107; /* Yellow color for the globe icon */
-        font-size: 1.5rem; /* Increased icon size */
-    }
+
 
     /* Dropdown Menu */
     .dropdown-menu {
@@ -143,7 +222,7 @@
         right: 0;
         background-color: #fff;
         border: 1px solid rgba(0, 0, 0, 0.15);
-        border-radius: 4px;
+
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         width: 120px;
         padding: 0;
@@ -250,11 +329,8 @@
         display: block; /* Ensures the image is treated as a block element */
         margin: 0 auto; /* Centers the image horizontally */
     }
-
-
-
-
 </style>
+
 </head>
 
 <body class="index-page">
@@ -276,10 +352,7 @@
         </div>
 
         <div class="d-flex align-items-center">
-            <!-- Login Button -->
-
-
-            <div class="language-dropdown me-3">
+             <div class="language-dropdown me-3">
                 <button class="dropdown-toggle" id="languageDropdown">
                     <i class="fa text-white fa-globe text-warning fa-lg"></i>
                     <span class="current-language">
@@ -290,8 +363,6 @@
                         @endif
                 </span>
                 </button>
-
-
                 <ul class="dropdown-menu" id="dropdownMenu">
                     <li>
                         <a class="dropdown-item @if(app()->getLocale() == 'en') text-danger @endif"
@@ -306,6 +377,7 @@
                         </a>
                     </li>
                 </ul>
+
             </div>
 
         </div>
@@ -328,9 +400,9 @@
                     <li><a href="#hero" class="active"><span>{{__('Home')}}</span></a></li>
                     <li><a href="#about"><span>{{__('About')}}</span></a></li>
                     <li><a href="#services"><span> {{__('Features')}}</span></a></li>
-                    <li><a href="#team">Team</a></li>
+                    <li><a href="#team"><span>{{__('Why Choose Us')}}</span></a></li>
 
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#contact"><span>{{__('Contact Us')}}</span></a></li>
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
@@ -628,37 +700,36 @@
             </div>
         </div>
         <div id="modal" class="modal" style="display: none">
-            <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <span class="close-btn">&times;</span>
-                    <h2>{{ __('Plan Request') }}</h2>
-                    <div class="col-lg-12">
+                    <div class="form-container">
+                        <h2>{{ __('Plan Request') }}</h2>
+
                         <form id="planForm" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="400">
-                            @csrf
-                            <input type="hidden" name="plan_id" id="plan_id">
+                                @csrf
+                                <input type="hidden" name="plan_id" id="plan_id">
 
-                            <div class="row gy-4">
-                                <div class="col-md-12">
-                                    <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
-                                </div>
-
-                                <div class="col-md-12">
-                                    <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
-                                </div>
-
-                                <div class="col-md-12">
-                                    <input type="text" class="form-control" name="phone" placeholder="Your Phone" required="">
-                                </div>
-
-                                <div class="col-md-12 text-center">
-                                    <div class="loading" style="display: none;">Loading...</div>
-                                     <div class="sent-message text-success" style="display: none;  "><span style="color: white">Your message has been sent. Thank you!</span></div>
-
-                                    <button type="submit">{{ __('Send') }}</button>
-                                </div>
+                                <div class="form-group">
+                                <label for="name">{{__('name')}}</label>
+                                <input type="text" id="name" name="name" placeholder="{{__('Enter your full name')}}" required>
                             </div>
+                            <div class="form-group">
+                                <label for="email">{{__('email')}}</label>
+                                <input type="email" id="email" name="email" placeholder="{{__('Enter your email')}}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">{{__('phone')}}</label>
+                                <input type="text" id="phone" name="phone" placeholder="{{__('Enter your Phone')}}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="buisness_type">{{__('Business Type')}}</label>
+                                <input type="text" id="buisness_type" name="buisness_type" placeholder="{{__('Business Type')}}"   required>
+                            </div>
+                            <button type="submit" class="submit-btn">{{__('Send')}}</button>
                         </form>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -667,91 +738,46 @@
 
 
     </section>
-    <!-- Team Section -->
-    <section id="team" class="team section">
 
-        <!-- Section Title -->
-        <div class="container section-title" data-aos="fade-up">
-            <span>Team</span>
-            <h2>Team</h2>
-            <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-        </div><!-- End Section Title -->
+    <section id="team" class="call-to-action section dark-background">
+
+        <img src="assets/img/cta-bg.jpg" alt="">
 
         <div class="container">
+            <div class="row justify-content-center" data-aos="zoom-in" data-aos-delay="100">
+                <div class="col-xl-10">
+                    <div class="text-center">
+                        <h3 class="my-8">{{__('Why Choose Us')}}</h3>
+                        @if(app()->getLocale()=='ar')
+                            @foreach($why as $w)
+                                <p>{{ $w->title_ar ?? '' }}
+                                    <i class="bi bi-check-circle-fill text-success ms-2" style="font-size: 1.2rem;"></i>
+                                </p>
+                            @endforeach
+                        @else
+                            @foreach($why as $w)
+                                <p>{{ $w->title ?? '' }}
+                                    <i class="bi bi-check-circle-fill text-success ms-2" style="font-size: 1.2rem;"></i>
+                                </p>
+                             @endforeach
+                        @endif
 
-            <div class="row">
-
-                <div class="col-lg-4 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="100">
-                    <div class="member">
-                        <img src="assets/img/team/team-1.jpg" class="img-fluid" alt="">
-                        <div class="member-content">
-                            <h4>Walter White</h4>
-                            <span>Web Development</span>
-                            <p>
-                                Magni qui quod omnis unde et eos fuga et exercitationem. Odio veritatis perspiciatis quaerat qui aut aut aut
-                            </p>
-                            <div class="social">
-                                <a href=""><i class="bi bi-twitter-x"></i></a>
-                                <a href=""><i class="bi bi-facebook"></i></a>
-                                <a href=""><i class="bi bi-instagram"></i></a>
-                                <a href=""><i class="bi bi-linkedin"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div><!-- End Team Member -->
-
-                <div class="col-lg-4 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="200">
-                    <div class="member">
-                        <img src="assets/img/team/team-2.jpg" class="img-fluid" alt="">
-                        <div class="member-content">
-                            <h4>Sarah Jhinson</h4>
-                            <span>Marketing</span>
-                            <p>
-                                Repellat fugiat adipisci nemo illum nesciunt voluptas repellendus. In architecto rerum rerum temporibus
-                            </p>
-                            <div class="social">
-                                <a href=""><i class="bi bi-twitter-x"></i></a>
-                                <a href=""><i class="bi bi-facebook"></i></a>
-                                <a href=""><i class="bi bi-instagram"></i></a>
-                                <a href=""><i class="bi bi-linkedin"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div><!-- End Team Member -->
-
-                <div class="col-lg-4 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="300">
-                    <div class="member">
-                        <img src="assets/img/team/team-3.jpg" class="img-fluid" alt="">
-                        <div class="member-content">
-                            <h4>William Anderson</h4>
-                            <span>Content</span>
-                            <p>
-                                Voluptas necessitatibus occaecati quia. Earum totam consequuntur qui porro et laborum toro des clara
-                            </p>
-                            <div class="social">
-                                <a href=""><i class="bi bi-twitter-x"></i></a>
-                                <a href=""><i class="bi bi-facebook"></i></a>
-                                <a href=""><i class="bi bi-instagram"></i></a>
-                                <a href=""><i class="bi bi-linkedin"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div><!-- End Team Member -->
-
+                     </div>
+                </div>
             </div>
-
         </div>
 
-    </section><!-- /Team Section -->
+    </section><!-- /Call To Action Section -->
+
 
     <!-- Contact Section -->
     <section id="contact" class="contact section">
 
         <!-- Section Title -->
         <div class="container section-title" data-aos="fade-up">
-            <span>Contact</span>
-            <h2>Contact</h2>
-            <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+            <span>{{__('Contact Us')}}</span>
+            <h2>{{__('Contact Us')}}</h2>
+
         </div><!-- End Section Title -->
 
         <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -786,40 +812,38 @@
 
             <div class="row gy-4 mt-1">
                 <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d48389.78314118045!2d-74.006138!3d40.710059!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a22a3bda30d%3A0xb89d1fe6bc499443!2sDowntown%20Conference%20Center!5e0!3m2!1sen!2sus!4v1676961268712!5m2!1sen!2sus" frameborder="0" style="border:0; width: 100%; height: 400px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    @if(!empty($setting->map))
+                        {!! $setting->map !!}
+                    @else
+                        <p>No map available.</p>
+                    @endif
                 </div><!-- End Google Maps -->
 
+
                 <div class="col-lg-6">
-                    <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="400">
+                    <form action="{{ route('contact-us.store') }}" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="400">
+                        @csrf
                         <div class="row gy-4">
-
                             <div class="col-md-6">
-                                <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
+                                <input type="text" name="name" class="form-control" placeholder="Your Name" required>
                             </div>
-
-                            <div class="col-md-6 ">
-                                <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
+                            <div class="col-md-6">
+                                <input type="email" class="form-control" name="email" placeholder="Your Email" required>
                             </div>
-
                             <div class="col-md-12">
-                                <input type="text" class="form-control" name="subject" placeholder="Subject" required="">
+                                <input type="text" class="form-control" name="subject" placeholder="Subject" required>
                             </div>
-
                             <div class="col-md-12">
-                                <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
+                                <textarea class="form-control" name="message" rows="6" placeholder="Message" required></textarea>
                             </div>
-
                             <div class="col-md-12 text-center">
-                                <div class="loading">Loading</div>
-                                <div class="error-message"></div>
-                                <div class="sent-message">Your message has been sent. Thank you!</div>
-
+                                <div class="loading" style="display: none;">Loading...</div>
+                                 <div class="sent-message" style="display: none;">Your message has been sent. Thank you!</div>
                                 <button type="submit">Send Message</button>
                             </div>
-
                         </div>
                     </form>
-                </div><!-- End Contact Form -->
+                </div>
 
             </div>
 
@@ -833,7 +857,7 @@
 
     <div class="container footer-top">
         <div class="row gy-4">
-            <div class="col-lg-4 col-md-6">
+            <div class="col-lg-10 col-md-6">
                 <div class="footer-about">
                     <a href="index.html" class="logo sitename">Mwerdi</a>
                     <div class="footer-contact pt-3">
@@ -850,51 +874,26 @@
                 </div>
             </div>
 
-            <div class="col-lg-2 col-md-3 footer-links">
-                <h4>Useful Links</h4>
-                <ul>
-                    <li><a href="#">{{__('Home')}}</a></li>
-                    <li><a href="#">{{__('About us')}}</a></li>
-                    <li><a href="#">{{__('Features')}}</a></li>
-                    <li><a href="#">Terms of service</a></li>
-                    <li><a href="#">Privacy policy</a></li>
+            <div class="col-lg-2 col-md-3 footer-links text-center">
+                <h4>{{ __('Our Web Site') }}</h4>
+                <ul class="list-unstyled d-inline-block text-start">
+                    <li class="text-center"><a href="#hero">{{ __('Home') }}</a></li>
+                    <li class="text-center"><a href="#about">{{ __('About Us') }}</a></li>
+                    <li class="text-center"><a href="#services">{{ __('Features') }}</a></li>
+                    <li class="text-center"><a href="#team">{{ __('Why Choose Us') }}</a></li>
+                    <li class="text-center"><a href="#contact">{{ __('Contact Us') }}</a></li>
                 </ul>
             </div>
 
-            <div class="col-lg-2 col-md-3 footer-links">
-                <h4>Our Services</h4>
-                <ul>
-                    <li><a href="#">Web Design</a></li>
-                    <li><a href="#">Web Development</a></li>
-                    <li><a href="#">Product Management</a></li>
-                    <li><a href="#">Marketing</a></li>
-                    <li><a href="#">Graphic Design</a></li>
-                </ul>
-            </div>
 
-            <div class="col-lg-4 col-md-12 footer-newsletter">
-                <h4>Our Newsletter</h4>
-                <p>Subscribe to our newsletter and receive the latest news about our products and services!</p>
-                <form action="forms/newsletter.php" method="post" class="php-email-form">
-                    <div class="newsletter-form"><input type="email" name="email"><input type="submit" value="Subscribe"></div>
-                    <div class="loading">Loading</div>
-                    <div class="error-message"></div>
-                    <div class="sent-message">Your subscription request has been sent. Thank you!</div>
-                </form>
-            </div>
+
 
         </div>
     </div>
 
     <div class="container copyright text-center mt-4">
-        <p>© <span>Copyright</span> <strong class="px-1 sitename">Day</strong> <span>All Rights Reserved</span></p>
-        <div class="credits">
-            <!-- All the links in the footer should remain intact. -->
-            <!-- You can delete the links only if you've purchased the pro version. -->
-            <!-- Licensing information: https://bootstrapmade.com/license/ -->
-            <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
-            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-        </div>
+        <p> <span>Copyright</span> <strong class="px-1 sitename">©</strong> <span>Mwerdi</span></p>
+
     </div>
 
 </footer>
@@ -1006,7 +1005,63 @@
     });
 
 </script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.php-email-form').on('submit', function (e) {
+            e.preventDefault(); // Prevent the default form submission
 
+            // Show loading message
+            $('.loading').show();
+            $('.error-message').hide();
+            $('.sent-message').hide();
+
+            // Serialize form data
+            var formData = $(this).serialize();
+
+            // Send AJAX request
+            $.ajax({
+                url: $(this).attr('action'),
+                type: 'POST',
+                data: formData,
+                success: function (response) {
+                    // Hide loading message
+                    $('.loading').hide();
+
+                    if (response.success) {
+                        // Show success message
+                        $('.sent-message').show();
+                    } else {
+                        // Show error message
+                        $('.error-message').html('An error occurred. Please try again.').show();
+                    }
+                    setTimeout(() => {
+                        modal.hide();
+                    }, 9000);
+
+                    // Reload page after 2 seconds
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1500);
+                },
+                error: function (xhr) {
+                    // Hide loading message
+                    $('.loading').hide();
+
+                    // Show error message
+                    var errorMessage = 'An error occurred. Please try again.';
+                    if (xhr.responseJSON && xhr.responseJSON.errors) {
+                        errorMessage = '';
+                        $.each(xhr.responseJSON.errors, function (key, value) {
+                            errorMessage += value + '<br>';
+                        });
+                    }
+                    $('.error-message').html(errorMessage).show();
+                }
+            });
+        });
+    });
+</script>
 </body>
 
 </html>

@@ -18,6 +18,8 @@ use App\Models\EmployeeContracts;
 use App\Models\Companyslate;
 use App\Models\Salary_setting;
 use App\Models\Utility;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Session;
 use Schema;
 
 use Illuminate\Support\ServiceProvider;
@@ -42,6 +44,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::enableForeignKeyConstraints();
+        App::setLocale(Session::get('app_locale', config('app.locale')));
 
         //compose all the views....
         view()->composer('*', function ($view)

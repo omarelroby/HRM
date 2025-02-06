@@ -28,6 +28,10 @@
             <label>Description (Arabic)</label>
             <textarea name="description_ar" class="form-control">{{ old('description_ar', $homeSection->description_ar ?? '') }}</textarea>
         </div>
+        <div class="form-group">
+            <label>Map</label>
+            <textarea name="map" class="form-control">{{ old('map', $homeSection->map ?? '') }}</textarea>
+        </div>
 
         <div class="form-group">
             <label>Image</label>

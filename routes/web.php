@@ -38,7 +38,7 @@ Route::get('/check', 'HomeController@check')->middleware(
 Route::get('/password/resets/{lang?}', 'Auth\LoginController@showLinkRequestForm')->name('change.langPass');
 
 Route::get('/', 'HomeController@landing_page')->name('landingPage')->middleware(['XSS']);
-//landing page
+
 Route::get('/home-sections',   'HomeSectionController@index' )->name('home-sections.index')->middleware(['auth','XSS']);
 Route::get('/about-us',   'AboutUsController@index' )->name('about-us.index')->middleware(['auth','XSS']);
 Route::put('/about-us/{aboutUs}', 'AboutUsController@update')->name('about-us.update')->middleware(['auth','XSS']);;
@@ -46,8 +46,13 @@ Route::get('/front-setting',   'FrontSettingController@index' )->name('front-set
 Route::put('/front-setting/{frontSetting}', 'FrontSettingController@update')->name('front-setting.update')->middleware(['auth','XSS']);;
 Route::put('/home-sections/{homeSection}', 'HomeSectionController@update')->name('home-sections.update')->middleware(['auth','XSS']);;
 Route::resource('clients', 'ClientsController')->middleware(['auth','XSS']);
+Route::resource('why-us', 'WhyChooseUsController')->middleware(['auth','XSS']);
 Route::resource('features', 'FeaturesController')->middleware(['auth','XSS']);
+Route::resource('contacts', 'ContactController')->middleware(['auth','XSS']);
+Route::post('contact-us', 'ContactController@store')->name('contact-us.store');
 
+Route::post('plan-requests/approve', [PlanRequestController::class, 'approve'])->name('plan-requests.approve');
+Route::delete('plan-requests/reject/{id}', [PlanRequestController::class, 'reject'])->name('plan-requests.reject');
 
 Route::post('/plan-request', 'PlanController@plan_requests')->name('plan.request');
 Route::resource('plan-requests', 'PlanRequestsController')->middleware(['auth','XSS']);
@@ -1032,6 +1037,7 @@ Route::resource('transferbalance', 'TransferBalanceController')->middleware(
     ]
 );
 
+Route::get('change-language/{lang}', 'LanguageController@changeLanquage')->name('change.language');
 
 Route::group(
     [
@@ -1041,7 +1047,6 @@ Route::group(
         ],
     ],
     function () {
-        Route::get('change-language/{lang}', 'LanguageController@changeLanquage')->name('change.language');
         Route::get('manage-language/{lang}', 'LanguageController@manageLanguage')->name('manage.language');
         Route::post('store-language-data/{lang}', 'LanguageController@storeLanguageData')->name('store.language.data');
         Route::get('create-language', 'LanguageController@createLanguage')->name('create.language');
@@ -1049,6 +1054,7 @@ Route::group(
         Route::delete('/lang/{lang}', 'LanguageController@destroyLang')->name('lang.destroy');
     }
 );
+//Route::get('change-language-front/{lang}', 'LanguageController@changeLanquageFront')->name('change.front.language');
 
 Route::resource('roles', 'RoleController')->middleware(
     [

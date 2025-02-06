@@ -29,6 +29,7 @@ class FrontSettingController extends Controller
             'facebook' => 'nullable|string',
             'linkedin' => 'nullable|string',
             'instagram' => 'nullable|string',
+            'map' => 'nullable|string',
          ]);
 
         $frontSetting->fill($validated)->save();

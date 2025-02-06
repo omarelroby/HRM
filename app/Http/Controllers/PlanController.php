@@ -193,8 +193,8 @@ class PlanController extends Controller
             'phone' => 'required|string|max:255',
             'email' => 'required|string|max:255',
             'plan_id' => 'required',
+            'buisness_type' => 'required',
          ]);
-
 
         PlanRequests::create($validated);
 

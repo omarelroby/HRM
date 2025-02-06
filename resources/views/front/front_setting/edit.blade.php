@@ -47,6 +47,10 @@
                             <label>LinkedIn</label>
                             <input type="url" name="linkedin" class="form-control" value="{{ old('linkedin', $setting->linkedin) }}">
                         </div>
+                        <div class="form-group">
+                            <label>Map</label>
+                            <textarea name="map" class="form-control">{{ old('map', $setting->map ?? '') }}</textarea>
+                        </div>
 
                         <button type="submit" class="btn btn-primary my-2">Update</button>
                     </form>

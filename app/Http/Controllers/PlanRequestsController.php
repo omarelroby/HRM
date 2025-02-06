@@ -14,10 +14,13 @@ class PlanRequestsController extends Controller
 {
     public function index()
     {
-        if (\Auth::user()->can('Manage Plan')) {
-            $plansRequests                 = PlanRequests::get();
+        if (\Auth::user()->can('Manage Plan'))
+        {
+            $plansRequests    = PlanRequests::get();
             return view('dashboard.plan_requests.index', compact('plansRequests' ));
-        } else {
+        }
+        else
+        {
             return redirect()->back()->with('error', __('Permission denied.'));
         }
     }

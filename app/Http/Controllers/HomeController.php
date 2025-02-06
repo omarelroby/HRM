@@ -40,6 +40,7 @@ use App\Models\Ticket;
 use App\Models\Trainer;
 use App\Models\User;
 use App\Models\Utility;
+use App\Models\WhyUs;
 use App\Models\Workunit;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
@@ -452,6 +453,7 @@ class HomeController extends Controller
         $data['clients']=\App\Models\Client::all();
         $data['plans']=Plan::all();
         $data['features']=Feature::all();
+        $data['why']=WhyUs::all();
         return view('front.index',$data);
     }
     public function getlanguvage($period)

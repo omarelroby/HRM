@@ -181,6 +181,8 @@
                                         <li><a href="{{ url('/about-us') }}" class="{{ Request::is('about-us') ?'active' :'' }}">{{ __('About Us') }}</a></li>
                                         <li><a href="{{ url('/clients') }}" class="{{ Request::is('clients') ?'active' :'' }}">{{ __('Clients') }}</a></li>
                                         <li><a href="{{ url('/features') }}" class="{{ Request::is('features') ?'active' :'' }}">{{ __('Features') }}</a></li>
+                                        <li><a href="{{ url('/why-us') }}" class="{{ Request::is('why-us') ?'active' :'' }}">{{ __('Why Choose Us') }}</a></li>
+                                        <li><a href="{{ url('/contacts') }}" class="{{ Request::is('contacts') ?'active' :'' }}">{{ __('Contact Us') }}</a></li>
                                         <li><a href="{{ url('/front-setting') }}" class="{{ Request::is('front-setting') ?'active' :'' }}">{{ __('Setting') }}</a></li>
 
                                 </ul>

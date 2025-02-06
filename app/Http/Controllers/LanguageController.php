@@ -13,12 +13,22 @@ class LanguageController extends Controller
 {
     public function changeLanquage($lang)
     {
+
         $user       = Auth::user();
+        if($user)
+        {
         $user->lang = $lang;
         $user->save();
-
+        }
+        else{
+            session(['app_locale' => $lang]);
+            session(['locale' => $lang]);
+            app()->setLocale($lang);
+         }
         return redirect()->back()->with('success', __('Language change successfully.'));
     }
+
+
 
     public function manageLanguage($currantLang)
     {
