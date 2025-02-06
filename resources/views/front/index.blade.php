@@ -556,7 +556,7 @@
 
         <div class="container">
             <div class="row gy-4">
-                @if(app()->getLocale() == 'ar')
+                @if(app()->getLocale() == 'en')
                     @foreach($features as $feature)
                         <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
                             <div class="service-item position-relative">
