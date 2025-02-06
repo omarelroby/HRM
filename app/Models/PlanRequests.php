@@ -13,6 +13,7 @@ class PlanRequests extends Model
         'phone',
         'email',
         'buisness_type',
+        'approve',
     ];
 
 

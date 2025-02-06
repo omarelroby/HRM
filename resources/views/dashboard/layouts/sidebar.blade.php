@@ -169,6 +169,11 @@
                                     <i class="ti ti-git-pull-request"></i><span>{{ __('Plan Requests') }}</span>
                                 </a>
                             </li>
+                            <li class="{{ Request::is('order-requests')  ? 'active' : '' }}">
+                                <a href="{{ url('/order-requests') }}">
+                                    <i class="ti ti-adjustments-dollar"></i><span>{{ __('Paid Orders') }}</span>
+                                </a>
+                            </li>
                             <li class="submenu">
                                 <a href="javascript:void(0);" class="subdrop {{ Request::is('user')     ? 'active' : '' }}">
                                     <i class="ti ti-user-circle"></i>

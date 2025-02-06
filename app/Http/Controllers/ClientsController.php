@@ -47,7 +47,7 @@ class ClientsController extends Controller
     // Update a client
     public function update(Request $request, Client $client)
     {
-     
+
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'name_ar' => 'required|string|max:255',

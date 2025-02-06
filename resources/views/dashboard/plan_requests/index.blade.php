@@ -39,21 +39,32 @@
                                     <td>{{ $planRequest->phone }}</td>
                                     <td>{{ $planRequest->email }}</td>
                                     <td class="text-right">
-                                        <!-- Approve Button -->
-                                        <button type="button" class="btn btn-sm btn-success approve-btn" data-toggle="modal" data-target="#approveModal" data-request-id="{{ $planRequest->id }}">
-                                            <i class="fas fa-check"></i> {{ __('Approve') }}
-                                        </button>
-
-                                        <!-- Reject Button -->
-                                        <form method="POST" action="{{ route('plan-requests.reject', $planRequest->id) }}" class="d-inline" onsubmit="return confirm('{{ __('Are you sure you want to reject this request?') }}');">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger">
-                                                <i class="fas fa-times"></i> {{ __('Reject') }}
+                                        @if($planRequest->approve == 0)
+                                            <!-- Show Approve and Reject buttons if status is 0 (pending) -->
+                                            <button type="button" class="btn btn-sm btn-success approve-btn" data-toggle="modal" data-target="#approveModal" data-request-id="{{ $planRequest->id }}">
+                                                <i class="fas fa-check"></i> {{ __('Approve') }}
                                             </button>
-                                        </form>
 
-                                        <!-- Delete Button -->
+                                            <form method="POST" action="{{ route('plan-requests.reject', $planRequest->id) }}" class="d-inline" onsubmit="return confirm('{{ __('Are you sure you want to reject this request?') }}');">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-sm btn-danger">
+                                                    <i class="fas fa-times"></i> {{ __('Reject') }}
+                                                </button>
+                                            </form>
+                                        @elseif($planRequest->approve == 1)
+                                            <!-- Show Approved text if status is 1 (approved) -->
+                                            <span class="badge badge-success">
+            <i class="fas fa-check"></i> {{ __('Approved') }}
+        </span>
+                                        @elseif($planRequest->approve == 2)
+                                            <!-- Show Rejected text if status is 2 (rejected) -->
+                                            <span class="badge badge-danger">
+            <i class="fas fa-times"></i> {{ __('Rejected') }}
+        </span>
+                                        @endif
+
+                                        <!-- Delete Button (always visible) -->
                                         <form method="POST" action="{{ route('plan-requests.destroy', $planRequest->id) }}" class="d-inline" onsubmit="return confirm('{{ __('Are you sure?') }}\n{{ __('This action cannot be undone. Do you want to continue?') }}');">
                                             @csrf
                                             @method('DELETE')
@@ -61,8 +72,7 @@
                                                 <i class="fas fa-trash"></i>
                                             </button>
                                         </form>
-                                    </td>
-                                </tr>
+                                    </td>                                </tr>
                             @endforeach
                             </tbody>
                         </table>
@@ -93,15 +103,15 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="payment_method">{{ __('Payment Method') }}</label>
-                                        <select class="form-control" id="payment_method" name="payment_method" required>
+                                        <select class="form-control" id="payment_method" name="payment" required>
                                             <option value="credit_card">{{ __('Credit Card') }}</option>
-                                            <option value="paypal">{{ __('PayPal') }}</option>
+                                            <option value="cash">{{ __('Cash') }}</option>
                                             <option value="bank_transfer">{{ __('Bank Transfer') }}</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('Close') }}</button>
+                                    <button type="button" class="btn btn-secondary mx-2" data-dismiss="modal">{{ __('Close') }}</button>
                                     <button type="submit" class="btn btn-primary">{{ __('Approve') }}</button>
                                 </div>
                             </form>
@@ -131,7 +141,7 @@
                         $('#request_id').val(requestId); // Set the request ID in the hidden input
                     });
 
-                    // Handle form submission
+
                     $('#approveForm').on('submit', function (e) {
                         e.preventDefault(); // Prevent default form submission
 
@@ -142,7 +152,7 @@
                             data: $(this).serialize(),
                             success: function (response) {
                                 if (response.success) {
-                                    alert('Request approved successfully!');
+                                    alert(response.message);
                                     location.reload(); // Reload the page to reflect changes
                                 } else {
                                     alert('An error occurred. Please try again.');
