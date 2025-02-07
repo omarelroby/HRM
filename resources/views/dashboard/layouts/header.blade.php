@@ -55,10 +55,22 @@
 
     @yield('css')
     @stack('css')
-    <style>
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+     <style>
         .sidebar-inner.slimscroll {
             height: calc(100vh); /* Adjust the height as needed */
             overflow-y: auto; /* Enable vertical scrolling */
         }
     </style>
+     <style>
+         .dropdown-menu {
+             display: none;
+         }
+
+         .dropdown-menu.show {
+             display: block;
+         }
+
+     </style>
 </head>

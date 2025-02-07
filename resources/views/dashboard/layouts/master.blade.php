@@ -4,6 +4,18 @@
 @php
     $currentLang = app()->getLocale(); // or any other way to get current language
 @endphp
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<style>
+    .dropdown-menu {
+        display: none;
+    }
+
+    .dropdown-menu.show {
+        display: block;
+    }
+
+</style>
 <body class="{{ $currentLang == 'ar' ? 'layout-mode-rtl' : 'ltr' }}">
 <div id="global-loader">
     <div class="page-loader"></div>
@@ -52,32 +64,32 @@
                         </a>
                     </div>
 
-                    <div class="dropdown profile-dropdown"  >
+                    <div class="dropdown profile-dropdown">
                         <a href="javascript:void(0);" class="dropdown-toggle d-flex align-items-center"
-                           data-bs-toggle="dropdown">
-                                <span class="avatar avatar-sm online">
-                                    @if(Storage::exists('uploads/logo/' . \Auth::user()->id . '_logo.png'))
-                                        <img src="{{$logo.'/'.\Auth::user()->id.'_logo.png'}}" alt="Img" class="img-fluid rounded-circle">
-                                    @elseif(auth()->user()->avatar)
-                                        <img src="{{ asset(Storage::url(auth()->user()->avatar)) }}" alt="Img" class="img-fluid rounded-circle">
-                                    @else
-                                        <img src="{{ asset(Storage::url('uploads/avatar/company.png'))}}" alt="Img" class="img-fluid rounded-circle">
-                                    @endif
-                                </span>
+                           data-bs-toggle="dropdown" aria-expanded="false">
+        <span class="avatar avatar-sm online">
+            @if(Storage::exists('uploads/logo/' . \Auth::user()->id . '_logo.png'))
+                <img src="{{$logo.'/'.\Auth::user()->id.'_logo.png'}}" alt="Img" class="img-fluid rounded-circle">
+            @elseif(auth()->user()->avatar)
+                <img src="{{ asset(Storage::url(auth()->user()->avatar)) }}" alt="Img" class="img-fluid rounded-circle">
+            @else
+                <img src="{{ asset(Storage::url('uploads/avatar/company.png'))}}" alt="Img" class="img-fluid rounded-circle">
+            @endif
+        </span>
                         </a>
-                        <div class="dropdown-menu shadow-none" >
+                        <div class="dropdown-menu shadow-none">
                             <div class="card mb-0">
                                 <div class="card-header">
                                     <div class="d-flex align-items-center">
-                                <span class="avatar avatar-lg me-2 avatar-rounded">
-                                    @if(Storage::exists('uploads/logo/' . \Auth::user()->id . '_logo.png'))
-                                        <img src="{{$logo.'/'.\Auth::user()->id.'_logo.png'}}" alt="img">
-                                    @elseif(auth()->user()->avatar)
-                                        <img src="{{ asset(Storage::url(auth()->user()->avatar)) }}" alt="img">
-                                    @else
-                                        <img src="{{ asset(Storage::url('uploads/avatar/company.png'))}}" alt="img">
-                                    @endif
-                                </span>
+                    <span class="avatar avatar-lg me-2 avatar-rounded">
+                        @if(Storage::exists('uploads/logo/' . \Auth::user()->id . '_logo.png'))
+                            <img src="{{$logo.'/'.\Auth::user()->id.'_logo.png'}}" alt="img">
+                        @elseif(auth()->user()->avatar)
+                            <img src="{{ asset(Storage::url(auth()->user()->avatar)) }}" alt="img">
+                        @else
+                            <img src="{{ asset(Storage::url('uploads/avatar/company.png'))}}" alt="img">
+                        @endif
+                    </span>
                                         <div>
                                             <h5 class="mb-0">{{ auth()->user()->name }}</h5>
                                             <p class="fs-12 fw-medium mb-0">{{ auth()->user()->email }}</p>
@@ -85,27 +97,22 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <a class="dropdown-item d-inline-flex align-items-center p-0 py-2"
-                                       href="{{route('profile')}}">
-                                            <i class="ti ti-user-circle me-1"></i>{{__('My Profile')}}
+                                    <a class="dropdown-item d-inline-flex align-items-center p-0 py-2" href="{{route('profile')}}">
+                                        <i class="ti ti-user-circle me-1"></i>{{__('My Profile')}}
                                     </a>
-
                                 </div>
                                 <div class="card-footer">
-
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
-
-                                    <!-- Logout Button -->
                                     <a href="{{ route('logout') }}" class="dropdown-item d-inline-flex align-items-center p-0 py-2" title="Logout"
                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                        <i class="ti ti-login me-2"></i>   {{__('Logout')}}
+                                        <i class="ti ti-login me-2"></i> {{__('Logout')}}
                                     </a>
                                 </div>
                             </div>
                         </div>
-                    </div>                        <!-- Logout Section -->
+                    </div>
 
                     <!-- Language Dropdown Section -->
                     <div class="d-flex align-items-center">
@@ -155,12 +162,12 @@
             </div>
 
             <!-- Mobile Menu -->
-            <div class="dropdown mobile-user-menu" style="padding: 0 500px;">
+            <div class="dropdown mobile-user-menu"  >
                 <a href="javascript:void(0);" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
                    aria-expanded="false">
                     <i class="fa fa-ellipsis-v"></i>
                 </a>
-                <div class="dropdown-menu dropdown-menu-end">
+                <div class="dropdown-menu ">
                     <a class="dropdown-item" href="https://smarthr.dreamstechnologies.com/html/template/profile.html">My
                         Profile</a>
                     <a class="dropdown-item"
@@ -2984,6 +2991,35 @@
 </div>
 <!-- /Main Wrapper -->
 @include('dashboard.layouts.footer')
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let dropdownToggle = document.querySelector(".profile-dropdown .dropdown-toggle");
+        let dropdownMenu = document.querySelector(".profile-dropdown .dropdown-menu");
+
+        dropdownToggle.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            // Check if the dropdown is open
+            let isOpen = dropdownMenu.classList.contains("show");
+
+            // Close all dropdowns (if there are multiple on the page)
+            document.querySelectorAll(".dropdown-menu").forEach(menu => menu.classList.remove("show"));
+
+            // Toggle the clicked dropdown
+            if (!isOpen) {
+                dropdownMenu.classList.add("show");
+            }
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener("click", function (event) {
+            if (!dropdownToggle.contains(event.target) && !dropdownMenu.contains(event.target)) {
+                dropdownMenu.classList.remove("show");
+            }
+        });
+    });
+
+</script>
 @yield('script')
 
 @stack('scripts')
