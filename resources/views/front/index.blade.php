@@ -39,6 +39,7 @@
         /* General Reset */
 
 
+
         /* Body Styling */
 
         /* Form Container */
@@ -747,22 +748,31 @@
             <div class="row justify-content-center" data-aos="zoom-in" data-aos-delay="100">
                 <div class="col-xl-10">
                     <div class="text-center">
-                        <h3 class="my-8">{{__('Why Choose Us')}}</h3>
-                        @if(app()->getLocale()=='ar')
-                            @foreach($why as $w)
-                                <p>{{ $w->title_ar ?? '' }}
-                                    <i class="bi bi-check-circle-fill text-success ms-2" style="font-size: 1.2rem;"></i>
-                                </p>
-                            @endforeach
-                        @else
-                            @foreach($why as $w)
-                                <p>{{ $w->title ?? '' }}
-                                    <i class="bi bi-check-circle-fill text-success ms-2" style="font-size: 1.2rem;"></i>
-                                </p>
-                             @endforeach
-                        @endif
+                        <h3 class="my-8">{{ __('Why Choose Us') }}</h3>
+                        <p></p>
+                        <div class="row text-start"> <!-- Ensure all <p> starts from the same position -->
+                            @if(app()->getLocale() == 'ar')
+                                @foreach($why as $w)
+                                    <div class="col-12">
+                                        <p class="ms-3" style="text-align: right;margin-right:20px;"> <!-- Adjust spacing with margin-start -->
+                                            {{ $w->title_ar ?? '' }}
+                                            <i class="bi bi-check-circle-fill text-success ms-2" style="font-size: 1.2rem;  "></i>
+                                        </p>
+                                    </div>
+                                @endforeach
+                            @else
+                                @foreach($why as $w)
+                                    <div class="col-12">
+                                        <p class="ms-3" style="text-align: left;margin-left:20px;"> <!-- Adjust spacing with margin-start -->
+                                            <i class="bi bi-check-circle-fill text-success ms-2" style="font-size: 1.2rem; "></i>
+                                            {{ $w->title ?? '' }}
 
-                     </div>
+                                        </p>
+                                    </div>
+                                @endforeach
+                            @endif
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
