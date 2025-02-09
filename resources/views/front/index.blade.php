@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 <html lang="en">
@@ -20,10 +19,13 @@
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
     @if(app()->getLocale() == 'ar')
         <!-- Cairo for Arabic -->
-        <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap"
+              rel="stylesheet">
     @else
         <!-- Original fonts for other languages -->
-        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+        <link
+            href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+            rel="stylesheet">
     @endif
     <!-- Vendor CSS Files -->
     <link href="{{asset('public/front/assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
@@ -116,10 +118,11 @@
 
             .form-container h2 {
                 font-size: 1.25rem;
-                    }
+                    
+            }
         }
     </style>
-<style>
+    <style>
         /* Modal background */
         .modal {
             display: none;
@@ -169,167 +172,175 @@
         button:hover {
             background: #0056b3;
         }
-</style>
-<style>
-    body {
-        font-family:
-            @if(app()->getLocale() == 'ar')
+    </style>
+    <style>
+        body {
+            font-family: @if(app()->getLocale() == 'ar')
             'Cairo', sans-serif;
-    @else
-'Open Sans', 'Poppins', 'Raleway', sans-serif;
-    @endif
-}
+        @else
+     'Open Sans', 'Poppins', 'Raleway', sans-serif;
+        @endif
 
-    /* If you need to target specific elements */
-    body:lang(ar) {
-        font-family: 'Cairo', sans-serif;
-    }
 
-    /* For elements that should always use Cairo when in Arabic */
-    @if(app()->getLocale() == 'ar')
+
+
+
+        }
+
+        /* If you need to target specific elements */
+        body:lang(ar) {
+            font-family: 'Cairo', sans-serif;
+        }
+
+        /* For elements that should always use Cairo when in Arabic */
+        @if(app()->getLocale() == 'ar')
     .arabic-text {
-        font-family: 'Cairo', sans-serif;
-    }
-    h1, h2, h3, h4, h5, h6,
-    span {
-        font-family: 'Cairo', sans-serif;
-    }
+            font-family: 'Cairo', sans-serif;
+        }
 
-    @endif
-/* Language Dropdown Container */
-    .language-dropdown {
-        position: relative;
-        display: inline-block;
-    }
+        h1, h2, h3, h4, h5, h6,
+        span {
+            font-family: 'Cairo', sans-serif;
+        }
 
-    /* Dropdown Toggle Button */
-    .dropdown-toggle {
-        background: none;
-        border: none;
-        cursor: pointer;
-        padding: 8px;
-        display: flex;
-        align-items: center;
-    }
+        @endif
+     /* Language Dropdown Container */
+        .language-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Dropdown Toggle Button */
+        .dropdown-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+        }
 
 
+        /* Dropdown Menu */
+        .dropdown-menu {
+            display: none; /* Hidden by default */
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: #fff;
+            border: 1px solid rgba(0, 0, 0, 0.15);
 
-    /* Dropdown Menu */
-    .dropdown-menu {
-        display: none; /* Hidden by default */
-        position: absolute;
-        top: 100%;
-        right: 0;
-        background-color: #fff;
-        border: 1px solid rgba(0, 0, 0, 0.15);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 120px;
+            padding: 0;
+            margin-top: 5px;
+            z-index: 1000;
+        }
 
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        width: 120px;
-        padding: 0;
-        margin-top: 5px;
-        z-index: 1000;
-    }
+        .dropdown-menu.show {
+            display: block; /* Show dropdown when toggled */
+        }
 
-    .dropdown-menu.show {
-        display: block; /* Show dropdown when toggled */
-    }
+        /* Dropdown Items */
+        .dropdown-item {
+            padding: 8px 16px;
+            font-size: 14px;
+            color: #333;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.3s ease;
+        }
 
-    /* Dropdown Items */
-    .dropdown-item {
-        padding: 8px 16px;
-        font-size: 14px;
-        color: #333;
-        text-decoration: none;
-        display: block;
-        transition: background-color 0.3s ease;
-    }
+        .dropdown-item:hover {
+            background-color: #f8f9fa; /* Light gray background on hover */
+        }
 
-    .dropdown-item:hover {
-        background-color: #f8f9fa; /* Light gray background on hover */
-    }
+        .dropdown-item.text-danger {
+            color: #dc3545 !important; /* Red color for the active language */
+        }
 
-    .dropdown-item.text-danger {
-        color: #dc3545 !important; /* Red color for the active language */
-    }
+        /* Divider */
+        .dropdown-divider {
+            margin: 4px 0;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
 
-    /* Divider */
-    .dropdown-divider {
-        margin: 4px 0;
-        border-top: 1px solid rgba(0, 0, 0, 0.1);
-    }
-    .current-language {
-        margin-left: 8px;
-        font-size: 14px;
-        color: #fff;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-    }
+        .current-language {
+            margin-left: 8px;
+            font-size: 14px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
 
-    /* Flag styling */
-    .current-language::before {
-         font-size: 16px;
-    }
+        /* Flag styling */
+        .current-language::before {
+            font-size: 16px;
+        }
 
-    .dropdown-item {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-    /* Optional: Add hover animation */
-    .dropdown-toggle:hover .current-language {
-        transform: translateX(2px);
-        transition: transform 0.2s ease;
-    }
-    .client-card {
-        position: relative;
-        width: 150px; /* Equal width */
-        height: 150px; /* Equal height */
-        overflow: hidden;
-        border-radius: 10px;
-    }
+        /* Optional: Add hover animation */
+        .dropdown-toggle:hover .current-language {
+            transform: translateX(2px);
+            transition: transform 0.2s ease;
+        }
 
-    /* Parent Container */
-    .client-container {
-        width: 150px; /* Set a fixed width or use max-width */
-        height: auto;
-        text-align: center;
-    }
+        .client-card {
+            position: relative;
+            width: 150px; /* Equal width */
+            height: 150px; /* Equal height */
+            overflow: hidden;
+            border-radius: 10px;
+        }
 
-    /* Background Image */
-    .client-image {
-        width: 100%;
-        height: 150px; /* Equal height */
-        background-size: cover;
-        background-position: center;
-        opacity: 1;
-        border-radius: 10px;
-    }
+        /* Parent Container */
+        .client-container {
+            width: 150px; /* Set a fixed width or use max-width */
+            height: auto;
+            text-align: center;
+        }
 
-    /* Client Name Under Image */
-    .client-name {
-        width: 100%; /* Matches the image width */
-        text-align: center;
-        font-weight: bold;
-        font-size: 16px;
-        color: rgba(0, 0, 0, 0.7);;
+        /* Background Image */
+        .client-image {
+            width: 100%;
+            height: 150px; /* Equal height */
+            background-size: cover;
+            background-position: center;
+            opacity: 1;
+            border-radius: 10px;
+        }
 
-        padding: 8px;
-        border-radius: 0 0 10px 10px; /* Rounded bottom corners */
-    }
-    .icon {
-        text-align: center; /* Center the icon */
-        margin-bottom: 1rem; /* Add some space below the icon */
-    }
-    .icon-img {
-        width: 50px; /* Adjust size as needed */
-        height: 50px; /* Adjust size as needed */
-        object-fit: contain; /* Ensures the image fits within the dimensions */
-        display: block; /* Ensures the image is treated as a block element */
-        margin: 0 auto; /* Centers the image horizontally */
-    }
-</style>
+        /* Client Name Under Image */
+        .client-name {
+            width: 100%; /* Matches the image width */
+            text-align: center;
+            font-weight: bold;
+            font-size: 16px;
+            color: rgba(0, 0, 0, 0.7);;
+
+            padding: 8px;
+            border-radius: 0 0 10px 10px; /* Rounded bottom corners */
+        }
+
+        .icon {
+            text-align: center; /* Center the icon */
+            margin-bottom: 1rem; /* Add some space below the icon */
+        }
+
+        .icon-img {
+            width: 50px; /* Adjust size as needed */
+            height: 50px; /* Adjust size as needed */
+            object-fit: contain; /* Ensures the image fits within the dimensions */
+            display: block; /* Ensures the image is treated as a block element */
+            margin: 0 auto; /* Centers the image horizontally */
+        }
+    </style>
 
 </head>
 
@@ -340,7 +351,8 @@
     <div class="topbar d-flex align-items-center">
         <div class="container d-flex justify-content-center justify-content-md-between">
             <div class="contact-info d-flex align-items-center">
-                <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">{{$setting->email}}</a></i>
+                <i class="bi bi-envelope d-flex align-items-center"><a
+                        href="mailto:contact@example.com">{{$setting->email}}</a></i>
                 <i class="bi bi-phone d-flex align-items-center ms-4"><span>{{$setting->phone}}</span></i>
             </div>
             <div class="social-links d-none d-md-flex align-items-center">
@@ -352,7 +364,7 @@
         </div>
 
         <div class="d-flex align-items-center">
-             <div class="language-dropdown me-3">
+            <div class="language-dropdown me-3">
                 <button class="dropdown-toggle" id="languageDropdown">
                     <i class="fa text-white fa-globe text-warning fa-lg"></i>
                     <span class="current-language">
@@ -381,21 +393,17 @@
             </div>
 
         </div>
-        <a href="{{ route('login') }}" class="text-dark px-3 py-2 d-flex align-items-center mx-5" style="background-color: white; border-radius: 5px;">
+        <a href="{{ route('login') }}" class="text-dark px-3 py-2 d-flex align-items-center mx-5"
+           style="background-color: white; border-radius: 5px;">
             <i class="bi bi-box-arrow-in-right me-2"></i> Login
         </a>
     </div>
 
     <div class="branding d-flex align-items-center">
 
-        <div class="container position-relative d-flex align-items-center justify-content-between">
-            <a href="{{route('landingPage')}}" class="logo d-flex align-items-center">
-                <!-- Uncomment the line below if you also wish to use an image logo -->
-                  <img src="{{asset('public/front/assets/img/logo.png')}}" alt="">
-                <h4 class="sitename">Mwerdi</h4>
-            </a>
-
-            <nav id="navmenu" class="navmenu" @if(app()->getLocale()=='ar') dir="rtl" @endif>
+        <div class="container position-relative d-flex align-items-center justify-content-between"
+             @if(app()->getLocale()=='ar') dir="rtl" @endif>
+            <nav id="navmenu" class="navmenu">
                 <ul>
                     <li><a href="#hero" class="active"><span>{{__('Home')}}</span></a></li>
                     <li><a href="#about"><span>{{__('About')}}</span></a></li>
@@ -406,6 +414,12 @@
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
+
+            <a href="{{route('landingPage')}}" class="logo d-flex align-items-center">
+                <!-- Uncomment the line below if you also wish to use an image logo -->
+                <img src="{{asset('public/front/assets/img/logo.png')}}" alt="">
+                <h4 class="sitename">Mwerdi</h4>
+            </a>
         </div>
 
     </div>
@@ -418,18 +432,19 @@
     <section id="hero" class="hero section dark-background">
 
         <img src="{{ asset('storage/app/public/'.$homeSection->image) }}" alt="" data-aos="fade-in">
+        {{--        <img src="{{ asset('public/front/assets/img/about.jpg') }}" alt="" data-aos="fade-in">--}}
         @if(app()->getLocale()=='ar')
-        <div class="container" data-aos="fade-up" data-aos-delay="100" dir="rtl">
-            <div class="row justify-content-start">
-                <div class="col-lg-12">
-                    <h2>{{$homeSection->title_ar}}</h2>
-                    <p>{{$homeSection->description_ar}}</p>
-                    <a href="#about" class="btn-get-started">{{__('Get Started')}}</a>
+            <div class="container" data-aos="fade-up" data-aos-delay="100" dir="rtl">
+                <div class="row justify-content-start">
+                    <div class="col-lg-12">
+                        <h2>{{$homeSection->title_ar}}</h2>
+                        <p>{{$homeSection->description_ar}}</p>
+                        <a href="#about" class="btn-get-started">{{__('Get Started')}}</a>
+                    </div>
                 </div>
             </div>
-        </div>
         @else
-            <div class="container" data-aos="fade-up" data-aos-delay="100" dir="rtl">
+            <div class="container" data-aos="fade-up" data-aos-delay="100">
                 <div class="row justify-content-start">
                     <div class="col-lg-12">
                         <h2>{{$homeSection->title}}</h2>
@@ -443,43 +458,42 @@
     </section><!-- /Hero Section -->
 
     <!-- About Section -->
-    <section id="about" class="about section ">
+    <section id="about" class="about section">
         @if(app()->getLocale()=='ar')
-        <!-- Section Title -->
-        <div class="container section-title" dir="rtl" data-aos="fade-up">
-            <span>معلومات عنا<br></span>
-            <h2>معلومات عنا<br></h2>
+            <!-- Section Title -->
+            <div class="container section-title" dir="rtl" data-aos="fade-up">
+                <span>معلومات عنا<br></span>
+                <h2>معلومات عنا<br></h2>
 
-            <p>{{$about->title_ar}}</p>
-        </div><!-- End Section Title -->
-        <div class="container" dir="rtl">
-            <div class="row">
-                <div class="col-lg-12 order-2 order-lg-1 content  " data-aos="fade-up" data-aos-delay="200">
-                    {!! $about->description_ar !!}
+                {{--                <p>{{$about->title_ar}}</p>--}}
+            </div><!-- End Section Title -->
+            <div class="container" dir="rtl">
+                <div class="row">
+                    <div class="col-lg-12 order-2 order-lg-1 content  " data-aos="fade-up" data-aos-delay="200">
+                        {!! $about->description_ar !!}
+                    </div>
+
                 </div>
 
             </div>
-
-        </div>
         @else
             <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
                 <span>About Us<br></span>
                 <h2>About Us<br></h2>
 
-                <p>{!! $about->title !!}</p>
             </div><!-- End Section Title -->
             <div class="container">
 
                 <div class="row gy-4">
 
-{{--                    <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-up" data-aos-delay="100">--}}
-{{--                        <img src="assets/img/about.jpg" class="img-fluid" alt="">--}}
-{{--                    </div>--}}
+                    {{--                    <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-up" data-aos-delay="100">--}}
+                    {{--                        <img src="{{ asset('front/assets/img/about.jpg') }}" class="img-fluid" alt="">--}}
+                    {{--                    </div>--}}
 
                     <div class="col-lg-12 order-2 order-lg-1 content" data-aos="fade-up" data-aos-delay="200">
-                    {!! $about->description !!}
-                     </div>
+                        {!! $about->description !!}
+                    </div>
 
                 </div>
 
@@ -530,11 +544,12 @@
                     @foreach($clients as $client)
                         <div class="swiper-slide">
                             <div class="client-container">
-                                <div class="client-image" style="background-image: url('{{ asset('storage/app/public/'.$client->image) }}');"></div>
+                                <div class="client-image"
+                                     style="background-image: url('{{ asset('public/front/assets/img/clients/'.$client->image) }}');"></div>
                                 @if(app()->getLocale()=='ar')
-                                <div class="client-name">{{ $client->name_ar??'' }}</div>
+                                    <div class="client-name">{{ $client->name_ar??'' }}</div>
                                 @else
-                                <div class="client-name">{{ $client->name??'' }}</div>
+                                    <div class="client-name">{{ $client->name??'' }}</div>
                                 @endif
                             </div>
                         </div>
@@ -549,19 +564,22 @@
     <!-- Services Section -->
     <section id="services" class="services section">
 
-        <div class="container section-title" data-aos="fade-up">
+        <div class="container section-title">
             <span>{{__('Features')}}</span>
             <h2>{{__('Features')}}</h2>
-         </div>
+        </div>
 
         <div class="container">
             <div class="row gy-4">
                 @if(app()->getLocale() == 'en')
                     @foreach($features as $feature)
-                        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                        {{--                        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">--}}
+                        <div class="col-lg-4 col-md-6">
                             <div class="service-item position-relative">
                                 <div class="icon">
-                                    <img src="{{ asset('storage/app/public/' . ($feature->icon ?? 'default-icon.png')) }}" alt="{{ $feature->title }}" class="icon-img">
+                                    <img
+                                        src="{{ asset('storage/app/public/' . ($feature->icon ?? 'default-icon.png')) }}"
+                                        alt="{{ $feature->title }}" class="icon-img">
                                 </div>
                                 <a href="#" class="stretched-link">
                                     <h3>{{ $feature->title }}</h3>
@@ -572,10 +590,13 @@
                     @endforeach
                 @else
                     @foreach($features as $feature)
-                        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                        {{--                        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">--}}
+                        <div class="col-lg-4 col-md-6">
                             <div class="service-item position-relative">
                                 <div class="icon">
-                                    <img src="{{ asset('storage/app/public/' . ($feature->icon ?? 'default-icon.png')) }}" alt="{{ $feature->title_ar }}" class="icon-img">
+                                    <img
+                                        src="{{ asset('storage/app/public/' . ($feature->icon ?? 'default-icon.png')) }}"
+                                        alt="{{ $feature->title_ar }}" class="icon-img">
                                 </div>
                                 <a href="#" class="stretched-link">
                                     <h3>{{ $feature->title_ar }}</h3>
@@ -586,12 +607,13 @@
                     @endforeach
                 @endif
             </div>
-        </div>    </section><!-- /Services Section -->
+        </div>
+    </section><!-- /Services Section -->
 
     <!-- Call To Action Section -->
     <section id="call-to-action" class="call-to-action section dark-background">
 
-        <img src="assets/img/cta-bg.jpg" alt="">
+        <img src="{{ asset('public/front/assets/img/cta-bg.jpg') }}" alt="">
 
         <div class="container">
             <div class="row justify-content-center" data-aos="zoom-in" data-aos-delay="100">
@@ -599,7 +621,7 @@
                     <div class="text-center">
                         <h3>{{__('Contact Us')}}</h3>
                         @if(app()->getLocale()=='ar')
-                        <p>{{$homeSection->description_ar ??''}}</p>
+                            <p>{{$homeSection->description_ar ??''}}</p>
                         @else
                             <p>{{$homeSection->description??''}}</p>
 
@@ -621,7 +643,7 @@
         <div class="container section-title" data-aos="fade-up">
             <span>{{__('Pricing')}}</span>
             <h2>{{__('Pricing')}}</h2>
-{{--            <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>--}}
+            {{--            <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>--}}
         </div><!-- End Section Title -->
 
         <div class="container">
@@ -629,7 +651,8 @@
                 @foreach($plans as $plan)
                     <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="{{ $loop->index * 100 + 100 }}">
                         <div class="pricing-item card shadow-sm border-0">
-                            <div class="card-header text-white position-relative" style="background-color: {{ ['#f27439', '#24314e', '#ffa508'][$loop->index % 3] }};">
+                            <div class="card-header text-white position-relative"
+                                 style="background-color: {{ ['#f27439', '#24314e', '#ffa508'][$loop->index % 3] }};">
                                 <h3 class="card-title mb-0 text-center text-white">{{ $plan->name }}</h3>
                             </div>
 
@@ -685,8 +708,6 @@
                                             {{ __('Subscribe') }}
                                         </a>
 
-
-
                                     @else
                                         <span class="btn btn-outline-success btn-block">
                                     <i class="fas fa-gift mr-1"></i>{{__('Free')}}
@@ -706,25 +727,30 @@
                     <div class="form-container">
                         <h2>{{ __('Plan Request') }}</h2>
 
-                        <form id="planForm" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="400">
-                                @csrf
-                                <input type="hidden" name="plan_id" id="plan_id">
+                        <form id="planForm" method="post" class="php-email-form" data-aos="fade-up"
+                              data-aos-delay="400">
+                            @csrf
+                            <input type="hidden" name="plan_id" id="plan_id">
 
-                                <div class="form-group">
+                            <div class="form-group">
                                 <label for="name">{{__('name')}}</label>
-                                <input type="text" id="name" name="name" placeholder="{{__('Enter your full name')}}" required>
+                                <input type="text" id="name" name="name" placeholder="{{__('Enter your full name')}}"
+                                       required>
                             </div>
                             <div class="form-group">
                                 <label for="email">{{__('email')}}</label>
-                                <input type="email" id="email" name="email" placeholder="{{__('Enter your email')}}" required>
+                                <input type="email" id="email" name="email" placeholder="{{__('Enter your email')}}"
+                                       required>
                             </div>
                             <div class="form-group">
                                 <label for="phone">{{__('phone')}}</label>
-                                <input type="text" id="phone" name="phone" placeholder="{{__('Enter your Phone')}}" required>
+                                <input type="text" id="phone" name="phone" placeholder="{{__('Enter your Phone')}}"
+                                       required>
                             </div>
                             <div class="form-group">
                                 <label for="buisness_type">{{__('Business Type')}}</label>
-                                <input type="text" id="buisness_type" name="buisness_type" placeholder="{{__('Business Type')}}"   required>
+                                <input type="text" id="buisness_type" name="buisness_type"
+                                       placeholder="{{__('Business Type')}}" required>
                             </div>
                             <button type="submit" class="submit-btn">{{__('Send')}}</button>
                         </form>
@@ -741,7 +767,7 @@
 
     <section id="team" class="call-to-action section dark-background">
 
-        <img src="assets/img/cta-bg.jpg" alt="">
+        <img src="{{ asset('public/front/assets/img/cta-bg.jpg') }}" alt="">
 
         <div class="container">
             <div class="row justify-content-center" data-aos="zoom-in" data-aos-delay="100">
@@ -759,10 +785,10 @@
                                 <p>{{ $w->title ?? '' }}
                                     <i class="bi bi-check-circle-fill text-success ms-2" style="font-size: 1.2rem;"></i>
                                 </p>
-                             @endforeach
+                            @endforeach
                         @endif
 
-                     </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -785,7 +811,8 @@
             <div class="row gy-4">
 
                 <div class="col-lg-6">
-                    <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="200">
+                    <div class="info-item d-flex flex-column justify-content-center align-items-center"
+                         data-aos="fade-up" data-aos-delay="200">
                         <i class="bi bi-geo-alt"></i>
                         <h3>Address</h3>
                         <p>{{$setting->address??''}}</p>
@@ -793,7 +820,8 @@
                 </div><!-- End Info Item -->
 
                 <div class="col-lg-3 col-md-6">
-                    <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="300">
+                    <div class="info-item d-flex flex-column justify-content-center align-items-center"
+                         data-aos="fade-up" data-aos-delay="300">
                         <i class="bi bi-telephone"></i>
                         <h3>Call Us</h3>
                         <p>{{$setting->phone??''}}</p>
@@ -801,7 +829,8 @@
                 </div><!-- End Info Item -->
 
                 <div class="col-lg-3 col-md-6">
-                    <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="400">
+                    <div class="info-item d-flex flex-column justify-content-center align-items-center"
+                         data-aos="fade-up" data-aos-delay="400">
                         <i class="bi bi-envelope"></i>
                         <h3>Email Us</h3>
                         <p>{{$setting->email??''}}</p>
@@ -821,7 +850,8 @@
 
 
                 <div class="col-lg-6">
-                    <form action="{{ route('contact-us.store') }}" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="400">
+                    <form action="{{ route('contact-us.store') }}" method="post" class="php-email-form"
+                          data-aos="fade-up" data-aos-delay="400">
                         @csrf
                         <div class="row gy-4">
                             <div class="col-md-6">
@@ -834,11 +864,14 @@
                                 <input type="text" class="form-control" name="subject" placeholder="Subject" required>
                             </div>
                             <div class="col-md-12">
-                                <textarea class="form-control" name="message" rows="6" placeholder="Message" required></textarea>
+                                <textarea class="form-control" name="message" rows="6" placeholder="Message"
+                                          required></textarea>
                             </div>
                             <div class="col-md-12 text-center">
                                 <div class="loading" style="display: none;">Loading...</div>
-                                 <div class="sent-message" style="display: none;">Your message has been sent. Thank you!</div>
+                                <div class="sent-message" style="display: none;">Your message has been sent. Thank
+                                    you!
+                                </div>
                                 <button type="submit">Send Message</button>
                             </div>
                         </div>
@@ -853,29 +886,42 @@
 
 </main>
 
-<footer id="footer" class="footer position-relative dark-background">
 
-    <div class="container footer-top">
+<!-- Footer:START -->
+<footer id="footer" class="footer position-relative dark-background">
+    <div class="container footer-top" @if(app()->getLocale()=='ar') dir="rtl" @endif>
         <div class="row gy-4">
-            <div class="col-lg-10 col-md-6">
+            <!-- Company Name & Description -->
+            <div class="col-lg-3 col-md-6">
                 <div class="footer-about">
                     <a href="index.html" class="logo sitename">Mwerdi</a>
-                    <div class="footer-contact pt-3">
-                        {{$setting->address??''}}
-                        <p class="mt-3"><strong>Phone:</strong> <span>{{$setting->phone??''}}</span></p>
-                        <p><strong>Email:</strong> <span> {{$setting->email??''}} </span></p>
-                    </div>
-                    <div class="social-links d-flex mt-4">
-                        <a href="{{$setting->twitter }}" target="_blank"><i class="bi bi-twitter-x"></i></a>
-                        <a href="{{$setting->facebook }}" target="_blank"><i class="bi bi-facebook"></i></a>
-                        <a href="{{$setting->instagram }}" target="_blank"><i class="bi bi-instagram"></i></a>
-                        <a href="{{$setting->linkedin }}" target="_blank"><i class="bi bi-linkedin"></i></a>
-                    </div>
+                    <p class="mt-2">{{ $setting->description ?? 'We are the tech company following are our services.' }}</p>
                 </div>
             </div>
 
-            <div class="col-lg-2 col-md-3 footer-links text-center">
-                <h4>{{ __('Our Web Site') }}</h4>
+            <div class="col-lg-3 col-md-12 footer-links text-center">
+                <h4>{{__('Features')}}</h4>
+
+                @if(app()->getLocale() == 'en')
+                    <ul class="list-unstyled d-inline-block text-start">
+                        @foreach($features as $feature)
+
+                            <li class="text-center">{{ $feature->title }}</li>
+
+                        @endforeach
+                    </ul>
+                @else
+                    <ul class="list-unstyled d-inline-block text-start">
+                        @foreach($features as $feature)
+                            <li class="text-center">{{ $feature->title_ar }}</li>
+                        @endforeach
+                    </ul>
+                @endif
+            </div>
+
+            <!-- Our Website Links -->
+            <div class="col-lg-3 col-md-12 footer-links text-center">
+                <h4>{{ __('Our Website') }}</h4>
                 <ul class="list-unstyled d-inline-block text-start">
                     <li class="text-center"><a href="#hero">{{ __('Home') }}</a></li>
                     <li class="text-center"><a href="#about">{{ __('About Us') }}</a></li>
@@ -884,22 +930,57 @@
                     <li class="text-center"><a href="#contact">{{ __('Contact Us') }}</a></li>
                 </ul>
             </div>
-
-
-
-
+            <!-- Contact Information -->
+            <div class="col-lg-3 col-md-6 text-center">
+                <h4>{{ __('Contact Us') }}</h4>
+                <div class="footer-contact pt-2">
+                    <p><strong>{{ __('Address') }}:</strong> {{ $setting->address ?? '' }}</p>
+                    <p><strong>{{ __('Phone') }}:</strong> <span>{{ $setting->phone ?? '' }}</span></p>
+                    <p><strong>{{ __('Email') }}:</strong> <span>{{ $setting->email ?? '' }}</span></p>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="container copyright text-center mt-4">
-        <p> <span>Copyright</span> <strong class="px-1 sitename">©</strong> <span>Mwerdi</span></p>
-
+    <!-- Copyright & Social Links -->
+    <div class="container mt-4">
+        @if(app()->getLocale() == 'en')
+            <div class="row align-items-center">
+                <div class="col-md-6 text-start">
+                    <p><span>Copyright</span> <strong class="px-1 sitename">©</strong> <span>Mwerdi</span></p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <div class="social-links d-flex justify-content-end">
+                        <a href="{{ $setting->twitter }}" target="_blank"><i class="bi bi-twitter-x"></i></a>
+                        <a href="{{ $setting->facebook }}" target="_blank"><i class="bi bi-facebook"></i></a>
+                        <a href="{{ $setting->instagram }}" target="_blank"><i class="bi bi-instagram"></i></a>
+                        <a href="{{ $setting->linkedin }}" target="_blank"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+        @else
+            <div class="row align-items-center">
+                <div class="col-md-6 text-start">
+                    <div class="social-links d-flex justify-content-start">
+                        <a href="{{ $setting->twitter }}" target="_blank"><i class="bi bi-twitter-x"></i></a>
+                        <a href="{{ $setting->facebook }}" target="_blank"><i class="bi bi-facebook"></i></a>
+                        <a href="{{ $setting->instagram }}" target="_blank"><i class="bi bi-instagram"></i></a>
+                        <a href="{{ $setting->linkedin }}" target="_blank"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-6 text-end">
+                    <p><span>Copyright</span> <strong class="px-1 sitename">©</strong> <span>Mwerdi</span></p>
+                </div>
+            </div>
     </div>
-
+    @endif
 </footer>
+<!-- Footer:END -->
+
 
 <!-- Scroll Top -->
-<a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+<a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
 
 <!-- Preloader -->
 <div id="preloader"></div>
