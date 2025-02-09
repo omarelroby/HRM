@@ -2,19 +2,9 @@
 <html lang="en" >
 <head>
     <meta charset="UTF-8">
-    <title>Animated Login &amp; Register Form</title>
+    <title>Mwaredi | Login</title>
+    <link href="{{asset('public/front/assets/img/logo.png')}}" rel="icon">
     <link rel="stylesheet" href="{{ asset('public/auth/css/style.css') }}">
-
-</head>
-<body>
-<!-- partial:index.partial.html -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Animated Login-Signup Form</title>
-    <link rel="stylesheet" href="style.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
@@ -43,8 +33,8 @@
         </form>
     </div>
     <div class="info-text login">
-        <h2 class="animation" style="--i:0; --j:20;">Welcome back!</h2>
-        <p class="animation" style="--i:1; --j:21;">We're happy to have you with us back again! If you need anything, we're here to help</p>
+        <h2 class="animation" style="--i:0; --j:20;">Welcome Back to Mwaredi!</h2>
+        <p class="animation" style="--i:1; --j:21;">We're glad to have you here.  we're always ready to help</p>
     </div>
 
     <div class="form-box register ">
@@ -73,8 +63,8 @@
     </div>
 
     <div class="info-text register">
-        <h2 class="animation" style="--i:17; --j:0;">Welcome!</h2>
-        <p class="animation" style="--i:18; --j:1">We're delighted to have you here. If you need any assistance, feel free to reach out</p>
+        <h2 class="animation" style="--i:17; --j:0;">Welcome Back to Mwaredi!</h2>
+        <p class="animation" style="--i:18; --j:1">We're glad to have you here.  we're always ready to help</p>
     </div>
 </div>
 
