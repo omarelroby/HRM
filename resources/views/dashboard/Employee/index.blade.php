@@ -223,7 +223,7 @@
                                                         'building_number', 'street_name', 'region', 'country', 'postal_code', 'mother_city',
                                                         'mother_country', 'emergency_contact_name', 'emergency_contact_relationship', 'emergency_contact_address',
                                                         'emergency_contact_phone', 'custom_field_corona', 'custom_field_notes', 'Join_date_gregorian', 'Join_date_hijri',
-                                                        'labor_hire_company', 'work_unit', 'class', 'direct_manager', 'permission', 'uploading_record_permission',
+                                                        'labor_hire_company',  'class', 'direct_manager', 'permission', 'uploading_record_permission',
                                                         'contract_type', 'contract_duration', 'employee_on_probation',
                                                         'payment_type', 'employee_account_type',  'policy_number',
                                                         'insurance_startdate', 'category', 'cost', 'availability_health_insurance_council', 'health_insurance_council_startdate',
@@ -875,6 +875,19 @@
                             <hr>
                             <div class="row">
                                 <h6 class="col-md-12 my-2">{{ __('job_details') }}</h6>
+                                <!-- Join Date (Gregorian) -->
+                                <div class="form-group col-md-3 input-icon-start position-relative">
+                                    <div class="mb-3">
+                                        <label for="work_start_date" class="form-label">{{ __('Starting Work Date') }}</label>
+                                        <div class="input-icon-start position-relative">
+                                            <input type="text" name="work_start_date" id="work_start_date" class="form-control form-control-lg datetimepicker" placeholder="dd/mm/yyyy">
+                                            <span class="input-icon-addon">
+                                                <i class="ti ti-calendar text-gray-7"></i>
+                                            </span>
+                                            <div id="work_start_date" class="invalid-feedback"></div>
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <!-- Join Date (Gregorian) -->
                                 <div class="form-group col-md-3 input-icon-start position-relative">
@@ -896,15 +909,7 @@
                                     <input type="text" class="form-control hijri-date-input" name="Join_date_hijri" id="Join_date_hijri" value="{{ old('Join_date_hijri') ?? now() }}">
                                 </div>
 
-                                <!-- Job Title -->
-                                <div class="form-group col-md-3">
-                                    <label for="jobtitle_id" class="form-label">{{ __('jobtitle') }}</label>
-                                    <select class="form-control" name="jobtitle_id" id="jobtitle_id">
-                                        @foreach($jobtitles as $id => $title)
-                                            <option value="{{ $title->id }}" {{ old('jobtitle_id') == $id ? 'selected' : '' }}>{{ $title->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+
 
                                 <!-- Job Type -->
                                 <div class="form-group col-md-3">
@@ -916,16 +921,7 @@
                                     </select>
                                 </div>
                                 <div class="row">
-                                    <!-- Work Unit -->
-                                    <div class="form-group col-md-3">
-                                        <label for="work_unit" class="form-label">{{ __('work_unit') }}</label>
-                                        <select class="form-control" name="work_unit" id="work_unit">
-                                            <option value="">{{   __('work_unit')}} /</option>
-                                            @foreach($work_units as $id => $unit)
-                                                <option value="{{ $unit->id }}" {{ old('work_unit') == $id ? 'selected' : '' }}>{{ $unit->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
+
 
                                     <!-- Class -->
                                     <div class="form-group col-md-3">

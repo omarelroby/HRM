@@ -627,15 +627,7 @@
                                     </select>
                                 </div>
                                 <div class="row">
-                                    <!-- Work Unit -->
-                                    <div class="form-group col-md-3">
-                                        <label for="work_unit" class="form-label">{{ __('work_unit') }}</label>
-                                        <select class="form-control" name="work_unit" id="work_unit">
-                                            @foreach($work_units as $id => $unit)
-                                                <option value="{{ $unit->id }}" {{ old('work_unit') == $id ? 'selected' : '' }}>{{ $unit->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
+
 
                                     <!-- Class -->
                                     <div class="form-group col-md-3">
