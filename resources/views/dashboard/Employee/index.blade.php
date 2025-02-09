@@ -227,7 +227,7 @@
                                                         'contract_type', 'contract_duration', 'employee_on_probation',
                                                         'payment_type', 'employee_account_type',  'policy_number',
                                                         'insurance_startdate', 'category', 'cost', 'availability_health_insurance_council', 'health_insurance_council_startdate',
-                                                        'insurance_document', 'annual_leave_entitlement', 'shift', 'location',
+                                                        'insurance_document','work_start_date', 'annual_leave_entitlement', 'shift', 'location',
 
                                                     ];
 

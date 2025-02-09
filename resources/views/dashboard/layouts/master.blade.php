@@ -64,7 +64,7 @@
                         </a>
                     </div>
 
-                    <div class="dropdown profile-dropdown">
+                    <div class="dropdown profile-dropdown mx-2">
                         <a href="javascript:void(0);" class="dropdown-toggle d-flex align-items-center"
                            data-bs-toggle="dropdown" aria-expanded="false">
         <span class="avatar avatar-sm online">

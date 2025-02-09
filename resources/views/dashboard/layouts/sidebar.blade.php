@@ -228,7 +228,7 @@
                                         <li><a href="{{ url('/jobtitle') }}" class="{{ Request::is('jobtitle') ?'active' :'' }}">{{ __('Job Titles') }}</a></li>
                                          <li><a href="{{ url('/nationality') }}" class="{{ Request::is('nationality') ?'active' :'' }}">{{ __('Nationality') }}</a></li>
                                          <li><a href="{{ url('/labor_companies') }}" class="{{ Request::is('labor_companies') ?'active' :'' }}">{{ __('labor_companies') }}</a></li>
-                                         <li><a href="{{ url('/workunits') }}" class="{{ Request::is('workunits') ?'active' :'' }}">{{ __('workunits') }}</a></li>
+{{--                                         <li><a href="{{ url('/workunits') }}" class="{{ Request::is('workunits') ?'active' :'' }}">{{ __('workunits') }}</a></li>--}}
                                          <li><a href="{{ url('/employee_shifts') }}" class="{{ Request::is('employee_shifts') ?'active' :'' }}">{{ __('employee_shifts') }}</a></li>
                                          <li><a href="{{ url('/place') }}" class="{{ Request::is('place') ?'active' :'' }}">{{ __('location') }}</a></li>
                                          <li><a href="{{ url('/jobtypes') }}" class="{{ Request::is('jobtypes') ?'active' :'' }}">{{ __('job_type') }}</a></li>
@@ -249,7 +249,7 @@
                         @endif
                         @if(\Auth::user()->can('Manage Set Salary'))
                             <li class="submenu">
-                                <a href="javascript:void(0);" class="subdrop {{ Request::is('salary_setting') || Request::is('setsalary')|| Request::is('payslip') ? 'active' : '' }}">
+                                <a href="javascript:void(0);" class="subdrop {{ Request::is('salary_setting') || Request::is('setsalary')|| Request::is('payslip')|| Request::is('end-service') ? 'active' : '' }}">
                                     <i class="ti ti-file-description"></i><span class="submenu-title">{{ __('Payroll') }}</span>
                                     <span class="menu-arrow"></span>
                                 </a>
@@ -257,8 +257,9 @@
                                     @if(\Auth::user()->type!='employee')
                                     <li><a href="{{ route('salary_setting.index') }}"  class="{{ Request::is('salary_setting') ?'active' :'' }}">{{ __('Salary Data Settings') }}</a></li>
                                     @endif
-                                        <li><a href="{{ route('setsalary.index') }}"  class="{{ Request::is('setsalary') ?'active' :'' }}">{{ __('Determine Salary') }}</a></li>
+                                    <li><a href="{{ route('setsalary.index') }}"  class="{{ Request::is('setsalary') ?'active' :'' }}">{{ __('Determine Salary') }}</a></li>
                                     <li><a href="{{ url('/payslip') }}"  class="{{ Request::is('payslip') ?'active' :'' }}">{{ __('Payslip') }}</a></li>
+                                    <li><a href="{{ url('/end-service') }}"  class="{{ Request::is('end-service') ?'active' :'' }}">{{ __('End of service gratuity') }}</a></li>
 
                                 </ul>
                             </li>
