@@ -586,7 +586,18 @@
                             <hr>
                             <div class="row">
                                 <h6 class="col-md-12 my-2">{{ __('job_details') }}</h6>
-
+                                <div class="form-group col-md-3 input-icon-start position-relative">
+                                    <div class="mb-3">
+                                        <label for="work_start_date" class="form-label">{{ __('Starting Work Date') }}</label>
+                                        <div class="input-icon-start position-relative">
+                                            <input type="text" value="{{$employee->work_start_date??''}}" name="work_start_date" id="work_start_date" class="form-control form-control-lg datetimepicker" placeholder="dd/mm/yyyy">
+                                            <span class="input-icon-addon">
+                                                <i class="ti ti-calendar text-gray-7"></i>
+                                            </span>
+                                            <div id="work_start_date" class="invalid-feedback"></div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <!-- Join Date (Gregorian) -->
                                 <div class="form-group col-md-3 input-icon-start position-relative">
                                     <div class="mb-3">

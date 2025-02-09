@@ -108,7 +108,18 @@ class Employee extends Model
     //     'expiry_date',
     //     'created_by',
     // ];
+    protected $appends =[
+        'allownce'
+ ];
+    public function allowances()
+    {
+        return $this->hasMany(Allowance::class,'employee_id','id');
+    }
 
+    public function getAllowanceAttribute()
+    {
+        return $this->allowances()->sum('amount');
+    }
     public function documents()
     {
         return $this->hasMany('App\Models\EmployeeDocument', 'employee_id', 'employee_id')->get();

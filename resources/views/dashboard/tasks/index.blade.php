@@ -9,7 +9,7 @@
 @section('content')
     <div class="row">
         <div class="d-flex justify-content-end mb-3">
-            @can('Create Ticket')
+            @can('Create tasks')
                 <a href="#" data-bs-toggle="modal" data-bs-target="#addTrainingModal" class="btn btn-primary btn-lg">
                     <i class="fas fa-plus"></i> {{ __('Create New Task') }}
                 </a>
