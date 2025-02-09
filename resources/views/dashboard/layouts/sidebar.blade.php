@@ -33,7 +33,8 @@
         <!-- Normal Logo -->
         <a href="{{ route('home') }}" class="logo logo-normal">
 
-            <img title="{{$logo.'/'.\Auth::user()->id.'_logo.png'}}" style="width: auto;    height: 80px; object-fit: cover;" src="{{  $logo.'/'.\Auth::user()->id.'_logo.png' }}" alt="Logo" class="logo-img">
+{{--            <img title="{{$logo.'/'.\Auth::user()->id.'_logo.png'}}" style="width: auto;    height: 80px; object-fit: cover;" src="{{  $logo.'/'.\Auth::user()->id.'_logo.png' }}" alt="Logo" class="logo-img">--}}
+            <img style="width: auto;    height: 80px; object-fit: cover;" src="{{ asset('public/front/assets/img/logo.png') }}" alt="Logo" class="logo-img">
         </a>
 
 
@@ -72,7 +73,8 @@
             <!-- Normal Logo -->
             <a href="{{ route('home') }}" class="logo logo-normal">
 
-                <img style="width: auto;   height: 80px; object-fit: cover;" src="{{  asset(Storage::url('uploads/avatar/company.png'))}}" alt="Logo" class="logo-img">
+{{--                <img style="width: auto;   height: 80px; object-fit: cover;" src="{{  asset(Storage::url('uploads/avatar/company.png'))}}" alt="Logo" class="logo-img">--}}
+                <img style="width: auto;   height: 80px; object-fit: cover;" src="{{  asset('front/assets/img/logo.png')}}" alt="Logo" class="logo-img">
             </a>
 
             <!-- Small Logo -->
@@ -180,8 +182,7 @@
                                     <span class="submenu-title">{{  __('Landing Page') }}</span>
                                     <span class="menu-arrow"></span>
                                 </a>
-                                <ul style="display: none;">
-
+                                <ul style="display: block;">
                                         <li><a href="{{ url('/home-sections') }}" class="{{ Request::is('home-sections') ?'active' :'' }}">{{ __('Home Section') }}</a></li>
                                         <li><a href="{{ url('/about-us') }}" class="{{ Request::is('about-us') ?'active' :'' }}">{{ __('About Us') }}</a></li>
                                         <li><a href="{{ url('/clients') }}" class="{{ Request::is('clients') ?'active' :'' }}">{{ __('Clients') }}</a></li>
