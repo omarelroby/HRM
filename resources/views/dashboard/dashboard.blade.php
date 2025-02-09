@@ -75,8 +75,7 @@
         <div class="card-body d-flex align-items-center justify-content-between flex-wrap pb-1">
             <div class="d-flex align-items-center mb-3">
 							<span class="avatar avatar-xl flex-shrink-0">
-{{--								<img src="{{auth()->user()->avatar?asset(Storage::url(auth()->user()->avatar)):asset(Storage::url('uploads/avatar/company.png'))}}" class="rounded-circle" alt="img">--}}
-								<img src="{{ asset('public/assets/img/profiles/avatar-01.jpg') }}" class="rounded-circle" alt="img">
+								<img src="{{auth()->user()->avatar?asset(Storage::url(auth()->user()->avatar)):asset(Storage::url('uploads/avatar/company.png'))}}" class="rounded-circle" alt="img">
 							</span>
                 <div class="ms-3">
                     <h3 class="mb-2">{{__('Welcome Back')}}, {{auth()->user()->name}} <a href="javascript:void(0);" class="edit-icon"><i class="ti ti-edit fs-14"></i></a></h3>
