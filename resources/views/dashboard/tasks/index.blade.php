@@ -219,7 +219,7 @@
                         </tbody>
                     </table>
 
-                    <!-- Buttons -->
+                     
                     <div class="text-end">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Cancel') }}</button>
                         <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
