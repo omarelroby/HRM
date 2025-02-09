@@ -1339,6 +1339,7 @@ button:focus {
 .btn.btn-secondary {
   background-color: #3B7080;
   border: 1px solid #3B7080;
+    width: 20rem;
   color: #FFF;
 }
 .btn.btn-secondary:hover, .btn.btn-secondary:focus, .btn.btn-secondary.focus, .btn.btn-secondary:active, .btn.btn-secondary.active {
@@ -11291,6 +11292,11 @@ table.table-bordered thead tr th p {
 }
 .nav.tab-style-1 .nav-link {
   border-radius: 5px;
+    height: 53px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   padding: 0.35rem 1rem;
 }
 .nav.tab-style-1 .nav-link.active {
