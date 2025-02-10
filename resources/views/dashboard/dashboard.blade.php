@@ -84,7 +84,7 @@
             <div class="d-flex align-items-center mb-3">
 							<span class="avatar avatar-xl flex-shrink-0">
 {{--								<img src="{{auth()->user()->avatar?asset(Storage::url(auth()->user()->avatar)):asset(Storage::url('uploads/avatar/company.png'))}}" class="rounded-circle" alt="img">--}}
-								<img src="{{ asset('public/assets/img/profiles/avatar-01.jpg') }}"
+								<img src="{{ asset('public/assets/img/profiles/avatar-31.jpg') }}"
                                      class="rounded-circle" alt="img">
 							</span>
                 <div class="ms-3">

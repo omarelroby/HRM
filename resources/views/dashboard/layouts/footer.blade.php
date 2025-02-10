@@ -115,7 +115,7 @@
 <script>
     $(document).ready(function(){
     // Ensure that the dropdown is closed when the page reloads
-    $('.submenu > ul').hide(); // Hide the submenu on page load
+    // $('.submenu > ul').hide(); // Hide the submenu on page load
     $('.submenu > a').removeClass('subdrop'); // Remove the 'subdrop' class initially
 
     // Handle the click event to toggle the dropdown

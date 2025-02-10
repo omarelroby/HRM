@@ -28289,3 +28289,9 @@ span.flatpickr-weekday {
 /* End:: swiper js */
 
 /*# sourceMappingURL=style.css.map */
+
+.body.layout-mode-rtl .me-auto#header-search {
+    margin-right: unset !important;
+    margin-left: auto !important;
+}
+
