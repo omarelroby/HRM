@@ -464,12 +464,12 @@ class Employee extends Model
 
     public function nationality()
     {
-        return $this->hasOne('App\Models\Nationality', 'id', 'nationality_id');
+        return $this->belongsTo(Nationality::class,  'nationality_id');
     }
 
     public function jobtitle()
     {
-        return $this->hasOne('App\Models\Jobtitle', 'id', 'jobtitle_id');
+        return $this->belongsTo(Jobtitle::class,  'jobtitle_id');
     }
 
     public function category()

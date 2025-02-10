@@ -1,202 +1,107 @@
-@php
-    $logo=asset(Storage::url('uploads/logo/'));
-    $company_logo=Utility::getValByName('company_logo');
-@endphp
-<div class="card bg-none card-box">
-{{--    <div class="text-md-right mb-2">--}}
-{{--        <a href="#" class="btn btn-xs rounded-pill btn-warning" onclick="saveAsPDF()"><span class="fa fa-download"></span></a>--}}
-{{--        <a title="Mail Send" href="{{route('payslip.send',[$service->id,$payslip->salary_month])}}" class="btn btn-xs rounded-pill btn-primary"><span class="fa fa-paper-plane"></span></a>--}}
-{{--    </div>--}}
-    <div class="card-body p-4" id="printableArea">
-        <div class="text-center mb-4">
-            <img src="{{$logo.'/'.($company_logo ?: 'logo.png')}}"
-                 class="img-fluid mb-3"
-                 alt="Company Logo"
-                 style="max-height: 60px">
-        </div>
-
-        <!-- Header Section -->
-        <div class="row border-bottom pb-4 mb-4">
-            <div class="col-md-6">
-                <div class="d-flex flex-column">
-                    <h6 class="fw-bold text-dark mb-2">{{ __('Employee Details') }}</h6>
-                    <div class="text-muted">
-                        <p class="mb-1"><strong>{{ __('Name') }}:</strong> {{ $service->employee->name }}</p>
-                        <p class="mb-1"><strong>{{ __('Position') }}:</strong> {{ __('Employee') }}</p>
-                        <p class="mb-0"><strong>{{ __('Salary Date') }}:</strong>
-                            {{ \Auth::user()->dateFormat($service->created_at) }}</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 mt-3 mt-md-0">
-                <div class="d-flex flex-column text-md-end">
-                    <h6 class="fw-bold text-dark mb-2">{{ __('Company Details') }}</h6>
-                    <div class="text-muted">
-                        <p class="mb-1">{{ \Utility::getValByName('company_name') }}</p>
-                        <p class="mb-1">
-                            {{ \Utility::getValByName('company_address') }},
-                            {{ \Utility::getValByName('company_city') }}
-                        </p>
-                        <p class="mb-0">
-                            {{ \Utility::getValByName('company_state') }} -
-                            {{ \Utility::getValByName('company_zipcode') }}
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="row mt-2">
-            <div class="col-md-12">
-                <div class="table-responsive">
-{{--                    <table class="table table-striped table-hover table-md">--}}
-{{--                        <tbody>--}}
-{{--                        <tr class="font-weight-bold">--}}
-{{--                            <th>{{__('Earning')}}</th>--}}
-{{--                            <th>{{__('Title')}}</th>--}}
-{{--                            <th class="text-right">{{__('Amount')}}</th>--}}
-{{--                        </tr>--}}
-{{--                        <tr>--}}
-{{--                            <td>{{__('Basic Salary')}}</td>--}}
-{{--                            <td>-</td>--}}
-{{--                            <td class="text-right">{{  \Auth::user()->priceFormat( $payslip->basic_salary)}}</td>--}}
-{{--                        </tr>--}}
-{{--                        @foreach($payslipDetail['earning']['allowance'] as $allowance)--}}
-{{--                            <tr>--}}
-{{--                                <td>{{__('Allowance')}}</td>--}}
-{{--                                <td>{{$allowance->title}}</td>--}}
-{{--                                <td class="text-right">{{  \Auth::user()->priceFormat( $allowance->amount)}}</td>--}}
-{{--                            </tr>--}}
-{{--                        @endforeach--}}
-{{--                        @foreach($payslipDetail['earning']['commission'] as $commission)--}}
-{{--                                <?php--}}
-{{--//                                 $commission->amount = $commission->type == '$' ? $commission->amount :  $totalSalary * ($commission->amount) / 100 ;--}}
-{{--                                ?>--}}
-{{--                            <tr>--}}
-{{--                                <td>{{__('Commission')}}</td>--}}
-{{--                                <td>{{$commission->title}}</td>--}}
-{{--                                <td class="text-right">--}}
-
-{{--                                    {{  \Auth::user()->priceFormat( $commission->amount)}}--}}
-{{--                                </td>--}}
-{{--                            </tr>--}}
-{{--                        @endforeach--}}
-{{--                        @foreach($payslipDetail['earning']['otherPayment'] as $otherPayment)--}}
-{{--                            <tr>--}}
-{{--                                <td>{{__('Other Payment')}}</td>--}}
-{{--                                <td>{{$otherPayment->title}}</td>--}}
-{{--                                <td class="text-right">{{  \Auth::user()->priceFormat( $otherPayment->amount)}}</td>--}}
-{{--                            </tr>--}}
-{{--                        @endforeach--}}
-{{--                        @foreach($payslipDetail['earning']['overTime'] as $overTime)--}}
-{{--                            <tr>--}}
-{{--                                <td>{{__('OverTime')}}</td>--}}
-{{--                                <td>{{$overTime->title}}</td>--}}
-{{--                                <td class="text-right">{{  \Auth::user()->priceFormat( $overTime->amount)}}</td>--}}
-{{--                            </tr>--}}
-{{--                        @endforeach--}}
-
-{{--                        </tbody>--}}
-{{--                    </table>--}}
-                </div>
-                <div class="table-responsive">
-{{--                    <table class="table table-striped table-hover table-md">--}}
-{{--                        <tbody>--}}
-{{--                        <tr class="font-weight-bold">--}}
-{{--                            <th>{{__('Deduction')}}</th>--}}
-{{--                            <th>{{__('Title')}}</th>--}}
-{{--                            <th class="text-right">{{__('Amount')}}</th>--}}
-{{--                        </tr>--}}
-
-{{--                        @foreach($payslipDetail['deduction']['loan'] as $loan)--}}
-{{--                            <tr>--}}
-{{--                                <td>{{__('Loan')}}</td>--}}
-{{--                                <td>{{$loan->title}}</td>--}}
-{{--                                <td class="text-right">{{  \Auth::user()->priceFormat( $loan->amount)}}</td>--}}
-{{--                            </tr>--}}
-{{--                        @endforeach--}}
-{{--                        @foreach($payslipDetail['deduction']['deduction'] as $deduction)--}}
-{{--                            <tr>--}}
-{{--                                <td>{{__('Saturation Deduction')}}</td>--}}
-{{--                                <td>{{$deduction->title}}</td>--}}
-{{--                                <td class="text-right">{{  \Auth::user()->priceFormat( $deduction->amount)}}</td>--}}
-{{--                            </tr>--}}
-{{--                        @endforeach--}}
-{{--                        @foreach($payslipDetail['absence']['absence'] as $absence)--}}
-{{--                            <tr>--}}
-{{--                                <td>{{__('Absence')}}</td>--}}
-{{--                                <td>{{$absence->type}}</td>--}}
-{{--                                <td class="text-right">{{  \Auth::user()->priceFormat( $absence->discount_amount)}}</td>--}}
-{{--                            </tr>--}}
-{{--                        @endforeach--}}
-
-{{--                        <tr>--}}
-{{--                            <td>{{__('social_insurance')}}</td>--}}
-{{--                            <td>{{__('on_employee')}}</td>--}}
-{{--                            <td class="text-right">{{  \Auth::user()->priceFormat($employee->insurance($payslip->employee_id,'employee'))}}</td>--}}
-{{--                        </tr>--}}
-
-{{--                        <tr>--}}
-{{--                            <td>{{__('social_insurance')}}</td>--}}
-{{--                            <td>{{__('on_company')}}</td>--}}
-{{--                            <td class="text-right">{{  \Auth::user()->priceFormat($employee->insurance($payslip->employee_id,'company'))}}</td>--}}
-{{--                        </tr>--}}
-
-{{--                        </tbody>--}}
-{{--                    </table>--}}
-                </div>
-
-                <!-- Totals -->
-                <div class="row mt-4" style="direction: ltr">
-                    <div class="col-lg-8"></div>
-{{--                    <div class="col-lg-8">--}}
-{{--                        <div class="bg-light p-3 rounded">--}}
-{{--                            <div class="d-flex justify-content-between mb-2">--}}
-{{--                                <span class="fw-medium">{{ __('Total Earnings') }}:</span>--}}
-{{--                                <span class="fw-bold">{{ \Auth::user()->priceFormat($payslipDetail['totalEarning']) }}</span>--}}
-{{--                            </div>--}}
-{{--                            <div class="d-flex justify-content-between mb-2">--}}
-{{--                                <span class="fw-medium">{{ __('Total Deductions') }}:</span>--}}
-{{--                                <span class="fw-bold">{{ \Auth::user()->priceFormat($payslipDetail['totalDeduction'] + $insurance) }}</span>--}}
-{{--                            </div>--}}
-{{--                            <hr>--}}
-{{--                            <div class="d-flex justify-content-between">--}}
-{{--                                <span class="fw-bold">{{ __('Net Salary') }}:</span>--}}
-{{--                                <span class="fw-bold text-primary">--}}
-{{--                            {{ \Auth::user()->priceFormat(($payslip->basic_salary + $payslipDetail['totalEarning']) - ($payslipDetail['totalDeduction'] + $insurance)) }}--}}
-{{--                        </span>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-                </div>
-            </div>
-        </div>
-    </div>
-    <hr>
-    <div class="text-md-right pb-2 text-sm">
-        <div class="float-lg-left mb-lg-0 mb-3 ">
-            <p class="mt-2">{{__('Employee Signature')}}</p>
-        </div>
-        <p class="mt-2 "> {{__('Paid By')}}</p>
-    </div>
-</div>
-</div>
-
 <script type="text/javascript" src="{{ asset('js/html2pdf.bundle.min.js') }}"></script>
-<script>
+@php
+    $logo = asset(Storage::url('uploads/logo/'));
+    $company_logo = Utility::getValByName('company_logo');
+@endphp
 
+    <!-- Download PDF Button -->
+<button class="btn btn-primary" onclick="saveAsPDF()">
+    <i class="fa fa-download"></i> {{ __('Download PDF') }}
+</button>
+
+<div class="card bg-none card-box">
+    <div class="card-body p-4" id="printableArea" dir="rtl">
+        <!-- Add inline CSS for PDF styling -->
+        <style>
+            .pdf-header { border-bottom: 2px solid #333; margin-bottom: 20px; }
+            .pdf-table { width: 100%; border-collapse: collapse; margin: 20px 0; direction: rtl; }
+            .pdf-table th, .pdf-table td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+            .text-right { text-align: right; }
+            .total-section { margin-top: 30px; background: #f9f9f9; padding: 15px; text-align: right; }
+            .signature-section { margin-top: 50px; }
+            .signature-line { font-weight: bold; margin-bottom: 10px; }
+        </style>
+
+        <div class="text-center mb-4">
+            <img src="{{ $logo . '/' . ($company_logo ?: 'logo.png') }}" class="img-fluid mb-3" style="max-height: 60px; max-width: 200px;">
+        </div>
+
+        <div class="row pdf-header pb-4">
+            <div class="col-md-3 text-right">
+                <h5>{{ __('Basic Information') }}</h5>
+                <p class="mb-1"><strong>{{ __('التاريخ') }}:</strong> {{today()->format('Y-m-d')}}  </p>
+                <p class="mb-1"><strong>{{ __('الاسم') }}:</strong> {{ $service->employee->name }}</p>
+                <p class="mb-1"><strong>{{ __('رقم الموظف') }}:</strong> {{ $service->employee->id }}</p>
+                <p class="mb-0"><strong>{{ __('القسم') }}:</strong> {{ $service->employee->department->name }}</p>
+            </div>
+            <div class="col-md-6 text-right">
+                <h5></h5>
+                 <p class="mb-1"><strong>{{ __('المسمى الوظيفي') }}:</strong> {{ $service->employee->jobtitle->name ??'' }}</p>
+                <p class="mb-1"><strong>{{ __('الجنسية') }}:</strong> {{ $service->employee->nationality->name ??'' }}</p>
+                <p class="mb-0"><strong>{{ __('القسم') }}:</strong> {{ $service->employee->department->name }}</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <table class="pdf-table">
+                    <thead>
+                    <tr>
+                        <th>{{ __('نوع العقد') }}</th>
+                        <th>{{ __('تاريخ التعيين') }}</th>
+                        <th>{{ __('تاريخ انتهاء الخدمة') }}</th>
+                        <th>{{ __('سبب انتهاء الخدمة') }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>{{ $service->contract_type }}</td>
+                        <td>{{ \Auth::user()->dateFormat($service->hire_date) }}</td>
+                        <td>{{ \Auth::user()->dateFormat($service->work_end_date) }}</td>
+                        <td>{{ $service->termination_reason }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div class="total-section">
+                    <div class="d-flex justify-content-between">
+                        <strong>{{ __('إجمالي مدة الخدمة') }}:</strong>
+                        <span>{{ $service->total_service_years }} {{ __('سنة') }}, {{ $service->total_service_months }} {{ __('شهر') }}, {{ $service->total_service_days }} {{ __('يوم') }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between mt-2">
+                        <strong>{{ __('المبلغ الإجمالي') }}:</strong>
+                        <span>{{ number_format($service->amount, 2) }} {{ __('ريال سعودي') }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="signature-section mt-5">
+            <div class="row">
+                <div class="col-md-6 text-right">
+                    <p class="signature-line">{{ __('توقيع الموظف') }}</p>
+                    <p>_________________________</p>
+                </div>
+                <div class="col-md-6 text-right">
+                    <p class="signature-line">{{ __('توقيع المسؤول') }}</p>
+                    <p>_________________________</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
     function saveAsPDF() {
-        var element = document.getElementById('printableArea');
-        var opt = {
-            margin: 0.3,
-            filename: '{{$service->name}}',
-            image: {type: 'jpeg', quality: 1},
-            html2canvas: {scale: 4, dpi: 72, letterRendering: true},
-            jsPDF: {unit: 'in', format: 'A4'}
+        const element = document.getElementById('printableArea');
+        const opt = {
+            margin: [0.5, 0.5],
+            filename: 'end-of-service-{{ $service->id }}.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2, useCORS: true, logging: true },
+            jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
         };
+
         html2pdf().set(opt).from(element).save();
     }
-
 </script>
