@@ -11,7 +11,7 @@
                 <a href="{{ route('end-service-dismissal') }}" class="btn btn-primary btn-lg mb-2 mb-md-0 mr-md-2 mx-2">
                     <i class="fas fa-user-minus"></i> {{ __('Create New Dismissal') }}
                 </a>
-                <a href="{{ route('end-service-dismissal') }}" class="btn btn-primary btn-lg">
+                <a href="{{ route('end-service-resignation') }}" class="btn btn-primary btn-lg">
                     <i class="fas fa-sign-out-alt"></i> {{ __('Create New Resignation') }}
                 </a>
             </div>
@@ -19,7 +19,7 @@
         <div class="col-lg-12">
             <div class="card shadow-sm">
                 <div class="card-header text-white">
-                    <h5 class="card-title mb-0">{{ __('End of service gratuity') }}</h5>
+                    <h5 class="card-title mb-0">{{ __('End of service gratuity').'-'. __('Create New Dismissal') }}</h5>
                 </div>
                 @if (session('success'))
                     <div class="alert alert-success" style="text-align: center;">{{ session('success') }}</div>
@@ -27,7 +27,7 @@
                     <div class="alert alert-danger" style="text-align: center;">{{ session('error') }}</div>
                 @endif
                 <div class="card-body">
-                    <form action="{{ route('end-service.store') }}" method="POST">
+                    <form id="end-service-form" action="{{ route('end-service.store') }}" method="POST">
                         @csrf <!-- CSRF token for security -->
                         <input type="hidden" name="type" value="dismissal">
                         <input type="hidden" name="years" id="years_val">
@@ -39,7 +39,7 @@
                             @if(\Auth::user()->type != 'employee')
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="employee_id" class="form-control-label">{{ __('Ticket for Employee') }}</label>
+                                        <label for="employee_id" class="form-control-label">{{ __('Employee') }}</label>
                                         <select name="employee_id" id="employee_id" class="form-control select2">
                                             <option value="">{{ __('Select Employee') }}</option>
                                             @foreach($employees as $employee)
@@ -65,8 +65,6 @@
                                 </div>
                             @endif
 
-
-
                             <!-- Table to display years, months, days, basic_salary, and allownce -->
                             <div class="col-md-12 my-3">
                                 <table class="table table-bordered">
@@ -90,21 +88,21 @@
                                     </tbody>
                                 </table>
                             </div>
-                                <!-- Checkbox to toggle basic_salary display -->
-                                <div class="col-md-1">
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="show_basic_salary">
-                                        <label class="form-check-label" for="show_basic_salary">{{ __('Salary') }}</label>
-                                    </div>
+                            <!-- Checkbox to toggle basic_salary display -->
+                            <div class="col-md-1">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="show_basic_salary">
+                                    <label class="form-check-label" for="show_basic_salary">{{ __('Salary') }}</label>
                                 </div>
+                            </div>
 
-                                <!-- Checkbox to toggle allownce display -->
-                                <div class="col-md-1">
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="show_allownce">
-                                        <label class="form-check-label" for="show_allownce">{{ __('Allownce') }}</label>
-                                    </div>
+                            <!-- Checkbox to toggle allownce display -->
+                            <div class="col-md-1">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="show_allownce">
+                                    <label class="form-check-label" for="show_allownce">{{ __('Allownce') }}</label>
                                 </div>
+                            </div>
 
                             <div class="col-12 my-2">
                                 <input type="submit" value="{{ __('Create') }}" class="btn btn-primary">
@@ -112,47 +110,45 @@
                             </div>
                         </div>
                     </form>
+
+                    <!-- Placeholder for displaying the calculated amount -->
+                    <div id="amount-display"
+                         class="mt-4 p-4 text-center rounded shadow-lg"
+                         style="display: none; max-width: 400px; margin: auto;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-left: 5px solid #007bff;">
+                        <h5 class="text-dark fw-bold">
+                            {{ __('Calculated Amount') }}:
+                            <span id="calculated-amount" class="text-primary"></span>
+                        </h5>
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
 @endsection
+
 @push('scripts')
-    <script>
-        $(document).ready(function () {
-            $('[data-toggle="tooltip"]').tooltip();
-        });
-    </script>
     <script>
         $(document).ready(function () {
             // When the employee dropdown changes
             $('#employee_id').on('change', function () {
-                // Get the selected employee's work_start_date, basic_salary, and allownce from the data attribute
                 const workStartDate = $(this).find(':selected').data('work-start-date');
                 const basicSalary = $(this).find(':selected').data('basic-salary');
                 const allownceSalary = $(this).find(':selected').data('allownce-salary');
 
-                console.log('Selected work_start_date:', workStartDate); // Debugging
-                console.log('Selected basic_salary:', basicSalary); // Debugging
-                console.log('Selected allownce_salary:', allownceSalary); // Debugging
-
                 if (workStartDate) {
-                    // Convert DD-MM-YYYY to YYYY-MM-DD
                     const [day, month, year] = workStartDate.split('-');
                     const formattedDate = `${year}-${month}-${day}`;
-
-                    // Parse the date and format it for the input[type="date"]
                     const dateObj = new Date(formattedDate);
                     if (dateObj instanceof Date && !isNaN(dateObj)) {
                         const isoDate = dateObj.toISOString().split('T')[0];
-                        console.log('Formatted date:', isoDate); // Debugging
                         $('#work_start_date').val(isoDate);
                     } else {
-                        console.error('Invalid date format:', workStartDate); // Debugging
                         $('#work_start_date').val('');
                     }
                 } else {
-                    console.log('No work_start_date found'); // Debugging
                     $('#work_start_date').val('');
                 }
 
@@ -204,7 +200,6 @@
                     $('#allownce_header').hide();
                     $('#allownce_cell').hide();
                     $('#check_allownce').val(0);
-
                 }
             });
 
@@ -229,32 +224,28 @@
 
                 return { years, months, days };
             }
-        });
-    </script>
-    <script>
-        $(function () {
-            $(".gregorian-date, .datepicker").hijriDatePicker({
-                format: 'YYYY-M-D',
-                showSwitcher: false,
-                hijri: false,
-                useCurrent: true,
-            });
-        });
-        $(function () {
-            $('.datetimepicker').datetimepicker({
-                format: 'DD/MM/YYYY',
-                icons: {
-                    time: 'ti ti-time',
-                    date: 'ti ti-calendar',
-                    up: 'ti ti-chevron-up',
-                    down: 'ti ti-chevron-down',
-                },
-                widgetPositioning: {
-                    horizontal: 'auto',
-                    vertical: 'bottom'
-                },
-                // Append to body to avoid overflow issues
-                widgetParent: 'body'
+
+            // Handle form submission via AJAX
+            $('#end-service-form').on('submit', function (e) {
+                e.preventDefault();
+
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: 'POST',
+                    data: $(this).serialize(),
+                    success: function (response) {
+                        if (response.success) {
+                            $('#amount-display').show();
+                            $('#calculated-amount').text(parseFloat(response.amount).toFixed(2));
+                        } else {
+                            alert('Error: ' + response.message);
+                        }
+
+                    },
+                    error: function (xhr) {
+                        alert('An error occurred while processing your request.');
+                    }
+                });
             });
         });
     </script>
