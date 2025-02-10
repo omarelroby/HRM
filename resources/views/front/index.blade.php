@@ -466,7 +466,7 @@
                 <h2>معلومات عنا<br></h2>
 
                 {{--                <p>{{$about->title_ar}}</p>--}}
-            </div><!-- End Section Title -->
+            </div>
             <div class="container" dir="rtl">
                 <div class="row">
                     <div class="col-lg-12 order-2 order-lg-1 content  " data-aos="fade-up" data-aos-delay="200">
@@ -506,6 +506,12 @@
     <!-- Clients Section -->
     <section id="clients" class="clients section light-background">
         <div class="container">
+            <div class="container section-title" dir="rtl" data-aos="fade-up">
+                <span>{{__('Clients')}}<br></span>
+                <h2>{{__('Clients')}}<br></h2>
+
+                {{--                <p>{{$about->title_ar}}</p>--}}
+            </div>
             <div class="swiper init-swiper">
                 <script type="application/json" class="swiper-config">
                     {
@@ -541,13 +547,15 @@
                     }
                 </script>
                 <div class="swiper-wrapper align-items-center">
+
                     @foreach($clients as $client)
                         <div class="swiper-slide">
+
                             <div class="client-container">
-                                <div class="client-image"
-                                     style="background-image: url({{ $client->image ? asset('storage/app/public' . $client->image) : asset('public/front/assets/img/team/team-1.jpg') }});'"></div>
 {{--                                <div class="client-image"--}}
-{{--                                     style="background-image: url('{{ asset('storage/app/public/'.$client->image) }}');"></div>--}}
+{{--                                     style="background-image: url({{ $client->image ? asset('storage/app/public' . $client->image) : asset('public/front/assets/img/team/team-1.jpg') }});'"></div>--}}
+                                <div class="client-image"
+                                     style="background-image: url('{{ asset('storage/app/public/'.$client->image) }}');"></div>
                                 @if(app()->getLocale()=='ar')
                                     <div class="client-name">{{ $client->name_ar??'' }}</div>
                                 @else
@@ -675,20 +683,20 @@
                                     </h4>
                                 </div>
 
-                                <ul class="list-unstyled">
-                                    <li class="{{ $plan->max_employees ? '' : 'na' }} mb-3">
+                                <ul class="list-unstyled"@if(app()->getLocale()=='ar') dir="rtl"@endif>
+                                    <li style="font-weight: bold;" class="{{ $plan->max_employees ? '' : 'na' }} mb-3">
                                         <i class="bi bi-{{ $plan->max_employees ? 'check' : 'x' }}"></i>
                                         <span>{{ $plan->max_users == -1 ? __('Unlimited') : $plan->max_users }}</span>&nbsp;&nbsp;
                                         <span>{{ __('Users') }}</span>
                                     </li>
-                                    <li class="{{ $plan->max_employees ? '' : 'na' }} mb-3">
+                                    <li style="font-weight: bold;" class="{{ $plan->max_employees ? '' : 'na' }} mb-3">
                                         <i class="bi bi-{{ $plan->max_employees ? 'check' : 'x' }}"></i>
                                         <span>{{ $plan->max_employees == -1 ? __('Unlimited') : $plan->max_employees }}</span>&nbsp;&nbsp;
                                         <span>{{ __('Employees') }}</span>
                                     </li>
 
                                     <!-- Chat GPT -->
-                                    <li class="{{ $plan->chat_gpt ? '' : 'na' }} mb-3">
+                                    <li style="font-weight: bold;" class="{{ $plan->chat_gpt ? '' : 'na' }} mb-3">
                                         <i class="bi bi-{{ $plan->chat_gpt ? 'check' : 'x' }}"></i>
                                         <span>{{ $plan->chat_gpt ? __('Enabled') : __('Disabled') }}</span>&nbsp;&nbsp;
                                         <span>{{ __('chat-gpt') }}</span>
@@ -698,14 +706,14 @@
                                     @if($plan->storage)
                                         <li class="mb-3">
                                             <i class="bi bi-check"></i>
-                                            <span>{{ $plan->storage }} GB</span>&nbsp;&nbsp;
-                                            <span>{{ __('storage') }}</span>
+                                            <span style="font-weight: bold;">{{ $plan->storage }} GB</span>&nbsp;&nbsp;
+                                            <span style="font-weight: bold;">{{ __('storage') }}</span>
                                         </li>
                                     @else
                                         <li class="na mb-3">
                                             <i class="bi bi-x"></i>
-                                            <span>{{ __('Disabled') }}</span>&nbsp;&nbsp;
-                                            <span>{{ __('storage') }}</span>
+                                            <span style="font-weight: bold;">{{ __('Disabled') }}</span>&nbsp;&nbsp;
+                                            <span style="font-weight: bold;">{{ __('storage') }}</span>
                                         </li>
                                     @endif
                                 </ul>
