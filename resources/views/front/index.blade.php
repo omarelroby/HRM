@@ -545,7 +545,9 @@
                         <div class="swiper-slide">
                             <div class="client-container">
                                 <div class="client-image"
-                                     style="background-image: url('{{ asset('public/front/assets/img/clients/'.$client->image) }}');"></div>
+                                     style="background-image: url({{ $client->image ? asset('storage/app/public' . $client->image) : asset('public/front/assets/img/team/team-1.jpg') }});'"></div>
+{{--                                <div class="client-image"--}}
+{{--                                     style="background-image: url('{{ asset('storage/app/public/'.$client->image) }}');"></div>--}}
                                 @if(app()->getLocale()=='ar')
                                     <div class="client-name">{{ $client->name_ar??'' }}</div>
                                 @else
@@ -578,8 +580,12 @@
                             <div class="service-item position-relative">
                                 <div class="icon">
                                     <img
-                                        src="{{ asset('storage/app/public/' . ($feature->icon ?? 'default-icon.png')) }}"
-                                        alt="{{ $feature->title }}" class="icon-img">
+                                        src="{{ $feature->icon == !null ? asset('storage/app/public/' . $feature->icon) : asset('public/front/assets/img/portfolio/app-1.jpg') }}"
+                                        alt="{{ $feature->title }}"
+                                        class="icon-img">
+{{--                                    <img--}}
+{{--                                        src="{{ asset('storage/app/public/' . ($feature->icon ?? 'public/assets/img/app-1.jpg')) }}"--}}
+{{--                                        alt="{{ $feature->title }}" class="icon-img">--}}
                                 </div>
                                 <a href="#" class="stretched-link">
                                     <h3>{{ $feature->title }}</h3>
@@ -597,8 +603,9 @@
                             <div class="service-item position-relative">
                                 <div class="icon">
                                     <img
-                                        src="{{ asset('storage/app/public/' . ($feature->icon ?? 'default-icon.png')) }}"
-                                        alt="{{ $feature->title_ar }}" class="icon-img">
+                                        src="{{ $feature->icon == !null ? asset('storage/app/public/' . $feature->icon) : asset('public/front/assets/img/portfolio/app-1.jpg') }}"
+                                        alt="{{ $feature->title }}"
+                                        class="icon-img">
                                 </div>
                                 <a href="#" class="stretched-link">
                                     <h3>{{ $feature->title_ar }}</h3>
