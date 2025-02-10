@@ -682,6 +682,7 @@
                                         <span class="text-muted">/ {{ __('month') }}</span>
                                     </h4>
                                 </div>
+                                <p class="text-center" style="height: 50px;">{{$plan->description??''}}</p>
 
                                 <ul class="list-unstyled"@if(app()->getLocale()=='ar') dir="rtl"@endif>
                                     <li style="font-weight: bold;" class="{{ $plan->max_employees ? '' : 'na' }} mb-3">
