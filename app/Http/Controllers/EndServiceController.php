@@ -300,6 +300,11 @@ class EndServiceController extends Controller
             'amount' => $service->amount, // Return the calculated amount
         ]);
     }
+    public function pdf($id)
+    {
+        $data['service']=EndService::findOrFail($id);
+        return view('dashboard.end_service.pdf',$data);
+    }
     public function show(Ticket $ticket)
     {
         return redirect()->route('ticket.index');

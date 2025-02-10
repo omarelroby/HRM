@@ -717,6 +717,12 @@ Route::get('payslip/pdf/{id}/{m}', 'PaySlipController@pdf')->name('payslip.pdf')
         'XSS',
     ]
 );
+Route::get('end-service/pdf/{id}', 'EndServiceController@pdf')->name('end-service.pdf')->middleware(
+    [
+        'auth',
+        'XSS',
+    ]
+);
 
 Route::get('payslip/Payrollpdf/{m}/{y}', 'PaySlipController@Payrollpdf')->name('payslip.Payrollpdf')->middleware(
     [

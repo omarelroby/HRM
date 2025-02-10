@@ -62,14 +62,17 @@
 
 {{--                                    <td class="text-right action-btns">--}}
 
-{{--                                            <!-- Reply Button -->--}}
-{{--                                            <a href="{{ route('tasks.edit',$task->id) }}"--}}
-{{--                                               class="btn btn-sm btn-success mr-2"--}}
-{{--                                               data-toggle="tooltip"--}}
-{{--                                               title="{{ __('Edit') }}"--}}
-{{--                                               aria-label="{{ __('Edit') }}">--}}
-{{--                                                <i class="fa fa-edit"></i>--}}
-{{--                                            </a>--}}
+                                            <!-- Reply Button -->
+                                            <a href=""
+                                               class="btn btn-sm btn-success mr-2"
+                                               data-bs-toggle="modal"
+                                               data-bs-target="#addPdfModal"
+                                               data-url="{{ url('/end-service/pdf',$service->id) }}"
+                                               data-toggle="tooltip"
+                                               title="{{ __('$service') }}"
+                                               aria-label="{{ __('PDF') }}">
+                                                <i class="fa fa-file-archive"></i>
+                                            </a>
 
 
 
@@ -88,6 +91,17 @@
                         </table>
 
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="addPdfModal" tabindex="-1" aria-labelledby="addTrainingModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" >
+            <div class="modal-content" >
+                <div class="modal-body py-4" >
+                </div>
+                <div class="modal-footer bg-light">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Close') }}</button>
                 </div>
             </div>
         </div>
@@ -157,4 +171,32 @@
             $('[data-toggle="tooltip"]').tooltip();
         });
     </script>
+    <script>
+        $(document).ready(function () {
+            // Handle modal content loading
+            $(document).on('click', '[data-bs-target="#addPdfModal"]', function (e) {
+                e.preventDefault();
+                var url = $(this).data('url'); // URL to fetch payslip data
+                var title = $(this).data('title'); // Modal title
+
+                // Set the modal title
+                $('#addTrainingModalLabel').text(title);
+
+                // Load content via AJAX
+                $.ajax({
+                    url: url,
+                    method: 'GET',
+                    success: function (response) {
+                        // Inject the response into the modal body
+                        $('#addPdfModal .modal-body').html(response);
+                        $('#addPdfModal').modal('show'); // Show the modal
+                    },
+                    error: function () {
+                        alert('Failed to load content.');
+                    }
+                });
+            });
+        });
+    </script>
+
 @endpush
