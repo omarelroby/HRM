@@ -387,7 +387,7 @@
     "Create New Performance Type" : "انشاء نوع أداء جديد ",
     "Create New Plan" : "انشاء خطة جديدة ",
     "Create New Promotion" : "انشاء ترقية جديدة ",
-    "Create New Resignation" : "مكافئة نهاية الخدمة المادة  (85)  من نظام العمل السعودي ",
+    "Create New Resignation" : "انشاء استقالة جديدة ",
     "Create New Role" : "انشاء وظيفة جديدة ",
     "Create New Termination" : "انشاء انهاء جديد ",
     "Create New Termination Type" : "انشاء نوع انهاء جديد ",
@@ -1291,7 +1291,7 @@
     "My Profile" : "صفحتي الشخصية ",
     "Starting Work Date" : "تاريخ بدء العمل ",
     "End of service gratuity" : "مكافأة نهاية الخدمة ",
-    "Create New Dismissal" : "مكافئة نهاية الخدمة مادة (84) من قانون العمل السعودي ",
+    "Create New Dismissal" : "إنشاء إقالة جديدة ",
     "Start URl" : "بدء UL ",
     "State" : "الحالة ",
     "status" : "حالة ",
@@ -2343,6 +2343,5 @@
                 "months": "الشهور",
                 "Days": "الأيام",
                 "days": "الأيام",
-                "Calculated Amount": "إجمالي المكافئة",
                 "Total Absence with Permission": "إجمالي الغياب بإذن"
 }

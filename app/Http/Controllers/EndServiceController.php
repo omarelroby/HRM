@@ -286,10 +286,8 @@ class EndServiceController extends Controller
                 $service->save();
             }
 
-        return response()->json([
-            'success' => true,
-            'amount' => $service->amount, // Return the calculated amount
-        ]);
+            return redirect()->route('end-service.index')->with('success', __('End Service Gratuaty successfully created.'));
+
     }
 //    public function update(Request $request, $id)
 //    {
