@@ -11,10 +11,10 @@
         @if(auth()->user()->type!='employee')
         <div class="d-flex flex-column flex-md-row justify-content-end mb-3">
             <a href="{{ route('end-service-dismissal') }}" class="btn btn-primary btn-lg mb-2 mb-md-0 mr-md-2 mx-2">
-                <i class="fas fa-user-minus"></i> {{ __('Create New Dismissal') }}
+                <i class="fas fa-user-minus"></i> {{ __('End of Service Bonus Article (84) of the Saudi Labor Law') }}
             </a>
             <a href="{{ route('end-service-resignation') }}" class="btn btn-primary btn-lg">
-                <i class="fas fa-sign-out-alt"></i> {{ __('Create New Resignation') }}
+                <i class="fas fa-sign-out-alt"></i> {{ __('End of Service Bonus Article (85) of the Saudi Labor Law') }}
             </a>
         </div>
         @endif

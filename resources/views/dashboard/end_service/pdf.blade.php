@@ -26,35 +26,72 @@
             <img src="{{ $logo . '/' . ($company_logo ?: 'logo.png') }}" class="img-fluid mb-3" style="max-height: 60px; max-width: 200px;">
         </div>
 
-        <div class="row pdf-header pb-4">
-<<<<<<< Updated upstream
-            <div class="col-md-3 text-right">
-                <h5>{{ __('Basic Information') }}</h5>
-                <p class="mb-1"><strong>{{ __('التاريخ') }}:</strong> {{today()->format('Y-m-d')}}  </p>
-                <p class="mb-1"><strong>{{ __('الاسم') }}:</strong> {{ $service->employee->name }}</p>
-                <p class="mb-1"><strong>{{ __('رقم الموظف') }}:</strong> {{ $service->employee->id }}</p>
-                <p class="mb-0"><strong>{{ __('القسم') }}:</strong> {{ $service->employee->department->name }}</p>
-            </div>
-            <div class="col-md-6 text-right">
-                <h5></h5>
-                 <p class="mb-1"><strong>{{ __('المسمى الوظيفي') }}:</strong> {{ $service->employee->jobtitle->name ??'' }}</p>
-                <p class="mb-1"><strong>{{ __('الجنسية') }}:</strong> {{ $service->employee->nationality->name ??'' }}</p>
-                <p class="mb-0"><strong>{{ __('القسم') }}:</strong> {{ $service->employee->department->name }}</p>
-=======
-            <div class="col-md-6 text-right">
-                <h5>{{ __('البيانات العامة') }}</h5>
-                <p class="mb-1"><strong>{{ __('التاريخ') }}:</strong> ......./......./....... {{ __('الموافق') }}</p>
-                <p class="mb-1"><strong>{{ __('الاسم') }}:</strong> {{ $service->employee->name }}</p>
-                <p class="mb-1"><strong>{{ __('رقم الموظف') }}:</strong> {{ $service->employee->employee_number }}</p>
-                <p class="mb-0"><strong>{{ __('القسم') }}:</strong> {{ $service->employee->department }}</p>
+        <div class="row pdf-header pb-4 border-bottom">
+            <!-- Basic Information Section -->
+            <div class="col-md-4 text-right mb-4 mb-md-0">
+                <h5 class="text-primary mb-3">{{ __('Basic Information') }}</h5>
+                <div class="info-item">
+                    <p class="mb-2"><strong>{{ __('Date') }}:</strong> {{ today()->format('Y-m-d') }}</p>
+                    <p class="mb-2"><strong>{{ __('Name') }}:</strong> {{ $service->employee->name }}</p>
+                    <p class="mb-2"><strong>{{ __('Employee ID') }}:</strong> {{ $service->employee->id }}</p>
+                    <p class="mb-0"><strong>{{ __('Department') }}:</strong> {{ $service->employee->department->name }}</p>
+                </div>
             </div>
 
-            <div class="col-md-6 text-right">
-                <h5>{{ __('تفاصيل الشركة') }}</h5>
-                <p class="mb-1">{{ \Utility::getValByName('company_name') }}</p>
-                <p class="mb-1">{{ \Utility::getValByName('company_address') }}</p>
-                <p class="mb-0">{{ \Utility::getValByName('company_city') }}, {{ \Utility::getValByName('company_zipcode') }}</p>
->>>>>>> Stashed changes
+            <!-- Job and Employment Details Section -->
+            <div class="col-md-4 text-right mb-4 mb-md-0">
+                <h5 class="text-primary mb-3">{{ __('Job Details') }}</h5>
+                <div class="info-item">
+                    <p class="mb-2"><strong>{{ __('Job Title') }}:</strong> {{ $service->employee->jobtitle->name ?? 'N/A' }}</p>
+                    <p class="mb-2"><strong>{{ __('Nationality') }}:</strong> {{ $service->employee->nationality->name ?? 'N/A' }}</p>
+                    <p class="mb-0"><strong>{{ __('Hire Date') }}:</strong> {{ $service->work_start_date ?? 'N/A' }}</p>
+                </div>
+            </div>
+            @php
+                $contract=\App\Models\Document::where('employee_id',$service->employee->id)
+                ->where('is_contract',1)
+                ->first();
+            @endphp
+            <!-- Service Details Section -->
+            <div class="col-md-4 text-right">
+                <h5 class="text-primary mb-3">{{ __('Service Details') }}</h5>
+                <div class="info-item">
+                    <p class="mb-0"><strong>{{ __('Service End Date') }}:</strong> {{ $service->work_end_date ?? 'N/A' }}</p>
+                   @if($contract->is_start_end_date==1)
+                    <p class="mb-0"><strong>{{ __('Contract Type') }}:</strong> {{ __('limited_time')   }}</p>
+                    @else
+                        <p class="mb-0"><strong>{{ __('Contract Type') }}:</strong> {{ __('unlimited_time')   }}</p>
+
+                    @endif
+                    <p class="mb-0"><strong>{{ __('Contract Duration') }}:</strong>
+                        @if ($contract->start_date && $contract->end_date)
+                            @php
+                                $startDate = new DateTime($contract->start_date);
+                                $endDate = new DateTime($contract->end_date);
+                                $interval = $startDate->diff($endDate);
+
+                                $duration = '';
+                                if ($interval->y > 0) {
+                                    $duration .= $interval->y . ' ' . __('Years') . ' ';
+                                }
+                                if ($interval->m > 0) {
+                                    $duration .= $interval->m . ' ' . __('Months') . ' ';
+                                }
+                                if ($interval->d > 0) {
+                                    $duration .= $interval->d . ' ' . __('Days') . ' ';
+                                }
+                                echo trim($duration); // Remove trailing space
+                            @endphp
+                        @else
+                            {{ 'N/A' }}
+                        @endif
+                    </p>
+                    @if($service->type=='resignation')
+                    <p class="mb-0"><strong>{{ __('Service Termination Reason') }}:</strong> {{ __('resignation')  }}</p>
+                    @else
+                        <p class="mb-0"><strong>{{ __('Service Termination Reason') }}:</strong> {{ __('dismissal')  }}</p>
+                    @endif
+                </div>
             </div>
         </div>
 
@@ -63,30 +100,32 @@
                 <table class="pdf-table">
                     <thead>
                     <tr>
-                        <th>{{ __('نوع العقد') }}</th>
-                        <th>{{ __('تاريخ التعيين') }}</th>
-                        <th>{{ __('تاريخ انتهاء الخدمة') }}</th>
-                        <th>{{ __('سبب انتهاء الخدمة') }}</th>
+                        <th>{{ __('Calculation Basis') }}</th>
+                        <th>{{ __('Years') }}</th>
+                        <th>{{ __('Months') }}</th>
+                        <th>{{ __('Days') }}</th>
+                        <th class="text-right">{{ __('Amount') }}</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
-                        <td>{{ $service->contract_type }}</td>
-                        <td>{{ \Auth::user()->dateFormat($service->hire_date) }}</td>
-                        <td>{{ \Auth::user()->dateFormat($service->work_end_date) }}</td>
-                        <td>{{ $service->termination_reason }}</td>
+                        <td>{{ __('End of Service') }}</td>
+                        <td>{{ $service->years }}</td>
+                        <td>{{ $service->months }}</td>
+                        <td>{{ $service->days }}</td>
+                        <td class="text-right">{{ number_format($service->amount, 2) }}</td>
                     </tr>
                     </tbody>
                 </table>
 
-                <div class="total-section">
-                    <div class="d-flex justify-content-between">
-                        <strong>{{ __('إجمالي مدة الخدمة') }}:</strong>
-                        <span>{{ $service->total_service_years }} {{ __('سنة') }}, {{ $service->total_service_months }} {{ __('شهر') }}, {{ $service->total_service_days }} {{ __('يوم') }}</span>
-                    </div>
-                    <div class="d-flex justify-content-between mt-2">
-                        <strong>{{ __('المبلغ الإجمالي') }}:</strong>
-                        <span>{{ number_format($service->amount, 2) }} {{ __('ريال سعودي') }}</span>
+                <div class="col-lg-8">
+                    <div class="bg-light p-3 rounded">
+                        <div class="d-flex justify-content-between">
+                            <span class="fw-bold">{{ __('Total Amount') }}:</span>
+                            <span class="fw-bold text-primary">
+                                {{ number_format($service->amount, 2) }} {{ __('SAR') }}
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -95,11 +134,11 @@
         <div class="signature-section mt-5">
             <div class="row">
                 <div class="col-md-6 text-right">
-                    <p class="signature-line">{{ __('توقيع الموظف') }}</p>
+                    <p class="signature-line">{{ __('Employee Signature') }}</p>
                     <p>_________________________</p>
                 </div>
                 <div class="col-md-6 text-right">
-                    <p class="signature-line">{{ __('توقيع المسؤول') }}</p>
+                    <p class="signature-line">{{ __('Manager Signature') }}</p>
                     <p>_________________________</p>
                 </div>
             </div>

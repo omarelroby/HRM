@@ -122,7 +122,7 @@ class Employee extends Model
     }
     public function documents()
     {
-        return $this->hasMany('App\Models\EmployeeDocument', 'employee_id', 'employee_id')->get();
+        return $this->hasMany(Document::class, 'employee_id' );
     }
 
     public function sub_dep()
