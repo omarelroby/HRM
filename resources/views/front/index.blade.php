@@ -905,8 +905,8 @@
             <!-- Company Name & Description -->
             <div class="col-lg-3 col-md-6">
                 <div class="footer-about">
-                    <a href="index.html" class="logo sitename">Mwerdi</a>
-                    <p class="mt-2">{{ $setting->description ?? 'We are the tech company following are our services.' }}</p>
+                    <a href="index.html" class="logo sitename">Mwaredi</a>
+                    <p class="mt-2">{{ $setting->description ?? 'Empower Your Workforce with Mwaredi – Streamline, Simplify, Succeed!' }}</p>
                 </div>
             </div>
 
@@ -915,7 +915,7 @@
 
                 @if(app()->getLocale() == 'en')
                     <ul class="list-unstyled d-inline-block text-start">
-                        @foreach($features as $feature)
+                        @foreach($features->take(5) as $feature)
 
                             <li class="text-center">{{ $feature->title }}</li>
 
@@ -923,7 +923,7 @@
                     </ul>
                 @else
                     <ul class="list-unstyled d-inline-block text-start">
-                        @foreach($features as $feature)
+                        @foreach($features->take(5) as $feature)
                             <li class="text-center">{{ $feature->title_ar }}</li>
                         @endforeach
                     </ul>
