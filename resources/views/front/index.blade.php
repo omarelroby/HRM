@@ -584,7 +584,9 @@
                                 <a href="#" class="stretched-link">
                                     <h3>{{ $feature->title }}</h3>
                                 </a>
-                                <p>{{ $feature->description }}</p>
+                                <p style="line-height: 1.5">
+                                    {!! nl2br(e(str_replace('.', ".\n", $feature->description))) !!}
+                                </p>
                             </div>
                         </div>
                     @endforeach
@@ -601,7 +603,9 @@
                                 <a href="#" class="stretched-link">
                                     <h3>{{ $feature->title_ar }}</h3>
                                 </a>
-                                <p>{{ $feature->description_ar }}</p>
+                                <p style="line-height: 2">
+                                    {!! nl2br(e(str_replace('.', ".\n", $feature->description_ar))) !!}
+                                </p>
                             </div>
                         </div>
                     @endforeach
