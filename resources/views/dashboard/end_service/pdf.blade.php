@@ -27,6 +27,7 @@
         </div>
 
         <div class="row pdf-header pb-4">
+<<<<<<< Updated upstream
             <div class="col-md-3 text-right">
                 <h5>{{ __('Basic Information') }}</h5>
                 <p class="mb-1"><strong>{{ __('التاريخ') }}:</strong> {{today()->format('Y-m-d')}}  </p>
@@ -39,6 +40,21 @@
                  <p class="mb-1"><strong>{{ __('المسمى الوظيفي') }}:</strong> {{ $service->employee->jobtitle->name ??'' }}</p>
                 <p class="mb-1"><strong>{{ __('الجنسية') }}:</strong> {{ $service->employee->nationality->name ??'' }}</p>
                 <p class="mb-0"><strong>{{ __('القسم') }}:</strong> {{ $service->employee->department->name }}</p>
+=======
+            <div class="col-md-6 text-right">
+                <h5>{{ __('البيانات العامة') }}</h5>
+                <p class="mb-1"><strong>{{ __('التاريخ') }}:</strong> ......./......./....... {{ __('الموافق') }}</p>
+                <p class="mb-1"><strong>{{ __('الاسم') }}:</strong> {{ $service->employee->name }}</p>
+                <p class="mb-1"><strong>{{ __('رقم الموظف') }}:</strong> {{ $service->employee->employee_number }}</p>
+                <p class="mb-0"><strong>{{ __('القسم') }}:</strong> {{ $service->employee->department }}</p>
+            </div>
+
+            <div class="col-md-6 text-right">
+                <h5>{{ __('تفاصيل الشركة') }}</h5>
+                <p class="mb-1">{{ \Utility::getValByName('company_name') }}</p>
+                <p class="mb-1">{{ \Utility::getValByName('company_address') }}</p>
+                <p class="mb-0">{{ \Utility::getValByName('company_city') }}, {{ \Utility::getValByName('company_zipcode') }}</p>
+>>>>>>> Stashed changes
             </div>
         </div>
 

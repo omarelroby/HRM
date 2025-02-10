@@ -71,7 +71,8 @@
                                                data-toggle="tooltip"
                                                title="{{ __('$service') }}"
                                                aria-label="{{ __('PDF') }}">
-                                                <i class="fa fa-file-archive"></i>
+                                                <i class="fa fa-file"></i> <!-- Generic file icon -->
+
                                             </a>
 
 
