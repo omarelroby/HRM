@@ -27,11 +27,13 @@
         <div class="main-header">
 
             <div class="header-left">
-                <a href="https://smarthr.dreamstechnologies.com/html/template/index.html" class="logo">
-                    <img style="width: 5em;height: 5em;" src="{{ asset('public/front/assets/img/logo.png') }}" alt="Logo" class="logo-img">
+                <a href="#" class="logo">
+                    <img style="width: 5em;height: 5em;" src="{{ asset('public/front/assets/img/logo.png') }}"
+                         alt="Logo" class="logo-img">
                 </a>
-                <a href="https://smarthr.dreamstechnologies.com/html/template/index.html" class="dark-logo">
-                    <img style="width: 5em;height: 5em;" src="{{ asset('public/front/assets/img/logo.png') }}" alt="Logo" class="logo-img">
+                <a href="#" class="dark-logo">
+                    <img style="width: 5em;height: 5em;" src="{{ asset('public/front/assets/img/logo.png') }}"
+                         alt="Logo" class="logo-img">
                 </a>
             </div>
 
@@ -51,7 +53,9 @@
                         $avatar = asset(Storage::url('uploads/avatar/'));
                         $profile = asset(Storage::url('uploads/avatar/'));
                     @endphp
-                    <div class="me-auto d-flex align-items-center" id="header-search">
+                    <div class="me-auto d-flex align-items-center"
+                         id="header-search"
+                    >
                         <!-- Logout Form (Hidden) -->
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
@@ -86,19 +90,22 @@
                                     <div class="card-body pb-1">
                                         <div class="row">
                                             <div class="col-sm-6">
-                                                <a href="contacts.html" class="d-flex align-items-center justify-content-between p-2 crm-link mb-3">
+                                                <a href="contacts.html"
+                                                   class="d-flex align-items-center justify-content-between p-2 crm-link mb-3">
 														<span class="d-flex align-items-center me-3">
 															<i class="ti ti-user-shield text-default me-2"></i>Contacts
 														</span>
                                                     <i class="ti ti-arrow-right"></i>
                                                 </a>
-                                                <a href="deals-grid.html" class="d-flex align-items-center justify-content-between p-2 crm-link mb-3">
+                                                <a href="deals-grid.html"
+                                                   class="d-flex align-items-center justify-content-between p-2 crm-link mb-3">
 														<span class="d-flex align-items-center me-3">
 															<i class="ti ti-heart-handshake text-default me-2"></i>Deals
 														</span>
                                                     <i class="ti ti-arrow-right"></i>
                                                 </a>
-                                                <a href="pipeline.html" class="d-flex align-items-center justify-content-between p-2 crm-link mb-3">
+                                                <a href="pipeline.html"
+                                                   class="d-flex align-items-center justify-content-between p-2 crm-link mb-3">
 														<span class="d-flex align-items-center me-3">
 															<i class="ti ti-timeline-event-text text-default me-2"></i>Pipeline
 														</span>
@@ -106,19 +113,22 @@
                                                 </a>
                                             </div>
                                             <div class="col-sm-6">
-                                                <a href="companies-grid.html" class="d-flex align-items-center justify-content-between p-2 crm-link mb-3">
+                                                <a href="companies-grid.html"
+                                                   class="d-flex align-items-center justify-content-between p-2 crm-link mb-3">
 														<span class="d-flex align-items-center me-3">
 															<i class="ti ti-building text-default me-2"></i>Companies
 														</span>
                                                     <i class="ti ti-arrow-right"></i>
                                                 </a>
-                                                <a href="leads-grid.html" class="d-flex align-items-center justify-content-between p-2 crm-link mb-3">
+                                                <a href="leads-grid.html"
+                                                   class="d-flex align-items-center justify-content-between p-2 crm-link mb-3">
 														<span class="d-flex align-items-center me-3">
 															<i class="ti ti-user-check text-default me-2"></i>Leads
 														</span>
                                                     <i class="ti ti-arrow-right"></i>
                                                 </a>
-                                                <a href="activity.html" class="d-flex align-items-center justify-content-between p-2 crm-link mb-3">
+                                                <a href="activity.html"
+                                                   class="d-flex align-items-center justify-content-between p-2 crm-link mb-3">
 														<span class="d-flex align-items-center me-3">
 															<i class="ti ti-activity text-default me-2"></i>Activities
 														</span>
@@ -153,22 +163,28 @@
                                 </div>
                                 <div class="card-body">
                                     <a href="calendar.html" class="d-block pb-2">
-                                        <span class="avatar avatar-md bg-transparent-dark me-2"><i class="ti ti-calendar text-gray-9"></i></span>Calendar
+                                        <span class="avatar avatar-md bg-transparent-dark me-2"><i
+                                                class="ti ti-calendar text-gray-9"></i></span>Calendar
                                     </a>
                                     <a href="todo.html" class="d-block py-2">
-                                        <span class="avatar avatar-md bg-transparent-dark me-2"><i class="ti ti-subtask text-gray-9"></i></span>To Do
+                                        <span class="avatar avatar-md bg-transparent-dark me-2"><i
+                                                class="ti ti-subtask text-gray-9"></i></span>To Do
                                     </a>
                                     <a href="notes.html" class="d-block py-2">
-                                        <span class="avatar avatar-md bg-transparent-dark me-2"><i class="ti ti-notes text-gray-9"></i></span>Notes
+                                        <span class="avatar avatar-md bg-transparent-dark me-2"><i
+                                                class="ti ti-notes text-gray-9"></i></span>Notes
                                     </a>
                                     <a href="file-manager.html" class="d-block py-2">
-                                        <span class="avatar avatar-md bg-transparent-dark me-2"><i class="ti ti-folder text-gray-9"></i></span>File Manager
+                                        <span class="avatar avatar-md bg-transparent-dark me-2"><i
+                                                class="ti ti-folder text-gray-9"></i></span>File Manager
                                     </a>
                                     <a href="kanban-view.html" class="d-block py-2">
-                                        <span class="avatar avatar-md bg-transparent-dark me-2"><i class="ti ti-layout-kanban text-gray-9"></i></span>Kanban
+                                        <span class="avatar avatar-md bg-transparent-dark me-2"><i
+                                                class="ti ti-layout-kanban text-gray-9"></i></span>Kanban
                                     </a>
                                     <a href="invoices.html" class="d-block py-2 pb-0">
-                                        <span class="avatar avatar-md bg-transparent-dark me-2"><i class="ti ti-file-invoice text-gray-9"></i></span>Invoices
+                                        <span class="avatar avatar-md bg-transparent-dark me-2"><i
+                                                class="ti ti-file-invoice text-gray-9"></i></span>Invoices
                                     </a>
                                 </div>
                             </div>
@@ -178,7 +194,8 @@
                     <div class="me-1">
                         <a href="chat.html" class="btn btn-menubar position-relative">
                             <i class="ti ti-brand-hipchat"></i>
-                            <span class="badge bg-info rounded-pill d-flex align-items-center justify-content-center header-badge">5</span>
+                            <span
+                                class="badge bg-info rounded-pill d-flex align-items-center justify-content-center header-badge">5</span>
                         </a>
                     </div>
 
@@ -190,7 +207,8 @@
                     </div>
                     <!-- Notification drop Down -->
                     <div class="me-1 notification_item">
-                        <a href="#" class="btn btn-menubar position-relative me-1" id="notification_popup" data-bs-toggle="dropdown">
+                        <a href="#" class="btn btn-menubar position-relative me-1" id="notification_popup"
+                           data-bs-toggle="dropdown">
                             <i class="ti ti-bell"></i>
                             <span class="notification-status-dot"></span>
                         </a>
@@ -200,7 +218,8 @@
                                 <div class="d-flex align-items-center">
                                     <a href="#" class="text-primary fs-15 me-3 lh-1">Mark all as read</a>
                                     <div class="dropdown">
-                                        <a href="javascript:void(0);" class="bg-white dropdown-toggle" data-bs-toggle="dropdown">
+                                        <a href="javascript:void(0);" class="bg-white dropdown-toggle"
+                                           data-bs-toggle="dropdown">
                                             <i class="ti ti-calendar-due me-1"></i>Today
                                         </a>
                                         <ul class="dropdown-menu mt-2 p-3">
@@ -246,7 +265,8 @@
 															<img src="assets/img/profiles/avatar-23.jpg" alt="Profile">
 														</span>
                                                 <div class="flex-grow-1">
-                                                    <p class="mb-1"><span class="text-dark fw-semibold">Sylvia</span> added
+                                                    <p class="mb-1"><span class="text-dark fw-semibold">Sylvia</span>
+                                                        added
                                                         appointment on 02:00 PM</p>
                                                     <span>10 mins ago</span>
                                                     <div class="d-flex justify-content-start align-items-center mt-1">
@@ -264,7 +284,9 @@
 															<img src="assets/img/profiles/avatar-25.jpg" alt="Profile">
 														</span>
                                                 <div class="flex-grow-1">
-                                                    <p class="mb-1">New student record <span class="text-dark fw-semibold"> George</span> is created by <span class="text-dark fw-semibold">Teressa</span></p>
+                                                    <p class="mb-1">New student record <span
+                                                            class="text-dark fw-semibold"> George</span> is created by
+                                                        <span class="text-dark fw-semibold">Teressa</span></p>
                                                     <span>2 hrs ago</span>
                                                 </div>
                                             </div>
@@ -277,7 +299,8 @@
 															<img src="assets/img/profiles/avatar-01.jpg" alt="Profile">
 														</span>
                                                 <div class="flex-grow-1">
-                                                    <p class="mb-1">A new teacher record for <span class="text-dark fw-semibold">Elisa</span> </p>
+                                                    <p class="mb-1">A new teacher record for <span
+                                                            class="text-dark fw-semibold">Elisa</span></p>
                                                     <span>09:45 AM</span>
                                                 </div>
                                             </div>
@@ -296,31 +319,36 @@
                     <div class="dropdown profile-dropdown">
                         <a href="javascript:void(0);" class="dropdown-toggle d-flex align-items-center"
                            data-bs-toggle="dropdown" aria-expanded="false">
-        <span class="avatar avatar-sm online">
-            @if(Storage::exists('uploads/logo/' . \Auth::user()->id . '_logo.png'))
-                <img src="{{$logo.'/'.\Auth::user()->id.'_logo.png'}}" alt="Img" class="img-fluid rounded-circle">
-            @elseif(auth()->user()->avatar)
-                <img src="{{ asset(Storage::url(auth()->user()->avatar)) }}" alt="Img" class="img-fluid rounded-circle">
-            @else
-                {{--                <img src="{{ asset(Storage::url('uploads/avatar/company.png'))}}" alt="Img" class="img-fluid rounded-circle">--}}
-                <img src="{{ asset('public/assets/img/profiles/avatar-01.jpg')}}" alt="Img" class="img-fluid rounded-circle">
-            @endif
-        </span>
+                            <span class="avatar avatar-sm online">
+                                @if(Storage::exists('uploads/logo/' . \Auth::user()->id . '_logo.png'))
+                                    <img src="{{$logo.'/'.\Auth::user()->id.'_logo.png'}}" alt="Img"
+                                         class="img-fluid rounded-circle">
+                                @elseif(auth()->user()->avatar)
+                                    <img src="{{ asset(Storage::url(auth()->user()->avatar)) }}" alt="Img"
+                                         class="img-fluid rounded-circle">
+                                @else
+                                    {{--                <img src="{{ asset(Storage::url('uploads/avatar/company.png'))}}" alt="Img" class="img-fluid rounded-circle">--}}
+                                    <img src="{{ asset('public/assets/img/profiles/avatar-01.jpg')}}" alt="Img"
+                                         class="img-fluid rounded-circle">
+                                @endif
+                            </span>
                         </a>
                         <div class="dropdown-menu shadow-none">
                             <div class="card mb-0">
                                 <div class="card-header">
                                     <div class="d-flex align-items-center">
-                    <span class="avatar avatar-lg me-2 avatar-rounded">
-                        @if(Storage::exists('uploads/logo/' . \Auth::user()->id . '_logo.png'))
-                            <img src="{{$logo.'/'.\Auth::user()->id.'_logo.png'}}" alt="img">
-                        @elseif(auth()->user()->avatar)
-                            <img src="{{ asset(Storage::url(auth()->user()->avatar)) }}" alt="img">
-                        @else
-                            {{--                            <img src="{{ asset(Storage::url('uploads/avatar/company.png'))}}" alt="img">--}}
-                            <img src="{{ asset('public/assets/img/profiles/avatar-01.jpg')}}" alt="img">
-                        @endif
-                    </span>
+                                            <span class="avatar avatar-lg me-2 avatar-rounded">
+                                                @if(Storage::exists('uploads/logo/' . \Auth::user()->id . '_logo.png'))
+                                                    <img src="{{$logo.'/'.\Auth::user()->id.'_logo.png'}}" alt="img">
+                                                @elseif(auth()->user()->avatar)
+                                                    <img src="{{ asset(Storage::url(auth()->user()->avatar)) }}"
+                                                         alt="img">
+                                                @else
+                                                    {{--                            <img src="{{ asset(Storage::url('uploads/avatar/company.png'))}}" alt="img">--}}
+                                                    <img src="{{ asset('public/assets/img/profiles/avatar-01.jpg')}}"
+                                                         alt="img">
+                                                @endif
+                                            </span>
                                         <div>
                                             <h5 class="mb-0">{{ auth()->user()->name }}</h5>
                                             <p class="fs-12 fw-medium mb-0">{{ auth()->user()->email }}</p>
@@ -331,6 +359,15 @@
                                     <a class="dropdown-item d-inline-flex align-items-center p-0 py-2"
                                        href="{{route('profile')}}">
                                         <i class="ti ti-user-circle me-1"></i>{{__('My Profile')}}
+                                    </a>
+                                    <a class="dropdown-item d-inline-flex align-items-center p-0 py-2" href="#">
+                                        <i class="ti ti-settings me-1"></i>Settings
+                                    </a>
+                                    <a class="dropdown-item d-inline-flex align-items-center p-0 py-2" href="#">
+                                        <i class="ti ti-circle-arrow-up me-1"></i>My Account
+                                    </a>
+                                    <a class="dropdown-item d-inline-flex align-items-center p-0 py-2" href="#">
+                                        <i class="ti ti-question-mark me-1"></i>Knowledge Base
                                     </a>
                                 </div>
                                 <div class="card-footer">
@@ -390,8 +427,8 @@
                         </li>
 
                     </div>
+                    </div>
 
-                </div>
 
             </div>
 
@@ -402,11 +439,11 @@
                     <i class="fa fa-ellipsis-v"></i>
                 </a>
                 <div class="dropdown-menu ">
-                    <a class="dropdown-item" href="https://smarthr.dreamstechnologies.com/html/template/profile.html">My
+                    <a class="dropdown-item" href="#">My
                         Profile</a>
                     <a class="dropdown-item"
-                       href="https://smarthr.dreamstechnologies.com/html/template/profile-settings.html">Settings</a>
-                    <a class="dropdown-item" href="https://smarthr.dreamstechnologies.com/html/template/login.html">Logout</a>
+                       href="#">Settings</a>
+                    <a class="dropdown-item" href="#">Logout</a>
                 </div>
             </div>
             <!-- /Mobile Menu -->
