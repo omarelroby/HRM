@@ -27,6 +27,7 @@
         <div class="main-header">
 
             <div class="header-left">
+ 
                 <a href="#" class="logo">
                     <img style="width: 5em;height: 5em;" src="{{ asset('public/front/assets/img/logo.png') }}"
                          alt="Logo" class="logo-img">
@@ -34,6 +35,14 @@
                 <a href="#" class="dark-logo">
                     <img style="width: 5em;height: 5em;" src="{{ asset('public/front/assets/img/logo.png') }}"
                          alt="Logo" class="logo-img">
+ 
+                <a href="https://smarthr.dreamstechnologies.com/html/template/index.html" class="logo">
+                    <img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/logo.svg" alt="Logo">
+                </a>
+                <a href="https://smarthr.dreamstechnologies.com/html/template/index.html" class="dark-logo">
+                    <img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/logo-white.svg"
+                         alt="Logo">
+ 
                 </a>
             </div>
 
@@ -44,7 +53,6 @@
 						<span></span>
 					</span>
             </a>
-
 
             <div class="header-user">
                 <div class="nav user-menu nav-list">
@@ -66,6 +74,7 @@
                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             <i class="ti ti-arrow-bar-to-left text-danger"></i> <!-- Bootstrap red color -->
                         </a>
+ 
 
                         <!-- Search -->
                         <div class="input-group input-group-flat d-inline-flex me-1">
@@ -313,12 +322,13 @@
                                 <a href="activity.html" class="btn btn-primary w-100">View All</a>
                             </div>
                         </div>
+ 
                     </div>
 
-                    <!-- User Dropdown Section -->
-                    <div class="dropdown profile-dropdown">
+                    <div class="dropdown profile-dropdown mx-2">
                         <a href="javascript:void(0);" class="dropdown-toggle d-flex align-items-center"
                            data-bs-toggle="dropdown" aria-expanded="false">
+ 
                             <span class="avatar avatar-sm online">
                                 @if(Storage::exists('uploads/logo/' . \Auth::user()->id . '_logo.png'))
                                     <img src="{{$logo.'/'.\Auth::user()->id.'_logo.png'}}" alt="Img"
@@ -332,11 +342,23 @@
                                          class="img-fluid rounded-circle">
                                 @endif
                             </span>
+ 
+        <span class="avatar avatar-sm online">
+            @if(Storage::exists('uploads/logo/' . \Auth::user()->id . '_logo.png'))
+                <img src="{{$logo.'/'.\Auth::user()->id.'_logo.png'}}" alt="Img" class="img-fluid rounded-circle">
+            @elseif(auth()->user()->avatar)
+                <img src="{{ asset(Storage::url(auth()->user()->avatar)) }}" alt="Img" class="img-fluid rounded-circle">
+            @else
+                <img src="{{ asset(Storage::url('uploads/avatar/company.png'))}}" alt="Img" class="img-fluid rounded-circle">
+            @endif
+        </span>
+ 
                         </a>
                         <div class="dropdown-menu shadow-none">
                             <div class="card mb-0">
                                 <div class="card-header">
                                     <div class="d-flex align-items-center">
+ 
                                             <span class="avatar avatar-lg me-2 avatar-rounded">
                                                 @if(Storage::exists('uploads/logo/' . \Auth::user()->id . '_logo.png'))
                                                     <img src="{{$logo.'/'.\Auth::user()->id.'_logo.png'}}" alt="img">
@@ -349,6 +371,17 @@
                                                          alt="img">
                                                 @endif
                                             </span>
+ 
+                    <span class="avatar avatar-lg me-2 avatar-rounded">
+                        @if(Storage::exists('uploads/logo/' . \Auth::user()->id . '_logo.png'))
+                            <img src="{{$logo.'/'.\Auth::user()->id.'_logo.png'}}" alt="img">
+                        @elseif(auth()->user()->avatar)
+                            <img src="{{ asset(Storage::url(auth()->user()->avatar)) }}" alt="img">
+                        @else
+                            <img src="{{ asset(Storage::url('uploads/avatar/company.png'))}}" alt="img">
+                        @endif
+                    </span>
+ 
                                         <div>
                                             <h5 class="mb-0">{{ auth()->user()->name }}</h5>
                                             <p class="fs-12 fw-medium mb-0">{{ auth()->user()->email }}</p>
@@ -356,8 +389,7 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <a class="dropdown-item d-inline-flex align-items-center p-0 py-2"
-                                       href="{{route('profile')}}">
+                                    <a class="dropdown-item d-inline-flex align-items-center p-0 py-2" href="{{route('profile')}}">
                                         <i class="ti ti-user-circle me-1"></i>{{__('My Profile')}}
                                     </a>
                                     <a class="dropdown-item d-inline-flex align-items-center p-0 py-2" href="#">
@@ -371,12 +403,10 @@
                                     </a>
                                 </div>
                                 <div class="card-footer">
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                          style="display: none;">
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
-                                    <a href="{{ route('logout') }}"
-                                       class="dropdown-item d-inline-flex align-items-center p-0 py-2" title="Logout"
+                                    <a href="{{ route('logout') }}" class="dropdown-item d-inline-flex align-items-center p-0 py-2" title="Logout"
                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                         <i class="ti ti-login me-2"></i> {{__('Logout')}}
                                     </a>
@@ -433,7 +463,7 @@
             </div>
 
             <!-- Mobile Menu -->
-            <div class="dropdown mobile-user-menu">
+            <div class="dropdown mobile-user-menu"  >
                 <a href="javascript:void(0);" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
                    aria-expanded="false">
                     <i class="fa fa-ellipsis-v"></i>

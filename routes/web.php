@@ -717,6 +717,12 @@ Route::get('payslip/pdf/{id}/{m}', 'PaySlipController@pdf')->name('payslip.pdf')
         'XSS',
     ]
 );
+Route::get('end-service/pdf/{id}', 'EndServiceController@pdf')->name('end-service.pdf')->middleware(
+    [
+        'auth',
+        'XSS',
+    ]
+);
 
 Route::get('payslip/Payrollpdf/{m}/{y}', 'PaySlipController@Payrollpdf')->name('payslip.Payrollpdf')->middleware(
     [
@@ -767,6 +773,24 @@ Route::get('payslip/delete/{id}', 'PaySlipController@destroy')->name('payslip.de
 );
 
 Route::resource('payslip', 'PaySlipController')->middleware(
+    [
+        'auth',
+        'XSS',
+    ]
+);
+Route::resource('end-service', 'EndServiceController')->middleware(
+    [
+        'auth',
+        'XSS',
+    ]
+);
+Route::get('end-service-dismissal', 'EndServiceController@dismissal')->name('end-service-dismissal')->middleware(
+    [
+        'auth',
+        'XSS',
+    ]
+);
+Route::get('end-service-resignation', 'EndServiceController@resignation')->name('end-service-resignation')->middleware(
     [
         'auth',
         'XSS',

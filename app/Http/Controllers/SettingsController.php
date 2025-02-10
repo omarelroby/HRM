@@ -25,8 +25,12 @@ class SettingsController extends Controller
             if ($user->type == 'super admin') {
                 $settings              = Utility::settings();
                 $admin_payment_setting = Utility::getAdminPaymentSetting();
-
-                return view('dashboard.setting.system_settings', compact('settings', 'admin_payment_setting'));
+                $file_size = 0;
+                foreach (\File::allFiles(storage_path('/framework')) as $file) {
+                    $file_size += $file->getSize();
+                }
+                $file_size = number_format($file_size / 1000000, 4);
+                return view('super_dashboard.setting.system_settings', compact('settings', 'admin_payment_setting','file_size'));
             } else {
                 $timezones = config('timezones');
                 $settings  = Utility::settings();
@@ -931,4 +935,178 @@ class SettingsController extends Controller
         User::where('id',\Auth::user()->id)->update(['company_slate_readed' => 1]);
         return back();
     }
+    public function CacheSettings(Request $request)
+    {
+        \Illuminate\Support\Facades\Artisan::call('cache:clear');
+        Artisan::call('optimize:clear');
+        return redirect()->back()->with('success', 'Cache clear Successfully');
+    }
+    public function storageSettingStore(Request $request)
+    {
+
+        if (isset($request->storage_setting) && $request->storage_setting == 'local') {
+
+            $request->validate(
+                [
+
+                    'local_storage_validation' => 'required',
+                    'local_storage_max_upload_size' => 'required',
+                ]
+            );
+
+            $post['storage_setting'] = $request->storage_setting;
+            $local_storage_validation = implode(',', $request->local_storage_validation);
+            $post['local_storage_validation'] = $local_storage_validation;
+            $post['local_storage_max_upload_size'] = $request->local_storage_max_upload_size;
+        }
+
+        if (isset($request->storage_setting) && $request->storage_setting == 's3') {
+            $request->validate(
+                [
+                    's3_key'                  => 'required',
+                    's3_secret'               => 'required',
+                    's3_region'               => 'required',
+                    's3_bucket'               => 'required',
+                    's3_url'                  => 'required',
+                    's3_endpoint'             => 'required',
+                    's3_max_upload_size'      => 'required',
+                    's3_storage_validation'   => 'required',
+                ]
+            );
+            $post['storage_setting']            = $request->storage_setting;
+            $post['s3_key']                     = $request->s3_key;
+            $post['s3_secret']                  = $request->s3_secret;
+            $post['s3_region']                  = $request->s3_region;
+            $post['s3_bucket']                  = $request->s3_bucket;
+            $post['s3_url']                     = $request->s3_url;
+            $post['s3_endpoint']                = $request->s3_endpoint;
+            $post['s3_max_upload_size']         = $request->s3_max_upload_size;
+            $s3_storage_validation              = implode(',', $request->s3_storage_validation);
+            $post['s3_storage_validation']      = $s3_storage_validation;
+        }
+
+        if (isset($request->storage_setting) && $request->storage_setting == 'wasabi') {
+            $request->validate(
+                [
+                    'wasabi_key'                    => 'required',
+                    'wasabi_secret'                 => 'required',
+                    'wasabi_region'                 => 'required',
+                    'wasabi_bucket'                 => 'required',
+                    'wasabi_url'                    => 'required',
+                    'wasabi_root'                   => 'required',
+                    'wasabi_max_upload_size'        => 'required',
+                    'wasabi_storage_validation'     => 'required',
+                ]
+            );
+            $post['storage_setting']            = $request->storage_setting;
+            $post['wasabi_key']                 = $request->wasabi_key;
+            $post['wasabi_secret']              = $request->wasabi_secret;
+            $post['wasabi_region']              = $request->wasabi_region;
+            $post['wasabi_bucket']              = $request->wasabi_bucket;
+            $post['wasabi_url']                 = $request->wasabi_url;
+            $post['wasabi_root']                = $request->wasabi_root;
+            $post['wasabi_max_upload_size']     = $request->wasabi_max_upload_size;
+            $wasabi_storage_validation          = implode(',', $request->wasabi_storage_validation);
+            $post['wasabi_storage_validation']  = $wasabi_storage_validation;
+        }
+
+        foreach ($post as $key => $data) {
+
+            $arr = [
+                $data,
+                $key,
+                \Auth::user()->id,
+            ];
+
+            \DB::insert(
+                'insert into settings (`value`, `name`,`created_by`) values (?, ?, ?) ON DUPLICATE KEY UPDATE `value` = VALUES(`value`) ',
+                $arr
+            );
+        }
+
+        return redirect()->back()->with('success', 'Storage setting successfully updated.');
+    }
+    public function SeoSettings(Request $request)
+    {
+        $validator = \Validator::make(
+            $request->all(),
+            [
+                'meta_title' => 'required|string',
+                'meta_description' => 'required|string',
+                'meta_image' => 'required|file',
+            ]
+        );
+        if ($validator->fails()) {
+            $messages = $validator->getMessageBag();
+            return redirect()->back()->with('error', $messages->first());
+        }
+        $dir = storage_path() . '/uploads' . '/meta';
+        if (!is_dir($dir)) {
+            File::makeDirectory($dir, $mode = 0777, true, true);
+        }
+        $file_name = $request->meta_image->getClientOriginalName();
+        $file_path = $request->meta_image->getClientOriginalName();
+        $file = $request->file('meta_image');
+        $file->move($dir, $file_path);
+        $post['meta_title']     = $request->meta_title;
+        $post['meta_description'] = $request->meta_description;
+        $post['meta_image']       = $file_path;
+        foreach ($post as $key => $data) {
+            \DB::insert(
+                'insert into settings (`value`, `name`,`created_by`,`created_at`,`updated_at`) values (?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE `value` = VALUES(`value`) ',
+                [
+                    $data,
+                    $key,
+                    \Auth::user()->id,
+                    date('Y-m-d H:i:s'),
+                    date('Y-m-d H:i:s'),
+                ]
+            );
+        }
+        return redirect()->back()->with('success', 'SEO setting successfully save.');
+    }
+    public function chatgptkey(Request $request)
+    {
+        $validator = \Validator::make(
+            $request->all(),
+            [
+                'chatgpt_key' => 'required',
+                'chatgpt_model' => 'required',
+            ]
+        );
+        if ($validator->fails()) {
+            $messages = $validator->getMessageBag();
+            return redirect()->back()->with('error', $messages->first());
+        }
+
+        if (\Auth::user()->type == 'super admin') {
+            $user = \Auth::user();
+            if (!empty($request->chatgpt_key)) {
+                $post = $request->all();
+                $post['chatgpt_key'] = $request->chatgpt_key;
+                $post['chatgpt_model'] = $request->chatgpt_model;
+
+                unset($post['_token']);
+                foreach ($post as $key => $data) {
+                    $settings = Utility::settings();
+                    if (in_array($key, array_keys($settings))) {
+                        \DB::insert(
+                            'insert into settings (`value`, `name`,`created_by`, `created_at`,`updated_at`) values (?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE `value` = VALUES(`value`) ',
+                            [
+                                $data,
+                                $key,
+                                $user->creatorId(),
+                                date('Y-m-d H:i:s'),
+                                date('Y-m-d H:i:s'),
+                            ]
+                        );
+                    }
+                }
+            }
+            return redirect()->back()->with('success', __('Chatgpt key successfully saved.'));
+        } else {
+            return redirect()->back()->with('error', __('Permission denied.'));
+        }
+    }
+
 }

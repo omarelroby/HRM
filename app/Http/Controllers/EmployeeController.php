@@ -335,6 +335,7 @@ class EmployeeController extends Controller
 
 
 
+
         if (\Auth::user()->can('Edit Employee')) {
 
             if($request->has('update_organization_info'))

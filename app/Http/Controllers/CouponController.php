@@ -16,7 +16,7 @@ class CouponController extends Controller
         {
             $coupons = Coupon::get();
 
-            return view('coupon.index', compact('coupons'));
+            return view('super_dashboard.coupon.index', compact('coupons'));
         }
         else
         {
@@ -29,7 +29,7 @@ class CouponController extends Controller
     {
         if(\Auth::user()->can('create coupon'))
         {
-            return view('coupon.create');
+            return view('super_dashboard.coupon.create');
         }
         else
         {
@@ -90,7 +90,7 @@ class CouponController extends Controller
     {
         $userCoupons = UserCoupon::where('coupon', $coupon->id)->get();
 
-        return view('coupon.view', compact('userCoupons'));
+        return view('super_dashboard.coupon.view', compact('userCoupons'));
     }
 
 
@@ -98,7 +98,7 @@ class CouponController extends Controller
     {
         if(\Auth::user()->can('edit coupon'))
         {
-            return view('coupon.edit', compact('coupon'));
+            return view('super_dashboard.coupon.edit', compact('coupon'));
         }
         else
         {
