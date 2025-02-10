@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\Coupon;
 use App\Models\Order;
 use App\Models\Plan;
+use App\Models\User;
 use App\Models\UserCoupon;
 use App\Models\Utility;
 use Illuminate\Http\Request;
@@ -26,7 +27,7 @@ class StripePaymentController extends Controller
                 ]
             )->join('users', 'orders.user_id', '=', 'users.id')->orderBy('orders.created_at', 'DESC')->get();
 
-            return view('order.index', compact('orders'));
+            return view('super_dashboard.order.index', compact('orders'));
         }
         else
         {
@@ -70,13 +71,13 @@ class StripePaymentController extends Controller
     public function stripePost(Request $request)
     {
         $admin_payment_setting = Utility::getAdminPaymentSetting();
-        
+
         if(\Auth::user()->can('Manage Company Settings') && (isset($admin_payment_setting['is_stripe_enabled']) && $admin_payment_setting['is_stripe_enabled']== 'on' && !empty($admin_payment_setting['stripe_key']) && !empty($admin_payment_setting['stripe_secret'])))
         {
             $objUser = \Auth::user();
             $planID  = \Illuminate\Support\Facades\Crypt::decrypt($request->plan_id);
             $plan    = Plan::find($planID);
-            
+
             if($plan)
             {
                 try
@@ -90,7 +91,7 @@ class StripePaymentController extends Controller
                             $usedCoupun     = $coupons->used_coupon();
                             $discount_value = ($plan->price / 100) * $coupons->discount;
                             $price          = $plan->price - $discount_value;
-                            
+
                             if($coupons->limit == $usedCoupun)
                             {
                                 return redirect()->back()->with('error', __('This coupon code has expired.'));
@@ -101,9 +102,9 @@ class StripePaymentController extends Controller
                             return redirect()->back()->with('error', __('This coupon code is invalid or has expired.'));
                         }
                     }
-                    
+
                     $orderID = strtoupper(str_replace('.', '', uniqid('', true)));
-                    
+
                     if($price > 0.0)
                     {
                         Stripe\Stripe::setApiKey($admin_payment_setting['stripe_secret']);
@@ -206,4 +207,17 @@ class StripePaymentController extends Controller
 
 
     }
+
+    public function refund(Request $request, $id, $user_id)
+    {
+        Order::where('id', $request->id)->update(['is_refund' => 1]);
+
+        $user = User::find($user_id);
+
+        $assignPlan = $user->assignPlan(1);
+
+        return redirect()->back()->with('success', __('We successfully planned a refund and assigned a free plan.'));
+    }
+
+
 }

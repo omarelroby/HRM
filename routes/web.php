@@ -772,6 +772,24 @@ Route::resource('payslip', 'PaySlipController')->middleware(
         'XSS',
     ]
 );
+Route::resource('end-service', 'EndServiceController')->middleware(
+    [
+        'auth',
+        'XSS',
+    ]
+);
+Route::get('end-service-dismissal', 'EndServiceController@dismissal')->name('end-service-dismissal')->middleware(
+    [
+        'auth',
+        'XSS',
+    ]
+);
+Route::get('end-service-resignation', 'EndServiceController@resignation')->name('end-service-resignation')->middleware(
+    [
+        'auth',
+        'XSS',
+    ]
+);
 
 
 Route::resource('resignation', 'ResignationController')->middleware(

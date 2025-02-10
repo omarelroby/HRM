@@ -21,7 +21,7 @@ class PlanRequestController extends Controller
         if (Auth::user()->type == 'super admin') {
             $plan_requests = PlanRequest::all();
 
-            return view('plan_request.index', compact('plan_requests'));
+            return view('super_dashboard.plan_request.index', compact('plan_requests'));
         } else {
             return redirect()->back()->with('error', __('Permission Denied.'));
         }
