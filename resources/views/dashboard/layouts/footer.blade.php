@@ -1,43 +1,42 @@
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+{{-- <script data-cfasync="false" src="https://smarthr.dreamstechnologies.com/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script> --}}
+<script src="{{ asset('public/assets/js/jquery-3.7.1.min.js') }}" type="text/javascript"></script>
 
-    {{-- <script data-cfasync="false" src="https://smarthr.dreamstechnologies.com/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script> --}}
-    <script src="{{ asset('public/assets/js/jquery-3.7.1.min.js') }}" type="text/javascript"></script>
+<!-- Bootstrap Core JS -->
+<script src="{{ asset('public/assets/js/bootstrap.bundle.min.js') }}" type="text/javascript"></script>
 
-    <!-- Bootstrap Core JS -->
-    <script src="{{ asset('public/assets/js/bootstrap.bundle.min.js') }}" type="text/javascript"></script>
+<!-- Feather Icon JS -->
+<script src="{{ asset('public/assets/js/feather.min.js') }}" type="text/javascript"></script>
 
-    <!-- Feather Icon JS -->
-    <script src="{{ asset('public/assets/js/feather.min.js') }}" type="text/javascript"></script>
-
-    <!-- Slimscroll JS -->
-    {{-- <script src="https://smarthr.dreamstechnologies.com/html/template/assets/js/jquery.slimscroll.min.js" type="text/javascript"></script> --}}
+<!-- Slimscroll JS -->
+{{-- <script src="https://smarthr.dreamstechnologies.com/html/template/assets/js/jquery.slimscroll.min.js" type="text/javascript"></script> --}}
 
 
-    <!-- Datatable JS -->
-    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- jQuery --> --}}
-    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script> <!-- DataTables -->
-    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script> <!-- DataTables with Bootstrap 5 -->
+<!-- Datatable JS -->
+{{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- jQuery --> --}}
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script> <!-- DataTables -->
+<script
+    src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script> <!-- DataTables with Bootstrap 5 -->
 
-    <!-- Daterangepicker JS -->
-    <script src="{{ asset('public/assets/js/moment.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('public/assets/plugins/daterangepicker/daterangepicker.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('public/assets/js/bootstrap-datetimepicker.min.js') }}" type="text/javascript"></script>
+<!-- Daterangepicker JS -->
+<script src="{{ asset('public/assets/js/moment.js') }}" type="text/javascript"></script>
+<script src="{{ asset('public/assets/plugins/daterangepicker/daterangepicker.js') }}" type="text/javascript"></script>
+<script src="{{ asset('public/assets/js/bootstrap-datetimepicker.min.js') }}" type="text/javascript"></script>
 
-    <!-- Select2 JS -->
-    <script src="{{ asset('public/assets/plugins/select2/js/select2.min.js') }}" type="text/javascript"></script>
+<!-- Select2 JS -->
+<script src="{{ asset('public/assets/plugins/select2/js/select2.min.js') }}" type="text/javascript"></script>
 
-    <!-- Chart JS -->
-    <script src="{{ asset('public/assets/plugins/apexchart/apexcharts.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('public/assets/plugins/apexchart/chart-data.js') }}" type="text/javascript"></script>
+<<<<<<< HEAD
+{{--    <!-- Chart JS -->--}}
+{{--    <script src="{{ asset('public/assets/plugins/apexchart/apexcharts.min.js') }}" type="text/javascript"></script>--}}
+{{--    <script src="{{ asset('public/assets/plugins/apexchart/chart-data.js') }}" type="text/javascript"></script>--}}
 
     <!-- Custom JS -->
-    <script src="https://smarthr.dreamstechnologies.com/html/template/assets/js/theme-colorpicker.js" type="text/javascript"></script>
-    <script src="https://smarthr.dreamstechnologies.com/html/template/assets/js/script.js" type="text/javascript"></script>
+    <script src="{{ asset('public/assets/js/theme-colorpicker.js')}} " type="text/javascript"></script>
+    <script src="{{ asset('public/assets/js/script.js')}} " type="text/javascript"></script>
 
-    <!-- Additional Custom JS -->
-    <script src="{{ asset('public/assets/plugins/apexchart/apexcharts.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('public/assets/plugins/apexchart/chart-data.js') }}" type="text/javascript"></script>
+
     {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
     <script src="{{ asset('assets/js/bootstrap-hijri-datetimepicker.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap-hijri-datepicker.js') }}"></script>
@@ -52,91 +51,135 @@
     {{-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> --}}
     <!-- Popper.js -->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+=======
+<!-- Chart JS -->
+<script src="{{ asset('public/assets/plugins/apexchart/apexcharts.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('public/assets/plugins/apexchart/chart-data.js') }}" type="text/javascript"></script>
+
+<!-- Custom JS -->
+{{--    <script src="https://smarthr.dreamstechnologies.com/html/template/assets/js/theme-colorpicker.js" type="text/javascript"></script>--}}
+<script src="{{ asset('public/assets/dashboard/js/theme-colorpicker.js') }}"></script>
+{{--    <script src="https://smarthr.dreamstechnologies.com/html/template/assets/js/script.js" type="text/javascript"></script>--}}
+
+<script src="{{ asset('public/assets/dashboard/js/script.js') }}"></script>
+
+<!-- Additional Custom JS -->
+<script src="{{ asset('public/assets/plugins/apexchart/apexcharts.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('public/assets/plugins/apexchart/chart-data.js') }}" type="text/javascript"></script>
+{{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
+<script src="{{ asset('assets/js/bootstrap-hijri-datetimepicker.js') }}"></script>
+<script src="{{ asset('assets/js/bootstrap-hijri-datepicker.js') }}"></script>
+{{--    <script src="https://smarthr.dreamstechnologies.com/html/template/assets/plugins/summernote/summernote-lite.min.js" type="text/javascript"></script>--}}
+<script src="{{ asset('public/assets/dashboard/cdn/summernote.min.js') }}"></script>
+{{--    <script src="https://smarthr.dreamstechnologies.com/html/template/assets/js/circle-progress.js" type="text/javascript"></script>--}}
+<script src="{{ asset('public/assets/dashboard/js/circle-progress.js') }}"></script>
+{{--    <script src="https://smarthr.dreamstechnologies.com/html/template/assets/js/todo.js" type="text/javascript"></script>--}}
+<script src="{{ asset('public/assets/dashboard/js/todo.js') }}"></script>
+{{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js" integrity="sha512-9RI3sFi8egzK6DbLGcfs9Kwi+QlR2V5RH8oKtGvSCCPLO0ppLGkGU9cP0N5ksuL2oT4xjSM1ZpSEJGxXUQK7Lg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>--}}
+<script src="{{ asset('public/assets/dashboard/cdn/cloudflare-poppor.min.js') }}"></script>
+{{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js" integrity="sha512-CnESDX6nx7+gtI9O+37tIcAS8F2aafYP1rjE5x0CeglwLSrkNb2sKDkk/UCNRJYh4+Qo4G4P6R2ITjmrtwZ6Xw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>--}}
+<script src="{{ asset('public/assets/dashboard/cdn/cloudflare-moment.min.js') }}"></script>
+{{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js" integrity="sha512-vpuVKmjRprHqBoANt0LBIesdIGLvXVJgpeIzVf45yAZLyKf8btSQZ8GY0UzXQ6N4xrAzApjKy93sPiAUxZTXiw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>--}}
+<script src="{{ asset('public/assets/dashboard/cdn/cloudflare-moment-with-locales-min.js') }}"></script>
+{{--    <script src="https://cdn.jsdelivr.net/npm/moment-hijri@1.1.2/moment-hijri.min.js" integrity="sha512-aWxMk6WWelx74sDqff2k2J6lyO+ISclOh8JkgITxQjlx9iH3KuvJ3FyVY02AjT19oj19+QzOV0RX1DQaVL3tEA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>--}}
+<!-- jQuery -->
+{{-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> --}}
+<!-- Popper.js -->
+<script src="{{ 'public/assets/dashboard/cdn/popper.min.js' }}"></script>
+{{--    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>--}}
+>>>>>>> 380fd7ab7afbd1992a03db42ec0f70b19e50c423
 =    {{-- <!-- Moment.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
     <!-- Hijri Moment.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-hijri/1.1.2/moment-hijri.min.js"></script> --}}
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-    <script src="{{ asset('assets/js/bootstrap-hijri-datetimepicker.js') }}"></script>
-    <script src="{{ asset('assets/js/bootstrap-hijri-datepicker.js') }}"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+<script src="{{ asset('assets/js/bootstrap-hijri-datetimepicker.js') }}"></script>
+<script src="{{ asset('assets/js/bootstrap-hijri-datepicker.js') }}"></script>
 
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment-hijri@2.17.0/moment-hijri.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <script>
-    $(document).ready(function() {
-    $('#sidebar-menu').slimScroll({
-        height: 'auto', // or set a specific height
-        position: 'right',
-        size: "5px",
-        color: '#ccc',
-        wheelStep: 10,
-        touchScrollStep: 100
+    $(document).ready(function () {
+        $('#sidebar-menu').slimScroll({
+            height: 'auto', // or set a specific height
+            position: 'right',
+            size: "5px",
+            color: '#ccc',
+            wheelStep: 10,
+            touchScrollStep: 100
+        });
     });
-});
     @if(count($errors) > 0)
     @foreach($errors->all() as $error)
-    toastr.error('{{ $error }}', "@lang('efb.missing_or_wrong_data')", {iconClass:"bg-danger"});
+    toastr.error('{{ $error }}', "@lang('efb.missing_or_wrong_data')", {iconClass: "bg-danger"});
     @endforeach
-    @endif
-    @if(Session::has('message'))
+        @endif
+        @if(Session::has('message'))
         toastr.options =
         {
-            "closeButton" : true,
-            "progressBar" : false
+            "closeButton": true,
+            "progressBar": false
         }
     toastr.success("{{ session('message') }}");
     @endif
 
-            @if(Session::has('wrong'))
+        @if(Session::has('wrong'))
         toastr.options =
         {
-            "closeButton" : true,
-            "progressBar" : false
+            "closeButton": true,
+            "progressBar": false
         }
-    toastr.error("{{ session('wrong') }}", '', {iconClass:"bg-danger"});
+    toastr.error("{{ session('wrong') }}", '', {iconClass: "bg-danger"});
     @endif
 
-            @if(Session::has('info'))
+        @if(Session::has('info'))
         toastr.options =
         {
-            "closeButton" : true,
-            "progressBar" : true
+            "closeButton": true,
+            "progressBar": true
         }
     toastr.info("{{ session('info') }}");
     @endif
 
-            @if(Session::has('warning'))
+        @if(Session::has('warning'))
         toastr.options =
         {
-            "closeButton" : true,
-            "progressBar" : true
+            "closeButton": true,
+            "progressBar": true
         }
     toastr.warning("{{ session('warning') }}");
     @endif
 </script>
 <script>
-    $(document).ready(function(){
-    // Ensure that the dropdown is closed when the page reloads
-    // $('.submenu > ul').hide(); // Hide the submenu on page load
-    $('.submenu > a').removeClass('subdrop'); // Remove the 'subdrop' class initially
+    $(document).ready(function () {
+        // Ensure that the dropdown is closed when the page reloads
+        // $('.submenu > ul').hide(); // Hide the submenu on page load
+        $('.submenu > a').removeClass('subdrop'); // Remove the 'subdrop' class initially
 
-    // Handle the click event to toggle the dropdown
-    $('.submenu > a').click(function(e){
-        e.preventDefault(); // Prevent default link behavior
+        // Handle the click event to toggle the dropdown
+        $('.submenu > a').click(function (e) {
+            e.preventDefault(); // Prevent default link behavior
 
-        var $submenu = $(this).next('ul'); // Get the next 'ul' (the submenu)
+            var $submenu = $(this).next('ul'); // Get the next 'ul' (the submenu)
 
-        // Toggle the visibility of the submenu with animation
-        if ($submenu.is(':visible')) {
-            $submenu.slideUp(500); // Slide up with 500ms duration
-            $(this).removeClass('subdrop'); // Optionally remove the 'subdrop' class to change the icon
-        } else {
-            $submenu.slideDown(500); // Slide down with 500ms duration
-            $(this).addClass('subdrop'); // Optionally add the 'subdrop' class to change the icon
-        }
+            // Toggle the visibility of the submenu with animation
+            if ($submenu.is(':visible')) {
+                $submenu.slideUp(500); // Slide up with 500ms duration
+                $(this).removeClass('subdrop'); // Optionally remove the 'subdrop' class to change the icon
+            } else {
+                $submenu.slideDown(500); // Slide down with 500ms duration
+                $(this).addClass('subdrop'); // Optionally add the 'subdrop' class to change the icon
+            }
+        });
     });
-});
 
 </script>
-<script src="https://smarthr.dreamstechnologies.com/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="12789c3eb65f5dda020bae43-|49" defer></script>
+<script src="{{ asset('public/assets/dashboard/cdn/rocket-loader.min.js') }}"></script>
+{{--<script src="https://smarthr.dreamstechnologies.com/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="12789c3eb65f5dda020bae43-|49" defer></script>--}}
 </body>
 <script type="text/javascript">
     function changeLanguage() {

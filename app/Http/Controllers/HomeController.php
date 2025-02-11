@@ -30,11 +30,13 @@ use App\Models\LandingPageSection;
 use App\Models\Meeting;
 use App\Models\Nationality;
 use App\Models\Order;
+use App\Models\OrderRequest;
 use App\Models\Payees;
 use App\Models\Payer;
 use App\Models\PaySlip;
 use App\Models\Place;
 use App\Models\Plan;
+use App\Models\PlanRequests;
 use App\Models\Task;
 use App\Models\Ticket;
 use App\Models\Trainer;
@@ -164,9 +166,53 @@ class HomeController extends Controller
                 $lastMonthStart = Carbon::now()->subMonth()->startOfMonth();
                 $lastMonthEnd = Carbon::now()->subMonth()->endOfMonth();
                 $data['new_join'] = Employee::whereBetween('Join_date_gregorian', [$lastMonthStart, $lastMonthEnd])->count();
+                $data['users']=User::all();
+
+                $data['orders'] = OrderRequest::whereYear('start_date', date('Y'))->get();
+                $data['plan_requests'] = PlanRequests::where('approve',0)->get();
+
+
+                $mostPurchasedPlan = OrderRequest::selectRaw('plan_id, COUNT(plan_id) as count')
+                    ->whereYear('start_date', date('Y'))
+                    ->groupBy('plan_id')
+                    ->orderByDesc('count')
+                    ->first();
+
+                $data['mostPurchasedPlanName'] = $mostPurchasedPlan
+                    ? Plan::where('id', $mostPurchasedPlan->plan_id)->value('name')
+                    : 'N/A';
+
+                $data['totalPlans'] = Plan::count(); // Total number of plans
+
+                 $data['orderRequests'] = OrderRequest::with('plan')
+                    ->whereYear('start_date', date('Y'))
+                    ->orderBy('start_date')
+                    ->get();
+
+                 $monthlyOrders = OrderRequest::selectRaw('DATE_FORMAT(start_date, "%Y-%m") as month, COUNT(*) as count')
+                    ->whereYear('start_date', date('Y'))
+                    ->groupBy('month')
+                    ->orderBy('month')
+                    ->pluck('count', 'month'); // Use `pluck` for efficient mapping
+
+// Prepare chart data with all months of the current year
+                $months = collect(range(1, 12))->map(function ($month) {
+                    return Carbon::create(date('Y'), $month, 1)->format('Y-m');
+                });
+
+
+                $chartData = $months->map(function ($month) use ($monthlyOrders) {
+                    return [
+                        'month' => $month,
+                        'count' => $monthlyOrders[$month] ?? 0
+                    ];
+                })->toArray();
+
+                $data['chartData'] = $chartData;
 
                 return view('dashboard.dashboard', $data);
             }
+
             if(\auth()->user()->type=='company' || \auth()->user()->type=='hr'  )
             {
 
@@ -444,6 +490,25 @@ class HomeController extends Controller
                 return view('dashboard.EmployeeDashboard', $data);
             }
         }
+    }
+    private function prepareChartData($orderRequests)
+    {
+        $dates = [];
+        $orders = [];
+
+        foreach ($orderRequests as $order) {
+            $dates[] = $order->start_date; // Use start_date as the x-axis value
+            $orders[] = [
+                'x' => $order->start_date,
+                'y' => $order->payment, // Use payment as the y-axis value
+                'plan' => $order->plan->name // Include plan name for tooltips
+            ];
+        }
+
+        return [
+            'dates' => $dates,
+            'orders' => $orders
+        ];
     }
     public function landing_page()
     {
