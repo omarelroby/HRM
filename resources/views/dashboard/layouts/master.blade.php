@@ -164,22 +164,28 @@
                                     </div>
                                     <div class="card-body">
                                         <a href="calendar.html" class="d-block pb-2">
-                                            <span class="avatar avatar-md bg-transparent-dark me-2"><i class="ti ti-calendar text-gray-9"></i></span>Calendar
+                                            <span class="avatar avatar-md bg-transparent-dark me-2"><i
+                                                    class="ti ti-calendar text-gray-9"></i></span>Calendar
                                         </a>
                                         <a href="todo.html" class="d-block py-2">
-                                            <span class="avatar avatar-md bg-transparent-dark me-2"><i class="ti ti-subtask text-gray-9"></i></span>To Do
+                                            <span class="avatar avatar-md bg-transparent-dark me-2"><i
+                                                    class="ti ti-subtask text-gray-9"></i></span>To Do
                                         </a>
                                         <a href="notes.html" class="d-block py-2">
-                                            <span class="avatar avatar-md bg-transparent-dark me-2"><i class="ti ti-notes text-gray-9"></i></span>Notes
+                                            <span class="avatar avatar-md bg-transparent-dark me-2"><i
+                                                    class="ti ti-notes text-gray-9"></i></span>Notes
                                         </a>
                                         <a href="file-manager.html" class="d-block py-2">
-                                            <span class="avatar avatar-md bg-transparent-dark me-2"><i class="ti ti-folder text-gray-9"></i></span>File Manager
+                                            <span class="avatar avatar-md bg-transparent-dark me-2"><i
+                                                    class="ti ti-folder text-gray-9"></i></span>File Manager
                                         </a>
                                         <a href="kanban-view.html" class="d-block py-2">
-                                            <span class="avatar avatar-md bg-transparent-dark me-2"><i class="ti ti-layout-kanban text-gray-9"></i></span>Kanban
+                                            <span class="avatar avatar-md bg-transparent-dark me-2"><i
+                                                    class="ti ti-layout-kanban text-gray-9"></i></span>Kanban
                                         </a>
                                         <a href="invoices.html" class="d-block py-2 pb-0">
-                                            <span class="avatar avatar-md bg-transparent-dark me-2"><i class="ti ti-file-invoice text-gray-9"></i></span>Invoices
+                                            <span class="avatar avatar-md bg-transparent-dark me-2"><i
+                                                    class="ti ti-file-invoice text-gray-9"></i></span>Invoices
                                         </a>
                                     </div>
                                 </div>
@@ -188,7 +194,8 @@
                         <div class="me-1">
                             <a href="chat.html" class="btn btn-menubar position-relative">
                                 <i class="ti ti-brand-hipchat"></i>
-                                <span class="badge bg-info rounded-pill d-flex align-items-center justify-content-center header-badge">5</span>
+                                <span
+                                    class="badge bg-info rounded-pill d-flex align-items-center justify-content-center header-badge">5</span>
                             </a>
                         </div>
                         <div class="me-1">
@@ -203,7 +210,8 @@
                                 <span class="notification-status-dot"></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end notification-dropdown p-4">
-                                <div class="d-flex align-items-center justify-content-between border-bottom p-0 pb-3 mb-3">
+                                <div
+                                    class="d-flex align-items-center justify-content-between border-bottom p-0 pb-3 mb-3">
                                     <h4 class="notification-title">Notifications (2)</h4>
                                     <div class="d-flex align-items-center">
                                         <a href="#" class="text-primary fs-15 me-3 lh-1">Mark all as read</a>
@@ -276,7 +284,9 @@
 															<img src="assets/img/profiles/avatar-25.jpg" alt="Profile">
 														</span>
                                                     <div class="flex-grow-1">
-                                                        <p class="mb-1">New student record <span class="text-dark fw-semibold"> George</span> is created by <span class="text-dark fw-semibold">Teressa</span></p>
+                                                        <p class="mb-1">New student record <span
+                                                                class="text-dark fw-semibold"> George</span> is created
+                                                            by <span class="text-dark fw-semibold">Teressa</span></p>
                                                         <span>2 hrs ago</span>
                                                     </div>
                                                 </div>
@@ -289,7 +299,8 @@
 															<img src="assets/img/profiles/avatar-01.jpg" alt="Profile">
 														</span>
                                                     <div class="flex-grow-1">
-                                                        <p class="mb-1">A new teacher record for <span class="text-dark fw-semibold">Elisa</span> </p>
+                                                        <p class="mb-1">A new teacher record for <span
+                                                                class="text-dark fw-semibold">Elisa</span></p>
                                                         <span>09:45 AM</span>
                                                     </div>
                                                 </div>
@@ -378,7 +389,8 @@
                                             @csrf
                                         </form>
                                         <a href="{{ route('logout') }}"
-                                           class="dropdown-item d-inline-flex align-items-center p-0 py-2" title="Logout"
+                                           class="dropdown-item d-inline-flex align-items-center p-0 py-2"
+                                           title="Logout"
                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                             <i class="ti ti-login me-2"></i> {{__('Logout')}}
                                         </a>
