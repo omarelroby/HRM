@@ -27,7 +27,6 @@
 <!-- Select2 JS -->
 <script src="{{ asset('public/assets/plugins/select2/js/select2.min.js') }}" type="text/javascript"></script>
 
-<<<<<<< HEAD
 {{--    <!-- Chart JS -->--}}
 {{--    <script src="{{ asset('public/assets/plugins/apexchart/apexcharts.min.js') }}" type="text/javascript"></script>--}}
 {{--    <script src="{{ asset('public/assets/plugins/apexchart/chart-data.js') }}" type="text/javascript"></script>--}}
@@ -51,7 +50,7 @@
     {{-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> --}}
     <!-- Popper.js -->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-=======
+
 <!-- Chart JS -->
 <script src="{{ asset('public/assets/plugins/apexchart/apexcharts.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('public/assets/plugins/apexchart/chart-data.js') }}" type="text/javascript"></script>
@@ -61,7 +60,17 @@
 <script src="{{ asset('public/assets/dashboard/js/theme-colorpicker.js') }}"></script>
 {{--    <script src="https://smarthr.dreamstechnologies.com/html/template/assets/js/script.js" type="text/javascript"></script>--}}
 
-<script src="{{ asset('public/assets/dashboard/js/script.js') }}"></script>
+
+<!-- Chart JS -->
+<script src="{{ asset('public/assets/plugins/apexchart/apexcharts.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('public/assets/plugins/apexchart/chart-data.js') }}" type="text/javascript"></script>
+
+<!-- Custom JS -->
+{{--    <script src="https://smarthr.dreamstechnologies.com/html/template/assets/js/theme-colorpicker.js" type="text/javascript"></script>--}}
+<script src="{{ asset('public/assets/dashboard/js/theme-colorpicker.js') }}"></script>
+{{--    <script src="https://smarthr.dreamstechnologies.com/html/template/assets/js/script.js" type="text/javascript"></script>--}}
+
+ <script src="{{ asset('public/assets/dashboard/js/script.js') }}"></script>
 
 <!-- Additional Custom JS -->
 <script src="{{ asset('public/assets/plugins/apexchart/apexcharts.min.js') }}" type="text/javascript"></script>
@@ -87,8 +96,8 @@
 <!-- Popper.js -->
 <script src="{{ 'public/assets/dashboard/cdn/popper.min.js' }}"></script>
 {{--    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>--}}
->>>>>>> 380fd7ab7afbd1992a03db42ec0f70b19e50c423
-=    {{-- <!-- Moment.js -->
+
+    {{-- <!-- Moment.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
     <!-- Hijri Moment.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-hijri/1.1.2/moment-hijri.min.js"></script> --}}
