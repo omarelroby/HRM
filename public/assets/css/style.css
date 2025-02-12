@@ -1339,7 +1339,7 @@ button:focus {
 .btn.btn-secondary {
   background-color: #3B7080;
   border: 1px solid #3B7080;
-    width: 20rem;
+    width: 15rem;
   color: #FFF;
 }
 .btn.btn-secondary:hover, .btn.btn-secondary:focus, .btn.btn-secondary.focus, .btn.btn-secondary:active, .btn.btn-secondary.active {
