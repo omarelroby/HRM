@@ -47,15 +47,17 @@
     <link rel="stylesheet" href="{{  asset('public/assets/plugins/flatpickr/flatpickr.min.css') }}">
     <link rel="stylesheet" href="{{ asset('public/assets/plugins/@simonwep/pickr/themes/nano.min.css')}}">
 
+
     {{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.2/css/bootstrap.min.css" integrity="sha512-hFkX7HG+dChKQVRiHL8ZLZbGzMIJH3MHIxqU2x6iLePgZmwgrtv9A4vTQDEWADud0H5T2LchdDDTiz6JPMm21w==" crossorigin="anonymous" referrerpolicy="no-referrer" />--}}
     <link rel="stylesheet" href="{{ asset('public/assets/dashboard/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('public/assets/css/style.css')}}">
-
-    @yield('css')
-    @stack('css')
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <link rel="stylesheet" href="{{ asset('public/assets/css/style.css')}}">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.4/dist/sweetalert2.min.css" rel="stylesheet">
+
+    @yield('css')
+    @stack('css')
 
     <style>
         .sidebar-inner.slimscroll {
@@ -73,4 +75,5 @@
         }
 
     </style>
+
 </head>

@@ -195,7 +195,7 @@ class HomeController extends Controller
                     ->orderBy('month')
                     ->pluck('count', 'month'); // Use `pluck` for efficient mapping
 
-// Prepare chart data with all months of the current year
+
                 $months = collect(range(1, 12))->map(function ($month) {
                     return Carbon::create(date('Y'), $month, 1)->format('Y-m');
                 });

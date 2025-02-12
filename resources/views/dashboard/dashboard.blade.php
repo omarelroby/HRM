@@ -1,6 +1,7 @@
 @extends('dashboard.layouts.master')
 @include('dashboard.layouts.header')
 @push('css')
+
      <style>
         /* Add the CSS code below */
         .attendance-container {
@@ -187,8 +188,8 @@
                                                                                          class="edit-icon"><i
                                 class="ti ti-edit fs-14"></i></a></h3>
                     @if(auth()->user()->type=='super admin')
-                    <p>{{__('You have')}} <span class="text-primary text-decoration-underline">{{count($plan_requests)??''}}</span>{{__('Pending Approvals')}} <span
-                            class="text-primary text-decoration-underline">{{count($orders)??''}}</span> {{__('Approve Requests')}}</p>
+                    <p>{{__('You have')}} <span class="text-primary text-decoration-underline">{{count($plan_requests)  }}</span>{{__('Pending Approvals')}} <span
+                            class="text-primary text-decoration-underline">{{count($orders) }}</span> {{__('Approve Requests')}}</p>
                     @endif
                 </div>
             </div>
@@ -3306,7 +3307,8 @@
 @endsection
 
 @section('script')
-      <script>
+
+    <script>
 
               document.addEventListener('DOMContentLoaded', function() {
               const chartElement = document.querySelector("#chart-sales");
@@ -4127,5 +4129,5 @@
 
     <!-- Resources -->
 @endpush
-<!-- At the end of your Blade file -->
+
 
