@@ -9,6 +9,7 @@ use App\Models\PlanRequest;
 use App\Models\User;
 use File;
 use Illuminate\Http\Request;
+use MongoDB\Driver\Session;
 
 class PlanController extends Controller
 {
@@ -26,6 +27,19 @@ class PlanController extends Controller
         }
     }
 
+    public function fetchPlans()
+    {
+        $plans = Plan::all(); // Fetch all plans
+        $user = auth()->user(); // Get the authenticated user
+        return view('dashboard.user.plan', compact('plans', 'user'));
+    }
+    public function getPlans($id)
+    {
+        $plans = Plan::all();
+        $user = User::findOrFail($id);
+        session()->flash('success', 'Operation successful!');
+        return view('dashboard.user.plan', compact('plans', 'user'))->render();
+     }
 
     public function create()
     {

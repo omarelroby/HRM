@@ -711,6 +711,10 @@ Route::post('payslip/editemployee/{id}', 'PaySlipController@updateEmployee')->na
         'XSS',
     ]
 );
+Route::get('/get-plans','PlanController@fetchPlans'  )->name('plans.fetch');
+Route::get('/plans/list/{id}','PlanController@getPlans'  )->name('plans.list');
+Route::get('/plans/list/{id}','PlanController@getPlans'  )->name('plans.list');
+
 Route::get('payslip/pdf/{id}/{m}', 'PaySlipController@pdf')->name('payslip.pdf')->middleware(
     [
         'auth',
@@ -842,6 +846,12 @@ Route::resource('warning', 'WarningController')->middleware(
 //    ]
 //);
 Route::post('edit-profile', 'UserController@editprofile')->name('update.account')->middleware(
+    [
+        'auth',
+        'XSS',
+    ]
+);
+Route::get('user-loginAsCompany/{id}', 'UserController@loginAsCompany')->name('user.loginAsCompany')->middleware(
     [
         'auth',
         'XSS',

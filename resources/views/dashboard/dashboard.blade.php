@@ -1,7 +1,8 @@
 @extends('dashboard.layouts.master')
 @include('dashboard.layouts.header')
 @push('css')
-    <style>
+
+     <style>
         /* Add the CSS code below */
         .attendance-container {
             max-width: 700px;
@@ -60,6 +61,101 @@
             background-color: #c9302c;
         }
     </style>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Helvetica, Arial, sans-serif';
+            color: #373d3f;
+        }
+
+        .dash-content {
+            padding: 20px;
+        }
+
+        .page-header {
+            margin-bottom: 20px;
+        }
+
+        .page-header-title h4 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .card {
+            border-radius: 12px;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .badge.theme-avtar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            margin-bottom: 15px;
+        }
+
+        .badge.theme-avtar i {
+            font-size: 24px;
+        }
+
+        .text-muted {
+            color: #6c757d !important;
+        }
+
+        h6 {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        h3 {
+            font-size: 26px;
+            font-weight: 600;
+        }
+
+        .card-header {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 15px 20px;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+        }
+
+        .card-header h5 {
+            font-size: 20px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .apexcharts-canvas {
+            border-radius: 12px;
+        }
+    </style>
+    <style>
+        #chart-sales {
+            overflow: hidden;
+        }
+        .apexcharts-canvas {
+            margin: 0 auto;
+        }
+        .date-range input {
+            margin-left: 10px;
+        }
+    </style>
 
 @endpush
 @section('content')
@@ -91,12 +187,14 @@
                     <h3 class="mb-2">{{__('Welcome Back')}}, {{auth()->user()->name}} <a href="javascript:void(0);"
                                                                                          class="edit-icon"><i
                                 class="ti ti-edit fs-14"></i></a></h3>
-                    <p>You have <span class="text-primary text-decoration-underline">21</span> Pending Approvals & <span
-                            class="text-primary text-decoration-underline">14</span> Leave Requests</p>
+                    @if(auth()->user()->type=='super admin')
+                    <p>{{__('You have')}} <span class="text-primary text-decoration-underline">{{count($plan_requests)  }}</span>{{__('Pending Approvals')}} <span
+                            class="text-primary text-decoration-underline">{{count($orders) }}</span> {{__('Approve Requests')}}</p>
+                    @endif
                 </div>
             </div>
 
-
+        @if(auth()->user()->type!='super admin')
             <div class="d-flex align-items-center flex-wrap mb-1">
                 <a href="#" class="btn btn-secondary btn-md me-2 mb-2 mx-1" data-bs-toggle="modal"
                    data-bs-target="#addEmployeeModal"><i
@@ -104,6 +202,7 @@
                 <a href="#" class="btn btn-primary btn-md mb-2" data-bs-toggle="modal" data-bs-target="#addTaskModal"><i
                         class="ti ti-square-rounded-plus me-1"></i>{{__('Add Task')}}</a>
             </div>
+            @endif
         </div>
     </div>
     <!-- START:Welcome Wrap -->
@@ -119,6 +218,106 @@
                 {{ session('error') }}
             </div>
         @endif
+            @if(auth()->user()->type=='super admin')
+                <div class="dash-content">
+                    <!-- [ breadcrumb ] start -->
+
+
+                    <div class="page-header">
+                        <div class="page-block">
+                            <div class="row align-items-center">
+                                <div class="col-auto">
+                                    <div class="page-header-title">
+                                        <h4 class="m-b-10">
+                                            Dashboard
+                                        </h4>
+                                    </div>
+                                    <ul class="breadcrumb">
+                                    </ul>
+                                </div>
+                                <div class="col-sm-auto col-md">
+                                    <div class="float-end ">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-xxl-6">
+
+                            <div class="row">
+                                <div class="col-lg-4 col-6">
+                                    <div class="card" style="height: 226px">
+                                        <div class="card-body">
+                                            <div class="badge theme-avtar bg-primary" style=" width: 45px; height: 45px;">
+                                                <i class="ti ti-users" style="font-size: 32px; color: white;"></i>
+                                            </div>
+                                            <p class="text-muted text-sm mt-4 mb-2" style="font-size: 16px;">{{__('Total Users :')}}
+                                                {{count($users)??0}}
+                                            </p>
+                                            <h6 class="mb-3" style="font-size: 18px;">{{__('Paid Users')}}</h6>
+                                            <h3 class="mb-0 text-primary" style="font-size: 26px;">
+                                                {{ $users->where('plan', '!=', 1)->whereNotNull('plan')->count() }}
+                                            </h3>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-4 col-6">
+                                    <div class="card " style="height: 226px">
+                                        <div class="card-body">
+                                            <div class="badge theme-avtar bg-info" style=" width: 45px; height: 45px;">
+                                                <i class="ti ti-shopping-cart" style="font-size: 32px; color: white;"></i>
+                                            </div>
+                                            <p class="text-muted text-sm mt-4 mb-2" style="font-size: 16px;">
+                                                {{ __('Total Orders:') }} {{ count($orders) }}
+                                            </p>
+                                            <h6 class="mb-3" style="font-size: 18px;">
+                                                {{ __('Total Order Amount') }}
+                                            </h6>
+                                            <h3 class="mb-0 text-info" style="font-size: 26px;">
+                                                ${{ $orders->sum(fn($order) => $order->plan->price) }}
+                                            </h3>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-6">
+                                    <div class="card" style="height: 226px">
+                                        <div class="card-body">
+                                            <div class="badge theme-avtar bg-warning" style="width: 45px; height: 45px;">
+                                                <i class="ti ti-trophy" style="font-size: 32px; color: white;"></i>
+                                            </div>
+                                            <p class="text-muted text-sm mt-4 mb-2" style="font-size: 16px;">
+                                                {{__('Total Plan:')}} {{ $totalPlans }}
+                                            </p>
+                                            <h6 class="mb-3" style="font-size: 18px;">
+                                                {{__('Most Purchased Plan')}}
+                                            </h6>
+                                            <h3 class="mb-0 text-warning" style="font-size: 26px;">
+                                                {{ $mostPurchasedPlanName }}
+                                            </h3>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div class="col-xxl-6">
+                            <div class="card">
+
+                                <div class="card-body">
+                                    <div id="chart-sales" style="min-height: 315px;"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            @else
         <div class="col-xxl-8 d-flex">
             <div class="row flex-fill">
                 <div class="col-md-3 d-flex">
@@ -2178,10 +2377,129 @@
             </div>
         </div>
     </div>
+    @endif
 @endsection
 
 @section('script')
+
     <script>
+
+              document.addEventListener('DOMContentLoaded', function() {
+              const chartElement = document.querySelector("#chart-sales");
+              if (!chartElement) {
+              console.error("Chart container #chart-sales not found!");
+              return;
+          }
+
+              let chart;
+              let initialChartData = @json($chartData ?? []);
+
+              // Convert month strings to timestamps and extract counts
+              const initialCategories = initialChartData.map(item => new Date(item.month + '-01').getTime());
+              const initialCounts = initialChartData.map(item => item.count);
+
+              chart = initChart(initialCategories, initialCounts);
+              chart.render();
+
+              document.getElementById('startDate')?.addEventListener('change', updateChart);
+              document.getElementById('endDate')?.addEventListener('change', updateChart);
+
+              function initChart(dates, orders) {
+                  const options = {
+                      chart: {
+                          type: 'area',
+                          height: 350,
+                          zoom: {
+                              enabled: true,
+                              type: 'x',
+                              autoScaleYaxis: true
+                          },
+                          toolbar: {
+                              autoSelected: 'zoom'
+                          },
+                          events: {
+                              // Reset zoom when double-clicking
+                              beforeResetZoom: function(chartContext, { xaxis, yaxis }) {
+                                  return {
+                                      xaxis: {
+                                          min: undefined,
+                                          max: undefined
+                                      }
+                                  };
+                              }
+                          }
+                      },
+                      series: [{
+                          name: 'Orders',
+                          data: orders.map((count, index) => ({
+                              x: new Date(dates[index]).getTime(), // Convert date string to timestamp
+                              y: count
+                          }))
+                      }],
+                      xaxis: {
+                          type: 'datetime',
+                          labels: {
+                              datetimeUTC: false,
+                              format: 'yyyy-MM'
+                          }
+                      },
+                      dataLabels: {
+                          enabled: false
+                      },
+                      stroke: {
+                          curve: 'smooth',
+                          colors: ['#65cf5f'] // Set the stroke color to #f27439
+                      },
+                      fill: {
+                          type: 'gradient',
+                          gradient: {
+                              shadeIntensity: 1,
+                              opacityFrom: 0.7,
+                              opacityTo: 0.3,
+                              stops: [0, 100],
+                              colorStops: [
+                                  {
+                                      offset: 0,
+                                      color: '#65cf5f', // Start of gradient
+                                      opacity: 0.7
+                                  },
+                                  {
+                                      offset: 100,
+                                      color: '#65cf5f', // End of gradient
+                                      opacity: 0.3
+                                  }
+                              ]
+                          }
+                      }
+                  };
+              return new ApexCharts(chartElement, options);
+          }
+
+              function updateChart() {
+              const startDate = document.getElementById('startDate').value;
+              const endDate = document.getElementById('endDate').value;
+
+              // Get YYYY-MM format from selected dates
+              const startMonth = startDate ? startDate.substring(0, 7) : '';
+              const endMonth = endDate ? endDate.substring(0, 7) : '';
+
+              // Filter data based on selected month range
+              const filteredData = initialChartData.filter(item => {
+              return (!startMonth || item.month >= startMonth) &&
+              (!endMonth || item.month <= endMonth);
+          });
+
+              const categories = filteredData.map(item => new Date(item.month + '-01').getTime());
+              const counts = filteredData.map(item => item.count);
+
+              chart.updateOptions({
+              xaxis: { categories: categories },
+              series: [{ data: counts }]
+          });
+          }
+          });
+      </script>
+      <script>
 
         document.addEventListener('DOMContentLoaded', function () {
             const deleteModal = document.getElementById('delete_modal');
@@ -2865,6 +3183,8 @@
         });
     </script>
 
+
+
     <style>
         #chartdiv {
             width: 100%;
@@ -2874,3 +3194,5 @@
 
     <!-- Resources -->
 @endpush
+
+
