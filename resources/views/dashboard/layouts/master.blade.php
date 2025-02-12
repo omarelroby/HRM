@@ -5,7 +5,6 @@
     $currentLang = app()->getLocale(); // or any other way to get current language
 @endphp
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <style>
     .dropdown-menu {
         display: none;
@@ -47,13 +46,13 @@
             </a>
 
             <div class="header-user">
-                <div class="nav user-menu nav-list" @if(app()->getLocale()=='ar') dir="rtl" @endif>
+                <div class="nav user-menu nav-list">
                     @php
                         $logo = asset(Storage::url('uploads/logo/'));
                         $avatar = asset(Storage::url('uploads/avatar/'));
                         $profile = asset(Storage::url('uploads/avatar/'));
                     @endphp
-                    <div class="me-auto d-flex align-items-center"
+                    <div class="{{ app()->getLocale() == 'ar' ? 'ms-auto' : 'me-auto' }} d-flex align-items-center"
                          id="header-search"
                     >
                         <!-- Logout Form (Hidden) -->
@@ -334,7 +333,7 @@
                             </span>
 
                             </a>
-                            <div class="dropdown-menu shadow-none">
+                            <div class="dropdown-menu dropdown-menu-end shadow-none">
                                 <div class="card mb-0">
                                     <div class="card-header">
                                         <div class="d-flex align-items-center">
@@ -400,47 +399,39 @@
                         </div>
 
                         <!-- Language Dropdown Section -->
-                        <div class="d-flex align-items-center">
-                            @php
-                                use App\Models\Utility;use Illuminate\Support\Facades\Storage;
-                                $users = \Auth::user();
-                                $currantLang = $users->currentLanguage();
-                                $languages = Utility::languages();
-                                $profile = asset(Storage::url('uploads/avatar/'));
-                            @endphp
+                        <div class="dropdown">
+                            <a class="dropdown-toggle d-inline-flex align-items-center p-0" href="#"
+                               id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
+                               aria-expanded="false">
+                                <i class="fa fa-globe text-warning fa-lg"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="languageDropdown">
+                                @php
+                                    use App\Models\Utility;
+                                    $users = \Auth::user();
+                                    $currantLang = $users->currentLanguage();
+                                    $languages = Utility::languages();
+                                @endphp
 
-                                <!-- Language Dropdown -->
-                            <li class="dropdown"
-                                style="{{ app()->getLocale() == 'en' ? 'margin-right: 50px;' : 'margin-left: 200px;' }}">
-                                <a class="dropdown-toggle count-info" href="#" id="languageDropdown" role="button"
-                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa fa-globe text-warning fa-lg"></i> <!-- Increased icon size -->
-                                </a>
-
-                                <ul class="dropdown-menu {{ $currantLang == 'ar' ? 'dropdown-menu-left' : '' }}"
-                                    aria-labelledby="languageDropdown"
-                                    style="position: absolute; transform: translate3d(0px, 10px, 0px); top: 0px; right: 0px; width: 120px; min-width: 0; will-change: transform;">
-                                    <div class="dropdown-divider"></div> <!-- Divider after the first item -->
-
-                                    @foreach($languages as $key => $language)
-                                        @if($language != 'urdu')
-                                            <!-- Skip 'urdu' language -->
-                                            <li>
-                                                <a class="dropdown-item @if($language == $currantLang) text-danger @endif"
-                                                   href="{{ route('change.language', $language) }}">
-                                                    @if($language == 'ar')
-                                                        العربية
-                                                    @else
-                                                        English
-                                                    @endif
-                                                </a>
-                                            </li>
-                                        @endif
-                                    @endforeach
-                                </ul>
-                            </li>
-
+                                @foreach($languages as $key => $language)
+                                    @if($language != 'urdu')
+                                        <!-- Skip 'urdu' language -->
+                                        <li>
+                                            <a class="dropdown-item @if($language == $currantLang) text-danger @endif"
+                                               href="{{ route('change.language', $language) }}">
+                                                @if($language == 'ar')
+                                                    العربية
+                                                @else
+                                                    English
+                                                @endif
+                                            </a>
+                                        </li>
+                                    @endif
+                                @endforeach
+                            </ul>
                         </div>
+
+
                     </div>
 
                 </div>

@@ -4,17 +4,15 @@
 <script src="{{ asset('public/assets/js/jquery-3.7.1.min.js') }}" type="text/javascript"></script>
 
 <!-- Bootstrap Core JS -->
-<script src="{{ asset('public/assets/js/bootstrap.bundle.min.js') }}" type="text/javascript"></script>
+{{--<script src="{{ asset('public/assets/js/bootstrap.bundle.min.js') }}" type="4ebab11e745a926e85f82c49-text/javascript"></script>--}}
 
 <!-- Feather Icon JS -->
 <script src="{{ asset('public/assets/js/feather.min.js') }}" type="text/javascript"></script>
 
 <!-- Slimscroll JS -->
-{{-- <script src="https://smarthr.dreamstechnologies.com/html/template/assets/js/jquery.slimscroll.min.js" type="text/javascript"></script> --}}
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-slimScroll/1.3.8/jquery.slimscroll.min.js"></script>
 
 <!-- Datatable JS -->
-{{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- jQuery --> --}}
 <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script> <!-- DataTables -->
 <script
     src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script> <!-- DataTables with Bootstrap 5 -->
@@ -41,15 +39,13 @@
 <!-- Additional Custom JS -->
 <script src="{{ asset('public/assets/plugins/apexchart/apexcharts.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('public/assets/plugins/apexchart/chart-data.js') }}" type="text/javascript"></script>
-{{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
 <script src="{{ asset('assets/js/bootstrap-hijri-datetimepicker.js') }}"></script>
 <script src="{{ asset('assets/js/bootstrap-hijri-datepicker.js') }}"></script>
-{{--    <script src="https://smarthr.dreamstechnologies.com/html/template/assets/plugins/summernote/summernote-lite.min.js" type="text/javascript"></script>--}}
-<script src="{{ asset('public/assets/dashboard/cdn/summernote.min.js') }}"></script>
-{{--    <script src="https://smarthr.dreamstechnologies.com/html/template/assets/js/circle-progress.js" type="text/javascript"></script>--}}
-<script src="{{ asset('public/assets/dashboard/js/circle-progress.js') }}"></script>
-{{--    <script src="https://smarthr.dreamstechnologies.com/html/template/assets/js/todo.js" type="text/javascript"></script>--}}
-<script src="{{ asset('public/assets/dashboard/js/todo.js') }}"></script>
+<script src="{{ asset('public/assets/plugins/summernote/summernote-lite.min.js') }}"
+        type="text/javascript"></script>
+
+<script src="{{ asset('public/assets/dashboard/js/circle-progress.js') }}" type="text/javascript"></script>
+<script src="{{ asset('public/assets/dashboard/js/todo.js') }}" type="text/javascript"></script>
 {{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js" integrity="sha512-9RI3sFi8egzK6DbLGcfs9Kwi+QlR2V5RH8oKtGvSCCPLO0ppLGkGU9cP0N5ksuL2oT4xjSM1ZpSEJGxXUQK7Lg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>--}}
 <script src="{{ asset('public/assets/dashboard/cdn/cloudflare-poppor.min.js') }}"></script>
 {{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js" integrity="sha512-CnESDX6nx7+gtI9O+37tIcAS8F2aafYP1rjE5x0CeglwLSrkNb2sKDkk/UCNRJYh4+Qo4G4P6R2ITjmrtwZ6Xw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>--}}
@@ -66,16 +62,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
     <!-- Hijri Moment.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-hijri/1.1.2/moment-hijri.min.js"></script> --}}
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
 <script src="{{ asset('assets/js/bootstrap-hijri-datetimepicker.js') }}"></script>
 <script src="{{ asset('assets/js/bootstrap-hijri-datepicker.js') }}"></script>
 
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/moment-hijri@2.17.0/moment-hijri.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script src="{{ asset('public/assets/plugins/chartjs/chart.min.js') }}"></script>
+{{--<script src="{{ asset('public/assets/plugins/chartjs/chart-data.js') }}"></script>--}}
 <script>
     $(document).ready(function () {
         $('#sidebar-menu').slimScroll({
@@ -152,7 +146,7 @@
     });
 
 </script>
-<script src="{{ asset('public/assets/dashboard/cdn/rocket-loader.min.js') }}"></script>
+<script src="{{ asset('public/assets/dashboard/cdn/rocket-loader.min.js') }}" data-cf-settings="cb90688a5d83b208bb3c117a-|49" defer></script>
 {{--<script src="https://smarthr.dreamstechnologies.com/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="12789c3eb65f5dda020bae43-|49" defer></script>--}}
 </body>
 <script type="text/javascript">
