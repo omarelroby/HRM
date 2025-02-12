@@ -186,6 +186,11 @@
                                     <i class="ti ti-adjustments-dollar"></i><span>{{ __('Paid Orders') }}</span>
                                 </a>
                             </li>
+                            <li class="{{ Request::is('email-template')  ? 'active' : '' }}">
+                                <a href="{{ url('/email-template') }}">
+                                    <i class="ti ti-send"></i><span>{{ __('Email Template') }}</span>
+                                </a>
+                            </li>
                             <li class="submenu">
                                 <a href="javascript:void(0);"
                                    class="subdrop {{ (Request::is('home-sections') || Request::is('about-us') || Request::is('clients') || Request::is('features') || Request::is('why-us') || Request::is('contacts') || Request::is('front-setting') )  ? 'active' : '' }}">

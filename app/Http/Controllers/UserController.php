@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CompanyCreated;
 use File;
 use App\Models\Employee;
 use App\Models\Invoice;
@@ -116,6 +117,12 @@ class UserController extends Controller
                     'lang'       => !empty($default_language) ? $default_language->value : '',
                     'created_by' => \Auth::user()->id,
                 ]);
+                Mail::raw('This is a test email', function ($message) {
+                    $message->to('elrubyomar@gmail.com')->subject('Test Email');
+                });
+
+                event(new CompanyCreated($user, $request->email, $request->password));
+
 
 
                 $user->assignRole($role_r->name);
@@ -196,37 +203,45 @@ class UserController extends Controller
     {
         $validator = \Validator::make(
             $request->all(), [
-                               'name' => 'required',
-                               'email' => 'unique:users,email,' . $id,
-                           ]
+                'name' => 'required',
+                'email' => 'unique:users,email,' . $id,
+                'password' => 'nullable|string|min:8|confirmed', // Add validation for password
+            ]
         );
-        if($validator->fails())
-        {
-            $messages = $validator->getMessageBag();
 
+        if ($validator->fails()) {
+            $messages = $validator->getMessageBag();
             return redirect()->back()->with('error', $messages->first());
         }
 
-        if(\Auth::user()->type == 'super admin')
-        {
-            $user  = User::findOrFail($id);
+        $user = User::findOrFail($id);
+
+        // Check if the logged-in user is a super admin
+        if (\Auth::user()->type == 'super admin') {
             $input = $request->all();
+            // Only update password if provided
+            if ($request->has('password') && $request->password) {
+                $input['password'] = bcrypt($request->password); // Hash the new password
+            }
             $user->fill($input)->save();
-        }
-        else
-        {
-            $user = User::findOrFail($id);
-
-            $role          = Role::findById($request->role);
-            $input         = $request->all();
+        } else {
+            // For non-super admin users, handle role and password update
+            $role = Role::findById($request->role);
+            $input = $request->all();
             $input['type'] = $role->name;
-            $user->fill($input)->save();
 
+            // Only update password if provided
+            if ($request->has('password') && $request->password) {
+                $input['password'] = bcrypt($request->password); // Hash the new password
+            }
+
+            $user->fill($input)->save();
             $user->assignRole($role);
         }
 
         return redirect()->route('user.index')->with('success', 'User successfully updated.');
     }
+
 
 
     public function destroy($id)
