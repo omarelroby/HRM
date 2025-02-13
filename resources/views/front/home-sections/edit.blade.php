@@ -27,12 +27,12 @@
 
         <div class="form-group">
             <label>Description (English)</label>
-            <textarea name="description" class="form-control">{{ old('description', $homeSection->description) }}</textarea>
+            <textarea name="description" class="form-control description">{{ old('description', $homeSection->description) }}</textarea>
         </div>
 
         <div class="form-group">
             <label>Description (Arabic)</label>
-            <textarea name="description_ar" class="form-control">{{ old('description_ar', $homeSection->description_ar) }}</textarea>
+            <textarea name="description_ar" class="form-control description_ar">{{ old('description_ar', $homeSection->description_ar) }}</textarea>
         </div>
 
         <div class="form-group">
@@ -49,4 +49,55 @@
             </div>
         </div>
     </div>
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.1.0/classic/ckeditor.js"></script>
+
+    <style>
+        /* Custom editor height */
+        .ck-editor__editable {
+            min-height: 500px;
+        }
+    </style>
+
+    <script>
+        // Configure English editor
+        ClassicEditor
+            .create(document.querySelector('.description'), {
+                toolbar: {
+                    items: [
+                        'heading', '|',
+                        'bold', 'italic', 'link', 'bulletedList', 'numberedList', '|',
+                        'alignment', 'indent', 'outdent', '|',
+                        'imageUpload', 'blockQuote', 'insertTable', 'mediaEmbed', 'undo', 'redo'
+                    ]
+                },
+                language: 'en' // Ensure English language is set
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+        // Configure Arabic editor with RTL support
+        ClassicEditor
+            .create(document.querySelector('.description_ar'), {
+                toolbar: {
+                    items: [
+                        'heading', '|',
+                        'bold', 'italic', 'link', 'bulletedList', 'numberedList', '|',
+                        'alignment', 'indent', 'outdent', '|',
+                        'imageUpload', 'blockQuote', 'insertTable', 'mediaEmbed', 'undo', 'redo'
+                    ]
+                },
+                language: 'ar' // Set Arabic language (automatically enables RTL)
+            })
+            .then(editor => {
+                // Force RTL direction for Arabic editor
+                editor.editing.view.change(writer => {
+                    writer.setAttribute('dir', 'rtl', editor.editing.view.document.getRoot());
+                });
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+
 @endsection

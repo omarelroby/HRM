@@ -3299,6 +3299,50 @@
 
 </script>
 @yield('script')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.4/dist/sweetalert2.all.min.js"></script>
 
+<script>
+    @if(count($errors) > 0)
+    @foreach($errors->all() as $error)
+    Swal.fire({
+        icon: 'error',
+        title: '@lang('efb.missing_or_wrong_data')',
+        text: '{{ $error }}',
+    });
+    @endforeach
+    @endif
+
+    @if(Session::has('success'))
+    Swal.fire({
+        icon: 'success',
+        title: 'Success!',
+        text: "{{ session('success') }}",
+    });
+    @endif
+
+    @if(Session::has('wrong'))
+    Swal.fire({
+        icon: 'error',
+        title: 'Error!',
+        text: "{{ session('wrong') }}",
+    });
+    @endif
+
+    @if(Session::has('info'))
+    Swal.fire({
+        icon: 'info',
+        title: 'Information',
+        text: "{{ session('info') }}",
+    });
+    @endif
+
+    @if(Session::has('warning'))
+    Swal.fire({
+        icon: 'warning',
+        title: 'Warning!',
+        text: "{{ session('warning') }}",
+    });
+    @endif
+</script>
 @stack('scripts')
 </html>

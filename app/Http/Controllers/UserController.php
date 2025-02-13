@@ -397,4 +397,18 @@ class UserController extends Controller
 
         return response()->json(['is_success' => true], 200);
     }
+    public function loginAsCompany($id)
+    {
+        // Find the company user
+        $companyUser = User::findOrFail($id);
+
+        // Log out the current user
+        Auth::logout();
+
+        // Log in as the company user
+        Auth::login($companyUser);
+
+        // Redirect to the dashboard or desired page
+        return redirect()->route('home')->with('success', 'Logged in as ' . $companyUser->name);
+    }
 }

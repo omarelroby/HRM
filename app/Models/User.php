@@ -176,8 +176,9 @@ class User extends Authenticatable
 
     public function getPlan()
     {
-        return $this->hasOne('App\Models\Plan', 'id', 'plan');
+        return $this->belongsTo(Plan::class,   'plan');
     }
+
 
     public function assignPlan($planID)
     {
