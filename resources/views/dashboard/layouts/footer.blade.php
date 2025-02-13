@@ -35,19 +35,14 @@
 
 
 
-    <script src="{{ asset('assets/js/bootstrap-hijri-datetimepicker.js') }}"></script>
-    <script src="{{ asset('assets/js/bootstrap-hijri-datepicker.js') }}"></script>
-    <script src="https://smarthr.dreamstechnologies.com/html/template/assets/plugins/summernote/summernote-lite.min.js" type="text/javascript"></script>
-    <script src="https://smarthr.dreamstechnologies.com/html/template/assets/js/circle-progress.js" type="text/javascript"></script>
-    <script src="https://smarthr.dreamstechnologies.com/html/template/assets/js/todo.js" type="text/javascript"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js" integrity="sha512-9RI3sFi8egzK6DbLGcfs9Kwi+QlR2V5RH8oKtGvSCCPLO0ppLGkGU9cP0N5ksuL2oT4xjSM1ZpSEJGxXUQK7Lg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js" integrity="sha512-CnESDX6nx7+gtI9O+37tIcAS8F2aafYP1rjE5x0CeglwLSrkNb2sKDkk/UCNRJYh4+Qo4G4P6R2ITjmrtwZ6Xw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js" integrity="sha512-vpuVKmjRprHqBoANt0LBIesdIGLvXVJgpeIzVf45yAZLyKf8btSQZ8GY0UzXQ6N4xrAzApjKy93sPiAUxZTXiw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdn.jsdelivr.net/npm/moment-hijri@1.1.2/moment-hijri.min.js" integrity="sha512-aWxMk6WWelx74sDqff2k2J6lyO+ISclOh8JkgITxQjlx9iH3KuvJ3FyVY02AjT19oj19+QzOV0RX1DQaVL3tEA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{{--    <script src="{{ asset('assets/js/bootstrap-hijri-datetimepicker.js') }}"></script>--}}
+{{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js" integrity="sha512-9RI3sFi8egzK6DbLGcfs9Kwi+QlR2V5RH8oKtGvSCCPLO0ppLGkGU9cP0N5ksuL2oT4xjSM1ZpSEJGxXUQK7Lg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>--}}
     <!-- jQuery -->
     {{-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> --}}
     <!-- Popper.js -->
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+{{--    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>--}}
+
+
 
 <!-- Chart JS -->
 <script src="{{ asset('public/assets/plugins/apexchart/apexcharts.min.js') }}" type="text/javascript"></script>
@@ -73,25 +68,16 @@
 <!-- Additional Custom JS -->
 <script src="{{ asset('public/assets/plugins/apexchart/apexcharts.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('public/assets/plugins/apexchart/chart-data.js') }}" type="text/javascript"></script>
-<script src="{{ asset('assets/js/bootstrap-hijri-datetimepicker.js') }}"></script>
 <script src="{{ asset('assets/js/bootstrap-hijri-datepicker.js') }}"></script>
 <script src="{{ asset('public/assets/plugins/summernote/summernote-lite.min.js') }}"
         type="text/javascript"></script>
 
 <script src="{{ asset('public/assets/dashboard/js/circle-progress.js') }}" type="text/javascript"></script>
 <script src="{{ asset('public/assets/dashboard/js/todo.js') }}" type="text/javascript"></script>
-{{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js" integrity="sha512-9RI3sFi8egzK6DbLGcfs9Kwi+QlR2V5RH8oKtGvSCCPLO0ppLGkGU9cP0N5ksuL2oT4xjSM1ZpSEJGxXUQK7Lg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>--}}
 <script src="{{ asset('public/assets/dashboard/cdn/cloudflare-poppor.min.js') }}"></script>
-{{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js" integrity="sha512-CnESDX6nx7+gtI9O+37tIcAS8F2aafYP1rjE5x0CeglwLSrkNb2sKDkk/UCNRJYh4+Qo4G4P6R2ITjmrtwZ6Xw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>--}}
 <script src="{{ asset('public/assets/dashboard/cdn/cloudflare-moment.min.js') }}"></script>
-{{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js" integrity="sha512-vpuVKmjRprHqBoANt0LBIesdIGLvXVJgpeIzVf45yAZLyKf8btSQZ8GY0UzXQ6N4xrAzApjKy93sPiAUxZTXiw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>--}}
 <script src="{{ asset('public/assets/dashboard/cdn/cloudflare-moment-with-locales-min.js') }}"></script>
-{{--    <script src="https://cdn.jsdelivr.net/npm/moment-hijri@1.1.2/moment-hijri.min.js" integrity="sha512-aWxMk6WWelx74sDqff2k2J6lyO+ISclOh8JkgITxQjlx9iH3KuvJ3FyVY02AjT19oj19+QzOV0RX1DQaVL3tEA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>--}}
-<!-- jQuery -->
-{{-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> --}}
-<!-- Popper.js -->
 <script src="{{ 'public/assets/dashboard/cdn/popper.min.js' }}"></script>
-{{--    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>--}}
 
     {{-- <!-- Moment.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
@@ -99,7 +85,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-hijri/1.1.2/moment-hijri.min.js"></script> --}}
 
 <script src="{{ asset('assets/js/bootstrap-hijri-datetimepicker.js') }}"></script>
-<script src="{{ asset('assets/js/bootstrap-hijri-datepicker.js') }}"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/moment-hijri@2.17.0/moment-hijri.min.js"></script>
@@ -182,7 +167,6 @@
 
 </script>
 <script src="{{ asset('public/assets/dashboard/cdn/rocket-loader.min.js') }}" data-cf-settings="cb90688a5d83b208bb3c117a-|49" defer></script>
-{{--<script src="https://smarthr.dreamstechnologies.com/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="12789c3eb65f5dda020bae43-|49" defer></script>--}}
 </body>
 <script type="text/javascript">
     function changeLanguage() {
