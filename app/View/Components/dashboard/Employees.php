@@ -2,10 +2,12 @@
 
 namespace App\View\Components\dashboard;
 
+use App\Models\Employee;
 use Illuminate\View\Component;
 
 class Employees extends Component
 {
+    public $employees;
     /**
      * Create a new component instance.
      *
@@ -13,7 +15,7 @@ class Employees extends Component
      */
     public function __construct()
     {
-        //
+        $this->employees = Employee::query()->latest()->take(4)->get();
     }
 
     /**
@@ -23,6 +25,8 @@ class Employees extends Component
      */
     public function render()
     {
-        return view('components.dashboard.employees');
+        return view('components.dashboard.employees', [
+            'employees' => $this->employees
+        ]);
     }
 }
