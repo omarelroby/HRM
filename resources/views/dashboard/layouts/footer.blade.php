@@ -34,7 +34,7 @@
     <script src="{{ asset('public/assets/js/script.js')}} " type="text/javascript"></script>
 
 
-    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
+
     <script src="{{ asset('assets/js/bootstrap-hijri-datetimepicker.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap-hijri-datepicker.js') }}"></script>
     <script src="https://smarthr.dreamstechnologies.com/html/template/assets/plugins/summernote/summernote-lite.min.js" type="text/javascript"></script>

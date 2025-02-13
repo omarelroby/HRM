@@ -26,6 +26,8 @@
     <script src="{{ asset('public/assets/assets/js/theme-script.js') }}"
             type="8839293e20295dfe9c85554d-text/javascript"></script>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <link rel="stylesheet" href="{{ asset('public/assets/plugins/icons/feather/feather.css') }}">
 
     {{-- <link href="https://cdn.datatables.net/v/dt/dt-2.1.8/datatables.min.css" rel="stylesheet"> --}}
@@ -44,15 +46,15 @@
     <link rel="stylesheet" href="{{  asset('public/assets/plugins/flatpickr/flatpickr.min.css') }}">
     <link rel="stylesheet" href="{{ asset('public/assets/plugins/@simonwep/pickr/themes/nano.min.css')}}">
 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.2/css/bootstrap.min.css" integrity="sha512-hFkX7HG+dChKQVRiHL8ZLZbGzMIJH3MHIxqU2x6iLePgZmwgrtv9A4vTQDEWADud0H5T2LchdDDTiz6JPMm21w==" crossorigin="anonymous" referrerpolicy="no-referrer" />--}}
- 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.2/css/bootstrap.min.css" />
+
 
     {{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.2/css/bootstrap.min.css" integrity="sha512-hFkX7HG+dChKQVRiHL8ZLZbGzMIJH3MHIxqU2x6iLePgZmwgrtv9A4vTQDEWADud0H5T2LchdDDTiz6JPMm21w==" crossorigin="anonymous" referrerpolicy="no-referrer" />--}}
- 
+
     <link rel="stylesheet" href="{{ asset('public/assets/dashboard/css/bootstrap.min.css') }}">
 
     <link rel="stylesheet" href="{{ asset('public/assets/css/style.css')}}">
- 
+
 
     <link rel="stylesheet" href="{{ asset('public/assets/css/style.css')}}">
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.4/dist/sweetalert2.min.css" rel="stylesheet">
