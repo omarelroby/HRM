@@ -94,21 +94,21 @@ $(document).on('click', 'a[data-ajax-popup="true"], button[data-ajax-popup="true
     var title = $(this).data('title');
     var size = ($(this).data('size') == '') ? 'md' : $(this).data('size');
     var url = $(this).data('url');
-    
-    
+
+
     $("#commonModal .modal-title").html(title);
     $("#commonModal .modal-dialog").addClass('modal-' + size);
     $.ajax({
         url: url,
         success: function (data) {
-            
-            
+
+
             // alert('title');
             // console.log(data.length);
             // return false;
             if (data.length) {
                 $('#commonModal .modal-body').html(data);
-                $("#commonModal").modal('show');                
+                $("#commonModal").modal('show');
                 common_bind();
                 ddatetime_range();
 

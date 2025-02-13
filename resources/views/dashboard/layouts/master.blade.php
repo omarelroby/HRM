@@ -15,15 +15,6 @@
     }
 
 </style>
-<style>
-    .btn-custom {
-        width: 100px;
-        font-weight: bold;
-        font-size: 22px; /* Increased font size */
-        height: 40px;    /* Increased height for better button proportion */
-    }
-</style>
-
 <body class="{{ $currentLang == 'ar' ? 'layout-mode-rtl' : 'ltr' }}">
 <div id="global-loader">
     <div class="page-loader"></div>
@@ -254,7 +245,7 @@
                                             <a href="activity.html">
                                                 <div class="d-flex">
 														<span class="avatar avatar-lg me-2 flex-shrink-0">
-															<img src="assets/img/profiles/avatar-27.jpg" alt="Profile">
+															<img src="{{ asset('public/assets/img/profiles/avatar-27.jpg') }}" alt="Profile">
 														</span>
                                                     <div class="flex-grow-1">
                                                         <p class="mb-1"><span
@@ -269,7 +260,7 @@
                                             <a href="activity.html" class="pb-0">
                                                 <div class="d-flex">
 														<span class="avatar avatar-lg me-2 flex-shrink-0">
-															<img src="assets/img/profiles/avatar-23.jpg" alt="Profile">
+															<img src="{{ asset('public/assets/img/profiles/avatar-23.jpg') }}" alt="Profile">
 														</span>
                                                     <div class="flex-grow-1">
                                                         <p class="mb-1"><span
@@ -289,7 +280,7 @@
                                             <a href="activity.html">
                                                 <div class="d-flex">
 														<span class="avatar avatar-lg me-2 flex-shrink-0">
-															<img src="assets/img/profiles/avatar-25.jpg" alt="Profile">
+															<img src="{{ asset('public/assets/img/profiles/avatar-25.jpg') }}" alt="Profile">
 														</span>
                                                     <div class="flex-grow-1">
                                                         <p class="mb-1">New student record <span
@@ -304,7 +295,7 @@
                                             <a href="activity.html">
                                                 <div class="d-flex">
 														<span class="avatar avatar-lg me-2 flex-shrink-0">
-															<img src="assets/img/profiles/avatar-01.jpg" alt="Profile">
+															<img src="{{ asset('public/assets/img/profiles/avatar-01.jpg') }}" alt="Profile">
 														</span>
                                                     <div class="flex-grow-1">
                                                         <p class="mb-1">A new teacher record for <span
@@ -408,13 +399,14 @@
                         </div>
 
                         <!-- Language Dropdown Section -->
-                        <div class="dropdown">
+                        <div class="dropdown"
+                        style="{{ app()->getLocale() == 'ar' ? 'margin-left: 150px' : 'margin-right: 30px' }}">
                             <a class="dropdown-toggle d-inline-flex align-items-center p-0" href="#"
                                id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
                                aria-expanded="false">
                                 <i class="fa fa-globe text-warning fa-lg"></i>
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="languageDropdown">
+                            <ul class="dropdown-menu shadow-sm" aria-labelledby="languageDropdown">
                                 @php
                                     use App\Models\Utility;
                                     $users = \Auth::user();
@@ -440,14 +432,8 @@
                             </ul>
                         </div>
 
-                        @if(session('superadmin_session'))
-                            <a href="{{ route('return.to.superadmin') }}" class="btn btn-danger btn-md me-2 mb-2 mx-1"
-                            ><i
-                                    class="ti ti-logout me-1"></i>{{__('Return to Superadmin')}}</a>
-                        @endif
 
                     </div>
-
 
                 </div>
 
@@ -1663,7 +1649,7 @@
                 <div class="d-xl-flex align-items-center d-none">
                     <a href="#" class="me-3 avatar avatar-sm">
                         <img
-                            src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-07.jpg"
+                            src="{{ asset('public/assets/img/profiles/avatar-07.jpg') }}"
                             alt="profile" class="rounded-circle">
                     </a>
                     <a href="#" class="btn btn-icon btn-sm rounded-circle mode-toggle">
@@ -1680,7 +1666,7 @@
         <div class="sidebar sidebar-twocol">
             <div class="twocol-mini">
                 <a href="https://smarthr.dreamstechnologies.com/html/template/index.html" class="logo-small">
-                    <img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/logo-small.svg"
+                    <img src="{{ asset('public/assets/img/logo-small.svg') }}"
                          alt="Logo">
                 </a>
                 <div class="sidebar-left slimscroll">
@@ -1739,10 +1725,10 @@
             <div class="sidebar-right">
                 <div class="sidebar-logo mb-4">
                     <a href="https://smarthr.dreamstechnologies.com/html/template/index.html" class="logo logo-normal">
-                        <img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/logo.svg" alt="Logo">
+                        <img src="{{ asset('public/assets/img/logo.svg') }}" alt="Logo">
                     </a>
                     <a href="https://smarthr.dreamstechnologies.com/html/template/index.html" class="dark-logo">
-                        <img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/logo-white.svg"
+                        <img src="{{ asset('public/assets/img/logo-white.svg') }}"
                              alt="Logo">
                     </a>
                 </div>
@@ -1751,7 +1737,7 @@
                     <div class="text-center rounded bg-light p-3 mb-4">
                         <div class="avatar avatar-lg online mb-3">
                             <img
-                                src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-02.jpg"
+                                src="{{ asset('public/assets/img/profiles/avatar-02.jpg') }}"
                                 alt="Img" class="img-fluid rounded-circle">
                         </div>
                         <h6 class="fs-12 fw-normal mb-1">Adrian Herman</h6>
@@ -1809,7 +1795,7 @@
         <div class="sidebar sidebar-stacked" style="display: flex !important;">
             <div class="stacked-mini">
                 <a href="https://smarthr.dreamstechnologies.com/html/template/index.html" class="logo-small">
-                    <img src="https://smarthr.dreamstechnologies.com/html/template/assets/img/logo-small.svg"
+                    <img src="{{ asset('public/assets/img/logo-small.svg') }}"
                          alt="Logo">
                 </a>
                 <div class="sidebar-left slimscroll">
@@ -1854,7 +1840,7 @@
                     <div class="sidebar-profile text-center rounded bg-light p-3 mb-4">
                         <div class="avatar avatar-lg online mb-3">
                             <img
-                                src="https://smarthr.dreamstechnologies.com/html/template/assets/img/profiles/avatar-02.jpg"
+                                src="{{ asset('public/assets/img/profiles/avatar-02.jpg') }}"
                                 alt="Img" class="img-fluid rounded-circle">
                         </div>
                         <h6 class="fs-12 fw-normal mb-1">Adrian Herman</h6>
@@ -3335,11 +3321,11 @@
     });
     @endif
 
-    @if(Session::has('error'))
+    @if(Session::has('wrong'))
     Swal.fire({
         icon: 'error',
         title: 'Error!',
-        text: "{{ session('error') }}",
+        text: "{{ session('wrong') }}",
     });
     @endif
 
