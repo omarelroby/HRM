@@ -33,13 +33,13 @@
                                             <i class="fas fa-eye"></i> {{ __('View') }}
                                         </a>
                                         <!-- Edit Button -->
-                                        <a href="{{ route('email-template.edit', $email->id) }}"
+                                        <a href="{{ route('company-email-template.edit', $email->id) }}"
                                            class="btn btn-sm btn-success mx-2" data-toggle="tooltip" title="{{ __('Edit') }}">
                                             <i class="fa fa-edit"></i>
                                         </a>
 
                                         <!-- Delete Button -->
-                                        <form method="POST" action="{{ route('email-template.destroy', $email->id) }}" class="d-inline" onsubmit="return confirm('{{ __('Are You Sure?') }}\n{{ __('This action cannot be undone. Do you want to continue?') }}');">
+                                        <form method="POST" action="{{ route('company-email-template.destroy', $email->id) }}" class="d-inline" onsubmit="return confirm('{{ __('Are You Sure?') }}\n{{ __('This action cannot be undone. Do you want to continue?') }}');">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="{{ __('Delete') }}">

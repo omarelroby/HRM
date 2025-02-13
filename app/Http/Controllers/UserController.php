@@ -24,6 +24,9 @@ class UserController extends Controller
 {
     public function index()
     {
+
+
+
         if(\Auth::user()->can('Manage User'))
         {
             $user = \Auth::user();
@@ -117,9 +120,9 @@ class UserController extends Controller
                     'lang'       => !empty($default_language) ? $default_language->value : '',
                     'created_by' => \Auth::user()->id,
                 ]);
-                Mail::raw('This is a test email', function ($message) {
-                    $message->to('elrubyomar@gmail.com')->subject('Test Email');
-                });
+//                Mail::raw('This is a test email', function ($message) {
+//                    $message->to('elrubyomar@gmail.com')->subject('Test Email');
+//                });
 
                 event(new CompanyCreated($user, $request->email, $request->password));
 
@@ -414,7 +417,11 @@ class UserController extends Controller
     }
     public function loginAsCompany($id)
     {
-        // Find the company user
+        session()->put('superadmin_session', [
+            'user_id' => auth()->id(),
+            'role' => auth()->user()->role,
+        ]);
+
         $companyUser = User::findOrFail($id);
 
         // Log out the current user
@@ -425,5 +432,23 @@ class UserController extends Controller
 
         // Redirect to the dashboard or desired page
         return redirect()->route('home')->with('success', 'Logged in as ' . $companyUser->name);
+    }
+    // In your controller method for returning to superadmin
+    public function returnToSuperadmin()
+    {
+        // Check if superadmin session exists
+        if (session()->has('superadmin_session')) {
+            // Restore the superadmin session
+            $superadminSession = session('superadmin_session');
+            $superadminUser = User::findOrFail($superadminSession['user_id']);
+            auth()->login($superadminUser);
+
+            // Clear the temporary session
+            session()->forget('superadmin_session');
+
+            return redirect()->route('home')->with('success', 'Returned to superadmin account.');
+        }
+
+        return redirect()->back()->with('error', 'Unable to return to superadmin account.');
     }
 }

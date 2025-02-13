@@ -15,6 +15,15 @@
     }
 
 </style>
+<style>
+    .btn-custom {
+        width: 100px;
+        font-weight: bold;
+        font-size: 22px; /* Increased font size */
+        height: 40px;    /* Increased height for better button proportion */
+    }
+</style>
+
 <body class="{{ $currentLang == 'ar' ? 'layout-mode-rtl' : 'ltr' }}">
 <div id="global-loader">
     <div class="page-loader"></div>
@@ -431,8 +440,14 @@
                             </ul>
                         </div>
 
+                        @if(session('superadmin_session'))
+                            <a href="{{ route('return.to.superadmin') }}" class="btn btn-danger btn-md me-2 mb-2 mx-1"
+                            ><i
+                                    class="ti ti-logout me-1"></i>{{__('Return to Superadmin')}}</a>
+                        @endif
 
                     </div>
+
 
                 </div>
 

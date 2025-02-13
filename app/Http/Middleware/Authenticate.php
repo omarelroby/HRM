@@ -14,6 +14,9 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
+        if (!session()->has('superadmin_session')) {
+        return redirect()->route('home')->with('error', 'Unauthorized access.');
+            }
         if (! $request->expectsJson()) {
             return route('login');
         }

@@ -618,6 +618,13 @@
                                 </ul>
                             </li>
                         @endif
+                        @if(auth()->user()->type=='company')
+                        <li class="{{ Request::is('company-email-template')  ? 'active' : '' }}">
+                            <a href="{{ url('/company-email-template') }}">
+                                <i class="ti ti-send"></i><span>{{ __('Email Template') }}</span>
+                            </a>
+                        </li>
+                        @endif
                         <li class="{{ Request::is('settings')  ? 'active' : '' }}">
                             <a href="{{ route('settings.index') }}">
                                 <i class="ti ti-device-analytics    "></i><span>{{ __('System Setting') }}</span>

@@ -94,6 +94,7 @@ Route::group(
     function () {
 
         Route::resource('email-template', 'EmailTemplateController');
+        Route::resource('company-email-template', 'CompanyEmailTemplateController');
         Route::resource('settings', 'SettingsController');
         Route::post('email-settings', 'SettingsController@saveEmailSettings')->name('email.settings');
         Route::post('company-settings', 'SettingsController@saveCompanySettings')->name('company.settings');
@@ -858,7 +859,14 @@ Route::get('user-loginAsCompany/{id}', 'UserController@loginAsCompany')->name('u
         'XSS',
     ]
 );
-
+Route::get('/return-to-superadmin', 'UserController@returnToSuperadmin')
+    ->name('return.to.superadmin')
+    ->middleware(
+        [
+            'auth',
+            'XSS',
+        ]
+    );
 
 Route::resource('accountlist', 'AccountListController')->middleware(
     [
