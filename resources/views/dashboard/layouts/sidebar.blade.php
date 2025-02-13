@@ -28,64 +28,66 @@
 
 <div class="sidebar mb-4" id="sidebar">
     <!-- Logo Section -->
-    @if(Storage::exists('uploads/logo/' . \Auth::user()->id . '_logo.png'))
+    {{--    @if(Storage::exists('uploads/logo/' . \Auth::user()->id . '_logo.png'))--}}
+    {{--    <div class="sidebar-logo">--}}
+    {{--        <!-- Normal Logo -->--}}
+    {{--        <a href="{{ route('home') }}" class="logo logo-normal">--}}
+
+    {{--            <img title="{{$logo.'/'.\Auth::user()->id.'_logo.png'}}" style="width: auto;    height: 80px; object-fit: cover;" src="{{  $logo.'/'.\Auth::user()->id.'_logo.png' }}" alt="Logo" class="logo-img">--}}
+    {{--        </a>--}}
+
+
+    {{--        <!-- Small Logo -->--}}
+    {{--        <a href="{{ route('home') }}" class="logo-small">--}}
+    {{--            <img src="{{  $logo.'/'.\Auth::user()->id.'_logo.png' }}" alt="Logo" class="logo-img-small">--}}
+    {{--        </a>--}}
+
+    {{--        <!-- Dark Logo -->--}}
+    {{--        <a href="{{ route('home') }}" class="dark-logo">--}}
+    {{--            <img src="{{ $logo.'/'.\Auth::user()->id.'_logo.png' }}" alt="Logo" class="logo-img-dark">--}}
+    {{--        </a>--}}
+    {{--    </div>--}}
+    {{--    @elseif(auth()->user()->avatar)--}}
+
+    {{--        <div class="sidebar-logo">--}}
+    {{--            <!-- Normal Logo -->--}}
+    {{--            <a href="{{ route('home') }}" class="logo logo-normal">--}}
+
+    {{--                <img style="width: auto;   height: 80px; object-fit: cover;" src="{{  asset(Storage::url(auth()->user()->avatar)) }}" alt="Logo" class="logo-img">--}}
+    {{--            </a>--}}
+
+    {{--            <!-- Small Logo -->--}}
+    {{--            <a href="{{ route('home') }}" class="logo-small">--}}
+    {{--                <img src="{{ asset(Storage::url(auth()->user()->avatar)) }}" alt="Logo" class="logo-img-small">--}}
+    {{--            </a>--}}
+
+    {{--            <!-- Dark Logo -->--}}
+    {{--            <a href="{{ route('home') }}" class="dark-logo">--}}
+    {{--                <img src="{{ asset(Storage::url(auth()->user()->avatar)) }}" alt="Logo" class="logo-img-dark">--}}
+    {{--            </a>--}}
+    {{--        </div>--}}
+
+    {{--    @else--}}
+    {{--        --}}
+    {{--    @endif--}}
     <div class="sidebar-logo">
         <!-- Normal Logo -->
         <a href="{{ route('home') }}" class="logo logo-normal">
 
-            <img title="{{$logo.'/'.\Auth::user()->id.'_logo.png'}}" style="width: auto;    height: 80px; object-fit: cover;" src="{{  $logo.'/'.\Auth::user()->id.'_logo.png' }}" alt="Logo" class="logo-img">
+            <img style="width: auto;   height: 80px; object-fit: cover;"
+                 src="{{ asset('public/front/assets/img/logo.png') }}" alt="Logo" class="logo-img">
         </a>
-
 
         <!-- Small Logo -->
         <a href="{{ route('home') }}" class="logo-small">
-            <img src="{{  $logo.'/'.\Auth::user()->id.'_logo.png' }}" alt="Logo" class="logo-img-small">
+            <img src="{{ asset('public/front/assets/img/logo.png') }}" alt="Logo" class="logo-img-small">
         </a>
 
         <!-- Dark Logo -->
         <a href="{{ route('home') }}" class="dark-logo">
-            <img src="{{ $logo.'/'.\Auth::user()->id.'_logo.png' }}" alt="Logo" class="logo-img-dark">
+            <img src="{{ asset('public/front/assets/img/logo.png') }}" alt="Logo" class="logo-img-dark">
         </a>
     </div>
-    @elseif(auth()->user()->avatar)
-
-        <div class="sidebar-logo">
-            <!-- Normal Logo -->
-            <a href="{{ route('home') }}" class="logo logo-normal">
-
-                <img style="width: auto;   height: 80px; object-fit: cover;" src="{{  asset(Storage::url(auth()->user()->avatar)) }}" alt="Logo" class="logo-img">
-            </a>
-
-            <!-- Small Logo -->
-            <a href="{{ route('home') }}" class="logo-small">
-                <img src="{{ asset(Storage::url(auth()->user()->avatar)) }}" alt="Logo" class="logo-img-small">
-            </a>
-
-            <!-- Dark Logo -->
-            <a href="{{ route('home') }}" class="dark-logo">
-                <img src="{{ asset(Storage::url(auth()->user()->avatar)) }}" alt="Logo" class="logo-img-dark">
-            </a>
-        </div>
-
-    @else
-        <div class="sidebar-logo">
-            <!-- Normal Logo -->
-            <a href="{{ route('home') }}" class="logo logo-normal">
-
-                <img style="width: auto;   height: 80px; object-fit: cover;" src="{{ asset('public/front/assets/img/logo.png') }}" alt="Logo" class="logo-img">
-            </a>
-
-            <!-- Small Logo -->
-            <a href="{{ route('home') }}" class="logo-small">
-                <img src="{{ asset('public/front/assets/img/logo.png') }}" alt="Logo" class="logo-img-small">
-            </a>
-
-            <!-- Dark Logo -->
-            <a href="{{ route('home') }}" class="dark-logo">
-                <img src="{{ asset('public/front/assets/img/logo.png') }}" alt="Logo" class="logo-img-dark">
-            </a>
-        </div>
-    @endif
 
 
     <!-- Profile Section -->

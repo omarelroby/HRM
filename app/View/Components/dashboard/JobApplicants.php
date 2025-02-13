@@ -2,10 +2,15 @@
 
 namespace App\View\Components\dashboard;
 
+use App\Models\Job;
+use App\Models\JobApplication;
 use Illuminate\View\Component;
 
 class JobApplicants extends Component
 {
+    public $jobApplicants;
+    public $openJobs;
+
     /**
      * Create a new component instance.
      *
@@ -13,7 +18,8 @@ class JobApplicants extends Component
      */
     public function __construct()
     {
-        //
+        $this->openJobs = Job::query()->where('status', 'active')->get();
+        $this->jobApplicants = JobApplication::query()->latest()->get();
     }
 
     /**
@@ -23,6 +29,9 @@ class JobApplicants extends Component
      */
     public function render()
     {
-        return view('components.dashboard.job-applicants');
+        return view('components.dashboard.job-applicants', [
+            'openJobs' => $this->openJobs,
+            'jobApplicants' => $this->jobApplicants,
+        ]);
     }
 }
