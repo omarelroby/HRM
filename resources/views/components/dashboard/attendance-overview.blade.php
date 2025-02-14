@@ -1,3 +1,4 @@
+@props(['attendanceData' =>  ['present' => 0,'late' => 0,'leave' => 0,'absent' => 0], 'totalAttendance' => 0, 'attendancePercentage' => ['present' => 0,'late' => 0,'leave' => 0,'absent'=> 0]])
 <div class="col-xxl-4 col-xl-6 d-flex">
     <div class="card flex-fill">
         <div class="card-header pb-2 d-flex align-items-center justify-content-between flex-wrap">
@@ -31,19 +32,19 @@
             <h6 class="mb-3">Status</h6>
             <div class="d-flex align-items-center justify-content-between">
                 <p class="f-13 mb-2"><i class="ti ti-circle-filled text-success me-1"></i>Present</p>
-                <p class="f-13 fw-medium text-gray-9 mb-2">{{ $attendancePercentage['present'] }}</p>
+                <p class="f-13 fw-medium text-gray-9 mb-2">{{ $attendancePercentage['present'] }} %</p>
             </div>
             <div class="d-flex align-items-center justify-content-between">
                 <p class="f-13 mb-2"><i class="ti ti-circle-filled text-secondary me-1"></i>Late</p>
-                <p class="f-13 fw-medium text-gray-9 mb-2">{{ $attendancePercentage['late'] }}</p>
+                <p class="f-13 fw-medium text-gray-9 mb-2">{{ $attendancePercentage['late'] }} %</p>
             </div>
             <div class="d-flex align-items-center justify-content-between">
                 <p class="f-13 mb-2"><i class="ti ti-circle-filled text-warning me-1"></i>Permission</p>
-                <p class="f-13 fw-medium text-gray-9 mb-2">{{ $attendancePercentage['leave'] }}</p>
+                <p class="f-13 fw-medium text-gray-9 mb-2">{{ $attendancePercentage['leave'] }} %</p>
             </div>
             <div class="d-flex align-items-center justify-content-between mb-2">
                 <p class="f-13 mb-2"><i class="ti ti-circle-filled text-danger me-1"></i>Absent</p>
-                <p class="f-13 fw-medium text-gray-9 mb-2">{{ $attendancePercentage['absent'] }}</p>
+                <p class="f-13 fw-medium text-gray-9 mb-2">{{ $attendancePercentage['absent'] }} %</p>
             </div>
             <div
                 class="bg-light br-5 box-shadow-xs p-2 pb-0 d-flex align-items-center justify-content-between flex-wrap">

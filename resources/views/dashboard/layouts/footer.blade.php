@@ -25,21 +25,19 @@
 <!-- Select2 JS -->
 <script src="{{ asset('public/assets/plugins/select2/js/select2.min.js') }}" type="text/javascript"></script>
 
-{{--    <!-- Chart JS -->--}}
-{{--    <script src="{{ asset('public/assets/plugins/apexchart/apexcharts.min.js') }}" type="text/javascript"></script>--}}
-{{--    <script src="{{ asset('public/assets/plugins/apexchart/chart-data.js') }}" type="text/javascript"></script>--}}
+<!-- Chart JS -->
+<script src="{{ asset('public/assets/plugins/apexchart/apexcharts.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('public/assets/plugins/apexchart/chart-data.js') }}" type="text/javascript"></script>
 
-    <!-- Custom JS -->
-    <script src="{{ asset('public/assets/js/theme-colorpicker.js')}} " type="text/javascript"></script>
-    <script src="{{ asset('public/assets/js/script.js')}} " type="text/javascript"></script>
-
+<!-- Custom JS -->
+<script src="{{ asset('public/assets/js/script.js')}} " type="text/javascript"></script>
 
 
-{{--    <script src="{{ asset('assets/js/bootstrap-hijri-datetimepicker.js') }}"></script>--}}
+<script src="{{ asset('public/assets/js/bootstrap-hijri-datepicker.js') }}"></script>
 {{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js" integrity="sha512-9RI3sFi8egzK6DbLGcfs9Kwi+QlR2V5RH8oKtGvSCCPLO0ppLGkGU9cP0N5ksuL2oT4xjSM1ZpSEJGxXUQK7Lg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>--}}
-    <!-- jQuery -->
-    {{-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> --}}
-    <!-- Popper.js -->
+<!-- jQuery -->
+{{-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> --}}
+<!-- Popper.js -->
 {{--    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>--}}
 
 
@@ -49,26 +47,17 @@
 <script src="{{ asset('public/assets/plugins/apexchart/chart-data.js') }}" type="text/javascript"></script>
 
 <!-- Custom JS -->
-{{--    <script src="https://smarthr.dreamstechnologies.com/html/template/assets/js/theme-colorpicker.js" type="text/javascript"></script>--}}
-<script src="{{ asset('public/assets/dashboard/js/theme-colorpicker.js') }}"></script>
-{{--    <script src="https://smarthr.dreamstechnologies.com/html/template/assets/js/script.js" type="text/javascript"></script>--}}
+<script src="{{ asset('public/assets/js/theme-colorpicker.js') }}"></script>
 
 
 <!-- Chart JS -->
 <script src="{{ asset('public/assets/plugins/apexchart/apexcharts.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('public/assets/plugins/apexchart/chart-data.js') }}" type="text/javascript"></script>
 
-<!-- Custom JS -->
-{{--    <script src="https://smarthr.dreamstechnologies.com/html/template/assets/js/theme-colorpicker.js" type="text/javascript"></script>--}}
-<script src="{{ asset('public/assets/dashboard/js/theme-colorpicker.js') }}"></script>
-{{--    <script src="https://smarthr.dreamstechnologies.com/html/template/assets/js/script.js" type="text/javascript"></script>--}}
-
- <script src="{{ asset('public/assets/dashboard/js/script.js') }}"></script>
-
 <!-- Additional Custom JS -->
 <script src="{{ asset('public/assets/plugins/apexchart/apexcharts.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('public/assets/plugins/apexchart/chart-data.js') }}" type="text/javascript"></script>
-<script src="{{ asset('assets/js/bootstrap-hijri-datepicker.js') }}"></script>
+<script src="{{ asset('public/assets/js/bootstrap-hijri-datepicker.js') }}"></script>
 <script src="{{ asset('public/assets/plugins/summernote/summernote-lite.min.js') }}"
         type="text/javascript"></script>
 
@@ -79,13 +68,7 @@
 <script src="{{ asset('public/assets/dashboard/cdn/cloudflare-moment-with-locales-min.js') }}"></script>
 <script src="{{ 'public/assets/dashboard/cdn/popper.min.js' }}"></script>
 
-    {{-- <!-- Moment.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
-    <!-- Hijri Moment.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-hijri/1.1.2/moment-hijri.min.js"></script> --}}
-
-<script src="{{ asset('assets/js/bootstrap-hijri-datetimepicker.js') }}"></script>
-
+<!-- Hijri Moment.js -->
 <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/moment-hijri@2.17.0/moment-hijri.min.js"></script>
 <script src="{{ asset('public/assets/plugins/chartjs/chart.min.js') }}"></script>
@@ -166,7 +149,8 @@
     });
 
 </script>
-<script src="{{ asset('public/assets/dashboard/cdn/rocket-loader.min.js') }}" data-cf-settings="cb90688a5d83b208bb3c117a-|49" defer></script>
+<script src="{{ asset('public/assets/dashboard/cdn/rocket-loader.min.js') }}"
+        data-cf-settings="cb90688a5d83b208bb3c117a-|49" defer></script>
 </body>
 <script type="text/javascript">
     function changeLanguage() {

@@ -16,26 +16,32 @@ class AttendanceOverview extends Component
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(array $attendanceData = [], int $totalAttendance = 0, array $attendancePercentage = [])
     {
-        // Fetch data
-        $this->attendanceData = [
-            'present' => AttendanceEmployee::where('status', 'present')->count(),
-            'late' => AttendanceEmployee::where('status', 'late')->count(),
-            'leave' => AttendanceEmployee::where('status', 'leave')->count(),
-            'absent' => AttendanceEmployee::where('status', 'absent')->count(),
-        ];
+        if (empty($attendanceData)) {
+            // Fetch data
+            $attendanceData = [
+                'present' => AttendanceEmployee::where('status', 'present')->count(),
+                'late' => AttendanceEmployee::where('status', 'late')->count(),
+                'leave' => AttendanceEmployee::where('status', 'leave')->count(),
+                'absent' => AttendanceEmployee::where('status', 'absent')->count(),
+            ];
 
-        // Calculate total attendance
-        $this->totalAttendance = array_sum($this->attendanceData);
+            $totalAttendance = array_sum($attendanceData);
 
-        // Calculate Percentage based on status
-        $this->attendancePercentage = [];
-        foreach ($this->attendanceData as $status => $count) {
-            $this->attendancePercentage[$status] = $this->totalAttendance > 0 ?
-                round(($count / $this->totalAttendance) * 100, 2)
-                : 0;
+            // Calculate percentage
+            $attendancePercentage = [];
+            foreach ($attendanceData as $status => $count)
+            {
+                $attendancePercentage[$status] = $totalAttendance > 0
+                    ? round(($count / $totalAttendance) * 100, 2)
+                    : 0;
+            }
         }
+
+        $this->attendanceData = $attendanceData;
+        $this->totalAttendance = $totalAttendance;
+        $this->attendancePercentage = $attendancePercentage;
     }
 
     /**
@@ -45,7 +51,7 @@ class AttendanceOverview extends Component
      */
     public function render()
     {
-        return view('components.dashboard.attendance-overview', [
+        return view('components.dashboard.attendance-overview',[
             'attendanceData' => $this->attendanceData,
             'totalAttendance' => $this->totalAttendance,
             'attendancePercentage' => $this->attendancePercentage,

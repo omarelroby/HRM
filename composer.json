@@ -22,6 +22,7 @@
         "laravel/ui": "3.4",
         "laravelcollective/html": "^6.1",
         "livepixel/mercado-pago": "^1.0",
+        "livewire/livewire": "^2.1",
         "maatwebsite/excel": "^3.1",
         "mashape/unirest-php": "dev-master",
         "mollie/mollie-api-php": "^2.36",
