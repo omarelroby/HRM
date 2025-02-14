@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CompanyCreated;
 use File;
 use App\Models\Employee;
 use App\Models\Invoice;
@@ -23,6 +24,9 @@ class UserController extends Controller
 {
     public function index()
     {
+
+
+
         if(\Auth::user()->can('Manage User'))
         {
             $user = \Auth::user();
@@ -116,6 +120,12 @@ class UserController extends Controller
                     'lang'       => !empty($default_language) ? $default_language->value : '',
                     'created_by' => \Auth::user()->id,
                 ]);
+//                Mail::raw('This is a test email', function ($message) {
+//                    $message->to('elrubyomar@gmail.com')->subject('Test Email');
+//                });
+
+                event(new CompanyCreated($user, $request->email, $request->password));
+
 
 
                 $user->assignRole($role_r->name);
@@ -196,37 +206,45 @@ class UserController extends Controller
     {
         $validator = \Validator::make(
             $request->all(), [
-                               'name' => 'required',
-                               'email' => 'unique:users,email,' . $id,
-                           ]
+                'name' => 'required',
+                'email' => 'unique:users,email,' . $id,
+                'password' => 'nullable|string|min:8|confirmed', // Add validation for password
+            ]
         );
-        if($validator->fails())
-        {
-            $messages = $validator->getMessageBag();
 
+        if ($validator->fails()) {
+            $messages = $validator->getMessageBag();
             return redirect()->back()->with('error', $messages->first());
         }
 
-        if(\Auth::user()->type == 'super admin')
-        {
-            $user  = User::findOrFail($id);
+        $user = User::findOrFail($id);
+
+        // Check if the logged-in user is a super admin
+        if (\Auth::user()->type == 'super admin') {
             $input = $request->all();
+            // Only update password if provided
+            if ($request->has('password') && $request->password) {
+                $input['password'] = bcrypt($request->password); // Hash the new password
+            }
             $user->fill($input)->save();
-        }
-        else
-        {
-            $user = User::findOrFail($id);
-
-            $role          = Role::findById($request->role);
-            $input         = $request->all();
+        } else {
+            // For non-super admin users, handle role and password update
+            $role = Role::findById($request->role);
+            $input = $request->all();
             $input['type'] = $role->name;
-            $user->fill($input)->save();
 
+            // Only update password if provided
+            if ($request->has('password') && $request->password) {
+                $input['password'] = bcrypt($request->password); // Hash the new password
+            }
+
+            $user->fill($input)->save();
             $user->assignRole($role);
         }
 
         return redirect()->route('user.index')->with('success', 'User successfully updated.');
     }
+
 
 
     public function destroy($id)
@@ -399,7 +417,11 @@ class UserController extends Controller
     }
     public function loginAsCompany($id)
     {
-        // Find the company user
+        session()->put('superadmin_session', [
+            'user_id' => auth()->id(),
+            'role' => auth()->user()->role,
+        ]);
+
         $companyUser = User::findOrFail($id);
 
         // Log out the current user
@@ -410,5 +432,23 @@ class UserController extends Controller
 
         // Redirect to the dashboard or desired page
         return redirect()->route('home')->with('success', 'Logged in as ' . $companyUser->name);
+    }
+    // In your controller method for returning to superadmin
+    public function returnToSuperadmin()
+    {
+        // Check if superadmin session exists
+        if (session()->has('superadmin_session')) {
+            // Restore the superadmin session
+            $superadminSession = session('superadmin_session');
+            $superadminUser = User::findOrFail($superadminSession['user_id']);
+            auth()->login($superadminUser);
+
+            // Clear the temporary session
+            session()->forget('superadmin_session');
+
+            return redirect()->route('home')->with('success', 'Returned to superadmin account.');
+        }
+
+        return redirect()->back()->with('error', 'Unable to return to superadmin account.');
     }
 }

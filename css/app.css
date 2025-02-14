@@ -66,7 +66,7 @@ section {
 
 body {
   margin: 0;
-  font-family: "Nunito", sans-serif;
+  /* font-family: "Nunito", sans-serif; */
   font-size: 0.9rem;
   font-weight: 400;
   line-height: 1.6;
@@ -3636,9 +3636,9 @@ input[type=button].btn-block {
 
 .dropdown-item.active,
 .dropdown-item:active {
-  color: #fff;
+  color: var(--bs-dropdown-link-active-color);
   text-decoration: none;
-  background-color: #3490dc;
+  background-color: var(--bs-dropdown-link-active-bg);
 }
 
 .dropdown-item.disabled,

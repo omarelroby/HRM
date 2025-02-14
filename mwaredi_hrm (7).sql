@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 06, 2025 at 12:45 PM
+-- Generation Time: Feb 13, 2025 at 01:59 PM
 -- Server version: 10.3.39-MariaDB
 -- PHP Version: 8.1.31
 
@@ -66,7 +66,7 @@ CREATE TABLE `absences` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `leave_id` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `absences`
@@ -93,7 +93,7 @@ CREATE TABLE `account_lists` (
   `created_by` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -103,18 +103,18 @@ CREATE TABLE `account_lists` (
 
 CREATE TABLE `activity_log` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `log_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `subject_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `event` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `log_name` varchar(255) DEFAULT NULL,
+  `description` text NOT NULL,
+  `subject_type` varchar(255) DEFAULT NULL,
+  `event` varchar(255) DEFAULT NULL,
   `subject_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `causer_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `causer_type` varchar(255) DEFAULT NULL,
   `causer_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `properties` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-  `batch_uuid` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `properties` longtext DEFAULT NULL,
+  `batch_uuid` char(36) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -129,7 +129,7 @@ CREATE TABLE `admin_payment_settings` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -147,7 +147,7 @@ CREATE TABLE `allowances` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `allowances`
@@ -155,7 +155,7 @@ CREATE TABLE `allowances` (
 
 INSERT INTO `allowances` (`id`, `employee_id`, `allowance_option`, `title`, `date`, `amount`, `created_by`, `created_at`, `updated_at`) VALUES
 (2, 5, 1, 'بدل2', '2025-01-15', 23, 2, '2025-01-15 11:55:35', '2025-01-15 11:55:35'),
-(3, 3, 1, 'بدل 1', '2025-01-26', 500, 2, '2025-01-26 13:30:44', '2025-01-26 13:30:44');
+(3, 3, 1, 'بدل 1', '2025-01-26', 2000, 2, '2025-01-26 13:30:44', '2025-01-26 13:30:44');
 
 -- --------------------------------------------------------
 
@@ -172,7 +172,7 @@ CREATE TABLE `allowance_options` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `allowance_options`
@@ -199,7 +199,7 @@ CREATE TABLE `announcements` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -214,7 +214,7 @@ CREATE TABLE `announcement_employees` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -239,7 +239,7 @@ CREATE TABLE `appraisals` (
   `created_by` int(11) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -261,7 +261,7 @@ CREATE TABLE `assets` (
   `serial_number` varchar(255) DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
   `assets_type_id` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `assets`
@@ -281,7 +281,7 @@ CREATE TABLE `assets_types` (
   `name` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -311,7 +311,7 @@ CREATE TABLE `attendance_employees` (
   `note` text DEFAULT NULL,
   `image_clock_in` varchar(255) DEFAULT NULL,
   `image_clock_out` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `attendance_employees`
@@ -347,7 +347,7 @@ CREATE TABLE `attendance_movements` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `attendance_movements`
@@ -373,7 +373,7 @@ CREATE TABLE `awards` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -388,7 +388,7 @@ CREATE TABLE `award_types` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `award_types`
@@ -410,7 +410,7 @@ CREATE TABLE `banks` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `banks`
@@ -436,7 +436,7 @@ CREATE TABLE `branches` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `branches`
@@ -460,7 +460,7 @@ CREATE TABLE `categories` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -474,7 +474,7 @@ CREATE TABLE `ch_favorites` (
   `favorite_id` bigint(20) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -492,7 +492,7 @@ CREATE TABLE `ch_messages` (
   `seen` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -536,7 +536,7 @@ CREATE TABLE `commissions` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `precentage` varchar(255) DEFAULT NULL,
   `close_deal_amount` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `commissions`
@@ -563,7 +563,7 @@ CREATE TABLE `companyslates` (
   `created_by` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -579,7 +579,7 @@ CREATE TABLE `company_breaks` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -597,7 +597,7 @@ CREATE TABLE `company_ducument_uploads` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `category_id` bigint(20) DEFAULT NULL,
   `deleted_at` varchar(191) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -613,7 +613,30 @@ CREATE TABLE `company_ducument_upload_categories` (
   `created_by` bigint(20) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `company_email_template`
+--
+
+CREATE TABLE `company_email_template` (
+  `id` int(11) NOT NULL,
+  `subject` varchar(255) DEFAULT NULL,
+  `message_ar` text DEFAULT NULL,
+  `message` text DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `company_email_template`
+--
+
+INSERT INTO `company_email_template` (`id`, `subject`, `message_ar`, `message`, `created_at`, `updated_at`) VALUES
+(1, 'انشاء موظف جديد', '<p>مرحبًا {employee_name}، مرحبًا بك في {app_name}. أنت الآن موظف.. البريد الإلكتروني: {employee_email} كلمة المرور: {employee_password} {app_url} شكرًا، {app_name}</p>', '<p>Hello {employee_name}, Welcome to {app_name}. You are now Employee.. Email : {employee_email} Password : {employee_password} {app_url} Thanks, {app_name}</p>', NULL, '2025-02-13 14:17:18'),
+(2, 'New Payroll', 'الموضوع:- قسم الموارد البشرية/الشركة ترسل كشوف المرتبات عبر البريد الإلكتروني في وقت تأكيد كشف المرتبات\r\n\r\nمرحبًا {name}،\r\n\r\nآمل أن تجدك هذه الرسالة الإلكترونية بخير! يُرجى الاطلاع على كشف المرتبات المرفق لشهر {salary_month}.\r\n\r\nانقر ببساطة على الزر أدناه\r\n\r\nكشف المرتبات\r\n\r\nلا تتردد في التواصل معنا إذا كان لديك أي أسئلة.\r\n\r\nشكرًا لك\r\n\r\nمع خالص التحيات،\r\n\r\nقسم الموارد البشرية،\r\n\r\n{app_name}', 'Subject:-HR department/Company to send payslips by email at time of confirmation of payslip\r\n\r\nHi {name},\r\n\r\nHope this email ﬁnds you well! Please see attached payslip for {salary_month}.\r\n\r\nsimply click on the button below\r\n\r\nPayslip\r\n\r\nFeel free to reach out if you have any questions.\r\n\r\nThank you\r\n\r\nRegards,\r\n\r\nHR Department,\r\n\r\n{app_name}', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -644,7 +667,7 @@ CREATE TABLE `company_job_requests` (
   `positions_count` bigint(20) UNSIGNED NOT NULL DEFAULT 1,
   `job_requirement` text NOT NULL,
   `location` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -663,7 +686,7 @@ CREATE TABLE `company_policies` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `company_policies`
@@ -688,7 +711,7 @@ CREATE TABLE `company_structures` (
   `created_by` int(11) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -703,7 +726,7 @@ CREATE TABLE `company_structure_employees` (
   `created_by` int(11) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `company_structure_employees`
@@ -751,7 +774,7 @@ CREATE TABLE `competencies` (
   `created_by` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `competencies`
@@ -778,7 +801,7 @@ CREATE TABLE `complaints` (
   `created_by` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -791,10 +814,10 @@ CREATE TABLE `contact_us` (
   `name` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `subject` varchar(255) DEFAULT NULL,
-  `message` mediumtext DEFAULT NULL,
+  `message` longtext DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `contact_us`
@@ -804,7 +827,11 @@ INSERT INTO `contact_us` (`id`, `name`, `email`, `subject`, `message`, `updated_
 (3, 'aazzz', 'elrubyomar@gmail.com', 'zzxx', 'zvxx', '2025-02-06 02:19:34', '2025-02-06 02:19:34'),
 (4, 'aaa', 'elrubyomar@gmail.com', 'as', 'as', '2025-02-06 02:20:11', '2025-02-06 02:20:11'),
 (5, 'aaa', 'elrubyomar@gmail.com', 'dd', 'zxz', '2025-02-06 02:22:23', '2025-02-06 02:22:23'),
-(8, 'aaa', 'omar@gmail.com', 'as', 'sad', '2025-02-06 02:27:42', '2025-02-06 02:27:42');
+(8, 'aaa', 'omar@gmail.com', 'as', 'sad', '2025-02-06 02:27:42', '2025-02-06 02:27:42'),
+(10, 'TedDus', 'moqagides18@gmail.com', 'Hallo  i am write about your   price', 'Kaixo, zure prezioa jakin nahi nuen.', '2025-02-06 20:17:27', '2025-02-06 20:17:27'),
+(11, 'GeorgeDus', 'ibucezevuda439@gmail.com', 'Hello, i writing about your the prices', 'Hi, I wanted to know your price.', '2025-02-10 09:12:28', '2025-02-10 09:12:28'),
+(12, 'TedDus', 'moqagides18@gmail.com', 'Hello    writing about     prices', 'Ola, quería saber o seu prezo.', '2025-02-11 04:04:26', '2025-02-11 04:04:26'),
+(13, 'Hello', 'ibckhvwi@do-not-respond.me', 'TestUser', 'sRq FXLyo MURV qfbylKM qsiIMt OwvEu lglDuX', '2025-02-13 06:17:20', '2025-02-13 06:17:20');
 
 -- --------------------------------------------------------
 
@@ -819,7 +846,7 @@ CREATE TABLE `contract_templates` (
   `template` longtext DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -837,7 +864,7 @@ CREATE TABLE `coupons` (
   `is_active` int(11) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `coupons`
@@ -859,7 +886,7 @@ CREATE TABLE `custom_questions` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -874,7 +901,7 @@ CREATE TABLE `deduction_options` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `deduction_options`
@@ -899,7 +926,7 @@ CREATE TABLE `departments` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `departments`
@@ -927,7 +954,7 @@ CREATE TABLE `deposits` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -943,7 +970,7 @@ CREATE TABLE `designations` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `designations`
@@ -974,7 +1001,7 @@ CREATE TABLE `documents` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `documents`
@@ -999,7 +1026,7 @@ CREATE TABLE `document_types` (
   `created_by` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `document_types`
@@ -1027,7 +1054,7 @@ CREATE TABLE `ducument_uploads` (
   `created_by` int(11) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1041,7 +1068,31 @@ CREATE TABLE `ducument_upload_images` (
   `ducument_upload_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `email_template`
+--
+
+CREATE TABLE `email_template` (
+  `id` int(11) NOT NULL,
+  `subject` varchar(255) DEFAULT NULL,
+  `message_ar` text DEFAULT NULL,
+  `message` text DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `email_template`
+--
+
+INSERT INTO `email_template` (`id`, `subject`, `message_ar`, `message`, `created_at`, `updated_at`) VALUES
+(1, 'إنشاء حساب شركة جديدة', '<p>مرحبًا<br>أهلاً بكم في {app_name}.</p><p><strong>تم إنشاء حساب جديد لشركتكم</strong></p><p><strong>البريد الإلكتروني</strong>: {email}<br><strong>كلمة المرور</strong>: {password}</p><p>{app_url}</p><p>شكرًا،<br>{app_name}</p><p>&nbsp;</p>', '<p>Hello,<br>Welcome to {app_name}.</p><p><strong>A new account has been created for your company.</strong></p><p><strong>Email</strong>: {email}<br><strong>Password</strong>: {password}</p><p>{app_url}</p><p>Thanks,<br>{app_name}</p>', NULL, '2025-02-12 20:21:10'),
+(2, 'ادخل عنوان الرسالة', '<p>&nbsp;</p><p>مرحبًا،<br>أهلاً بكم في {app_name}.</p><p><br>&nbsp;</p><p><strong>أنت الآن مستخدم.</strong></p><p><br>&nbsp;</p><p><strong>البريد الإلكتروني</strong>: {email}<br><strong>كلمة المرور</strong>: {password}</p><p><br>&nbsp;</p><p>{app_url}</p><p><br>&nbsp;</p><p>شكرًا،<br>{app_name}</p><p><br>&nbsp;</p><p>&nbsp;</p>', '<p>Hello,<br>Welcome to {app_name}.</p><p>New Task</p><p><strong>Email</strong>: {email}<br><strong>Password</strong>: {password}</p><p>{app_url}</p><p>Thanks,<br>{app_name}</p>', NULL, '2025-02-12 19:08:50'),
+(3, 'ادخل عنوان الرسالة', '<p>&nbsp;</p><p>مرحبًا،<br>أهلاً بكم في {app_name}.</p><p><br>&nbsp;</p><p><strong>أنت الآن مستخدم.</strong></p><p><br>&nbsp;</p><p><strong>البريد الإلكتروني</strong>: {email}<br><strong>كلمة المرور</strong>: {password}</p><p><br>&nbsp;</p><p>{app_url}</p><p><br>&nbsp;</p><p>شكرًا،<br>{app_name}</p><p><br>&nbsp;</p><p>&nbsp;</p>', '<p>Hello,<br>Welcome to {app_name}.</p><p><strong>You are now a user.</strong></p><p><strong>Email</strong>: {email}<br><strong>Password</strong>: {password}</p><p>{app_url}</p><p>Thanks,<br>{app_name}</p>', NULL, '2025-02-12 19:07:22');
 
 -- --------------------------------------------------------
 
@@ -1056,6 +1107,7 @@ CREATE TABLE `employees` (
   `name` varchar(255) NOT NULL,
   `name_ar` varchar(255) DEFAULT NULL,
   `dob` text DEFAULT NULL,
+  `work_start_date` varchar(255) DEFAULT NULL,
   `nationality_id` int(11) DEFAULT NULL,
   `jobtitle_id` int(11) DEFAULT NULL,
   `gender` varchar(255) NOT NULL,
@@ -1148,17 +1200,17 @@ CREATE TABLE `employees` (
   `skip_start_work_location` int(11) NOT NULL DEFAULT 0,
   `read_slate` int(11) DEFAULT 0,
   `on_off_notification` tinyint(4) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `employees`
 --
 
-INSERT INTO `employees` (`id`, `user_id`, `user_register`, `name`, `name_ar`, `dob`, `nationality_id`, `jobtitle_id`, `gender`, `phone`, `address`, `email`, `personal_email`, `password`, `employee_id`, `branch_id`, `department_id`, `section_id`, `designation_id`, `account_holder_name`, `account_number`, `bank_name`, `branch_location`, `insurance_number`, `residence_number`, `passport_number`, `city`, `work_time`, `nationality_type`, `is_active`, `created_by`, `created_at`, `updated_at`, `religion`, `out_of_saudia`, `employer_phone`, `place_of_issuance_of_ID_residence`, `iqama_issuance_date_Hijri`, `iqama_issuance_date_gregorian`, `iqama_issuance_expirydate_Hijri`, `iqama_issuance_expirydate_gregorian`, `iqama_attachment`, `place_of_issuance_of_passport`, `passport_issuance_date_gregorian`, `passport_issuance_expirydate_gregorian`, `passport_attachment`, `building_number`, `street_name`, `region`, `country`, `postal_code`, `mother_city`, `mother_country`, `emergency_contact_name`, `emergency_contact_relationship`, `emergency_contact_address`, `emergency_contact_phone`, `custom_field_corona`, `custom_field_notes`, `Join_date_gregorian`, `Join_date_hijri`, `labor_hire_company`, `work_unit`, `class`, `direct_manager`, `permission`, `uploading_record_permission`, `contract_type`, `contract_duration`, `employee_on_probation`, `payment_type`, `employee_account_type`, `salary_card_number`, `bank_id`, `IBAN_number`, `account_holder_name_ar`, `branch_location_ar`, `sub_dep_id`, `swift_code`, `sort_code`, `bank_country`, `policy_number`, `insurance_startdate`, `category`, `salary_type`, `cost`, `salary`, `net_salary`, `availability_health_insurance_council`, `health_insurance_council_startdate`, `insurance_document`, `annual_leave_entitlement`, `shift`, `location`, `fingerprint_out_campany`, `skip_start_work_location`, `read_slate`, `on_off_notification`) VALUES
-(3, 709, 1, 'omar elruby', 'omar elruby', '26-01-2025', NULL, 1, 'Male', '01102021700', NULL, 'elrubyomar@gmail.com', 'elrubyomar@gmail.com', '$2y$10$mhntYNPU2ewX13LqhWvFQ.U3MuchcnR2uTtdpWbsJ2TvbppePKqAe', '2', 1, 10, 1, 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', 1, 1, 2, '2025-01-26 13:03:43', '2025-01-27 15:38:55', 1, 1, '01102021700', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '26-01-2025', NULL, NULL, NULL, '6 october city ,cairo -egypt', NULL, 'Egypt', '12345', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', '1', '0', '2', NULL, 'on', '1', '1', '0', 'cash', '0', NULL, 1, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, '20-01-2026', NULL, NULL, NULL, '5000', '2824', '20-01-2026', '20-01-2026', NULL, NULL, NULL, NULL, '0', 0, 0, 1),
-(5, 711, 1, 'Ahmed Malek', 'أحمد مالك', '02-01-2025', NULL, 1, 'Male', '0110202022', NULL, 'malek@gmail.com', 'malek@gmail.com', '$2y$10$dpWDimgv8GCpkeSUPfRSwOYk/iNvo3N9YkIwDhD9G.l0vwXcpwPdK', '4', 1, 10, 1, 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', 1, 1, 2, '2025-01-28 13:22:29', '2025-01-28 13:50:05', 1, 1, '01102021700', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'حلوان القاهرة', NULL, 'Egypt', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', '1', '0', '2', NULL, 'on', '1', '1', '0', 'cash', '0', NULL, 1, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, '20-01-2028', NULL, NULL, NULL, '3000', '2873', '20-01-2028', '20-01-2028', NULL, NULL, NULL, NULL, '0', 0, 0, 1),
-(6, 712, 1, 'depadmin', 'depadmin', '29-01-2025', NULL, 1, 'Male', '0112020220', NULL, 'depadmin@gmail.com', 'depadmin@gmail.com', '$2y$10$mTdqP7YSuxIylfg2taKqUOdpFci2ZFtBEew7iLqcmty972Tsc2L4G', '6', 1, 10, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', 1, 1, 2, '2025-01-29 20:56:17', '2025-01-30 14:26:07', 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '6 october city ,cairo -egypt', NULL, 'Egypt', '12345', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', '1', '0', '2', NULL, 'on', '1', '1', '0', 'cash', '0', NULL, 1, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, '20-01-2029', NULL, NULL, NULL, NULL, '0', '20-01-2029', '20-01-2029', NULL, NULL, NULL, NULL, '0', 0, 0, 1),
-(7, 713, 1, 'subdepadmin', 'subdepadmin', '29-01-2025', NULL, 1, 'Male', '01102021700', NULL, 'subdepadmin@gmail.com', 'subdepadmin@gmail.com', '$2y$10$jiZmO/9G9r/KYttZ6wzc8eVI3K6BhD3DrbWIsNEPgs92WZ5hpdGum', '7', 1, 10, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', 1, 1, 2, '2025-01-29 20:57:30', '2025-01-30 14:27:33', 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', '1', '0', '2', NULL, 'on', '1', '1', '0', 'cash', '0', NULL, 1, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, '20-01-2029', NULL, NULL, NULL, NULL, '0', '20-01-2029', '20-01-2029', NULL, NULL, NULL, NULL, '0', 0, 0, 1);
+INSERT INTO `employees` (`id`, `user_id`, `user_register`, `name`, `name_ar`, `dob`, `work_start_date`, `nationality_id`, `jobtitle_id`, `gender`, `phone`, `address`, `email`, `personal_email`, `password`, `employee_id`, `branch_id`, `department_id`, `section_id`, `designation_id`, `account_holder_name`, `account_number`, `bank_name`, `branch_location`, `insurance_number`, `residence_number`, `passport_number`, `city`, `work_time`, `nationality_type`, `is_active`, `created_by`, `created_at`, `updated_at`, `religion`, `out_of_saudia`, `employer_phone`, `place_of_issuance_of_ID_residence`, `iqama_issuance_date_Hijri`, `iqama_issuance_date_gregorian`, `iqama_issuance_expirydate_Hijri`, `iqama_issuance_expirydate_gregorian`, `iqama_attachment`, `place_of_issuance_of_passport`, `passport_issuance_date_gregorian`, `passport_issuance_expirydate_gregorian`, `passport_attachment`, `building_number`, `street_name`, `region`, `country`, `postal_code`, `mother_city`, `mother_country`, `emergency_contact_name`, `emergency_contact_relationship`, `emergency_contact_address`, `emergency_contact_phone`, `custom_field_corona`, `custom_field_notes`, `Join_date_gregorian`, `Join_date_hijri`, `labor_hire_company`, `work_unit`, `class`, `direct_manager`, `permission`, `uploading_record_permission`, `contract_type`, `contract_duration`, `employee_on_probation`, `payment_type`, `employee_account_type`, `salary_card_number`, `bank_id`, `IBAN_number`, `account_holder_name_ar`, `branch_location_ar`, `sub_dep_id`, `swift_code`, `sort_code`, `bank_country`, `policy_number`, `insurance_startdate`, `category`, `salary_type`, `cost`, `salary`, `net_salary`, `availability_health_insurance_council`, `health_insurance_council_startdate`, `insurance_document`, `annual_leave_entitlement`, `shift`, `location`, `fingerprint_out_campany`, `skip_start_work_location`, `read_slate`, `on_off_notification`) VALUES
+(3, 709, 1, 'omar elruby', 'omar elruby', '26-01-2025', '19-02-2025', 1, 1, 'Male', '01102021700', NULL, 'elrubyomar@gmail.com', 'elrubyomar@gmail.com', '$2y$10$mhntYNPU2ewX13LqhWvFQ.U3MuchcnR2uTtdpWbsJ2TvbppePKqAe', '2', 1, 10, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '{\"id\":1,\"name\":\"\\u0648\\u0642\\u062a \\u0643\\u0627\\u0645\\u0644\",\"name_ar\":\"Full Time\",\"created_by\":2,\"created_at\":\"2025-01-11T23:25:35.000000Z\",\"updated_at\":\"2025-01-11T23:25:35.000000Z\"}', 1, 1, 2, '2025-01-26 13:03:43', '2025-02-09 09:01:54', 1, 1, '01102021700', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '26-01-2025', NULL, NULL, NULL, '6 october city ,cairo -egypt', NULL, NULL, '12345', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '11-02-2025', NULL, '1', '1', '0', '2', NULL, '0', '1', '1', '0', 'cash', '0', NULL, 1, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, '20-01-2026', NULL, NULL, NULL, '3000', '2904', '20-02-2009', '20-02-2009', NULL, NULL, NULL, NULL, '0', 0, 0, 1),
+(5, 711, 1, 'Ahmed Malek', 'أحمد مالك', '02-01-2025', NULL, NULL, 1, 'Male', '0110202022', NULL, 'malek@gmail.com', 'malek@gmail.com', '$2y$10$dpWDimgv8GCpkeSUPfRSwOYk/iNvo3N9YkIwDhD9G.l0vwXcpwPdK', '4', 1, 10, 1, 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', 1, 1, 2, '2025-01-28 13:22:29', '2025-01-28 13:50:05', 1, 1, '01102021700', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'حلوان القاهرة', NULL, 'Egypt', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', '1', '0', '2', NULL, 'on', '1', '1', '0', 'cash', '0', NULL, 1, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, '20-01-2028', NULL, NULL, NULL, '3000', '2873', '20-01-2028', '20-01-2028', NULL, NULL, NULL, NULL, '0', 0, 0, 1),
+(6, 712, 1, 'depadmin', 'depadmin', '29-01-2025', NULL, NULL, 1, 'Male', '0112020220', NULL, 'depadmin@gmail.com', 'depadmin@gmail.com', '$2y$10$mTdqP7YSuxIylfg2taKqUOdpFci2ZFtBEew7iLqcmty972Tsc2L4G', '6', 1, 10, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', 1, 1, 2, '2025-01-29 20:56:17', '2025-01-30 14:26:07', 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '6 october city ,cairo -egypt', NULL, 'Egypt', '12345', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', '1', '0', '2', NULL, 'on', '1', '1', '0', 'cash', '0', NULL, 1, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, '20-01-2029', NULL, NULL, NULL, NULL, '0', '20-01-2029', '20-01-2029', NULL, NULL, NULL, NULL, '0', 0, 0, 1),
+(7, 713, 1, 'subdepadmin', 'subdepadmin', '29-01-2025', NULL, NULL, 1, 'Male', '01102021700', NULL, 'subdepadmin@gmail.com', 'subdepadmin@gmail.com', '$2y$10$jiZmO/9G9r/KYttZ6wzc8eVI3K6BhD3DrbWIsNEPgs92WZ5hpdGum', '7', 1, 10, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', 1, 1, 2, '2025-01-29 20:57:30', '2025-01-30 14:27:33', 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', '1', '0', '2', NULL, 'on', '1', '1', '0', 'cash', '0', NULL, 1, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, '20-01-2029', NULL, NULL, NULL, NULL, '0', '20-01-2029', '20-01-2029', NULL, NULL, NULL, NULL, '0', 0, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -1172,7 +1224,7 @@ CREATE TABLE `employee_branches` (
   `branch_id` bigint(20) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1189,7 +1241,7 @@ CREATE TABLE `employee_breaks` (
   `created_by` bigint(20) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1222,7 +1274,7 @@ CREATE TABLE `employee_contracts` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `employee_contracts`
@@ -1262,7 +1314,7 @@ CREATE TABLE `employee_documents` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1278,7 +1330,7 @@ CREATE TABLE `employee_finger_print_locations` (
   `employee_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1302,11 +1354,11 @@ CREATE TABLE `employee_followers` (
   `residence_number` varchar(255) DEFAULT NULL,
   `passport_number` varchar(255) DEFAULT NULL,
   `passport_expiry_date` date DEFAULT NULL,
-  `documents` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `documents` longtext DEFAULT NULL,
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1327,7 +1379,7 @@ CREATE TABLE `employee_permissions` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `direct_manager` bigint(20) DEFAULT NULL,
   `admin_message` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1350,7 +1402,7 @@ CREATE TABLE `employee_requests` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `employee_requests`
@@ -1389,7 +1441,7 @@ CREATE TABLE `employee_shifts` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `employee_shifts`
@@ -1411,7 +1463,54 @@ CREATE TABLE `employee_tasks` (
   `employee_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `end_service`
+--
+
+CREATE TABLE `end_service` (
+  `id` int(11) NOT NULL,
+  `work_start_date` varchar(255) DEFAULT NULL,
+  `work_end_date` varchar(255) DEFAULT NULL,
+  `employee_id` int(11) DEFAULT NULL,
+  `years` varchar(255) DEFAULT NULL,
+  `months` varchar(255) DEFAULT NULL,
+  `days` varchar(255) DEFAULT NULL,
+  `amount` varchar(255) DEFAULT NULL,
+  `date_gerg` varchar(255) DEFAULT NULL,
+  `date_hijri` varchar(255) DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `allownce` varchar(255) DEFAULT NULL,
+  `salary` varchar(255) DEFAULT NULL,
+  `total_salary` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `end_service`
+--
+
+INSERT INTO `end_service` (`id`, `work_start_date`, `work_end_date`, `employee_id`, `years`, `months`, `days`, `amount`, `date_gerg`, `date_hijri`, `type`, `updated_at`, `created_at`, `allownce`, `salary`, `total_salary`) VALUES
+(27, '19-02-2025', '2025-02-20', 3, '0', '0', '1', '0', NULL, NULL, 'resignation', '2025-02-09 08:27:58', '2025-02-09 08:27:58', '2000', '3000', '5000'),
+(28, '19-02-2025', '2025-02-20', 3, '0', '0', '1', '0', NULL, NULL, 'resignation', '2025-02-09 08:28:02', '2025-02-09 08:28:02', '2000', '3000', '5000'),
+(29, '19-02-2025', '2025-06-26', 3, '0', '4', '7', '0', NULL, NULL, 'resignation', '2025-02-09 08:28:15', '2025-02-09 08:28:15', '2000', '3000', '5000'),
+(30, '19-02-2025', '2025-06-26', 3, '0', '4', '7', '0', NULL, NULL, 'resignation', '2025-02-09 08:28:17', '2025-02-09 08:28:17', '2000', '3000', '5000'),
+(31, '19-02-2025', '2029-11-22', 3, '4', '9', '3', '5430.5555555556', NULL, NULL, 'resignation', '2025-02-09 08:28:26', '2025-02-09 08:28:26', '2000', '3000', '5000'),
+(32, '19-02-2025', '2029-11-22', 3, '4', '9', '3', '5430.5555555556', NULL, NULL, 'resignation', '2025-02-09 08:28:27', '2025-02-09 08:28:27', '2000', '3000', '5000'),
+(33, '19-02-2025', '2025-02-13', 3, '-1', '11', '25', '0', NULL, NULL, 'resignation', '2025-02-09 08:30:21', '2025-02-09 08:30:21', '0', '0', '0'),
+(34, '19-02-2025', '2025-02-12', 3, '-1', '11', '24', '0', NULL, NULL, 'resignation', '2025-02-09 08:31:10', '2025-02-09 08:31:10', '2000', '3000', '5000'),
+(35, '19-02-2025', '2030-10-16', 3, '5', '7', '27', '5263.8888888889', NULL, NULL, 'resignation', '2025-02-09 08:31:30', '2025-02-09 08:31:30', '2000', '3000', '5000'),
+(36, '19-02-2025', '2030-10-16', 3, '5', '7', '27', '5263.8888888889', NULL, NULL, 'resignation', '2025-02-09 08:31:30', '2025-02-09 08:31:30', '2000', '3000', '5000'),
+(38, '19-02-2025', '2028-07-27', 3, '3', '5', '8', '2500', NULL, NULL, 'dismissal', '2025-02-09 08:34:20', '2025-02-09 08:34:20', '2000', '3000', '5000'),
+(39, '19-02-2025', '2025-02-20', 3, '0', '0', '1', '2500', NULL, NULL, 'dismissal', '2025-02-09 08:40:37', '2025-02-09 08:40:37', '2000', '3000', '5000'),
+(40, '19-02-2025', '2025-02-25', 3, '0', '0', '6', '2500', NULL, NULL, 'dismissal', '2025-02-09 16:37:35', '2025-02-09 16:37:35', '2000', '3000', '5000'),
+(41, '19-02-2025', '2025-02-18', 3, '-1', '11', '30', '2500', NULL, NULL, 'dismissal', '2025-02-10 09:33:16', '2025-02-10 09:33:16', '2000', '3000', '5000'),
+(42, '19-02-2025', '2029-09-12', 3, '4', '6', '24', '2500', NULL, NULL, 'dismissal', '2025-02-10 11:37:59', '2025-02-10 11:37:59', '2000', '3000', '5000'),
+(43, '19-02-2025', '2025-02-28', 3, '0', '0', '9', '2500', NULL, NULL, 'dismissal', '2025-02-10 11:39:36', '2025-02-10 11:39:36', '2000', '3000', '5000');
 
 -- --------------------------------------------------------
 
@@ -1433,7 +1532,7 @@ CREATE TABLE `evaluations` (
   `is_completed` tinyint(1) NOT NULL DEFAULT 0,
   `title` varchar(255) DEFAULT NULL,
   `parent_id` bigint(20) UNSIGNED DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1450,7 +1549,7 @@ CREATE TABLE `evaluation_answers` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `points` double(8,2) NOT NULL DEFAULT 0.00,
   `employee_id` bigint(20) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1466,7 +1565,7 @@ CREATE TABLE `evaluation_categories` (
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1482,7 +1581,7 @@ CREATE TABLE `evaluation_results` (
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1496,7 +1595,7 @@ CREATE TABLE `evaluation_sections` (
   `evaluation_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1526,7 +1625,7 @@ CREATE TABLE `events` (
   `location` varchar(255) DEFAULT NULL,
   `about` text DEFAULT NULL,
   `photo` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `events`
@@ -1548,7 +1647,7 @@ CREATE TABLE `event_employees` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `event_employees`
@@ -1576,7 +1675,7 @@ CREATE TABLE `expenses` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1590,7 +1689,7 @@ CREATE TABLE `expense_types` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1605,7 +1704,7 @@ CREATE TABLE `failed_jobs` (
   `payload` longtext NOT NULL,
   `exception` longtext NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1620,7 +1719,7 @@ CREATE TABLE `fcm` (
   `token` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1693,7 +1792,7 @@ CREATE TABLE `genrate_payslip_options` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1718,7 +1817,7 @@ CREATE TABLE `goal_trackings` (
   `created_by` int(11) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1733,7 +1832,7 @@ CREATE TABLE `goal_types` (
   `created_by` int(11) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `goal_types`
@@ -1756,7 +1855,7 @@ CREATE TABLE `holidays` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `holidays`
@@ -1778,7 +1877,7 @@ CREATE TABLE `holiday_types` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1802,10 +1901,12 @@ CREATE TABLE `home_section` (
 --
 
 INSERT INTO `home_section` (`id`, `title`, `description`, `image`, `title_ar`, `description_ar`, `created_at`, `updated_at`) VALUES
-(0, 'Welcome to mwaredi Smart HR Solutions for a Smarter Workforce', 'At Wmaredi, we believe that managing your workforce should be simple, efficient, and stress-free. Our all-in-one HR Management System is designed to streamline HR processes, empower employees, and help businesses of all sizes grow with confidence.', 'home_sections/cNT7HM2Jm3scZeJuzDe97whFAlHzHqkyZpPJaq4s.png', 'مرحبًا بكم في مواردي حلول الموارد البشرية الذكية لقوة عاملة أكثر ذكاءً', 'في مواردي، نؤمن بأن إدارة القوى العاملة الخاصة بك يجب أن تكون بسيطة وفعالة وخالية من التوتر. تم تصميم نظام إدارة الموارد البشرية الشامل لدينا لتبسيط عمليات الموارد البشرية وتمكين الموظفين ومساعدة الشركات من جميع الأحجام على النمو بثقة.', '2025-02-04 01:10:49', '2025-02-06 12:23:15'),
-(0, 'Welcome to mwaredi Smart HR Solutions for a Smarter Workforce', 'At Wmaredi, we believe that managing your workforce should be simple, efficient, and stress-free. Our all-in-one HR Management System is designed to streamline HR processes, empower employees, and help businesses of all sizes grow with confidence.', 'home_sections/cNT7HM2Jm3scZeJuzDe97whFAlHzHqkyZpPJaq4s.png', 'مرحبًا بكم في مواردي حلول الموارد البشرية الذكية لقوة عاملة أكثر ذكاءً', 'في مواردي، نؤمن بأن إدارة القوى العاملة الخاصة بك يجب أن تكون بسيطة وفعالة وخالية من التوتر. تم تصميم نظام إدارة الموارد البشرية الشامل لدينا لتبسيط عمليات الموارد البشرية وتمكين الموظفين ومساعدة الشركات من جميع الأحجام على النمو بثقة.', '2025-02-04 02:07:58', '2025-02-06 12:23:15'),
-(0, 'Default Title', 'At Wmaredi, we believe that managing your workforce should be simple, efficient, and stress-free. Our all-in-one HR Management System is designed to streamline HR processes, empower employees, and help businesses of all sizes grow with confidence.', 'home_sections/cNT7HM2Jm3scZeJuzDe97whFAlHzHqkyZpPJaq4s.png', 'عنوان افتراضي', 'في مواردي، نؤمن بأن إدارة القوى العاملة الخاصة بك يجب أن تكون بسيطة وفعالة وخالية من التوتر. تم تصميم نظام إدارة الموارد البشرية الشامل لدينا لتبسيط عمليات الموارد البشرية وتمكين الموظفين ومساعدة الشركات من جميع الأحجام على النمو بثقة.', '2025-02-06 09:58:09', '2025-02-06 12:23:15'),
-(0, 'Default Title', 'Default description', 'home_sections/cNT7HM2Jm3scZeJuzDe97whFAlHzHqkyZpPJaq4s.png', 'عنوان افتراضي', 'وصف افتراضي', '2025-02-06 10:00:32', '2025-02-06 12:23:15');
+(0, 'Welcome to mwaredi Smart HR Solutions for a Smarter Workforce', '<p><strong>At Mwaredi, we believe that managing your workforce should be simple, efficient, and stress-free. Our all-in-one HR Management System is designed to streamline HR processes, empower employees, and help businesses of all sizes grow with confidence.</strong></p>', 'home_sections/cNT7HM2Jm3scZeJuzDe97whFAlHzHqkyZpPJaq4s.png', 'مرحبًا بكم في مواردي حلول الموارد البشرية الذكية لقوة عاملة أكثر ذكاءً', '<p>في مواردي، نؤمن بأن إدارة القوى العاملة الخاصة بك يجب أن تكون بسيطة وفعالة وخالية من التوتر. تم تصميم نظام إدارة الموارد البشرية الشامل لدينا لتبسيط عمليات الموارد البشرية وتمكين الموظفين ومساعدة الشركات من جميع الأحجام على النمو بثقة.</p>', '2025-02-04 01:10:49', '2025-02-12 18:40:29'),
+(0, 'Welcome to mwaredi Smart HR Solutions for a Smarter Workforce', '<p><strong>At Mwaredi, we believe that managing your workforce should be simple, efficient, and stress-free. Our all-in-one HR Management System is designed to streamline HR processes, empower employees, and help businesses of all sizes grow with confidence.</strong></p>', 'home_sections/cNT7HM2Jm3scZeJuzDe97whFAlHzHqkyZpPJaq4s.png', 'مرحبًا بكم في مواردي حلول الموارد البشرية الذكية لقوة عاملة أكثر ذكاءً', '<p>في مواردي، نؤمن بأن إدارة القوى العاملة الخاصة بك يجب أن تكون بسيطة وفعالة وخالية من التوتر. تم تصميم نظام إدارة الموارد البشرية الشامل لدينا لتبسيط عمليات الموارد البشرية وتمكين الموظفين ومساعدة الشركات من جميع الأحجام على النمو بثقة.</p>', '2025-02-04 02:07:58', '2025-02-12 18:40:29'),
+(0, 'Default Title', '<p><strong>At Mwaredi, we believe that managing your workforce should be simple, efficient, and stress-free. Our all-in-one HR Management System is designed to streamline HR processes, empower employees, and help businesses of all sizes grow with confidence.</strong></p>', 'home_sections/cNT7HM2Jm3scZeJuzDe97whFAlHzHqkyZpPJaq4s.png', 'عنوان افتراضي', '<p>في مواردي، نؤمن بأن إدارة القوى العاملة الخاصة بك يجب أن تكون بسيطة وفعالة وخالية من التوتر. تم تصميم نظام إدارة الموارد البشرية الشامل لدينا لتبسيط عمليات الموارد البشرية وتمكين الموظفين ومساعدة الشركات من جميع الأحجام على النمو بثقة.</p>', '2025-02-06 09:58:09', '2025-02-12 18:40:29'),
+(0, 'Default Title', '<p><strong>At Mwaredi, we believe that managing your workforce should be simple, efficient, and stress-free. Our all-in-one HR Management System is designed to streamline HR processes, empower employees, and help businesses of all sizes grow with confidence.</strong></p>', 'home_sections/cNT7HM2Jm3scZeJuzDe97whFAlHzHqkyZpPJaq4s.png', 'عنوان افتراضي', '<p>في مواردي، نؤمن بأن إدارة القوى العاملة الخاصة بك يجب أن تكون بسيطة وفعالة وخالية من التوتر. تم تصميم نظام إدارة الموارد البشرية الشامل لدينا لتبسيط عمليات الموارد البشرية وتمكين الموظفين ومساعدة الشركات من جميع الأحجام على النمو بثقة.</p>', '2025-02-06 10:00:32', '2025-02-12 18:40:29'),
+(0, 'Default Title', '<p><strong>At Mwaredi, we believe that managing your workforce should be simple, efficient, and stress-free. Our all-in-one HR Management System is designed to streamline HR processes, empower employees, and help businesses of all sizes grow with confidence.</strong></p>', NULL, 'عنوان افتراضي', 'وصف افتراضي', '2025-02-12 07:37:49', '2025-02-12 18:40:29'),
+(0, 'Default Title', 'Default description', NULL, 'عنوان افتراضي', 'وصف افتراضي', '2025-02-12 18:40:31', '2025-02-12 18:40:31');
 
 -- --------------------------------------------------------
 
@@ -1819,7 +1920,7 @@ CREATE TABLE `income_types` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1843,7 +1944,7 @@ CREATE TABLE `indicators` (
   `created_by` int(11) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1858,7 +1959,7 @@ CREATE TABLE `insurance_companies` (
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1877,7 +1978,7 @@ CREATE TABLE `interview_schedules` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1894,7 +1995,7 @@ CREATE TABLE `in_out_logs` (
   `date` date DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1908,7 +2009,7 @@ CREATE TABLE `ip_restricts` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1935,7 +2036,7 @@ CREATE TABLE `jobs` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1950,7 +2051,7 @@ CREATE TABLE `jobtitles` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `jobtitles`
@@ -1989,7 +2090,7 @@ CREATE TABLE `job_applications` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2005,7 +2106,7 @@ CREATE TABLE `job_application_notes` (
   `created_by` int(11) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2020,7 +2121,7 @@ CREATE TABLE `job_categories` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `job_categories`
@@ -2044,7 +2145,7 @@ CREATE TABLE `job_offer_answers` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `points` double(8,2) NOT NULL DEFAULT 0.00
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2060,7 +2161,7 @@ CREATE TABLE `job_offer_questions` (
   `point` double(8,2) NOT NULL DEFAULT 0.00,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2075,7 +2176,7 @@ CREATE TABLE `job_offer_question_options` (
   `point` double(8,2) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2089,7 +2190,7 @@ CREATE TABLE `job_offer_sections` (
   `company_job_request_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2121,7 +2222,7 @@ CREATE TABLE `job_offer_users` (
   `is_seen` tinyint(1) NOT NULL DEFAULT 0,
   `interview_from` timestamp NULL DEFAULT NULL,
   `interview_to` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2138,7 +2239,7 @@ CREATE TABLE `job_on_boards` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2169,7 +2270,7 @@ CREATE TABLE `job_requests` (
   `salary` varchar(255) DEFAULT NULL,
   `english_rate` varchar(255) DEFAULT NULL,
   `is_read` int(11) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2185,7 +2286,7 @@ CREATE TABLE `job_stages` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `job_stages`
@@ -2293,7 +2394,57 @@ INSERT INTO `job_stages` (`id`, `title`, `title_ar`, `order`, `created_by`, `cre
 (99, 'Phone Screen', '', 0, 710, '2025-01-26 15:48:29', '2025-01-26 15:48:29'),
 (100, 'Interview', '', 0, 710, '2025-01-26 15:48:29', '2025-01-26 15:48:29'),
 (101, 'Hired', '', 0, 710, '2025-01-26 15:48:29', '2025-01-26 15:48:29'),
-(102, 'Rejected', '', 0, 710, '2025-01-26 15:48:29', '2025-01-26 15:48:29');
+(102, 'Rejected', '', 0, 710, '2025-01-26 15:48:29', '2025-01-26 15:48:29'),
+(103, 'Applied', '', 0, 714, '2025-02-12 18:42:57', '2025-02-12 18:42:57'),
+(104, 'Phone Screen', '', 0, 714, '2025-02-12 18:42:57', '2025-02-12 18:42:57'),
+(105, 'Interview', '', 0, 714, '2025-02-12 18:42:57', '2025-02-12 18:42:57'),
+(106, 'Hired', '', 0, 714, '2025-02-12 18:42:57', '2025-02-12 18:42:57'),
+(107, 'Rejected', '', 0, 714, '2025-02-12 18:42:57', '2025-02-12 18:42:57'),
+(108, 'Applied', '', 0, 715, '2025-02-12 20:39:35', '2025-02-12 20:39:35'),
+(109, 'Phone Screen', '', 0, 715, '2025-02-12 20:39:35', '2025-02-12 20:39:35'),
+(110, 'Interview', '', 0, 715, '2025-02-12 20:39:35', '2025-02-12 20:39:35'),
+(111, 'Hired', '', 0, 715, '2025-02-12 20:39:35', '2025-02-12 20:39:35'),
+(112, 'Rejected', '', 0, 715, '2025-02-12 20:39:35', '2025-02-12 20:39:35'),
+(113, 'Applied', '', 0, 716, '2025-02-12 20:45:46', '2025-02-12 20:45:46'),
+(114, 'Phone Screen', '', 0, 716, '2025-02-12 20:45:46', '2025-02-12 20:45:46'),
+(115, 'Interview', '', 0, 716, '2025-02-12 20:45:46', '2025-02-12 20:45:46'),
+(116, 'Hired', '', 0, 716, '2025-02-12 20:45:46', '2025-02-12 20:45:46'),
+(117, 'Rejected', '', 0, 716, '2025-02-12 20:45:46', '2025-02-12 20:45:46'),
+(118, 'Applied', '', 0, 721, '2025-02-12 21:18:34', '2025-02-12 21:18:34'),
+(119, 'Phone Screen', '', 0, 721, '2025-02-12 21:18:34', '2025-02-12 21:18:34'),
+(120, 'Interview', '', 0, 721, '2025-02-12 21:18:34', '2025-02-12 21:18:34'),
+(121, 'Hired', '', 0, 721, '2025-02-12 21:18:34', '2025-02-12 21:18:34'),
+(122, 'Rejected', '', 0, 721, '2025-02-12 21:18:34', '2025-02-12 21:18:34'),
+(123, 'Applied', '', 0, 722, '2025-02-12 21:23:12', '2025-02-12 21:23:12'),
+(124, 'Phone Screen', '', 0, 722, '2025-02-12 21:23:12', '2025-02-12 21:23:12'),
+(125, 'Interview', '', 0, 722, '2025-02-12 21:23:12', '2025-02-12 21:23:12'),
+(126, 'Hired', '', 0, 722, '2025-02-12 21:23:12', '2025-02-12 21:23:12'),
+(127, 'Rejected', '', 0, 722, '2025-02-12 21:23:13', '2025-02-12 21:23:13'),
+(128, 'Applied', '', 0, 723, '2025-02-12 21:26:53', '2025-02-12 21:26:53'),
+(129, 'Phone Screen', '', 0, 723, '2025-02-12 21:26:53', '2025-02-12 21:26:53'),
+(130, 'Interview', '', 0, 723, '2025-02-12 21:26:53', '2025-02-12 21:26:53'),
+(131, 'Hired', '', 0, 723, '2025-02-12 21:26:53', '2025-02-12 21:26:53'),
+(132, 'Rejected', '', 0, 723, '2025-02-12 21:26:53', '2025-02-12 21:26:53'),
+(133, 'Applied', '', 0, 724, '2025-02-12 21:31:11', '2025-02-12 21:31:11'),
+(134, 'Phone Screen', '', 0, 724, '2025-02-12 21:31:11', '2025-02-12 21:31:11'),
+(135, 'Interview', '', 0, 724, '2025-02-12 21:31:11', '2025-02-12 21:31:11'),
+(136, 'Hired', '', 0, 724, '2025-02-12 21:31:11', '2025-02-12 21:31:11'),
+(137, 'Rejected', '', 0, 724, '2025-02-12 21:31:11', '2025-02-12 21:31:11'),
+(138, 'Applied', '', 0, 725, '2025-02-12 21:33:49', '2025-02-12 21:33:49'),
+(139, 'Phone Screen', '', 0, 725, '2025-02-12 21:33:49', '2025-02-12 21:33:49'),
+(140, 'Interview', '', 0, 725, '2025-02-12 21:33:49', '2025-02-12 21:33:49'),
+(141, 'Hired', '', 0, 725, '2025-02-12 21:33:49', '2025-02-12 21:33:49'),
+(142, 'Rejected', '', 0, 725, '2025-02-12 21:33:49', '2025-02-12 21:33:49'),
+(143, 'Applied', '', 0, 726, '2025-02-12 21:36:00', '2025-02-12 21:36:00'),
+(144, 'Phone Screen', '', 0, 726, '2025-02-12 21:36:00', '2025-02-12 21:36:00'),
+(145, 'Interview', '', 0, 726, '2025-02-12 21:36:00', '2025-02-12 21:36:00'),
+(146, 'Hired', '', 0, 726, '2025-02-12 21:36:00', '2025-02-12 21:36:00'),
+(147, 'Rejected', '', 0, 726, '2025-02-12 21:36:00', '2025-02-12 21:36:00'),
+(148, 'Applied', '', 0, 727, '2025-02-12 21:42:28', '2025-02-12 21:42:28'),
+(149, 'Phone Screen', '', 0, 727, '2025-02-12 21:42:28', '2025-02-12 21:42:28'),
+(150, 'Interview', '', 0, 727, '2025-02-12 21:42:28', '2025-02-12 21:42:28'),
+(151, 'Hired', '', 0, 727, '2025-02-12 21:42:28', '2025-02-12 21:42:28'),
+(152, 'Rejected', '', 0, 727, '2025-02-12 21:42:28', '2025-02-12 21:42:28');
 
 -- --------------------------------------------------------
 
@@ -2308,7 +2459,7 @@ CREATE TABLE `job_types` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `job_types`
@@ -2326,10 +2477,10 @@ INSERT INTO `job_types` (`id`, `name`, `name_ar`, `created_by`, `created_at`, `u
 
 CREATE TABLE `join_us` (
   `id` int(11) DEFAULT NULL,
-  `email` text NOT NULL,
+  `email` mediumtext NOT NULL,
   `created_at` int(11) NOT NULL,
   `updated_at` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2344,7 +2495,7 @@ CREATE TABLE `labor_hire_companies` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `labor_hire_companies`
@@ -2368,7 +2519,7 @@ CREATE TABLE `landaboutcards` (
   `image` varchar(200) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2393,7 +2544,7 @@ CREATE TABLE `landblogs` (
   `metaTagAr` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2409,7 +2560,7 @@ CREATE TABLE `landcloudcards` (
   `image` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2425,7 +2576,7 @@ CREATE TABLE `landcontactcards` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `type` varchar(191) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2439,7 +2590,7 @@ CREATE TABLE `landdemocards` (
   `descriptionAr` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2455,7 +2606,7 @@ CREATE TABLE `landfaqs` (
   `answer_ar` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2470,7 +2621,7 @@ CREATE TABLE `landfeatures` (
   `landplan_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2487,7 +2638,7 @@ CREATE TABLE `landhelpcards` (
   `image` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2506,7 +2657,7 @@ CREATE TABLE `landing_page_sections` (
   `section_blade_file_name` text NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `landing_page_sections`
@@ -2560,7 +2711,7 @@ CREATE TABLE `landing_page_settings` (
   `value` text NOT NULL,
   `created_at` int(11) NOT NULL,
   `updated_at` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2575,7 +2726,7 @@ CREATE TABLE `landplans` (
   `dateType` enum('monthly','yearly') DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2591,7 +2742,7 @@ CREATE TABLE `landsaycards` (
   `descriptionAr` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2617,7 +2768,7 @@ CREATE TABLE `landsections` (
   `metaTagAr` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2634,7 +2785,7 @@ CREATE TABLE `landsliders` (
   `image` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2648,7 +2799,7 @@ CREATE TABLE `landsocialmedia` (
   `url` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2664,7 +2815,7 @@ CREATE TABLE `landsupportforms` (
   `message` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2674,11 +2825,11 @@ CREATE TABLE `landsupportforms` (
 
 CREATE TABLE `languages` (
   `id` int(11) NOT NULL,
-  `code` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `fullName` text CHARACTER SET utf16 COLLATE utf16_general_ci NOT NULL,
+  `code` mediumtext NOT NULL,
+  `fullName` text NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `languages`
@@ -2712,7 +2863,7 @@ CREATE TABLE `leaves` (
   `created_by` bigint(20) DEFAULT NULL,
   `ticket_flight_status` enum('no_both','go','back','go_back') DEFAULT NULL,
   `direct_manager` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2739,7 +2890,7 @@ CREATE TABLE `leaves_types` (
   `created_by` int(11) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2762,7 +2913,7 @@ CREATE TABLE `leave_types` (
   `parent` bigint(20) DEFAULT NULL,
   `daysBeforeApply` int(11) DEFAULT NULL,
   `deduction` float DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `leave_types`
@@ -2792,7 +2943,7 @@ CREATE TABLE `loans` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `loans`
@@ -2816,7 +2967,7 @@ CREATE TABLE `loan_options` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `loan_options`
@@ -2846,7 +2997,7 @@ CREATE TABLE `loan_pendings` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `direct_manager` bigint(20) DEFAULT NULL,
   `admin_message` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2860,7 +3011,7 @@ CREATE TABLE `mac_address` (
   `created_by` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `mac_address`
@@ -2891,7 +3042,7 @@ CREATE TABLE `meetings` (
   `duration` varchar(255) DEFAULT NULL,
   `location` varchar(255) DEFAULT NULL,
   `persons` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2908,7 +3059,7 @@ CREATE TABLE `meeting_employees` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `reject_reason` varchar(255) DEFAULT NULL,
   `status` enum('pending','accepted','rejected') DEFAULT 'pending'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `meeting_employees`
@@ -2927,7 +3078,7 @@ CREATE TABLE `migrations` (
   `id` int(10) UNSIGNED NOT NULL,
   `migration` varchar(255) NOT NULL,
   `batch` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2946,7 +3097,7 @@ CREATE TABLE `missions` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `status` varchar(255) DEFAULT 'pending',
   `direct_manager` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2958,7 +3109,7 @@ CREATE TABLE `model_has_permissions` (
   `permission_id` bigint(20) UNSIGNED NOT NULL,
   `model_type` varchar(255) NOT NULL,
   `model_id` bigint(20) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2970,7 +3121,7 @@ CREATE TABLE `model_has_roles` (
   `role_id` bigint(20) UNSIGNED NOT NULL,
   `model_type` varchar(255) NOT NULL,
   `model_id` bigint(20) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `model_has_roles`
@@ -3498,6 +3649,9 @@ INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 (43, 'App\\Models\\User', 703),
 (43, 'App\\Models\\User', 704),
 (43, 'App\\Models\\User', 710),
+(43, 'App\\Models\\User', 714),
+(43, 'App\\Models\\User', 715),
+(43, 'App\\Models\\User', 724),
 (44, 'App\\Models\\User', 3),
 (45, 'App\\Models\\User', 709),
 (45, 'App\\Models\\User', 711),
@@ -3517,7 +3671,7 @@ CREATE TABLE `nationalities` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `nationalities`
@@ -3544,7 +3698,7 @@ CREATE TABLE `news` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -3566,7 +3720,7 @@ CREATE TABLE `notifications` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `redirect_url` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -3587,7 +3741,7 @@ CREATE TABLE `offers` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `offer_category_id` bigint(20) UNSIGNED DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -3601,7 +3755,7 @@ CREATE TABLE `offer_categories` (
   `name_ar` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -3628,7 +3782,23 @@ CREATE TABLE `orders` (
   `user_id` int(11) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `order_id`, `name`, `email`, `card_number`, `card_exp_month`, `card_exp_year`, `plan_name`, `plan_id`, `price`, `price_currency`, `txn_id`, `payment_status`, `payment_type`, `receipt`, `user_id`, `created_at`, `updated_at`) VALUES
+(1, '67AC1BA274162944672032', NULL, NULL, NULL, NULL, NULL, 'اشترك مجانا', 1, 0.00, '$', '', 'succeeded', 'Manually', NULL, 1, '2025-02-12 05:55:14', '2025-02-12 05:55:14'),
+(2, '67AC1BB414E51036839402', NULL, NULL, NULL, NULL, NULL, 'premium', 2, 250.00, '$', '', 'succeeded', 'Manually', NULL, 1, '2025-02-12 05:55:32', '2025-02-12 05:55:32'),
+(3, '67AC1D714FEA3106275402', NULL, NULL, NULL, NULL, NULL, 'silver', 9, 300.00, '$', '', 'succeeded', 'Manually', NULL, 1, '2025-02-12 06:02:57', '2025-02-12 06:02:57'),
+(4, '67AC1F7D70049923592716', NULL, NULL, NULL, NULL, NULL, 'premium', 2, 250.00, '$', '', 'succeeded', 'Manually', NULL, 1, '2025-02-12 06:11:41', '2025-02-12 06:11:41'),
+(5, '67AC2040BA47F480682222', NULL, NULL, NULL, NULL, NULL, 'premium', 2, 250.00, '$', '', 'succeeded', 'Manually', NULL, 2, '2025-02-12 06:14:56', '2025-02-12 06:14:56'),
+(6, '67AC210992F06720216789', NULL, NULL, NULL, NULL, NULL, 'premium', 2, 250.00, '$', '', 'succeeded', 'Manually', NULL, 707, '2025-02-12 06:18:17', '2025-02-12 06:18:17'),
+(7, '67AC234C1661C688154661', NULL, NULL, NULL, NULL, NULL, 'اشترك مجانا', 1, 0.00, '$', '', 'succeeded', 'Manually', NULL, 707, '2025-02-12 06:27:56', '2025-02-12 06:27:56'),
+(8, '67AC2472AB968616472370', NULL, NULL, NULL, NULL, NULL, 'premium', 2, 250.00, '$', '', 'succeeded', 'Manually', NULL, 707, '2025-02-12 06:32:50', '2025-02-12 06:32:50'),
+(9, '67AC24B0F2309808694528', NULL, NULL, NULL, NULL, NULL, 'silver', 9, 300.00, '$', '', 'succeeded', 'Manually', NULL, 707, '2025-02-12 06:33:52', '2025-02-12 06:33:52'),
+(10, '67AC2520E0C84801610217', NULL, NULL, NULL, NULL, NULL, 'silver', 9, 300.00, '$', '', 'succeeded', 'Manually', NULL, 2, '2025-02-12 06:35:44', '2025-02-12 06:35:44');
 
 -- --------------------------------------------------------
 
@@ -3649,6 +3819,13 @@ CREATE TABLE `order_requests` (
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `order_requests`
+--
+
+INSERT INTO `order_requests` (`id`, `plan_id`, `start_date`, `end_date`, `payment`, `name`, `phone`, `email`, `updated_at`, `created_at`) VALUES
+(13, 2, '2025-02-11', '2025-05-11', 'credit_card', 'aa', '3222222222', 'elrubyomar@gmail.com', '2025-02-11 13:02:35', '2025-02-11 13:02:35');
+
 -- --------------------------------------------------------
 
 --
@@ -3664,7 +3841,7 @@ CREATE TABLE `other_payments` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `other_payments`
@@ -3692,7 +3869,7 @@ CREATE TABLE `overtimes` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `overtimes`
@@ -3720,7 +3897,7 @@ CREATE TABLE `over_time_requests` (
   `status` varchar(255) DEFAULT 'pending',
   `admin_message` text DEFAULT NULL,
   `direct_manager` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -3732,7 +3909,7 @@ CREATE TABLE `password_resets` (
   `email` varchar(255) NOT NULL,
   `token` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -3747,7 +3924,7 @@ CREATE TABLE `payees` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -3762,7 +3939,7 @@ CREATE TABLE `payers` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -3776,7 +3953,7 @@ CREATE TABLE `payment_types` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `payment_types`
@@ -3798,7 +3975,7 @@ CREATE TABLE `payroll_settings` (
   `created_by` bigint(20) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -3813,7 +3990,7 @@ CREATE TABLE `payslip_types` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `payslip_types`
@@ -3847,7 +4024,7 @@ CREATE TABLE `pay_slips` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `is_recieved` int(11) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `pay_slips`
@@ -3877,7 +4054,7 @@ CREATE TABLE `performance` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `performance_period_id` bigint(20) UNSIGNED DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -3893,7 +4070,7 @@ CREATE TABLE `performance_details` (
   `notes` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -3908,7 +4085,7 @@ CREATE TABLE `performance_factors` (
   `performance_period_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -3923,7 +4100,7 @@ CREATE TABLE `performance_periods` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `months_no` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -3938,7 +4115,7 @@ CREATE TABLE `performance__types` (
   `created_by` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `performance__types`
@@ -3960,7 +4137,7 @@ CREATE TABLE `permissions` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `category` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `permissions`
@@ -4270,7 +4447,7 @@ CREATE TABLE `personal_access_tokens` (
   `last_used_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -4287,7 +4464,7 @@ CREATE TABLE `places` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `places`
@@ -4316,15 +4493,15 @@ CREATE TABLE `plans` (
   `image` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `plans`
 --
 
 INSERT INTO `plans` (`id`, `name`, `price`, `storage`, `chat_gpt`, `duration`, `max_users`, `max_employees`, `description`, `image`, `created_at`, `updated_at`) VALUES
-(1, 'Free Plan', 0.00, NULL, 0, 'unlimited', 20, 500, 'Allow users to access ChatGPT features with this plan.', 'free_plan.png', '2022-02-05 22:59:41', '2025-02-05 07:19:32'),
-(2, 'premium', 250.00, NULL, 0, 'unlimited', 20, 20, 'vmvb', NULL, '2022-05-11 07:58:38', '2022-05-11 07:58:38'),
+(1, 'اشترك مجانا', 0.00, '3', 1, 'unlimited', 5, 20, 'Allow users to access ChatGPT features with this plan.', 'free_plan.png', '2022-02-05 22:59:41', '2025-02-10 20:17:12'),
+(2, 'premium', 250.00, NULL, 0, '6months', 20, 20, 'vmvb', NULL, '2022-05-11 07:58:38', '2022-05-11 07:58:38'),
 (9, 'silver', 300.00, '6000', 1, 'year', 50, 500, NULL, NULL, '2025-02-03 13:59:12', '2025-02-03 14:23:13');
 
 -- --------------------------------------------------------
@@ -4339,23 +4516,24 @@ CREATE TABLE `plan_request` (
   `buisness_type` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `phone` varchar(255) DEFAULT NULL,
+  `approve` int(11) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `plan_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `plan_request`
 --
 
-INSERT INTO `plan_request` (`id`, `name`, `buisness_type`, `email`, `phone`, `created_at`, `updated_at`, `plan_id`) VALUES
-(2, 'omar elruby', NULL, 'elrubyomar@gmail.com', '3222222222', '2025-02-05 03:13:27', '2025-02-05 03:13:27', 2),
-(3, 'omar elruby', NULL, 'elrubyomar@gmail.com', '3222222222', '2025-02-05 03:14:21', '2025-02-05 03:14:21', 2),
-(4, 'omar elruby', NULL, 'elrubyomar@gmail.com', '3222222222', '2025-02-05 03:16:05', '2025-02-05 03:16:05', 2),
-(5, 'omar elruby', NULL, 'elrubyomar@gmail.com', '3222222222', '2025-02-05 03:16:34', '2025-02-05 03:16:34', 9),
-(6, 'aa', NULL, 'elrubyomar@gmail.com', '3222222222', '2025-02-05 22:24:45', '2025-02-05 22:24:45', 2),
-(7, 'aa', NULL, 'elrubyomar@gmail.com', '3222222222', '2025-02-05 22:24:46', '2025-02-05 22:24:46', 2),
-(8, 'omar elruby', 'ada', 'elrubyomar@gmail.com', '3222222222', '2025-02-05 22:44:32', '2025-02-05 22:44:32', 9);
+INSERT INTO `plan_request` (`id`, `name`, `buisness_type`, `email`, `phone`, `approve`, `created_at`, `updated_at`, `plan_id`) VALUES
+(2, 'omar elruby', NULL, 'elrubyomar@gmail.com', '3222222222', 1, '2025-02-05 03:13:27', '2025-02-06 22:35:57', 2),
+(3, 'omar elruby', NULL, 'elrubyomar@gmail.com', '3222222222', 1, '2025-02-05 03:14:21', '2025-02-06 22:37:28', 2),
+(4, 'omar elruby', NULL, 'elrubyomar@gmail.com', '3222222222', 2, '2025-02-05 03:16:05', '2025-02-06 22:40:41', 2),
+(5, 'omar elruby', NULL, 'elrubyomar@gmail.com', '3222222222', 2, '2025-02-05 03:16:34', '2025-02-06 22:43:38', 9),
+(6, 'aa', NULL, 'elrubyomar@gmail.com', '3222222222', 2, '2025-02-05 22:24:45', '2025-02-06 22:43:54', 2),
+(7, 'aa', NULL, 'elrubyomar@gmail.com', '3222222222', 1, '2025-02-05 22:24:46', '2025-02-11 13:02:35', 2),
+(8, 'omar elruby', 'ada', 'elrubyomar@gmail.com', '3222222222', 1, '2025-02-05 22:44:32', '2025-02-06 22:36:11', 9);
 
 -- --------------------------------------------------------
 
@@ -4370,7 +4548,7 @@ CREATE TABLE `plan_requests` (
   `duration` varchar(20) NOT NULL DEFAULT 'monthly',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `plan_requests`
@@ -4397,7 +4575,7 @@ CREATE TABLE `promotions` (
   `created_by` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -4417,7 +4595,7 @@ CREATE TABLE `qualifications` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -4437,7 +4615,7 @@ CREATE TABLE `questions` (
   `type` varchar(255) NOT NULL DEFAULT 'choice',
   `parent_id` bigint(20) UNSIGNED DEFAULT NULL,
   `point` double(8,2) DEFAULT NULL COMMENT 'null if has multi select'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -4452,7 +4630,7 @@ CREATE TABLE `question_options` (
   `point` double(8,2) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -4467,7 +4645,7 @@ CREATE TABLE `request_types` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `request_types`
@@ -4493,7 +4671,7 @@ CREATE TABLE `resignations` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -4508,7 +4686,7 @@ CREATE TABLE `roles` (
   `created_by` int(11) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `roles`
@@ -4529,7 +4707,7 @@ INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_by`, `created_at`, `up
 CREATE TABLE `role_has_permissions` (
   `permission_id` bigint(20) UNSIGNED NOT NULL,
   `role_id` bigint(20) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `role_has_permissions`
@@ -5129,7 +5307,7 @@ CREATE TABLE `salary_components_types` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `salary_components_types`
@@ -5169,7 +5347,7 @@ CREATE TABLE `salary_settings` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `other_currency_rate` double NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `salary_settings`
@@ -5285,7 +5463,17 @@ INSERT INTO `salary_settings` (`id`, `saudi_company_insurance_percentage`, `saud
 (107, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 8, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 702, '2025-01-25 23:13:45', '2025-01-25 23:13:45', 1),
 (108, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 8, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 704, '2025-01-26 11:30:22', '2025-01-26 11:30:22', 1),
 (109, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 8, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 705, '2025-01-26 11:43:51', '2025-01-26 11:43:51', 1),
-(110, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 8, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 710, '2025-01-26 15:48:29', '2025-01-26 15:48:29', 1);
+(110, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 8, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 710, '2025-01-26 15:48:29', '2025-01-26 15:48:29', 1),
+(111, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 8, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 714, '2025-02-12 18:42:57', '2025-02-12 18:42:57', 1),
+(112, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 8, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 715, '2025-02-12 20:39:35', '2025-02-12 20:39:35', 1),
+(113, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 8, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 716, '2025-02-12 20:45:46', '2025-02-12 20:45:46', 1),
+(114, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 8, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 721, '2025-02-12 21:18:34', '2025-02-12 21:18:34', 1),
+(115, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 8, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 722, '2025-02-12 21:23:12', '2025-02-12 21:23:12', 1),
+(116, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 8, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 723, '2025-02-12 21:26:53', '2025-02-12 21:26:53', 1),
+(117, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 8, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 724, '2025-02-12 21:31:11', '2025-02-12 21:31:11', 1),
+(118, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 8, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 725, '2025-02-12 21:33:49', '2025-02-12 21:33:49', 1),
+(119, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 8, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 726, '2025-02-12 21:36:00', '2025-02-12 21:36:00', 1),
+(120, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 8, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 727, '2025-02-12 21:42:28', '2025-02-12 21:42:28', 1);
 
 -- --------------------------------------------------------
 
@@ -5304,7 +5492,7 @@ CREATE TABLE `saturation_deductions` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `saturation_deductions`
@@ -5350,7 +5538,7 @@ CREATE TABLE `settings` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `settings`
@@ -5397,7 +5585,7 @@ CREATE TABLE `set_salaries` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -5412,7 +5600,7 @@ CREATE TABLE `shifts` (
   `shift_id` bigint(20) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -5447,12 +5635,12 @@ INSERT INTO `sub_department` (`id`, `department_id`, `created_by`, `name`, `name
 CREATE TABLE `sub_request_types` (
   `id` int(11) NOT NULL,
   `request_type_id` int(11) NOT NULL,
-  `name` text DEFAULT NULL,
-  `name_ar` text DEFAULT NULL,
+  `name` mediumtext DEFAULT NULL,
+  `name_ar` mediumtext DEFAULT NULL,
   `created_by` int(11) DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `sub_request_types`
@@ -5481,7 +5669,7 @@ CREATE TABLE `tasks` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `created_by` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tasks`
@@ -5507,7 +5695,7 @@ CREATE TABLE `task_activity_logs` (
   `description` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -5523,7 +5711,7 @@ CREATE TABLE `task_comments` (
   `attachments` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -5541,7 +5729,7 @@ CREATE TABLE `terminate_requests` (
   `reason` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -5560,7 +5748,7 @@ CREATE TABLE `terminations` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -5575,7 +5763,7 @@ CREATE TABLE `termination_types` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `termination_types`
@@ -5605,7 +5793,7 @@ CREATE TABLE `tickets` (
   `status` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -5622,7 +5810,7 @@ CREATE TABLE `ticket_replies` (
   `is_read` int(11) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -5640,7 +5828,7 @@ CREATE TABLE `time_sheets` (
   `created_by` int(11) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `time_sheets`
@@ -5674,7 +5862,7 @@ CREATE TABLE `trainers` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -5700,7 +5888,7 @@ CREATE TABLE `trainings` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -5715,7 +5903,7 @@ CREATE TABLE `training_types` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `training_types`
@@ -5741,7 +5929,7 @@ CREATE TABLE `transfers` (
   `created_by` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -5761,7 +5949,7 @@ CREATE TABLE `transfer_balances` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -5783,7 +5971,7 @@ CREATE TABLE `travels` (
   `created_by` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -5825,23 +6013,23 @@ CREATE TABLE `users` (
   `activity_type` varchar(255) DEFAULT NULL,
   `job_title` varchar(255) DEFAULT NULL,
   `work_email` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `company_name`, `email`, `phone`, `email_verified_at`, `password`, `type`, `request_type`, `avatar`, `lang`, `plan`, `plan_expire_date`, `requested_plan`, `number_of_employees`, `device_id`, `fcm_token`, `forgetcode`, `last_login`, `is_active`, `user_status`, `company_slate_readed`, `created_by`, `remember_token`, `created_at`, `updated_at`, `messenger_color`, `dark_mode`, `active_status`, `have_hr`, `activity_type`, `job_title`, `work_email`) VALUES
-(1, 'Super Admin', NULL, 'superadmin@example.com', NULL, NULL, '$2y$10$gCmhYhUoZ7YiNIMfbNOpAePS.FB8cOfuzMI2xoQxVu3Nzdi67tckS', 'super admin', NULL, '', 'ar', NULL, NULL, 0, NULL, NULL, NULL, NULL, '2025-02-06 12:08:48', 1, 1, NULL, '0', NULL, '2022-02-05 22:59:38', '2025-02-06 12:11:00', '#2180f3', 0, 0, NULL, NULL, NULL, NULL),
-(2, 'admin', NULL, 'admin@idev.com', NULL, NULL, '$2y$10$gCmhYhUoZ7YiNIMfbNOpAePS.FB8cOfuzMI2xoQxVu3Nzdi67tckS', 'company', NULL, 'uploads/avatar//41081a9b2f965b50f638a25019317384_1737883822.jpg', 'en', 1, NULL, 0, NULL, NULL, NULL, NULL, '2025-02-06 12:12:01', 1, 1, NULL, '1', NULL, '2025-01-26 11:30:22', '2025-02-06 12:12:01', '#2180f3', 0, 0, NULL, NULL, NULL, NULL),
-(703, 'company', NULL, 'company@example.com', NULL, NULL, '$2y$10$iaSn1zeW4x8fv9Ohjf7m8eGbLCcKSao1bEA4BqCQEs..Mth41K8c.', 'company', NULL, '', 'en', 1, NULL, 0, NULL, NULL, NULL, NULL, '2025-01-26 11:29:29', 1, 1, NULL, '1', NULL, '2025-01-26 11:27:03', '2025-01-26 11:29:29', '#2180f3', 0, 0, NULL, NULL, NULL, NULL),
-(707, 'omar elruby', NULL, 'omar@gmail.com', NULL, NULL, '$2y$10$3Dl5/.K/gkvlPdzl1aoHrORwKoBZSBZNdLJQhoQ16WXqk/WJwvh3W', 'company', NULL, 'uploads/avatar//Diamond-Painting-Chat-avec-Rose_1737884631.jpg', '', 1, NULL, 0, NULL, NULL, NULL, NULL, '2025-01-26 13:00:51', 1, 1, NULL, '1', NULL, '2025-01-26 11:43:51', '2025-01-26 13:00:51', '#2180f3', 0, 0, NULL, NULL, NULL, NULL),
-(708, 'ahmed', NULL, 'ahmed@idev.com', NULL, NULL, '$2y$10$gCmhYhUoZ7YiNIMfbNOpAePS.FB8cOfuzMI2xoQxVu3Nzdi67tckS', 'company', NULL, 'uploads/avatar//41081a9b2f965b50f638a25019317384_1737883822.jpg', '', 1, NULL, 0, NULL, NULL, NULL, NULL, '2025-01-26 11:39:55', 1, 1, NULL, '1', NULL, '2025-01-26 11:30:22', '2025-01-26 11:39:55', '#2180f3', 0, 0, NULL, NULL, NULL, NULL),
-(709, 'omar elruby', NULL, 'elrubyomar@gmail.com', NULL, NULL, '$2y$10$siidKj0LkTmy3kjNgMEiWOUhg9DMgtqLErL1ugN59dPqesHWFOs1O', 'employee', NULL, NULL, 'ar', NULL, NULL, 0, NULL, NULL, NULL, NULL, '2025-02-02 19:03:54', 1, 1, NULL, '2', NULL, '2025-01-26 13:03:43', '2025-02-02 19:03:54', '#2180f3', 0, 0, NULL, NULL, NULL, NULL),
-(710, 'New Company', NULL, 'company@company.com', NULL, NULL, '$2y$10$ivVl.tV2Ex4cLpBLorkbs.9mPj6ybm49iyY.mPlW3HwJAgGlpqX3W', 'company', NULL, 'uploads/avatar//Screenshot 2025-01-17 at 1.29.15 AM_1737899309.png', '', 1, NULL, 0, NULL, NULL, NULL, NULL, '2025-01-26 15:49:23', 1, 1, NULL, '1', NULL, '2025-01-26 15:48:29', '2025-01-26 15:49:23', '#2180f3', 0, 0, NULL, NULL, NULL, NULL),
+(1, 'Admin', NULL, 'admin@admin.com', NULL, NULL, '$2y$10$H4LXmdum9sa3yC3KMLngEeaOwdqTV5CrxRrt.K.eQsUVB6I67Rh1m', 'super admin', NULL, '', 'ar', 2, NULL, 0, NULL, NULL, NULL, NULL, '2025-02-13 14:18:45', 1, 1, NULL, '0', NULL, '2022-02-05 22:59:38', '2025-02-13 14:18:45', '#2180f3', 0, 0, NULL, NULL, NULL, NULL),
+(2, 'admin', NULL, 'admin@idev.com', NULL, NULL, '$2y$10$bt8ZuiLH3Kc5mcBasPEKruEOsiYaVXd6fMlDwId6cSC0J5tXtm1Dy', 'company', NULL, 'uploads/avatar//41081a9b2f965b50f638a25019317384_1737883822.jpg', 'en', 9, '2026-02-12', 0, NULL, NULL, NULL, NULL, '2025-02-13 15:39:27', 1, 1, NULL, '1', NULL, '2025-01-26 11:30:22', '2025-02-13 15:40:00', '#2180f3', 0, 0, NULL, NULL, NULL, NULL),
+(703, 'Omar Ahmed', NULL, 'company@example.com', NULL, NULL, '$2y$10$iaSn1zeW4x8fv9Ohjf7m8eGbLCcKSao1bEA4BqCQEs..Mth41K8c.', 'company', NULL, '', 'en', 1, NULL, 0, NULL, NULL, NULL, NULL, '2025-01-26 11:29:29', 1, 1, NULL, '1', NULL, '2025-01-26 11:27:03', '2025-02-12 06:43:50', '#2180f3', 0, 0, NULL, NULL, NULL, NULL),
+(707, 'omar elruby', NULL, 'omar@gmail.com', NULL, NULL, '$2y$10$3Dl5/.K/gkvlPdzl1aoHrORwKoBZSBZNdLJQhoQ16WXqk/WJwvh3W', 'company', NULL, 'uploads/avatar//Diamond-Painting-Chat-avec-Rose_1737884631.jpg', '', 9, '2026-02-12', 0, NULL, NULL, NULL, NULL, '2025-01-26 13:00:51', 1, 1, NULL, '1', NULL, '2025-01-26 11:43:51', '2025-02-12 06:33:52', '#2180f3', 0, 0, NULL, NULL, NULL, NULL),
+(710, 'New Company', NULL, 'company@company.com', NULL, NULL, '$2y$10$ivVl.tV2Ex4cLpBLorkbs.9mPj6ybm49iyY.mPlW3HwJAgGlpqX3W', 'company', NULL, 'uploads/avatar//Screenshot 2025-01-17 at 1.29.15 AM_1737899309.png', '', 2, NULL, 0, NULL, NULL, NULL, NULL, '2025-01-26 15:49:23', 1, 1, NULL, '1', NULL, '2025-01-26 15:48:29', '2025-01-26 15:49:23', '#2180f3', 0, 0, NULL, NULL, NULL, NULL),
 (711, 'Ahmed Malek', NULL, 'malek@gmail.com', NULL, NULL, '$2y$10$Khw5pPZK8APmnsrfMg77A.CV6ilZnXd5VToriuIYbgAzbsPSrIR1S', 'employee', NULL, NULL, 'en', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 1, 1, NULL, '2', NULL, '2025-01-28 13:22:29', '2025-01-28 13:22:29', '#2180f3', 0, 0, NULL, NULL, NULL, NULL),
 (712, 'depadmin', NULL, 'depadmin@gmail.com', NULL, NULL, '$2y$10$dyU8LMVhWKcLr8CVSK2SROxP9x5S73FJON4YTs/I57C8d2shfi9Ue', 'employee', NULL, NULL, 'en', NULL, NULL, 0, NULL, NULL, NULL, NULL, '2025-02-03 02:10:41', 1, 1, NULL, '2', NULL, '2025-01-29 20:56:17', '2025-02-03 02:10:41', '#2180f3', 0, 0, NULL, NULL, NULL, NULL),
-(713, 'subdepadmin', NULL, 'subdepadmin@gmail.com', NULL, NULL, '$2y$10$3gbR1OJ8mk5mAjkc6jqNkuaRbaGj/asF6FA1HiMc2OhAD0kiNscgu', 'employee', NULL, NULL, 'en', NULL, NULL, 0, NULL, NULL, NULL, NULL, '2025-02-04 00:58:05', 1, 1, NULL, '2', NULL, '2025-01-29 20:57:30', '2025-02-04 00:58:05', '#2180f3', 0, 0, NULL, NULL, NULL, NULL);
+(713, 'subdepadmin', NULL, 'subdepadmin@gmail.com', NULL, NULL, '$2y$10$3gbR1OJ8mk5mAjkc6jqNkuaRbaGj/asF6FA1HiMc2OhAD0kiNscguPNPAPU,Y]JoS', 'employee', NULL, NULL, 'en', NULL, NULL, 0, NULL, NULL, NULL, NULL, '2025-02-04 00:58:05', 1, 1, NULL, '2', NULL, '2025-01-29 20:57:30', '2025-02-04 00:58:05', '#2180f3', 0, 0, NULL, NULL, NULL, NULL),
+(714, 'Demo', NULL, 'admin@demo.com', NULL, NULL, '$2y$10$GXIaNyWOaY4OMjFiBloDrOnsJhxWpG400BKd6c1xudPW6RgjUhODG', 'company', NULL, 'uploads/avatar//Logo_1739378577.jpeg', '', 1, NULL, 0, NULL, NULL, NULL, NULL, NULL, 1, 1, NULL, '1', NULL, '2025-02-12 18:42:57', '2025-02-12 18:42:57', '#2180f3', 0, 0, NULL, NULL, NULL, NULL),
+(724, 'aaa', NULL, 'elruddbyomar@gmail.com', NULL, NULL, '$2y$10$VkGD/qizhQzi6I7dsCPEw.ZAERxgSsvgzjsbcHtEGqA/07mJP/J4G', 'company', NULL, 'uploads/avatar//41081a9b2f965b50f638a25019317384_1739388670.jpg', '', 1, NULL, 0, NULL, NULL, NULL, NULL, NULL, 1, 1, NULL, '1', NULL, '2025-02-12 21:31:10', '2025-02-12 21:31:10', '#2180f3', 0, 0, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -5856,7 +6044,7 @@ CREATE TABLE `user_coupons` (
   `order` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -5880,7 +6068,7 @@ CREATE TABLE `vehicles` (
   `created_by` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -5900,7 +6088,7 @@ CREATE TABLE `warnings` (
   `created_by` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -5945,7 +6133,7 @@ CREATE TABLE `work_from_home_requests` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `direct_manager` bigint(20) DEFAULT NULL,
   `reject_reason` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -5960,7 +6148,7 @@ CREATE TABLE `work_unites` (
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `work_unites`
@@ -5983,7 +6171,7 @@ CREATE TABLE `zkteco_devices` (
   `status` tinyint(4) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -6005,7 +6193,7 @@ CREATE TABLE `zoom_meetings` (
   `created_by` int(11) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indexes for dumped tables
@@ -6178,6 +6366,12 @@ ALTER TABLE `company_ducument_upload_categories`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `company_email_template`
+--
+ALTER TABLE `company_email_template`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `company_job_requests`
 --
 ALTER TABLE `company_job_requests`
@@ -6291,6 +6485,12 @@ ALTER TABLE `ducument_upload_images`
   ADD KEY `ducument_upload_images_ducument_upload_id_foreign` (`ducument_upload_id`);
 
 --
+-- Indexes for table `email_template`
+--
+ALTER TABLE `email_template`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `employees`
 --
 ALTER TABLE `employees`
@@ -6355,6 +6555,12 @@ ALTER TABLE `employee_shifts`
 -- Indexes for table `employee_tasks`
 --
 ALTER TABLE `employee_tasks`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `end_service`
+--
+ALTER TABLE `end_service`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -7364,6 +7570,12 @@ ALTER TABLE `company_ducument_upload_categories`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `company_email_template`
+--
+ALTER TABLE `company_email_template`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `company_job_requests`
 --
 ALTER TABLE `company_job_requests`
@@ -7403,7 +7615,7 @@ ALTER TABLE `complaints`
 -- AUTO_INCREMENT for table `contact_us`
 --
 ALTER TABLE `contact_us`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `contract_templates`
@@ -7472,6 +7684,12 @@ ALTER TABLE `ducument_upload_images`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `email_template`
+--
+ALTER TABLE `email_template`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
@@ -7536,6 +7754,12 @@ ALTER TABLE `employee_shifts`
 --
 ALTER TABLE `employee_tasks`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `end_service`
+--
+ALTER TABLE `end_service`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `evaluations`
@@ -7757,7 +7981,7 @@ ALTER TABLE `job_requests`
 -- AUTO_INCREMENT for table `job_stages`
 --
 ALTER TABLE `job_stages`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=153;
 
 --
 -- AUTO_INCREMENT for table `job_types`
@@ -7973,13 +8197,13 @@ ALTER TABLE `offer_categories`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `order_requests`
 --
 ALTER TABLE `order_requests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `other_payments`
@@ -8153,7 +8377,7 @@ ALTER TABLE `salary_components_types`
 -- AUTO_INCREMENT for table `salary_settings`
 --
 ALTER TABLE `salary_settings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
 
 --
 -- AUTO_INCREMENT for table `saturation_deductions`
@@ -8291,7 +8515,7 @@ ALTER TABLE `travels`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=714;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=728;
 
 --
 -- AUTO_INCREMENT for table `user_coupons`

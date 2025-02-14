@@ -399,7 +399,10 @@
                         </div>
 
                         <!-- Language Dropdown Section -->
-                        <div class="dropdown mx-2"
+                         <div class="dropdown mx-2"
+ 
+                        <div class="dropdown"
+ 
                         style="{{ app()->getLocale() == 'ar' ? 'margin-left: 150px' : 'margin-right: 30px' }}">
                             <a class="dropdown-toggle d-inline-flex align-items-center p-0" href="#"
                                id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true"

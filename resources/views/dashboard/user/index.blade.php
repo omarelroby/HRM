@@ -525,11 +525,11 @@
         });
         @endif
 
-        @if(Session::has('wrong'))
+        @if(Session::has('error'))
         Swal.fire({
             icon: 'error',
             title: 'Error!',
-            text: "{{ session('wrong') }}",
+            text: "{{ session('error') }}",
         });
         @endif
 

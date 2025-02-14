@@ -438,7 +438,7 @@
                 <div class="row justify-content-start">
                     <div class="col-lg-12">
                         <h2>{{$homeSection->title_ar}}</h2>
-                        <p>{{$homeSection->description_ar}}</p>
+                         <p>{!! $homeSection->description_ar ??''!!}</p>
                         <a href="#about" class="btn-get-started">{{__('Get Started')}}</a>
                     </div>
                 </div>
@@ -448,7 +448,8 @@
                 <div class="row justify-content-start">
                     <div class="col-lg-12">
                         <h2>{{$homeSection->title}}</h2>
-                        <p>{{$homeSection->description}}</p>
+
+                        <p>{!! $homeSection->description ??''!!}</p>
                         <a href="#about" class="btn-get-started">{{__('Get Started')}}</a>
                     </div>
                 </div>
@@ -682,7 +683,7 @@
                                         <span class="text-muted">/ {{ __('month') }}</span>
                                     </h4>
                                 </div>
-                                <p class="text-center" style="height: 50px;">{{$plan->description??''}}</p>
+                                <p class="text-center" style="height: 50px;">{!! $plan->description ??''!!} </p>
 
                                 <ul class="list-unstyled"@if(app()->getLocale()=='ar') dir="rtl"@endif>
                                     <li style="font-weight: bold;" class="{{ $plan->max_employees ? '' : 'na' }} mb-3">
