@@ -47,7 +47,7 @@
                     class="d-flex align-items-center justify-content-between mb-3 p-2 border border-dashed br-5">
                     <div class="d-flex align-items-center">
                         <a href="javascript:void(0);" class="avatar flex-shrink-0">
-                            <img src="assets/img/profiles/avatar-24.jpg" class="rounded-circle border border-2"
+                            <img src="{{ asset('public/assets/img/profiles/avatar-24.jpg') }}" class="rounded-circle border border-2"
                                  alt="img">
                         </a>
                         <div class="ms-2">
@@ -65,7 +65,7 @@
                 <div class="d-flex align-items-center justify-content-between mb-3 p-2 border br-5">
                     <div class="d-flex align-items-center">
                         <a href="javascript:void(0);" class="avatar flex-shrink-0">
-                            <img src="assets/img/profiles/avatar-23.jpg" class="rounded-circle border border-2"
+                            <img src="{{ asset('public/assets/img/profiles/avatar-23.jpg') }}" class="rounded-circle border border-2"
                                  alt="img">
                         </a>
                         <div class="ms-2">
@@ -84,7 +84,7 @@
                     <div class="d-flex align-items-center justify-content-between">
                         <div class="d-flex align-items-center">
                             <a href="javascript:void(0);" class="avatar flex-shrink-0">
-                                <img src="assets/img/profiles/avatar-27.jpg"
+                                <img src="{{ asset('public/assets/img/profiles/avatar-27.jpg') }}"
                                      class="rounded-circle border border-2" alt="img">
                             </a>
                             <div class="ms-2">
@@ -124,7 +124,7 @@
             <div class="d-flex align-items-center justify-content-between mb-3 p-2 border border-dashed br-5">
                 <div class="d-flex align-items-center">
 										<span class="avatar flex-shrink-0">
-											<img src="assets/img/profiles/avatar-29.jpg"
+											<img src="{{ asset('assets/img/profiles/avatar-29.jpg') }}"
                                                  class="rounded-circle border border-2" alt="img">
 										</span>
                     <div class="ms-2">

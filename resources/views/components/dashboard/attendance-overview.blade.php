@@ -1,4 +1,8 @@
+ 
+@props(['attendanceData' =>  ['present' => 0,'late' => 0,'leave' => 0,'absent' => 0], 'totalAttendance' => 0, 'attendancePercentage' => ['present' => 0,'late' => 0,'leave' => 0,'absent'=> 0]])
+ 
 <!-- Attendance Overview -->
+ 
 <div class="col-xxl-4 col-xl-6 d-flex">
     <div class="card flex-fill">
         <div class="card-header pb-2 d-flex align-items-center justify-content-between flex-wrap">
@@ -25,25 +29,25 @@
                 <canvas id="attendance" height="200"></canvas>
                 <div class="position-absolute text-center attendance-canvas">
                     <p class="fs-13 mb-1">Total Attendance</p>
-                    <h3>120</h3>
+                    <h3>{{ $totalAttendance }}</h3>
                 </div>
             </div>
             <h6 class="mb-3">Status</h6>
             <div class="d-flex align-items-center justify-content-between">
                 <p class="f-13 mb-2"><i class="ti ti-circle-filled text-success me-1"></i>Present</p>
-                <p class="f-13 fw-medium text-gray-9 mb-2">59%</p>
+                <p class="f-13 fw-medium text-gray-9 mb-2">{{ $attendancePercentage['present'] }} %</p>
             </div>
             <div class="d-flex align-items-center justify-content-between">
                 <p class="f-13 mb-2"><i class="ti ti-circle-filled text-secondary me-1"></i>Late</p>
-                <p class="f-13 fw-medium text-gray-9 mb-2">21%</p>
+                <p class="f-13 fw-medium text-gray-9 mb-2">{{ $attendancePercentage['late'] }} %</p>
             </div>
             <div class="d-flex align-items-center justify-content-between">
                 <p class="f-13 mb-2"><i class="ti ti-circle-filled text-warning me-1"></i>Permission</p>
-                <p class="f-13 fw-medium text-gray-9 mb-2">2%</p>
+                <p class="f-13 fw-medium text-gray-9 mb-2">{{ $attendancePercentage['leave'] }} %</p>
             </div>
             <div class="d-flex align-items-center justify-content-between mb-2">
                 <p class="f-13 mb-2"><i class="ti ti-circle-filled text-danger me-1"></i>Absent</p>
-                <p class="f-13 fw-medium text-gray-9 mb-2">15%</p>
+                <p class="f-13 fw-medium text-gray-9 mb-2">{{ $attendancePercentage['absent'] }} %</p>
             </div>
             <div class="bg-light br-5 box-shadow-xs p-2 pb-0 d-flex align-items-center justify-content-between flex-wrap">
                 <div class="d-flex align-items-center">
@@ -71,7 +75,10 @@
         </div>
     </div>
 </div>
+ 
+ 
 <!-- /Attendance Overview -->
+ 
 <script>
     $(function () {
         'use strict';
@@ -79,34 +86,33 @@
         if($('#attendance').length > 0) {
             var ctx = document.getElementById('attendance').getContext('2d');
             var mySemiDonutChart = new Chart(ctx, {
-                type: 'doughnut', // Chart type
+                type: 'doughnut',
                 data: {
                     labels: ['Late','Present', 'Permission', 'Absent'],
                     datasets: [{
-                        label: 'Semi Donut',
-                        data: [40, 20, 30, 10],
-                        backgroundColor: ['#0C4B5E', '#03C95A', '#FFC107', '#E70D0D'],
+                        label: 'Attendance Overview',
+                        data: [
+                            {{ $attendanceData['present'] }},
+                            {{ $attendanceData['late'] }},
+                            {{ $attendanceData['leave'] }},
+                            {{ $attendanceData['absent'] }}
+                        ],
+                        backgroundColor: ['#03C95A', '#0C4B5E', '#FFC107', '#E70D0D'],
                         borderWidth: 5,
                         borderRadius: 10,
-                        borderColor: '#fff', // Border between segments
-                        hoverBorderWidth: 0,   // Border radius for curved edges
+                        borderColor: '#fff',
+                        hoverBorderWidth: 0,
                         cutout: '60%',
                     }]
                 },
                 options: {
                     rotation: -100,
                     circumference: 200,
-                    layout: {
-                        padding: {
-                            top: -20,    // Set to 0 to remove top padding
-                            bottom: -20, // Set to 0 to remove bottom padding
-                        }
-                    },
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
                         legend: {
-                            display: false // Hide the legend
+                            display: false
                         }
                     },
                 }
