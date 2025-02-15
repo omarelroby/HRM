@@ -82,66 +82,127 @@
                             <a href="#" class="btn btn-menubar me-1" data-bs-toggle="dropdown">
                                 <i class="ti ti-layout-grid"></i>
                             </a>
-                            <div class="dropdown-menu dropdown-lg dropdown-menu-start">
-                                <div class="card mb-0 border-0 shadow-none">
-                                    <div class="card-header">
-                                        <h4>CRM</h4>
-                                    </div>
-                                    <div class="card-body pb-1">
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <a href="contacts.html"
-                                                   class="d-flex align-items-center justify-content-between p-2 crm-link mb-3">
+                            @if(auth()->user()->type === 'super admin')
+                                <div class="dropdown-menu dropdown-lg dropdown-menu-start">
+                                    <div class="card mb-0 border-0 shadow-none">
+                                        <div class="card-header">
+                                            <h4>CRM</h4>
+                                        </div>
+                                        <div class="card-body pb-1">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <a href="{{ route('home') }}"
+                                                       class="d-flex align-items-center justify-content-between p-2 crm-link mb-3">
 														<span class="d-flex align-items-center me-3">
-															<i class="ti ti-user-shield text-default me-2"></i>Contacts
+															<i class="ti ti-smart-home text-default me-2"></i>{{ __('Dashboard') }}
 														</span>
-                                                    <i class="ti ti-arrow-right"></i>
-                                                </a>
-                                                <a href="deals-grid.html"
-                                                   class="d-flex align-items-center justify-content-between p-2 crm-link mb-3">
+                                                        <i class="ti ti-arrow-right"></i>
+                                                    </a>
+                                                    <a href="{{ url('/plans') }}"
+                                                       class="d-flex align-items-center justify-content-between p-2 crm-link mb-3">
 														<span class="d-flex align-items-center me-3">
-															<i class="ti ti-heart-handshake text-default me-2"></i>Deals
+															<i class="ti ti-subtask text-default me-2"></i>{{ __('Plan') }}
 														</span>
-                                                    <i class="ti ti-arrow-right"></i>
-                                                </a>
-                                                <a href="pipeline.html"
-                                                   class="d-flex align-items-center justify-content-between p-2 crm-link mb-3">
+                                                        <i class="ti ti-arrow-right"></i>
+                                                    </a>
+                                                    <a href="{{ url('/plan-requests') }}"
+                                                       class="d-flex align-items-center justify-content-between p-2 crm-link mb-3">
 														<span class="d-flex align-items-center me-3">
-															<i class="ti ti-timeline-event-text text-default me-2"></i>Pipeline
+															<i class="ti ti-git-pull-request text-default me-2"></i>{{ __('Plan Requests') }}
 														</span>
-                                                    <i class="ti ti-arrow-right"></i>
-                                                </a>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <a href="companies-grid.html"
-                                                   class="d-flex align-items-center justify-content-between p-2 crm-link mb-3">
+                                                        <i class="ti ti-arrow-right"></i>
+                                                    </a>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <a href="{{ route('user.index') }}"
+                                                       class="d-flex align-items-center justify-content-between p-2 crm-link mb-3">
 														<span class="d-flex align-items-center me-3">
-															<i class="ti ti-building text-default me-2"></i>Companies
+															<i class="ti ti-building text-default me-2"></i>{{ __('Companies') }}
 														</span>
-                                                    <i class="ti ti-arrow-right"></i>
-                                                </a>
-                                                <a href="leads-grid.html"
-                                                   class="d-flex align-items-center justify-content-between p-2 crm-link mb-3">
+                                                        <i class="ti ti-arrow-right"></i>
+                                                    </a>
+                                                    <a href="{{ url('/order-requests') }}"
+                                                       class="d-flex align-items-center justify-content-between p-2 crm-link mb-3">
 														<span class="d-flex align-items-center me-3">
-															<i class="ti ti-user-check text-default me-2"></i>Leads
+															<i class="ti ti-adjustments-dollar text-default me-2"></i>{{ __('Paid Orders') }}
 														</span>
-                                                    <i class="ti ti-arrow-right"></i>
-                                                </a>
-                                                <a href="activity.html"
-                                                   class="d-flex align-items-center justify-content-between p-2 crm-link mb-3">
+                                                        <i class="ti ti-arrow-right"></i>
+                                                    </a>
+                                                    <a href="{{ url('/front-setting') }}"
+                                                       class="d-flex align-items-center justify-content-between p-2 crm-link mb-3">
 														<span class="d-flex align-items-center me-3">
-															<i class="ti ti-activity text-default me-2"></i>Activities
+															<i class="ti ti-settings-cog text-default me-2"></i>{{ __('Setting') }}
 														</span>
-                                                    <i class="ti ti-arrow-right"></i>
-                                                </a>
+                                                        <i class="ti ti-arrow-right"></i>
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            @elseif(auth()->user()->type === 'company')
+                                <div class="dropdown-menu dropdown-lg dropdown-menu-start">
+                                    <div class="card mb-0 border-0 shadow-none">
+                                        <div class="card-header">
+                                            <h4>CRM</h4>
+                                        </div>
+                                        <div class="card-body pb-1">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <a href="{{ route('user.index') }}"
+                                                       class="d-flex align-items-center justify-content-between p-2 crm-link mb-3">
+														<span class="d-flex align-items-center me-3">
+															<i class="ti ti-user-shield text-default me-2"></i>Users
+														</span>
+                                                        <i class="ti ti-arrow-right"></i>
+                                                    </a>
+                                                    <a href="{{ route('employee.index') }}"
+                                                       class="d-flex align-items-center justify-content-between p-2 crm-link mb-3">
+														<span class="d-flex align-items-center me-3">
+															<i class="ti ti-heart-handshake text-default me-2"></i>Employee
+														</span>
+                                                        <i class="ti ti-arrow-right"></i>
+                                                    </a>
+                                                    <a href="{{ route('job.index') }}"
+                                                       class="d-flex align-items-center justify-content-between p-2 crm-link mb-3">
+														<span class="d-flex align-items-center me-3">
+															<i class="ti ti-timeline-event-text text-default me-2"></i>Job
+														</span>
+                                                        <i class="ti ti-arrow-right"></i>
+                                                    </a>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <a href="{{ route('companystructure.index') }}"
+                                                       class="d-flex align-items-center justify-content-between p-2 crm-link mb-3">
+														<span class="d-flex align-items-center me-3">
+															<i class="ti ti-building text-default me-2"></i>Structure
+														</span>
+                                                        <i class="ti ti-arrow-right"></i>
+                                                    </a>
+                                                    <a href="{{ route('attendanceemployee.index') }}"
+                                                       class="d-flex align-items-center justify-content-between p-2 crm-link mb-3">
+														<span class="d-flex align-items-center me-3">
+															<i class="ti ti-user-check text-default me-2"></i>Attendance
+														</span>
+                                                        <i class="ti ti-arrow-right"></i>
+                                                    </a>
+                                                    <a href="activity.html"
+                                                       class="d-flex align-items-center justify-content-between p-2 crm-link mb-3">
+														<span class="d-flex align-items-center me-3">
+															<i class="ti ti-activity text-default me-2"></i>Activities
+														</span>
+                                                        <i class="ti ti-arrow-right"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+
                         </div>
 
-                        <a href="profile-settings.html" class="btn btn-menubar">
+                        <a href="{{ route('settings.index') }}" class="btn btn-menubar">
                             <i class="ti ti-settings-cog"></i>
                         </a>
                     </div>
@@ -399,11 +460,8 @@
                         </div>
 
                         <!-- Language Dropdown Section -->
-                         <div class="dropdown mx-2"
- 
-                        <div class="dropdown"
- 
-                        style="{{ app()->getLocale() == 'ar' ? 'margin-left: 150px' : 'margin-right: 30px' }}">
+                        <div class="dropdown mx-2"
+                        style="{{ app()->getLocale() == 'ar' ? 'margin-left: 150px !important' : 'margin-right: 30px' }}">
                             <a class="dropdown-toggle d-inline-flex align-items-center p-0" href="#"
                                id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
                                aria-expanded="false">
@@ -3349,4 +3407,3 @@
     @endif
 </script>
 @stack('scripts')
-</html>

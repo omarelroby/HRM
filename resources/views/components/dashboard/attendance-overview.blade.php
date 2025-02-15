@@ -1,14 +1,11 @@
- 
 @props(['attendanceData' =>  ['present' => 0,'late' => 0,'leave' => 0,'absent' => 0], 'totalAttendance' => 0, 'attendancePercentage' => ['present' => 0,'late' => 0,'leave' => 0,'absent'=> 0]])
- 
-<!-- Attendance Overview -->
- 
 <div class="col-xxl-4 col-xl-6 d-flex">
     <div class="card flex-fill">
         <div class="card-header pb-2 d-flex align-items-center justify-content-between flex-wrap">
             <h5 class="mb-2">Attendance Overview</h5>
             <div class="dropdown mb-2">
-                <a href="javascript:void(0);" class="btn btn-white border btn-sm d-inline-flex align-items-center" data-bs-toggle="dropdown">
+                <a href="javascript:void(0);" class="btn btn-white border btn-sm d-inline-flex align-items-center"
+                   data-bs-toggle="dropdown">
                     <i class="ti ti-calendar me-1"></i>Today
                 </a>
                 <ul class="dropdown-menu  dropdown-menu-end p-3">
@@ -49,15 +46,18 @@
                 <p class="f-13 mb-2"><i class="ti ti-circle-filled text-danger me-1"></i>Absent</p>
                 <p class="f-13 fw-medium text-gray-9 mb-2">{{ $attendancePercentage['absent'] }} %</p>
             </div>
-            <div class="bg-light br-5 box-shadow-xs p-2 pb-0 d-flex align-items-center justify-content-between flex-wrap">
+            <div
+                class="bg-light br-5 box-shadow-xs p-2 pb-0 d-flex align-items-center justify-content-between flex-wrap">
                 <div class="d-flex align-items-center">
                     <p class="mb-2 me-2">Total Absenties</p>
                     <div class="avatar-list-stacked avatar-group-sm mb-2">
 											<span class="avatar avatar-rounded">
-												<img class="border border-white" src="assets/img/profiles/avatar-27.jpg" alt="img">
+												<img class="border border-white" src="assets/img/profiles/avatar-27.jpg"
+                                                     alt="img">
 											</span>
                         <span class="avatar avatar-rounded">
-												<img class="border border-white" src="assets/img/profiles/avatar-30.jpg" alt="img">
+												<img class="border border-white" src="assets/img/profiles/avatar-30.jpg"
+                                                     alt="img">
 											</span>
                         <span class="avatar avatar-rounded">
 												<img src="assets/img/profiles/avatar-14.jpg" alt="img">
@@ -75,20 +75,16 @@
         </div>
     </div>
 </div>
- 
- 
-<!-- /Attendance Overview -->
- 
 <script>
     $(function () {
         'use strict';
 
-        if($('#attendance').length > 0) {
+        if ($('#attendance').length > 0) {
             var ctx = document.getElementById('attendance').getContext('2d');
             var mySemiDonutChart = new Chart(ctx, {
                 type: 'doughnut',
                 data: {
-                    labels: ['Late','Present', 'Permission', 'Absent'],
+                    labels: ['Late', 'Present', 'Permission', 'Absent'],
                     datasets: [{
                         label: 'Attendance Overview',
                         data: [

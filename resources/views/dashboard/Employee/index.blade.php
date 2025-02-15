@@ -1272,28 +1272,28 @@ document.addEventListener('DOMContentLoaded', function () {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/persian-datepicker@1.2.0/dist/css/persian-datepicker.min.css">
 
     <!-- Moment.js with Hijri support -->
-    <script src="https://cdn.jsdelivr.net/npm/moment-hijri@2.17.0/moment-hijri.min.js"></script>
+{{--    <script src="https://cdn.jsdelivr.net/npm/moment-hijri@2.17.0/moment-hijri.min.js"></script>--}}
 
     <!-- Hijri DatePicker Script -->
-    <script src="https://cdn.jsdelivr.net/npm/persian-datepicker@1.2.0/dist/js/persian-datepicker.min.js"></script>
+{{--    <script src="https://cdn.jsdelivr.net/npm/persian-datepicker@1.2.0/dist/js/persian-datepicker.min.js"></script>--}}
 
     <!-- Your HTML content -->
 
     <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{{--    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>--}}
 
     <!-- Bootstrap JS (if not already included) -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+{{--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>--}}
 
     <!-- Bootstrap Hijri Datepicker JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-hijri-datepicker/1.0.7/js/bootstrap-hijri-datepicker.min.js"></script>
+{{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-hijri-datepicker/1.0.7/js/bootstrap-hijri-datepicker.min.js"></script>--}}
    <!-- Scripts -->
-   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+{{--   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>--}}
+{{--   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>--}}
 
-   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-   <script src="{{ asset('public/assets/js/bootstrap-hijri-datetimepicker.js') }}"></script>
-   <script src="{{ asset('public/assets/js/bootstrap-hijri-datepicker.js') }}"></script>
+{{--   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>--}}
+{{--   <script src="{{ asset('public/assets/js/bootstrap-hijri-datetimepicker.js') }}"></script>--}}
+{{--   <script src="{{ asset('public/assets/js/bootstrap-hijri-datepicker.js') }}"></script>--}}
    <script>
     document.addEventListener('DOMContentLoaded', function () {
         const paymentTypeInputs = document.querySelectorAll('input[name="payment_type"]');

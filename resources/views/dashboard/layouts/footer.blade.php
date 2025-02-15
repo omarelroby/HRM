@@ -1,11 +1,10 @@
+@livewireScripts
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
 
 {{-- <script data-cfasync="false" src="https://smarthr.dreamstechnologies.com/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script> --}}
 <script src="{{ asset('public/assets/js/jquery-3.7.1.min.js') }}" type="text/javascript"></script>
 
 <!-- Bootstrap Core JS -->
-{{--<script src="{{ asset('public/assets/js/bootstrap.bundle.min.js') }}" type="4ebab11e745a926e85f82c49-text/javascript"></script>--}}
-
 <!-- Feather Icon JS -->
 <script src="{{ asset('public/assets/js/feather.min.js') }}" type="text/javascript"></script>
 
@@ -31,16 +30,7 @@
 
 <!-- Custom JS -->
 <script src="{{ asset('public/assets/js/script.js')}} " type="text/javascript"></script>
-
-
 <script src="{{ asset('public/assets/js/bootstrap-hijri-datepicker.js') }}"></script>
-{{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js" integrity="sha512-9RI3sFi8egzK6DbLGcfs9Kwi+QlR2V5RH8oKtGvSCCPLO0ppLGkGU9cP0N5ksuL2oT4xjSM1ZpSEJGxXUQK7Lg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>--}}
-<!-- jQuery -->
-{{-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> --}}
-<!-- Popper.js -->
-{{--    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>--}}
-
-
 
 <!-- Chart JS -->
 <script src="{{ asset('public/assets/plugins/apexchart/apexcharts.min.js') }}" type="text/javascript"></script>
@@ -151,7 +141,31 @@
 </script>
 <script src="{{ asset('public/assets/dashboard/cdn/rocket-loader.min.js') }}"
         data-cf-settings="cb90688a5d83b208bb3c117a-|49" defer></script>
-</body>
+
+<!-- Hijri DatePicker Styles -->
+<link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/persian-datepicker@1.2.0/dist/css/persian-datepicker.min.css">
+
+<!-- Moment.js with Hijri support -->
+<script src="https://cdn.jsdelivr.net/npm/moment-hijri@2.17.0/moment-hijri.min.js"></script>
+
+<!-- Hijri DatePicker Script -->
+<script
+    src="https://cdn.jsdelivr.net/npm/persian-datepicker@1.2.0/dist/js/persian-datepicker.min.js"></script>
+
+<!-- Your HTML content -->
+
+<!-- Bootstrap Hijri Datepicker JS -->
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-hijri-datepicker/1.0.7/js/bootstrap-hijri-datepicker.min.js"></script>
+<!-- Scripts -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="{{ asset('public/assets/js/bootstrap-hijri-datetimepicker.js') }}"></script>
+
+<script src="{{ asset('public/assets/js/bootstrap-hijri-datepicker.js') }}"></script>
+
 <script type="text/javascript">
     function changeLanguage() {
         var lang = document.getElementById("langSwitcher").value;
@@ -159,6 +173,9 @@
     }
 
 </script>
+
+</body>
+</html>
 
 
 <!-- Mirrored from smarthr.dreamstechnologies.com/html/template/employee-dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 22 Dec 2024 18:38:21 GMT -->

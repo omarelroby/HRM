@@ -71,5 +71,5 @@
         }
 
     </style>
-
+    @livewireStyles
 </head>
